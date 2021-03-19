@@ -2,7 +2,7 @@
 //  About_This_HackApp.swift
 //  About This Hack
 //
-//  Created by Alexander Skula on 3/10/21.
+//  Created by AvaQueen on 3/08/21.
 //
 
 import SwiftUI
