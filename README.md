@@ -9,8 +9,7 @@ A simple application to view your exact hardware on macOS. Similar to About This
 # If you get this error when opening:
 ![image](https://user-images.githubusercontent.com/79278890/111886978-4af4cb80-89a8-11eb-90c8-522a89abb48e.png)
 1) Open `System Preferences` and go to `Security & Privacy`.
-2) Under `General` you should see this prompt: <br>
-![Screen Shot 2021-03-20 at 6 18 41 PM](https://user-images.githubusercontent.com/79278890/111887197-c6a34800-89a9-11eb-83e2-9fd3d61e2c15.png)
+2) Under `General` you should see [this prompt](https://user-images.githubusercontent.com/79278890/111887197-c6a34800-89a9-11eb-83e2-9fd3d61e2c15.png):
 3) Click "Open Anyway"
 4) You're golden!
 
