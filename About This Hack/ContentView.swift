@@ -70,11 +70,13 @@ struct ContentView: View {
                         .font(.system(size: 11))
                 }
                 HStack {
-                    Text("OpenCore Version")
-                        .font(.system(size: 11))
-                        .fontWeight(.bold)
-                    Text("\(opencore1).\(opencore2).\(opencore3)")
-                        .font(.system(size: 11))
+                    if opencore1 == "0" {
+                        Text("OpenCore Version")
+                            .font(.system(size: 11))
+                            .fontWeight(.bold)
+                        Text("\(opencore1).\(opencore2).\(opencore3)")
+                            .font(.system(size: 11))
+                    }
                 }
             }
             .font(.callout)
@@ -89,7 +91,7 @@ struct ContentView: View {
         serialNumber = (try? call("system_profiler SPHardwareDataType | awk '/Serial/ {print $4}'")) ?? "Something's outta wack"
         print("Serial Number: \(serialNumber)")
         ram = (try? call("echo \"$(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024))\"")) ?? "Whoopsie"
-        print("\(ram)")
+        print("\(ram) GB")
         cpu = (try? call("sysctl -n machdep.cpu.brand_string")) ?? "Whoopsie"
         graphics = (try? call("system_profiler SPDisplaysDataType | awk -F': ' '/^\\ *Chipset Model:/ {printf $2 \" \"}'")) ?? "Unknown GPU"
         display = (try? call("system_profiler SPDisplaysDataType | grep UI | cut -c 26-")) ?? "Unknown Display"
