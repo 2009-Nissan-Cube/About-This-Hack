@@ -6,10 +6,10 @@ A simple application to view your exact hardware on macOS. Similar to About This
 2) Drag to your Applications Folder
 3) Open!
 
-# If you get this error when opening: \n
+# If you get this error when opening:
 ![image](https://user-images.githubusercontent.com/79278890/111886978-4af4cb80-89a8-11eb-90c8-522a89abb48e.png)
 1) Open `System Preferences` and go to `Security & Privacy`.
-2) Under `General` you should see this prompt: \n
+2) Under `General` you should see this prompt: <br>
 ![image](https://user-images.githubusercontent.com/79278890/111887036-c5bde680-89a8-11eb-8ba0-a8abf2126e35.png)
 3) Click "Open Anyway"
 4) You're golden!
