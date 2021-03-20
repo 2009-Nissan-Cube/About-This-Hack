@@ -14,8 +14,8 @@ A simple application to view your exact hardware on macOS. Similar to About This
 4) You're golden!
 
 # Credits
-@BenSova for being awesome, providing some of the commands, and helping me debug a lot.
-@moosethegoose2213 for inspiring the project with his own awesome creation, Hedgefetch.
+@BenSova for being awesome, providing some of the commands, and helping me debug a lot. <br>
+@moosethegoose2213 for inspiring the project with his own awesome creation, Hedgefetch. <br>
 @MykolaG for suggesting the awesomesauce server icon.
 The internet for helping me with a lot of the code.
 
