@@ -87,7 +87,7 @@ struct ContentView: View {
     }
     init() {
         systemVersion = (try? call("system_profiler SPSoftwareDataType | grep 'System Version' | cut -c 23-")) ?? "System Version Not Recognized"
-        modelID = (try? (try? call("'/Volumes/About This Hack/modelID.sh'")) ?? call("sysctl -n hw.model")) ?? "Mac"
+        modelID = (try? (try? call("'/Applications/About This Hack.app/Contents/Resources/modelID.sh'")) ?? call("sysctl -n hw.model")) ?? "Mac"
         serialNumber = (try? call("system_profiler SPHardwareDataType | awk '/Serial/ {print $4}'")) ?? "Something's outta wack"
         print("Serial Number: \(serialNumber)")
         ram = (try? call("echo \"$(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024))\"")) ?? "Whoopsie"
