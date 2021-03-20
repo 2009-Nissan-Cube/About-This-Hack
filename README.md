@@ -1,5 +1,7 @@
 # About-This-Hack
-A simple application to view your exact hardware on macOS. Similar to About This Mac, but with more features, including AMD Processor Support, display resolution and refresh rate, OpenCore (or not) version, and more!
+A simple application to view your exact hardware on macOS. Similar to About This Mac, but with more features, including AMD Processor Support, display resolution and refresh rate, OpenCore (or not) version, and more! Works on both Hackintoshes *and* real Macs! <br>
+![example](https://user-images.githubusercontent.com/79278890/111887266-331e4700-89aa-11eb-9ff7-f11fa1a73b84.png)
+
 
 # How To Install
 1) Download the DMG from the latest release
