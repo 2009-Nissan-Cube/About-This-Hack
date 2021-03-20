@@ -12,6 +12,7 @@
 		C1533ED525F961B300F7469F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1533ED425F961B300F7469F /* ContentView.swift */; };
 		C1533ED725F961B500F7469F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1533ED625F961B500F7469F /* Assets.xcassets */; };
 		C1533EDA25F961B500F7469F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1533ED925F961B500F7469F /* Preview Assets.xcassets */; };
+		C18514582606759A0063F570 /* modelID.sh in Resources */ = {isa = PBXBuildFile; fileRef = C18514572606759A0063F570 /* modelID.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		C1533ED925F961B500F7469F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C1533EDB25F961B500F7469F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1533EDC25F961B500F7469F /* About_This_Hack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = About_This_Hack.entitlements; sourceTree = "<group>"; };
+		C18514572606759A0063F570 /* modelID.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = modelID.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 		C1533ED125F961B300F7469F /* About This Hack */ = {
 			isa = PBXGroup;
 			children = (
+				C18514572606759A0063F570 /* modelID.sh */,
 				C1533ED225F961B300F7469F /* About_This_HackApp.swift */,
 				C1533ED425F961B300F7469F /* ContentView.swift */,
 				C15274D725F97A3300B4F462 /* ShellOut.swift */,
@@ -131,6 +134,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C18514582606759A0063F570 /* modelID.sh in Resources */,
 				C1533EDA25F961B500F7469F /* Preview Assets.xcassets in Resources */,
 				C1533ED725F961B500F7469F /* Assets.xcassets in Resources */,
 			);
@@ -273,6 +277,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "About This Hack/About_This_Hack.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"About This Hack/Preview Content\"";
@@ -297,6 +302,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "About This Hack/About_This_Hack.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"About This Hack/Preview Content\"";
