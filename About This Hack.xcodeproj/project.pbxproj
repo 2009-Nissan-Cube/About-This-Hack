@@ -7,16 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C15274D825F97A3300B4F462 /* ShellOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15274D725F97A3300B4F462 /* ShellOut.swift */; };
+		C1266585262647D8009A912B /* modelID.sh in Resources */ = {isa = PBXBuildFile; fileRef = C1266584262647D8009A912B /* modelID.sh */; };
+		C126658826264800009A912B /* ShellOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = C126658726264800009A912B /* ShellOut.swift */; };
 		C1533ED325F961B300F7469F /* About_This_HackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1533ED225F961B300F7469F /* About_This_HackApp.swift */; };
 		C1533ED525F961B300F7469F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1533ED425F961B300F7469F /* ContentView.swift */; };
 		C1533ED725F961B500F7469F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1533ED625F961B500F7469F /* Assets.xcassets */; };
 		C1533EDA25F961B500F7469F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1533ED925F961B500F7469F /* Preview Assets.xcassets */; };
-		C18514582606759A0063F570 /* modelID.sh in Resources */ = {isa = PBXBuildFile; fileRef = C18514572606759A0063F570 /* modelID.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C15274D725F97A3300B4F462 /* ShellOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShellOut.swift; path = "../../../Downloads/Patched-Sur-0.1.1/Patched Sur - For Catalina/ShellOut.swift"; sourceTree = "<group>"; };
+		C1266584262647D8009A912B /* modelID.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = modelID.sh; sourceTree = "<group>"; };
+		C126658726264800009A912B /* ShellOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShellOut.swift; sourceTree = "<group>"; };
 		C1533ECF25F961B300F7469F /* About This Hack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "About This Hack.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1533ED225F961B300F7469F /* About_This_HackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About_This_HackApp.swift; sourceTree = "<group>"; };
 		C1533ED425F961B300F7469F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -24,7 +25,6 @@
 		C1533ED925F961B500F7469F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C1533EDB25F961B500F7469F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1533EDC25F961B500F7469F /* About_This_Hack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = About_This_Hack.entitlements; sourceTree = "<group>"; };
-		C18514572606759A0063F570 /* modelID.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = modelID.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,10 +57,10 @@
 		C1533ED125F961B300F7469F /* About This Hack */ = {
 			isa = PBXGroup;
 			children = (
-				C18514572606759A0063F570 /* modelID.sh */,
+				C1266584262647D8009A912B /* modelID.sh */,
 				C1533ED225F961B300F7469F /* About_This_HackApp.swift */,
 				C1533ED425F961B300F7469F /* ContentView.swift */,
-				C15274D725F97A3300B4F462 /* ShellOut.swift */,
+				C126658726264800009A912B /* ShellOut.swift */,
 				C1533ED625F961B500F7469F /* Assets.xcassets */,
 				C1533EDB25F961B500F7469F /* Info.plist */,
 				C1533EDC25F961B500F7469F /* About_This_Hack.entitlements */,
@@ -134,7 +134,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C18514582606759A0063F570 /* modelID.sh in Resources */,
+				C1266585262647D8009A912B /* modelID.sh in Resources */,
 				C1533EDA25F961B500F7469F /* Preview Assets.xcassets in Resources */,
 				C1533ED725F961B500F7469F /* Assets.xcassets in Resources */,
 			);
@@ -148,7 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1533ED525F961B300F7469F /* ContentView.swift in Sources */,
-				C15274D825F97A3300B4F462 /* ShellOut.swift in Sources */,
+				C126658826264800009A912B /* ShellOut.swift in Sources */,
 				C1533ED325F961B300F7469F /* About_This_HackApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
