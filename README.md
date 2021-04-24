@@ -2,6 +2,10 @@
 A simple application to view your exact hardware on macOS. Similar to About This Mac, but with more features, including AMD Processor Support, display resolution and refresh rate, OpenCore (or not) version, and more! Works on both Hackintoshes *and* real Macs! <br>
 ![example](https://user-images.githubusercontent.com/79278890/111887299-71b40180-89aa-11eb-998a-139e8739b9f2.png)
 
+# Supported OS's
+- **Only macOS Catalina and newer** are supported
+- Not supported in any way in Linux or Windows
+
 # How To Install
 1) Download the DMG from the latest release
 2) Drag to your Applications Folder
