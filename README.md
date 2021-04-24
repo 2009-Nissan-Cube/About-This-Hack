@@ -25,5 +25,5 @@ The internet for helping me with a lot of the code.
 
 # Contact
 You can reach me at the following destinations:
-Discord - @AvaQueen#4170 & https://discord.gg/5AQjAnNKYd
+Discord - @AvaQueen#0001 & https://discord.gg/5AQjAnNKYd
 Reddit - u/QueenVengeance
