@@ -93,8 +93,25 @@ struct ContentView: View {
         ram = (try? call("echo \"$(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024))\"")) ?? "Whoopsie"
         print("\(ram) GB")
         cpu = (try? call("sysctl -n machdep.cpu.brand_string")) ?? "Whoopsie"
-        graphics = (try? call("system_profiler SPDisplaysDataType | awk -F': ' '/^\\ *Chipset Model:/ {printf $2 \" \"}'")) ?? "Unknown GPU"
-        display = (try? call("system_profiler SPDisplaysDataType | grep UI | cut -c 26-")) ?? "Unknown Display"
+        /*graphics = (try? call("system_profiler SPDisplaysDataType | awk -F': ' '/^\\ *Chipset Model:/ {printf $2 \" \"}'")) ?? "Unknown GPU"*/
+        // EDITED BY ASTROKID
+        let graphicsTemp = (try? call("system_profiler SPDisplaysDataType | grep Chipset")) ?? "Unknown GPU"
+        // Now will trim string from "      Chipset Model:"
+        let graphicsIndex = graphicsTemp.firstIndex(of: ":")
+        let graphicsTemp2 = String(graphicsTemp[graphicsIndex!...])
+        // Now will remove ":"
+        let graphicsIndex2 = graphicsTemp2.firstIndex(of: " ")
+        graphics = String(graphicsTemp2[graphicsIndex2!...])
+        let displayTemp = (try? call("system_profiler SPDisplaysDataType | grep Resolution")) ?? "Unknown Display"
+        print("displayTemp " + displayTemp)
+        // Now will trim string from "    Resolution: "
+        let displayIndex = displayTemp.firstIndex(of: ":")
+        let displayTemp2 = String(displayTemp[displayIndex!...])
+        print("displayTemp2 " + displayTemp2)
+        // Now will trim string from "    Resolution: "
+        let displayIndex2 = displayTemp2.firstIndex(of: " ")
+        display = String(displayTemp2[displayIndex2!...])
+        print(display)
         opencore1 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 59- | cut -c -1")) ?? "X"
         opencore2 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 60- | cut -c -1")) ?? "X"
         opencore3 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 61- | cut -c -1")) ?? "X"
