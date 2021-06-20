@@ -88,13 +88,17 @@ struct ContentView: View {
     init() {
         systemVersion = (try? call("system_profiler SPSoftwareDataType | grep 'System Version' | cut -c 23-")) ?? "System Version Not Recognized"
         modelID = (try? (try? call("'/Applications/About This Hack.app/Contents/Resources/modelID.sh'")) ?? call("sysctl -n hw.model")) ?? "Mac"
-        serialNumber = (try? call("system_profiler SPHardwareDataType | awk '/Serial/ {print $4}'")) ?? "Something's outta wack"
+        serialNumber = (try? call("system_profiler SPHardwareDataType | awk '/Serial/ {print $4}'")) ?? "Serial # not found"
         print("Serial Number: \(serialNumber)")
-        ram = (try? call("echo \"$(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024))\"")) ?? "Whoopsie"
+        ram = (try? call("echo \"$(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024))\"")) ?? "RAM Error"
         print("\(ram) GB")
         cpu = (try? call("sysctl -n machdep.cpu.brand_string")) ?? "Whoopsie"
         graphics = (try? call("system_profiler SPDisplaysDataType | awk -F': ' '/^\\ *Chipset Model:/ {printf $2 \" \"}'")) ?? "Unknown GPU"
-        display = (try? call("system_profiler SPDisplaysDataType | grep UI | cut -c 26-")) ?? "Unknown Display"
+        display = (try? call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ?? "Unknown Display"
+        if display.contains("(QHD"){
+            display = (try? call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23- | cut -c -11")) ?? "Unknown Display"
+        }
+        // thanks AstroKid for helping out with making "display" work with macOS 12 Monterey
         opencore1 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 59- | cut -c -1")) ?? "X"
         opencore2 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 60- | cut -c -1")) ?? "X"
         opencore3 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 61- | cut -c -1")) ?? "X"
