@@ -94,11 +94,7 @@ struct ContentView: View {
         print("\(ram) GB")
         cpu = (try? call("sysctl -n machdep.cpu.brand_string")) ?? "Whoopsie"
         graphics = (try? call("system_profiler SPDisplaysDataType | awk -F': ' '/^\\ *Chipset Model:/ {printf $2 \" \"}'")) ?? "Unknown GPU"
-        display = (try? call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ?? "Unknown Display"
-        if display.contains("(QHD"){
-            display = (try? call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23- | cut -c -11")) ?? "Unknown Display"
-        }
-        // thanks AstroKid for helping out with making "display" work with macOS 12 Monterey
+        display = (try? call("system_profiler SPDisplaysDataType | grep UI | cut -c 26-")) ?? "Unknown Display"
         opencore1 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 59- | cut -c -1")) ?? "X"
         opencore2 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 60- | cut -c -1")) ?? "X"
         opencore3 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 61- | cut -c -1")) ?? "X"
