@@ -3,7 +3,7 @@ A simple application to view your exact hardware on macOS. Similar to About This
 ![example](https://user-images.githubusercontent.com/79278890/111887299-71b40180-89aa-11eb-998a-139e8739b9f2.png)
 
 # Supported OS's
-- **Only macOS Catalina and newer** are supported
+- **Only macOS 11 Big Sur and newer** are supported for now, older OS support coming soon.
 - Not supported in any way in Linux or Windows
 
 # How To Install
