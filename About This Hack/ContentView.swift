@@ -15,22 +15,51 @@ struct ContentView: View {
     var cpu: String
     var graphics: String
     var display: String
+    var startupDisk: String
     var opencore1: String
     var opencore2: String
     var opencore3: String
     var OSver: Double
     var ImageName: String
     var qDarkMode: DarwinBoolean
+    
     init() {
         systemVersion = (try? call("system_profiler SPSoftwareDataType | grep 'System Version' | cut -c 23-")) ?? "System Version Not Recognized"
         OSver = Double((try? call("sw_vers | grep ProductVersion | cut -c 17-")) ?? "11.0") ?? 11.0
         modelID = (try? (try? call("'/Applications/About This Hack.app/Contents/Resources/modelID.sh'")) ?? call("sysctl -n hw.model")) ?? "Mac"
         serialNumber = (try? call("system_profiler SPHardwareDataType | awk '/Serial/ {print $4}'")) ?? "Serial # not found"
         print("Serial Number: \(serialNumber)")
+        
+        
         ram = (try? call("echo \"$(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024))\"")) ?? "RAM Error"
         print("\(ram) GB")
+        ram = "\(ram) GB"
+        let ramSpeedTmp = (try? call("system_profiler SPMemoryDataType | grep Speed:")) ?? "RAM Error"
+        let ramSpeedID = ramSpeedTmp.firstIndex(of: "\n")!
+        let ramSpeedTrim1 = String(ramSpeedTmp[ramSpeedID...])
+        print(ramSpeedTrim1)
+        let ramSpeedID1 = ramSpeedTrim1.firstIndex(of: ":")!
+        let ramSpeedTrim2 = String(ramSpeedTrim1[ramSpeedID1...])
+        let ramSpeedID2 = ramSpeedTrim2.firstIndex(of: " ")!
+        let ramSpeedTrim3 = String(ramSpeedTrim2[ramSpeedID2...])
+        ram = "\(ram)\(ramSpeedTrim3)"
+        
+        // "system_profiler SPMemoryDataType | grep Type: | cut -c 16-"
+        
+        let ramType = (try? call("system_profiler SPMemoryDataType | grep Type: | cut -c 16-")) ?? "RAM Error"
+        let ramTypeID = ramType.firstIndex(of: "\n")!
+        let ramTypeTrim = String(ramType[ramTypeID...])
+        let ramTypeID1 = ramTypeTrim.firstIndex(of: " ")!
+        let ramTypeTrim1 = String(ramTypeTrim[ramTypeID1...])
+        ram = "\(ram)\(ramTypeTrim1)"
+        
+        
         cpu = (try? call("sysctl -n machdep.cpu.brand_string")) ?? "Whoopsie"
+        
+        
         graphics = (try? call("system_profiler SPDisplaysDataType | awk -F': ' '/^\\ *Chipset Model:/ {printf $2 \" \"}'")) ?? "Unknown GPU"
+        
+        
         display = (try? call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ?? "Unknown Display"
         if display.contains("(QHD"){
             display = (try? call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23- | cut -c -11")) ?? "Unknown Display"
@@ -65,7 +94,14 @@ struct ContentView: View {
         }
         print(ImageName)
         
-            
+        
+        // now startup disk
+        
+        // command: DISK=$(bless --getBoot) | diskutil info $DISK | grep Volume\ Name: | cut -c 31-
+        startupDisk = (try? call("DISK=$(bless --getBoot); diskutil info $DISK | grep \"Volume Name:\" | cut -c 31-")) ?? "Macintosh HD"
+        print(startupDisk)
+        
+        
     }
     
     var body: some View {
@@ -94,7 +130,7 @@ struct ContentView: View {
                     Text("Memory")
                         .font(.system(size: 11))
                         .fontWeight(.bold)
-                    Text("\(ram) GB")
+                    Text(ram)
                         .font(.system(size: 11))
                 }
                 HStack {
@@ -109,6 +145,13 @@ struct ContentView: View {
                         .font(.system(size: 11))
                         .fontWeight(.bold)
                     Text(display)
+                        .font(.system(size: 11))
+                }
+                HStack {
+                    Text("Startup Disk")
+                        .font(.system(size: 11))
+                        .fontWeight(.bold)
+                    Text(startupDisk)
                         .font(.system(size: 11))
                 }
                 HStack {
