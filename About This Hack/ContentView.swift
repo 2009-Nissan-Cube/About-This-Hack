@@ -116,7 +116,7 @@ struct ContentView: View {
                 Text("\(systemVersion)")
                     .font(.system(size: 20))
                     .fontWeight(.bold)
-                Text(getMacName(infoString: modelID))
+                Text("\(getMacName(infoString: modelID)) (\(modelID))")
                     .font(.system(size: 11))
                     .fontWeight(.bold)
                 HStack(spacing: 11) {
