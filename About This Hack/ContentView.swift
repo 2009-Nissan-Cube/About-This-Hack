@@ -58,7 +58,8 @@ struct ContentView: View {
         
         
         graphics = (try? call("system_profiler SPDisplaysDataType | awk -F': ' '/^\\ *Chipset Model:/ {printf $2 \" \"}'")) ?? "Unknown GPU"
-        
+        let tempGraphics = (try? call("system_profiler SPDisplaysDataType | grep VRAM | cut -c 28-")) ?? "Unknown RAM" //system_profiler SPDisplaysDataType | grep VRAM | cut -c 28-
+        graphics = "\(graphics)\(tempGraphics)"
         
         display = (try? call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ?? "Unknown Display"
         if display.contains("(QHD"){
@@ -170,6 +171,7 @@ struct ContentView: View {
                             .font(.system(size: 11))
                     }
                 }
+            
             }
             .font(.callout)
             .padding(.top)
