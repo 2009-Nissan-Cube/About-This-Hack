@@ -18,6 +18,7 @@ A simple application to view your exact hardware on macOS. Similar to About This
 4) You're golden!
 
 # Credits
+@MDNich for helping out a ton with features, code, and generally being a nice person. Thanks a million! <br>
 @BenSova for being awesome, providing some of the commands, and helping me debug a lot. <br>
 @moosethegoose2213 for inspiring the project with his own awesome creation, Hedgefetch. <br>
 @MykolaG for suggesting the awesomesauce server icon.
@@ -25,5 +26,5 @@ The internet for helping me with a lot of the code.
 
 # Contact
 You can reach me at the following destinations:
-Discord - @AvaQueen#0001 & https://discord.gg/5AQjAnNKYd
+Discord - @AvaQueen#1949 & https://discord.gg/5AQjAnNKYd
 Reddit - u/QueenVengeance
