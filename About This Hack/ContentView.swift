@@ -40,6 +40,8 @@ struct ContentView: View {
         opencore2 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 60- | cut -c -1")) ?? "X"
         opencore3 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 61- | cut -c -1")) ?? "X"
         print("\(opencore1).\(opencore2).\(opencore3)")
+        
+        // ASTRO KID MODIFIED HERE: allow images to be OS dependent
         qDarkMode = true
         let darkModeStr = (try? call("/usr/bin/defaults read -g AppleInterfaceStyle")) ?? "Light"
         if(darkModeStr != "Dark") {
