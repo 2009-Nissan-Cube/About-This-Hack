@@ -113,7 +113,7 @@ struct ContentView: View {
                 .frame(width: 220)
             
             VStack(alignment: .leading, spacing: 8) {
-                Text("\(systemVersion)")
+                Text("\(getOSName())")//": \(systemVersion)")
                     .font(.system(size: 20))
                     .fontWeight(.bold)
                 Text("\(getMacName(infoString: modelID)) (\(modelID))")
@@ -176,6 +176,61 @@ struct ContentView: View {
         }
         .navigationTitle("About This Hack")
         .frame(minWidth: 580, maxWidth: 580, minHeight: 350, maxHeight: 350)
+    }
+    func getOSName() -> String {
+        let infoString = (try? call("sw_vers | grep ProductVersion | cut -c 17-")) ?? "12.0"
+        let OSnumber = Double(infoString)
+        if(OSnumber ?? 11.0 >= 12.0) {
+            return "macOS Monterey (\(OSnumber ?? 11.0))"
+        }
+        else if(OSnumber ?? 11.0 >= 11.0) {
+            return "macOS Big Sur (\(OSnumber))"
+        }
+        else if (OSnumber ?? 11.0 >= 10.0) {
+            let infoString1 = (try? call("sw_vers -productVersion | awk -F '.' '{print  $2}'")) ?? "15"
+            switch(infoString1) {
+            case "16":
+                return "macOS Flying Squirrel (\(OSnumber))"
+            case "15":
+                return "macOS Catalina (\(OSnumber))"
+            case "14":
+                return "macOS Mojave (\(OSnumber))"
+            case "13":
+                return "macOS High Sierra (\(OSnumber))"
+            case "12":
+                return "macOS Sierra (\(OSnumber))"
+            case "11":
+                return "OS X El Capitan (\(OSnumber))"
+            case "10":
+                return "OS X Yosemite (\(OSnumber))"
+            case "9":
+                return "OS X Mavericks (\(OSnumber))"
+            case "8":
+                return "OS X Mountain Lion (\(OSnumber))"
+            case "7":
+                return "Mac OS X Lion (\(OSnumber))"
+            case "6":
+                return "Mac OS X Snow Leopard (\(OSnumber))"
+            case "5":
+                return "Mac OS X Leopard (\(OSnumber))"
+            case "4":
+                return "Mac OS X Tiger (\(OSnumber))"
+            case "3":
+                return "Mac OS X Panther (\(OSnumber))"
+            case "2":
+                return "Mac OS X Jaguar (\(OSnumber))"
+            case "1":
+                return "Mac OS X Puma (\(OSnumber))"
+            case "0":
+                return "Mac OS X Cheetah (\(OSnumber))"
+            default:
+                return "macOS Catalina (10.15.6)"
+            }
+            
+        }
+        else {
+            return "macOS Flying Squirrel (\(OSnumber))"
+        }
     }
     
     func getMacName(infoString: String) -> String {
