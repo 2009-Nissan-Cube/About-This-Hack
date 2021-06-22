@@ -104,10 +104,10 @@
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Unknown" id="86d-lN-PYS"/>
                     </imageView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8NQ-KE-vco">
-                        <rect key="frame" x="284" y="260" width="274" height="33"/>
+                        <rect key="frame" x="273" y="248" width="393" height="33"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="macOS Unkown" id="42p-sh-xFk">
-                            <font key="font" metaFont="system"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="macOS Unkown (12.0)" drawsBackground="YES" id="42p-sh-xFk">
+                            <font key="font" metaFont="systemBold" size="31"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
