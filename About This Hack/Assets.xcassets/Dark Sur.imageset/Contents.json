@@ -1,11 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "dark_icon_256x2562x_55A54008AD1BA589AA210D2629C1DF41_0.png",
+      "filename" : "dark_icon_256x256_55A54008AD1BA589AA210D2629C1DF41_0.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "dark_icon_256x256@2x_55A54008AD1BA589AA210D2629C1DF41_0.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

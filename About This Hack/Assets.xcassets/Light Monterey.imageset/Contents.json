@@ -1,11 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "Screen Shot 2021-06-21 at 9.53.12 AM.png",
+      "filename" : "icon_256x256-1_55A54008AD1BA589AA210D2629C1DF41_0.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "icon_256x256@2x-1_55A54008AD1BA589AA210D2629C1DF41_0.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
