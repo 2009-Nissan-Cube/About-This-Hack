@@ -200,6 +200,10 @@ struct ContentView: View {
             .padding(.top)
         }
         .navigationTitle("About This Hack")
+        .onReceive(NotificationCenter.default.publisher(for: NSApplication.willUpdateNotification), perform: { _ in
+            hideZoomButton()
+        })
+        
       // conflict resolved
         .frame(minWidth: 580, maxWidth: 580, minHeight: 320, maxHeight: 320)
     }
@@ -258,6 +262,14 @@ struct ContentView: View {
             return "macOS Flying Squirrel (\(OSnumber ?? 10.16))"
         }
     }
+    
+    func hideZoomButton() {
+            for window in NSApplication.shared.windows {
+                window.standardWindowButton(NSWindow.ButtonType.zoomButton)!.isHidden = true
+            }
+        }
+    }
+    
     func getMacNameSmart() -> String {
         return (try? call("defaults read ~/Library/Preferences/com.apple.SystemProfiler.plist \"CPU Names\" | cut -f 2 -d = | sed 's/..$//' | tail -n 2 | head -n 1 | sed 's/$//' | cut -c 3-")) ?? "Mac"
     }
@@ -468,9 +480,10 @@ struct ContentView: View {
             return "Mac"
         }
     }
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
         }
     }
-}
+
