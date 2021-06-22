@@ -41,7 +41,12 @@ struct ContentView: View {
         let ramSpeedID1 = ramSpeedTrim1.firstIndex(of: ":")!
         let ramSpeedTrim2 = String(ramSpeedTrim1[ramSpeedID1...])
         let ramSpeedID2 = ramSpeedTrim2.firstIndex(of: " ")!
-        let ramSpeedTrim3 = String(ramSpeedTrim2[ramSpeedID2...])
+        var ramSpeedTrim3 = String(ramSpeedTrim2[ramSpeedID2...])
+        if(ramSpeedTrim3.contains("\n")) {
+            let ramID = ramSpeedTrim3.firstIndex(of: "\n")!
+            let ramTrimFinal = String(ramSpeedTrim3[..<ramID])
+            ramSpeedTrim3 = ramTrimFinal
+        }
         ram = "\(ram)\(ramSpeedTrim3)"
         
         // "system_profiler SPMemoryDataType | grep Type: | cut -c 16-"
