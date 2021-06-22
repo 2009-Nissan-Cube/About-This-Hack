@@ -49,8 +49,6 @@ struct ContentView: View {
         }
         ram = "\(ram)\(ramSpeedTrim3)"
         
-        // "system_profiler SPMemoryDataType | grep Type: | cut -c 16-"
-        
         let ramType = (try? call("system_profiler SPMemoryDataType | grep Type: | cut -c 16-")) ?? "RAM Error"
         let ramTypeID = ramType.firstIndex(of: "\n")!
         let ramTypeTrim = String(ramType[ramTypeID...])
@@ -70,12 +68,12 @@ struct ContentView: View {
         
         graphics = (try? call("system_profiler SPDisplaysDataType | awk -F': ' '/^\\ *Chipset Model:/ {printf $2 \" \"}'")) ?? "Unknown GPU"
         // system_profiler SPDisplaysDataType | grep VRAM | cut -c 28-
-        let graphicsRAM  = (try? call("system_profiler SPDisplaysDataType | grep VRAM | cut -c 28-")) ?? "Unknown GPU RAM"
+        let graphicsRAM  = (try? call("system_profiler SPDisplaysDataType | grep VRAM | sed 's/.*: //'")) ?? "Unknown GPU RAM"
         graphics = "\(graphics)\(graphicsRAM)"
         
-        display = (try? call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ?? "Unknown Display"
+        display = (try? call("system_profiler SPDisplaysDataType | grep Resolution | sed 's/.*: //'")) ?? "Unknown Display"
         if display.contains("(QHD"){
-            display = (try? call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23- | cut -c -11")) ?? "Unknown Display"
+            display = (try? call("system_profiler SPDisplaysDataType | grep Resolution | sed 's/.*: //' | cut -c -11")) ?? "Unknown Display"
         }
         if(display.contains("\n")) {
             let displayID = display.firstIndex(of: "\n")!
