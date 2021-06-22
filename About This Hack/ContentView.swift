@@ -110,12 +110,6 @@ struct ContentView: View {
                 ImageName = "Light Sur"
             }
         }
-        else if(OSver >= 10.0) {
-            let OSminVer = (OSver-10)*100 // 10.15 - 10 = 0.15  ;  0.15 * 100 = 15 yay
-            if(OSminVer >= 15 {
-                
-            }
-        }
         else {
             ImageName = "Unknown" // default macOS icon
         }
