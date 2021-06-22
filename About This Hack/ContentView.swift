@@ -26,7 +26,7 @@ struct ContentView: View {
     init() {
         systemVersion = (try? call("system_profiler SPSoftwareDataType | grep 'System Version' | cut -c 23-")) ?? "System Version Not Recognized"
         OSver = Double((try? call("sw_vers | grep ProductVersion | cut -c 17-")) ?? "11.0") ?? 11.0
-        modelID = (try? (try? call("'/Applications/About This Hack.app/Contents/Resources/modelID.sh'")) ?? call("sysctl -n hw.model")) ?? "Mac"
+        //modelID = (try? (try? call("'/Applications/About This Hack.app/Contents/Resources/modelID.sh'")) ?? call("sysctl -n hw.model")) ?? "Mac"
         serialNumber = (try? call("system_profiler SPHardwareDataType | awk '/Serial/ {print $4}'")) ?? "Serial # not found"
         print("Serial Number: \(serialNumber)")
         
@@ -51,7 +51,13 @@ struct ContentView: View {
         let ramTypeTrim = String(ramType[ramTypeID...])
         let ramTypeID1 = ramTypeTrim.firstIndex(of: " ")!
         let ramTypeTrim1 = String(ramTypeTrim[ramTypeID1...])
-        ram = "\(ram)\(ramTypeTrim1)"
+        var ramTypeOfficial = ramTypeTrim1
+        if(ramTypeTrim1.contains("\n")) {
+            let ramTypeID2 = ramTypeTrim1.firstIndex(of: "\n")!
+            let ramTypeTrim2 = String(ramTypeTrim1[..<ramTypeID2])
+            ramTypeOfficial = ramTypeTrim2
+        }
+        ram = "\(ram)\(ramTypeOfficial)"
         
         
         cpu = (try? call("sysctl -n machdep.cpu.brand_string")) ?? "Whoopsie"
@@ -64,6 +70,13 @@ struct ContentView: View {
         if display.contains("(QHD"){
             display = (try? call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23- | cut -c -11")) ?? "Unknown Display"
         }
+        if(display.contains("\n")) {
+            let displayID = display.firstIndex(of: "\n")!
+            let displayTrimmed = String(display[..<displayID])
+            display = displayTrimmed
+        }
+        ram = "\(ram)\(ramTypeOfficial)"
+        
         // thanks AstroKid for helping out with making "display" work with macOS 12 Monterey
         opencore1 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 59- | cut -c -1")) ?? "X"
         opencore2 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 60- | cut -c -1")) ?? "X"
@@ -100,6 +113,10 @@ struct ContentView: View {
         // command: DISK=$(bless --getBoot) | diskutil info $DISK | grep Volume\ Name: | cut -c 31-
         startupDisk = (try? call("DISK=$(bless --getBoot); diskutil info $DISK | grep \"Volume Name:\" | cut -c 31-")) ?? "Macintosh HD"
         print(startupDisk)
+        modelID = (try? call("sysctl hw.model | cut -f2 -d \" \"")) ?? "Mac"
+        //curl -s 'https://support-sp.apple.com/sp/product?cc='$(system_profiler SPHardwareDataType | awk '/Serial/ {print $4}' | cut -c 9-)  | sed 's|.*<configCode>\(.*\)</configCode>.*|\1|'
+
+        print("MAC: \(getMacName(infoString: modelID))")
         
     }
 
@@ -115,6 +132,7 @@ struct ContentView: View {
                 Text("\(getOSName())")//": \(systemVersion)")
                     .font(.system(size: 22))
                     .fontWeight(.bold)
+                //Text("\(getMacNameSmart()) (\(modelID))")
                 Text("\(getMacName(infoString: modelID)) (\(modelID))")
                     .font(.system(size: 11))
                     .fontWeight(.bold)
@@ -174,6 +192,7 @@ struct ContentView: View {
             .padding(.top)
         }
         .navigationTitle("About This Hack")
+      // conflict resolved
         .frame(minWidth: 580, maxWidth: 580, minHeight: 320, maxHeight: 320)
     }
     func getOSName() -> String {
@@ -231,7 +250,9 @@ struct ContentView: View {
             return "macOS Flying Squirrel (\(OSnumber ?? 10.16))"
         }
     }
-    
+    func getMacNameSmart() -> String {
+        return (try? call("defaults read ~/Library/Preferences/com.apple.SystemProfiler.plist \"CPU Names\" | cut -f 2 -d = | sed 's/..$//' | tail -n 2 | head -n 1 | sed 's/$//' | cut -c 3-")) ?? "Mac"
+    }
     func getMacName(infoString: String) -> String {
         // from https://everymac.com/systems/by_capability/mac-specs-by-machine-model-machine-id.html
         
@@ -318,6 +339,8 @@ struct ContentView: View {
         case "Macmini9,1":
             return "Mac Mini (M1, 2020)"
             
+        case "MacPro3,1":
+            return "Mac Pro (2008)"
         case "MacPro4,1":
             return "Mac Pro (2009)"
         case "MacPro5,1":
