@@ -42,7 +42,10 @@ struct ContentView: View {
         let ramSpeedTrim2 = String(ramSpeedTrim1[ramSpeedID1...])
         let ramSpeedID2 = ramSpeedTrim2.firstIndex(of: " ")!
         let ramSpeedTrim3 = String(ramSpeedTrim2[ramSpeedID2...])
-        ram = "\(ram)\(ramSpeedTrim3)"
+        let ramSpeedTrim5 = "\(ramSpeedTrim3)"
+        let ramSpeedID3 = ramSpeedTrim5.firstIndex(of: "z")!
+        let ramSpeedTrim4 = String(ramSpeedTrim5[...ramSpeedID3])
+        ram = "\(ram)\(ramSpeedTrim4)"
         
         // "system_profiler SPMemoryDataType | grep Type: | cut -c 16-"
         
@@ -58,7 +61,8 @@ struct ContentView: View {
         
         
         graphics = (try? call("system_profiler SPDisplaysDataType | awk -F': ' '/^\\ *Chipset Model:/ {printf $2 \" \"}'")) ?? "Unknown GPU"
-        
+        let tempGraphics = (try? call("system_profiler SPDisplaysDataType | grep VRAM | cut -c 28-")) ?? "Unknown RAM" //system_profiler SPDisplaysDataType | grep VRAM | cut -c 28-
+        graphics = "\(graphics)\(tempGraphics)"
         
         display = (try? call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ?? "Unknown Display"
         if display.contains("(QHD"){
@@ -170,6 +174,7 @@ struct ContentView: View {
                             .font(.system(size: 11))
                     }
                 }
+            
             }
             .font(.callout)
             .padding(.top)
