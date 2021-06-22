@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C1266585262647D8009A912B /* modelID.sh in Resources */ = {isa = PBXBuildFile; fileRef = C1266584262647D8009A912B /* modelID.sh */; };
 		C126658826264800009A912B /* ShellOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = C126658726264800009A912B /* ShellOut.swift */; };
+		C14B350026823F2200633CF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B34FF26823F2200633CF6 /* AppDelegate.swift */; };
 		C1533ED325F961B300F7469F /* About_This_HackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1533ED225F961B300F7469F /* About_This_HackApp.swift */; };
 		C1533ED525F961B300F7469F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1533ED425F961B300F7469F /* ContentView.swift */; };
 		C1533ED725F961B500F7469F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1533ED625F961B500F7469F /* Assets.xcassets */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		C1266584262647D8009A912B /* modelID.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = modelID.sh; sourceTree = "<group>"; };
 		C126658726264800009A912B /* ShellOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShellOut.swift; sourceTree = "<group>"; };
+		C14B34FF26823F2200633CF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1533ECF25F961B300F7469F /* About This Hack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "About This Hack.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1533ED225F961B300F7469F /* About_This_HackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About_This_HackApp.swift; sourceTree = "<group>"; };
 		C1533ED425F961B300F7469F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				C1533ED225F961B300F7469F /* About_This_HackApp.swift */,
+				C14B34FF26823F2200633CF6 /* AppDelegate.swift */,
 				C1533ED425F961B300F7469F /* ContentView.swift */,
 				C126658726264800009A912B /* ShellOut.swift */,
 				C1533ED625F961B500F7469F /* Assets.xcassets */,
@@ -169,6 +172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C14B350026823F2200633CF6 /* AppDelegate.swift in Sources */,
 				C1533ED525F961B300F7469F /* ContentView.swift in Sources */,
 				C126658826264800009A912B /* ShellOut.swift in Sources */,
 				C1533ED325F961B300F7469F /* About_This_HackApp.swift in Sources */,
