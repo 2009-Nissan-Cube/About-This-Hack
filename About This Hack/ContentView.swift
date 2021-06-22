@@ -30,7 +30,7 @@ struct ContentView: View {
         serialNumber = (try? call("system_profiler SPHardwareDataType | awk '/Serial/ {print $4}'")) ?? "Serial # not found"
         print("Serial Number: \(serialNumber)")
         
-        
+
         ram = (try? call("echo \"$(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024))\"")) ?? "RAM Error"
         print("\(ram) GB")
         ram = "\(ram) GB"
@@ -42,10 +42,7 @@ struct ContentView: View {
         let ramSpeedTrim2 = String(ramSpeedTrim1[ramSpeedID1...])
         let ramSpeedID2 = ramSpeedTrim2.firstIndex(of: " ")!
         let ramSpeedTrim3 = String(ramSpeedTrim2[ramSpeedID2...])
-        let ramSpeedTrim5 = "\(ramSpeedTrim3)"
-        let ramSpeedID3 = ramSpeedTrim5.firstIndex(of: "z")!
-        let ramSpeedTrim4 = String(ramSpeedTrim5[...ramSpeedID3])
-        ram = "\(ram)\(ramSpeedTrim4)"
+        ram = "\(ram)\(ramSpeedTrim3)"
         
         // "system_profiler SPMemoryDataType | grep Type: | cut -c 16-"
         
@@ -67,8 +64,7 @@ struct ContentView: View {
         
         
         graphics = (try? call("system_profiler SPDisplaysDataType | awk -F': ' '/^\\ *Chipset Model:/ {printf $2 \" \"}'")) ?? "Unknown GPU"
-        let tempGraphics = (try? call("system_profiler SPDisplaysDataType | grep VRAM | cut -c 28-")) ?? "Unknown RAM" //system_profiler SPDisplaysDataType | grep VRAM | cut -c 28-
-        graphics = "\(graphics)\(tempGraphics)"
+        
         
         display = (try? call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ?? "Unknown Display"
         if display.contains("(QHD"){
@@ -122,20 +118,19 @@ struct ContentView: View {
 
         print("MAC: \(getMacName(infoString: modelID))")
         
-        
     }
-    
+
     var body: some View {
         HStack(spacing: 15) {
             Image(ImageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(.blue)
-                .frame(width: 220)
+                .frame(width: 210)
             
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 6) {
                 Text("\(getOSName())")//": \(systemVersion)")
-                    .font(.system(size: 20))
+                    .font(.system(size: 22))
                     .fontWeight(.bold)
                 //Text("\(getMacNameSmart()) (\(modelID))")
                 Text("\(getMacName(infoString: modelID)) (\(modelID))")
@@ -192,67 +187,67 @@ struct ContentView: View {
                             .font(.system(size: 11))
                     }
                 }
-            
             }
             .font(.callout)
             .padding(.top)
         }
         .navigationTitle("About This Hack")
-        .frame(minWidth: 650, maxWidth: 700, minHeight: 350, maxHeight: 350)
+      // conflict resolved
+        .frame(minWidth: 580, maxWidth: 580, minHeight: 320, maxHeight: 320)
     }
     func getOSName() -> String {
-        let infoString = (try? call("sw_vers | grep ProductVersion | cut -c 17-")) ?? "12.0"
+        let infoString = (try? call("sw_vers | grep ProductVersion | cut -c 17-")) ?? "Unknown"
         let OSnumber = Double(infoString)
         if(OSnumber ?? 11.0 >= 12.0) {
-            return "macOS Monterey (\(OSnumber ?? 11.0))"
+            return "macOS Monterey (\(OSnumber ?? 12.0))"
         }
         else if(OSnumber ?? 11.0 >= 11.0) {
-            return "macOS Big Sur (\(OSnumber))"
+            return "macOS Big Sur (\(OSnumber ?? 11.0))"
         }
         else if (OSnumber ?? 11.0 >= 10.0) {
             let infoString1 = (try? call("sw_vers -productVersion | awk -F '.' '{print  $2}'")) ?? "15"
             switch(infoString1) {
             case "16":
-                return "macOS Flying Squirrel (\(OSnumber))"
+                return "macOS Flying Squirrel (\(OSnumber ?? 10.16))"
             case "15":
-                return "macOS Catalina (\(OSnumber))"
+                return "macOS Catalina (\(OSnumber ?? 10.15))"
             case "14":
-                return "macOS Mojave (\(OSnumber))"
+                return "macOS Mojave (\(OSnumber ?? 10.14))"
             case "13":
-                return "macOS High Sierra (\(OSnumber))"
+                return "macOS High Sierra (\(OSnumber ?? 10.13))"
             case "12":
-                return "macOS Sierra (\(OSnumber))"
+                return "macOS Sierra (\(OSnumber ?? 10.12))"
             case "11":
-                return "OS X El Capitan (\(OSnumber))"
+                return "OS X El Capitan (\(OSnumber ?? 10.11))"
             case "10":
-                return "OS X Yosemite (\(OSnumber))"
+                return "OS X Yosemite (\(OSnumber ?? 10.10))"
             case "9":
-                return "OS X Mavericks (\(OSnumber))"
+                return "OS X Mavericks (\(OSnumber ?? 10.9))"
             case "8":
-                return "OS X Mountain Lion (\(OSnumber))"
+                return "OS X Mountain Lion (\(OSnumber ?? 10.8))"
             case "7":
-                return "Mac OS X Lion (\(OSnumber))"
+                return "Mac OS X Lion (\(OSnumber ?? 10.7))"
             case "6":
-                return "Mac OS X Snow Leopard (\(OSnumber))"
+                return "Mac OS X Snow Leopard (\(OSnumber ?? 10.6))"
             case "5":
-                return "Mac OS X Leopard (\(OSnumber))"
+                return "Mac OS X Leopard (\(OSnumber ?? 10.5))"
             case "4":
-                return "Mac OS X Tiger (\(OSnumber))"
+                return "Mac OS X Tiger (\(OSnumber ?? 10.4))"
             case "3":
-                return "Mac OS X Panther (\(OSnumber))"
+                return "Mac OS X Panther (\(OSnumber ?? 10.3))"
             case "2":
-                return "Mac OS X Jaguar (\(OSnumber))"
+                return "Mac OS X Jaguar (\(OSnumber ?? 10.2))"
             case "1":
-                return "Mac OS X Puma (\(OSnumber))"
+                return "Mac OS X Puma (\(OSnumber ?? 10.1))"
             case "0":
-                return "Mac OS X Cheetah (\(OSnumber))"
+                return "Mac OS X Cheetah (\(OSnumber ?? 10.0))"
             default:
                 return "macOS Catalina (10.15.6)"
             }
             
         }
         else {
-            return "macOS Flying Squirrel (\(OSnumber))"
+            return "macOS Flying Squirrel (\(OSnumber ?? 10.16))"
         }
     }
     func getMacNameSmart() -> String {
@@ -465,11 +460,9 @@ struct ContentView: View {
             return "Mac"
         }
     }
-    
-}
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+        }
     }
 }
