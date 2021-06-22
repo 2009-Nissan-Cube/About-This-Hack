@@ -104,13 +104,22 @@ struct ContentView: View {
                 ImageName = "Light Monterey"
             }
         }
-        else {
+        else if(OSver >= 11.0) {
             if(qDarkMode == true) {
                 ImageName = "Dark Sur"
             }
             else {
                 ImageName = "Light Sur"
             }
+        }
+        else if(OSver >= 10.0) {
+            let OSminVer = (OSver-10)*100 // 10.15 - 10 = 0.15  ;  0.15 * 100 = 15 yay
+            if(OSminVer >= 15 {
+                
+            }
+        }
+        else {
+            ImageName = "Unknown" // default macOS icon
         }
         print(ImageName)
         
