@@ -175,11 +175,6 @@ struct ContentView: View {
         }
         .navigationTitle("About This Hack")
         .frame(minWidth: 580, maxWidth: 580, minHeight: 320, maxHeight: 320)
-        HStack(alignment: .bottom) {
-                    Text("Made with ❤️ by AvaQueen with help by a few others.")
-                        .font(.system(size: 11))
-                        .padding(.bottom, 1)
-                }
     }
     func getOSName() -> String {
         let infoString = (try? call("sw_vers | grep ProductVersion | cut -c 17-")) ?? "Unknown"
