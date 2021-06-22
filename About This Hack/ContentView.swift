@@ -77,7 +77,7 @@ struct ContentView: View {
             let displayTrimmed = String(display[..<displayID])
             display = displayTrimmed
         }
-        ram = "\(ram)\(ramTypeOfficial)"
+        //ram = "\(ram)\(ramTypeOfficial)"
         
         // thanks AstroKid for helping out with making "display" work with macOS 12 Monterey
         opencore1 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 59- | cut -c -1")) ?? "X"
