@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var systemVersion: String
+    var macModel: String
     var modelID: String
     var serialNumber: String
     var ram: String
@@ -30,6 +31,9 @@ struct ContentView: View {
         serialNumber = (try? call("system_profiler SPHardwareDataType | awk '/Serial/ {print $4}'")) ?? "Serial # not found"
         print("Serial Number: \(serialNumber)")
         
+        macModel = (try? call("""
+ /usr/libexec/PlistBuddy -c "print :'CPU Names':$(system_profiler SPHardwareDataType | awk '/Serial/ {print $4}' | cut -c 9-)-en-US_US" ~/Library/Preferences/com.apple.SystemProfiler.plist
+ """)) ?? "Unknown Model"
 
         ram = (try? call("echo \"$(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024))\"")) ?? "RAM Error"
         print("\(ram) GB")
@@ -122,9 +126,9 @@ struct ContentView: View {
         startupDisk = (try? call("DISK=$(bless --getBoot); diskutil info $DISK | grep \"Volume Name:\" | cut -c 31-")) ?? "Macintosh HD"
         print(startupDisk)
         modelID = (try? call("sysctl hw.model | cut -f2 -d \" \"")) ?? "Mac"
-        //curl -s 'https://support-sp.apple.com/sp/product?cc='$(system_profiler SPHardwareDataType | awk '/Serial/ {print $4}' | cut -c 9-)  | sed 's|.*<configCode>\(.*\)</configCode>.*|\1|'
+        // curl -s 'https://support-sp.apple.com/sp/product?cc='$(system_profiler SPHardwareDataType | awk '/Serial/ {print $4}' | cut -c 9-)  | sed 's|.*<configCode>\(.*\)</configCode>.*|\1|'
 
-        print("MAC: \(getMacName(infoString: modelID))")
+        print("MAC: \(macModel)")
         
     }
 
@@ -141,7 +145,7 @@ struct ContentView: View {
                     .font(.system(size: 22))
                     .fontWeight(.bold)
                 //Text("\(getMacNameSmart()) (\(modelID))")
-                Text("\(getMacName(infoString: modelID)) (\(modelID))")
+                Text("\(macModel) (\(modelID))")
                     .font(.system(size: 11))
                     .fontWeight(.bold)
                 HStack(spacing: 11) {
@@ -270,7 +274,9 @@ struct ContentView: View {
         }
     }
     
-    func getMacNameSmart() -> String {
+    // Removed below code in favor of one-line macModel command
+
+    /* func getMacNameSmart() -> String {
         return (try? call("defaults read ~/Library/Preferences/com.apple.SystemProfiler.plist \"CPU Names\" | cut -f 2 -d = | sed 's/..$//' | tail -n 2 | head -n 1 | sed 's/$//' | cut -c 3-")) ?? "Mac"
     }
     func getMacName(infoString: String) -> String {
@@ -479,7 +485,7 @@ struct ContentView: View {
         default:
             return "Mac"
         }
-    }
+    } */
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
