@@ -9,7 +9,7 @@ A simple application to view your exact hardware on macOS. Similar to About This
 
 # How To Install
 1) Download the DMG from the latest release
-2) Drag to your Applications Folder
+2) Drag the enclosed app to your Applications Folder
 3) Open!
 
 # If you get [this error](https://user-images.githubusercontent.com/79278890/111886978-4af4cb80-89a8-11eb-90c8-522a89abb48e.png) when opening:
