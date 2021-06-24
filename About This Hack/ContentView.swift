@@ -17,12 +17,11 @@ struct ContentView: View {
     var graphics: String
     var display: String
     var startupDisk: String
-    var opencore1: String
-    var opencore2: String
-    var opencore3: String
     var OSver: Double
     var ImageName: String
     var qDarkMode: DarwinBoolean
+    var ocLevel: String
+    var ocVersion: String
     
     init() {
         systemVersion = (try? call("system_profiler SPSoftwareDataType | grep 'System Version' | cut -c 23-")) ?? "System Version Not Recognized"
@@ -85,12 +84,15 @@ struct ContentView: View {
             display = displayTrimmed
         }
         //ram = "\(ram)\(ramTypeOfficial)"
-        
+        ocLevel   = "X"
+        ocVersion = "X"
+        let ocString = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version")) ?? "X"
+        let testString = ocString.replacingOccurrences(of: "4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version", with: "").trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: "-")
+        if(ocString != "X") {
+            ocLevel = String(testString[1]).inserting(separator: ".", every: 1)
+            ocVersion = (testString[0] == "REL" ? "(Release)" : "(Debug)")
+        }
         // thanks AstroKid for helping out with making "display" work with macOS 12 Monterey
-        opencore1 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 59- | cut -c -1")) ?? "X"
-        opencore2 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 60- | cut -c -1")) ?? "X"
-        opencore3 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 61- | cut -c -1")) ?? "X"
-        print("\(opencore1).\(opencore2).\(opencore3)")
         
         // ASTRO KID MODIFIED HERE: allow images to be OS dependent
         qDarkMode = true
@@ -191,13 +193,11 @@ struct ContentView: View {
                         .font(.system(size: 11))
                 }
                 HStack {
-                    if opencore1 == "0" {
-                        Text("OpenCore Version")
-                            .font(.system(size: 11))
-                            .fontWeight(.bold)
-                        Text("\(opencore1).\(opencore2).\(opencore3)")
-                            .font(.system(size: 11))
-                    }
+                    Text("OpenCore Version")
+                        .font(.system(size: 11))
+                        .fontWeight(.bold)
+                    Text("\(ocLevel) \(ocVersion)")
+                        .font(.system(size: 11))
                 }
             }
             .font(.callout)
