@@ -22,7 +22,6 @@ struct ContentView: View {
     var qDarkMode: DarwinBoolean
     var ocLevel: String
     var ocVersion: String
-    var qPrintOC: DarwinBoolean
     
     init() {
         systemVersion = (try? call("system_profiler SPSoftwareDataType | grep 'System Version' | cut -c 23-")) ?? "System Version Not Recognized"
@@ -85,17 +84,13 @@ struct ContentView: View {
             display = displayTrimmed
         }
         //ram = "\(ram)\(ramTypeOfficial)"
-        ocLevel   = "X"
-        ocVersion = "X"
-        qPrintOC = true
+        ocLevel   = "Unknown"
+        ocVersion = "Version"
         let ocString = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version")) ?? "X"
         let testString = ocString.replacingOccurrences(of: "4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version", with: "").trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: "-")
         if(ocString != "X") {
             ocLevel = String(testString[1]).inserting(separator: ".", every: 1)
             ocVersion = (testString[0] == "REL" ? "(Release)" : "(Debug)")
-        }
-        if(ocLevel == "X" || ocVersion == "X") {
-            qPrintOC = false
         }
         // thanks AstroKid for helping out with making "display" work with macOS 12 Monterey
         
@@ -201,14 +196,14 @@ struct ContentView: View {
                     Text(serialNumber)
                         .font(.system(size: 11))
                 }
-                if (qPrintOC == true) {
+                if ocLevel != "Unknown" {
                     HStack {
                         Text("OpenCore Version")
                             .font(.system(size: 11))
                             .fontWeight(.bold)
                         Text("\(ocLevel) \(ocVersion)")
                             .font(.system(size: 11))
-                }
+                    }
                 }
             }
             .font(.callout)
