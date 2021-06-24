@@ -192,12 +192,14 @@ struct ContentView: View {
                     Text(serialNumber)
                         .font(.system(size: 11))
                 }
-                HStack {
-                    Text("OpenCore Version")
-                        .font(.system(size: 11))
-                        .fontWeight(.bold)
-                    Text("\(ocLevel) \(ocVersion)")
-                        .font(.system(size: 11))
+                if ocVersion.contains("0") == false {
+                    HStack {
+                        Text("OpenCore Version")
+                            .font(.system(size: 11))
+                            .fontWeight(.bold)
+                        Text("\(ocLevel) \(ocVersion)")
+                            .font(.system(size: 11))
+                }
                 }
             }
             .font(.callout)
