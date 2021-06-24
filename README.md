@@ -1,6 +1,7 @@
 # About-This-Hack
-A simple application to view your exact hardware on macOS. Similar to About This Mac, but with more features, including AMD Processor Support, display resolution and refresh rate, OpenCore (or not) version, and more! Works on both Hackintoshes *and* real Macs! <br>
-![example](https://user-images.githubusercontent.com/79278890/111887299-71b40180-89aa-11eb-998a-139e8739b9f2.png)
+A simple application to view your exact hardware on macOS. Similar to About This Mac, but with more features, including AMD Processor Support, display resolution, and more! Works on both Hackintoshes *and* real Macs! <br>
+![Screen Shot 2021-06-24 at 11 02 13 AM](https://user-images.githubusercontent.com/79278890/123286218-b8e6ec80-d4db-11eb-9ce4-7fef3bd62f82.png)
+
 
 # Supported OS's
 - **Only macOS 11 Big Sur and newer** are supported for now, older OS support coming soon.
