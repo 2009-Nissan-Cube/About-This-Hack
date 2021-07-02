@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.colorScheme) var colorScheme
     var systemVersion: String
     var macModel: String
     var modelID: String
@@ -18,8 +19,8 @@ struct ContentView: View {
     var display: String
     var startupDisk: String
     var OSver: Double
-    var ImageName: String
-    var qDarkMode: DarwinBoolean
+    var lightImageName: String
+    var darkImageName: String
     var ocLevel: String
     var ocVersion: String
     
@@ -95,31 +96,20 @@ struct ContentView: View {
         // thanks AstroKid for helping out with making "display" work with macOS 12 Monterey
         
         // ASTRO KID MODIFIED HERE: allow images to be OS dependent
-        qDarkMode = true
-        let darkModeStr = (try? call("/usr/bin/defaults read -g AppleInterfaceStyle")) ?? "Light"
-        if(darkModeStr != "Dark") {
-            qDarkMode = false
-        }
+        
         if(OSver >= 12.0) {
-            if(qDarkMode == true) {
-                ImageName = "Dark Monterey"
-            }
-            else {
-                ImageName = "Light Monterey"
-            }
+            lightImageName = "Light Monterey"
+            darkImageName = "Dark Monterey"
         }
         else if(OSver >= 11.0) {
-            if(qDarkMode == true) {
-                ImageName = "Dark Sur"
-            }
-            else {
-                ImageName = "Light Sur"
-            }
+            lightImageName = "Light Sur"
+            darkImageName = "Dark Sur"
         }
         else {
-            ImageName = "Unknown" // default macOS icon
+            lightImageName = "Unknown" // default macOS icon
+            darkImageName = "Unknown"
         }
-        print(ImageName)
+        print("Light Image: \(lightImageName)\nDark Image:\(darkImageName)")
         
         
         // now startup disk
@@ -140,7 +130,7 @@ struct ContentView: View {
 
     var body: some View {
         HStack(spacing: 15) {
-            Image(ImageName)
+            Image(colorScheme == .dark ? darkImageName : lightImageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(.blue)
@@ -207,7 +197,6 @@ struct ContentView: View {
                 }
             }
             .font(.callout)
-            .padding(.top)
         }
         .navigationTitle("About This Hack")
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.willUpdateNotification), perform: { _ in
