@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.colorScheme) var colorScheme
     var systemVersion: String
     var macModel: String
     var modelID: String
@@ -17,27 +18,28 @@ struct ContentView: View {
     var graphics: String
     var display: String
     var startupDisk: String
-    var OSver: Double
-    var ImageName: String
-    var qDarkMode: DarwinBoolean
+    var lightImageName: String
+    var darkImageName: String
     var ocLevel: String
     var ocVersion: String
     
     init() {
-        systemVersion = (try? call("system_profiler SPSoftwareDataType | grep 'System Version' | cut -c 23-")) ?? "System Version Not Recognized"
-        OSver = Double((try? call("sw_vers | grep ProductVersion | cut -c 17-")) ?? "11.0") ?? 11.0
+//        systemVersion = (try? call("system_profiler SPSoftwareDataType | grep 'System Version' | cut -c 23-")) ?? "System Version Not Recognized"
+        systemVersion = (try? call("sw_vers | grep ProductVersion | cut -c 17-")) ?? "11.0"
         //modelID = (try? (try? call("'/Applications/About This Hack.app/Contents/Resources/modelID.sh'")) ?? call("sysctl -n hw.model")) ?? "Mac"
-        serialNumber = (try? call("system_profiler SPHardwareDataType | awk '/Serial/ {print $4}'")) ?? "Serial # not found"
+        let hardwareCache = (try? call("system_profiler SPHardwareDataType")) ?? "Some data idk lol"
+        serialNumber = (try? call("echo \"\(hardwareCache)\" | awk '/Serial/ {print $4}'")) ?? "Serial # not found"
         print("Serial Number: \(serialNumber)")
         
         macModel = (try? call("""
- /usr/libexec/PlistBuddy -c "print :'CPU Names':$(system_profiler SPHardwareDataType | awk '/Serial/ {print $4}' | cut -c 9-)-en-US_US" ~/Library/Preferences/com.apple.SystemProfiler.plist
+ /usr/libexec/PlistBuddy -c "print :'CPU Names':$(echo \"\(hardwareCache)\" | awk '/Serial/ {print $4}' | cut -c 9-)-en-US_US" ~/Library/Preferences/com.apple.SystemProfiler.plist
  """)) ?? "Unknown Model"
 
         ram = (try? call("echo \"$(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024))\"")) ?? "RAM Error"
         print("\(ram) GB")
         ram = "\(ram) GB"
-        let ramSpeedTmp = (try? call("system_profiler SPMemoryDataType | grep Speed:")) ?? "RAM Error"
+        let ramInfoCache = (try? call("system_profiler SPMemoryDataType")) ?? "RAM Error"
+        let ramSpeedTmp = (try? call("echo \"\(ramInfoCache)\" | grep Speed:")) ?? "RAM Error"
         let ramSpeedID = ramSpeedTmp.firstIndex(of: "\n")!
         let ramSpeedTrim1 = String(ramSpeedTmp[ramSpeedID...])
         print(ramSpeedTrim1)
@@ -52,7 +54,7 @@ struct ContentView: View {
         }
         ram = "\(ram)\(ramSpeedTrim3)"
         
-        let ramType = (try? call("system_profiler SPMemoryDataType | grep Type: | cut -c 16-")) ?? "RAM Error"
+        let ramType = (try? call("echo \"\(ramInfoCache)\" | grep Type: | cut -c 16-")) ?? "RAM Error"
         let ramTypeID = ramType.firstIndex(of: "\n")!
         let ramTypeTrim = String(ramType[ramTypeID...])
         let ramTypeID1 = ramTypeTrim.firstIndex(of: " ")!
@@ -68,15 +70,15 @@ struct ContentView: View {
         
         cpu = (try? call("sysctl -n machdep.cpu.brand_string")) ?? "Whoopsie"
         
-        
-        graphics = (try? call("system_profiler SPDisplaysDataType | awk -F': ' '/^\\ *Chipset Model:/ {printf $2 \" \"}'")) ?? "Unknown GPU"
+        let displaysCache = (try? call("system_profiler SPDisplaysDataType")) ?? "Unknown GPU"
+        graphics = (try? call("echo \"\(displaysCache)\" | awk -F': ' '/^\\ *Chipset Model:/ {printf $2 \" \"}'")) ?? "Unknown GPU"
         // system_profiler SPDisplaysDataType | grep VRAM | cut -c 28-
-        let graphicsRAM  = (try? call("system_profiler SPDisplaysDataType | grep VRAM | sed 's/.*: //'")) ?? "Unknown GPU RAM"
+        let graphicsRAM  = (try? call("echo \"\(displaysCache)\" | grep VRAM | sed 's/.*: //'")) ?? "Unknown GPU RAM"
         graphics = "\(graphics)\(graphicsRAM)"
         
-        display = (try? call("system_profiler SPDisplaysDataType | grep Resolution | sed 's/.*: //'")) ?? "Unknown Display"
+        display = (try? call("echo \"\(displaysCache)\" | grep Resolution | sed 's/.*: //'")) ?? "Unknown Display"
         if display.contains("(QHD"){
-            display = (try? call("system_profiler SPDisplaysDataType | grep Resolution | sed 's/.*: //' | cut -c -11")) ?? "Unknown Display"
+            display = (try? call("echo \"\(displaysCache)\" | grep Resolution | sed 's/.*: //' | cut -c -11")) ?? "Unknown Display"
         }
         if(display.contains("\n")) {
             let displayID = display.firstIndex(of: "\n")!
@@ -95,31 +97,20 @@ struct ContentView: View {
         // thanks AstroKid for helping out with making "display" work with macOS 12 Monterey
         
         // ASTRO KID MODIFIED HERE: allow images to be OS dependent
-        qDarkMode = true
-        let darkModeStr = (try? call("/usr/bin/defaults read -g AppleInterfaceStyle")) ?? "Light"
-        if(darkModeStr != "Dark") {
-            qDarkMode = false
+        
+        if(systemVersion.hasPrefix("12")) {
+            lightImageName = "Light Monterey"
+            darkImageName = "Dark Monterey"
         }
-        if(OSver >= 12.0) {
-            if(qDarkMode == true) {
-                ImageName = "Dark Monterey"
-            }
-            else {
-                ImageName = "Light Monterey"
-            }
-        }
-        else if(OSver >= 11.0) {
-            if(qDarkMode == true) {
-                ImageName = "Dark Sur"
-            }
-            else {
-                ImageName = "Light Sur"
-            }
+        else if(systemVersion.hasPrefix("11")) {
+            lightImageName = "Light Sur"
+            darkImageName = "Dark Sur"
         }
         else {
-            ImageName = "Unknown" // default macOS icon
+            lightImageName = "Unknown" // default macOS icon
+            darkImageName = "Unknown"
         }
-        print(ImageName)
+        print("Light Image: \(lightImageName)\nDark Image:\(darkImageName)")
         
         
         // now startup disk
@@ -140,7 +131,7 @@ struct ContentView: View {
 
     var body: some View {
         HStack(spacing: 15) {
-            Image(ImageName)
+            Image(colorScheme == .dark ? darkImageName : lightImageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(.blue)
@@ -207,7 +198,6 @@ struct ContentView: View {
                 }
             }
             .font(.callout)
-            .padding(.top)
         }
         .navigationTitle("About This Hack")
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.willUpdateNotification), perform: { _ in
@@ -218,58 +208,57 @@ struct ContentView: View {
         .frame(minWidth: 580, maxWidth: 580, minHeight: 320, maxHeight: 320)
     }
     func getOSName() -> String {
-        let infoString = (try? call("sw_vers | grep ProductVersion | cut -c 17-")) ?? "Unknown"
-        let OSnumber = Double(infoString)
-        if(OSnumber ?? 11.0 >= 12.0) {
-            return "macOS Monterey (\(OSnumber ?? 12.0))"
+        let infoString = systemVersion
+        if(systemVersion.hasPrefix("12")) {
+            return "macOS Monterey (\(systemVersion))"
         }
-        else if(OSnumber ?? 11.0 >= 11.0) {
-            return "macOS Big Sur (\(OSnumber ?? 11.0))"
+        else if(systemVersion.hasPrefix("11")) {
+            return "macOS Big Sur (\(systemVersion))"
         }
-        else if (OSnumber ?? 11.0 >= 10.0) {
+        else if (systemVersion.hasPrefix("10")) {
             let infoString1 = (try? call("sw_vers -productVersion | awk -F '.' '{print  $2}'")) ?? "15"
             switch(infoString1) {
             case "16":
-                return "macOS Flying Squirrel (\(OSnumber ?? 10.16))"
+                return "macOS Flying Squirrel (\(systemVersion))"
             case "15":
-                return "macOS Catalina (\(OSnumber ?? 10.15))"
+                return "macOS Catalina (\(systemVersion))"
             case "14":
-                return "macOS Mojave (\(OSnumber ?? 10.14))"
+                return "macOS Mojave (\(systemVersion))"
             case "13":
-                return "macOS High Sierra (\(OSnumber ?? 10.13))"
+                return "macOS High Sierra (\(systemVersion))"
             case "12":
-                return "macOS Sierra (\(OSnumber ?? 10.12))"
+                return "macOS Sierra (\(systemVersion))"
             case "11":
-                return "OS X El Capitan (\(OSnumber ?? 10.11))"
+                return "OS X El Capitan (\(systemVersion))"
             case "10":
-                return "OS X Yosemite (\(OSnumber ?? 10.10))"
+                return "OS X Yosemite (\(systemVersion))"
             case "9":
-                return "OS X Mavericks (\(OSnumber ?? 10.9))"
+                return "OS X Mavericks (\(systemVersion))"
             case "8":
-                return "OS X Mountain Lion (\(OSnumber ?? 10.8))"
+                return "OS X Mountain Lion (\(systemVersion))"
             case "7":
-                return "Mac OS X Lion (\(OSnumber ?? 10.7))"
+                return "Mac OS X Lion (\(systemVersion))"
             case "6":
-                return "Mac OS X Snow Leopard (\(OSnumber ?? 10.6))"
+                return "Mac OS X Snow Leopard (\(systemVersion))"
             case "5":
-                return "Mac OS X Leopard (\(OSnumber ?? 10.5))"
+                return "Mac OS X Leopard (\(systemVersion))"
             case "4":
-                return "Mac OS X Tiger (\(OSnumber ?? 10.4))"
+                return "Mac OS X Tiger (\(systemVersion))"
             case "3":
-                return "Mac OS X Panther (\(OSnumber ?? 10.3))"
+                return "Mac OS X Panther (\(systemVersion))"
             case "2":
-                return "Mac OS X Jaguar (\(OSnumber ?? 10.2))"
+                return "Mac OS X Jaguar (\(systemVersion))"
             case "1":
-                return "Mac OS X Puma (\(OSnumber ?? 10.1))"
+                return "Mac OS X Puma (\(systemVersion))"
             case "0":
-                return "Mac OS X Cheetah (\(OSnumber ?? 10.0))"
+                return "Mac OS X Cheetah (\(systemVersion))"
             default:
                 return "macOS Catalina (10.15.6)"
             }
             
         }
         else {
-            return "macOS Flying Squirrel (\(OSnumber ?? 10.16))"
+            return "macOS Flying Squirrel (\(systemVersion))"
         }
     }
     
