@@ -113,10 +113,8 @@ struct ContentView: View {
         print("Light Image: \(lightImageName)\nDark Image:\(darkImageName)")
         
         
-        // now startup disk
-        
-        // command: DISK=$(bless --getBoot) | diskutil info $DISK | grep Volume\ Name: | cut -c 31-
-        startupDisk = (try? call("DISK=$(bless --getBoot); diskutil info $DISK | grep \"Volume Name:\" | cut -c 31-")) ?? "Macintosh HD"
+        // Startup Disk
+        startupDisk = (try? call("system_profiler SPSoftwareDataType | grep 'Boot Volume' | sed 's/.*: //'")) ?? "Macintosh HD"
         print(startupDisk)
         modelID = (try? call("sysctl hw.model | cut -f2 -d \" \"")) ?? "Mac"
         // curl -s 'https://support-sp.apple.com/sp/product?cc='$(system_profiler SPHardwareDataType | awk '/Serial/ {print $4}' | cut -c 9-)  | sed 's|.*<configCode>\(.*\)</configCode>.*|\1|'
