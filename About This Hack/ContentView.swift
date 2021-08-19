@@ -206,7 +206,7 @@ struct ContentView: View {
         .frame(minWidth: 580, maxWidth: 580, minHeight: 320, maxHeight: 320)
     }
     func getOSName() -> String {
-        let infoString = systemVersion
+        _ = systemVersion
         if(systemVersion.hasPrefix("12")) {
             return "macOS Monterey (\(systemVersion))"
         }
