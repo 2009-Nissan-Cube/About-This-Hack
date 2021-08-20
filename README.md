@@ -37,5 +37,5 @@ The internet for helping me with a lot of the code.
 
 # Contact
 You can reach me at the following destinations:
-Discord - @AvaQueen#1949 & https://discord.gg/5AQjAnNKYd
+Discord - @8itCat#1949 & https://discord.gg/5AQjAnNKYd
 Reddit - u/QueenVengeance
