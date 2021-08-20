@@ -2,7 +2,7 @@
 //  About_This_HackUITests.swift
 //  About This HackUITests
 //
-//  Created by Alexander Skula on 8/20/21.
+//  Created by AvaQueen on 8/20/21.
 //
 
 import XCTest

@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  About This Hack
 //
-//  Created by Alexander Skula on 8/20/21.
+//  Created by AvaQueen on 8/20/21.
 //
 
 import Cocoa
