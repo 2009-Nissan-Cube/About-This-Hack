@@ -94,9 +94,8 @@ struct ContentView: View {
             ocLevel = String(testString[1]).inserting(separator: ".", every: 1)
             ocVersion = (testString[0] == "REL" ? "(Release)" : "(Debug)")
         }
-        // thanks AstroKid for helping out with making "display" work with macOS 12 Monterey
         
-        // ASTRO KID MODIFIED HERE: allow images to be OS dependent
+        // thanks AstroKid for helping out with making "display" work with macOS 12 Monterey
         
         if(systemVersion.hasPrefix("12")) {
             lightImageName = "Light Monterey"
