@@ -13,6 +13,7 @@ class ViewController: NSViewController {
 
     @IBOutlet weak var picture: NSImageView!
     @IBOutlet weak var osVersion: NSTextField!
+    @IBOutlet weak var osPrefix: NSTextField!
     @IBOutlet weak var systemVersion: NSTextField!
     @IBOutlet weak var macModel: NSTextField!
     @IBOutlet weak var cpu: NSTextField!
@@ -81,6 +82,8 @@ class ViewController: NSViewController {
         
         // macOS Version Name
         osVersion.stringValue = "\(getOSName())"
+        
+        osPrefix.stringValue = "\(getOSPrefix())"
         
         // macOS Version ID
         systemVersion.stringValue = (try? call("system_profiler SPSoftwareDataType | grep 'System Version' | cut -c 29-")) ?? ""
@@ -164,14 +167,28 @@ class ViewController: NSViewController {
     
     func visualName() {
         // Add Names
-        systemVersion.stringValue = "Version \(systemVersion.stringValue)"
-        cpu.stringValue = "Processor  \(cpu.stringValue)"
-        ram.stringValue = "Memory  \(ram.stringValue)"
-        graphics.stringValue = "Graphics  \(graphics.stringValue)"
-        display.stringValue = "Display  \(display.stringValue)"
-        startupDisk.stringValue = "Startup Disk  \(startupDisk.stringValue)"
-        serialNumber.stringValue = "Serial Number  \(serialNumber.stringValue)"
-        ocVersion.stringValue = "OpenCore Version \(ocVersion.stringValue)"
+        //systemVersion.stringValue = "Version \(systemVersion.stringValue)"
+        //cpu.stringValue = "Processor  \(cpu.stringValue)"
+        //ram.stringValue = "Memory  \(ram.stringValue)"
+        //graphics.stringValue = "Graphics  \(graphics.stringValue)"
+        //display.stringValue = "Display  \(display.stringValue)"
+        //startupDisk.stringValue = "Startup Disk  \(startupDisk.stringValue)"
+        //serialNumber.stringValue = "Serial Number  \(serialNumber.stringValue)"
+        //ocVersion.stringValue = "OpenCore Version \(ocVersion.stringValue)"
+    }
+    func getOSPrefix() -> String{
+        if(!osNumber.hasPrefix("10")) {
+            return "macOS"
+        }
+        else {
+            let infoString1 = (try? call("sw_vers -productVersion | awk -F '.' '{print  $2}'")) ?? "15"
+            switch(infoString1) {
+            case "16","15","14","13","12":
+                return "macOS"
+            default:
+                return "OS X"
+            }
+        }
     }
     
     func updateView() {
@@ -192,32 +209,32 @@ class ViewController: NSViewController {
     func getOSName() -> String {
         _ = osNumber
         if(osNumber.hasPrefix("12")) {
-            return "macOS Monterey"
+            return "Monterey"
         }
         else if(osNumber.hasPrefix("11")) {
-            return "macOS Big Sur"
+            return "Big Sur"
         }
         else if (osNumber.hasPrefix("10")) {
             let infoString1 = (try? call("sw_vers -productVersion | awk -F '.' '{print  $2}'")) ?? "15"
             switch(infoString1) {
             case "16":
-                return "macOS Big Sur"
+                return "Big Sur"
             case "15":
-                return "macOS Catalina"
+                return "Catalina"
             case "14":
-                return "macOS Mojave"
+                return "Mojave"
             case "13":
-                return "macOS High Sierra"
+                return "High Sierra"
             case "12":
-                return "macOS Sierra"
+                return "Sierra"
             case "11":
-                return "OS X El Capitan"
+                return "El Capitan"
             case "10":
-                return "OS X Yosemite"
+                return "Yosemite"
             case "9":
-                return "OS X Mavericks"
+                return "Mavericks"
             default:
-                return "macOS"
+                return ""
             }
             
         }
