@@ -13,6 +13,7 @@
 		C13F44F226CFD65B005984E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C13F44F026CFD65B005984E0 /* Main.storyboard */; };
 		C13F44FC26CFD65B005984E0 /* About_This_HackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13F44FB26CFD65B005984E0 /* About_This_HackTests.swift */; };
 		C13F450626CFD65B005984E0 /* About_This_HackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13F450526CFD65B005984E0 /* About_This_HackUITests.swift */; };
+		C14F091C26D5530B007F2C50 /* InsertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14F091B26D5530B007F2C50 /* InsertExtension.swift */; };
 		C199D35A26D2E7100068FB3D /* ShellOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = C199D35926D2E7100068FB3D /* ShellOut.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,8 @@
 		C13F450126CFD65B005984E0 /* About This HackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "About This HackUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C13F450526CFD65B005984E0 /* About_This_HackUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About_This_HackUITests.swift; sourceTree = "<group>"; };
 		C14BB73C26CFDC6400DE57E3 /* About-This-Hack-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "About-This-Hack-Info.plist"; sourceTree = SOURCE_ROOT; };
+		C14F091A26D5511D007F2C50 /* About This Hack.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "About This Hack.entitlements"; sourceTree = "<group>"; };
+		C14F091B26D5530B007F2C50 /* InsertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertExtension.swift; sourceTree = "<group>"; };
 		C199D35926D2E7100068FB3D /* ShellOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShellOut.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,10 +98,12 @@
 		C13F44E926CFD65A005984E0 /* About This Hack */ = {
 			isa = PBXGroup;
 			children = (
+				C14F091A26D5511D007F2C50 /* About This Hack.entitlements */,
 				C14BB73C26CFDC6400DE57E3 /* About-This-Hack-Info.plist */,
 				C13F44EA26CFD65A005984E0 /* AppDelegate.swift */,
 				C13F44EC26CFD65A005984E0 /* ViewController.swift */,
 				C199D35926D2E7100068FB3D /* ShellOut.swift */,
+				C14F091B26D5530B007F2C50 /* InsertExtension.swift */,
 				C13F44EE26CFD65B005984E0 /* Assets.xcassets */,
 				C13F44F026CFD65B005984E0 /* Main.storyboard */,
 			);
@@ -253,6 +258,7 @@
 			files = (
 				C13F44ED26CFD65A005984E0 /* ViewController.swift in Sources */,
 				C199D35A26D2E7100068FB3D /* ShellOut.swift in Sources */,
+				C14F091C26D5530B007F2C50 /* InsertExtension.swift in Sources */,
 				C13F44EB26CFD65A005984E0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,6 +426,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "About This Hack/About This Hack.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -450,6 +457,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "About This Hack/About This Hack.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
