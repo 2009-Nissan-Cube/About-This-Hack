@@ -59,7 +59,7 @@ class ViewController: NSViewController {
         osVersion.stringValue = "\(getOSName())"
         
         // macOS Version ID
-        systemVersion.stringValue = (try? call("system_profiler SPSoftwareDataType | grep 'System Version' | cut -c 23-")) ?? ""
+        systemVersion.stringValue = (try? call("system_profiler SPSoftwareDataType | grep 'System Version' | cut -c 29-")) ?? ""
         
         // Mac Model
         modelID = (try? call("sysctl hw.model | cut -f2 -d \" \"")) ?? "Mac"
@@ -140,6 +140,7 @@ class ViewController: NSViewController {
     
     func visualName() {
         // Add Names
+        systemVersion.stringValue = "Version \(systemVersion.stringValue)"
         cpu.stringValue = "Processor  \(cpu.stringValue)"
         ram.stringValue = "Memory  \(ram.stringValue)"
         graphics.stringValue = "Graphics  \(graphics.stringValue)"
