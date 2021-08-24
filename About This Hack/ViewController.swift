@@ -46,10 +46,34 @@ class ViewController: NSViewController {
         
         // Image
         if(osNumber.hasPrefix("12")) {
-            picture.image = NSImage(named: "Dark Monterey")
+            picture.image = NSImage(named: "Monterey")
         }
         else if(osNumber.hasPrefix("11")) {
-            picture.image = NSImage(named: "Dark Sur")
+            picture.image = NSImage(named: "Big Sur")
+        }
+        else if (osNumber.hasPrefix("10")) {
+            let infoString1 = (try? call("sw_vers -productVersion | awk -F '.' '{print  $2}'")) ?? "15"
+            switch(infoString1) {
+            case "16":
+                picture.image = NSImage(named: "Unknown")
+            case "15":
+                picture.image = NSImage(named: "Catalina")
+            case "14":
+                picture.image = NSImage(named: "Mojave")
+            case "13":
+                picture.image = NSImage(named: "High Sierra")
+            case "12":
+                picture.image = NSImage(named: "Sierra")
+            case "11":
+                picture.image = NSImage(named: "El Capitan")
+            case "10":
+                picture.image = NSImage(named: "Yosemite")
+            case "9":
+                picture.image = NSImage(named: "Mavericks")
+            default:
+                picture.image = NSImage(named: "Unknown")
+            }
+            
         }
         else {
             picture.image = NSImage(named: "Unknown")
