@@ -94,7 +94,7 @@ class ViewController: NSViewController {
  //strings ~/Library/Preferences/com.apple.SystemProfiler.plist | grep ")" | cut -c 2- | grep -o 'Mac.*' | sed 's/.$//;s/_//g'
 // """)) ?? "\(getMacName(infoString: modelID))"
         macModel.stringValue = getMacName(infoString: modelID)
-        //macModel.stringValue = "\(macModel.stringValue)"
+        
         // CPU
         cpu.stringValue = (try? call("sysctl -n machdep.cpu.brand_string")) ?? "Unknown CPU"
         
@@ -161,22 +161,10 @@ class ViewController: NSViewController {
             ocVersionID = (testString[0] == "REL" ? "(Release)" : "(Debug)")
             ocVersion.isHidden = false
         }
-        
-        visualName()
+
         updateView()
     }
-    
-    func visualName() {
-        // Add Names
-        //systemVersion.stringValue = "Version \(systemVersion.stringValue)"
-        //cpu.stringValue = "Processor  \(cpu.stringValue)"
-        //ram.stringValue = "Memory  \(ram.stringValue)"
-        //graphics.stringValue = "Graphics  \(graphics.stringValue)"
-        //display.stringValue = "Display  \(display.stringValue)"
-        //startupDisk.stringValue = "Startup Disk  \(startupDisk.stringValue)"
-        //serialNumber.stringValue = "Serial Number  \(serialNumber.stringValue)"
-        //ocVersion.stringValue = "OpenCore Version \(ocVersion.stringValue)"
-    }
+
     func getOSPrefix() -> String{
         if(!osNumber.hasPrefix("10")) {
             return "macOS"
