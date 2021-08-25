@@ -11,14 +11,13 @@ import Cocoa
 class WindowController: NSWindowController {
     
     var tabViewController: NSTabViewController?
-    
-  
-    @IBOutlet weak var segCtrl: NSToolbarItem!
+    public var currentView: Int = 0
+    @IBOutlet public weak var segmentedControl: NSSegmentedControl!
     
     override func windowDidLoad() {
         super.windowDidLoad()
         print("loaded")
-
+        
         self.tabViewController = self.window?.contentViewController as? NSTabViewController
         
         if let window = window {
@@ -38,6 +37,8 @@ class WindowController: NSWindowController {
         
         print("switched")
         let segCtrl = sender as! NSSegmentedControl
-        self.tabViewController?.selectedTabViewItemIndex = segCtrl.selectedSegment
+        currentView = segCtrl.selectedSegment
+        self.tabViewController?.selectedTabViewItemIndex = currentView
+        ViewController.currentView = currentView
     }
 }

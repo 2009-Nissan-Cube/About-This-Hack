@@ -300,7 +300,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x8i-fO-ag7">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x8i-fO-ag7">
                                         <rect key="frame" x="237" y="-2" width="103" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="OpenCore Version" id="Mgu-Wg-99b">
@@ -309,7 +309,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A0q-SM-khO">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A0q-SM-khO">
                                         <rect key="frame" x="342" y="-2" width="201" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" id="GrF-N1-VJa">
@@ -334,6 +334,7 @@
                         <outlet property="display" destination="XaB-5G-KGc" id="LCR-cY-X3B"/>
                         <outlet property="graphics" destination="yae-Uv-NND" id="9m2-a9-Tlh"/>
                         <outlet property="macModel" destination="Gm1-7a-Pie" id="Ncl-BP-TQA"/>
+                        <outlet property="ocPrefix" destination="x8i-fO-ag7" id="NZT-9u-E95"/>
                         <outlet property="ocVersion" destination="A0q-SM-khO" id="jCB-iL-wS2"/>
                         <outlet property="osPrefix" destination="a6l-aN-htH" id="VSQ-d4-ofr"/>
                         <outlet property="osVersion" destination="bk2-am-ChW" id="jLF-dX-c7C"/>
@@ -346,7 +347,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-374.5" y="505"/>
+            <point key="canvasLocation" x="-375" y="505"/>
         </scene>
         <!--About This Hack-->
         <scene sceneID="0on-tk-n3u">
@@ -420,6 +421,7 @@
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="dispPic" destination="PA5-nE-SAD" id="m2k-PG-B45"/>
                         <outlet property="osPrefix" destination="1J5-bh-VRi" id="5nR-Hp-uxt"/>
                         <outlet property="picture" destination="PA5-nE-SAD" id="tHs-yq-VDT"/>
                     </connections>

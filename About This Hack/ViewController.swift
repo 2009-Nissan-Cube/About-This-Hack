@@ -10,6 +10,10 @@
 import Cocoa
 
 class ViewController: NSViewController {
+    
+    
+    // MARK: IBOutlets Overview
+    
     @IBOutlet weak var picture: NSImageView!
     @IBOutlet weak var osVersion: NSTextField!
     @IBOutlet weak var osPrefix: NSTextField!
@@ -22,6 +26,23 @@ class ViewController: NSViewController {
     @IBOutlet weak var startupDisk: NSTextField!
     @IBOutlet weak var serialNumber: NSTextField!
     @IBOutlet weak var ocVersion: NSTextField!
+    @IBOutlet weak var ocPrefix: NSTextField!
+
+    
+    // MARK: IBOutlets Displays
+        
+    @IBOutlet weak var dispPic: NSImageView! 
+    
+    // MARK: IBOutlets Storage
+    
+    
+    // MARK: Other Vars
+    
+    public static var currentView: Int = 0
+    public static 
+
+    
+    
     var osNumber = (try? call("sw_vers | grep ProductVersion | cut -c 17-")) ?? "macOS"
     var modelID = "Mac"
     var ocLevel = "Unknown"
@@ -29,7 +50,7 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        start()
+        start0()
         
     }
     
@@ -43,7 +64,23 @@ class ViewController: NSViewController {
         self.view.window?.styleMask.remove(NSWindow.StyleMask.resizable)
     }
     
-    func start() {
+    func start1() {
+        print("Display Ini Called")
+        
+        dispPic.image = NSImage(named: "Disp_Generic")
+    }
+    func start2() {
+        print("Storage Ini Called")
+    }
+    func start3() {
+        print("Support Ini Called")
+    }
+    func start4() {
+        print("Service Ini Called")
+    }
+    
+    
+    func start0() {
         print("Initializing...")
         if(osVersion == nil) {
             return
@@ -157,15 +194,34 @@ class ViewController: NSViewController {
         serialNumber.stringValue = (try? call("system_profiler SPHardwareDataType | awk '/Serial/ {print $4}'")) ?? "Unknown Serial Number"
         
         // OpenCore Version (Optional)
-        let ocString = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version")) ?? "X"
-        let testString = ocString.replacingOccurrences(of: "4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version", with: "").trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: "-")
-        if(ocString != "X") {
-            ocLevel = String(testString[1]).inserting(separator: ".", every: 1)
-            ocVersionID = (testString[0] == "REL" ? "(Release)" : "(Debug)")
-            ocVersion.isHidden = false
-        }
+                var opencore1: String
+                var opencore2: String
+                var opencore3: String
+                var opencoreType: String
+                opencore1 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 59- | cut -c -1")) ?? "X"
+                opencore2 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 60- | cut -c -1")) ?? "X"
+                opencore3 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 61- | cut -c -1")) ?? "X"
+                opencoreType = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 55- | cut -c -3")) ?? "N/A"
+                if opencore1 == "0" {
+                    if opencoreType == "REL" {
+                        opencoreType = "(Release)"
+                    } else if opencoreType == "N/A" {
+                        opencoreType = ""
+                    } else {
+                        opencoreType = "(Debug)"
+                    }
+                    ocVersion.stringValue = "\(opencore1).\(opencore2).\(opencore3) \(opencoreType)"
+                    ocVersion.isHidden = false
+                }
+                if(opencore1 == opencore2 && opencore2 == opencore3 && opencore3 == "") {
+                    ocVersion.isHidden = true
+                    ocPrefix.isHidden = true
+                    print("No opencore thus hidden")
+                }
+                ocVersion.stringValue = "\(opencore1).\(opencore2).\(opencore3) \(opencoreType)"
 
-        updateView()
+
+                updateView()
     }
 
     func getOSPrefix() -> String{
