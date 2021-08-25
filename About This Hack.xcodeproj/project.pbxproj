@@ -44,7 +44,6 @@
 		C13F44FB26CFD65B005984E0 /* About_This_HackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About_This_HackTests.swift; sourceTree = "<group>"; };
 		C13F450126CFD65B005984E0 /* About This HackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "About This HackUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C13F450526CFD65B005984E0 /* About_This_HackUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About_This_HackUITests.swift; sourceTree = "<group>"; };
-		C14BB73C26CFDC6400DE57E3 /* About-This-Hack-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "About-This-Hack-Info.plist"; sourceTree = SOURCE_ROOT; };
 		C14F091A26D5511D007F2C50 /* About This Hack.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "About This Hack.entitlements"; sourceTree = "<group>"; };
 		C14F091B26D5530B007F2C50 /* InsertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertExtension.swift; sourceTree = "<group>"; };
 		C199D35926D2E7100068FB3D /* ShellOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShellOut.swift; sourceTree = "<group>"; };
@@ -99,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				C14F091A26D5511D007F2C50 /* About This Hack.entitlements */,
-				C14BB73C26CFDC6400DE57E3 /* About-This-Hack-Info.plist */,
 				C13F44EA26CFD65A005984E0 /* AppDelegate.swift */,
 				C13F44EC26CFD65A005984E0 /* ViewController.swift */,
 				C199D35926D2E7100068FB3D /* ShellOut.swift */,
@@ -430,13 +428,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZSHVFXXGW4;
+				DEVELOPMENT_TEAM = H336QJQ279;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "About-This-Hack-Info.plist";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright ©2021 8itCat, MDNich, and ASentientHedgehog";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -461,13 +459,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZSHVFXXGW4;
+				DEVELOPMENT_TEAM = H336QJQ279;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "About-This-Hack-Info.plist";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright ©2021 8itCat, MDNich, and ASentientHedgehog";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -491,7 +489,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZSHVFXXGW4;
+				DEVELOPMENT_TEAM = H336QJQ279;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -516,7 +514,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZSHVFXXGW4;
+				DEVELOPMENT_TEAM = H336QJQ279;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -540,7 +538,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZSHVFXXGW4;
+				DEVELOPMENT_TEAM = H336QJQ279;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -563,7 +561,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZSHVFXXGW4;
+				DEVELOPMENT_TEAM = H336QJQ279;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

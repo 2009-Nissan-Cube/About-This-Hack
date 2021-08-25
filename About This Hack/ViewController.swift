@@ -90,10 +90,11 @@ class ViewController: NSViewController {
         
         // Mac Model
         modelID = (try? call("sysctl hw.model | cut -f2 -d \" \"")) ?? "Mac"
-        macModel.stringValue = (try? call("""
- /usr/libexec/PlistBuddy -c "print :'CPU Names':$(system_profiler SPHardwareDataType | awk '/Serial/ {print $4}' | cut -c 9-)-en-US_US" ~/Library/Preferences/com.apple.SystemProfiler.plist
- """)) ?? "\(getMacName(infoString: modelID))"
-        
+        //macModel.stringValue = (try? call("""
+ //strings ~/Library/Preferences/com.apple.SystemProfiler.plist | grep ")" | cut -c 2- | grep -o 'Mac.*' | sed 's/.$//;s/_//g'
+// """)) ?? "\(getMacName(infoString: modelID))"
+        macModel.stringValue = getMacName(infoString: modelID)
+        //macModel.stringValue = "\(macModel.stringValue)"
         // CPU
         cpu.stringValue = (try? call("sysctl -n machdep.cpu.brand_string")) ?? "Unknown CPU"
         
