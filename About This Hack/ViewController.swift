@@ -10,7 +10,6 @@
 import Cocoa
 
 class ViewController: NSViewController {
-
     @IBOutlet weak var picture: NSImageView!
     @IBOutlet weak var osVersion: NSTextField!
     @IBOutlet weak var osPrefix: NSTextField!
@@ -31,7 +30,9 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         start()
+        
     }
+    
 
     override var representedObject: Any? {
         didSet {
@@ -44,7 +45,9 @@ class ViewController: NSViewController {
     
     func start() {
         print("Initializing...")
-        
+        if(osVersion == nil) {
+            return
+        }
         // Image
         if(osNumber.hasPrefix("12")) {
             picture.image = NSImage(named: "Monterey")

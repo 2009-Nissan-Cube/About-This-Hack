@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58A9B86426D6B48E00D5874F /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A9B86326D6B48E00D5874F /* WindowController.swift */; };
 		C13F44EB26CFD65A005984E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13F44EA26CFD65A005984E0 /* AppDelegate.swift */; };
 		C13F44ED26CFD65A005984E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13F44EC26CFD65A005984E0 /* ViewController.swift */; };
 		C13F44EF26CFD65B005984E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C13F44EE26CFD65B005984E0 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		58A9B86326D6B48E00D5874F /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		C13F44E726CFD65A005984E0 /* About This Hack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "About This Hack.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C13F44EA26CFD65A005984E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C13F44EC26CFD65A005984E0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		C13F44E926CFD65A005984E0 /* About This Hack */ = {
 			isa = PBXGroup;
 			children = (
+				58A9B86326D6B48E00D5874F /* WindowController.swift */,
 				C14F091A26D5511D007F2C50 /* About This Hack.entitlements */,
 				C13F44EA26CFD65A005984E0 /* AppDelegate.swift */,
 				C13F44EC26CFD65A005984E0 /* ViewController.swift */,
@@ -255,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C13F44ED26CFD65A005984E0 /* ViewController.swift in Sources */,
+				58A9B86426D6B48E00D5874F /* WindowController.swift in Sources */,
 				C199D35A26D2E7100068FB3D /* ShellOut.swift in Sources */,
 				C14F091C26D5530B007F2C50 /* InsertExtension.swift in Sources */,
 				C13F44EB26CFD65A005984E0 /* AppDelegate.swift in Sources */,
