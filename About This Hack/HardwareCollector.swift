@@ -22,10 +22,12 @@ class HardwareCollector {
     static var SerialNumberString: String = "XXXXXXXXXXX"
     static var qHackintosh = false // is it a hackintosh
     static var OpenCoreString: String = ""
-    static var macType: macType = .MAC
-    
+    static var macType: macType = .LAPTOP
+    static var numberOfDisplays: Int = 1
     static var dataHasBeenSet: Bool = false
-    
+    static var qhasBuiltInDisplay: Bool = (macType == .LAPTOP)
+    static var displayRes: [String] = []
+    static var displayNames: [String] = []
     
     
     static func getAllData() {
@@ -48,8 +50,47 @@ class HardwareCollector {
         else {
             OpenCoreString = ""
         }
+        numberOfDisplays = getNumDisplays()
+        qhasBuiltInDisplay = hasBuiltInDisplay()
+        displayRes = getDisplayRess()
+        
         
         dataHasBeenSet = true
+    }
+    
+    static func getDisplayRess() -> [String] {
+        var numDispl = getNumDisplays()
+        if numDispl == 1 {
+            return [(try! call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ?? "1920 x 1080"]
+        }
+        else if (numDispl == 2) {
+            let tmp = (try! call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ?? "1920 x 1080"
+            let tmpParts = tmp.components(separatedBy: "\n")
+            return tmpParts
+        }
+        return []
+    }
+    
+    static func getDisplayNames() -> [String] {
+        var numDispl = getNumDisplays()
+        if numDispl == 1 {
+            return [(try! call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ?? "1920 x 1080"]
+        }
+        else if (numDispl == 2) {
+            let tmp = (try! call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ?? "1920 x 1080"
+            let tmpParts = tmp.components(separatedBy: "\n")
+            return tmpParts
+        }
+        return []
+    }
+    
+    
+    static func getNumDisplays() -> Int {
+        return Int(try! call("system_profiler SPDisplaysDataType | grep -c Resolution") ?? "1") ?? 1
+    }
+    static func hasBuiltInDisplay() -> Bool {
+        let tmp = (try? call("system_profiler SPDisplaysDataType | grep Built-In")) ?? ""
+        return !(tmp == "")
     }
     
     
@@ -293,33 +334,47 @@ class HardwareCollector {
             return "iMac Pro (2017)"
         
         case "Macmini3,1":
+            macType = .DESKTOP
             return "Mac Mini (Late 2009)"
         case "Macmini4,1":
+            macType = .DESKTOP
             return "Mac Mini (Mid 2010)"
         case "Macmini5,1":
+            macType = .DESKTOP
             return "Mac Mini (Mid 2011)"
+            macType = .DESKTOP
         case "Macmini5,2","Macmini5,3":
             return "Mac Mini (Mid 2011)"
         case "Macmini6,1":
+            macType = .DESKTOP
             return "Mac Mini (Late 2012)"
         case "Macmini6,2":
+            macType = .DESKTOP
             return "Mac Mini Server (Late 2012)"
         case "Macmini7,1":
+            macType = .DESKTOP
             return "Mac Mini (Late 2014)"
         case "Macmini8,1":
+            macType = .DESKTOP
             return "Mac Mini (Late 2018)"
         case "Macmini9,1":
+            macType = .DESKTOP
             return "Mac Mini (M1, 2020)"
             
         case "MacPro3,1":
+            macType = .DESKTOP
             return "Mac Pro (2008)"
         case "MacPro4,1":
+            macType = .DESKTOP
             return "Mac Pro (2009)"
         case "MacPro5,1":
+            macType = .DESKTOP
             return "Mac Pro (2010-2012)"
         case "MacPro6,1":
+            macType = .DESKTOP
             return "Mac Pro (Late 2013)"
         case "MacPro7,1":
+            macType = .DESKTOP
             return "Mac Pro (2019)"
             
         case "MacBook5,1":
@@ -427,6 +482,7 @@ class HardwareCollector {
         case "MacBookPro8,3":
             return "MacBook Pro (17-inch, Late 2011)"
         case "Unkown","Mac":
+            macType = .DESKTOP
             return "Hackintosh Extreme Plus" // hehe just for fun
         default:
             return "Mac"
@@ -459,29 +515,6 @@ enum macOSvers {
     case macOS
 }
 enum macType {
-    case MACBOOKPOLYCARB
-    case MACBOOKUSBC
-    case MACBOOKPRO13
-    case MACBOOKPRO15
-    case MACBOOKPRO17
-    case MACBOOKPRO13ALUM
-    case MACBOOKPRO15ALUM
-    case MACBOOKPRO16LIGHT
-    case MACBOOKPRO16DARK
-    case MACBOOKAIR11
-    case MACBOOKAIR13OLD
-    case MACBOOKAIR13NEW
-    case IMAC24OLD
-    case IMAC24NEWY // yellow
-    case IMAC24NEWO // orange
-    case IMAC24NEWR // red
-    case IMAC24NEWB // blue
-    case IMAC24NEWGE // green
-    case IMAC24NEWGA // gray
-    case IMAC24NEWP // purple
-    case IMAC215 // 21.5"
-    case IMAC17
-    case IMACPRO
-    case PRODISPXDR
-    case MAC
+    case DESKTOP
+    case LAPTOP
 }

@@ -423,25 +423,72 @@
                                 <rect key="frame" x="0.0" y="0.0" width="580" height="250"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1J5-bh-VRi">
-                                        <rect key="frame" x="245" y="76" width="91" height="28"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Display" id="32S-Nz-BHn">
-                                            <font key="font" metaFont="systemSemibold" size="24"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <imageView focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PA5-nE-SAD">
+                                    <imageView hidden="YES" focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PA5-nE-SAD">
                                         <rect key="frame" x="190" y="112" width="200" height="118"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" focusRingType="exterior" alignment="left" imageScaling="proportionallyUpOrDown" image="NSComputer" id="XOo-uO-Qd0"/>
                                     </imageView>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sqC-Xn-QYw">
-                                        <rect key="frame" x="235" y="39" width="110" height="15"/>
+                                    <imageView hidden="YES" focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="trV-Oe-iKo">
+                                        <rect key="frame" x="321" y="112" width="200" height="118"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Retina 1920x1080" id="X7w-6m-o8X">
-                                            <font key="font" metaFont="cellTitle"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" focusRingType="exterior" alignment="left" imageScaling="proportionallyUpOrDown" image="NSComputer" id="FMn-AH-1ZX"/>
+                                    </imageView>
+                                    <imageView hidden="YES" focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hop-8T-aK3">
+                                        <rect key="frame" x="56" y="112" width="200" height="118"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" focusRingType="exterior" alignment="left" imageScaling="proportionallyUpOrDown" image="NSComputer" id="nC2-4F-XW2"/>
+                                    </imageView>
+                                    <imageView hidden="YES" focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fsK-UG-uc6">
+                                        <rect key="frame" x="120" y="112" width="200" height="118"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" focusRingType="exterior" alignment="left" imageScaling="proportionallyUpOrDown" image="NSComputer" id="DXl-nB-Rrn"/>
+                                    </imageView>
+                                    <imageView hidden="YES" focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3e-Et-8op">
+                                        <rect key="frame" x="249" y="112" width="200" height="118"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" focusRingType="exterior" alignment="left" imageScaling="proportionallyUpOrDown" image="NSComputer" id="aMw-hD-eDx"/>
+                                    </imageView>
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Orh-dQ-0M1">
+                                        <rect key="frame" x="227" y="83" width="127" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" alignment="center" title="Display" id="sJc-j1-qmk">
+                                            <font key="font" textStyle="headline" name=".SFNS-Bold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="haK-Zb-8ht">
+                                        <rect key="frame" x="101" y="83" width="111" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" alignment="center" title="Display" id="EMs-f0-ueV">
+                                            <font key="font" textStyle="headline" name=".SFNS-Bold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="858-f8-xta">
+                                        <rect key="frame" x="288" y="83" width="123" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" alignment="center" title="Display" id="edR-gc-Tis">
+                                            <font key="font" textStyle="headline" name=".SFNS-Bold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xEq-6a-wft">
+                                        <rect key="frame" x="350" y="83" width="121" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" alignment="center" title="Display" id="Cti-yT-IUK">
+                                            <font key="font" textStyle="headline" name=".SFNS-Bold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SjI-Or-BeG">
+                                        <rect key="frame" x="157" y="83" width="127" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" alignment="center" title="Display" id="PPg-3k-9fc">
+                                            <font key="font" textStyle="headline" name=".SFNS-Bold"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -451,9 +498,16 @@
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="DisplayMoreInfoTxt" destination="sqC-Xn-QYw" id="8XT-qu-esN"/>
-                        <outlet property="DisplayPic" destination="PA5-nE-SAD" id="9TE-9w-w2d"/>
-                        <outlet property="displayInfoTxt" destination="1J5-bh-VRi" id="usY-Zd-TEq"/>
+                        <outlet property="DisplayNameCenter" destination="Orh-dQ-0M1" id="NGi-DZ-pQF"/>
+                        <outlet property="DisplayNameL1" destination="haK-Zb-8ht" id="T2D-XR-gsy"/>
+                        <outlet property="DisplayNameL2" destination="SjI-Or-BeG" id="bZd-ft-B1e"/>
+                        <outlet property="DisplayNameR1" destination="xEq-6a-wft" id="uDp-7k-hwP"/>
+                        <outlet property="DisplayNameR2" destination="858-f8-xta" id="gfZ-zy-ChT"/>
+                        <outlet property="DisplayPicCenter" destination="PA5-nE-SAD" id="VCL-zQ-ZSy"/>
+                        <outlet property="DisplayPicL1" destination="hop-8T-aK3" id="uwa-k9-ZPJ"/>
+                        <outlet property="DisplayPicL2" destination="fsK-UG-uc6" id="hKp-yW-zDv"/>
+                        <outlet property="DisplayPicR1" destination="trV-Oe-iKo" id="LjR-NI-Qs3"/>
+                        <outlet property="DisplayPicR2" destination="z3e-Et-8op" id="Pbo-DI-0iJ"/>
                     </connections>
                 </viewController>
                 <customObject id="f0Y-GX-qi4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
