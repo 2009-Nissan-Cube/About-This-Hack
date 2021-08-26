@@ -58,6 +58,8 @@ class ViewControllerDisplays: NSViewController {
         print("display ini called")
         if (!HardwareCollector.dataHasBeenSet) {HardwareCollector.getAllData()}
         var dispArr: [NSImageView] = []
+        var nameArr: [NSTextField] = []
+        var labelArr2: [NSTextField] = []
         if (!HardwareCollector.dataHasBeenSet) {HardwareCollector.getAllData()}
         if (HardwareCollector.macType == .DESKTOP) {
             DisplayPicCenter.image = NSImage(named: "genericLCD")
@@ -70,14 +72,27 @@ class ViewControllerDisplays: NSViewController {
             }
             DisplayPicCenter.isHidden = false
             DisplayNameCenter.isHidden = false
-            DisplayNameCenter.stringValue = "Built-in Retina Display"
+            DisplayNameCenter.stringValue = HardwareCollector.displayNames[0]
+            DisplaySizeResCenter.isHidden = false
+            DisplaySizeResCenter.stringValue = HardwareCollector.displayRes[0]
             break
         case 2:
+            labelArr2.append(DisplaySizeResL2)
+            labelArr2.append(DisplaySizeResR2)
+            nameArr.append(DisplayNameL2)
+            nameArr.append(DisplayNameR2)
             dispArr.append(DisplayPicL2)
             dispArr.append(DisplayPicR2)
             if (HardwareCollector.macType == .DESKTOP) {
-                for disp in dispArr {
-                    disp.image = NSImage(named: "genericLCD")
+                for i in [0,1] {
+                    nameArr[i].isHidden = false
+                    nameArr[i].stringValue = HardwareCollector.displayNames[i]
+                    labelArr2[i].isHidden = false
+                    labelArr2[i].stringValue = HardwareCollector.displayRes[i]
+                    if (!(HardwareCollector.displayNames[i] == "LG HDR 4K")) {dispArr[i].image = NSImage(named: "genericLCD")}
+                    else {
+                        dispArr[i].image = NSImage(named: "LG4K")
+                    }
                 }
             }
             else {

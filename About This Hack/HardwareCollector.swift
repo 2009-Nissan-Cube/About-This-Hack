@@ -28,6 +28,7 @@ class HardwareCollector {
     static var qhasBuiltInDisplay: Bool = (macType == .LAPTOP)
     static var displayRes: [String] = []
     static var displayNames: [String] = []
+    static var builtInDisplaySize: Float = 0
     
     
     static func getAllData() {
@@ -53,6 +54,7 @@ class HardwareCollector {
         numberOfDisplays = getNumDisplays()
         qhasBuiltInDisplay = hasBuiltInDisplay()
         displayRes = getDisplayRess()
+        displayNames = getDisplayNames()
         
         
         dataHasBeenSet = true
@@ -74,10 +76,14 @@ class HardwareCollector {
     static func getDisplayNames() -> [String] {
         var numDispl = getNumDisplays()
         if numDispl == 1 {
-            return [(try! call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ?? "1920 x 1080"]
+            return [(try! call("""
+echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|<' '/_name/{getline; print $3}')"
+""")) ?? "Generic LCD"]
         }
         else if (numDispl == 2) {
-            let tmp = (try! call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ?? "1920 x 1080"
+            let tmp = (try! call("""
+echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|<' '/_name/{getline; print $3}')"
+""")) ?? "Generic LCD"
             let tmpParts = tmp.components(separatedBy: "\n")
             return tmpParts
         }
@@ -271,66 +277,96 @@ class HardwareCollector {
         let infoString = (try? call("sysctl hw.model | cut -f2 -d \" \"")) ?? "Mac"
         switch(infoString) {
         case "iMac4,1":
+            builtInDisplaySize = 17
             return "iMac 17-Inch \"Core Duo\" 1.83"
         case "iMac4,2":
+            builtInDisplaySize = 17
             return "iMac 17-Inch \"Core Duo\" 1.83 (IG)"
         case "iMac5,2":
+            builtInDisplaySize = 17
             return "iMac 17-Inch \"Core 2 Duo\" 1.83 (IG)"
         case "iMac5,1":
+            builtInDisplaySize = 17
             return "iMac 17-Inch \"Core 2 Duo\" 2.0"
         case "iMac7,1":
+            builtInDisplaySize = 17
             return "iMac 20-Inch \"Core 2 Duo\" 2.0 (Al)"
         case "iMac8,1":
+            builtInDisplaySize = 20
             return "iMac (Early 2008)"
         case "iMac9,1":
+            builtInDisplaySize = 20
             return "iMac (Mid 2009)"
         case "iMac10,1":
+            builtInDisplaySize = 20
             return "iMac (Late 2009)"
         case "iMac11,2":
+            builtInDisplaySize = 21.5
             return "iMac 21.5-Inch (Mid 2010)"
         case "iMac12,1":
+            builtInDisplaySize = 21.5
             return "iMac 21.5-Inch (Mid 2011)"
         case "iMac13,1":
+            builtInDisplaySize = 21.5
             return "iMac 21.5-Inch (Mid 2012/Early 2013)"
         case "iMac14,1","iMac14,3":
+            builtInDisplaySize = 21.5
             return "iMac 21.5-Inch (Late 2013)"
         case "iMac14,4":
+            builtInDisplaySize = 21.5
             return "iMac 21.5-Inch (Mid 2014)"
         case "iMac16,1","iMac16,2":
+            builtInDisplaySize = 21.5
             return "iMac 21.5-Inch (Late 2015)"
         case "iMac18,1":
+            builtInDisplaySize = 21.5
             return "iMac 21.5-Inch (2017)"
         case "iMac18,2":
+            builtInDisplaySize = 21.5
             return "iMac 21.5-Inch (Retina 4K, 2017)"
         case "iMac19,3":
+            builtInDisplaySize = 21.5
             return "iMac 21.5-Inch (Retina 4K, 2019)"
         case "iMac11,1":
+            builtInDisplaySize = 27
             return "iMac 27-Inch (Late 2009)"
         case "iMac11,3":
+            builtInDisplaySize = 27
             return "iMac 27-Inch (Mid 2010)"
         case "iMac12,2":
+            builtInDisplaySize = 27
             return "iMac 27-inch (Mid 2011)"
         case "iMac13,2":
+            builtInDisplaySize = 27
             return "iMac 27-inch (Mid 2012)"
         case "iMac14,2":
+            builtInDisplaySize = 27
             return "iMac 27-inch (Late 2013)"
         case "iMac15,1":
+            builtInDisplaySize = 27
             return "iMac 27-inch (Retina 5K, Late 2014)"
         case "iMac17,1":
+            builtInDisplaySize = 27
             return "iMac 27-inch (Retina 5K, Late 2015)"
         case "iMac18,3":
+            builtInDisplaySize = 27
             return "iMac 27-inch (Retina 5K, 2017)"
         case "iMac19,1":
+            builtInDisplaySize = 27
             return "iMac 27-inch (Retina 5K, 2019)"
         case "iMac19,2":
+            builtInDisplaySize = 27
             return "iMac 21.5-inch (Retina 4K, 2019)"
         case "iMac20,1","iMac20,2":
+            builtInDisplaySize = 27
             return "iMac 27-inch (Retina 5K, 2020)"
         case "iMac21,1","iMac21,2":
+            builtInDisplaySize = 24
             return "iMac (24-inch, M1, 2021)"
             
         
         case "iMacPro1,1":
+            builtInDisplaySize = 27
             return "iMac Pro (2017)"
         
         case "Macmini3,1":
@@ -378,108 +414,159 @@ class HardwareCollector {
             return "Mac Pro (2019)"
             
         case "MacBook5,1":
+            builtInDisplaySize = 13
             return "MacBook (Original, Unibody)"
         case "MacBook5,2":
+            builtInDisplaySize = 13
             return "MacBook (2009)"
         case "MacBook6,1":
+            builtInDisplaySize = 13
             return "MacBook (Late 2009)"
         case "MacBook7,1":
+            builtInDisplaySize = 13
             return "MacBook (Mid 2010)"
         case "MacBook8,1":
+            builtInDisplaySize = 13
             return "MacBook (Early 2015)"
         case "MacBook9,1":
+            builtInDisplaySize = 13
             return "MacBook (Early 2016)"
         case "MacBook10,1":
+            builtInDisplaySize = 13
             return "MacBook (Mid 2017)"
         case "MacBookAir1,1":
+            builtInDisplaySize = 13
             return "MacBook Air (2008, Original)"
         case "MacBookAir2,1":
+            builtInDisplaySize = 13
             return "MacBook Air (Mid 2009, NVIDIA)"
         case "MacBookAir3,1":
+            builtInDisplaySize = 11
             return "MacBook Air (11-inch, Late 2010)"
         case "MacBookAir3,2":
+            builtInDisplaySize = 13
             return "MacBook Air (13-inch, Late 2010)"
         case "MacBookAir4,1":
+            builtInDisplaySize = 11
             return "MacBook Air (11-inch, Mid 2011)"
         case "MacBookAir4,2":
+            builtInDisplaySize = 13
             return "MacBook Air (13-inch, Mid 2011)"
         case "MacBookAir5,1":
+            builtInDisplaySize = 11
             return "MacBook Air (11-inch, Mid 2012)"
         case "MacBookAir5,2":
+            builtInDisplaySize = 13
             return "MacBook Air (13-inch, Mid 2012)"
         case "MacBookAir6,1":
+            builtInDisplaySize = 11
             return "MacBook Air (11-inch, Mid 2013/Early 2014)"
         case "MacBookAir6,2":
+            builtInDisplaySize = 13
             return "MacBook Air (13-inch, Mid 2013/Early 2014)"
         case "MacBookAir7,1":
+            builtInDisplaySize = 11
             return "MacBook Air (11-inch, Early 2015/2017)"
         case "MacBookAir7,2":
+            builtInDisplaySize = 13
             return "MacBook Air (13-inch, Early 2015/2017)"
         case "MacBookAir8,1":
+            builtInDisplaySize = 13
             return "MacBook Air (13-inch, Late 2018)"
         case "MacBookAir8,2":
+            builtInDisplaySize = 13
             return "MacBook Air (13-inch, True-Tone, 2019)"
         case "MacBookAir9,1":
+            builtInDisplaySize = 13
             return "MacBook Air (13-inch, 2020)"
         case "MacBookAir10,1":
+            builtInDisplaySize = 13
             return "MacBook Air (13-inch, M1, 2020)"
             
         case "MacBookPro5,5":
+            builtInDisplaySize = 13
             return "MacBook Pro (13-inch, 2009)"
         case "MacBookPro7,1":
+            builtInDisplaySize = 13
             return "MacBook Pro (13-inch, Mid 2010)"
         case "MacBookPro8,1":
+            builtInDisplaySize = 13
             return "MacBook Pro (13-inch, Early 2011)"
         case "MacBookPro9,2":
+            builtInDisplaySize = 13
             return "MacBook Pro (13-inch, Mid 2012)"
         case "MacBookPro10,2":
+            builtInDisplaySize = 13
             return "MacBook Pro (Retina, 13-inch, 2012)"
         case "MacBookPro11,1":
+            builtInDisplaySize = 13
             return "MacBook Pro (Retina, 13-inch, Late 2013/Mid 2014)"
         case "MacBookPro12,1":
+            builtInDisplaySize = 13
             return "MacBook Pro (Retina, 13-inch, 2015)"
         case "MacBookPro13,1":
+            builtInDisplaySize = 13
             return "MacBook Pro (Retina, 13-inch, Late 2016)"
         case "MacBookPro13,2":
+            builtInDisplaySize = 13
             return "MacBook Pro (Retina, 13-inch, Touch ID/Bar, Late 2016)"
         case "MacBookPro14,1":
+            builtInDisplaySize = 13
             return "MacBook Pro (Retina, 13-inch, Mid 2017)"
         case "MacBookPro14,2":
+            builtInDisplaySize = 13
             return "MacBook Pro (Retina, 13-inch, Touch ID/Bar, Mid 2017)"
         case "MacBookPro15,2":
+            builtInDisplaySize = 13
             return "MacBook Pro (Retina, 13-inch, Touch ID/Bar, Mid 2018)"
         case "MacBookPro15,4":
+            builtInDisplaySize = 13
             return "MacBook Pro (Retina, 13-inch, Touch ID/Bar, Mid 2019)"
         case "MacBookPro16,2","MacBookPro16,3":
+            builtInDisplaySize = 13
             return "MacBook Pro (Retina, 13-inch, Touch ID/Bar, Mid 2020)"
         case "MacBookPro17,1":
+            builtInDisplaySize = 13
             return "MacBook Pro (13-inch, M1, 2020)"
             
         case "MacBookPro6,2":
+            builtInDisplaySize = 15
             return "MacBook Pro (15-inch, Mid 2010)"
         case "MacBookPro8,2":
+            builtInDisplaySize = 15
             return "MacBook Pro (15-inch, Early 2011)"
         case "MacBookPro9,1":
+            builtInDisplaySize = 15
             return "MacBook Pro (15-inch, Mid 2012)"
         case "MacBookPro10,1":
+            builtInDisplaySize = 15
             return "MacBook Pro (Retina, 15-inch, Mid 2012)"
         case "MacBookPro11,2":
+            builtInDisplaySize = 15
             return "MacBook Pro (Retina, 15-inch, Late 2013)"
         case "MacBookPro11,3":
+            builtInDisplaySize = 15
             return "MacBook Pro (Retina, 15-inch, Mid 2014)"
         case "MacBookPro11,4","MacBookPro11,5":
+            builtInDisplaySize = 15
             return "MacBook Pro (Retina, 15-inch, Mid 2015)"
         case "MacBookPro13,3":
+            builtInDisplaySize = 15
             return "MacBook Pro (Retina, 15-inch, Touch ID/Bar, Late 2016)"
         case "MacBookPro14,3":
+            builtInDisplaySize = 15
             return "MacBook Pro (Retina, 15-inch, Touch ID/Bar, Late 2017)"
         case "MacBookPro15,1":
+            builtInDisplaySize = 15
             return "MacBook Pro (Retina, 15-inch, Touch ID/Bar, 2018/2019)"
         case "MacBookPro15,3":
+            builtInDisplaySize = 15
             return "MacBook Pro (Retina Vega Graphics, 15-inch, Touch ID/Bar, 2018/2019)"
         case "MacBookPro16,1":
+            builtInDisplaySize = 16
             return "MacBook Pro (Retina, 16-inch, Touch ID/Bar, 2019)"
         case "MacBookPro8,3":
+            builtInDisplaySize = 17
             return "MacBook Pro (17-inch, Late 2011)"
         case "Unkown","Mac":
             macType = .DESKTOP

@@ -449,7 +449,7 @@
                                         <imageCell key="cell" refusesFirstResponder="YES" focusRingType="exterior" alignment="left" imageScaling="proportionallyUpOrDown" image="NSComputer" id="aMw-hD-eDx"/>
                                     </imageView>
                                     <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Orh-dQ-0M1">
-                                        <rect key="frame" x="227" y="83" width="127" height="28"/>
+                                        <rect key="frame" x="185" y="25" width="211" height="86"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" alignment="center" title="Display" id="sJc-j1-qmk">
                                             <font key="font" textStyle="headline" name=".SFNS-Bold"/>
@@ -457,8 +457,17 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SjI-Or-BeG">
+                                        <rect key="frame" x="131" y="56" width="178" height="55"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" alignment="center" title="Display" id="PPg-3k-9fc">
+                                            <font key="font" textStyle="headline" name=".SFNS-Bold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                     <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="haK-Zb-8ht">
-                                        <rect key="frame" x="101" y="83" width="111" height="28"/>
+                                        <rect key="frame" x="56" y="56" width="201" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" alignment="center" title="Display" id="EMs-f0-ueV">
                                             <font key="font" textStyle="headline" name=".SFNS-Bold"/>
@@ -467,7 +476,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="858-f8-xta">
-                                        <rect key="frame" x="288" y="83" width="123" height="28"/>
+                                        <rect key="frame" x="258" y="56" width="183" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" alignment="center" title="Display" id="edR-gc-Tis">
                                             <font key="font" textStyle="headline" name=".SFNS-Bold"/>
@@ -476,7 +485,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xEq-6a-wft">
-                                        <rect key="frame" x="350" y="83" width="121" height="28"/>
+                                        <rect key="frame" x="337" y="56" width="169" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" alignment="center" title="Display" id="Cti-yT-IUK">
                                             <font key="font" textStyle="headline" name=".SFNS-Bold"/>
@@ -484,11 +493,47 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SjI-Or-BeG">
-                                        <rect key="frame" x="157" y="83" width="127" height="28"/>
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wNI-Ij-lp9">
+                                        <rect key="frame" x="206" y="25" width="169" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" alignment="center" title="Display" id="PPg-3k-9fc">
-                                            <font key="font" textStyle="headline" name=".SFNS-Bold"/>
+                                        <textFieldCell key="cell" alignment="center" title="Resolution" id="2z4-hu-X9K">
+                                            <font key="font" textStyle="callout" name=".SFNS-Regular"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5AF-gZ-4T3">
+                                        <rect key="frame" x="72" y="25" width="169" height="55"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" alignment="center" title="Resolution" id="gFI-Cs-sI6">
+                                            <font key="font" textStyle="callout" name=".SFNS-Regular"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yhX-vN-zmQ">
+                                        <rect key="frame" x="136" y="25" width="169" height="55"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" alignment="center" title="Resolution" id="eif-aS-JZY">
+                                            <font key="font" textStyle="callout" name=".SFNS-Regular"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3C-3W-8fs">
+                                        <rect key="frame" x="265" y="25" width="169" height="55"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" alignment="center" title="Resolution" id="FPS-OW-rKW">
+                                            <font key="font" textStyle="callout" name=".SFNS-Regular"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I1c-Up-oSG">
+                                        <rect key="frame" x="337" y="25" width="169" height="55"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" alignment="center" title="Resolution" id="MjX-1e-gVr">
+                                            <font key="font" textStyle="callout" name=".SFNS-Regular"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -508,6 +553,11 @@
                         <outlet property="DisplayPicL2" destination="fsK-UG-uc6" id="hKp-yW-zDv"/>
                         <outlet property="DisplayPicR1" destination="trV-Oe-iKo" id="LjR-NI-Qs3"/>
                         <outlet property="DisplayPicR2" destination="z3e-Et-8op" id="Pbo-DI-0iJ"/>
+                        <outlet property="DisplaySizeResCenter" destination="wNI-Ij-lp9" id="jmN-md-COY"/>
+                        <outlet property="DisplaySizeResL1" destination="5AF-gZ-4T3" id="nvY-gO-QR9"/>
+                        <outlet property="DisplaySizeResL2" destination="yhX-vN-zmQ" id="xb8-Na-gQi"/>
+                        <outlet property="DisplaySizeResR1" destination="I1c-Up-oSG" id="9Nh-QG-ZUh"/>
+                        <outlet property="DisplaySizeResR2" destination="z3C-3W-8fs" id="vFm-Bt-Enb"/>
                     </connections>
                 </viewController>
                 <customObject id="f0Y-GX-qi4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
