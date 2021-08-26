@@ -22,7 +22,11 @@ class HardwareCollector {
     static var SerialNumberString: String = "XXXXXXXXXXX"
     static var qHackintosh = false // is it a hackintosh
     static var OpenCoreString: String = ""
+    static var macType: macType = .MAC
+    
     static var dataHasBeenSet: Bool = false
+    
+    
     
     static func getAllData() {
         if (dataHasBeenSet) {return}
@@ -453,4 +457,31 @@ enum macOSvers {
     case BIG_SUR
     case MONTEREY
     case macOS
+}
+enum macType {
+    case MACBOOKPOLYCARB
+    case MACBOOKUSBC
+    case MACBOOKPRO13
+    case MACBOOKPRO15
+    case MACBOOKPRO17
+    case MACBOOKPRO13ALUM
+    case MACBOOKPRO15ALUM
+    case MACBOOKPRO16LIGHT
+    case MACBOOKPRO16DARK
+    case MACBOOKAIR11
+    case MACBOOKAIR13OLD
+    case MACBOOKAIR13NEW
+    case IMAC24OLD
+    case IMAC24NEWY // yellow
+    case IMAC24NEWO // orange
+    case IMAC24NEWR // red
+    case IMAC24NEWB // blue
+    case IMAC24NEWGE // green
+    case IMAC24NEWGA // gray
+    case IMAC24NEWP // purple
+    case IMAC215 // 21.5"
+    case IMAC17
+    case IMACPRO
+    case PRODISPXDR
+    case MAC
 }
