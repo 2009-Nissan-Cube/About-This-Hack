@@ -529,6 +529,9 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
         case "MacBookPro16,2","MacBookPro16,3":
             builtInDisplaySize = 13
             return "MacBook Pro (Retina, 13-inch, Touch ID/Bar, Mid 2020)"
+        case "MacBookPro16,4":
+            builtInDisplaySize = 16
+            return "MacBook Pro (Retina, 16-inch, Touch ID/Bar, Mid 2019)"
         case "MacBookPro17,1":
             builtInDisplaySize = 13
             return "MacBook Pro (13-inch, M1, 2020)"
