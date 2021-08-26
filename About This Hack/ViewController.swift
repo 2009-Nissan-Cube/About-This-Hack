@@ -29,18 +29,6 @@ class ViewController: NSViewController {
     @IBOutlet weak var ocPrefix: NSTextField!
 
     
-    // MARK: IBOutlets Displays
-        
-    @IBOutlet weak var dispPic: NSImageView!
-    
-    // MARK: IBOutlets Storage
-    
-    
-    // MARK: Other Vars
-    
-    public static var currentView: Int = 0
-    public static
-
     
     
     var osNumber = (try? call("sw_vers | grep ProductVersion | cut -c 17-")) ?? "macOS"
@@ -64,20 +52,7 @@ class ViewController: NSViewController {
         self.view.window?.styleMask.remove(NSWindow.StyleMask.resizable)
     }
     
-    func start1() {
-        print("Display Ini Called")
-        
-        dispPic.image = NSImage(named: "Disp_Generic")
-    }
-    func start2() {
-        print("Storage Ini Called")
-    }
-    func start3() {
-        print("Support Ini Called")
-    }
-    func start4() {
-        print("Service Ini Called")
-    }
+
     
     
     func start0() {
@@ -86,13 +61,13 @@ class ViewController: NSViewController {
             return
         }
         // Image
-        if(ViewController.osNumber.hasPrefix("12")) {
+        if(osNumber.hasPrefix("12")) {
             picture.image = NSImage(named: "Monterey")
         }
-        else if(ViewController.osNumber.hasPrefix("11")) {
+        else if(osNumber.hasPrefix("11")) {
             picture.image = NSImage(named: "Big Sur")
         }
-        else if (ViewController.osNumber.hasPrefix("10")) {
+        else if (osNumber.hasPrefix("10")) {
             let infoString1 = (try? call("sw_vers -productVersion | awk -F '.' '{print  $2}'")) ?? "15"
             switch(infoString1) {
             case "16":
@@ -227,7 +202,7 @@ class ViewController: NSViewController {
     }
 
     func getOSPrefix() -> String{
-        if(!ViewController.osNumber.hasPrefix("10")) {
+        if(!osNumber.hasPrefix("10")) {
             return "macOS"
         }
         else {
@@ -257,14 +232,14 @@ class ViewController: NSViewController {
     }
     
     func getOSName() -> String {
-        _ = ViewController.osNumber
-        if(ViewController.osNumber.hasPrefix("12")) {
+        _ = osNumber
+        if(osNumber.hasPrefix("12")) {
             return "Monterey"
         }
-        else if(ViewController.osNumber.hasPrefix("11")) {
+        else if(osNumber.hasPrefix("11")) {
             return "Big Sur"
         }
-        else if (ViewController.osNumber.hasPrefix("10")) {
+        else if (osNumber.hasPrefix("10")) {
             let infoString1 = (try? call("sw_vers -productVersion | awk -F '.' '{print  $2}'")) ?? "15"
             switch(infoString1) {
             case "16":

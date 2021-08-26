@@ -57,6 +57,36 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Window" id="CGo-wv-2KW">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Window" systemMenu="window" id="DUf-nJ-qcj">
+                                    <items>
+                                        <menuItem title="Minimize" keyEquivalent="m" id="Fdn-tF-SyD">
+                                            <connections>
+                                                <action selector="performMiniaturize:" target="Ady-hI-5gd" id="i5s-nF-DGo"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Close" keyEquivalent="w" id="rT6-YD-Lao">
+                                            <connections>
+                                                <action selector="performClose:" target="Ady-hI-5gd" id="61M-kq-lQy"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom" id="5HS-Mc-tod">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="performZoom:" target="Ady-hI-5gd" id="rVx-uu-IEB"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="hNE-XU-1EN"/>
+                                        <menuItem title="Bring All to Front" id="MvP-56-vIj">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="arrangeInFront:" target="Ady-hI-5gd" id="X2l-Av-4h0"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Help" id="wpr-3q-Mcd">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
@@ -384,7 +414,7 @@
         <!--Displays-->
         <scene sceneID="mS1-us-Eox">
             <objects>
-                <viewController title="Displays" id="cTB-fT-bUH" customClass="ViewController" customModule="About_This_Hack" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Displays" id="cTB-fT-bUH" customClass="ViewControllerDisplays" customModule="About_This_Hack" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="S5G-j8-IfD">
                         <rect key="frame" x="0.0" y="0.0" width="580" height="250"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -420,11 +450,6 @@
                             </view>
                         </subviews>
                     </view>
-                    <connections>
-                        <outlet property="dispPic" destination="PA5-nE-SAD" id="m2k-PG-B45"/>
-                        <outlet property="osPrefix" destination="1J5-bh-VRi" id="5nR-Hp-uxt"/>
-                        <outlet property="picture" destination="PA5-nE-SAD" id="tHs-yq-VDT"/>
-                    </connections>
                 </viewController>
                 <customObject id="f0Y-GX-qi4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -433,7 +458,7 @@
         <!--Storage-->
         <scene sceneID="Fat-KB-VyR">
             <objects>
-                <viewController title="Storage" id="wzq-Ng-O1T" customClass="ViewController" customModule="About_This_Hack" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Storage" id="wzq-Ng-O1T" customClass="ViewControllerStorage" customModule="About_This_Hack" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Pj4-hd-duo">
                         <rect key="frame" x="0.0" y="0.0" width="580" height="250"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -481,7 +506,7 @@
         <!--Support-->
         <scene sceneID="Zmu-dP-k4h">
             <objects>
-                <viewController title="Support" id="Nau-hC-e0F" customClass="ViewController" customModule="About_This_Hack" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Support" id="Nau-hC-e0F" customClass="ViewControllerSupport" customModule="About_This_Hack" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="5JA-sc-4eo">
                         <rect key="frame" x="0.0" y="0.0" width="580" height="250"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -529,7 +554,7 @@
         <!--Service-->
         <scene sceneID="q6u-tG-6AZ">
             <objects>
-                <viewController title="Service" id="AJW-Am-NAa" customClass="ViewController" customModule="About_This_Hack" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Service" id="AJW-Am-NAa" customClass="ViewControllerService" customModule="About_This_Hack" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="eHG-Nt-2ss">
                         <rect key="frame" x="0.0" y="0.0" width="580" height="250"/>
                         <autoresizingMask key="autoresizingMask"/>

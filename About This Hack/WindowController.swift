@@ -39,6 +39,5 @@ class WindowController: NSWindowController {
         let segCtrl = sender as! NSSegmentedControl
         currentView = segCtrl.selectedSegment
         self.tabViewController?.selectedTabViewItemIndex = currentView
-        ViewController.currentView = currentView
     }
 }
