@@ -59,12 +59,12 @@ class HardwareCollector {
     }
     
     static func getDisplayRess() -> [String] {
-        var numDispl = getNumDisplays()
+        let numDispl = getNumDisplays()
         if numDispl == 1 {
-            return [(try! call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ?? "1920 x 1080"]
+            return [(try! call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ]
         }
         else if (numDispl == 2) {
-            let tmp = (try! call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ?? "1920 x 1080"
+            let tmp = (try! call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-"))
             let tmpParts = tmp.components(separatedBy: "\n")
             return tmpParts
         }
@@ -72,12 +72,12 @@ class HardwareCollector {
     }
     
     static func getDisplayNames() -> [String] {
-        var numDispl = getNumDisplays()
+        let numDispl = getNumDisplays()
         if numDispl == 1 {
-            return [(try! call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ?? "1920 x 1080"]
+            return [(try! call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ]
         }
         else if (numDispl == 2) {
-            let tmp = (try! call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ?? "1920 x 1080"
+            let tmp = (try! call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-"))
             let tmpParts = tmp.components(separatedBy: "\n")
             return tmpParts
         }
@@ -86,7 +86,7 @@ class HardwareCollector {
     
     
     static func getNumDisplays() -> Int {
-        return Int(try! call("system_profiler SPDisplaysDataType | grep -c Resolution") ?? "1") ?? 1
+        return Int(try! call("system_profiler SPDisplaysDataType | grep -c Resolution") ) ?? 1
     }
     static func hasBuiltInDisplay() -> Bool {
         let tmp = (try? call("system_profiler SPDisplaysDataType | grep Built-In")) ?? ""
@@ -151,7 +151,7 @@ class HardwareCollector {
     }
     
     static func getRam() -> String {
-        var ram = (try? call("echo \"$(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024))\"")) ?? "RAM Error"
+        let ram = (try? call("echo \"$(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024))\"")) ?? "RAM Error"
         var ramReturn = "\(ram) GB"
         let ramInfoCache = (try? call("system_profiler SPMemoryDataType")) ?? "RAM Error"
         let ramSpeedTmp = (try? call("echo \"\(ramInfoCache)\" | grep Speed:")) ?? "RAM Error"
@@ -342,7 +342,6 @@ class HardwareCollector {
         case "Macmini5,1":
             macType = .DESKTOP
             return "Mac Mini (Mid 2011)"
-            macType = .DESKTOP
         case "Macmini5,2","Macmini5,3":
             return "Mac Mini (Mid 2011)"
         case "Macmini6,1":
