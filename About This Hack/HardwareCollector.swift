@@ -55,9 +55,14 @@ class HardwareCollector {
         qhasBuiltInDisplay = hasBuiltInDisplay()
         displayRes = getDisplayRess()
         displayNames = getDisplayNames()
-        
+        getDisplayDiagonal()
         
         dataHasBeenSet = true
+    }
+    
+    static func getDisplayDiagonal() -> Float {
+        
+        return 13.3
     }
     
     static func getDisplayRess() -> [String] {
