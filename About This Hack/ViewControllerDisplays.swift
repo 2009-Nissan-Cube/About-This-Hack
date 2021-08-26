@@ -9,6 +9,14 @@ import Foundation
 import Cocoa
 
 class ViewControllerDisplays: NSViewController {
+    
+    
+    @IBOutlet weak var DisplayPic: NSImageView!
+    @IBOutlet weak var DisplayMoreInfoTxt: NSTextField!
+    @IBOutlet weak var displayInfoTxt: NSTextField!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         start()
@@ -27,5 +35,6 @@ class ViewControllerDisplays: NSViewController {
     
     func start() {
         print("display ini called")
+        
     }
 }

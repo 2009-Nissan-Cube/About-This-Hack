@@ -432,10 +432,10 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PA5-nE-SAD">
+                                    <imageView focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PA5-nE-SAD">
                                         <rect key="frame" x="190" y="112" width="200" height="118"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="XOo-uO-Qd0"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" focusRingType="exterior" alignment="left" imageScaling="proportionallyDown" image="genericLCD" id="XOo-uO-Qd0"/>
                                     </imageView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sqC-Xn-QYw">
                                         <rect key="frame" x="235" y="39" width="110" height="15"/>
@@ -450,6 +450,11 @@
                             </view>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="DisplayMoreInfoTxt" destination="sqC-Xn-QYw" id="8XT-qu-esN"/>
+                        <outlet property="DisplayPic" destination="PA5-nE-SAD" id="9TE-9w-w2d"/>
+                        <outlet property="displayInfoTxt" destination="1J5-bh-VRi" id="usY-Zd-TEq"/>
+                    </connections>
                 </viewController>
                 <customObject id="f0Y-GX-qi4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -600,4 +605,7 @@
             <point key="canvasLocation" x="220" y="812"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="genericLCD" width="128" height="128"/>
+    </resources>
 </document>
