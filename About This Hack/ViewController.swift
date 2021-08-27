@@ -93,28 +93,17 @@ class ViewController: NSViewController {
         // macOS Version Name
         osVersion.stringValue = HardwareCollector.OSname
         
-
-        
-        /*(try? call("""
- /usr/libexec/PlistBuddy -c "print :'CPU Names':$(system_profiler SPHardwareDataType | awk '/Serial/ {print $4}' | cut -c 9-)-en-US_US" ~/Library/Preferences/com.apple.SystemProfiler.plist
-""")) ?? "\(HardwareCollector.getMacName())"*/
-        
         // macOS Version ID
         systemVersion.stringValue = HardwareCollector.OSBuildNum
         
         // Mac Model
         macModel.stringValue = HardwareCollector.macName
-        //macModel.stringValue = (try? call("""
- //strings ~/Library/Preferences/com.apple.SystemProfiler.plist | grep ")" | cut -c 2- | grep -o 'Mac.*' | sed 's/.$//;s/_//g'
-// """)) ?? "\(getMacName(infoString: modelID))"
-        //macModel.stringValue = HardwareCollector.getMacName()
         
         // CPU
         cpu.stringValue = HardwareCollector.CPUstring
         
         // RAM
         ram.stringValue = HardwareCollector.RAMstring
-        
         
         // GPU
         graphics.stringValue = HardwareCollector.GPUstring

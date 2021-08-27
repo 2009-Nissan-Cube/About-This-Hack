@@ -53,7 +53,7 @@ class HardwareCollector {
         qhasBuiltInDisplay = hasBuiltInDisplay()
         displayRes = getDisplayRess()
         displayNames = getDisplayNames()
-        getDisplayDiagonal()
+        // getDisplayDiagonal() Having some issues, removing for now
         
         dataHasBeenSet = true
     }
