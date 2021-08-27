@@ -105,9 +105,23 @@ class ViewControllerDisplays: NSViewController {
                     dispArr[1].image = NSImage(named: "genericLCD") // not first one
                 }
             }
+            for i in [0,1] {
+                nameArr[i].isHidden = false
+                nameArr[i].stringValue = HardwareCollector.displayNames[i]
+                labelArr2[i].isHidden = false
+                labelArr2[i].stringValue = HardwareCollector.displayRes[i]
+            }
             for disp in dispArr {
                 disp.isHidden = false
             }
+            /*
+            for label in nameArr {
+                label.isHidden = false
+            }
+            for label in labelArr2 {
+                label.isHidden = false
+            }*/
+            
             break
         case 3:
             break

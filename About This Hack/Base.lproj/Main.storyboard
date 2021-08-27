@@ -520,19 +520,19 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3C-3W-8fs">
-                                        <rect key="frame" x="265" y="25" width="169" height="55"/>
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I1c-Up-oSG">
+                                        <rect key="frame" x="337" y="25" width="169" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" alignment="center" title="Resolution" id="FPS-OW-rKW">
+                                        <textFieldCell key="cell" alignment="center" title="Resolution" id="MjX-1e-gVr">
                                             <font key="font" textStyle="callout" name=".SFNS-Regular"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I1c-Up-oSG">
-                                        <rect key="frame" x="337" y="25" width="169" height="55"/>
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3C-3W-8fs">
+                                        <rect key="frame" x="258" y="25" width="169" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" alignment="center" title="Resolution" id="MjX-1e-gVr">
+                                        <textFieldCell key="cell" alignment="center" title="Resolution" id="FPS-OW-rKW">
                                             <font key="font" textStyle="callout" name=".SFNS-Regular"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -628,7 +628,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Tm-z8-QVR">
-                                        <rect key="frame" x="73" y="175" width="84" height="16"/>
+                                        <rect key="frame" x="73" y="182" width="84" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="macOS Help" id="qaK-5G-98g">
                                             <font key="font" textStyle="headline" name=".SFNS-Bold"/>
@@ -637,7 +637,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GrT-Zi-ddp">
-                                        <rect key="frame" x="425" y="175" width="101" height="16"/>
+                                        <rect key="frame" x="425" y="182" width="101" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Hardware Help" id="HuZ-JY-TSx">
                                             <font key="font" textStyle="headline" name=".SFNS-Bold"/>
@@ -646,9 +646,9 @@
                                         </textFieldCell>
                                     </textField>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dtY-jd-Ip0">
-                                        <rect key="frame" x="47" y="149" width="136" height="18"/>
+                                        <rect key="frame" x="47" y="156" width="136" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="macOS User Guide " bezelStyle="inline" image="NSTouchBarOpenInBrowserTemplate" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="ttV-6r-KWU">
+                                        <buttonCell key="cell" type="inline" title="macOS User Guide " bezelStyle="inline" image="safari" catalog="system" imagePosition="trailing" alignment="center" borderStyle="border" inset="2" id="ttV-6r-KWU">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -657,9 +657,9 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5OQ-us-odM">
-                                        <rect key="frame" x="421" y="149" width="109" height="18"/>
+                                        <rect key="frame" x="421" y="156" width="109" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Apple Support" bezelStyle="inline" image="NSTouchBarOpenInBrowserTemplate" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="rsW-PX-wvK">
+                                        <buttonCell key="cell" type="inline" title="Apple Support" bezelStyle="inline" image="safari" catalog="system" imagePosition="trailing" alignment="center" borderStyle="border" inset="2" id="rsW-PX-wvK">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -668,9 +668,9 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0aH-Ip-0jT">
-                                        <rect key="frame" x="417" y="97" width="117" height="18"/>
+                                        <rect key="frame" x="418" y="104" width="114" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Mac User Guide" bezelStyle="inline" image="NSTouchBarOpenInBrowserTemplate" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="xTZ-yl-yG1">
+                                        <buttonCell key="cell" type="inline" title="Mac User Guide" bezelStyle="inline" image="safari" catalog="system" imagePosition="trailing" alignment="center" borderStyle="border" inset="2" id="xTZ-yl-yG1">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -679,9 +679,9 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lIP-i4-RkP">
-                                        <rect key="frame" x="412" y="123" width="127" height="18"/>
+                                        <rect key="frame" x="412" y="130" width="127" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Hackintosh Guide" bezelStyle="inline" image="NSTouchBarOpenInBrowserTemplate" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="6g6-V5-YHx">
+                                        <buttonCell key="cell" type="inline" title="Hackintosh Guide" bezelStyle="inline" image="safari" catalog="system" imagePosition="trailing" alignment="center" borderStyle="border" inset="2" id="6g6-V5-YHx">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -689,21 +689,10 @@
                                             <action selector="HackintoshPress:" target="Nau-hC-e0F" id="JTO-u8-u5d"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ovu-bc-0Xj">
-                                        <rect key="frame" x="225" y="36" width="132" height="18"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Hack Café Discord" bezelStyle="inline" image="NSTouchBarOpenInBrowserTemplate" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="x4f-S1-MjV">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="smallSystemBold"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="HackCafeDiscordPress:" target="Nau-hC-e0F" id="cUB-wH-wck"/>
-                                        </connections>
-                                    </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q27-be-TLE">
-                                        <rect key="frame" x="42" y="123" width="147" height="18"/>
+                                        <rect key="frame" x="42" y="130" width="147" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Whats New in macOS" bezelStyle="inline" image="NSTouchBarOpenInBrowserTemplate" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="OTr-vA-9vX">
+                                        <buttonCell key="cell" type="inline" title="Whats New in macOS" bezelStyle="inline" image="safari" catalog="system" imagePosition="trailing" alignment="center" borderStyle="border" inset="2" id="OTr-vA-9vX">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -712,14 +701,25 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ise-M2-RUF">
-                                        <rect key="frame" x="70" y="97" width="92" height="18"/>
+                                        <rect key="frame" x="69" y="104" width="92" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Mac Basics" bezelStyle="inline" image="NSTouchBarOpenInBrowserTemplate" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="iVE-To-f0E">
+                                        <buttonCell key="cell" type="inline" title="Mac Basics" bezelStyle="inline" image="safari" catalog="system" imagePosition="trailing" alignment="center" borderStyle="border" inset="2" id="iVE-To-f0E">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="MacBasicsPress:" target="Nau-hC-e0F" id="aS2-sg-mZl"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ovu-bc-0Xj">
+                                        <rect key="frame" x="207" y="45" width="167" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="inline" title="Hack Café Discord" bezelStyle="inline" image="safari" catalog="system" imagePosition="trailing" alignment="center" borderStyle="border" inset="2" id="x4f-S1-MjV">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="smallSystemBold"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="HackCafeDiscordPress:" target="Nau-hC-e0F" id="cUB-wH-wck"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -785,6 +785,6 @@
     </scenes>
     <resources>
         <image name="NSComputer" width="32" height="32"/>
-        <image name="NSTouchBarOpenInBrowserTemplate" width="15" height="15"/>
+        <image name="safari" catalog="system" width="15" height="15"/>
     </resources>
 </document>
