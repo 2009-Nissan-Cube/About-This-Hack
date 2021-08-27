@@ -648,7 +648,7 @@
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dtY-jd-Ip0">
                                         <rect key="frame" x="47" y="156" width="136" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="macOS User Guide " bezelStyle="inline" image="safari" catalog="system" imagePosition="trailing" alignment="center" borderStyle="border" inset="2" id="ttV-6r-KWU">
+                                        <buttonCell key="cell" type="inline" title="macOS User Guide " bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="ttV-6r-KWU">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -659,7 +659,7 @@
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5OQ-us-odM">
                                         <rect key="frame" x="421" y="156" width="109" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Apple Support" bezelStyle="inline" image="safari" catalog="system" imagePosition="trailing" alignment="center" borderStyle="border" inset="2" id="rsW-PX-wvK">
+                                        <buttonCell key="cell" type="inline" title="Apple Support" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="rsW-PX-wvK">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -670,7 +670,7 @@
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0aH-Ip-0jT">
                                         <rect key="frame" x="418" y="104" width="114" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Mac User Guide" bezelStyle="inline" image="safari" catalog="system" imagePosition="trailing" alignment="center" borderStyle="border" inset="2" id="xTZ-yl-yG1">
+                                        <buttonCell key="cell" type="inline" title="Mac User Guide" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="xTZ-yl-yG1">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -681,7 +681,7 @@
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lIP-i4-RkP">
                                         <rect key="frame" x="412" y="130" width="127" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Hackintosh Guide" bezelStyle="inline" image="safari" catalog="system" imagePosition="trailing" alignment="center" borderStyle="border" inset="2" id="6g6-V5-YHx">
+                                        <buttonCell key="cell" type="inline" title="Hackintosh Guide" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="6g6-V5-YHx">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -692,7 +692,7 @@
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q27-be-TLE">
                                         <rect key="frame" x="42" y="130" width="147" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Whats New in macOS" bezelStyle="inline" image="safari" catalog="system" imagePosition="trailing" alignment="center" borderStyle="border" inset="2" id="OTr-vA-9vX">
+                                        <buttonCell key="cell" type="inline" title="Whats New in macOS" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="OTr-vA-9vX">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -703,7 +703,7 @@
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ise-M2-RUF">
                                         <rect key="frame" x="69" y="104" width="92" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Mac Basics" bezelStyle="inline" image="safari" catalog="system" imagePosition="trailing" alignment="center" borderStyle="border" inset="2" id="iVE-To-f0E">
+                                        <buttonCell key="cell" type="inline" title="Mac Basics" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="iVE-To-f0E">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -714,7 +714,7 @@
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ovu-bc-0Xj">
                                         <rect key="frame" x="207" y="45" width="167" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Hack Café Discord" bezelStyle="inline" image="safari" catalog="system" imagePosition="trailing" alignment="center" borderStyle="border" inset="2" id="x4f-S1-MjV">
+                                        <buttonCell key="cell" type="inline" title="Hack Café Discord" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="x4f-S1-MjV">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
