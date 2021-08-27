@@ -19,18 +19,6 @@ class WindowController: NSWindowController {
         print("loaded")
         
         self.tabViewController = self.window?.contentViewController as? NSTabViewController
-        
-        if let window = window {
-            if let view = window.contentView {
-                
-                //window.setValue(580, forKey: "width")
-                //view.wantsLayer = true
-                //window.titleVisibility = .hidden
-                    //window.titlebarAppearsTransparent = true
-                //window.backgroundColor = .white
-            }
-        }
-
     }
 
     @IBAction func segmentedControlSwitched(_ sender: Any) {

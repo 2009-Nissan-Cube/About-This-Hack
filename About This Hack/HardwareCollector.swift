@@ -122,6 +122,7 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
                 opencoreType = "(Debug)"
             }
             tmp = "\(opencore1).\(opencore2).\(opencore3) \(opencoreType)"
+            print(tmp)
             qHackintosh = true
         }
         if(opencore1 == opencore2 && opencore2 == opencore3 && opencore3 == "") {
