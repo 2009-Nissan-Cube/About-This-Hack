@@ -45,10 +45,8 @@ class HardwareCollector {
         DisplayString = getDisp()
         StartupDiskString = getStartupDisk()
         SerialNumberString = getSerialNumber()
-        if qHackintosh {
-            OpenCoreString = getOpenCore()
-        }
-        else {
+        OpenCoreString = getOpenCore()
+        if !qHackintosh {
             OpenCoreString = ""
         }
         numberOfDisplays = getNumDisplays()
