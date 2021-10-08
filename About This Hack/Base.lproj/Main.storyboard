@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -129,10 +129,10 @@
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Jtn-pX-f66"/>
                                 <toolbarItem implicitItemIdentifier="88CCF72C-7D82-4627-B3A1-154D73ADC1B1" label="Custom View" paletteLabel="Custom View" autovalidates="NO" id="5iE-AH-Dbz">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="345" height="22"/>
+                                    <size key="minSize" width="292" height="22"/>
                                     <size key="maxSize" width="364" height="26"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" springLoaded="YES" id="L8Y-nK-bWF">
-                                        <rect key="frame" x="0.0" y="14" width="364" height="26"/>
+                                        <rect key="frame" x="0.0" y="14" width="292" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="texturedRounded" trackingMode="selectOne" id="Kat-cT-SH6">
                                             <font key="font" metaFont="system"/>
@@ -141,7 +141,6 @@
                                                 <segment label="Displays" tag="1"/>
                                                 <segment label="Storage"/>
                                                 <segment label="Support"/>
-                                                <segment label="Service"/>
                                             </segments>
                                         </segmentedCell>
                                         <connections>
@@ -388,7 +387,6 @@
                         <tabViewItem id="cqa-lm-Aif"/>
                         <tabViewItem id="Uls-md-CWC"/>
                         <tabViewItem id="gxc-1C-boE"/>
-                        <tabViewItem id="3aU-PS-30a"/>
                     </tabViewItems>
                     <tabView key="tabView" type="noTabsNoBorder" id="SGh-uI-E1i">
                         <rect key="frame" x="0.0" y="0.0" width="580" height="250"/>
@@ -404,7 +402,6 @@
                         <segue destination="cTB-fT-bUH" kind="relationship" relationship="tabItems" id="tWi-Mi-ETk"/>
                         <segue destination="wzq-Ng-O1T" kind="relationship" relationship="tabItems" id="vHq-t5-p7K"/>
                         <segue destination="Nau-hC-e0F" kind="relationship" relationship="tabItems" id="Sof-P7-Nv8"/>
-                        <segue destination="AJW-Am-NAa" kind="relationship" relationship="tabItems" id="piP-Va-fIE"/>
                     </connections>
                 </tabViewController>
                 <customObject id="mc0-by-tLC" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -591,7 +588,7 @@
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="HDD" id="ErU-rD-tJ2"/>
                                     </imageView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CRL-U4-0CV">
-                                        <rect key="frame" x="-2" y="12" width="584" height="29"/>
+                                        <rect key="frame" x="-2" y="0.0" width="584" height="54"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Storage" id="G5x-4p-VmO">
                                             <font key="font" metaFont="system" size="14"/>
@@ -643,9 +640,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GrT-Zi-ddp">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GrT-Zi-ddp">
                                         <rect key="frame" x="425" y="198" width="101" height="16"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Hardware Help" id="HuZ-JY-TSx">
                                             <font key="font" textStyle="headline" name=".SFNS-Bold"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -655,7 +651,7 @@
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dtY-jd-Ip0">
                                         <rect key="frame" x="47" y="168" width="136" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="macOS User Guide " bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="ttV-6r-KWU">
+                                        <buttonCell key="cell" type="inline" title="macOS User Guide " bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="ttV-6r-KWU">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -663,10 +659,9 @@
                                             <action selector="macOSUserGuidePress:" target="Nau-hC-e0F" id="kOe-JK-Pcm"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5OQ-us-odM">
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5OQ-us-odM">
                                         <rect key="frame" x="421" y="168" width="109" height="18"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Apple Support" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="rsW-PX-wvK">
+                                        <buttonCell key="cell" type="inline" title="Apple Support" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="rsW-PX-wvK">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -674,10 +669,9 @@
                                             <action selector="AppleSupportPress:" target="Nau-hC-e0F" id="wBF-Xq-nYv"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0aH-Ip-0jT">
+                                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0aH-Ip-0jT">
                                         <rect key="frame" x="418" y="109" width="114" height="18"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Mac User Guide" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="xTZ-yl-yG1">
+                                        <buttonCell key="cell" type="inline" title="Mac User Guide" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="xTZ-yl-yG1">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -685,10 +679,9 @@
                                             <action selector="MacUserGuidePress:" target="Nau-hC-e0F" id="Wkb-SN-siW"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lIP-i4-RkP">
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lIP-i4-RkP">
                                         <rect key="frame" x="412" y="139" width="127" height="18"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Hackintosh Guide" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="6g6-V5-YHx">
+                                        <buttonCell key="cell" type="inline" title="Hackintosh Guide" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="6g6-V5-YHx">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -696,10 +689,9 @@
                                             <action selector="HackintoshPress:" target="Nau-hC-e0F" id="JTO-u8-u5d"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q27-be-TLE">
+                                    <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q27-be-TLE">
                                         <rect key="frame" x="42" y="139" width="147" height="18"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Whats New in macOS" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="OTr-vA-9vX">
+                                        <buttonCell key="cell" type="inline" title="Whats New in macOS" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="OTr-vA-9vX">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -710,7 +702,7 @@
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ise-M2-RUF">
                                         <rect key="frame" x="69" y="109" width="92" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Mac Basics" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="iVE-To-f0E">
+                                        <buttonCell key="cell" type="inline" title="Mac Basics" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="iVE-To-f0E">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -721,7 +713,7 @@
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ovu-bc-0Xj">
                                         <rect key="frame" x="207" y="44" width="167" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Hack Café Discord" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" borderStyle="border" inset="2" id="x4f-S1-MjV">
+                                        <buttonCell key="cell" type="inline" title="Hack Café Discord" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="x4f-S1-MjV">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -730,6 +722,16 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="lIP-i4-RkP" firstAttribute="centerX" secondItem="5OQ-us-odM" secondAttribute="centerX" id="21G-fz-WPI"/>
+                                    <constraint firstItem="lIP-i4-RkP" firstAttribute="centerX" secondItem="0aH-Ip-0jT" secondAttribute="centerX" id="6JU-T1-YTU"/>
+                                    <constraint firstItem="lIP-i4-RkP" firstAttribute="top" secondItem="5OQ-us-odM" secondAttribute="bottom" constant="11" id="7g8-j9-6L1"/>
+                                    <constraint firstItem="lIP-i4-RkP" firstAttribute="top" secondItem="geq-4f-G90" secondAttribute="top" constant="123" id="Gzr-bq-md7"/>
+                                    <constraint firstItem="lIP-i4-RkP" firstAttribute="baseline" secondItem="q27-be-TLE" secondAttribute="baseline" id="IP8-dO-DQe"/>
+                                    <constraint firstItem="lIP-i4-RkP" firstAttribute="centerX" secondItem="GrT-Zi-ddp" secondAttribute="centerX" id="Zne-Xd-eZo"/>
+                                    <constraint firstAttribute="trailing" secondItem="lIP-i4-RkP" secondAttribute="trailing" constant="41" id="aEn-e9-OYU"/>
+                                    <constraint firstItem="0aH-Ip-0jT" firstAttribute="top" secondItem="lIP-i4-RkP" secondAttribute="bottom" constant="12" id="fLx-fv-ewk"/>
+                                </constraints>
                             </view>
                         </subviews>
                     </view>
@@ -741,51 +743,10 @@
             </objects>
             <point key="canvasLocation" x="855" y="1017"/>
         </scene>
-        <!--Service-->
-        <scene sceneID="q6u-tG-6AZ">
-            <objects>
-                <viewController title="Service" id="AJW-Am-NAa" customClass="ViewControllerService" customModule="About_This_Hack" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="eHG-Nt-2ss">
-                        <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <view id="yVm-B2-EeC">
-                                <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dnZ-am-50b">
-                                        <rect key="frame" x="245" y="225" width="86" height="28"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Service" id="2QD-mt-SUH">
-                                            <font key="font" metaFont="systemSemibold" size="24"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GBT-eA-7Hx">
-                                        <rect key="frame" x="169" y="132" width="247" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Go buy a new PC and run Windows :)" id="SCz-bf-Uht">
-                                            <font key="font" metaFont="system" size="14"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                </subviews>
-                            </view>
-                        </subviews>
-                    </view>
-                    <connections>
-                        <outlet property="osPrefix" destination="dnZ-am-50b" id="ph1-bZ-srs"/>
-                    </connections>
-                </viewController>
-                <customObject id="em8-O0-Sei" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="220" y="1017"/>
-        </scene>
     </scenes>
     <resources>
         <image name="HDD" width="256" height="256"/>
+        <image name="NSActionTemplate" width="15" height="15"/>
         <image name="NSComputer" width="32" height="32"/>
         <image name="safari" catalog="system" width="15" height="15"/>
     </resources>

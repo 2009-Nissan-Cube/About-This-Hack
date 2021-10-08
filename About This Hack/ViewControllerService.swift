@@ -26,6 +26,6 @@ class ViewControllerService: NSViewController {
     }
     
     func start() {
-        print("service ini called")
+        print("Service View Initializing...")
     }
 }

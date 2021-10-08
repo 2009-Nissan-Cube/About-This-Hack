@@ -29,21 +29,16 @@ class ViewControllerStorage: NSViewController {
     }
     
     func start() {
-        print("Storage view initializing...")
+        print("Storage View Initializing...")
         
         // Image
-        let name = "\(HardwareCollector.getStartupDisk())"
-        let storageType = (try? call("diskutil info \"\(name)\" | grep 'Solid State'")) ?? "Unknown Storage Type"
-        if storageType.contains("Yes") {
+        if HardwareCollector.getStorageType() == true {
             startupDiskImage.image = NSImage(named: "SSD")
         } else {
             startupDiskImage.image = NSImage(named: "HDD")
         }
-        print(storageType)
         
         // Text
-        let size = (try? call("diskutil info \"\(name)\" | grep 'Disk Size' | sed 's/.*:                 //' | cut -f1 -d'('"))
-        let available = (try? call("diskutil info \"\(name)\" | Grep 'Container Free Space' | sed 's/.*:      //' | cut -f1 -d'('"))
-        storageValue.stringValue = "\(name) \(size ?? "")(\(available ?? "")Available)"
+        storageValue.stringValue = "\(HardwareCollector.getStorageData())"
     }
 }

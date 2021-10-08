@@ -55,12 +55,7 @@ class ViewControllerDisplays: NSViewController {
     }
     
     func start() {
-        print("display ini called")
-
-        
-        
-        
-        
+        print("Display View Initializing")
         if (!HardwareCollector.dataHasBeenSet) {HardwareCollector.getAllData()}
         var dispArr: [NSImageView] = []
         var nameArr: [NSTextField] = []

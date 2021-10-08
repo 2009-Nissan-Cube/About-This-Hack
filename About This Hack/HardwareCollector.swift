@@ -29,6 +29,8 @@ class HardwareCollector {
     static var displayRes: [String] = []
     static var displayNames: [String] = []
     static var builtInDisplaySize: Float = 0
+    static var storageType: Bool = false
+    static var storageData: String = ""
     
     
     static func getAllData() {
@@ -54,6 +56,8 @@ class HardwareCollector {
         displayRes = getDisplayRess()
         displayNames = getDisplayNames()
         // getDisplayDiagonal() Having some issues, removing for now
+        storageType = getStorageType()
+        storageData = getStorageData()
         
         dataHasBeenSet = true
     }
@@ -66,10 +70,10 @@ class HardwareCollector {
     static func getDisplayRess() -> [String] {
         let numDispl = getNumDisplays()
         if numDispl == 1 {
-            return [(try! call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")) ]
+            return [run("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-") ]
         }
         else if (numDispl == 2) {
-            let tmp = (try! call("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-"))
+            let tmp = run("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")
             let tmpParts = tmp.components(separatedBy: "\n")
             return tmpParts
         }
@@ -79,14 +83,14 @@ class HardwareCollector {
     static func getDisplayNames() -> [String] {
         let numDispl = getNumDisplays()
         if numDispl == 1 {
-            return [(try! call("""
-echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|<' '/_name/{getline; print $3}')"
-""")) ]
+            return [run("""
+echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|<' '/_name/{getline; print $3}')" | tr -d '\n'
+""")]
         }
         else if (numDispl == 2) {
-            let tmp = (try! call("""
-echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|<' '/_name/{getline; print $3}')"
-"""))
+            let tmp = run("""
+echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|<' '/_name/{getline; print $3}')" | tr -d '\n'
+""")
             let tmpParts = tmp.components(separatedBy: "\n")
             return tmpParts
         }
@@ -95,10 +99,10 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
     
     
     static func getNumDisplays() -> Int {
-        return Int(try! call("system_profiler SPDisplaysDataType | grep -c Resolution") ) ?? 1
+        return Int(run("system_profiler SPDisplaysDataType | grep -c Resolution | tr -d '\n'")) ?? 0x0
     }
     static func hasBuiltInDisplay() -> Bool {
-        let tmp = (try? call("system_profiler SPDisplaysDataType | grep Built-In")) ?? ""
+        let tmp = run("system_profiler SPDisplaysDataType | grep Built-In | tr -d '\n'")
         return !(tmp == "")
     }
     
@@ -109,25 +113,25 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
         var opencore3: String
         var tmp: String
         var opencoreType: String
-        opencore1 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 59- | cut -c -1")) ?? "X"
-        opencore2 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 60- | cut -c -1")) ?? "X"
-        opencore3 = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 61- | cut -c -1")) ?? "X"
-        opencoreType = (try? call("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 55- | cut -c -3")) ?? "N/A"
-        if opencore1 == "0" {
-            if opencoreType == "REL" {
+        opencore1 = run("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 59- | cut -c -1 | tr -d '\n'")
+        opencore2 = run("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 60- | cut -c -1 | tr -d '\n'")
+        opencore3 = run("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 61- | cut -c -1 | tr -d '\n'")
+        opencoreType = run("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 55- | cut -c -3 | tr -d '\n'")
+        if opencore1.contains("0") {
+            if opencoreType.contains("REL") {
                 opencoreType = "(Release)"
-            } else if opencoreType == "N/A" {
+            } else if opencoreType.contains("N/A") {
                 opencoreType = ""
             } else {
                 opencoreType = "(Debug)"
             }
             tmp = "\(opencore1).\(opencore2).\(opencore3) \(opencoreType)"
-            print(tmp)
+            print(tmp, terminator: "")
             qHackintosh = true
         }
         if(opencore1 == opencore2 && opencore2 == opencore3 && opencore3 == "") {
             qHackintosh = false
-            print("No opencore thus hidden")
+            print("No opencore; hiding menu")
             return ""
         }
         return "\(opencore1).\(opencore2).\(opencore3) \(opencoreType)"
@@ -135,22 +139,22 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
     
     
     static func getSerialNumber() -> String {
-        return (try? call("system_profiler SPHardwareDataType | awk '/Serial/ {print $4}'")) ?? "Unknown Serial Number"
+        return run("system_profiler SPHardwareDataType | awk '/Serial/ {print $4}'")
     }
     
     static func getStartupDisk() -> String {
-        return (try? call("system_profiler SPSoftwareDataType | grep 'Boot Volume' | sed 's/.*: //'")) ?? "Unknown Startup Disk"
+        return run("system_profiler SPSoftwareDataType | grep 'Boot Volume' | sed 's/.*: //' | tr -d '\n'")
     }
     
     static func getGPU() -> String {
-        let graphicsTmp = (try? call("system_profiler SPDisplaysDataType | awk -F': ' '/^\\ *Chipset Model:/ {printf $2 \" \"}'")) ?? "Unknown GPU"
-        let graphicsRAM  = (try? call("system_profiler SPDisplaysDataType | grep VRAM | sed 's/.*: //'")) ?? "Unknown GPU RAM"
+        let graphicsTmp = run("system_profiler SPDisplaysDataType | awk -F': ' '/^\\ *Chipset Model:/ {printf $2 \" \"}'")
+        let graphicsRAM  = run("system_profiler SPDisplaysDataType | grep VRAM | sed 's/.*: //'")
         return "\(graphicsTmp)\(graphicsRAM)"
     }
     static func getDisp() -> String {
-        var tmp = (try? call("system_profiler SPDisplaysDataType | grep Resolution | sed 's/.*: //'")) ?? "Unknown Display"
+        var tmp = run("system_profiler SPDisplaysDataType | grep Resolution | sed 's/.*: //'")
         if tmp.contains("(QHD"){
-            tmp = (try? call("system_profiler SPDisplaysDataType | grep Resolution | sed 's/.*: //' | cut -c -11")) ?? "Unknown Display"
+            tmp = run("system_profiler SPDisplaysDataType | grep Resolution | sed 's/.*: //' | cut -c -11")
         }
         if(tmp.contains("\n")) {
             let displayID = tmp.firstIndex(of: "\n")!
@@ -161,35 +165,8 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
     }
     
     static func getRam() -> String {
-        let ram = (try? call("echo \"$(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024))\"")) ?? "RAM Error"
-        var ramReturn = "\(ram) GB"
-        let ramInfoCache = (try? call("system_profiler SPMemoryDataType")) ?? "RAM Error"
-        let ramSpeedTmp = (try? call("echo \"\(ramInfoCache)\" | grep Speed:")) ?? "RAM Error"
-        let ramSpeedID = ramSpeedTmp.firstIndex(of: "\n")!
-        let ramSpeedTrim1 = String(ramSpeedTmp[ramSpeedID...])
-        print(ramSpeedTrim1)
-        let ramSpeedID1 = ramSpeedTrim1.firstIndex(of: ":")!
-        let ramSpeedTrim2 = String(ramSpeedTrim1[ramSpeedID1...])
-        let ramSpeedID2 = ramSpeedTrim2.firstIndex(of: " ")!
-        var ramSpeedTrim3 = String(ramSpeedTrim2[ramSpeedID2...])
-        if(ramSpeedTrim3.contains("\n")) {
-            let ramID = ramSpeedTrim3.firstIndex(of: "\n")!
-            let ramTrimFinal = String(ramSpeedTrim3[..<ramID])
-            ramSpeedTrim3 = ramTrimFinal
-        }
-        ramReturn = "\(ramReturn)\(ramSpeedTrim3)"
-        let ramType = (try? call("echo \"\(ramInfoCache)\" | grep Type: | cut -c 16-")) ?? "RAM Error"
-        let ramTypeID = ramType.firstIndex(of: "\n")!
-        let ramTypeTrim = String(ramType[ramTypeID...])
-        let ramTypeID1 = ramTypeTrim.firstIndex(of: " ")!
-        let ramTypeTrim1 = String(ramTypeTrim[ramTypeID1...])
-        var ramTypeOfficial = ramTypeTrim1
-        if(ramTypeTrim1.contains("\n")) {
-            let ramTypeID2 = ramTypeTrim1.firstIndex(of: "\n")!
-            let ramTypeTrim2 = String(ramTypeTrim1[..<ramTypeID2])
-            ramTypeOfficial = ramTypeTrim2
-        }
-        ramReturn = "\(ramReturn)\(ramTypeOfficial)"
+        let ram = run("echo \"$(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024))\" | tr -d '\n'")
+        let ramReturn = "\(ram) GB"
         return ramReturn
     }
     
@@ -206,7 +183,7 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
     
     
     static func getOSnum() -> String {
-        return (try? call("sw_vers | grep ProductVersion | cut -c 17-")) ?? "macOS"
+        return run("sw_vers | grep ProductVersion | cut -c 17-")
     }
     static func setOSvers(osNumber: String) {
         if(osNumber.hasPrefix("12")) {
@@ -216,7 +193,7 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
             OSvers = macOSvers.BIG_SUR
         }
         else if (osNumber.hasPrefix("10")) {
-            let infoString1 = (try? call("sw_vers -productVersion | awk -F '.' '{print  $2}'")) ?? "15"
+            let infoString1 = run("sw_vers -productVersion | awk -F '.' '{print  $2}' | tr -d '\n'")
             switch(infoString1) {
             case "16":
                 OSvers = macOSvers.BIG_SUR
@@ -272,13 +249,13 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
     
     
     static func getOSBuildNum() -> String {
-        return (try? call("system_profiler SPSoftwareDataType | grep 'System Version' | cut -c 29-")) ?? ""
+        return run("system_profiler SPSoftwareDataType | grep 'System Version' | cut -c 29-")
     }
     
     
     static func getMacName() -> String {
         // from https://everymac.com/systems/by_capability/mac-specs-by-machine-model-machine-id.html
-        let infoString = (try? call("sysctl hw.model | cut -f2 -d \" \"")) ?? "Mac"
+        let infoString = run("sysctl hw.model | cut -f2 -d \" \" | tr -d '\n'")
         switch(infoString) {
         case "iMac4,1":
             builtInDisplaySize = 17
@@ -582,16 +559,29 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
         }
     }
     
-    
-    
-    
-    
     static func getCPU() -> String {
-        return (try? call("sysctl -n machdep.cpu.brand_string")) ?? "Unknown"
+        return run("sysctl -n machdep.cpu.brand_string")
     }
     
+    static func getStorageType() -> Bool {
+        let name = "\(HardwareCollector.getStartupDisk())"
+        let storageType = run("diskutil info \"\(name)\" | grep 'Solid State'")
+        if storageType.contains("Yes") {
+            return true
+        } else {
+            return false
+        }
+    }
     
-    
+    static func getStorageData() -> String {
+        let name = "\(HardwareCollector.getStartupDisk())"
+        let size = run("diskutil info \"\(name)\" | grep 'Disk Size' | sed 's/.*:                 //' | cut -f1 -d'(' | tr -d '\n'")
+        let available = run("diskutil info \"\(name)\" | Grep 'Container Free Space' | sed 's/.*:      //' | cut -f1 -d'(' | tr -d '\n'")
+        return """
+\(name)
+\(size)(\(available)Available)
+"""
+    }
     
 }
 

@@ -31,7 +31,7 @@ class ViewController: NSViewController {
     
     
     
-    var osNumber = (try? call("sw_vers | grep ProductVersion | cut -c 17-")) ?? "macOS"
+    var osNumber = run("sw_vers | grep ProductVersion | cut -c 17-")
     var modelID = "Mac"
     var ocLevel = "Unknown"
     var ocVersionID = "Version"
