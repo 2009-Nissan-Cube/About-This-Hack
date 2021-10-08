@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		114545F42710A6790017655D /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114545F32710A6790017655D /* Shell.swift */; };
+		114545F62710E3AE0017655D /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114545F52710E3AE0017655D /* Shell.swift */; };
 		115D921226D6F65500F5DF35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115D921126D6F65500F5DF35 /* AppDelegate.swift */; };
 		115D921426D6F65500F5DF35 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115D921326D6F65500F5DF35 /* ViewController.swift */; };
 		115D921626D6F65600F5DF35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 115D921526D6F65600F5DF35 /* Assets.xcassets */; };
@@ -22,7 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		114545F32710A6790017655D /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Shell.swift; path = ../../Shell.swift; sourceTree = "<group>"; };
+		114545F52710E3AE0017655D /* Shell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		115D920E26D6F65500F5DF35 /* About This Hack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "About This Hack.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		115D921126D6F65500F5DF35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		115D921326D6F65500F5DF35 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 				58B988D526D7ACD70092EC5B /* ViewControllerService.swift */,
 				58B988D626D7ACD70092EC5B /* ViewControllerStorage.swift */,
 				58B988D726D7ACD80092EC5B /* ViewControllerSupport.swift */,
-				114545F32710A6790017655D /* Shell.swift */,
+				114545F52710E3AE0017655D /* Shell.swift */,
 				115D922326D6F6AE00F5DF35 /* InsertExtension.swift */,
 				115D921526D6F65600F5DF35 /* Assets.xcassets */,
 				115D921A26D6F65600F5DF35 /* Info.plist */,
@@ -163,7 +163,7 @@
 				58B988D426D7ABFE0092EC5B /* ViewControllerDisplays.swift in Sources */,
 				589B667C26D7B694000509DC /* HardwareCollector.swift in Sources */,
 				C1BAD6FF26D70091008460FB /* WindowController.swift in Sources */,
-				114545F42710A6790017655D /* Shell.swift in Sources */,
+				114545F62710E3AE0017655D /* Shell.swift in Sources */,
 				115D922426D6F6AF00F5DF35 /* InsertExtension.swift in Sources */,
 				115D921226D6F65500F5DF35 /* AppDelegate.swift in Sources */,
 			);
