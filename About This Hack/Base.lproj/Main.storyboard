@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19150" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21179.7" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19150"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21179.7"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -129,8 +130,8 @@
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Jtn-pX-f66"/>
                                 <toolbarItem implicitItemIdentifier="88CCF72C-7D82-4627-B3A1-154D73ADC1B1" label="Custom View" paletteLabel="Custom View" autovalidates="NO" id="5iE-AH-Dbz">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="292" height="22"/>
-                                    <size key="maxSize" width="364" height="26"/>
+                                    <size key="minSize" width="278" height="22"/>
+                                    <size key="maxSize" width="364" height="28"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" springLoaded="YES" id="L8Y-nK-bWF">
                                         <rect key="frame" x="0.0" y="14" width="292" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -420,6 +421,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Orh-dQ-0M1">
+                                        <rect key="frame" x="124" y="5" width="333" height="125"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" alignment="center" title="Display" id="sJc-j1-qmk">
+                                            <font key="font" textStyle="headline" name=".SFNS-Bold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                     <imageView hidden="YES" focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PA5-nE-SAD">
                                         <rect key="frame" x="190" y="131" width="200" height="118"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -445,15 +455,6 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" focusRingType="exterior" alignment="left" imageScaling="proportionallyUpOrDown" image="NSComputer" id="aMw-hD-eDx"/>
                                     </imageView>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Orh-dQ-0M1">
-                                        <rect key="frame" x="185" y="44" width="211" height="86"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" alignment="center" title="Display" id="sJc-j1-qmk">
-                                            <font key="font" textStyle="headline" name=".SFNS-Bold"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
                                     <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SjI-Or-BeG">
                                         <rect key="frame" x="131" y="75" width="178" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -535,6 +536,17 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RfR-aa-wQA">
+                                        <rect key="frame" x="358" y="13" width="209" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" title="Open Displays Preferences..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="l4g-r5-TtG">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="openPrefsDispl:" target="cTB-fT-bUH" id="6ou-sL-KVh"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </view>
                         </subviews>
@@ -574,7 +586,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v7b-El-G0K">
-                                        <rect key="frame" x="221" y="226" width="139" height="28"/>
+                                        <rect key="frame" x="221" y="232" width="139" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Startup Disk" id="ehO-L1-X7O">
                                             <font key="font" metaFont="systemSemibold" size="24"/>
@@ -583,12 +595,12 @@
                                         </textFieldCell>
                                     </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8kv-X3-qib">
-                                        <rect key="frame" x="220" y="62" width="140" height="140"/>
+                                        <rect key="frame" x="220" y="84" width="140" height="140"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="HDD" id="ErU-rD-tJ2"/>
                                     </imageView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CRL-U4-0CV">
-                                        <rect key="frame" x="-2" y="0.0" width="584" height="54"/>
+                                        <rect key="frame" x="-2" y="22" width="584" height="54"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Storage" id="G5x-4p-VmO">
                                             <font key="font" metaFont="system" size="14"/>
@@ -596,6 +608,14 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
+                                    <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" drawsTieredCapacityLevels="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y6J-CA-TEe">
+                                        <rect key="frame" x="90" y="7" width="401" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <levelIndicatorCell key="cell" alignment="left" doubleValue="500000" maxValue="1000000" warningValue="600000" criticalValue="800000" levelIndicatorStyle="continuousCapacity" id="7TX-47-UbS"/>
+                                        <color key="fillColor" name="AccentColor"/>
+                                        <color key="warningFillColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="criticalFillColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                    </levelIndicator>
                                 </subviews>
                             </view>
                         </subviews>
@@ -603,6 +623,7 @@
                     <connections>
                         <outlet property="osPrefix" destination="v7b-El-G0K" id="bIz-mN-P8f"/>
                         <outlet property="startupDiskImage" destination="8kv-X3-qib" id="2pm-KB-CA6"/>
+                        <outlet property="storageAmount" destination="7TX-47-UbS" id="uQM-aX-oae"/>
                         <outlet property="storageValue" destination="CRL-U4-0CV" id="fk9-rq-ubS"/>
                     </connections>
                 </viewController>
@@ -749,5 +770,8 @@
         <image name="NSActionTemplate" width="15" height="15"/>
         <image name="NSComputer" width="32" height="32"/>
         <image name="safari" catalog="system" width="15" height="15"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

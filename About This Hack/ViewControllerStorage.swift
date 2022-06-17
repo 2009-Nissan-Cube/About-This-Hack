@@ -13,6 +13,8 @@ class ViewControllerStorage: NSViewController {
     @IBOutlet weak var startupDiskImage: NSImageView!
     @IBOutlet weak var storageValue: NSTextField!
     
+    
+    @IBOutlet weak var storageAmount: NSLevelIndicatorCell!
     override func viewDidLoad() {
         super.viewDidLoad()
         start()
@@ -39,6 +41,7 @@ class ViewControllerStorage: NSViewController {
         }
         
         // Text
-        storageValue.stringValue = "\(HardwareCollector.getStorageData())"
+        storageValue.stringValue = HardwareCollector.storageData
+        storageAmount.doubleValue = HardwareCollector.storagePercent*1000000
     }
 }

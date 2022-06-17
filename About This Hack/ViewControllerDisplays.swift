@@ -36,6 +36,9 @@ class ViewControllerDisplays: NSViewController {
     @IBOutlet weak var DisplayNameR2: NSTextField!
 
     
+    @IBAction func openPrefsDispl(_ sender: Any) {
+            run("open /System/Library/PreferencePanes/Displays.prefPane")
+    }
     
     
     override func viewDidLoad() {

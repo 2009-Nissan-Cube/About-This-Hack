@@ -31,7 +31,8 @@ class HardwareCollector {
     static var builtInDisplaySize: Float = 0
     static var storageType: Bool = false
     static var storageData: String = ""
-    
+    static var storagePercent: Double = 0.0
+
     
     static func getAllData() {
         if (dataHasBeenSet) {return}
@@ -57,7 +58,8 @@ class HardwareCollector {
         displayNames = getDisplayNames()
         // getDisplayDiagonal() Having some issues, removing for now
         storageType = getStorageType()
-        storageData = getStorageData()
+        storageData = getStorageData()[0]
+        storagePercent = Double(getStorageData()[1])!
         
         dataHasBeenSet = true
     }
@@ -70,7 +72,9 @@ class HardwareCollector {
     static func getDisplayRess() -> [String] {
         let numDispl = getNumDisplays()
         if numDispl == 1 {
-            return [run("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-") ]
+            return [run("""
+echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 _spdisplays_resolution | grep string | cut -c 15- | cut -f1 -d"<")"
+""") ]
         }
         else if (numDispl == 2) {
             let tmp = run("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")
@@ -84,8 +88,10 @@ class HardwareCollector {
         let numDispl = getNumDisplays()
         if numDispl == 1 {
             return [run("""
+echo "$(system_profiler SPDisplaysDataType | grep "Display Type" | cut -c 25-)"
 echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|<' '/_name/{getline; print $3}')" | tr -d '\n'
-""")]
+""")] //
+
         }
         else if (numDispl == 2) {
             let tmp = run("""
@@ -573,15 +579,22 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
         }
     }
     
-    static func getStorageData() -> String {
+    static func getStorageData() -> [String] {
         let name = "\(HardwareCollector.getStartupDisk())"
         let size = run("diskutil info \"\(name)\" | grep 'Disk Size' | sed 's/.*:                 //' | cut -f1 -d'(' | tr -d '\n'")
         let available = run("diskutil info \"\(name)\" | Grep 'Container Free Space' | sed 's/.*:      //' | cut -f1 -d'(' | tr -d '\n'")
-        return """
+        let sizeTrimmed = run("echo \"\(size)\" | cut -f1 -d\" \"").dropLast(1)
+        let availableTrimmed = run("echo \"\(available)\" | cut -f1 -d\" \"").dropLast(1)
+        //print("Size: \(sizeTrimmed)")
+        //print("Available: \(availableTrimmed)")
+        var percent: Double = Double(availableTrimmed)! / Double(sizeTrimmed)!
+        //print("%: \(percent)")
+        return ["""
 \(name)
 \(size)(\(available)Available)
-"""
+""",String(percent)]
     }
+    
     
 }
 
