@@ -354,6 +354,10 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
         case "iMacPro1,1":
             builtInDisplaySize = 27
             return "iMac Pro (2017)"
+            
+        case "ADP3,2":
+            macType = .DESKTOP
+            return "Developer Transition Kit (ARM)"
         
         case "Macmini3,1":
             macType = .DESKTOP
@@ -397,6 +401,10 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
         case "MacPro7,1":
             macType = .DESKTOP
             return "Mac Pro (2019)"
+            
+        case "Mac13,1","Mac13,2":
+            macType = .DESKTOP
+            return "Mac Studio (2022)"
             
         case "MacBook5,1":
             builtInDisplaySize = 13
@@ -556,6 +564,7 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
         case "MacBookPro8,3":
             builtInDisplaySize = 17
             return "MacBook Pro (17-inch, Late 2011)"
+       
         case "Unkown","Mac":
             macType = .DESKTOP
             return "Hackintosh Extreme Plus" // hehe just for fun
