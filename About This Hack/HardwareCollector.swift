@@ -181,7 +181,7 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
         switch OSvers {
         case .MAVERICKS,.YOSEMITE,.EL_CAPITAN:
             return "OS X"
-        case .SIERRA,.HIGH_SIERRA,.MOJAVE,.CATALINA,.BIG_SUR,.MONTEREY,.macOS:
+        case .SIERRA,.HIGH_SIERRA,.MOJAVE,.CATALINA,.BIG_SUR,.MONTEREY,.VENTURA,.macOS:
             return "macOS"
         }
     }
@@ -191,15 +191,17 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
         return run("sw_vers | grep ProductVersion | cut -c 17-")
     }
     static func setOSvers(osNumber: String) {
-        if(osNumber.hasPrefix("12")) {
+        if (osNumber.hasPrefix("13")) {
+            OSvers = macOSvers.VENTURA
+        }
+        else if (osNumber.hasPrefix("12")) {
             OSvers = macOSvers.MONTEREY
         }
-        else if(osNumber.hasPrefix("11")) {
+        else if (osNumber.hasPrefix("11")) {
             OSvers = macOSvers.BIG_SUR
         }
         else if (osNumber.hasPrefix("10")) {
-            let infoString1 = run("sw_vers -productVersion | awk -F '.' '{print  $2}' | tr -d '\n'")
-            switch(infoString1) {
+            switch(osNumber) {
             case "16":
                 OSvers = macOSvers.BIG_SUR
             case "15":
@@ -247,6 +249,8 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
             return "Big Sur"
         case .MONTEREY:
             return "Monterey"
+        case .VENTURA:
+            return "Ventura"
         case .macOS:
             return ""
         }
@@ -262,6 +266,8 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
         // from https://everymac.com/systems/by_capability/mac-specs-by-machine-model-machine-id.html
         let infoString = run("sysctl hw.model | cut -f2 -d \" \" | tr -d '\n'")
         switch(infoString) {
+            
+        // iMacs
         case "iMac4,1":
             builtInDisplaySize = 17
             return "iMac 17-Inch \"Core Duo\" 1.83"
@@ -350,15 +356,17 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
             builtInDisplaySize = 24
             return "iMac (24-inch, M1, 2021)"
             
-        
+        // iMac Pros
         case "iMacPro1,1":
             builtInDisplaySize = 27
             return "iMac Pro (2017)"
             
+        // Developer Transition Kits
         case "ADP3,2":
             macType = .DESKTOP
             return "Developer Transition Kit (ARM)"
         
+        // Mac Minis
         case "Macmini3,1":
             macType = .DESKTOP
             return "Mac Mini (Late 2009)"
@@ -386,6 +394,7 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
             macType = .DESKTOP
             return "Mac Mini (M1, 2020)"
             
+        // Mac Pros
         case "MacPro3,1":
             macType = .DESKTOP
             return "Mac Pro (2008)"
@@ -401,11 +410,13 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
         case "MacPro7,1":
             macType = .DESKTOP
             return "Mac Pro (2019)"
-            
+        
+        // Mac Studios
         case "Mac13,1","Mac13,2":
             macType = .DESKTOP
             return "Mac Studio (2022)"
-            
+        
+        // MacBooks
         case "MacBook5,1":
             builtInDisplaySize = 13
             return "MacBook (Original, Unibody)"
@@ -427,6 +438,8 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
         case "MacBook10,1":
             builtInDisplaySize = 13
             return "MacBook (Mid 2017)"
+            
+        // MacBook Airs
         case "MacBookAir1,1":
             builtInDisplaySize = 13
             return "MacBook Air (2008, Original)"
@@ -475,7 +488,9 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
         case "MacBookAir10,1":
             builtInDisplaySize = 13
             return "MacBook Air (13-inch, M1, 2020)"
-            
+        
+        // MacBook Pros
+        // 13-inch Models
         case "MacBookPro5,5":
             builtInDisplaySize = 13
             return "MacBook Pro (13-inch, 2009)"
@@ -525,6 +540,12 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
             builtInDisplaySize = 13
             return "MacBook Pro (13-inch, M1, 2020)"
             
+        // 14-inch Models
+        case "MacBookPro18,3","MacBookPro18,4":
+            builtInDisplaySize = 14
+            return "MacBook Pro (14-inch, 2021)"
+            
+        // 15-inch Models
         case "MacBookPro6,2":
             builtInDisplaySize = 15
             return "MacBook Pro (15-inch, Mid 2010)"
@@ -558,16 +579,24 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
         case "MacBookPro15,3":
             builtInDisplaySize = 15
             return "MacBook Pro (Retina Vega Graphics, 15-inch, Touch ID/Bar, 2018/2019)"
+        
+        // 16-inch Models
         case "MacBookPro16,1":
             builtInDisplaySize = 16
             return "MacBook Pro (Retina, 16-inch, Touch ID/Bar, 2019)"
+        case "MacBookPro18,1","MacBookPro18,2":
+            builtInDisplaySize = 16
+            return "MacBook Pro (16-inch, 2021)"
+        
+        // 17-inch Models
         case "MacBookPro8,3":
             builtInDisplaySize = 17
             return "MacBook Pro (17-inch, Late 2011)"
        
-        case "Unkown","Mac":
+        // In the rare case that the Mac is not detected
+        case "Unknown","Mac":
             macType = .DESKTOP
-            return "Hackintosh Extreme Plus" // hehe just for fun
+            return "Mac (Unknown)"
         default:
             return "Mac"
         }
@@ -616,6 +645,7 @@ enum macOSvers {
     case CATALINA
     case BIG_SUR
     case MONTEREY
+    case VENTURA
     case macOS
 }
 enum macType {
