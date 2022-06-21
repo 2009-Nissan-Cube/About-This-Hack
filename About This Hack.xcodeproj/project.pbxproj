@@ -18,6 +18,8 @@
 		58B988D826D7ACD80092EC5B /* ViewControllerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B988D526D7ACD70092EC5B /* ViewControllerService.swift */; };
 		58B988D926D7ACD80092EC5B /* ViewControllerStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B988D626D7ACD70092EC5B /* ViewControllerStorage.swift */; };
 		58B988DA26D7ACD80092EC5B /* ViewControllerSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B988D726D7ACD80092EC5B /* ViewControllerSupport.swift */; };
+		72E686C12862406900B8316D /* UpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E686C02862406900B8316D /* UpdateViewController.swift */; };
+		72E686C32862453700B8316D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E686C22862453700B8316D /* Reachability.swift */; };
 		C1BAD6FF26D70091008460FB /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BAD6FE26D70091008460FB /* WindowController.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +38,8 @@
 		58B988D526D7ACD70092EC5B /* ViewControllerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerService.swift; sourceTree = "<group>"; };
 		58B988D626D7ACD70092EC5B /* ViewControllerStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerStorage.swift; sourceTree = "<group>"; };
 		58B988D726D7ACD80092EC5B /* ViewControllerSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSupport.swift; sourceTree = "<group>"; };
+		72E686C02862406900B8316D /* UpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateViewController.swift; sourceTree = "<group>"; };
+		72E686C22862453700B8316D /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		C1BAD6FE26D70091008460FB /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +87,8 @@
 				115D921526D6F65600F5DF35 /* Assets.xcassets */,
 				115D921A26D6F65600F5DF35 /* Info.plist */,
 				115D921B26D6F65600F5DF35 /* About_This_Hack.entitlements */,
+				72E686C02862406900B8316D /* UpdateViewController.swift */,
+				72E686C22862453700B8316D /* Reachability.swift */,
 			);
 			path = "About This Hack";
 			sourceTree = "<group>";
@@ -160,7 +166,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72E686C12862406900B8316D /* UpdateViewController.swift in Sources */,
 				115D921426D6F65500F5DF35 /* ViewController.swift in Sources */,
+				72E686C32862453700B8316D /* Reachability.swift in Sources */,
 				58B988D826D7ACD80092EC5B /* ViewControllerService.swift in Sources */,
 				58B988D926D7ACD80092EC5B /* ViewControllerStorage.swift in Sources */,
 				58B988DA26D7ACD80092EC5B /* ViewControllerSupport.swift in Sources */,
