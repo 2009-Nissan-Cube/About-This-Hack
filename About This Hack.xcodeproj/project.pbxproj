@@ -103,6 +103,8 @@
 			dependencies = (
 			);
 			name = "About This Hack";
+			packageProductDependencies = (
+			);
 			productName = "About This Hack";
 			productReference = 115D920E26D6F65500F5DF35 /* About This Hack.app */;
 			productType = "com.apple.product-type.application";
@@ -130,6 +132,8 @@
 				Base,
 			);
 			mainGroup = 115D920526D6F65500F5DF35;
+			packageReferences = (
+			);
 			productRefGroup = 115D920F26D6F65500F5DF35 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

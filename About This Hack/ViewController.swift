@@ -73,6 +73,7 @@ class ViewController: NSViewController {
             break
         case .HIGH_SIERRA:
             picture.image = NSImage(named: "High Sierra")
+            break
         case .SIERRA:
             picture.image = NSImage(named: "Sierra")
             break
