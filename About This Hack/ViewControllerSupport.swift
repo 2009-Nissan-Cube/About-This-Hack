@@ -38,12 +38,6 @@ class ViewControllerSupport: NSViewController {
             print("Browser Successfully opened")
         }
     }
-    @IBAction func HackCafeDiscordPress(_ sender: NSButton) {
-        let url = URL(string: "https://discord.gg/5AQjAnNKYd")!
-        if NSWorkspace.shared.open(url) {
-            print("Browser Successfully opened")
-        }
-    }
     @IBAction func MacBasicsPress(_ sender: NSButton) {
         let url = URL(string: "https://help.apple.com/macos/big-sur/mac-basics/")!
         if NSWorkspace.shared.open(url) {

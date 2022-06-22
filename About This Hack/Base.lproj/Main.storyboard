@@ -643,35 +643,41 @@
                                 <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Npq-wh-d6q">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Npq-wh-d6q">
                                         <rect key="frame" x="244" y="226" width="92" height="28"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="88" id="bLe-aG-F7H"/>
+                                        </constraints>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Support" id="9IN-h0-bOt">
                                             <font key="font" metaFont="systemSemibold" size="24"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Tm-z8-QVR">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Tm-z8-QVR">
                                         <rect key="frame" x="73" y="198" width="84" height="16"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="uRT-qh-nsf"/>
+                                        </constraints>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="macOS Help" id="qaK-5G-98g">
                                             <font key="font" textStyle="headline" name=".SFNS-Bold"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GrT-Zi-ddp">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GrT-Zi-ddp">
                                         <rect key="frame" x="425" y="198" width="101" height="16"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="97" id="q9D-DH-cpF"/>
+                                        </constraints>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Hardware Help" id="HuZ-JY-TSx">
                                             <font key="font" textStyle="headline" name=".SFNS-Bold"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dtY-jd-Ip0">
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dtY-jd-Ip0">
                                         <rect key="frame" x="47" y="168" width="136" height="18"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="inline" title="macOS User Guide " bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="ttV-6r-KWU">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
@@ -701,7 +707,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lIP-i4-RkP">
-                                        <rect key="frame" x="412" y="139" width="127" height="18"/>
+                                        <rect key="frame" x="412" y="138" width="127" height="18"/>
                                         <buttonCell key="cell" type="inline" title="Hackintosh Guide" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="6g6-V5-YHx">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
@@ -710,8 +716,8 @@
                                             <action selector="HackintoshPress:" target="Nau-hC-e0F" id="JTO-u8-u5d"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q27-be-TLE">
-                                        <rect key="frame" x="42" y="139" width="147" height="18"/>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q27-be-TLE">
+                                        <rect key="frame" x="42" y="139" width="146" height="18"/>
                                         <buttonCell key="cell" type="inline" title="Whats New in macOS" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="OTr-vA-9vX">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
@@ -720,9 +726,8 @@
                                             <action selector="whatsNewInMacOSPress:" target="Nau-hC-e0F" id="pMA-xu-Mwi"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ise-M2-RUF">
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ise-M2-RUF">
                                         <rect key="frame" x="69" y="109" width="92" height="18"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="inline" title="Mac Basics" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="iVE-To-f0E">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
@@ -731,27 +736,28 @@
                                             <action selector="MacBasicsPress:" target="Nau-hC-e0F" id="aS2-sg-mZl"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ovu-bc-0Xj">
-                                        <rect key="frame" x="207" y="44" width="167" height="18"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Hack Café Discord" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="x4f-S1-MjV">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="smallSystemBold"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="HackCafeDiscordPress:" target="Nau-hC-e0F" id="cUB-wH-wck"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="lIP-i4-RkP" firstAttribute="centerX" secondItem="5OQ-us-odM" secondAttribute="centerX" id="21G-fz-WPI"/>
-                                    <constraint firstItem="lIP-i4-RkP" firstAttribute="centerX" secondItem="0aH-Ip-0jT" secondAttribute="centerX" id="6JU-T1-YTU"/>
-                                    <constraint firstItem="lIP-i4-RkP" firstAttribute="top" secondItem="5OQ-us-odM" secondAttribute="bottom" constant="11" id="7g8-j9-6L1"/>
-                                    <constraint firstItem="lIP-i4-RkP" firstAttribute="top" secondItem="geq-4f-G90" secondAttribute="top" constant="123" id="Gzr-bq-md7"/>
-                                    <constraint firstItem="lIP-i4-RkP" firstAttribute="baseline" secondItem="q27-be-TLE" secondAttribute="baseline" id="IP8-dO-DQe"/>
-                                    <constraint firstItem="lIP-i4-RkP" firstAttribute="centerX" secondItem="GrT-Zi-ddp" secondAttribute="centerX" id="Zne-Xd-eZo"/>
-                                    <constraint firstAttribute="trailing" secondItem="lIP-i4-RkP" secondAttribute="trailing" constant="41" id="aEn-e9-OYU"/>
-                                    <constraint firstItem="0aH-Ip-0jT" firstAttribute="top" secondItem="lIP-i4-RkP" secondAttribute="bottom" constant="12" id="fLx-fv-ewk"/>
+                                    <constraint firstItem="GrT-Zi-ddp" firstAttribute="centerX" secondItem="5OQ-us-odM" secondAttribute="centerX" id="0s4-YD-S2i"/>
+                                    <constraint firstItem="5OQ-us-odM" firstAttribute="centerX" secondItem="lIP-i4-RkP" secondAttribute="centerX" id="4Mg-6O-FA7"/>
+                                    <constraint firstItem="q27-be-TLE" firstAttribute="centerX" secondItem="Ise-M2-RUF" secondAttribute="centerX" id="4PU-dy-blQ"/>
+                                    <constraint firstItem="Ise-M2-RUF" firstAttribute="baseline" secondItem="0aH-Ip-0jT" secondAttribute="baseline" id="5ME-An-jVb"/>
+                                    <constraint firstAttribute="trailing" secondItem="GrT-Zi-ddp" secondAttribute="trailing" constant="56" id="9Fc-9o-OeT"/>
+                                    <constraint firstItem="q27-be-TLE" firstAttribute="leading" secondItem="geq-4f-G90" secondAttribute="leading" constant="42" id="EOy-VG-3zk"/>
+                                    <constraint firstAttribute="trailing" secondItem="0aH-Ip-0jT" secondAttribute="trailing" constant="48" id="FnD-vV-WjG"/>
+                                    <constraint firstItem="Npq-wh-d6q" firstAttribute="top" secondItem="geq-4f-G90" secondAttribute="top" constant="26" id="HX6-Wf-jkc"/>
+                                    <constraint firstItem="dtY-jd-Ip0" firstAttribute="baseline" secondItem="5OQ-us-odM" secondAttribute="baseline" id="K0Y-Cg-qlq"/>
+                                    <constraint firstItem="1Tm-z8-QVR" firstAttribute="leading" secondItem="geq-4f-G90" secondAttribute="leading" constant="75" id="Mt9-1N-wlM"/>
+                                    <constraint firstItem="lIP-i4-RkP" firstAttribute="centerX" secondItem="0aH-Ip-0jT" secondAttribute="centerX" id="Mtr-y7-kds"/>
+                                    <constraint firstItem="dtY-jd-Ip0" firstAttribute="top" secondItem="1Tm-z8-QVR" secondAttribute="bottom" constant="12" id="Pf8-3y-jZK"/>
+                                    <constraint firstItem="dtY-jd-Ip0" firstAttribute="centerX" secondItem="q27-be-TLE" secondAttribute="centerX" id="VU8-ji-0jh"/>
+                                    <constraint firstItem="1Tm-z8-QVR" firstAttribute="centerX" secondItem="dtY-jd-Ip0" secondAttribute="centerX" id="fQ7-vC-2iW"/>
+                                    <constraint firstItem="0aH-Ip-0jT" firstAttribute="top" secondItem="lIP-i4-RkP" secondAttribute="bottom" constant="11" id="jNS-Uu-jSP"/>
+                                    <constraint firstItem="1Tm-z8-QVR" firstAttribute="top" secondItem="geq-4f-G90" secondAttribute="top" constant="66" id="kTD-lv-sO9"/>
+                                    <constraint firstItem="1Tm-z8-QVR" firstAttribute="baseline" secondItem="GrT-Zi-ddp" secondAttribute="baseline" id="lUM-C1-aLP"/>
+                                    <constraint firstItem="Npq-wh-d6q" firstAttribute="centerX" secondItem="geq-4f-G90" secondAttribute="centerX" id="p88-3y-esW"/>
+                                    <constraint firstItem="Ise-M2-RUF" firstAttribute="top" secondItem="q27-be-TLE" secondAttribute="bottom" constant="12" id="rHG-lw-uCb"/>
+                                    <constraint firstItem="q27-be-TLE" firstAttribute="top" secondItem="dtY-jd-Ip0" secondAttribute="bottom" constant="11" id="rJe-3g-HRU"/>
                                 </constraints>
                             </view>
                         </subviews>

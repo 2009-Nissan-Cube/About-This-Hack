@@ -586,7 +586,7 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
         let availableTrimmed = run("echo \"\(available)\" | cut -f1 -d\" \"").dropLast(1)
         //print("Size: \(sizeTrimmed)")
         //print("Available: \(availableTrimmed)")
-        var percent: Double = Double(availableTrimmed)! / Double(sizeTrimmed)!
+        let percent: Double = Double(availableTrimmed)! / Double(sizeTrimmed)!
         //print("%: \(percent)")
         return ["""
 \(name)
