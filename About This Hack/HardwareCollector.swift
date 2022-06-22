@@ -93,7 +93,10 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
 
         }
         else if (numDispl == 2) {
+            print("2 displays found")
             let tmp = run("""
+echo "$(system_profiler SPDisplaysDataType | grep "Display Type" | cut -c 25-)"
+echo "$(system_profiler SPDisplaysDataType | grep "LG" | cut -c 9-)"
 echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|<' '/_name/{getline; print $3}')" | tr -d '\n'
 """)
             let tmpParts = tmp.components(separatedBy: "\n")
@@ -624,7 +627,13 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
         let availableTrimmed = run("echo \"\(available)\" | cut -f1 -d\" \"").dropLast(1)
         //print("Size: \(sizeTrimmed)")
         //print("Available: \(availableTrimmed)")
-        let percent: Double = Double(availableTrimmed)! / Double(sizeTrimmed)!
+        var percent: Double = Double(availableTrimmed)! / Double(sizeTrimmed)!
+        if(percent > 1.0) {
+            percent = percent/1024.0 // GB instead of TB
+            if(percent > 1.0) {
+                percent = percent/1024.0 // MB instead of TB
+            }
+        }
         //print("%: \(percent)")
         return ["""
 \(name)
