@@ -1,7 +1,7 @@
 # About-This-Hack
 A simple application to view your exact hardware on macOS. Similar to About This Mac, but with more features, including AMD Processor Support, display resolution, and more! Works on both Hackintoshes *and* real Macs! <br>
-![M1 Max Monterey](https://user-images.githubusercontent.com/94565160/175033768-94e2be0d-0171-44bc-bf9a-332c1d0d537c.png)
-![Hackintosh Ventura](https://user-images.githubusercontent.com/94565160/175034194-1f2daa81-354b-4aeb-b2a3-0f83165621eb.png)
+![M1 Max Monterey](https://user-images.githubusercontent.com/94565160/175033768-94e2be0d-0171-44bc-bf9a-332c1d0d537c.png =692x458)
+![Hackintosh Ventura](https://user-images.githubusercontent.com/94565160/175034194-1f2daa81-354b-4aeb-b2a3-0f83165621eb.png =692x458)
 
 # Supported OS's
 - **10.11 El Capitan and newer** *(Older OS support is a WIP as Swift is bad for backwards compatibility)*
