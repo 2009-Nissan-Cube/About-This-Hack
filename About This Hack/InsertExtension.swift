@@ -2,7 +2,6 @@
 //  InsertExtension.swift
 //  InsertExtension
 //
-//  Created by 8itCat on 8/24/21.
 //
 
 import Foundation

@@ -2,7 +2,6 @@
 //  ViewControllerDisplays.swift
 //  ViewControllerDisplays
 //
-//  Created by Marc Nich on 8/26/21.
 //
 
 import Foundation

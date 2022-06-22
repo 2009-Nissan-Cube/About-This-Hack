@@ -2,10 +2,7 @@
 //  ViewController.swift
 //  About This Hack
 //
-//  Created by 8itCat on 8/20/21.
 //
-
-// NOTE: This code is horribly unoptimized. If you find anything at all that can make it better, please change it. This is my first time making a storyboard app this complicated.
 
 import Cocoa
 

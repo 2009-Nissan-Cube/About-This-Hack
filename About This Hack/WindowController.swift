@@ -2,8 +2,6 @@
 //  WindowController.swift
 //  NSTabView
 //
-//  Created by Szabolcs Toth on 11/19/18.
-//  Copyright © 2018 purzelbaum.hu. All rights reserved.
 //
 
 import Cocoa

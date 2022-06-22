@@ -2,7 +2,6 @@
 //  HardwareCollector.swift
 //  HardwareCollector
 //
-//  Created by Marc Nich on 8/26/21.
 //
 
 import Foundation
