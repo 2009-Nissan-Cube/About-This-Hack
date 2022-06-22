@@ -45,11 +45,11 @@
                                 <rect key="frame" x="163" y="16" width="252" height="163"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <view key="contentView" id="kPt-DX-5gX">
-                                    <rect key="frame" x="3" y="3" width="246" height="157"/>
+                                    <rect key="frame" x="4" y="5" width="244" height="155"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8MY-Rn-qTd">
-                                            <rect key="frame" x="27" y="127" width="193" height="22"/>
+                                            <rect key="frame" x="27" y="125" width="193" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Check For Updates" id="8ef-5A-q55">
                                                 <font key="font" textStyle="headline" name=".SFNS-Bold"/>
@@ -58,7 +58,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GYS-V8-tyY">
-                                            <rect key="frame" x="6" y="103" width="103" height="16"/>
+                                            <rect key="frame" x="6" y="101" width="103" height="16"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Current Version:" id="1dg-eI-SZD">
                                                 <font key="font" metaFont="system"/>
@@ -67,7 +67,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ILT-Lw-r83">
-                                            <rect key="frame" x="6" y="79" width="103" height="16"/>
+                                            <rect key="frame" x="6" y="77" width="103" height="16"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Latest Version:" id="lqK-la-oRz">
                                                 <font key="font" metaFont="system"/>
@@ -76,7 +76,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aTR-7j-8BS">
-                                            <rect key="frame" x="112" y="103" width="33" height="16"/>
+                                            <rect key="frame" x="112" y="101" width="33" height="16"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="0.2.1" id="Xy1-w0-RJm">
                                                 <font key="font" metaFont="system"/>
@@ -85,7 +85,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Wt-Yv-HUs">
-                                            <rect key="frame" x="112" y="79" width="33" height="16"/>
+                                            <rect key="frame" x="112" y="77" width="33" height="16"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" id="bha-QY-kuz">
                                                 <font key="font" metaFont="system"/>
@@ -94,7 +94,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tXe-aF-GRh">
-                                            <rect key="frame" x="28" y="44" width="191" height="32"/>
+                                            <rect key="frame" x="28" y="42" width="191" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="push" title="Download New Updates..." bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VeG-VN-cae">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -105,16 +105,16 @@
                                             </connections>
                                         </button>
                                         <progressIndicator fixedFrame="YES" maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="NHp-SR-tEO">
-                                            <rect key="frame" x="8" y="19" width="231" height="20"/>
+                                            <rect key="frame" x="8" y="17" width="231" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         </progressIndicator>
                                         <imageView toolTip="Status: Online" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HO1-fC-otK">
-                                            <rect key="frame" x="211" y="127" width="28" height="22"/>
+                                            <rect key="frame" x="211" y="125" width="28" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusAvailable" id="zMR-QZ-u6i"/>
                                         </imageView>
                                         <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x9q-SW-RbU">
-                                            <rect key="frame" x="18" y="7" width="210" height="36"/>
+                                            <rect key="frame" x="18" y="5" width="210" height="36"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" alignment="center" title="OFFLINE: Please connect to the Internet to check for updates." id="SLf-Dm-sut">
                                                 <font key="font" metaFont="system"/>
@@ -123,7 +123,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2dK-QP-W1c">
-                                            <rect key="frame" x="1" y="122" width="38" height="32"/>
+                                            <rect key="frame" x="1" y="120" width="38" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="push" bezelStyle="rounded" image="arrow.counterclockwise" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CAc-bG-bwh">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -174,9 +174,6 @@
                                         </menuItem>
                                         <menuItem title="Check for updates..." id="pq4-KE-Q0r">
                                             <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <segue destination="7c3-hG-b06" kind="modal" id="MnD-YX-6jq"/>
-                                            </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
                                         <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
@@ -260,7 +257,11 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="About_This_Hack" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="About_This_Hack" customModuleProvider="target">
+                    <connections>
+                        <outlet property="checkForUpdatesMenuItem" destination="pq4-KE-Q0r" id="0hY-Sk-vdq"/>
+                    </connections>
+                </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
