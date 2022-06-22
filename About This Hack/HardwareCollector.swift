@@ -491,6 +491,9 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|
         case "MacBookAir10,1":
             builtInDisplaySize = 13
             return "MacBook Air (13-inch, M1, 2020)"
+        case "MacBookAir11,1": // just a guess
+            builtInDisplaySize = 13
+            return "MacBook Air (13-inch, M2, 2022)"
         
         // MacBook Pros
         // 13-inch Models
