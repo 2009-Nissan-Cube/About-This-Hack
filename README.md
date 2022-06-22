@@ -3,6 +3,7 @@ A simple application to view your exact hardware on macOS. Similar to About This
 
 
 <img width="692" alt="M1 iMac Monterey" src="https://user-images.githubusercontent.com/71262643/175041661-246d1602-7e26-4631-ab9c-a37c785c87db.png">
+
 ![Hackintosh Ventura](https://user-images.githubusercontent.com/94565160/175034194-1f2daa81-354b-4aeb-b2a3-0f83165621eb.png)
 
 # Supported OS's
