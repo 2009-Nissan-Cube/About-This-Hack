@@ -1,0 +1,225 @@
+
+/* Class = "NSMenuItem"; title = "About This Hack"; ObjectID = "1Xt-HY-uBw"; */
+"1Xt-HY-uBw.title" = "About This Hack";
+
+/* Class = "NSTextFieldCell"; title = "Current Version:"; ObjectID = "1dg-eI-SZD"; */
+"1dg-eI-SZD.title" = "Current Version:";
+
+/* Class = "NSTextFieldCell"; title = "Resolution"; ObjectID = "2z4-hu-X9K"; */
+"2z4-hu-X9K.title" = "Resolution";
+
+/* Class = "NSMenuItem"; title = "Quit About This Hack"; ObjectID = "4sb-4s-VLi"; */
+"4sb-4s-VLi.title" = "Quit About This Hack";
+
+/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "5HS-Mc-tod"; */
+"5HS-Mc-tod.title" = "Zoom";
+
+/* Class = "NSToolbarItem"; label = "Custom View"; ObjectID = "5iE-AH-Dbz"; */
+"5iE-AH-Dbz.label" = "Custom View";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Custom View"; ObjectID = "5iE-AH-Dbz"; */
+"5iE-AH-Dbz.paletteLabel" = "Custom View";
+
+/* Class = "NSMenuItem"; title = "About This Hack"; ObjectID = "5kV-Vb-QxS"; */
+"5kV-Vb-QxS.title" = "About This Hack";
+
+/* Class = "NSButtonCell"; title = "Hackintosh Guide"; ObjectID = "6g6-V5-YHx"; */
+"6g6-V5-YHx.title" = "Hackintosh Guide";
+
+/* Class = "NSTextFieldCell"; title = "Check For Updates"; ObjectID = "8ef-5A-q55"; */
+"8ef-5A-q55.title" = "Check For Updates";
+
+/* Class = "NSTextFieldCell"; title = "Support"; ObjectID = "9IN-h0-bOt"; */
+"9IN-h0-bOt.title" = "Support";
+
+/* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
+"AYu-sK-qS6.title" = "Main Menu";
+
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
+"BOF-NM-1cW.title" = "Preferences…";
+
+/* Class = "NSMenuItem"; title = "Window"; ObjectID = "CGo-wv-2KW"; */
+"CGo-wv-2KW.title" = "Window";
+
+/* Class = "NSTextFieldCell"; title = "Display"; ObjectID = "Cti-yT-IUK"; */
+"Cti-yT-IUK.title" = "Display";
+
+/* Class = "NSMenu"; title = "Window"; ObjectID = "DUf-nJ-qcj"; */
+"DUf-nJ-qcj.title" = "Window";
+
+/* Class = "NSTextFieldCell"; title = "Display"; ObjectID = "Dhc-IR-WqN"; */
+"Dhc-IR-WqN.title" = "Display";
+
+/* Class = "NSTextFieldCell"; title = "Display"; ObjectID = "EMs-f0-ueV"; */
+"EMs-f0-ueV.title" = "Display";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
+"F2S-fz-NVQ.title" = "Help";
+
+/* Class = "NSMenuItem"; title = "About This Hack Help"; ObjectID = "FKE-Sm-Kum"; */
+"FKE-Sm-Kum.title" = "About This Hack Help";
+
+/* Class = "NSTextFieldCell"; title = "Resolution"; ObjectID = "FPS-OW-rKW"; */
+"FPS-OW-rKW.title" = "Resolution";
+
+/* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "Fdn-tF-SyD"; */
+"Fdn-tF-SyD.title" = "Minimize";
+
+/* Class = "NSTextFieldCell"; title = "Storage"; ObjectID = "G5x-4p-VmO"; */
+"G5x-4p-VmO.title" = "Storage";
+
+/* Class = "NSImageView"; ibShadowedToolTip = "Status: Online"; ObjectID = "HO1-fC-otK"; */
+"HO1-fC-otK.ibShadowedToolTip" = "Status: Online";
+
+/* Class = "NSTextFieldCell"; title = "Hardware Help"; ObjectID = "HuZ-JY-TSx"; */
+"HuZ-JY-TSx.title" = "Hardware Help";
+
+/* Class = "NSTextFieldCell"; title = "Big Sur"; ObjectID = "J4g-R2-Wek"; */
+"J4g-R2-Wek.title" = "Big Sur";
+
+/* Class = "NSTextFieldCell"; title = "Processor"; ObjectID = "JAl-xV-Ro8"; */
+"JAl-xV-Ro8.title" = "Processor";
+
+/* Class = "NSTextFieldCell"; title = "Serial Number"; ObjectID = "JyF-l5-OcY"; */
+"JyF-l5-OcY.title" = "Serial Number";
+
+/* Class = "NSSegmentedCell"; Kat-cT-SH6.ibShadowedLabels[0] = "Overview"; ObjectID = "Kat-cT-SH6"; */
+"Kat-cT-SH6.ibShadowedLabels[0]" = "Overview";
+
+/* Class = "NSSegmentedCell"; Kat-cT-SH6.ibShadowedLabels[1] = "Displays"; ObjectID = "Kat-cT-SH6"; */
+"Kat-cT-SH6.ibShadowedLabels[1]" = "Displays";
+
+/* Class = "NSSegmentedCell"; Kat-cT-SH6.ibShadowedLabels[2] = "Storage"; ObjectID = "Kat-cT-SH6"; */
+"Kat-cT-SH6.ibShadowedLabels[2]" = "Storage";
+
+/* Class = "NSSegmentedCell"; Kat-cT-SH6.ibShadowedLabels[3] = "Support"; ObjectID = "Kat-cT-SH6"; */
+"Kat-cT-SH6.ibShadowedLabels[3]" = "Support";
+
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
+"Kd2-mp-pUS.title" = "Show All";
+
+/* Class = "NSTextFieldCell"; title = "OpenCore Version"; ObjectID = "Mgu-Wg-99b"; */
+"Mgu-Wg-99b.title" = "OpenCore Version";
+
+/* Class = "NSTextFieldCell"; title = "Resolution"; ObjectID = "MjX-1e-gVr"; */
+"MjX-1e-gVr.title" = "Resolution";
+
+/* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "MvP-56-vIj"; */
+"MvP-56-vIj.title" = "Bring All to Front";
+
+/* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
+"NMo-om-nkz.title" = "Services";
+
+/* Class = "NSViewController"; title = "Support"; ObjectID = "Nau-hC-e0F"; */
+"Nau-hC-e0F.title" = "Support";
+
+/* Class = "NSButtonCell"; title = "Whats New in macOS"; ObjectID = "OTr-vA-9vX"; */
+"OTr-vA-9vX.title" = "Whats New in macOS";
+
+/* Class = "NSMenuItem"; title = "Hide About This Hack"; ObjectID = "Olw-nP-bQN"; */
+"Olw-nP-bQN.title" = "Hide About This Hack";
+
+/* Class = "NSTextFieldCell"; title = "Display"; ObjectID = "PPg-3k-9fc"; */
+"PPg-3k-9fc.title" = "Display";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "RwR-3E-1Lo"; */
+"RwR-3E-1Lo.title" = "Box";
+
+/* Class = "NSTextFieldCell"; title = "OFFLINE: Please connect to the Internet to check for updates."; ObjectID = "SLf-Dm-sut"; */
+"SLf-Dm-sut.title" = "OFFLINE: Please connect to the Internet to check for updates.";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
+"Vdr-fp-XzO.title" = "Hide Others";
+
+/* Class = "NSButtonCell"; title = "Download New Updates..."; ObjectID = "VeG-VN-cae"; */
+"VeG-VN-cae.title" = "Download New Updates...";
+
+/* Class = "NSTextFieldCell"; title = "Startup Disk"; ObjectID = "Voc-xL-sTc"; */
+"Voc-xL-sTc.title" = "Startup Disk";
+
+/* Class = "NSTextFieldCell"; title = "Memory"; ObjectID = "XCF-fy-S4y"; */
+"XCF-fy-S4y.title" = "Memory";
+
+/* Class = "NSViewController"; title = "Overview"; ObjectID = "XfG-lQ-9wD"; */
+"XfG-lQ-9wD.title" = "Overview";
+
+/* Class = "NSTextFieldCell"; title = "0.2.1"; ObjectID = "Xy1-w0-RJm"; */
+"Xy1-w0-RJm.title" = "0.2.1";
+
+/* Class = "NSTextFieldCell"; title = "Graphics"; ObjectID = "bTR-ER-8AD"; */
+"bTR-ER-8AD.title" = "Graphics";
+
+/* Class = "NSViewController"; title = "Displays"; ObjectID = "cTB-fT-bUH"; */
+"cTB-fT-bUH.title" = "Displays";
+
+/* Class = "NSWindow"; title = "Update"; ObjectID = "dgB-cr-ztF"; */
+"dgB-cr-ztF.title" = "Update";
+
+/* Class = "NSTextFieldCell"; title = "Display"; ObjectID = "edR-gc-Tis"; */
+"edR-gc-Tis.title" = "Display";
+
+/* Class = "NSTextFieldCell"; title = "Startup Disk"; ObjectID = "ehO-L1-X7O"; */
+"ehO-L1-X7O.title" = "Startup Disk";
+
+/* Class = "NSTextFieldCell"; title = "Resolution"; ObjectID = "eif-aS-JZY"; */
+"eif-aS-JZY.title" = "Resolution";
+
+/* Class = "NSTextFieldCell"; title = "Resolution"; ObjectID = "gFI-Cs-sI6"; */
+"gFI-Cs-sI6.title" = "Resolution";
+
+/* Class = "NSViewController"; title = "Update"; ObjectID = "giA-8U-LhC"; */
+"giA-8U-LhC.title" = "Update";
+
+/* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
+"hz9-B4-Xy5.title" = "Services";
+
+/* Class = "NSButtonCell"; title = "Mac Basics"; ObjectID = "iVE-To-f0E"; */
+"iVE-To-f0E.title" = "Mac Basics";
+
+/* Class = "NSButtonCell"; title = "Open Displays Preferences..."; ObjectID = "l4g-r5-TtG"; */
+"l4g-r5-TtG.title" = "Open Displays Preferences...";
+
+/* Class = "NSTextFieldCell"; title = "Latest Version:"; ObjectID = "lqK-la-oRz"; */
+"lqK-la-oRz.title" = "Latest Version:";
+
+/* Class = "NSMenuItem"; title = "Check for updates..."; ObjectID = "pq4-KE-Q0r"; */
+"pq4-KE-Q0r.title" = "Check for updates...";
+
+/* Class = "NSTextFieldCell"; title = "macOS Help"; ObjectID = "qaK-5G-98g"; */
+"qaK-5G-98g.title" = "macOS Help";
+
+/* Class = "NSMenuItem"; title = "Close"; ObjectID = "rT6-YD-Lao"; */
+"rT6-YD-Lao.title" = "Close";
+
+/* Class = "NSTextFieldCell"; title = "Mac"; ObjectID = "rXS-ws-Emd"; */
+"rXS-ws-Emd.title" = "Mac";
+
+/* Class = "NSButtonCell"; title = "Apple Support"; ObjectID = "rsW-PX-wvK"; */
+"rsW-PX-wvK.title" = "Apple Support";
+
+/* Class = "NSTextFieldCell"; title = "Display"; ObjectID = "sJc-j1-qmk"; */
+"sJc-j1-qmk.title" = "Display";
+
+/* Class = "NSButtonCell"; title = "macOS User Guide "; ObjectID = "ttV-6r-KWU"; */
+"ttV-6r-KWU.title" = "macOS User Guide ";
+
+/* Class = "NSTextFieldCell"; title = "Version"; ObjectID = "u8u-HO-U2g"; */
+"u8u-HO-U2g.title" = "Version";
+
+/* Class = "NSMenu"; title = "About This Hack"; ObjectID = "uQy-DD-JDr"; */
+"uQy-DD-JDr.title" = "About This Hack";
+
+/* Class = "NSTabViewController"; title = "About This Hack"; ObjectID = "whh-mM-oJQ"; */
+"whh-mM-oJQ.title" = "About This Hack";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
+"wpr-3q-Mcd.title" = "Help";
+
+/* Class = "NSViewController"; title = "Storage"; ObjectID = "wzq-Ng-O1T"; */
+"wzq-Ng-O1T.title" = "Storage";
+
+/* Class = "NSTextFieldCell"; title = "macOS"; ObjectID = "xRa-qB-6LO"; */
+"xRa-qB-6LO.title" = "macOS";
+
+/* Class = "NSButtonCell"; title = "Mac User Guide"; ObjectID = "xTZ-yl-yG1"; */
+"xTZ-yl-yG1.title" = "Mac User Guide";
