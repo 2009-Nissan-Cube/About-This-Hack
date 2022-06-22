@@ -33,7 +33,7 @@ The internet for helping me with a lot of the code.
 ### Startup Disk not Appearing in App
 - Some people get this at random. Latest Commit, *not* release, fixes this.
 
-### Having a different problem? Report in the [Issues](https://github.com/8itCat/About-This-Hack/issues) tab!
+### Having a different problem? Report in the [Issues](https://github.com/0xCUB3/About-This-Hack/issues) tab!
 
 # Contact
 You can reach me at the following destinations:
