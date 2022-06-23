@@ -11,7 +11,7 @@ A simple application to view your exact hardware on macOS. Similar to About This
 - Not supported in any way in Linux or Windows
 
 # How To Install
-1) Download the DMG from the latest release
+1) Download the zip file from the latest release
 2) Drag the enclosed app to your Applications Folder
 3) Open!
 
