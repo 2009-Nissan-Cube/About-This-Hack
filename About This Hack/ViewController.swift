@@ -57,7 +57,7 @@ class ViewController: NSViewController {
         // Image
         switch HardwareCollector.OSvers {
         case .VENTURA:
-            picture.image = NSImage(named: "Unknown") // To be exchanged when an icon comes out
+            picture.image = NSImage(named: "Ventura")
             break
         case .MONTEREY:
             picture.image = NSImage(named: "Monterey")
