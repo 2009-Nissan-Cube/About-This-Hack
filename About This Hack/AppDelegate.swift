@@ -42,19 +42,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func showOverview(_ sender: Any) {
-        var windCtrl: WindowController = NSApplication.shared.mainWindow?.windowController as! WindowController
+        let windCtrl: WindowController = NSApplication.shared.mainWindow?.windowController as! WindowController
         windCtrl.changeView(new: 0)
     }
     @IBAction func showDisplays(_ sender: Any) {
-        var windCtrl: WindowController = NSApplication.shared.mainWindow?.windowController as! WindowController
+        let windCtrl: WindowController = NSApplication.shared.mainWindow?.windowController as! WindowController
         windCtrl.changeView(new: 1)
     }
     @IBAction func showStorage(_ sender: Any) {
-        var windCtrl: WindowController = NSApplication.shared.mainWindow?.windowController as! WindowController
+        let windCtrl: WindowController = NSApplication.shared.mainWindow?.windowController as! WindowController
         windCtrl.changeView(new: 2)
     }
     @IBAction func showHelp(_ sender: Any) {
-        var windCtrl: WindowController = NSApplication.shared.mainWindow?.windowController as! WindowController
+        let windCtrl: WindowController = NSApplication.shared.mainWindow?.windowController as! WindowController
         windCtrl.changeView(new: 3)
     }
 }

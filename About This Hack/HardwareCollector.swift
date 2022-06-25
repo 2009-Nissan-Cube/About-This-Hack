@@ -658,7 +658,7 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         let availableTrimmed = run("echo \"\(available)\" | cut -f1 -d\" \"").dropLast(1)
         //print("Size: \(sizeTrimmed)")
         //print("Available: \(availableTrimmed)")
-        var percent: Double = Double(availableTrimmed)! / Double(sizeTrimmed)!
+        var percent: Double = (Double(sizeTrimmed)! - Double(availableTrimmed)!) / Double(sizeTrimmed)!
         if(percent > 1.0) {
             percent = percent/1024.0 // GB instead of TB
             if(percent > 1.0) {
