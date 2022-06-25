@@ -186,6 +186,7 @@
                     </window>
                     <connections>
                         <outlet property="segCtrl" destination="5iE-AH-Dbz" id="Afg-6R-fej"/>
+                        <outlet property="segmentedControl" destination="L8Y-nK-bWF" id="28S-8a-bOm"/>
                         <segue destination="whh-mM-oJQ" kind="relationship" relationship="window.shadowedContentViewController" id="IGk-If-dTd"/>
                     </connections>
                 </windowController>

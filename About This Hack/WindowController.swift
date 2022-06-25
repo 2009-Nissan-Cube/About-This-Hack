@@ -29,6 +29,9 @@ class WindowController: NSWindowController {
     public func changeView(new: Int) {
         print("changed to \(new)")
         self.tabViewController?.selectedTabViewItemIndex = new
+        if(segmentedControl != nil) {
+            segmentedControl.selectedSegment = new
+        }
        /* let segCtrl = self.window?.toolbar?.items[1].view.
         segCtrl.selectedSegment = new*/
     }
