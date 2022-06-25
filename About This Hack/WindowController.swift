@@ -8,7 +8,7 @@ import Cocoa
 
 class WindowController: NSWindowController {
     
-    var tabViewController: NSTabViewController?
+    public var tabViewController: NSTabViewController?
     public var currentView: Int = 0
     @IBOutlet public weak var segmentedControl: NSSegmentedControl!
     
@@ -25,5 +25,11 @@ class WindowController: NSWindowController {
         let segCtrl = sender as! NSSegmentedControl
         currentView = segCtrl.selectedSegment
         self.tabViewController?.selectedTabViewItemIndex = currentView
+    }
+    public func changeView(new: Int) {
+        print("changed to \(new)")
+        self.tabViewController?.selectedTabViewItemIndex = new
+       /* let segCtrl = self.window?.toolbar?.items[1].view.
+        segCtrl.selectedSegment = new*/
     }
 }

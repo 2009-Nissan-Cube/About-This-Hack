@@ -121,6 +121,75 @@ class ViewControllerDisplays: NSViewController {
             
             break
         case 3:
+            print("Found 3 Displays")
+            labelArr2.append(DisplaySizeResL1)
+            labelArr2.append(DisplaySizeResCenter)
+            labelArr2.append(DisplaySizeResR1)
+            nameArr.append(DisplayNameL1)
+            nameArr.append(DisplayNameCenter)
+            nameArr.append(DisplayNameR1)
+            dispArr.append(DisplayPicL1)
+            dispArr.append(DisplayPicCenter)
+            dispArr.append(DisplayPicR1)
+            //if (HardwareCollector.macType == .DESKTOP) {
+            if(HardwareCollector.macType == .DESKTOP) {
+                for i in [0,1,2] {
+                    nameArr[i].isHidden = false
+                    nameArr[i].stringValue = HardwareCollector.displayNames[i]
+                    labelArr2[i].isHidden = false
+                    labelArr2[i].stringValue = HardwareCollector.displayRes[i]
+                    print("DisplayName: \"\(HardwareCollector.displayNames[i])\"")
+                    
+                    if(HardwareCollector.displayNames[i] == "iMac") {
+                        dispArr[0].image = NSImage(named: "NSComputer")
+                    }
+                    
+                    else if (HardwareCollector.displayNames[i] == "LG HDR 4K") {
+                        dispArr[i].image = NSImage(named: "LG4K")
+                    }
+                    else if (HardwareCollector.displayNames[i] == "Sidecar Display") {
+                        print("Found a SidecarDisplay")
+                        dispArr[i].image = NSImage(named: "ipad")
+                    }
+                    else if (HardwareCollector.displayNames[i] == "LED Cinema Display") {
+                        dispArr[i].image = NSImage(named: "appledisp")
+                    }
+                    else {
+                        dispArr[i].image = NSImage(named: "genericLCD")
+                    }
+                }
+            }
+            else if HardwareCollector.qhasBuiltInDisplay {
+                for i in [1,2] {
+                    nameArr[i].isHidden = false
+                    nameArr[i].stringValue = HardwareCollector.displayNames[i]
+                    labelArr2[i].isHidden = false
+                    labelArr2[i].stringValue = HardwareCollector.displayRes[i]
+                    print("DisplayName: \"\(HardwareCollector.displayNames[i])\"")
+                    if (HardwareCollector.displayNames[i] == "LG HDR 4K") {
+                        dispArr[i].image = NSImage(named: "LG4K")
+                    }
+                    else if (HardwareCollector.displayNames[i] == "Sidecar Display") {
+                        print("Found a SidecarDisplay")
+                        dispArr[i].image = NSImage(named: "ipad")
+                    }
+                    else if (HardwareCollector.displayNames[i] == "LED Cinema Display") {
+                        dispArr[i].image = NSImage(named: "appledisp")
+                    }
+                    else {
+                        dispArr[i].image = NSImage(named: "genericLCD")
+                    }
+                }
+            }
+            for i in [0,1,2] {
+                nameArr[i].isHidden = false
+                nameArr[i].stringValue = HardwareCollector.displayNames[i]
+                labelArr2[i].isHidden = false
+                labelArr2[i].stringValue = HardwareCollector.displayRes[i]
+            }
+            for disp in dispArr {
+                disp.isHidden = false
+            }
             break
         default:
             dispArr.append(DisplayPicCenter)
