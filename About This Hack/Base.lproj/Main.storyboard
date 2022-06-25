@@ -499,7 +499,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wNI-Ij-lp9">
-                                        <rect key="frame" x="206" y="44" width="169" height="55"/>
+                                        <rect key="frame" x="221" y="20" width="138" height="79"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" alignment="center" title="Resolution" id="2z4-hu-X9K">
                                             <font key="font" textStyle="callout" name=".SFNS-Regular"/>
@@ -508,7 +508,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5AF-gZ-4T3">
-                                        <rect key="frame" x="72" y="44" width="169" height="55"/>
+                                        <rect key="frame" x="99" y="20" width="118" height="79"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" alignment="center" title="Resolution" id="gFI-Cs-sI6">
                                             <font key="font" textStyle="callout" name=".SFNS-Regular"/>
@@ -526,7 +526,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I1c-Up-oSG">
-                                        <rect key="frame" x="337" y="44" width="169" height="55"/>
+                                        <rect key="frame" x="363" y="44" width="126" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" alignment="center" title="Resolution" id="MjX-1e-gVr">
                                             <font key="font" textStyle="callout" name=".SFNS-Regular"/>

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "public.generic-lcd.png",
+      "filename" : "com.apple.led-cinema-display-27.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "public.generic-lcd 1.png",
+      "filename" : "com.apple.led-cinema-display-27 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "public.generic-lcd 2.png",
+      "filename" : "com.apple.led-cinema-display-27 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

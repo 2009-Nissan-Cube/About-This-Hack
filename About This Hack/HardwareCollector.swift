@@ -80,28 +80,56 @@ echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 _spdisplays_resolutio
             let tmpParts = tmp.components(separatedBy: "\n")
             return tmpParts
         }
+        else if (numDispl == 3) {
+            let tmp = run("system_profiler SPDisplaysDataType | grep Resolution | cut -c 23-")
+            let tmpParts = tmp.components(separatedBy: "\n")
+            return tmpParts
+        }
         return []
     }
     
     static func getDisplayNames() -> [String] {
         let numDispl = getNumDisplays()
         if numDispl == 1 {
-            return [run("""
+            if(qhasBuiltInDisplay) {
+                return [run("""
 echo "$(system_profiler SPDisplaysDataType | grep "Display Type" | cut -c 25-)"
 echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|<' '/_name/{getline; print $3}')" | tr -d '\n'
-""")] //
+""")] }
+            else {
+                return [run("""
+echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep "^[A-Za-z]" | cut -f 1 -d ":")"
+""")]
+            }
 
         }
-        else if (numDispl == 2) {
-            print("2 displays found")
+        else if (numDispl == 2 || numDispl == 3) {
+            print("2 or 3 displays found")
             let tmp = run("""
 echo "$(system_profiler SPDisplaysDataType | grep "Display Type" | cut -c 25-)"
-echo "$(system_profiler SPDisplaysDataType | grep "LG" | cut -c 9-)"
-echo "$(system_profiler SPDisplaysDataType -xml | grep -A2 "</data>" | awk -F'>|<' '/_name/{getline; print $3}')" | tr -d '\n'
+echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep "^[A-Za-z]" | cut -f 1 -d ":")"
+""")
+            let tmpParts = tmp.components(separatedBy: "\n")
+            var toSend: [String] = []
+            if(qhasBuiltInDisplay) {
+                toSend.append(tmpParts[0])
+                for i in 2...tmpParts.count-1 {
+                    toSend.append(tmpParts[i])
+                }
+                return toSend
+            }
+            else {
+                return [String](tmpParts.dropFirst())
+            }
+        }
+        /*else if (numDispl == 3) {
+            let tmp = run("""
+echo "$(system_profiler SPDisplaysDataType | grep "Display Type" | cut -c 25-)"
+echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep "^[A-Za-z]" | cut -f 1 -d ":")"
 """)
             let tmpParts = tmp.components(separatedBy: "\n")
             return tmpParts
-        }
+        }*/
         return []
     }
     
