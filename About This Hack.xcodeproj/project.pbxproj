@@ -12,6 +12,7 @@
 		115D921426D6F65500F5DF35 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115D921326D6F65500F5DF35 /* ViewController.swift */; };
 		115D921626D6F65600F5DF35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 115D921526D6F65600F5DF35 /* Assets.xcassets */; };
 		115D922426D6F6AF00F5DF35 /* InsertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115D922326D6F6AE00F5DF35 /* InsertExtension.swift */; };
+		58134C0228668FF70008B00D /* Keycodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58134C0128668FF70008B00D /* Keycodes.swift */; };
 		589B667C26D7B694000509DC /* HardwareCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589B667B26D7B694000509DC /* HardwareCollector.swift */; };
 		58B988D226D704F60092EC5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58B988D026D704F60092EC5B /* Main.storyboard */; };
 		58B988D426D7ABFE0092EC5B /* ViewControllerDisplays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B988D326D7ABFE0092EC5B /* ViewControllerDisplays.swift */; };
@@ -32,6 +33,7 @@
 		115D921A26D6F65600F5DF35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		115D921B26D6F65600F5DF35 /* About_This_Hack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = About_This_Hack.entitlements; sourceTree = "<group>"; };
 		115D922326D6F6AE00F5DF35 /* InsertExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertExtension.swift; sourceTree = "<group>"; };
+		58134C0128668FF70008B00D /* Keycodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keycodes.swift; sourceTree = "<group>"; };
 		589B667B26D7B694000509DC /* HardwareCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardwareCollector.swift; sourceTree = "<group>"; };
 		58B988D126D704F60092EC5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		58B988D326D7ABFE0092EC5B /* ViewControllerDisplays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDisplays.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				115D921526D6F65600F5DF35 /* Assets.xcassets */,
 				115D921A26D6F65600F5DF35 /* Info.plist */,
 				115D921B26D6F65600F5DF35 /* About_This_Hack.entitlements */,
+				58134C0128668FF70008B00D /* Keycodes.swift */,
 			);
 			path = "About This Hack";
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 			files = (
 				115D921426D6F65500F5DF35 /* ViewController.swift in Sources */,
 				72E686C32862453700B8316D /* Reachability.swift in Sources */,
+				58134C0228668FF70008B00D /* Keycodes.swift in Sources */,
 				58B988D826D7ACD80092EC5B /* ViewControllerService.swift in Sources */,
 				58B988D926D7ACD80092EC5B /* ViewControllerStorage.swift in Sources */,
 				58B988DA26D7ACD80092EC5B /* ViewControllerSupport.swift in Sources */,

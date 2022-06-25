@@ -81,6 +81,26 @@
                                                 <action selector="performZoom:" target="Ady-hI-5gd" id="rVx-uu-IEB"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Overview" keyEquivalent="1" id="Rw1-hT-NzJ">
+                                            <connections>
+                                                <action selector="showOverview:" target="Voe-Tx-rLC" id="Q0Q-mk-BHg"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Displays" keyEquivalent="2" id="pHH-rO-4Am">
+                                            <connections>
+                                                <action selector="showDisplays:" target="Voe-Tx-rLC" id="ifg-0w-Ou9"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Storage" keyEquivalent="3" id="tsM-eT-fG4">
+                                            <connections>
+                                                <action selector="showStorage:" target="Voe-Tx-rLC" id="sRY-v1-JKg"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Support" keyEquivalent="4" id="3AK-j7-ksI">
+                                            <connections>
+                                                <action selector="showHelp:" target="Voe-Tx-rLC" id="E74-Lp-QCb"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="hNE-XU-1EN"/>
                                         <menuItem title="Bring All to Front" id="MvP-56-vIj">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -135,7 +155,7 @@
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="F6F-um-AUh"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Jtn-pX-f66"/>
-                                <toolbarItem implicitItemIdentifier="88CCF72C-7D82-4627-B3A1-154D73ADC1B1" label="Custom View" paletteLabel="Custom View" autovalidates="NO" id="5iE-AH-Dbz">
+                                <toolbarItem implicitItemIdentifier="88CCF72C-7D82-4627-B3A1-154D73ADC1B1" explicitItemIdentifier="SegCTRL" label="Custom View" paletteLabel="Custom View" autovalidates="NO" id="5iE-AH-Dbz">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="278" height="22"/>
                                     <size key="maxSize" width="364" height="28"/>
@@ -145,10 +165,10 @@
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="texturedRounded" trackingMode="selectOne" id="Kat-cT-SH6">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment label="Overview" selected="YES"/>
+                                                <segment label="Overview" toolTip="General presentation of system specifications" selected="YES"/>
                                                 <segment label="Displays" tag="1"/>
                                                 <segment label="Storage"/>
-                                                <segment label="Support"/>
+                                                <segment label="Support" toolTip="Presentation of support links for help with your hackintosh or mac"/>
                                             </segments>
                                         </segmentedCell>
                                         <connections>
@@ -170,7 +190,7 @@
                     </connections>
                 </windowController>
             </objects>
-            <point key="canvasLocation" x="-374" y="31"/>
+            <point key="canvasLocation" x="-388" y="22"/>
         </scene>
         <!--Overview-->
         <scene sceneID="hIz-AP-VOD">
