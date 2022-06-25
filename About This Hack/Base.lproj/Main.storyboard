@@ -338,6 +338,9 @@
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <action selector="hideSerialNumber:" target="XfG-lQ-9wD" id="5WY-OX-IVL"/>
+                                        </connections>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Le-qQ-XKI">
                                         <rect key="frame" x="237" y="43" width="79" height="15"/>
@@ -380,6 +383,17 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="CVN-5K-wws"/>
                                     </imageView>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eIV-GT-Iqb">
+                                        <rect key="frame" x="232" y="34" width="335" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="B5B-ie-0ij">
+                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="hideSerialNumber:" target="XfG-lQ-9wD" id="rDu-fs-jMm"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </view>
                         </subviews>
@@ -398,6 +412,7 @@
                         <outlet property="picture" destination="aW5-VD-mei" id="MKF-3b-kow"/>
                         <outlet property="ram" destination="Ws0-cm-b2A" id="WKT-gV-KIC"/>
                         <outlet property="serialNumber" destination="tRC-kB-coB" id="XWg-Uv-3DT"/>
+                        <outlet property="serialToggle" destination="eIV-GT-Iqb" id="OuH-dW-G6k"/>
                         <outlet property="startupDisk" destination="6QW-gr-uh8" id="KpV-aT-1vx"/>
                         <outlet property="systemVersion" destination="faQ-JW-cWW" id="Pht-nw-ja6"/>
                     </connections>

@@ -22,6 +22,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var display: NSTextField!
     @IBOutlet weak var startupDisk: NSTextField!
     @IBOutlet weak var serialNumber: NSTextField!
+    @IBOutlet weak var serialToggle: NSButton!
     @IBOutlet weak var ocVersion: NSTextField!
     @IBOutlet weak var ocPrefix: NSTextField!
 
@@ -128,12 +129,13 @@ class ViewController: NSViewController {
             ocPrefix.isHidden = true
             ocVersion.stringValue = ""
         }
-        updateView()
+        
+        // Make Serial Number Toggle Transparent
+        serialToggle.isTransparent = true
     }
 
     
     func updateView() {
-        // Update View
         picture.needsDisplay = true
         osVersion.needsDisplay = true
         systemVersion.needsDisplay = true
@@ -147,4 +149,12 @@ class ViewController: NSViewController {
         ocVersion.needsDisplay = true
     }
     
+    @IBAction func hideSerialNumber(_ sender: NSButton) {
+        print("Serial Number toggled")
+        if serialNumber.stringValue == "" {
+            serialNumber.stringValue = HardwareCollector.SerialNumberString
+        } else {
+            serialNumber.stringValue = ""
+        }
+    }
 }
