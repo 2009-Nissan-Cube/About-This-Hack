@@ -763,6 +763,15 @@
                                             <action selector="MacBasicsPress:" target="Nau-hC-e0F" id="aS2-sg-mZl"/>
                                         </connections>
                                     </button>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9RX-Xn-wg3">
+                                        <rect key="frame" x="170" y="-11" width="241" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Made with ❤️ by 0xCUBE and astroKid" id="aFJ-b7-Jfk">
+                                            <font key="font" metaFont="system" size="10"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="GrT-Zi-ddp" firstAttribute="centerX" secondItem="5OQ-us-odM" secondAttribute="centerX" id="0s4-YD-S2i"/>
