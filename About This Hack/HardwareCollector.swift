@@ -648,20 +648,20 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         let available = run("diskutil info \"\(name)\" | Grep 'Container Free Space' | sed 's/.*:      //' | cut -f1 -d'(' | tr -d '\n'")
         let sizeTrimmed = run("echo \"\(size)\" | cut -f1 -d\" \"").dropLast(1)
         let availableTrimmed = run("echo \"\(available)\" | cut -f1 -d\" \"").dropLast(1)
-        //print("Size: \(sizeTrimmed)")
-        //print("Available: \(availableTrimmed)")
-        var percent: Double = (Double(sizeTrimmed)! - Double(availableTrimmed)!) / Double(sizeTrimmed)!
+        print("Size: \(sizeTrimmed)")
+        print("Available: \(availableTrimmed)")
+        var percent: Double = (Double(availableTrimmed)!) / Double(sizeTrimmed)!
         if(percent > 1.0) {
             percent = percent/1024.0 // GB instead of TB
             if(percent > 1.0) {
                 percent = percent/1024.0 // MB instead of TB
             }
         }
-        //print("%: \(percent)")
+        print("%: \(1-percent)")
         return ["""
 \(name)
 \(size)(\(available)Available)
-""",String(percent)]
+""",String(1-percent)]
     }
     
     

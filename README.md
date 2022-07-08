@@ -54,14 +54,8 @@ The Support tab, pictured below, contains numerous links to provide support with
 @MykolaG for suggesting the awesomesauce server icon. <br>
 The internet for helping me with a lot of the code.
 
-# Common Issues
-### Crashing on startup
-- This is an issue that hasn't been fixed yet. You can find new development in [Issue #10](https://github.com/8itCat/About-This-Hack/issues/10)
 
-### Startup Disk not Appearing in App
-- Some people get this at random. Latest Commit, *not* release, fixes this.
-
-### Having a different problem? Report in the [Issues](https://github.com/0xCUB3/About-This-Hack/issues) tab!
+### Having a problem? Report in the [Issues](https://github.com/0xCUB3/About-This-Hack/issues) tab!
 
 # Contact
 You can reach me at the following destinations:
