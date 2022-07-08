@@ -122,14 +122,6 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
                 return [String](tmpParts.dropFirst())
             }
         }
-        /*else if (numDispl == 3) {
-            let tmp = run("""
-echo "$(system_profiler SPDisplaysDataType | grep "Display Type" | cut -c 25-)"
-echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep "^[A-Za-z]" | cut -f 1 -d ":")"
-""")
-            let tmpParts = tmp.components(separatedBy: "\n")
-            return tmpParts
-        }*/
         return []
     }
     
