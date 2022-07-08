@@ -219,7 +219,7 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
     
     
     static func getOSnum() -> String {
-        return run("sw_vers | grep ProductVersion | cut -c 17-")
+        return run("sw_vers | grep ProductVersion | awk '{print $2}'")
     }
     static func setOSvers(osNumber: String) {
         if (osNumber.hasPrefix("13")) {
