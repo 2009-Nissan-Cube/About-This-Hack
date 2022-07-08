@@ -652,9 +652,9 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         print("Available: \(availableTrimmed)")
         var percent: Double = (Double(availableTrimmed)!) / Double(sizeTrimmed)!
         if(percent > 1.0) {
-            percent = percent/1024.0 // GB instead of TB
+            percent = percent / 1024.0 // GB instead of TB
             if(percent > 1.0) {
-                percent = percent/1024.0 // MB instead of TB
+                percent = percent / 1024.0 // MB instead of TB
             }
         }
         print("%: \(1-percent)")
