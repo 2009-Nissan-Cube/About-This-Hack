@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import Async
 
 class HardwareCollector {
     static var OSnum: String = "10.10.0"
@@ -34,31 +35,73 @@ class HardwareCollector {
 
     
     static func getAllData() {
+        let group = AsyncGroup()
+        
         if (dataHasBeenSet) {return}
-        OSnum = getOSnum()
-        setOSvers(osNumber: OSnum)
-        OSname = macOSversToString()
-        osPrefix = getOSPrefix()
-        OSBuildNum = getOSBuildNum()
-        macName = getMacName()
-        CPUstring = getCPU()
-        RAMstring = getRam()
-        GPUstring = getGPU()
-        DisplayString = getDisp()
-        StartupDiskString = getStartupDisk()
-        SerialNumberString = getSerialNumber()
-        OpenCoreString = getOpenCore()
-        if !qHackintosh {
-            OpenCoreString = ""
+        group.background {
+            OSnum = getOSnum()
+            print("OS Number: \(OSnum)")
+            setOSvers(osNumber: OSnum)
+            OSname = macOSversToString()
+            print("OS Name: \(OSname)")
+            osPrefix = getOSPrefix()
+            print("OS Prefix: \(osPrefix)")
+            OSBuildNum = getOSBuildNum()
+            print("OS Build Number: \(OSBuildNum)")
         }
-        numberOfDisplays = getNumDisplays()
-        qhasBuiltInDisplay = hasBuiltInDisplay()
-        displayRes = getDisplayRess()
+        group.background {
+            macName = getMacName()
+            print("Mac name: \(macName)")
+        }
+        group.background {
+            CPUstring = getCPU()
+            print("CPU: \(CPUstring)")
+        }
+        group.background {
+            RAMstring = getRam()
+            print("RAM: \(RAMstring)")
+        }
+        group.background {
+            GPUstring = getGPU()
+            print("GPU: \(GPUstring)")
+        }
+        group.background {
+            DisplayString = getDisp()
+            print("Display(s): \(DisplayString)")
+            numberOfDisplays = getNumDisplays()
+            print("Number of Displays: \(numberOfDisplays)")
+            qhasBuiltInDisplay = hasBuiltInDisplay()
+            print("Has built-in display: \(qhasBuiltInDisplay)")
+            // getDisplayDiagonal() Having some issues, removing for now
+        }
+        group.background {
+            StartupDiskString = getStartupDisk()
+            print("Startup Disk: \(StartupDiskString)")
+        }
+        group.background {
+            SerialNumberString = getSerialNumber()
+            print("Serial Number: \(SerialNumberString)")
+        }
+        group.background {
+            OpenCoreString = getOpenCore()
+            if !qHackintosh {
+                OpenCoreString = ""
+            } else {
+                print("OpenCore Version: \(OpenCoreString)")
+            }
+        }
+        group.background {
+            storageType = getStorageType()
+            print("Storage Type: \(storageType)")
+            storageData = getStorageData()[0]
+            print("Storage Data: \(storageData)")
+            storagePercent = Double(getStorageData()[1])!
+            print("Storage Percent: \(storagePercent)")
+        }
+        
+        // For some reason these don't work in groups, to be fixes
+        displayRes = getDisplayRes()
         displayNames = getDisplayNames()
-        // getDisplayDiagonal() Having some issues, removing for now
-        storageType = getStorageType()
-        storageData = getStorageData()[0]
-        storagePercent = Double(getStorageData()[1])!
         
         dataHasBeenSet = true
     }
@@ -68,7 +111,7 @@ class HardwareCollector {
         return 13.3
     }
     
-    static func getDisplayRess() -> [String] {
+    static func getDisplayRes() -> [String] {
         let numDispl = getNumDisplays()
         if numDispl == 1 {
             return [run("""

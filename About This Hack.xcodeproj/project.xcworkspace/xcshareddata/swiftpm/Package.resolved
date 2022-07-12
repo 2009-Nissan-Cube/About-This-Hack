@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "async",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/duemunk/Async",
+      "state" : {
+        "revision" : "a66d1a6efce6c1296ab228bdc3ec7da2b8968138",
+        "version" : "2.1.0"
+      }
+    },
+    {
       "identity" : "sparkle",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sparkle-project/Sparkle",
