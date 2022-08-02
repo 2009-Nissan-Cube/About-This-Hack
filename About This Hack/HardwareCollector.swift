@@ -20,7 +20,7 @@ class HardwareCollector {
     static var DisplayString: String = "Generic LCD"
     static var StartupDiskString: String = "Macintosh HD"
     static var SerialNumberString: String = "XXXXXXXXXXX"
-    static var qHackintosh = false // is it a hackintosh
+    static var qHackintosh = false
     static var OpenCoreString: String = ""
     static var macType: macType = .LAPTOP
     static var numberOfDisplays: Int = 1
@@ -99,7 +99,7 @@ class HardwareCollector {
             print("Storage Percent: \(storagePercent)")
         }
         
-        // For some reason these don't work in groups, to be fixes
+        // For some reason these don't work in groups, to be fixed
         displayRes = getDisplayRes()
         displayNames = getDisplayNames()
         
