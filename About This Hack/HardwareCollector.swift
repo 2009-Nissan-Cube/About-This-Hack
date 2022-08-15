@@ -218,10 +218,20 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
     }
     
     static func getGPU() -> String {
-        let graphicsTmp = run("system_profiler SPDisplaysDataType | awk -F': ' '/^\\ *Chipset Model:/ {printf $2 \" \"}'")
+        let graphicsTmp = run("system_profiler SPDisplaysDataType | grep 'Chipset' | sed 's/.*: //'")
         let graphicsRAM  = run("system_profiler SPDisplaysDataType | grep VRAM | sed 's/.*: //'")
-        return "\(graphicsTmp)\(graphicsRAM)"
+        let graphicsArray = graphicsTmp.components(separatedBy: "\n")
+        let vramArray = graphicsRAM.components(separatedBy: "\n")
+        let count = graphicsArray.count
+        var x = 0
+        var gpuInfoFormatted = ""
+        while x < count {
+            gpuInfoFormatted.append("\(graphicsArray[x]) \(vramArray[x])\n")
+            x += 1
+        }
+        return gpuInfoFormatted
     }
+    
     static func getDisp() -> String {
         var tmp = run("system_profiler SPDisplaysDataType | grep Resolution | sed 's/.*: //'")
         if tmp.contains("(QHD"){
