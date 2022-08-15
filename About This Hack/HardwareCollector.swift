@@ -237,7 +237,9 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
     
     static func getRam() -> String {
         let ram = run("echo \"$(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024))\" | tr -d '\n'")
-        let ramReturn = "\(ram) GB"
+        let ramType = run("system_profiler SPMemoryDataType | grep 'Type: DDR' | awk '{print $2}' | sed -n '1p'").trimmingCharacters(in: .whitespacesAndNewlines)
+        let ramSpeed = run("system_profiler SPMemoryDataType | grep 'Speed' | grep 'MHz' | awk '{print $2\" \"$3}' | sed -n '1p'").trimmingCharacters(in: .whitespacesAndNewlines)
+        let ramReturn = "\(ram) GB \(ramSpeed) \(ramType)"
         return ramReturn
     }
     
