@@ -49,9 +49,8 @@ The Support tab, pictured below, contains numerous links to provide support with
 # Credits
 @MDNich for helping out a ton with features, code, and setting up the update server. <br>
 @LordNaut for helping me fix stuff with AppDelegate and sorting out a bunch of minor, but important features! <br>
-@BenSova for being awesome, providing some of the commands, and helping me debug a lot. <br>
-@moosethegoose2213 for inspiring the project with his own awesome creation, Hedgefetch. <br>
-@MykolaG for suggesting the awesomesauce server icon. <br>
+@Ben216k for being awesome, providing some of the commands, and helping me debug a lot. <br>
+@Snoopy for helping create the new icon. <br>
 The internet for helping me with a lot of the code.
 
 
