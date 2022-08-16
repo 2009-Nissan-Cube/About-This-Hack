@@ -50,7 +50,7 @@ The Support tab, pictured below, contains numerous links to provide support with
 @MDNich for helping out a ton with features, code, and setting up the update server. <br>
 @LordNaut for helping me fix stuff with AppDelegate and sorting out a bunch of minor, but important features! <br>
 @Ben216k for being awesome, providing some of the commands, and helping me debug a lot. <br>
-@Snoopy for helping create the new icon. <br>
+@[Snoopy](https://macosicons.com/#/u/SnoopyLover) for helping create the new icon. <br>
 The internet for helping me with a lot of the code.
 
 
