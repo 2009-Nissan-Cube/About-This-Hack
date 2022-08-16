@@ -57,6 +57,6 @@ The internet for helping me with a lot of the code.
 ### Having a problem? Report in the [Issues](https://github.com/0xCUB3/About-This-Hack/issues) tab!
 
 # Contact
-You can reach me at the following destinations:
-Discord - 0xCUBE#4315
+You can reach me at the following destinations: <br>
+Discord - 0xCUBE#9118 <br>
 Reddit - [u/0xCUBE](https://www.reddit.com/user/0xCUBE)
