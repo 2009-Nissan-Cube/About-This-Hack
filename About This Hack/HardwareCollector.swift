@@ -673,6 +673,13 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         case "MacBookPro8,3":
             builtInDisplaySize = 17
             return "MacBook Pro (17-inch, Late 2011)"
+            
+        // New Macs which are weird for some reason...
+        case "Mac14,2":
+            return "MacBook Air (13-inch, M2, 2022)"
+            
+        case "Mac14,7":
+            return "MacBook Pro (13-inch, M2, 2022)"
        
         // In the rare case that the Mac is not detected
         case "Unknown","Mac":
