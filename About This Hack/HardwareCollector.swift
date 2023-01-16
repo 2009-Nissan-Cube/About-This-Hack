@@ -34,48 +34,65 @@ class HardwareCollector {
 
     
     static func getAllData() {
-        
         if (dataHasBeenSet) {return}
-        OSnum = getOSnum()
-        print("OS Number: \(OSnum)")
-        setOSvers(osNumber: OSnum)
-        OSname = macOSversToString()
-        print("OS Name: \(OSname)")
-        osPrefix = getOSPrefix()
-        print("OS Prefix: \(osPrefix)")
-        OSBuildNum = getOSBuildNum()
-        print("OS Build Number: \(OSBuildNum)")
-        macName = getMacName()
-        print("Mac name: \(macName)")
-        CPUstring = getCPU()
-        print("CPU: \(CPUstring)")
-        RAMstring = getRam()
-        print("RAM: \(RAMstring)")
-        GPUstring = getGPU()
-        print("GPU: \(GPUstring)")
-        DisplayString = getDisp()
-        print("Display(s): \(DisplayString)")
-        numberOfDisplays = getNumDisplays()
-        print("Number of Displays: \(numberOfDisplays)")
-        qhasBuiltInDisplay = hasBuiltInDisplay()
-        print("Has built-in display: \(qhasBuiltInDisplay)")
-        // getDisplayDiagonal() Having some issues, removing for now
-        StartupDiskString = getStartupDisk()
-        print("Startup Disk: \(StartupDiskString)")
-        SerialNumberString = getSerialNumber()
-        print("Serial Number: \(SerialNumberString)")
-        OpenCoreString = getOpenCore()
-        if !qHackintosh {
-            OpenCoreString = ""
-        } else {
-            print("OpenCore Version: \(OpenCoreString)")
+        let queue = DispatchQueue(label: "ga.0xCUBE.athqueue", attributes: .concurrent)
+
+        queue.async{
+            OSnum = getOSnum()
+            print("OS Number: \(OSnum)")
+            setOSvers(osNumber: OSnum)
+            OSname = macOSversToString()
+            print("OS Name: \(OSname)")
+            osPrefix = getOSPrefix()
+            print("OS Prefix: \(osPrefix)")
+            OSBuildNum = getOSBuildNum()
+            print("OS Build Number: \(OSBuildNum)")
+            macName = getMacName()
         }
-        storageType = getStorageType()
-        print("Storage Type: \(storageType)")
-        storageData = getStorageData()[0]
-        print("Storage Data: \(storageData)")
-        storagePercent = Double(getStorageData()[1])!
-        print("Storage Percent: \(storagePercent)")
+        queue.async {
+            print("Mac name: \(macName)")
+            CPUstring = getCPU()
+            print("CPU: \(CPUstring)")
+        }
+        queue.async {
+            RAMstring = getRam()
+            print("RAM: \(RAMstring)")
+        }
+        queue.async {
+            GPUstring = getGPU()
+            print("GPU: \(GPUstring)")
+        }
+        queue.async {
+            DisplayString = getDisp()
+            print("Display(s): \(DisplayString)")
+            numberOfDisplays = getNumDisplays()
+            print("Number of Displays: \(numberOfDisplays)")
+            qhasBuiltInDisplay = hasBuiltInDisplay()
+            print("Has built-in display: \(qhasBuiltInDisplay)")
+            // getDisplayDiagonal() Having some issues, removing for now
+        }
+        queue.async {
+            StartupDiskString = getStartupDisk()
+            print("Startup Disk: \(StartupDiskString)")
+        }
+        queue.async {
+            SerialNumberString = getSerialNumber()
+            print("Serial Number: \(SerialNumberString)")
+            OpenCoreString = getOpenCore()
+            if !qHackintosh {
+                OpenCoreString = ""
+            } else {
+                print("OpenCore Version: \(OpenCoreString)")
+            }
+        }
+        queue.async {
+            storageType = getStorageType()
+            print("Storage Type: \(storageType)")
+            storageData = getStorageData()[0]
+            print("Storage Data: \(storageData)")
+            storagePercent = Double(getStorageData()[1])!
+            print("Storage Percent: \(storagePercent)")
+        }
         
         // For some reason these don't work in groups, to be fixed
         displayRes = getDisplayRes()
@@ -703,8 +720,6 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
 \(size)(\(available)Available)
 """,String(1-percent)]
     }
-    
-    
 }
 
 enum macOSvers {
