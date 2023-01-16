@@ -1,9 +1,3 @@
-//
-//  ViewController.swift
-//  About This Hack
-//
-//
-
 import Cocoa
 
 class ViewController: NSViewController {
