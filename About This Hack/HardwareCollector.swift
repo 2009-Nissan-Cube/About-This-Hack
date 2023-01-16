@@ -5,7 +5,6 @@
 //
 
 import Foundation
-import Async
 
 class HardwareCollector {
     static var OSnum: String = "10.10.0"
@@ -35,69 +34,48 @@ class HardwareCollector {
 
     
     static func getAllData() {
-        let group = AsyncGroup()
         
         if (dataHasBeenSet) {return}
-        group.background {
-            OSnum = getOSnum()
-            print("OS Number: \(OSnum)")
-            setOSvers(osNumber: OSnum)
-            OSname = macOSversToString()
-            print("OS Name: \(OSname)")
-            osPrefix = getOSPrefix()
-            print("OS Prefix: \(osPrefix)")
-            OSBuildNum = getOSBuildNum()
-            print("OS Build Number: \(OSBuildNum)")
+        OSnum = getOSnum()
+        print("OS Number: \(OSnum)")
+        setOSvers(osNumber: OSnum)
+        OSname = macOSversToString()
+        print("OS Name: \(OSname)")
+        osPrefix = getOSPrefix()
+        print("OS Prefix: \(osPrefix)")
+        OSBuildNum = getOSBuildNum()
+        print("OS Build Number: \(OSBuildNum)")
+        macName = getMacName()
+        print("Mac name: \(macName)")
+        CPUstring = getCPU()
+        print("CPU: \(CPUstring)")
+        RAMstring = getRam()
+        print("RAM: \(RAMstring)")
+        GPUstring = getGPU()
+        print("GPU: \(GPUstring)")
+        DisplayString = getDisp()
+        print("Display(s): \(DisplayString)")
+        numberOfDisplays = getNumDisplays()
+        print("Number of Displays: \(numberOfDisplays)")
+        qhasBuiltInDisplay = hasBuiltInDisplay()
+        print("Has built-in display: \(qhasBuiltInDisplay)")
+        // getDisplayDiagonal() Having some issues, removing for now
+        StartupDiskString = getStartupDisk()
+        print("Startup Disk: \(StartupDiskString)")
+        SerialNumberString = getSerialNumber()
+        print("Serial Number: \(SerialNumberString)")
+        OpenCoreString = getOpenCore()
+        if !qHackintosh {
+            OpenCoreString = ""
+        } else {
+            print("OpenCore Version: \(OpenCoreString)")
         }
-        group.background {
-            macName = getMacName()
-            print("Mac name: \(macName)")
-        }
-        group.background {
-            CPUstring = getCPU()
-            print("CPU: \(CPUstring)")
-        }
-        group.background {
-            RAMstring = getRam()
-            print("RAM: \(RAMstring)")
-        }
-        group.background {
-            GPUstring = getGPU()
-            print("GPU: \(GPUstring)")
-        }
-        group.background {
-            DisplayString = getDisp()
-            print("Display(s): \(DisplayString)")
-            numberOfDisplays = getNumDisplays()
-            print("Number of Displays: \(numberOfDisplays)")
-            qhasBuiltInDisplay = hasBuiltInDisplay()
-            print("Has built-in display: \(qhasBuiltInDisplay)")
-            // getDisplayDiagonal() Having some issues, removing for now
-        }
-        group.background {
-            StartupDiskString = getStartupDisk()
-            print("Startup Disk: \(StartupDiskString)")
-        }
-        group.background {
-            SerialNumberString = getSerialNumber()
-            print("Serial Number: \(SerialNumberString)")
-        }
-        group.background {
-            OpenCoreString = getOpenCore()
-            if !qHackintosh {
-                OpenCoreString = ""
-            } else {
-                print("OpenCore Version: \(OpenCoreString)")
-            }
-        }
-        group.background {
-            storageType = getStorageType()
-            print("Storage Type: \(storageType)")
-            storageData = getStorageData()[0]
-            print("Storage Data: \(storageData)")
-            storagePercent = Double(getStorageData()[1])!
-            print("Storage Percent: \(storagePercent)")
-        }
+        storageType = getStorageType()
+        print("Storage Type: \(storageType)")
+        storageData = getStorageData()[0]
+        print("Storage Data: \(storageData)")
+        storagePercent = Double(getStorageData()[1])!
+        print("Storage Percent: \(storagePercent)")
         
         // For some reason these don't work in groups, to be fixed
         displayRes = getDisplayRes()
