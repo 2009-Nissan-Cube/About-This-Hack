@@ -1,5 +1,5 @@
 # About-This-Hack
-A simple application to view your exact hardware on macOS. Similar to About This Mac, but with more features, including AMD Processor Support, display resolution, and more! Works on both Hackintoshes *and* real Macs! <br>
+A simple application to view your exact hardware on macOS. Similar to About This Mac, but with more features, including AMD Processor Support, display resolution, and more! It retains the old "About This Mac" design language and is supported on both Hackintoshes and real Macs.<br>
 
 
 <img width="692" alt="M1 iMac Monterey" src="https://user-images.githubusercontent.com/71262643/175041661-246d1602-7e26-4631-ab9c-a37c785c87db.png">
