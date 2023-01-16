@@ -4,14 +4,15 @@ A simple application to view your exact hardware on macOS. Similar to About This
 
 <img width="692" alt="M1 iMac Monterey" src="https://user-images.githubusercontent.com/71262643/175041661-246d1602-7e26-4631-ab9c-a37c785c87db.png">
 
-![Hackintosh Ventura Light](https://user-images.githubusercontent.com/94565160/212776548-013f943d-8a37-4300-80f2-7a9dbca8550c.png)
+![Hackintosh Ventura Light](https://user-images.githubusercontent.com/94565160/212776668-3f7ff71a-e9cc-435b-b573-fa423771c775.png)
+
 
 # Supported OS's
 - **10.11 El Capitan and newer**
 - Not supported in any way in Linux or Windows
 
 # How To Install
-1) Download the zip file from the [latest release](https://github.com/0xCUB3/About-This-Hack/releases/tag/0.6.0)
+1) Download the zip file from the [latest release](https://github.com/0xCUB3/About-This-Hack/releases/latest)
 2) Drag the enclosed app to your Applications Folder
 3) Open it!
 
