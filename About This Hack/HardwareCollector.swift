@@ -220,7 +220,7 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         let count = graphicsArray.count
         var x = 0
         var gpuInfoFormatted = ""
-        while x < count {
+        while x < min(vramArray.count, graphicsArray.count) {
             gpuInfoFormatted.append("\(graphicsArray[x]) \(vramArray[x])\n")
             x += 1
         }
