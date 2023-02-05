@@ -12,6 +12,8 @@ class HardwareCollector {
     static var OSname: String = ""
     static var OSBuildNum: String = "19G101"
     static var macName: String = "Hackintosh Extreme Plus"
+    static var macInfo: String = "Hackintosh Extreme Plus"
+    static var SMBios: String = ""
     static var osPrefix: String = "macOS"
     static var CPUstring: String = "i7"
     static var RAMstring: String = "16 GB"
@@ -20,7 +22,8 @@ class HardwareCollector {
     static var StartupDiskString: String = "Macintosh HD"
     static var SerialNumberString: String = "XXXXXXXXXXX"
     static var qHackintosh = false
-    static var OpenCoreString: String = ""
+    static var BootloaderString: String = ""
+    static var BootloaderInfo: String = ""
     static var macType: macType = .LAPTOP
     static var numberOfDisplays: Int = 1
     static var dataHasBeenSet: Bool = false
@@ -47,9 +50,9 @@ class HardwareCollector {
             print("OS Prefix: \(osPrefix)")
             OSBuildNum = getOSBuildNum()
             print("OS Build Number: \(OSBuildNum)")
-            macName = getMacName()
         }
         queue.async {
+            macName = getMacName()
             print("Mac name: \(macName)")
             CPUstring = getCPU()
             print("CPU: \(CPUstring)")
@@ -78,12 +81,8 @@ class HardwareCollector {
         queue.async {
             SerialNumberString = getSerialNumber()
             print("Serial Number: \(SerialNumberString)")
-            OpenCoreString = getOpenCore()
-            if !qHackintosh {
-                OpenCoreString = ""
-            } else {
-                print("OpenCore Version: \(OpenCoreString)")
-            }
+            BootloaderString = getBootloader()
+            print("Bootloader: \(BootloaderString)")
         }
         queue.async {
             storageType = getStorageType()
@@ -173,35 +172,28 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
     }
     
     
-    static func getOpenCore() -> String {
-        var opencore1: String
-        var opencore2: String
-        var opencore3: String
-        var tmp: String
-        var opencoreType: String
-        opencore1 = run("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 59- | cut -c -1 | tr -d '\n'")
-        opencore2 = run("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 60- | cut -c -1 | tr -d '\n'")
-        opencore3 = run("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 61- | cut -c -1 | tr -d '\n'")
-        opencoreType = run("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | cut -c 55- | cut -c -3 | tr -d '\n'")
-        if opencore1.contains("0") {
-            if opencoreType.contains("REL") {
-                opencoreType = "(Release)"
-            } else if opencoreType.contains("N/A") {
-                opencoreType = ""
-            } else {
-                opencoreType = "(Debug)"
-            }
-            tmp = "\(opencore1).\(opencore2).\(opencore3) \(opencoreType)"
-            print(tmp, terminator: "")
+    static func getBootloader() -> String {
+        var BootloaderInfo: String = ""
+        BootloaderInfo = run("nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | awk '{print $2}' | awk -F'-' '{print $2}'")
+        if BootloaderInfo != "" {
             qHackintosh = true
+            BootloaderInfo = run("echo \"OpenCore Version \" $(nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | awk '{print $2}' | awk -F'-' '{print $2}' | sed -e 's/ */./g' -e s'/^.//g' -e 's/.$//g' -e 's/ .//g' -e 's/. //g' | tr -d '\n') $( nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | awk '{print $2}' | awk -F'-' '{print $1}' | sed -e 's/REL/(Release)/g' -e s'/N\\/A//g' -e 's/DEB/(Debug)/g' | tr -d '\n')")
         }
-        if(opencore1 == opencore2 && opencore2 == opencore3 && opencore3 == "") {
-            qHackintosh = false
-            print("No opencore; hiding menu")
-            return ""
+        else {
+            BootloaderInfo = run("system_profiler SPHardwareDataType | grep \"Clover\" | awk '{print $4,\"r\" $6,\"(\" $9,\" \"}' | tr -d '\n'")
+            if BootloaderInfo  != "" {
+                qHackintosh = true
+                BootloaderInfo += run("echo \"(\"$(/usr/local/bin/bdmesg | grep -i \"Build with: \\[Args:\" | awk -F '\\-b' '{print $NF}' |  awk -F '\\-t' '{print $1 $2}' | awk  '{print $2}' | awk '{print toupper(substr($0,0,1))tolower(substr($0,2))}') $(/usr/local/bin/bdmesg | grep -i \"Build with: \\[Args:\" | awk -F '\\-b' '{print $NF}' |  awk -F '\\-t' '{print $1 $2}' | awk  '{print $1}' | awk '{print toupper(substr($0,0,1))tolower(substr($0,2))}')\")\"")
+            }
+            else {
+                qHackintosh = false
+                BootloaderInfo = " "
+                print("No Bootloader found; hiding menu")
+            }
         }
-        return "\(opencore1).\(opencore2).\(opencore3) \(opencoreType)"
+        return BootloaderInfo
     }
+
     
     
     static func getSerialNumber() -> String {

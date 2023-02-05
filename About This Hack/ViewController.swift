@@ -114,7 +114,7 @@ class ViewController: NSViewController {
         
         // OpenCore Version (Optional)
         if HardwareCollector.qHackintosh {
-            ocVersion.stringValue = HardwareCollector.OpenCoreString
+            ocVersion.stringValue = HardwareCollector.BootloaderString
             ocVersion.isHidden = false
             ocPrefix.isHidden = false
         }
