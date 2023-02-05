@@ -19,8 +19,8 @@ class ViewController: NSViewController {
     @IBOutlet weak var serialToggle: NSButton!
     @IBOutlet weak var ocVersion: NSTextField!
     @IBOutlet weak var ocPrefix: NSTextField!
-
-    
+    @IBOutlet weak var systemReportButton: NSButton!
+    @IBOutlet weak var softwareUpdateButton: NSButton!
     
     
     var osNumber = run("sw_vers | grep ProductVersion | cut -c 17-")
@@ -153,9 +153,9 @@ class ViewController: NSViewController {
     }
     
     @IBAction func showSystemReport(_ sender: NSButton) {
-            print("System Report...")
-            run("open /System/Library/SystemProfiler/SPPlatformReporter.spreporter")
-        }
+        print("System Report...")
+        run("open /System/Library/SystemProfiler/SPPlatformReporter.spreporter")
+    }
         
     @IBAction func showSoftwareUpdate(_ sender: NSButton) {
         print("Software Update...")
