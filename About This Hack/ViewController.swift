@@ -151,4 +151,14 @@ class ViewController: NSViewController {
             serialNumber.stringValue = ""
         }
     }
+    
+    @IBAction func showSystemReport(_ sender: NSButton) {
+            print("System Report...")
+            run("open /System/Library/SystemProfiler/SPPlatformReporter.spreporter")
+        }
+        
+    @IBAction func showSoftwareUpdate(_ sender: NSButton) {
+        print("Software Update...")
+        run("open /System/Library/PreferencePanes/SoftwareUpdate.prefPane")
+    }
 }
