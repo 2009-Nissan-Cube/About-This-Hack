@@ -466,6 +466,12 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         case "Macmini9,1":
             macType = .DESKTOP
             return "Mac Mini (M1, 2020)"
+        case "Mac14,3":
+            macType = .DESKTOP
+            return "Mac Mini (M2, 2023)"
+        case "Mac14,12":
+            macType = .DESKTOP
+            return "Mac Mini (M2 Pro, 2023)"
             
         // Mac Pros
         case "MacPro3,1":
@@ -561,7 +567,7 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         case "MacBookAir10,1":
             builtInDisplaySize = 13
             return "MacBook Air (13-inch, M1, 2020)"
-        case "MacBookAir11,1": // just a guess
+        case "Mac14,2":
             builtInDisplaySize = 13
             return "MacBook Air (13-inch, M2, 2022)"
         
@@ -609,17 +615,20 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         case "MacBookPro16,2","MacBookPro16,3":
             builtInDisplaySize = 13
             return "MacBook Pro (Retina, 13-inch, Touch ID/Bar, Mid 2020)"
-        case "MacBookPro16,4":
-            builtInDisplaySize = 16
-            return "MacBook Pro (Retina, 16-inch, Touch ID/Bar, Mid 2019)"
         case "MacBookPro17,1":
             builtInDisplaySize = 13
             return "MacBook Pro (13-inch, M1, 2020)"
+        case "Mac14,7":
+            builtInDisplaySize = 13
+            return "MacBook Pro (13-inch, M2, 2022)"
             
         // 14-inch Models
         case "MacBookPro18,3","MacBookPro18,4":
             builtInDisplaySize = 14
             return "MacBook Pro (14-inch, 2021)"
+        case "Mac14,5","Mac14,9":
+            builtInDisplaySize = 14
+            return "MacBook Pro (14-inch, 2023)"
             
         // 15-inch Models
         case "MacBookPro6,2":
@@ -659,22 +668,21 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         // 16-inch Models
         case "MacBookPro16,1":
             builtInDisplaySize = 16
-            return "MacBook Pro (Retina, 16-inch, Touch ID/Bar, 2019)"
+            return "MacBook Pro (Retina, 16-inch, Touch ID/Bar, Mid 2019)"
+        case "MacBookPro16,4":
+            builtInDisplaySize = 16
+            return "MacBook Pro (Retina, 16-inch, Touch ID/Bar, Mid 2019)"
         case "MacBookPro18,1","MacBookPro18,2":
             builtInDisplaySize = 16
             return "MacBook Pro (16-inch, 2021)"
+        case "Mac14,6","Mac14,10":
+            builtInDisplaySize = 16
+            return "MacBook Pro (16-inch, 2023)"
         
         // 17-inch Models
         case "MacBookPro8,3":
             builtInDisplaySize = 17
             return "MacBook Pro (17-inch, Late 2011)"
-            
-        // New Macs which are weird for some reason...
-        case "Mac14,2":
-            return "MacBook Air (13-inch, M2, 2022)"
-            
-        case "Mac14,7":
-            return "MacBook Pro (13-inch, M2, 2022)"
        
         // In the rare case that the Mac is not detected
         case "Unknown","Mac":
