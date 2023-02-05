@@ -209,7 +209,7 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         let graphicsRAM  = run("system_profiler SPDisplaysDataType | grep VRAM | sed 's/.*: //'")
         let graphicsArray = graphicsTmp.components(separatedBy: "\n")
         let vramArray = graphicsRAM.components(separatedBy: "\n")
-        let count = graphicsArray.count
+        _ = graphicsArray.count
         var x = 0
         var gpuInfoFormatted = ""
         while x < min(vramArray.count, graphicsArray.count) {
