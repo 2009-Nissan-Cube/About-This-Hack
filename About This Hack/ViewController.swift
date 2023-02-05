@@ -17,11 +17,11 @@ class ViewController: NSViewController {
     @IBOutlet weak var startupDisk: NSTextField!
     @IBOutlet weak var serialNumber: NSTextField!
     @IBOutlet weak var serialToggle: NSButton!
-    @IBOutlet weak var ocVersion: NSTextField!
-    @IBOutlet weak var ocPrefix: NSTextField!
-    @IBOutlet weak var systemReportButton: NSButton!
-    @IBOutlet weak var softwareUpdateButton: NSButton!
-    
+    @IBOutlet weak var blVersion: NSTextField!
+    @IBOutlet weak var blPrefix: NSTextField!
+
+    @IBOutlet weak var btSysInfo: NSButton!
+    @IBOutlet weak var btSoftUpd: NSButton!
     
     var osNumber = run("sw_vers | grep ProductVersion | cut -c 17-")
     var modelID = "Mac"
@@ -112,16 +112,16 @@ class ViewController: NSViewController {
         // Serial Number
         serialNumber.stringValue = HardwareCollector.SerialNumberString
         
-        // OpenCore Version (Optional)
+        // Bootloader Version (Optional)
         if HardwareCollector.qHackintosh {
-            ocVersion.stringValue = HardwareCollector.BootloaderString
-            ocVersion.isHidden = false
-            ocPrefix.isHidden = false
+            blVersion.stringValue = HardwareCollector.BootloaderString
+            blVersion.isHidden = false
+            blPrefix.isHidden = false
         }
         else {
-            ocVersion.isHidden = true
-            ocPrefix.isHidden = true
-            ocVersion.stringValue = ""
+            blVersion.isHidden = true
+            blPrefix.isHidden = true
+            blVersion.stringValue = ""
         }
         
         // Make Serial Number Toggle Transparent
@@ -140,7 +140,7 @@ class ViewController: NSViewController {
         display.needsDisplay = true
         startupDisk.needsDisplay = true
         serialNumber.needsDisplay = true
-        ocVersion.needsDisplay = true
+        blVersion.needsDisplay = true
     }
     
     @IBAction func hideSerialNumber(_ sender: NSButton) {
