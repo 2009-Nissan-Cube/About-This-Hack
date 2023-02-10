@@ -154,11 +154,11 @@ class ViewController: NSViewController {
     
     @IBAction func showSystemReport(_ sender: NSButton) {
         print("System Report...")
-        run("open /System/Library/SystemProfiler/SPPlatformReporter.spreporter")
+        _ = run("open /System/Library/SystemProfiler/SPPlatformReporter.spreporter")
     }
         
     @IBAction func showSoftwareUpdate(_ sender: NSButton) {
         print("Software Update...")
-        run("open /System/Library/PreferencePanes/SoftwareUpdate.prefPane")
+        _ = run("open /System/Library/PreferencePanes/SoftwareUpdate.prefPane")
     }
 }
