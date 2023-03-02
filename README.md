@@ -2,10 +2,9 @@
 A simple application to view your exact hardware on macOS. Similar to About This Mac, but with more features, including AMD Processor Support, display resolution, and more! It retains the old "About This Mac" design language and is supported on both Hackintoshes and real Macs.<br>
 
 
-<img width="692" alt="M1 iMac Monterey" src="https://user-images.githubusercontent.com/71262643/175041661-246d1602-7e26-4631-ab9c-a37c785c87db.png">
-
 <img width="692" alt="M2 Pro Macbook Pro 14 Ventura" src="https://user-images.githubusercontent.com/94565160/222524244-c99cc627-4c90-4e3d-8c09-64f1e850641e.png">
 
+<img width="692" alt="M1 iMac Monterey" src="https://user-images.githubusercontent.com/71262643/175041661-246d1602-7e26-4631-ab9c-a37c785c87db.png">
 
 
 # Supported OS's
@@ -27,9 +26,12 @@ A simple application to view your exact hardware on macOS. Similar to About This
 
 In the app, there are four tabs on a tab bar at the top of the window, and each one visually presents some information about your system.
 
-The Overview tab presents standard system specifications, such as computer model, OS, processor, etc.
+The Overview tab presents standard system specifications, such as computer model, OS, processor, etc. The app also shows the Clover or OpenCore bootloader version, if applicable
 
 <img width="692" alt="M1 iMac Monterey" src="https://user-images.githubusercontent.com/71262643/175041661-246d1602-7e26-4631-ab9c-a37c785c87db.png">
+
+![Clover Hackintosh](https://user-images.githubusercontent.com/94565160/222528115-075a3b71-2bf6-4977-a021-3c0b2492be77.png)
+
 
 The Displays tab presents your monitors and internal displays. Up to 3 displays with their respective resolutions can be shown.
 
