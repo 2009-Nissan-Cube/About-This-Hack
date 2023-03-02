@@ -2,7 +2,6 @@
 //  HardwareCollector.swift
 //  HardwareCollector
 //
-//
 
 import Foundation
 
