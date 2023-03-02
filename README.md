@@ -35,19 +35,19 @@ The Overview tab presents standard system specifications, such as computer model
 
 The Displays tab presents your monitors and internal displays. Up to 3 displays with their respective resolutions can be shown.
 
-<img width="692" alt="Capture d’écran 2022-06-22 à 09 50 22" src="https://user-images.githubusercontent.com/71262643/175045609-45df2fd8-afab-4184-bc8a-b8bb62414094.png">
+<img width="692" alt="Display Screen" src="https://user-images.githubusercontent.com/71262643/175045609-45df2fd8-afab-4184-bc8a-b8bb62414094.png">
 
 Or with only one display:
 
-![image](https://user-images.githubusercontent.com/71262643/175046145-21a09c0a-f5bd-4b38-a6cc-1706c3567f9a.png)
+![Single Display](https://user-images.githubusercontent.com/71262643/175046145-21a09c0a-f5bd-4b38-a6cc-1706c3567f9a.png)
 
 The Storage tab presents your startup disk with its name, free and total storage, and a bar to indicate the amount used.
 
-<img width="692" alt="Capture d’écran 2022-06-22 à 09 49 55" src="https://user-images.githubusercontent.com/71262643/175045514-81a37dc7-9604-405a-901b-9d75ebcc19bb.png">
+<img width="692" alt="Storage Screen" src="https://user-images.githubusercontent.com/94565160/222528481-1379ebdf-912f-4df6-b1a6-9439f23a88ad.png">
 
 The Support tab contains numerous links to provide support with your Mac or Hackintosh. Note that the Mac links point to Apple's website, and the Hackintosh ones point to Dortania's guide.
 
-<img width="692" alt="Capture d’écran 2022-06-22 à 09 49 43" src="https://user-images.githubusercontent.com/71262643/175045493-b70e5c7c-f4ee-466b-8390-b6de8a96aeee.png">
+<img width="692" alt="Support Screen" src="https://user-images.githubusercontent.com/71262643/175045493-b70e5c7c-f4ee-466b-8390-b6de8a96aeee.png">
 
 
 # Credits
