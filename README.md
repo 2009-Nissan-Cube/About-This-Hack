@@ -30,8 +30,7 @@ The Overview tab presents standard system specifications, such as computer model
 
 <img width="692" alt="M1 iMac Monterey" src="https://user-images.githubusercontent.com/71262643/175041661-246d1602-7e26-4631-ab9c-a37c785c87db.png">
 
-![Clover Hackintosh](https://user-images.githubusercontent.com/94565160/222528115-075a3b71-2bf6-4977-a021-3c0b2492be77.png)
-
+![OpenCore Hackintosh](ImagesTMP/OC-Hackintosh.png?raw=true)
 
 The Displays tab presents your monitors and internal displays. Up to 3 displays with their respective resolutions can be shown.
 
