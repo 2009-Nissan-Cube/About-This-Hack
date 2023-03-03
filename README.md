@@ -26,11 +26,15 @@ A simple application to view your exact hardware on macOS. Similar to About This
 
 In the app, there are four tabs on a tab bar at the top of the window, and each one visually presents some information about your system.
 
-The Overview tab presents standard system specifications, such as computer model, OS, processor, etc. The app also shows the Clover or OpenCore bootloader version, if applicable
+The Overview tab presents standard system specifications, such as computer model, OS, processor, etc. The app also shows the Clover or OpenCore bootloader version, if applicable.
 
-<img width="692" alt="M1 iMac Monterey" src="https://user-images.githubusercontent.com/71262643/175041661-246d1602-7e26-4631-ab9c-a37c785c87db.png">
+About this Mac:
 
-<img width="692" alt="OpenCore Hackintosh" src="https://user-images.githubusercontent.com/71262643/175041661-246d1602-7e26-4631-ab9c-a37c785c87db.png">
+<img width="692" alt="M1 iMac Monterey" text="M1 iMac Monterey" src="https://user-images.githubusercontent.com/71262643/175041661-246d1602-7e26-4631-ab9c-a37c785c87db.png">
+
+About This Hack:
+
+<img width="692" alt="OpenCore Hackintosh" text="OpenCore Hackintosh" src="https://github.com/perez987/About-This-Hack/blob/main/ImagesTMP/OC-Hackintosh.png">
 
 The Displays tab presents your monitors and internal displays. Up to 3 displays with their respective resolutions can be shown.
 
