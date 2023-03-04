@@ -24,8 +24,6 @@ The Overview tab presents standard system specifications, such as computer model
 
 About this Mac:
 
-<img width="692" alt="M1 iMac Monterey" text="M1 iMac Monterey" src="https://user-images.githubusercontent.com/71262643/175041661-246d1602-7e26-4631-ab9c-a37c785c87db.png">
-
 <img width="692" alt="M2 Pro Macbook Pro 14 Ventura" src="https://user-images.githubusercontent.com/94565160/222524244-c99cc627-4c90-4e3d-8c09-64f1e850641e.png">
 
 
