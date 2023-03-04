@@ -34,7 +34,7 @@ About this Mac:
 
 About This Hack:
 
-<img width="692" alt="OpenCore Hackintosh" text="OpenCore Hackintosh" src="https://github.com/perez987/About-This-Hack/blob/main/ImagesTMP/OC-Hackintosh.png">
+<img width="692" alt="OpenCore Hackintosh" text="OpenCore Hackintosh" src="ImagesTMP/OC-Hackintosh.png">
 
 The Displays tab presents your monitors and internal displays. Up to 3 displays with their respective resolutions can be shown.
 
