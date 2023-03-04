@@ -714,10 +714,26 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
             }
         }
         print("%: \(1-percent)")
-        return ["""
-\(name)
-\(size)(\(available)Available)
-""",String(1-percent)]
+        
+        // Get the main language code (en for English, es for Spanish)
+        var idioma = Bundle.main.preferredLocalizations[0]
+        // print("Idioma : \(idioma)")  // for testing
+        
+        // If it's Spanish
+        if idioma == "es" {
+            return ["""
+    \(name)
+    \(size)(\(available)Disponible)
+    """,String(1-percent)]
+        }
+        else { // If it isn't Spanish
+            return ["""
+    \(name)
+    \(size)(\(available)Available)
+    """,String(1-percent)]
+            
+        }
+
     }
 }
 
