@@ -53,7 +53,6 @@ The Support tab contains numerous links to provide support with your Mac or Hack
 [Snoopy](https://macosicons.com/#/u/Squid4572) for helping create the new icon. <br>
 The internet for helping me with a lot of the code.
 
-
 # Contact
 You can reach me at the following destinations: <br>
 Discord - 0xCUBE#9118 <br>
