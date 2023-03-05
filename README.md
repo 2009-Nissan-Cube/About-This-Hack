@@ -26,20 +26,17 @@ About this Mac:
 
 <img width="692" alt="M2 Pro Macbook Pro 14 Ventura" src="https://user-images.githubusercontent.com/94565160/222524244-c99cc627-4c90-4e3d-8c09-64f1e850641e.png">
 
-
 About This Hack:
 
 <img width="692" alt="OpenCore Hackintosh" text="OpenCore Hackintosh" src="ImagesTMP/OC-Hackintosh.png">
 
 The Displays tab presents your monitors and internal displays. Up to 3 displays with their respective resolutions can be shown.
 
-<img width="692" alt="Display Screen" src="https://user-images.githubusercontent.com/71262643/175045609-45df2fd8-afab-4184-bc8a-b8bb62414094.png">
+<img width="692" alt="Display Screen" text="Display Screen" src="ImagesTMP/display-screen.png">
 
 Or with only one display:
 
 <img width="692" alt="Single Display" text="Single Display" src="ImagesTMP/one-screen.png">
-
-<!-- ![Single Display](https://user-images.githubusercontent.com/71262643/175046145-21a09c0a-f5bd-4b38-a6cc-1706c3567f9a.png) -->
 
 The Storage tab presents your startup disk with its name, free and total storage, and a bar to indicate the amount used.
 
@@ -48,7 +45,6 @@ The Storage tab presents your startup disk with its name, free and total storage
 The Support tab contains numerous links to provide support with your Mac or Hackintosh. Note that the Mac links point to Apple's website, and the Hackintosh ones point to Dortania's guide.
 
 <img width="692" alt="Support Screen" src="https://user-images.githubusercontent.com/71262643/175045493-b70e5c7c-f4ee-466b-8390-b6de8a96aeee.png">
-
 
 # Credits
 [MDNich](https://github.com/MDNich) for helping out a ton with features, code, and setting up the update server. <br>
