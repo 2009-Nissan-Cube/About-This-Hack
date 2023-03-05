@@ -37,7 +37,9 @@ The Displays tab presents your monitors and internal displays. Up to 3 displays 
 
 Or with only one display:
 
-![Single Display](https://user-images.githubusercontent.com/71262643/175046145-21a09c0a-f5bd-4b38-a6cc-1706c3567f9a.png)
+<img width="692" alt="Single Display" text="Single Display" src="ImagesTMP/one-screen.png">
+
+<!-- ![Single Display](https://user-images.githubusercontent.com/71262643/175046145-21a09c0a-f5bd-4b38-a6cc-1706c3567f9a.png) -->
 
 The Storage tab presents your startup disk with its name, free and total storage, and a bar to indicate the amount used.
 
