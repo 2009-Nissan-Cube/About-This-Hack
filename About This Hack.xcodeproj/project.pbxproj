@@ -36,6 +36,7 @@
 		58134C0128668FF70008B00D /* Keycodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keycodes.swift; sourceTree = "<group>"; };
 		589B667B26D7B694000509DC /* HardwareCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardwareCollector.swift; sourceTree = "<group>"; };
 		58B5C96B29B8DFEA0080DCA3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = fr; path = fr.lproj/Main.storyboard; sourceTree = "<group>"; };
+		58B5C96C29B8E6750080DCA3 /* ro */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ro; path = ro.lproj/Main.storyboard; sourceTree = "<group>"; };
 		58B988D326D7ABFE0092EC5B /* ViewControllerDisplays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDisplays.swift; sourceTree = "<group>"; };
 		58B988D526D7ACD70092EC5B /* ViewControllerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerService.swift; sourceTree = "<group>"; };
 		58B988D626D7ACD70092EC5B /* ViewControllerStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerStorage.swift; sourceTree = "<group>"; };
@@ -143,6 +144,7 @@
 				Base,
 				es,
 				fr,
+				ro,
 			);
 			mainGroup = 115D920526D6F65500F5DF35;
 			packageReferences = (
@@ -198,6 +200,7 @@
 				D91B9F7429B27FA800AB58B7 /* en */,
 				D91B9F7629B27FB400AB58B7 /* es */,
 				58B5C96B29B8DFEA0080DCA3 /* fr */,
+				58B5C96C29B8E6750080DCA3 /* ro */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

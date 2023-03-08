@@ -737,6 +737,12 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
     \(size)(\(available)Disponible)
     """,String(1-percent)]
         }
+        else if idioma == "ro" {
+            return ["""
+    \(name)
+    \(size)(\(available)Disponibil)
+    """,String(1-percent)]
+        }
         
         else { // If it isn't Spanish
             return ["""
