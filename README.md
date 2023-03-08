@@ -5,6 +5,11 @@ A simple application to view your exact hardware on macOS. Similar to About This
 - **10.11 El Capitan and newer**
 - Not supported in any way in Linux or Windows
 
+## Localizations
+
+Available in English, Spanish, French, and Romanian.
+
+
 # How To Install
 1) Download the zip file from the [latest release](https://github.com/0xCUB3/About-This-Hack/releases/latest)
 2) Drag the enclosed app to your Applications Folder
@@ -45,10 +50,6 @@ The Storage tab presents your startup disk with its name, free and total storage
 The Support tab contains numerous links to provide support with your Mac or Hackintosh. Note that the Mac links point to Apple's website, and the Hackintosh ones point to Dortania's guide.
 
 <img width="692" alt="Support Screen" src="https://user-images.githubusercontent.com/71262643/175045493-b70e5c7c-f4ee-466b-8390-b6de8a96aeee.png">
-
-# Localizations
-
-Available in English, Spanish, French, and Romanian - use latest commit, not release.
 
 # Credits
 [MDNich](https://github.com/MDNich) for helping out a ton with features, code, and setting up the update server. <br>
