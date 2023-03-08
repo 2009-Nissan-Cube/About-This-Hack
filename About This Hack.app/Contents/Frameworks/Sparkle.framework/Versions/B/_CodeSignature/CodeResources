@@ -901,10 +901,10 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			Zj9tvwAzpSEdLMTD6B6HcfN3TJE=
+			xsITNezb4Tr2/lkWWSsZRHdj+Wo=
 			</data>
 			<key>requirement</key>
-			<string>identifier "Autoupdate-55554944c5ebe882ca363b95991f248364b2551f" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>cdhash H"4a3b1ecd08d5620562d1bbb61761cf06774630eb" or cdhash H"c6c21335ecdbe13af6fe5916592b19447763f96a" or cdhash H"9741dcf5b0f858585e0ace45176fabcb3d1f1377" or cdhash H"a56dcfe04051e2c30c2bb311332a596d385f3467"</string>
 		</dict>
 		<key>Resources/Base.lproj/SUUpdateAlert.nib/keyedobjects-101300.nib</key>
 		<dict>
@@ -2253,28 +2253,28 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			v16GnRSsSFA1dJAs+K+b+XZYa54=
+			IoV+Rd3T65C+8SpSK7sLG6rsN1A=
 			</data>
 			<key>requirement</key>
-			<string>identifier "org.sparkle-project.Sparkle.Updater" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>cdhash H"0225b1fc064cd97a37297079dfb0a162cbb76284" or cdhash H"22857e45ddd3eb90bef12a522bbb0b1baaec3750" or cdhash H"e5773ea526240f70c403da59ed5dfcf8222d8781" or cdhash H"10262b7643f295e8042fb9fe4a21a90e0c1a85c7"</string>
 		</dict>
 		<key>XPCServices/Downloader.xpc</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			UNt4thCuDWLgdZGm2BUYl29DGMs=
+			bkSiZFfrpjZPIt8IlFtECFygqjM=
 			</data>
 			<key>requirement</key>
-			<string>identifier "org.sparkle-project.Downloader" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>cdhash H"006aba8fb3a6a0f3a766d85f7cc4698b2646008e" or cdhash H"6e44a26457eba6364f22df08945b44085ca0aa33" or cdhash H"144fe520b850ba7d0a910b3558aaaf865a6bdc7d" or cdhash H"538cb1146ea119ec4f2a4b445739d6e2c317ab70"</string>
 		</dict>
 		<key>XPCServices/Installer.xpc</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			ebhqJWQPaPBNS124PUS7+rMtKzI=
+			jcEwV8C4P44j6e233c1GYhdHrWc=
 			</data>
 			<key>requirement</key>
-			<string>identifier "org.sparkle-project.InstallerLauncher" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>cdhash H"86eaa6bf48b0ad3159162bb6fa847bf369a853ff" or cdhash H"8dc13057c0b83f8e23e9edb7ddcd46621747ad67" or cdhash H"877c1eb33fecf4759449ca04a5b13a055f5d4226" or cdhash H"f5ab04dc8e788ecd0112e5c82f462de6b8b4662f"</string>
 		</dict>
 	</dict>
 	<key>rules</key>

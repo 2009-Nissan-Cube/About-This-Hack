@@ -6,88 +6,246 @@
 	<dict>
 		<key>Resources/AppIcon.icns</key>
 		<data>
-		oIMv86RpkAitw2q97sIZgWz/9/I=
+		sFI/s+yJOzhVt9jPvBTBcdZKF64=
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		T43fnfq2kbEg7Ybei113kqYu0sw=
+		ZJEzTg6zLIbVSKJrhYd9aqHQSHk=
 		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/Info.plist</key>
-		<data>
-		YflqCNL4FfDgmZSZ4FTyZiHRoA8=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib/keyedobjects-101300.nib</key>
-		<data>
-		yufRJZuE6KeNovEUhuYHQyhkS8I=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib/keyedobjects-110000.nib</key>
-		<data>
-		8GzZf9RYmTJQozjswK5ktmjb6nA=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib/keyedobjects.nib</key>
-		<data>
-		uJW37ghauir5/kH7JYslwXDSIHA=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects-101300.nib</key>
-		<data>
-		6yQ43JmvYQqnTQVOqxVPHxY21fc=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects-110000.nib</key>
-		<data>
-		FPnsFL/CCxneea7bZtaqu1ARkqM=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects.nib</key>
-		<data>
-		I5CQzk42a98ozZs9Hyh3m6OdrRY=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/Nau-hC-e0F-view-5JA-sc-4eo.nib/keyedobjects-101300.nib</key>
-		<data>
-		XrTfz0IKCzD3H/prKKos9zeqk9I=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/Nau-hC-e0F-view-5JA-sc-4eo.nib/keyedobjects-110000.nib</key>
-		<data>
-		LNclXk4SnIzFqtvaNddIaKzrBUQ=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/Nau-hC-e0F-view-5JA-sc-4eo.nib/keyedobjects.nib</key>
-		<data>
-		nG3yqbxotWb+vAHTmH6xAqswVek=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib/keyedobjects-101300.nib</key>
-		<data>
-		xnlJT4HFE371cjmzKX9qmkvf7b4=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib/keyedobjects-110000.nib</key>
-		<data>
-		urjKCOGcvM8t5reVPNmcRFJ6jnc=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib/keyedobjects.nib</key>
-		<data>
-		U8zn4ZdQKDPYptEUZmotkzUb8YE=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/cTB-fT-bUH-view-S5G-j8-IfD.nib/keyedobjects-101300.nib</key>
-		<data>
-		NEYuA8A7gcpnh4oylyfj+sTpMvM=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/cTB-fT-bUH-view-S5G-j8-IfD.nib/keyedobjects-110000.nib</key>
-		<data>
-		NEYuA8A7gcpnh4oylyfj+sTpMvM=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/cTB-fT-bUH-view-S5G-j8-IfD.nib/keyedobjects.nib</key>
-		<data>
-		+YDQeElKTEaco4RWkDJrmyFKaiQ=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/wzq-Ng-O1T-view-Pj4-hd-duo.nib/keyedobjects-101300.nib</key>
-		<data>
-		QJudiYaTUcpnG6icclupb5s07qk=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/wzq-Ng-O1T-view-Pj4-hd-duo.nib/keyedobjects-110000.nib</key>
-		<data>
-		QJudiYaTUcpnG6icclupb5s07qk=
-		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/wzq-Ng-O1T-view-Pj4-hd-duo.nib/keyedobjects.nib</key>
-		<data>
-		kLUg2g5sH+aPxN1s21+6X/O4eCA=
-		</data>
+		<key>Resources/en.lproj/Main.storyboardc/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			GB5WtthFPTMjy85OpKlMQNgjBB4=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/en.lproj/Main.storyboardc/MainMenu.nib/keyedobjects-110000.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			KcUnEfByJv5VJeFlDh2FB9p5A2U=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/en.lproj/Main.storyboardc/MainMenu.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			XbW5xMdPmVGCgfYjys6dYaqpZYs=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/en.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects-110000.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ezbMFQiJ/KfmiXltv+m4t3o/DWo=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/en.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			II0B4LzgcETTfC2/fV4ovX2n4FI=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/en.lproj/Main.storyboardc/Nau-hC-e0F-view-5JA-sc-4eo.nib/keyedobjects-110000.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			nSqWQdf4DN7GeyoCBx75OA6ps+4=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/en.lproj/Main.storyboardc/Nau-hC-e0F-view-5JA-sc-4eo.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			uEEH9A/HG9IjPDJgj94ogxRrpvg=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/en.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib/keyedobjects-110000.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			QByzOWV+2SDGRT9D8FpjH8AjETE=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/en.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			QIjrnmdIDJdYD2G/Qe0D6L8Drc4=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/en.lproj/Main.storyboardc/cTB-fT-bUH-view-S5G-j8-IfD.nib/keyedobjects-110000.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			/+Nx6aUbryjEnyzVqe6HPRveclU=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/en.lproj/Main.storyboardc/cTB-fT-bUH-view-S5G-j8-IfD.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			/+Nx6aUbryjEnyzVqe6HPRveclU=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/en.lproj/Main.storyboardc/wzq-Ng-O1T-view-Pj4-hd-duo.nib/keyedobjects-110000.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			LZIWwtEDPm0OJObGUlTrZfR8A+U=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/en.lproj/Main.storyboardc/wzq-Ng-O1T-view-Pj4-hd-duo.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			LZIWwtEDPm0OJObGUlTrZfR8A+U=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			CWX6w7p592nnD1VXoTmggkx7Y1w=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/MainMenu.nib/keyedobjects-110000.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			/dXt4cBbJ/5c4KoQhSZcWm+N/kM=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/MainMenu.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			I/ak6dKsMdniRdCGvXRv36ldyGc=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects-110000.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			dyIgPR/cXzDAv0NPvGm88VbzxfM=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			s5e1yUhCBuLMWqTas2C79VLiae0=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/Nau-hC-e0F-view-5JA-sc-4eo.nib/keyedobjects-110000.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			9gg27veBRT18rGkv7+6GU0XlkJE=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/Nau-hC-e0F-view-5JA-sc-4eo.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			h32KXuRV2WNstscBDn2a5H9voXw=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib/keyedobjects-110000.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			8zmwCj/l2nvL1MYD89mcJfT4MD0=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			4xBTmdiCKlsjI+8XZ3LpVUbL84s=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/cTB-fT-bUH-view-S5G-j8-IfD.nib/keyedobjects-110000.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xpE1A+NZZmPLAelN2o8oU+YOMuc=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/cTB-fT-bUH-view-S5G-j8-IfD.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xpE1A+NZZmPLAelN2o8oU+YOMuc=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/wzq-Ng-O1T-view-Pj4-hd-duo.nib/keyedobjects-110000.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			LaGngUKIpXdz865OlzaK706fOFQ=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/wzq-Ng-O1T-view-Pj4-hd-duo.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			LaGngUKIpXdz865OlzaK706fOFQ=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 	</dict>
 	<key>files2</key>
 	<dict>
@@ -95,376 +253,258 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			0DtOhmbVABW9Go988WlQMAxvOxk=
+			AL5x6HCd1qhpVt4FHhyE6nTEkIQ=
 			</data>
 			<key>requirement</key>
-			<string>identifier "org.sparkle-project.Sparkle" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
-		</dict>
-		<key>Frameworks/libswiftAppKit.dylib</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			T/IysCYIPm+tD6mk1fPSToQ8Erw=
-			</data>
-			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftAppKit" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
-		</dict>
-		<key>Frameworks/libswiftCore.dylib</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			eJH1SsRps1OMr5diEXE4LNtS5/o=
-			</data>
-			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftCore" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
-		</dict>
-		<key>Frameworks/libswiftCoreData.dylib</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			N2/OWMLHUuYfdZw7AaQ7Aeg2wvY=
-			</data>
-			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftCoreData" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
-		</dict>
-		<key>Frameworks/libswiftCoreFoundation.dylib</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			0NYZ1QFhYDEyVxmwFvClnhiop/g=
-			</data>
-			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftCoreFoundation" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
-		</dict>
-		<key>Frameworks/libswiftCoreGraphics.dylib</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			13CDA/ub3t4dsKMJ2jlkqPJ0BEE=
-			</data>
-			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftCoreGraphics" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
-		</dict>
-		<key>Frameworks/libswiftCoreImage.dylib</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			lH3PuIG0thHrbK5EBigPy8tvp4I=
-			</data>
-			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftCoreImage" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
-		</dict>
-		<key>Frameworks/libswiftDarwin.dylib</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			I1PyVDagx4S0D5Yl/CwtLKf/gGE=
-			</data>
-			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftDarwin" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
-		</dict>
-		<key>Frameworks/libswiftDispatch.dylib</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			ozvq/+ODeMRGTW/fTOGkKBvMfRk=
-			</data>
-			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftDispatch" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
-		</dict>
-		<key>Frameworks/libswiftFoundation.dylib</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			02j7671QrM5ExPOrfkH/5x3CcEo=
-			</data>
-			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftFoundation" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
-		</dict>
-		<key>Frameworks/libswiftIOKit.dylib</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			25PmnWIWHrJptB9os4V6P8lEp3s=
-			</data>
-			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftIOKit" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
-		</dict>
-		<key>Frameworks/libswiftMetal.dylib</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			M3KUvt+/L4+EifFKkICIjX7PcB4=
-			</data>
-			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftMetal" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
-		</dict>
-		<key>Frameworks/libswiftObjectiveC.dylib</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			heJ/Z3lnj5ZdJjnlbVYxKK11LCw=
-			</data>
-			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftObjectiveC" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
-		</dict>
-		<key>Frameworks/libswiftQuartzCore.dylib</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			GNYCszxHP5RS6f+Yl6mWOqu0qo8=
-			</data>
-			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftQuartzCore" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
-		</dict>
-		<key>Frameworks/libswiftXPC.dylib</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			p9a87oMzv/5yA9KC7wCnTNlLUj4=
-			</data>
-			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftXPC" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
-		</dict>
-		<key>Frameworks/libswiftos.dylib</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			hPrO2wACJmkKsUJC/y8CsvOvYBc=
-			</data>
-			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftos" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Amin Aenurahman (5PCLMK3V4X)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>cdhash H"4c9976566b7c9d1fb13b36eb97525920ff9757ca" or cdhash H"00be71e8709dd6a86956de051e1c84ea74c49084" or cdhash H"e5e94de92bdb2273e4c7b59c252ebb2751c1faaa" or cdhash H"7266eee481d9dda22a12f3bda4ed6b869cf0c0e3"</string>
 		</dict>
 		<key>Resources/AppIcon.icns</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			oIMv86RpkAitw2q97sIZgWz/9/I=
-			</data>
 			<key>hash2</key>
 			<data>
-			ZEWW/7jnDRWva+iQzsnkPMAXjnUkIsEj6oksYvVd4x8=
+			lpl7eKhpX1ZD/dcu8Xjxfa/psrg/fa/PYVWdVwRR79Y=
 			</data>
 		</dict>
 		<key>Resources/Assets.car</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			T43fnfq2kbEg7Ybei113kqYu0sw=
-			</data>
 			<key>hash2</key>
 			<data>
-			Z2/YY4XJZQd9obyENHaFP0wZDZq3G3ygdaOKTJs5IME=
+			8rz5JkLdk08i0KezSaetd3+0dPEFQzgC3YEIBh4H9kQ=
 			</data>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/Info.plist</key>
+		<key>Resources/en.lproj/Main.storyboardc/Info.plist</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			YflqCNL4FfDgmZSZ4FTyZiHRoA8=
-			</data>
 			<key>hash2</key>
 			<data>
-			V1fMUUlbds1XATYeod1qqP5QYo/nBg8occMHsybboHE=
+			P0w/qaX+uQniO358daAZQ/hgkYapqlxoWC+AQdnAtdM=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib/keyedobjects-101300.nib</key>
+		<key>Resources/en.lproj/Main.storyboardc/MainMenu.nib/keyedobjects-110000.nib</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			yufRJZuE6KeNovEUhuYHQyhkS8I=
-			</data>
 			<key>hash2</key>
 			<data>
-			jT+6hN30bSNTJepS7IExsrn+CemFTxd1aAC5L0IPF4g=
+			UH6NzZJ5idShKZECAnT8H2HR7jSjGwmKwWCl9kyIbzo=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib/keyedobjects-110000.nib</key>
+		<key>Resources/en.lproj/Main.storyboardc/MainMenu.nib/keyedobjects.nib</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			8GzZf9RYmTJQozjswK5ktmjb6nA=
-			</data>
 			<key>hash2</key>
 			<data>
-			eQXeRRo/H/2+dUzJSsO6Do6GndNRZ+x9IWbP9BGk6/k=
+			OqiQyGNq1SaBUJFjD50sH2UDatUQcwSJZmvIwOFBX8k=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib/keyedobjects.nib</key>
+		<key>Resources/en.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects-110000.nib</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			uJW37ghauir5/kH7JYslwXDSIHA=
-			</data>
 			<key>hash2</key>
 			<data>
-			R1rWxqsmxmMQwKQfHuQfUm+7kuQHy/Y+0Vi3g/B2FcQ=
+			/VrvDkPx3v0qcwCX/hr3i0DlE8CRugYko/rVWbyKiU4=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects-101300.nib</key>
+		<key>Resources/en.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects.nib</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			6yQ43JmvYQqnTQVOqxVPHxY21fc=
-			</data>
 			<key>hash2</key>
 			<data>
-			744EXm47HVZp6G1hovZhLT2fH7HYYQkcKZmousbnBkM=
+			EtBrDhXOb6yr+KwRtQrnrdJi1OuksRhOD8BNq6xWytw=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects-110000.nib</key>
+		<key>Resources/en.lproj/Main.storyboardc/Nau-hC-e0F-view-5JA-sc-4eo.nib/keyedobjects-110000.nib</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			FPnsFL/CCxneea7bZtaqu1ARkqM=
-			</data>
 			<key>hash2</key>
 			<data>
-			f9UqoWheJdMQvshZ1hjQZTE1aAQsCjfUQJqZx5AHPy4=
+			UiIR6an+nS9RDQbQyXc/R4wk5gp1eDMkJs6lVj4ZhV4=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects.nib</key>
+		<key>Resources/en.lproj/Main.storyboardc/Nau-hC-e0F-view-5JA-sc-4eo.nib/keyedobjects.nib</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			I5CQzk42a98ozZs9Hyh3m6OdrRY=
-			</data>
 			<key>hash2</key>
 			<data>
-			1zkJ1KOCI7th6QU11SUX7tJNKOHTtSSLg2cmc475ojs=
+			PFv7IkeUSYUKRpOoZkFdMZp74yrCZVBguZuyB5WkMmU=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/Nau-hC-e0F-view-5JA-sc-4eo.nib/keyedobjects-101300.nib</key>
+		<key>Resources/en.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib/keyedobjects-110000.nib</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			XrTfz0IKCzD3H/prKKos9zeqk9I=
-			</data>
 			<key>hash2</key>
 			<data>
-			lBQf9k0eNYSCSje6h/lcKORPmj77xvkDXpcCl82fYtY=
+			QeR3fHq8D8ONLqJ99mwuFICmZBQ/3Uhjs6YfawRrwic=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/Nau-hC-e0F-view-5JA-sc-4eo.nib/keyedobjects-110000.nib</key>
+		<key>Resources/en.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib/keyedobjects.nib</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			LNclXk4SnIzFqtvaNddIaKzrBUQ=
-			</data>
 			<key>hash2</key>
 			<data>
-			W181btOaROkPXp86LkECVjobHLIN2Te4aEExn3HkmqE=
+			3nkWLmzxyT0YwyPQ2b79G6WIqz+EaUK7fF51OIHdXQc=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/Nau-hC-e0F-view-5JA-sc-4eo.nib/keyedobjects.nib</key>
+		<key>Resources/en.lproj/Main.storyboardc/cTB-fT-bUH-view-S5G-j8-IfD.nib/keyedobjects-110000.nib</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			nG3yqbxotWb+vAHTmH6xAqswVek=
-			</data>
 			<key>hash2</key>
 			<data>
-			fDH0Rl3tF5KjKs3O8ZYg1XWvy2vJs9YJ61QNyxlW/m0=
+			qDUsrzovOJoD+XoADQNMmt5Pqbj1Zi+jFGazCdH9ido=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib/keyedobjects-101300.nib</key>
+		<key>Resources/en.lproj/Main.storyboardc/cTB-fT-bUH-view-S5G-j8-IfD.nib/keyedobjects.nib</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			xnlJT4HFE371cjmzKX9qmkvf7b4=
-			</data>
 			<key>hash2</key>
 			<data>
-			Ie6mednU3ve2pD41Uic+6gticuPM2CeD90wLxjvLnkw=
+			qDUsrzovOJoD+XoADQNMmt5Pqbj1Zi+jFGazCdH9ido=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib/keyedobjects-110000.nib</key>
+		<key>Resources/en.lproj/Main.storyboardc/wzq-Ng-O1T-view-Pj4-hd-duo.nib/keyedobjects-110000.nib</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			urjKCOGcvM8t5reVPNmcRFJ6jnc=
-			</data>
 			<key>hash2</key>
 			<data>
-			4YmR5KknPgfSn/K3OErtbMbYL0BLh6ddC6qNT5r1Pn8=
+			Yua+dTzFwYqxLkYC0GfiZII8M+BhZRSq3ezvaPB2ZVU=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib/keyedobjects.nib</key>
+		<key>Resources/en.lproj/Main.storyboardc/wzq-Ng-O1T-view-Pj4-hd-duo.nib/keyedobjects.nib</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			U8zn4ZdQKDPYptEUZmotkzUb8YE=
-			</data>
 			<key>hash2</key>
 			<data>
-			7Sgxnrf04dzeXW0KTBsN5jnWEV+bjn5ljaoIZBCvDcc=
+			Yua+dTzFwYqxLkYC0GfiZII8M+BhZRSq3ezvaPB2ZVU=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/cTB-fT-bUH-view-S5G-j8-IfD.nib/keyedobjects-101300.nib</key>
+		<key>Resources/es.lproj/Main.storyboardc/Info.plist</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			NEYuA8A7gcpnh4oylyfj+sTpMvM=
-			</data>
 			<key>hash2</key>
 			<data>
-			aZLYU+yHiKkOOTqTFfi66j1xxV0bI0nTxvUvJWsUG9M=
+			xGvpoi56BYxbziwrHeiBf0l6BHJ+woZQl+39x7/9Yu8=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/cTB-fT-bUH-view-S5G-j8-IfD.nib/keyedobjects-110000.nib</key>
+		<key>Resources/es.lproj/Main.storyboardc/MainMenu.nib/keyedobjects-110000.nib</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			NEYuA8A7gcpnh4oylyfj+sTpMvM=
-			</data>
 			<key>hash2</key>
 			<data>
-			aZLYU+yHiKkOOTqTFfi66j1xxV0bI0nTxvUvJWsUG9M=
+			s+Mh+sBYsOGCzb029IjDxv0NRJv+/RhmC9Z0sMIoMeU=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/cTB-fT-bUH-view-S5G-j8-IfD.nib/keyedobjects.nib</key>
+		<key>Resources/es.lproj/Main.storyboardc/MainMenu.nib/keyedobjects.nib</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			+YDQeElKTEaco4RWkDJrmyFKaiQ=
-			</data>
 			<key>hash2</key>
 			<data>
-			H58VCZSekS2NyT1dEAw4QOx6jDbilE8OpCk5W12IdSs=
+			AjVOezDBboCUfKqz6qijgA27+elDvy6OVrHKbBElvds=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/wzq-Ng-O1T-view-Pj4-hd-duo.nib/keyedobjects-101300.nib</key>
+		<key>Resources/es.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects-110000.nib</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			QJudiYaTUcpnG6icclupb5s07qk=
-			</data>
 			<key>hash2</key>
 			<data>
-			ndaLGy4raMpHoNnB7YHAQ7dF93opS2WL+ksfF1Vu41c=
+			ScwJqTIYnJ+mkPPuQ4Lpcb2yA8Rljgj/EPRO2mk9lJM=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/wzq-Ng-O1T-view-Pj4-hd-duo.nib/keyedobjects-110000.nib</key>
+		<key>Resources/es.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects.nib</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			QJudiYaTUcpnG6icclupb5s07qk=
-			</data>
 			<key>hash2</key>
 			<data>
-			ndaLGy4raMpHoNnB7YHAQ7dF93opS2WL+ksfF1Vu41c=
+			JXKWTpjhA6IMyISOuqNwsu5XllivTYBcP7TOGkE7QdA=
 			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/wzq-Ng-O1T-view-Pj4-hd-duo.nib/keyedobjects.nib</key>
+		<key>Resources/es.lproj/Main.storyboardc/Nau-hC-e0F-view-5JA-sc-4eo.nib/keyedobjects-110000.nib</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			kLUg2g5sH+aPxN1s21+6X/O4eCA=
-			</data>
 			<key>hash2</key>
 			<data>
-			ZE4N60kUdgC5PwIhboMAT8fbwkpocUosfTEQinj0gM8=
+			NxONHQx3DSZDg3WFrJkBpyzDripMnb3dFloJR3Ig2cQ=
 			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/Nau-hC-e0F-view-5JA-sc-4eo.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			BGgOwwQeNYrYPOSHVgop9u50o999Zw5gla1yp4plhvA=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib/keyedobjects-110000.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			lPnX7Tex8jIRDfQoYKu6TOzwef3m+K4MLY/kwiej+0I=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			EKwIIyF6Q6lH4CP1dTrg+mslKwsYI70n8FIm7XwA4JM=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/cTB-fT-bUH-view-S5G-j8-IfD.nib/keyedobjects-110000.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			OFXAKZN/AoTUXnkIbt2tFM9BWwTFvzlC+TFxZXZnfcY=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/cTB-fT-bUH-view-S5G-j8-IfD.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			OFXAKZN/AoTUXnkIbt2tFM9BWwTFvzlC+TFxZXZnfcY=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/wzq-Ng-O1T-view-Pj4-hd-duo.nib/keyedobjects-110000.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Zealnb9W/CVvL2lZ2EYfM8Y/QWr/4UaTmQpSOQCHtQI=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/es.lproj/Main.storyboardc/wzq-Ng-O1T-view-Pj4-hd-duo.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Zealnb9W/CVvL2lZ2EYfM8Y/QWr/4UaTmQpSOQCHtQI=
+			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
 	</dict>
 	<key>rules</key>

@@ -21,7 +21,7 @@ class ViewControllerSupport: NSViewController {
         }
     }
     @IBAction func whatsNewInMacOSPress(_ sender: NSButton) {
-        let url = URL(string: "https://help.apple.com/macos/big-sur/whats-new/")!
+        let url = URL(string: "https://www.apple.com/es/macos/ventura/")!
         if NSWorkspace.shared.open(url) {
             print("Browser Successfully opened")
         }

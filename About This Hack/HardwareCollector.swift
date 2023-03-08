@@ -714,10 +714,37 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
             }
         }
         print("%: \(1-percent)")
-        return ["""
-\(name)
-\(size)(\(available)Available)
-""",String(1-percent)]
+        
+        // Get the main language code (en for English, es for Spanish)
+        // This is the device language
+        // let locale = NSLocale.current.languageCode
+        // print ("Device language: \(locale)") // for testing
+        // This is the app language
+        let idioma = Bundle.main.preferredLocalizations[0]
+        // print("Idioma : \(idioma)")  // for testing
+        
+        // If it's Spanish
+        if idioma == "es" {
+            return ["""
+    \(name)
+    \(size)(\(available)Disponible)
+    """,String(1-percent)]
+        }
+        
+        else if idioma == "fr" {
+            return ["""
+    \(name)
+    \(size)(\(available)Disponible)
+    """,String(1-percent)]
+        }
+        
+        else { // If it isn't Spanish
+            return ["""
+    \(name)
+    \(size)(\(available)Available)
+    """,String(1-percent)]
+        }
+
     }
 }
 

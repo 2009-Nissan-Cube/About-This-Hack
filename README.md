@@ -1,12 +1,6 @@
 # About This Hack
 A simple application to view your exact hardware on macOS. Similar to About This Mac, but with more features, including AMD Processor Support, display resolution, and more! It retains the old "About This Mac" design language and is supported on both Hackintoshes and real Macs.<br>
 
-
-<img width="692" alt="M2 Pro Macbook Pro 14 Ventura" src="https://user-images.githubusercontent.com/94565160/222524244-c99cc627-4c90-4e3d-8c09-64f1e850641e.png">
-
-<img width="692" alt="M1 iMac Monterey" src="https://user-images.githubusercontent.com/71262643/175041661-246d1602-7e26-4631-ab9c-a37c785c87db.png">
-
-
 # Supported OS's
 - **10.11 El Capitan and newer**
 - Not supported in any way in Linux or Windows
@@ -26,20 +20,23 @@ A simple application to view your exact hardware on macOS. Similar to About This
 
 In the app, there are four tabs on a tab bar at the top of the window, and each one visually presents some information about your system.
 
-The Overview tab presents standard system specifications, such as computer model, OS, processor, etc. The app also shows the Clover or OpenCore bootloader version, if applicable
+The Overview tab presents standard system specifications, such as computer model, OS, processor, etc. The app also shows the Clover or OpenCore bootloader version, if applicable.
 
-<img width="692" alt="M1 iMac Monterey" src="https://user-images.githubusercontent.com/71262643/175041661-246d1602-7e26-4631-ab9c-a37c785c87db.png">
+About this Mac:
 
-![Clover Hackintosh](https://user-images.githubusercontent.com/94565160/222528115-075a3b71-2bf6-4977-a021-3c0b2492be77.png)
+<img width="692" alt="M2 Pro Macbook Pro 14 Ventura" src="https://user-images.githubusercontent.com/94565160/222524244-c99cc627-4c90-4e3d-8c09-64f1e850641e.png">
 
+About This Hack:
+
+<img width="692" alt="OpenCore Hackintosh" text="OpenCore Hackintosh" src="ImagesTMP/OC-Hackintosh.png">
 
 The Displays tab presents your monitors and internal displays. Up to 3 displays with their respective resolutions can be shown.
 
-<img width="692" alt="Display Screen" src="https://user-images.githubusercontent.com/71262643/175045609-45df2fd8-afab-4184-bc8a-b8bb62414094.png">
+<img width="692" alt="Display Screen" text="Display Screen" src="ImagesTMP/display-screen.png">
 
 Or with only one display:
 
-![Single Display](https://user-images.githubusercontent.com/71262643/175046145-21a09c0a-f5bd-4b38-a6cc-1706c3567f9a.png)
+<img width="692" alt="Single Display" text="Single Display" src="ImagesTMP/one-screen.png">
 
 The Storage tab presents your startup disk with its name, free and total storage, and a bar to indicate the amount used.
 
@@ -49,14 +46,12 @@ The Support tab contains numerous links to provide support with your Mac or Hack
 
 <img width="692" alt="Support Screen" src="https://user-images.githubusercontent.com/71262643/175045493-b70e5c7c-f4ee-466b-8390-b6de8a96aeee.png">
 
-
 # Credits
 [MDNich](https://github.com/MDNich) for helping out a ton with features, code, and setting up the update server. <br>
 [LordNaut](https://github.com/Nautilus704) for helping me fix stuff with AppDelegate and sorting out a bunch of minor, but important features! <br>
 [Ben216k](https://github.com/Ben216k) for being awesome, providing some of the commands, and helping me debug a lot. <br>
 [Snoopy](https://macosicons.com/#/u/Squid4572) for helping create the new icon. <br>
 The internet for helping me with a lot of the code.
-
 
 # Contact
 You can reach me at the following destinations: <br>
