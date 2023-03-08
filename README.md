@@ -46,6 +46,10 @@ The Support tab contains numerous links to provide support with your Mac or Hack
 
 <img width="692" alt="Support Screen" src="https://user-images.githubusercontent.com/71262643/175045493-b70e5c7c-f4ee-466b-8390-b6de8a96aeee.png">
 
+# Localizations
+
+Available in English, Spanish, French, and Romanian - use latest commit, not release.
+
 # Credits
 [MDNich](https://github.com/MDNich) for helping out a ton with features, code, and setting up the update server. <br>
 [LordNaut](https://github.com/Nautilus704) for helping me fix stuff with AppDelegate and sorting out a bunch of minor, but important features! <br>
