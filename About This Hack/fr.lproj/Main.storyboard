@@ -80,7 +80,7 @@
                                                 <action selector="performZoom:" target="Ady-hI-5gd" id="rVx-uu-IEB"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Général" keyEquivalent="1" id="Rw1-hT-NzJ">
+                                        <menuItem title="Aperçu" keyEquivalent="1" id="Rw1-hT-NzJ">
                                             <connections>
                                                 <action selector="showOverview:" target="Voe-Tx-rLC" id="Q0Q-mk-BHg"/>
                                             </connections>
@@ -164,7 +164,7 @@
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="texturedRounded" trackingMode="selectOne" id="Kat-cT-SH6">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment label="Général" toolTip="General presentation of system specifications" selected="YES"/>
+                                                <segment label="Aperçu" toolTip="General presentation of system specifications" selected="YES"/>
                                                 <segment label="Écrans" tag="1"/>
                                                 <segment label="Stockage"/>
                                                 <segment label="Aide" toolTip="Presentation of support links for help with your hackintosh or mac"/>
@@ -338,7 +338,7 @@
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Le-qQ-XKI">
                                         <rect key="frame" x="237" y="68" width="94" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Numéro de serie" id="JyF-l5-OcY">
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Numéro de série" id="JyF-l5-OcY">
                                             <font key="font" metaFont="systemSemibold" size="11"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
