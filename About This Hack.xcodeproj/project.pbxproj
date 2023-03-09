@@ -41,6 +41,11 @@
 		58B988D526D7ACD70092EC5B /* ViewControllerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerService.swift; sourceTree = "<group>"; };
 		58B988D626D7ACD70092EC5B /* ViewControllerStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerStorage.swift; sourceTree = "<group>"; };
 		58B988D726D7ACD80092EC5B /* ViewControllerSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSupport.swift; sourceTree = "<group>"; };
+		58F9525929BA0FCE00716DBF /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "en-GB"; path = "en-GB.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		58F9525A29BA0FD500716DBF /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "fr-CA"; path = "fr-CA.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		58F9525B29BA0FDC00716DBF /* en-IN */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "en-IN"; path = "en-IN.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		58F9525C29BA0FEE00716DBF /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "es-419"; path = "es-419.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		58F9525D29BA0FF500716DBF /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "en-AU"; path = "en-AU.lproj/Main.storyboard"; sourceTree = "<group>"; };
 		72E686C22862453700B8316D /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		C1BAD6FE26D70091008460FB /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		D91B9F7429B27FA800AB58B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -145,6 +150,11 @@
 				es,
 				fr,
 				ro,
+				"en-GB",
+				"fr-CA",
+				"en-IN",
+				"es-419",
+				"en-AU",
 			);
 			mainGroup = 115D920526D6F65500F5DF35;
 			packageReferences = (
@@ -201,6 +211,11 @@
 				D91B9F7629B27FB400AB58B7 /* es */,
 				58B5C96B29B8DFEA0080DCA3 /* fr */,
 				58B5C96C29B8E6750080DCA3 /* ro */,
+				58F9525929BA0FCE00716DBF /* en-GB */,
+				58F9525A29BA0FD500716DBF /* fr-CA */,
+				58F9525B29BA0FDC00716DBF /* en-IN */,
+				58F9525C29BA0FEE00716DBF /* es-419 */,
+				58F9525D29BA0FF500716DBF /* en-AU */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
