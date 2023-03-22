@@ -58,3 +58,7 @@ The internet for helping me with a lot of the code.
 You can reach me at the following destinations: <br>
 Discord - 0xCUBE#9118 <br>
 Reddit - [u/0xCUBE](https://www.reddit.com/user/0xCUBE)
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=0xCUB3/About-This-Hack&type=Date)](https://star-history.com/#0xCUB3/About-This-Hack&Date)
