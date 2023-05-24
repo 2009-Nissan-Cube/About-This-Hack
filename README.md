@@ -2,7 +2,8 @@
 A simple application to view your exact hardware on macOS. Similar to About This Mac, but with more features, including AMD Processor Support, display resolution, and more! It retains the old "About This Mac" design language and is supported on both Hackintoshes and real Macs.<br>
 
 # Supported OS's
-- **10.11 El Capitan and newer**
+- **10.10 Yosemite and newer**
+- *Not supported in OS X Mavericks* (Looking into it)
 - Not supported in any way in Linux or Windows
 
 ## Localizations
