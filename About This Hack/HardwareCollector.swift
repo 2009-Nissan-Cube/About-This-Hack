@@ -255,8 +255,6 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         
         var osVersion = run("sw_vers | grep ProductVersion | awk '{print $2}'")
         
-        osVersion = "10.10"
-        
         return osVersion
     }
     static func setOSvers(osNumber: String) {
@@ -332,7 +330,7 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
     
     static func getMacName() -> String {
         // from https://everymac.com/systems/by_capability/mac-specs-by-machine-model-machine-id.html
-        var infoString = run("sysctl hw.model | cut -f2 -d \" \" | tr -d '\n'")
+        let infoString = run("sysctl hw.model | cut -f2 -d \" \" | tr -d '\n'")
         
         switch(infoString) {
             
