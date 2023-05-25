@@ -252,7 +252,10 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
     
     
     static func getOSnum() -> String {
-        return run("sw_vers | grep ProductVersion | awk '{print $2}'")
+        
+        var osVersion = run("sw_vers | grep ProductVersion | awk '{print $2}'")
+        
+        return osVersion
     }
     static func setOSvers(osNumber: String) {
         if (osNumber.hasPrefix("13")) {
@@ -264,29 +267,28 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         else if (osNumber.hasPrefix("11")) {
             OSvers = macOSvers.BIG_SUR
         }
-        else if (osNumber.hasPrefix("10")) {
-            switch(osNumber) {
-            case "16":
+        else if osNumber.hasPrefix("10") {
+            if osNumber.contains("16") {
                 OSvers = macOSvers.BIG_SUR
-            case "15":
+            } else if osNumber.contains("15") {
                 OSvers = macOSvers.CATALINA
-            case "14":
+            } else if osNumber.contains("14") {
                 OSvers = macOSvers.MOJAVE
-            case "13":
+            } else if osNumber.contains("13") {
                 OSvers = macOSvers.HIGH_SIERRA
-            case "12":
+            } else if osNumber.contains("12") {
                 OSvers = macOSvers.SIERRA
-            case "11":
+            } else if osNumber.contains("11") {
                 OSvers = macOSvers.EL_CAPITAN
-            case "10":
+            } else if osNumber.contains("10") {
                 OSvers = macOSvers.YOSEMITE
-            case "9":
+            } else if osNumber.contains("9") {
                 OSvers = macOSvers.MAVERICKS
-            default:
+            } else {
                 OSvers = macOSvers.macOS
             }
-            
         }
+
         else {
             OSvers = macOSvers.macOS
         }
@@ -329,6 +331,7 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
     static func getMacName() -> String {
         // from https://everymac.com/systems/by_capability/mac-specs-by-machine-model-machine-id.html
         let infoString = run("sysctl hw.model | cut -f2 -d \" \" | tr -d '\n'")
+        
         switch(infoString) {
             
         // iMacs
@@ -622,6 +625,9 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
             return "MacBook Pro (14-inch, 2023)"
             
         // 15-inch Models
+        case "MacBookPro4,1":
+            builtInDisplaySize = 15
+            return "MacBook Pro (15/17-inch, Early/Late 2008)"
         case "MacBookPro6,2":
             builtInDisplaySize = 15
             return "MacBook Pro (15-inch, Mid 2010)"

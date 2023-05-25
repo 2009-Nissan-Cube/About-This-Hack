@@ -16,7 +16,7 @@ class ViewControllerStorage: NSViewController {
     @IBOutlet weak var storageAmount: NSLevelIndicatorCell!
     override func viewDidLoad() {
         super.viewDidLoad()
-        start()
+        
     }
     
 
@@ -27,6 +27,7 @@ class ViewControllerStorage: NSViewController {
 
     override func viewDidAppear() {
         self.view.window?.styleMask.remove(NSWindow.StyleMask.resizable)
+        start()
     }
     
     func start() {
