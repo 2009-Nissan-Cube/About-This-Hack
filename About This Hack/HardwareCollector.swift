@@ -258,67 +258,39 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         return osVersion
     }
     static func setOSvers(osNumber: String) {
-        if (osNumber.hasPrefix("13")) {
-            OSvers = macOSvers.VENTURA
-        }
-        else if (osNumber.hasPrefix("12")) {
-            OSvers = macOSvers.MONTEREY
-        }
-        else if (osNumber.hasPrefix("11")) {
-            OSvers = macOSvers.BIG_SUR
-        }
-        else if osNumber.hasPrefix("10") {
-            if osNumber.contains("16") {
-                OSvers = macOSvers.BIG_SUR
-            } else if osNumber.contains("15") {
-                OSvers = macOSvers.CATALINA
-            } else if osNumber.contains("14") {
-                OSvers = macOSvers.MOJAVE
-            } else if osNumber.contains("13") {
-                OSvers = macOSvers.HIGH_SIERRA
-            } else if osNumber.contains("12") {
-                OSvers = macOSvers.SIERRA
-            } else if osNumber.contains("11") {
-                OSvers = macOSvers.EL_CAPITAN
-            } else if osNumber.contains("10") {
-                OSvers = macOSvers.YOSEMITE
-            } else if osNumber.contains("9") {
-                OSvers = macOSvers.MAVERICKS
-            } else {
-                OSvers = macOSvers.macOS
-            }
-        }
-
-        else {
-            OSvers = macOSvers.macOS
+        switch osNumber.prefix(2) {
+            case "13": OSvers = macOSvers.VENTURA
+            case "12": OSvers = macOSvers.MONTEREY
+            case "11": OSvers = macOSvers.BIG_SUR
+            case "10":
+                if osNumber.contains("16") { OSvers = macOSvers.BIG_SUR }
+                else if osNumber.contains("15") { OSvers = macOSvers.CATALINA }
+                else if osNumber.contains("14") { OSvers = macOSvers.MOJAVE }
+                else if osNumber.contains("13") { OSvers = macOSvers.HIGH_SIERRA }
+                else if osNumber.contains("12") { OSvers = macOSvers.SIERRA }
+                else if osNumber.contains("11") { OSvers = macOSvers.EL_CAPITAN }
+                else if osNumber.contains("10") { OSvers = macOSvers.YOSEMITE }
+                else if osNumber.contains("9") { OSvers = macOSvers.MAVERICKS }
+                else { OSvers = macOSvers.macOS }
+            default: OSvers = macOSvers.macOS
         }
     }
+
     
     
     static func macOSversToString() -> String {
         switch OSvers {
-        case .MAVERICKS:
-            return "Mavericks"
-        case .YOSEMITE:
-            return "Yosemite"
-        case .EL_CAPITAN:
-            return "El Capitan"
-        case .SIERRA:
-            return "Sierra"
-        case .HIGH_SIERRA:
-            return "High Sierra"
-        case .MOJAVE:
-            return "Mojave"
-        case .CATALINA:
-            return "Catalina"
-        case .BIG_SUR:
-            return "Big Sur"
-        case .MONTEREY:
-            return "Monterey"
-        case .VENTURA:
-            return "Ventura"
-        case .macOS:
-            return ""
+        case .MAVERICKS: return "Mavericks"
+        case .YOSEMITE: return "Yosemite"
+        case .EL_CAPITAN: return "El Capitan"
+        case .SIERRA: return "Sierra"
+        case .HIGH_SIERRA: return "High Sierra"
+        case .MOJAVE: return "Mojave"
+        case .CATALINA: return "Catalina"
+        case .BIG_SUR: return "Big Sur"
+        case .MONTEREY: return "Monterey"
+        case .VENTURA: return "Ventura"
+        case .macOS: return ""
         }
     }
     
@@ -332,362 +304,167 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         // from https://everymac.com/systems/by_capability/mac-specs-by-machine-model-machine-id.html
         let infoString = run("sysctl hw.model | cut -f2 -d \" \" | tr -d '\n'")
         
-        switch(infoString) {
-            
-        // iMacs
-        case "iMac4,1":
-            builtInDisplaySize = 17
-            return "iMac 17-Inch \"Core Duo\" 1.83"
-        case "iMac4,2":
-            builtInDisplaySize = 17
-            return "iMac 17-Inch \"Core Duo\" 1.83 (IG)"
-        case "iMac5,2":
-            builtInDisplaySize = 17
-            return "iMac 17-Inch \"Core 2 Duo\" 1.83 (IG)"
-        case "iMac5,1":
-            builtInDisplaySize = 17
-            return "iMac 17-Inch \"Core 2 Duo\" 2.0"
-        case "iMac7,1":
-            builtInDisplaySize = 17
-            return "iMac 20-Inch \"Core 2 Duo\" 2.0 (Al)"
-        case "iMac8,1":
-            builtInDisplaySize = 20
-            return "iMac (Early 2008)"
-        case "iMac9,1":
-            builtInDisplaySize = 20
-            return "iMac (Mid 2009)"
-        case "iMac10,1":
-            builtInDisplaySize = 20
-            return "iMac (Late 2009)"
-        case "iMac11,2":
-            builtInDisplaySize = 21.5
-            return "iMac 21.5-Inch (Mid 2010)"
-        case "iMac12,1":
-            builtInDisplaySize = 21.5
-            return "iMac 21.5-Inch (Mid 2011)"
-        case "iMac13,1":
-            builtInDisplaySize = 21.5
-            return "iMac 21.5-Inch (Mid 2012/Early 2013)"
-        case "iMac14,1","iMac14,3":
-            builtInDisplaySize = 21.5
-            return "iMac 21.5-Inch (Late 2013)"
-        case "iMac14,4":
-            builtInDisplaySize = 21.5
-            return "iMac 21.5-Inch (Mid 2014)"
-        case "iMac16,1","iMac16,2":
-            builtInDisplaySize = 21.5
-            return "iMac 21.5-Inch (Late 2015)"
-        case "iMac18,1":
-            builtInDisplaySize = 21.5
-            return "iMac 21.5-Inch (2017)"
-        case "iMac18,2":
-            builtInDisplaySize = 21.5
-            return "iMac 21.5-Inch (Retina 4K, 2017)"
-        case "iMac19,3":
-            builtInDisplaySize = 21.5
-            return "iMac 21.5-Inch (Retina 4K, 2019)"
-        case "iMac11,1":
-            builtInDisplaySize = 27
-            return "iMac 27-Inch (Late 2009)"
-        case "iMac11,3":
-            builtInDisplaySize = 27
-            return "iMac 27-Inch (Mid 2010)"
-        case "iMac12,2":
-            builtInDisplaySize = 27
-            return "iMac 27-inch (Mid 2011)"
-        case "iMac13,2":
-            builtInDisplaySize = 27
-            return "iMac 27-inch (Mid 2012)"
-        case "iMac14,2":
-            builtInDisplaySize = 27
-            return "iMac 27-inch (Late 2013)"
-        case "iMac15,1":
-            builtInDisplaySize = 27
-            return "iMac 27-inch (Retina 5K, Late 2014)"
-        case "iMac17,1":
-            builtInDisplaySize = 27
-            return "iMac 27-inch (Retina 5K, Late 2015)"
-        case "iMac18,3":
-            builtInDisplaySize = 27
-            return "iMac 27-inch (Retina 5K, 2017)"
-        case "iMac19,1":
-            builtInDisplaySize = 27
-            return "iMac 27-inch (Retina 5K, 2019)"
-        case "iMac19,2":
-            builtInDisplaySize = 27
-            return "iMac 21.5-inch (Retina 4K, 2019)"
-        case "iMac20,1","iMac20,2":
-            builtInDisplaySize = 27
-            return "iMac 27-inch (Retina 5K, 2020)"
-        case "iMac21,1","iMac21,2":
-            builtInDisplaySize = 24
-            return "iMac (24-inch, M1, 2021)"
-            
-        // iMac Pros
-        case "iMacPro1,1":
-            builtInDisplaySize = 27
-            return "iMac Pro (2017)"
-            
-        // Developer Transition Kits
-        case "ADP3,2":
-            macType = .DESKTOP
-            return "Developer Transition Kit (ARM)"
+        // Determines if Desktop or Laptop
+        let desktopStrings = ["iMac", "Macmini", "ADP", "MacPro", "Mac13,1", "Mac13,2"]
+        macType = desktopStrings.contains(where: infoString.contains) ? .DESKTOP : .LAPTOP
+
         
-        // Mac Minis
-        case "Macmini3,1":
-            macType = .DESKTOP
-            return "Mac Mini (Late 2009)"
-        case "Macmini4,1":
-            macType = .DESKTOP
-            return "Mac Mini (Mid 2010)"
-        case "Macmini5,1":
-            macType = .DESKTOP
-            return "Mac Mini (Mid 2011)"
-        case "Macmini5,2","Macmini5,3":
-            return "Mac Mini (Mid 2011)"
-        case "Macmini6,1":
-            macType = .DESKTOP
-            return "Mac Mini (Late 2012)"
-        case "Macmini6,2":
-            macType = .DESKTOP
-            return "Mac Mini Server (Late 2012)"
-        case "Macmini7,1":
-            macType = .DESKTOP
-            return "Mac Mini (Late 2014)"
-        case "Macmini8,1":
-            macType = .DESKTOP
-            return "Mac Mini (Late 2018)"
-        case "Macmini9,1":
-            macType = .DESKTOP
-            return "Mac Mini (M1, 2020)"
-        case "Mac14,3":
-            macType = .DESKTOP
-            return "Mac Mini (M2, 2023)"
-        case "Mac14,12":
-            macType = .DESKTOP
-            return "Mac Mini (M2 Pro, 2023)"
+        let macModels: [String: (Float, String)] = [
+            // iMacs
+            "iMac4,1": (17, "iMac 17-Inch \"Core Duo\" 1.83"),
+            "iMac4,2": (17, "iMac 17-Inch \"Core Duo\" 1.83"),
+            "iMac5,1": (17, "iMac 17-Inch \"Core 2 Duo\" 2.0"),
+            "iMac5,2": (17, "iMac 17-Inch \"Core 2 Duo\" 1.83"),
+            "iMac7,1": (17, "iMac 17-Inch \"Core 2 Duo\" 2.0"),
+            "iMac8,1": (20, "iMac (Early 2008)"),
+            "iMac9,1": (20, "iMac (Mid 2009)"),
+            "iMac10,1": (20, "iMac (Late 2009)"),
+            "iMac11,2": (21.5, "iMac (21.5-Inch, Mid 2010)"),
+            "iMac12,1": (21.5, "iMac (21.5-Inch, Mid 2011)"),
+            "iMac13,1": (21.5, "iMac (21.5-Inch, Mid 2012/Early 2013)"),
+            "iMac14,1": (21.5, "iMac (21.5-Inch, Late 2013)"),
+            "iMac14,3": (21.5, "iMac (21.5-Inch, Late 2013)"),
+            "iMac14,4": (21.5, "iMac (21.5-Inch, Mid 2014)"),
+            "iMac16,1": (21.5, "iMac (21.5-Inch, Late 2015)"),
+            "iMac16,2": (21.5, "iMac (21.5-Inch, Late 2015)"),
+            "iMac18,1": (21.5, "iMac (21.5-Inch, 2017)"),
+            "iMac18,2": (21.5, "iMac (Retina 4K, 2017)"),
+            "iMac19,2": (21.5, "iMac (Retina 4K, 2019)"),
+            "iMac19,3": (21.5, "iMac (Retina 4K, 2019)"),
+            "iMac11,1": (27, "iMac (27-Inch, Late 2009)"),
+            "iMac11,3": (27, "iMac (27-Inch, Mid 2010)"),
+            "iMac12,2": (27, "iMac (27-Inch, Mid 2011)"),
+            "iMac13,2": (27, "iMac (27-Inch, Mid 2012)"),
+            "iMac14,2": (27, "iMac (27-Inch, Late 2013)"),
+            "iMac15,1": (27, "iMac (Retina 5K, Late 2014)"),
+            "iMac17,1": (27, "iMac (Retina 5K, Late 2015)"),
+            "iMac18,3": (27, "iMac (Retina 5K, 2017)"),
+            "iMac19,1": (27, "iMac (Retina 5K, 2019)"),
+            "iMac20,1": (27, "iMac (Retina 5K, 2020)"),
+            "iMac20,2": (27, "iMac (Retina 5K, 2020)"),
+            "iMac21,1": (24, "iMac (24-inch, M1, 2021)"),
+            "iMac21,2": (24, "iMac (24-inch, M1, 2021)"),
             
-        // Mac Pros
-        case "MacPro3,1":
-            macType = .DESKTOP
-            return "Mac Pro (2008)"
-        case "MacPro4,1":
-            macType = .DESKTOP
-            return "Mac Pro (2009)"
-        case "MacPro5,1":
-            macType = .DESKTOP
-            return "Mac Pro (2010-2012)"
-        case "MacPro6,1":
-            macType = .DESKTOP
-            return "Mac Pro (Late 2013)"
-        case "MacPro7,1":
-            macType = .DESKTOP
-            return "Mac Pro (2019)"
-        
-        // Mac Studios
-        case "Mac13,1","Mac13,2":
-            macType = .DESKTOP
-            return "Mac Studio (2022)"
-        
-        // MacBooks
-        case "MacBook5,1":
-            builtInDisplaySize = 13
-            return "MacBook (Original, Unibody)"
-        case "MacBook5,2":
-            builtInDisplaySize = 13
-            return "MacBook (2009)"
-        case "MacBook6,1":
-            builtInDisplaySize = 13
-            return "MacBook (Late 2009)"
-        case "MacBook7,1":
-            builtInDisplaySize = 13
-            return "MacBook (Mid 2010)"
-        case "MacBook8,1":
-            builtInDisplaySize = 13
-            return "MacBook (Early 2015)"
-        case "MacBook9,1":
-            builtInDisplaySize = 13
-            return "MacBook (Early 2016)"
-        case "MacBook10,1":
-            builtInDisplaySize = 13
-            return "MacBook (Mid 2017)"
+            // iMac Pros
+            "iMacPro1,1": (27, "iMac Pro (2017)"),
             
-        // MacBook Airs
-        case "MacBookAir1,1":
-            builtInDisplaySize = 13
-            return "MacBook Air (2008, Original)"
-        case "MacBookAir2,1":
-            builtInDisplaySize = 13
-            return "MacBook Air (Mid 2009, NVIDIA)"
-        case "MacBookAir3,1":
-            builtInDisplaySize = 11
-            return "MacBook Air (11-inch, Late 2010)"
-        case "MacBookAir3,2":
-            builtInDisplaySize = 13
-            return "MacBook Air (13-inch, Late 2010)"
-        case "MacBookAir4,1":
-            builtInDisplaySize = 11
-            return "MacBook Air (11-inch, Mid 2011)"
-        case "MacBookAir4,2":
-            builtInDisplaySize = 13
-            return "MacBook Air (13-inch, Mid 2011)"
-        case "MacBookAir5,1":
-            builtInDisplaySize = 11
-            return "MacBook Air (11-inch, Mid 2012)"
-        case "MacBookAir5,2":
-            builtInDisplaySize = 13
-            return "MacBook Air (13-inch, Mid 2012)"
-        case "MacBookAir6,1":
-            builtInDisplaySize = 11
-            return "MacBook Air (11-inch, Mid 2013/Early 2014)"
-        case "MacBookAir6,2":
-            builtInDisplaySize = 13
-            return "MacBook Air (13-inch, Mid 2013/Early 2014)"
-        case "MacBookAir7,1":
-            builtInDisplaySize = 11
-            return "MacBook Air (11-inch, Early 2015/2017)"
-        case "MacBookAir7,2":
-            builtInDisplaySize = 13
-            return "MacBook Air (13-inch, Early 2015/2017)"
-        case "MacBookAir8,1":
-            builtInDisplaySize = 13
-            return "MacBook Air (13-inch, Late 2018)"
-        case "MacBookAir8,2":
-            builtInDisplaySize = 13
-            return "MacBook Air (13-inch, True-Tone, 2019)"
-        case "MacBookAir9,1":
-            builtInDisplaySize = 13
-            return "MacBook Air (13-inch, 2020)"
-        case "MacBookAir10,1":
-            builtInDisplaySize = 13
-            return "MacBook Air (13-inch, M1, 2020)"
-        case "Mac14,2":
-            builtInDisplaySize = 13
-            return "MacBook Air (13-inch, M2, 2022)"
-        
-        // MacBook Pros
-        // 13-inch Models
-        case "MacBookPro5,5":
-            builtInDisplaySize = 13
-            return "MacBook Pro (13-inch, 2009)"
-        case "MacBookPro7,1":
-            builtInDisplaySize = 13
-            return "MacBook Pro (13-inch, Mid 2010)"
-        case "MacBookPro8,1":
-            builtInDisplaySize = 13
-            return "MacBook Pro (13-inch, Early 2011)"
-        case "MacBookPro9,2":
-            builtInDisplaySize = 13
-            return "MacBook Pro (13-inch, Mid 2012)"
-        case "MacBookPro10,2":
-            builtInDisplaySize = 13
-            return "MacBook Pro (Retina, 13-inch, 2012)"
-        case "MacBookPro11,1":
-            builtInDisplaySize = 13
-            return "MacBook Pro (Retina, 13-inch, Late 2013/Mid 2014)"
-        case "MacBookPro12,1":
-            builtInDisplaySize = 13
-            return "MacBook Pro (Retina, 13-inch, 2015)"
-        case "MacBookPro13,1":
-            builtInDisplaySize = 13
-            return "MacBook Pro (Retina, 13-inch, Late 2016)"
-        case "MacBookPro13,2":
-            builtInDisplaySize = 13
-            return "MacBook Pro (Retina, 13-inch, Touch ID/Bar, Late 2016)"
-        case "MacBookPro14,1":
-            builtInDisplaySize = 13
-            return "MacBook Pro (Retina, 13-inch, Mid 2017)"
-        case "MacBookPro14,2":
-            builtInDisplaySize = 13
-            return "MacBook Pro (Retina, 13-inch, Touch ID/Bar, Mid 2017)"
-        case "MacBookPro15,2":
-            builtInDisplaySize = 13
-            return "MacBook Pro (Retina, 13-inch, Touch ID/Bar, Mid 2018)"
-        case "MacBookPro15,4":
-            builtInDisplaySize = 13
-            return "MacBook Pro (Retina, 13-inch, Touch ID/Bar, Mid 2019)"
-        case "MacBookPro16,2","MacBookPro16,3":
-            builtInDisplaySize = 13
-            return "MacBook Pro (Retina, 13-inch, Touch ID/Bar, Mid 2020)"
-        case "MacBookPro17,1":
-            builtInDisplaySize = 13
-            return "MacBook Pro (13-inch, M1, 2020)"
-        case "Mac14,7":
-            builtInDisplaySize = 13
-            return "MacBook Pro (13-inch, M2, 2022)"
+            // Developer Transition Kits
+            "ADP3,2": (0, "Developer Transition Kit (ARM)"),
             
-        // 14-inch Models
-        case "MacBookPro18,3","MacBookPro18,4":
-            builtInDisplaySize = 14
-            return "MacBook Pro (14-inch, 2021)"
-        case "Mac14,5","Mac14,9":
-            builtInDisplaySize = 14
-            return "MacBook Pro (14-inch, 2023)"
+            // Mac Minis
+            "Macmini3,1": (0, "Mac Mini (Early 2009)"),
+            "Macmini4,1": (0, "Mac Mini (Mid 2010)"),
+            "Macmini5,1": (0, "Mac Mini (Mid 2011)"),
+            "Macmini5,2": (0, "Mac Mini (Mid 2011)"),
+            "Macmini5,3": (0, "Mac Mini (Mid 2011)"),
+            "Macmini6,1": (0, "Mac Mini (Late 2012)"),
+            "Macmini6,2": (0, "Mac Mini Server (Late 2012)"),
+            "Macmini7,1": (0, "Mac Mini (Late 2014)"),
+            "Macmini8,1": (0, "Mac Mini (Late 2018)"),
+            "Macmini9,1": (0, "Mac Mini (M1, 2020)"),
+            "Mac14,3": (0, "Mac Mini (M2, 2023)"),
+            "Mac14,12": (0, "Mac Mini (M2 Pro, 2023)"),
             
-        // 15-inch Models
-        case "MacBookPro4,1":
-            builtInDisplaySize = 15
-            return "MacBook Pro (15/17-inch, Early/Late 2008)"
-        case "MacBookPro6,2":
-            builtInDisplaySize = 15
-            return "MacBook Pro (15-inch, Mid 2010)"
-        case "MacBookPro8,2":
-            builtInDisplaySize = 15
-            return "MacBook Pro (15-inch, Early 2011)"
-        case "MacBookPro9,1":
-            builtInDisplaySize = 15
-            return "MacBook Pro (15-inch, Mid 2012)"
-        case "MacBookPro10,1":
-            builtInDisplaySize = 15
-            return "MacBook Pro (Retina, 15-inch, Mid 2012)"
-        case "MacBookPro11,2":
-            builtInDisplaySize = 15
-            return "MacBook Pro (Retina, 15-inch, Late 2013)"
-        case "MacBookPro11,3":
-            builtInDisplaySize = 15
-            return "MacBook Pro (Retina, 15-inch, Mid 2014)"
-        case "MacBookPro11,4","MacBookPro11,5":
-            builtInDisplaySize = 15
-            return "MacBook Pro (Retina, 15-inch, Mid 2015)"
-        case "MacBookPro13,3":
-            builtInDisplaySize = 15
-            return "MacBook Pro (Retina, 15-inch, Touch ID/Bar, Late 2016)"
-        case "MacBookPro14,3":
-            builtInDisplaySize = 15
-            return "MacBook Pro (Retina, 15-inch, Touch ID/Bar, Late 2017)"
-        case "MacBookPro15,1":
-            builtInDisplaySize = 15
-            return "MacBook Pro (Retina, 15-inch, Touch ID/Bar, 2018/2019)"
-        case "MacBookPro15,3":
-            builtInDisplaySize = 15
-            return "MacBook Pro (Retina Vega Graphics, 15-inch, Touch ID/Bar, 2018/2019)"
-        
-        // 16-inch Models
-        case "MacBookPro16,1":
-            builtInDisplaySize = 16
-            return "MacBook Pro (Retina, 16-inch, Touch ID/Bar, Mid 2019)"
-        case "MacBookPro16,4":
-            builtInDisplaySize = 16
-            return "MacBook Pro (Retina, 16-inch, Touch ID/Bar, Mid 2019)"
-        case "MacBookPro18,1","MacBookPro18,2":
-            builtInDisplaySize = 16
-            return "MacBook Pro (16-inch, 2021)"
-        case "Mac14,6","Mac14,10":
-            builtInDisplaySize = 16
-            return "MacBook Pro (16-inch, 2023)"
-        
-        // 17-inch Models
-        case "MacBookPro8,3":
-            builtInDisplaySize = 17
-            return "MacBook Pro (17-inch, Late 2011)"
-       
-        // In the rare case that the Mac is not detected
-        case "Unknown","Mac":
-            macType = .DESKTOP
-            return "Mac (Unknown)"
-        default:
-            return "Mac"
+            // Mac Pros
+            "MacPro3,1": (0, "Mac Pro (2008)"),
+            "MacPro4,1": (0, "Mac Pro (2009)"),
+            "MacPro5,1": (0, "Mac Pro (2010-2012)"),
+            "MacPro6,1": (0, "Mac Pro (Late 2013)"),
+            "MacPro7,1": (0, "Mac Pro (2019)"),
+            
+            // Mac Studios
+            "Mac13,1": (0, "Mac Studio (2022)"),
+            "Mac13,2": (0, "Mac Studio (2022)"),
+            
+            // MacBooks
+            "MacBook5,1": (13, "MacBook"),
+            "MacBook5,2": (13, "MacBook (2009)"),
+            "MacBook6,1": (13, "MacBook (Late 2009)"),
+            "MacBook7,1": (13, "MacBook (Mid 2010)"),
+            "MacBook8,1": (13, "MacBook (Early 2015)"),
+            "MacBook9,1": (13, "MacBook (Early 2016)"),
+            "MacBook10,1": (13, "MacBook (Mid 2017)"),
+            
+            // MacBook Airs
+            "MacBookAir1,1": (13, "MacBook Air (2008)"),
+            "MacBookAir2,1": (13, "MacBook Air (Mid 2009)"),
+            "MacBookAir3,1": (11, "MacBook Air (11-inch, Late 2010)"),
+            "MacBookAir3,2": (13, "MacBook Air (13-inch, Late 2010)"),
+            "MacBookAir4,1": (11, "MacBook Air (11-inch, Mid 2011)"),
+            "MacBookAir4,2": (13, "MacBook Air (13-inch, Mid 2011)"),
+            "MacBookAir5,1": (11, "MacBook Air (11-inch, Mid 2012)"),
+            "MacBookAir5,2": (13, "MacBook Air (13-inch, Mid 2012)"),
+            "MacBookAir6,1": (11, "MacBook Air (11-inch, Mid 2013/Early 2014)"),
+            "MacBookAir6,2": (13, "MacBook Air (13-inch, Mid 2013/Early 2014)"),
+            "MacBookAir7,1": (11, "MacBook Air (11-inch, Early 2015/2017)"),
+            "MacBookAir7,2": (13, "MacBook Air (13-inch, Early 2015/2017)"),
+            "MacBookAir8,1": (13, "MacBook Air (13-inch, Late 2018)"),
+            "MacBookAir8,2": (13, "MacBook Air (13-inch, 2019)"),
+            "MacBookAir9,1": (13, "MacBook Air (13-inch, 2020)"),
+            "MacBookAir10,1": (13, "MacBook Air (13-inch, M1, 2020)"),
+            "Mac14,2": (13, "MacBook Air (13-inch, M2, 2022)"),
+            
+            // MacBook Pros
+            // 13-inch
+            "MacBookPro5,5": (13, "MacBook Pro (13-inch, 2009)"),
+            "MacBookPro7,1": (13, "MacBook Pro (13-inch, Mid 2010)"),
+            "MacBookPro8,1": (13, "MacBook Pro (13-inch, Early 2011)"),
+            "MacBookPro9,2": (13, "MacBook Pro (13-inch, Mid 2012)"),
+            "MacBookPro10,2": (13, "MacBook Pro (Retina, 13-inch, 2012)"),
+            "MacBookPro11,1": (13, "MacBook Pro (Retina, 13-inch, Late 2013/Mid 2014)"),
+            "MacBookPro12,1": (13, "MacBook Pro (Retina, 13-inch, Early 2015)"),
+            "MacBookPro13,1": (13, "MacBook Pro (Retina, 13-inch, Late 2016)"),
+            "MacBookPro13,2": (13, "MacBook Pro (Retina, 13-inch, Late 2016)"),
+            "MacBookPro14,1": (13, "MacBook Pro (Retina, 13-inch, Mid 2017)"),
+            "MacBookPro14,2": (13, "MacBook Pro (Retina, 13-inch, Mid 2017)"),
+            "MacBookPro15,2": (13, "MacBook Pro (Retina, 13-inch, Mid 2018)"),
+            "MacBookPro15,4": (13, "MacBook Pro (Retina, 13-inch, Mid 2019)"),
+            "MacBookPro16,2": (13, "MacBook Pro (Retina, 13-inch, Mid 2020)"),
+            "MacBookPro16,3": (13, "MacBook Pro (Retina, 13-inch, Mid 2020)"),
+            "MacBookPro17,1": (13, "MacBook Pro (13-inch, M1, 2020)"),
+            "Mac14,7": (13, "MacBook Pro (13-inch, M2, 2022)"),
+            
+            // 14-inch
+            "MacBookPro18,3": (14, "MacBook Pro (14-inch, 2021)"),
+            "MacBookPro18,4": (14, "MacBook Pro (14-inch, 2021)"),
+            "Mac14,5": (14, "MacBook Pro (14-inch, 2023)"),
+            "Mac14,9": (14, "MacBook Pro (14-inch, 2023)"),
+            
+            // 15-inch
+            "MacBookPro4,1": (15, "MacBook Pro (15/17-inch, 2008"),
+            "MacBookPro6,2": (15, "MacBook Pro (15-inch, Mid 2010"),
+            "MacBookPro8,2": (15, "MacBook Pro (15-inch, Early 2011"),
+            "MacBookPro9,1": (15, "MacBook Pro (15-inch, Mid 2012"),
+            "MacBookPro10,1": (15, "MacBook Pro (Retina, 15-inch, Mid 2012"),
+            "MacBookPro11,2": (15, "MacBook Pro (Retina, 15-inch, Late 2013"),
+            "MacBookPro11,3": (15, "MacBook Pro (Retina, 15-inch, Mid 2014"),
+            "MacBookPro11,4": (15, "MacBook Pro (Retina, 15-inch, Mid 2015"),
+            "MacBookPro11,5": (15, "MacBook Pro (Retina, 15-inch, Mid 2015"),
+            "MacBookPro13,3": (15, "MacBook Pro (Retina, 15-inch, Late 2016"),
+            "MacBookPro14,3": (15, "MacBook Pro (Retina, 15-inch, Late 2017"),
+            "MacBookPro15,1": (15, "MacBook Pro (Retina, 15-inch, 2018/2019"),
+            "MacBookPro15,3": (15, "MacBook Pro (Retina, 15-inch, 2018/2019"),
+            
+            // 16-inch
+            "MacBookPro16,1": (16, "MacBook Pro (Retina, 16-inch, Mid 2019"),
+            "MacBookPro16,4": (16, "MacBook Pro (Retina, 16-inch, Mid 2019"),
+            "MacBookPro18,1": (16, "MacBook Pro (16-inch, 2021"),
+            "MacBookPro18,2": (16, "MacBook Pro (16-inch, 2021"),
+            "Mac14,6": (16, "MacBook Pro (16-inch, 2023"),
+            "Mac14,10": (16, "MacBook Pro (16-inch, 2023"),
+            
+            // 17-inch
+            "MacBookPro8,3": (17, "MacBook Pro (17-inch, Late 2011"),
+            
+            // In the rare case that the Mac model is not found
+            "Unknown": (0, "Mac (UNKNOWN)"),
+            "Mac": (0, "Mac"),
+        ]
+        if let (displaySize, name) = macModels[infoString] {
+            builtInDisplaySize = displaySize
+            return name
         }
+        return "Mac"
     }
     
     static func getCPU() -> String {
@@ -697,12 +474,9 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
     static func getStorageType() -> Bool {
         let name = "\(HardwareCollector.getStartupDisk())"
         let storageType = run("diskutil info \"\(name)\" | grep 'Solid State'")
-        if storageType.contains("Yes") {
-            return true
-        } else {
-            return false
-        }
+        return storageType.contains("Yes")
     }
+
     
     static func getStorageData() -> [String] {
         let name = "\(HardwareCollector.getStartupDisk())"
@@ -712,51 +486,12 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         let availableTrimmed = run("echo \"\(available)\" | cut -f1 -d\" \"").dropLast(1)
         print("Size: \(sizeTrimmed)")
         print("Available: \(availableTrimmed)")
-        var percent: Double = (Double(availableTrimmed)!) / Double(sizeTrimmed)!
-        if(percent > 1.0) {
-            percent = percent / 1024.0 // GB instead of TB
-            if(percent > 1.0) {
-                percent = percent / 1024.0 // MB instead of TB
-            }
-        }
-        print("%: \(1-percent)")
-        
-        // Get the main language code (en for English, es for Spanish)
-        // This is the device language
-        // let locale = NSLocale.current.languageCode
-        // print ("Device language: \(locale)") // for testing
-        // This is the app language
-        let idioma = Bundle.main.preferredLocalizations[0]
-        // print("Idioma : \(idioma)")  // for testing
-        
-        // If it's Spanish
-        if idioma == "es" {
-            return ["""
-    \(name)
-    \(size)(\(available)Disponible)
-    """,String(1-percent)]
-        }
-        
-        else if idioma == "fr" {
-            return ["""
-    \(name)
-    \(size)(\(available)Disponible)
-    """,String(1-percent)]
-        }
-        else if idioma == "ro" {
-            return ["""
-    \(name)
-    \(size)(\(available)Disponibil)
-    """,String(1-percent)]
-        }
-        
-        else { // If it isn't Spanish
-            return ["""
-    \(name)
-    \(size)(\(available)Available)
-    """,String(1-percent)]
-        }
-
+        let percent = (Double(availableTrimmed)!) / Double(sizeTrimmed)!
+        print("%: \(1 - percent)")
+        return ["""
+        \(name)
+        \(size)(\(available)Available)
+        """, String(1 - percent)]
     }
 }
 
