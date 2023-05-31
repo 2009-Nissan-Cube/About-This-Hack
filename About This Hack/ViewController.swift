@@ -143,14 +143,23 @@ class ViewController: NSViewController {
         blVersion.needsDisplay = true
     }
     
-    @IBAction func hideSerialNumber(_ sender: NSButton) {
-        print("Serial Number toggled")
-        if serialNumber.stringValue == "" {
-            serialNumber.stringValue = HardwareCollector.SerialNumberString
-        } else {
-            serialNumber.stringValue = ""
-        }
-    }
+//    @IBAction func hideSerialNumber(_ sender: NSButton) {
+//        print("Serial Number toggled")
+//        if serialNumber.stringValue == "" {
+//            serialNumber.stringValue = HardwareCollector.SerialNumberString
+//        } else {
+//            serialNumber.stringValue = ""
+//        }
+//    }
+
+     @IBAction func hideSerialNumber(_ sender: NSButton) {
+          print("Serial Number toggled")
+          if serialNumber.stringValue == HardwareCollector.SerialNumberString {
+              serialNumber.stringValue = ""
+          } else {
+              erialNumber.stringValue = HardwareCollector.SerialNumberString
+          }
+      }
     
     @IBAction func showSystemReport(_ sender: NSButton) {
         print("System Report...")
