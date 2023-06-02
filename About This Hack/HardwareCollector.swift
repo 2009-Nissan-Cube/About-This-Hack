@@ -253,7 +253,7 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
     
     static func getOSnum() -> String {
         
-        var osVersion = run("sw_vers | grep ProductVersion | awk '{print $2}'")
+        let osVersion = run("sw_vers | grep ProductVersion | awk '{print $2}'")
         
         return osVersion
     }
