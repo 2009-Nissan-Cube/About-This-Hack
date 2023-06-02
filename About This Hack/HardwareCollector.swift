@@ -497,7 +497,7 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         let idioma = Bundle.main.preferredLocalizations[0]
         // print("Idioma : \(idioma)")  // for testing
  
-        // If it's English ot a variant
+        // If it's English or a variant
         if idioma.hasPrefix("en") {
             return ["""
     \(name)
@@ -513,7 +513,7 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
      """,String(1-percent)]
          }
         
-        // If it's French ot a variant
+        // If it's French or a variant
         else if idioma.hasPrefix("fr") {
             return ["""
     \(name)
