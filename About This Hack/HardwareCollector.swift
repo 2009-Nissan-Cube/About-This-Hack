@@ -253,7 +253,7 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
     
     static func getOSnum() -> String {
         
-        var osVersion = run("sw_vers | grep ProductVersion | awk '{print $2}'")
+        let osVersion = run("sw_vers | grep ProductVersion | awk '{print $2}'")
         
         return osVersion
     }
@@ -478,22 +478,54 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
     }
 
     
-    static func getStorageData() -> [String] {
-        let name = "\(HardwareCollector.getStartupDisk())"
-        let size = run("diskutil info \"\(name)\" | grep 'Disk Size' | sed 's/.*:                 //' | cut -f1 -d'(' | tr -d '\n'")
-        let available = run("diskutil info \"\(name)\" | Grep 'Container Free Space' | sed 's/.*:      //' | cut -f1 -d'(' | tr -d '\n'")
-        let sizeTrimmed = run("echo \"\(size)\" | cut -f1 -d\" \"").dropLast(1)
-        let availableTrimmed = run("echo \"\(available)\" | cut -f1 -d\" \"").dropLast(1)
-        print("Size: \(sizeTrimmed)")
-        print("Available: \(availableTrimmed)")
-        let percent = (Double(availableTrimmed)!) / Double(sizeTrimmed)!
-        print("%: \(1 - percent)")
-        return ["""
-        \(name)
-        \(size)(\(available)Available)
-        """, String(1 - percent)]
-    }
-}
+        // Get the main language code
+        // This is the device language
+        // let locale = NSLocale.current.languageCode
+        // print ("Device language: \(locale)") // for testing
+        // This is the app language
+        let idioma = Bundle.main.preferredLocalizations[0]
+        // print("Idioma : \(idioma)")  // for testing
+ 
+        // If it's English or a variant
+        if idioma.hasPrefix("en") {
+            return ["""
+    \(name)
+    \(size)(\(available)Available)
+    """,String(1-percent)]
+        }
+
+        // If it's Spanish
+        else if idioma == "es" {
+             return ["""
+     \(name)
+     \(size)(\(available)Disponible)
+     """,String(1-percent)]
+         }
+
+        // If it's French or a variant
+        else if idioma.hasPrefix("fr") {
+            return ["""
+    \(name)
+    \(size)(\(available)Disponible)
+    """,String(1-percent)]
+        }
+
+        // If it's Romanian
+        else if idioma == "ro" {
+            return ["""
+    \(name)
+    \(size)(\(available)Disponibil)
+    """,String(1-percent)]
+        }
+
+         else { // If it's any other language
+             return ["""
+     \(name)
+     \(size)(\(available)Available)
+     """,String(1-percent)]
+         }
+
+      }
 
 enum macOSvers {
     case MAVERICKS
