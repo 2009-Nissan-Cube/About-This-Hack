@@ -157,7 +157,7 @@ class ViewController: NSViewController {
           if serialNumber.stringValue == HardwareCollector.SerialNumberString {
               serialNumber.stringValue = ""
           } else {
-              erialNumber.stringValue = HardwareCollector.SerialNumberString
+              serialNumber.stringValue = HardwareCollector.SerialNumberString
           }
       }
     

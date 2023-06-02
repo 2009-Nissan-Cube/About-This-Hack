@@ -488,12 +488,57 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         print("Available: \(availableTrimmed)")
         let percent = (Double(availableTrimmed)!) / Double(sizeTrimmed)!
         print("%: \(1 - percent)")
-        return ["""
-        \(name)
-        \(size)(\(available)Available)
-        """, String(1 - percent)]
+        
+        // Get the main language code
+        // This is the device language
+        // let locale = NSLocale.current.languageCode
+        // print ("Device language: \(locale)") // for testing
+        // This is the app language
+        let idioma = Bundle.main.preferredLocalizations[0]
+        // print("Idioma : \(idioma)")  // for testing
+ 
+        // If it's English ot a variant
+        if idioma.hasPrefix("en") {
+            return ["""
+    \(name)
+    \(size)(\(available)Available)
+    """,String(1-percent)]
+        }
+        
+        // If it's Spanish
+        else if idioma == "es" {
+             return ["""
+     \(name)
+     \(size)(\(available)Disponible)
+     """,String(1-percent)]
+         }
+        
+        // If it's French ot a variant
+        else if idioma.hasPrefix("fr") {
+            return ["""
+    \(name)
+    \(size)(\(available)Disponible)
+    """,String(1-percent)]
+        }
+        
+        // If it's Romanian
+        else if idioma == "ro" {
+            return ["""
+    \(name)
+    \(size)(\(available)Disponibil)
+    """,String(1-percent)]
+        }
+             
+         else { // If it's any other language
+             return ["""
+     \(name)
+     \(size)(\(available)Available)
+     """,String(1-percent)]
+         }
+        
+      }
+        
     }
-}
 
 enum macOSvers {
     case MAVERICKS
