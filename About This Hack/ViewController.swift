@@ -116,16 +116,7 @@ class ViewController: NSViewController {
         serialNumber.stringValue = HardwareCollector.SerialNumberString
         
         // Bootloader Version (Optional)
-        if HardwareCollector.qHackintosh {
-            blVersion.stringValue = HardwareCollector.BootloaderString
-            blVersion.isHidden = false
-            blPrefix.isHidden = false
-        }
-        else {
-            blVersion.isHidden = true
-            blPrefix.isHidden = true
-            blVersion.stringValue = ""
-        }
+        blVersion.stringValue = HardwareCollector.BootloaderString
         
         // Make Serial Number Toggle Transparent
         serialToggle.isTransparent = true
