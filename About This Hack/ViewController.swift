@@ -51,6 +51,8 @@ class ViewController: NSViewController {
         
         // Image
         switch HardwareCollector.OSvers {
+        case .SONOMA:
+            picture.image = NSImage(named: "Sonoma")
         case .VENTURA:
             picture.image = NSImage(named: "Ventura")
             break
@@ -81,7 +83,7 @@ class ViewController: NSViewController {
         case .MAVERICKS:
             picture.image = NSImage(named: "Mavericks")
             break
-        case .macOS,.SONOMA:
+        case .macOS:
             picture.image = NSImage(named: "Unknown")
             break
         }
