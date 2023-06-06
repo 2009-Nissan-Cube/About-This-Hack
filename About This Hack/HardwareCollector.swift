@@ -245,7 +245,7 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         switch OSvers {
         case .MAVERICKS,.YOSEMITE,.EL_CAPITAN:
             return "OS X"
-        case .SIERRA,.HIGH_SIERRA,.MOJAVE,.CATALINA,.BIG_SUR,.MONTEREY,.VENTURA,.macOS:
+        case .SIERRA,.HIGH_SIERRA,.MOJAVE,.CATALINA,.BIG_SUR,.MONTEREY,.VENTURA,.SONOMA,.macOS:
             return "macOS"
         }
     }
@@ -259,6 +259,7 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
     }
     static func setOSvers(osNumber: String) {
         switch osNumber.prefix(2) {
+            case "14": OSvers = macOSvers.SONOMA
             case "13": OSvers = macOSvers.VENTURA
             case "12": OSvers = macOSvers.MONTEREY
             case "11": OSvers = macOSvers.BIG_SUR
@@ -290,6 +291,7 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         case .BIG_SUR: return "Big Sur"
         case .MONTEREY: return "Monterey"
         case .VENTURA: return "Ventura"
+        case .SONOMA: return "Sonoma"
         case .macOS: return ""
         }
     }
@@ -506,6 +508,7 @@ enum macOSvers {
     case BIG_SUR
     case MONTEREY
     case VENTURA
+    case SONOMA
     case macOS
 }
 enum macType {

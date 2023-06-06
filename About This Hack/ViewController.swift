@@ -81,7 +81,7 @@ class ViewController: NSViewController {
         case .MAVERICKS:
             picture.image = NSImage(named: "Mavericks")
             break
-        case .macOS:
+        case .macOS,.SONOMA:
             picture.image = NSImage(named: "Unknown")
             break
         }
@@ -157,7 +157,7 @@ class ViewController: NSViewController {
           if serialNumber.stringValue == HardwareCollector.SerialNumberString {
               serialNumber.stringValue = ""
           } else {
-              erialNumber.stringValue = HardwareCollector.SerialNumberString
+              serialNumber.stringValue = HardwareCollector.SerialNumberString
           }
       }
     
