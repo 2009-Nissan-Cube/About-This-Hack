@@ -19,7 +19,8 @@ class ViewController: NSViewController {
     @IBOutlet weak var serialToggle: NSButton!
     @IBOutlet weak var blVersion: NSTextField!
     @IBOutlet weak var blPrefix: NSTextField!
-
+    @IBOutlet weak var creditText: NSTextField!
+    
     @IBOutlet weak var btSysInfo: NSButton!
     @IBOutlet weak var btSoftUpd: NSButton!
     
@@ -128,6 +129,8 @@ class ViewController: NSViewController {
         
         // Make Serial Number Toggle Transparent
         serialToggle.isTransparent = true
+        
+        // Add credit text
     }
 
     

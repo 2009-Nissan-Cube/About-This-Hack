@@ -416,10 +416,10 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="CVN-5K-wws"/>
                                     </imageView>
-                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JaM-2k-3ag">
+                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" contentType="url" translatesAutoresizingMaskIntoConstraints="NO" id="JaM-2k-3ag">
                                         <rect key="frame" x="82" y="-1" width="400" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="™ and © 2021-2023 Mango Inc. All Rights Reserved. License Agreement" id="wwU-zy-Nw8">
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="™ and © 2021-2023 Grape Inc. All Rights Reserved. License Agreement" id="wwU-zy-Nw8">
                                             <font key="font" metaFont="system" size="10"/>
                                             <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -437,6 +437,7 @@
                         <outlet property="btSoftUpd" destination="Pot-uo-okh" id="5pk-IA-trS"/>
                         <outlet property="btSysInfo" destination="ku4-K5-p9x" id="OGv-Fs-u6c"/>
                         <outlet property="cpu" destination="9oc-mK-Jxd" id="Iib-JT-2EB"/>
+                        <outlet property="creditText" destination="JaM-2k-3ag" id="huq-u9-wjX"/>
                         <outlet property="display" destination="XaB-5G-KGc" id="LCR-cY-X3B"/>
                         <outlet property="graphics" destination="yae-Uv-NND" id="9m2-a9-Tlh"/>
                         <outlet property="macModel" destination="Gm1-7a-Pie" id="Ncl-BP-TQA"/>
