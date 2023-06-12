@@ -39,7 +39,7 @@ The Storage tab presents your startup disk with its name, free and total storage
 
 The Support tab contains numerous links to provide support with your Mac or Hackintosh. Note that the Mac links point to Apple's website, and the Hackintosh ones point to Dortania's guide.
 
-<img width="692" alt="Support Screen" src="https://user-images.githubusercontent.com/71262643/175045493-b70e5c7c-f4ee-466b-8390-b6de8a96aeee.png">
+<img width="692" alt="Support Screen" src="https://github.com/0xCUB3/About-This-Hack/assets/94565160/0ac9d6c5-a014-4939-b728-77073d5f1e53">
 
 # Credits
 [MDNich](https://github.com/MDNich) for helping out a ton with features, code, and setting up the update server. <br>
