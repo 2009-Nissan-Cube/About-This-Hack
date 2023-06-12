@@ -9,11 +9,10 @@ A simple application to view your exact hardware on macOS. Similar to About This
 1) Download the zip file from the [latest release](https://github.com/0xCUB3/About-This-Hack/releases/latest)
 2) Drag the enclosed app to your Applications Folder
 3) Open it!
-
-## If you get [this error](https://user-images.githubusercontent.com/79278890/111886978-4af4cb80-89a8-11eb-90c8-522a89abb48e.png) when opening:
-1) Open `System Preferences` and go to `Security & Privacy`.
-2) Under `General` you should see [this prompt](https://user-images.githubusercontent.com/79278890/111887197-c6a34800-89a9-11eb-83e2-9fd3d61e2c15.png):
-3) Click "Open Anyway"
+4) If you get [this error](https://user-images.githubusercontent.com/79278890/111886978-4af4cb80-89a8-11eb-90c8-522a89abb48e.png) when opening:
+- Open `System Preferences` and go to `Security & Privacy`.
+- Under `General` you should see [this prompt](https://user-images.githubusercontent.com/79278890/111887197-c6a34800-89a9-11eb-83e2-9fd3d61e2c15.png):
+- Click "Open Anyway"
 
 # Overview of Features
 
