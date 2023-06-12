@@ -1,5 +1,5 @@
 # About This Hack
-A simple application to view your exact hardware on macOS. Similar to About This Mac, but with more features, including AMD Processor Support, display resolution, and more! It retains the old "About This Mac" design language and is supported on both Hackintoshes and real Macs.<br>
+Discover your hardware on macOS with this simple, user-friendly hardware info app that retains the beloved design language of the classic 'About This Mac' interface, while gaining access to a wealth of additional features. Our app provides comprehensive information, including AMD Processor Support, display resolution, and much more. Whether you're on a Hackintosh or a real Mac, experience the best of all worlds with this intuitive and informative tool.<br>
 
 # Supported OS's
 - **10.11 El Capitan and newer**
