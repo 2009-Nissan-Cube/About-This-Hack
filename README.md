@@ -2,14 +2,8 @@
 A simple application to view your exact hardware on macOS. Similar to About This Mac, but with more features, including AMD Processor Support, display resolution, and more! It retains the old "About This Mac" design language and is supported on both Hackintoshes and real Macs.<br>
 
 # Supported OS's
-- **10.10 Yosemite and newer**
-- *Not supported in OS X Mavericks* (Looking into it)
+- **10.11 El Capitan and newer**
 - Not supported in any way in Linux or Windows
-
-## Localizations
-
-Available in English, Spanish, French, and Romanian.
-
 
 # How To Install
 1) Download the zip file from the [latest release](https://github.com/0xCUB3/About-This-Hack/releases/latest)
@@ -20,7 +14,6 @@ Available in English, Spanish, French, and Romanian.
 1) Open `System Preferences` and go to `Security & Privacy`.
 2) Under `General` you should see [this prompt](https://user-images.githubusercontent.com/79278890/111887197-c6a34800-89a9-11eb-83e2-9fd3d61e2c15.png):
 3) Click "Open Anyway"
-4) You're golden!
 
 # Overview of Features
 
