@@ -3,7 +3,7 @@ A simple application to view your exact hardware on macOS. Similar to About This
 
 # Supported OS's
 - **10.11 El Capitan and newer**
-- Not supported in any way in Linux or Windows
+- Not supported in any way on Linux or Windows
 
 # How To Install
 1) Download the zip file from the [latest release](https://github.com/0xCUB3/About-This-Hack/releases/latest)
