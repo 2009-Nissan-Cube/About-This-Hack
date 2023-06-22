@@ -2,7 +2,7 @@
 Discover your hardware on macOS with this simple, user-friendly hardware info app that retains the beloved design language of the classic 'About This Mac' interface, while gaining access to a wealth of additional features. Our app provides comprehensive information, including AMD Processor Support, display resolution, and much more. Whether you're on a Hackintosh or a real Mac, experience the best of all worlds with this intuitive and informative tool.<br>
 
 # Supported OS's
-- **10.11 El Capitan and newer**
+- **10.12 Sierra and newer**
 - Not supported in any way on Linux or Windows
 
 # How To Install
