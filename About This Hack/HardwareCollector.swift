@@ -429,9 +429,9 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
             
             // 15-inch
             "MacBookPro4,1": (15, "MacBook Pro (15/17-inch, 2008)"),
-            "MacBookPro6,2": (15, "MacBook Pro (15-inch, Mid 20100"),
+            "MacBookPro6,2": (15, "MacBook Pro (15-inch, Mid 2010)"),
             "MacBookPro8,2": (15, "MacBook Pro (15-inch, Early 2011)"),
-            "MacBookPro9,1": (15, "MacBook Pro (15-inch, Mid 20120"),
+            "MacBookPro9,1": (15, "MacBook Pro (15-inch, Mid 2012)"),
             "MacBookPro10,1": (15, "MacBook Pro (Retina, 15-inch, Mid 2012)"),
             "MacBookPro11,2": (15, "MacBook Pro (Retina, 15-inch, Late 2013)"),
             "MacBookPro11,3": (15, "MacBook Pro (Retina, 15-inch, Mid 2014)"),
