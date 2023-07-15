@@ -296,10 +296,14 @@ echo "$(system_profiler SPDisplaysDataType | grep "        " | cut -c 9- | grep 
         return run("system_profiler SPSoftwareDataType | grep 'System Version' | cut -c 29-")
     }
     
+    static func getModelIdentifier() -> String {
+        return run("sysctl hw.model | cut -f2 -d \" \" | tr -d '\n'")
+    }
+    
     
     static func getMacName() -> String {
         // from https://everymac.com/systems/by_capability/mac-specs-by-machine-model-machine-id.html
-        let infoString = run("sysctl hw.model | cut -f2 -d \" \" | tr -d '\n'")
+        let infoString = getModelIdentifier()
         
         // Determines if Desktop or Laptop
         let desktopStrings = ["iMac", "Macmini", "ADP", "MacPro", "Mac13,1", "Mac13,2"]

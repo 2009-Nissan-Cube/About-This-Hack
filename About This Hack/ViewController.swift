@@ -96,7 +96,7 @@ class ViewController: NSViewController {
         systemVersion.stringValue = HardwareCollector.OSBuildNum
         
         // Mac Model
-        macModel.stringValue = HardwareCollector.macName
+        macModel.stringValue = HardwareCollector.macName + " - " + HardwareCollector.getModelIdentifier()
         
         // CPU
         cpu.stringValue = HardwareCollector.CPUstring

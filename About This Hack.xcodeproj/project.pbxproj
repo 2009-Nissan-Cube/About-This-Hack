@@ -21,7 +21,7 @@
 		72E686C32862453700B8316D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E686C22862453700B8316D /* Reachability.swift */; };
 		C1BAD6FF26D70091008460FB /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BAD6FE26D70091008460FB /* WindowController.swift */; };
 		D91B9F7329B27FA800AB58B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D91B9F7529B27FA800AB58B7 /* Main.storyboard */; };
-		FA4509A628635224006F9056 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = FA4509A528635224006F9056 /* Sparkle */; };
+		DC6870412A63282000CAD908 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = DC6870402A63282000CAD908 /* Sparkle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,7 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA4509A628635224006F9056 /* Sparkle in Frameworks */,
+				DC6870412A63282000CAD908 /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +120,7 @@
 			);
 			name = "About This Hack";
 			packageProductDependencies = (
-				FA4509A528635224006F9056 /* Sparkle */,
+				DC6870402A63282000CAD908 /* Sparkle */,
 			);
 			productName = "About This Hack";
 			productReference = 115D920E26D6F65500F5DF35 /* About This Hack.app */;
@@ -159,7 +159,7 @@
 			);
 			mainGroup = 115D920526D6F65500F5DF35;
 			packageReferences = (
-				FA4509A428635224006F9056 /* XCRemoteSwiftPackageReference "Sparkle" */,
+				DC68703F2A63282000CAD908 /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			productRefGroup = 115D920F26D6F65500F5DF35 /* Products */;
 			projectDirPath = "";
@@ -358,7 +358,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 250;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = T474C55Q79;
+				DEVELOPMENT_TEAM = 7XQ65R8AB5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "About This Hack/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "About This Hack";
@@ -387,7 +387,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 250;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = T474C55Q79;
+				DEVELOPMENT_TEAM = 7XQ65R8AB5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "About This Hack/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "About This Hack";
@@ -429,20 +429,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		FA4509A428635224006F9056 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+		DC68703F2A63282000CAD908 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sparkle-project/Sparkle";
 			requirement = {
-				branch = 2.x;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		FA4509A528635224006F9056 /* Sparkle */ = {
+		DC6870402A63282000CAD908 /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FA4509A428635224006F9056 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			package = DC68703F2A63282000CAD908 /* XCRemoteSwiftPackageReference "Sparkle" */;
 			productName = Sparkle;
 		};
 /* End XCSwiftPackageProductDependency section */
