@@ -31,7 +31,39 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        start()
+
+        run("mkdir ~/.ath")
+        print("Directory created...")
+        func createFileIfNeeded(atPath path: String, withCommand command: String) {
+            let fileManager = FileManager.default
+
+            if !fileManager.fileExists(atPath: path) {
+                run(command)
+            }
+        }
+
+        // Example usage
+        let homeDirectory = NSHomeDirectory()
+        let hwFilePath = homeDirectory + "/.ath/hw.txt"
+        let sysmemFilePath = homeDirectory + "/.ath/sysmem.txt"
+        let sysvolnameFilePath = homeDirectory + "/.ath/sysvolname.txt"
+        let scrFilePath = homeDirectory + "/.ath/scr.txt"
+        let scrXmlFilePath = homeDirectory + "/.ath/scrXml.txt"
+
+        createFileIfNeeded(atPath: hwFilePath, withCommand: "system_profiler SPHardwareDataType > \"\(hwFilePath)\"")
+        createFileIfNeeded(atPath: sysmemFilePath, withCommand: "system_profiler SPMemoryDataType > \"\(sysmemFilePath)\"")
+        createFileIfNeeded(atPath: sysvolnameFilePath, withCommand: "diskutil info / > \"\(sysvolnameFilePath)\"")
+        createFileIfNeeded(atPath: scrFilePath, withCommand: "system_profiler SPDisplaysDataType > \"\(scrFilePath)\"")
+        createFileIfNeeded(atPath: scrXmlFilePath, withCommand: "system_profiler SPDisplaysDataType -xml > \"\(scrXmlFilePath)\"")
+        print("Files created...")
+        
+        // Call Functions to init Overview
+        HCVersion.getVersion()
+        HCMacModel.getMacModel()
+        HCCPU.getCPU()
+        HCRAM.getRam()
+        HCStartupDisk.getStartupDisk()
+        HCDisplay.getDisp()
         
     }
     
@@ -42,16 +74,18 @@ class ViewController: NSViewController {
     }
 
     override func viewDidAppear() {
+        super.viewDidAppear()
         self.view.window?.styleMask.remove(NSWindow.StyleMask.resizable)
+        
+        // Call Start Function
+        self.start()
     }
     
-
+    
     func start() {
         print("Initializing...")
-        HardwareCollector.getAllData()
         
-        // Image
-        switch HardwareCollector.OSvers {
+        switch HCVersion.OSvers {
         case .SONOMA:
             picture.image = NSImage(named: "Sonoma")
             break
@@ -89,39 +123,40 @@ class ViewController: NSViewController {
             picture.image = NSImage(named: "Unknown")
             break
         }
+        
         // macOS Version Name
-        osVersion.stringValue = HardwareCollector.OSname
-        
+        osVersion.stringValue = HCVersion.OSname
+
         // macOS Version ID
-        systemVersion.stringValue = HardwareCollector.OSBuildNum
-        
+        systemVersion.stringValue = HCVersion.getOSnum() + HCVersion.OSBuildNum
+
         // Mac Model
-        macModel.stringValue = HardwareCollector.macName + " - " + HardwareCollector.getModelIdentifier()
-        
+        macModel.stringValue = HCMacModel.macName + " - " + HCMacModel.getModelIdentifier()
+
         // CPU
-        cpu.stringValue = HardwareCollector.CPUstring
+        cpu.stringValue = HCCPU.getCPU()
         
         // RAM
-        ram.stringValue = HardwareCollector.RAMstring
-        
+        ram.stringValue = HCRAM.getRam()
+
         // GPU
-        graphics.stringValue = HardwareCollector.GPUstring
-        
+        graphics.stringValue = HCGPU.getGPU()
+
         // Display
-        display.stringValue = HardwareCollector.DisplayString
-        
+        display.stringValue = HCDisplay.getDisp()
+
         // Startup Disk
-        startupDisk.stringValue = HardwareCollector.StartupDiskString
-        
+        startupDisk.stringValue = HCStartupDisk.getStartupDisk()
+
         // Serial Number
-        serialNumber.stringValue = HardwareCollector.SerialNumberString
-        
+        serialNumber.stringValue = HCSerialNumber.getSerialNumber()
+
         // Bootloader Version (Optional)
-        blVersion.stringValue = HardwareCollector.BootloaderString
-        
+        blVersion.stringValue = HCBootloader.getBootloader()
+
         // Make Serial Number Toggle Transparent
         serialToggle.isTransparent = true
-        
+
         // Add credit text
     }
 
@@ -140,21 +175,21 @@ class ViewController: NSViewController {
         blVersion.needsDisplay = true
     }
     
-//    @IBAction func hideSerialNumber(_ sender: NSButton) {
-//        print("Serial Number toggled")
-//        if serialNumber.stringValue == "" {
-//            serialNumber.stringValue = HardwareCollector.SerialNumberString
-//        } else {
-//            serialNumber.stringValue = ""
-//        }
-//    }
+    @IBAction func hideSerialNumber(_ sender: NSButton) {
+        print("Serial Number toggled")
+        if serialNumber.stringValue == "" {
+            serialNumber.stringValue = HCSerialNumber.getSerialNumber()
+        } else {
+            serialNumber.stringValue = ""
+        }
+    }
 
-     @IBAction func hideSerialNumber(_ sender: NSButton) {
+    func showSerialNumber(_ sender: NSButton) {
           print("Serial Number toggled")
-          if serialNumber.stringValue == HardwareCollector.SerialNumberString {
+          if serialNumber.stringValue == HCSerialNumber.getSerialNumber() {
               serialNumber.stringValue = ""
           } else {
-              serialNumber.stringValue = HardwareCollector.SerialNumberString
+              serialNumber.stringValue = HCSerialNumber.getSerialNumber()
           }
       }
     
