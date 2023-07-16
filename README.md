@@ -40,6 +40,12 @@ The Support tab contains numerous links to provide support with your Mac or Hack
 
 <img width="692" alt="Support Screen" src="https://github.com/0xCUB3/About-This-Hack/assets/94565160/0ac9d6c5-a014-4939-b728-77073d5f1e53">
 
+# Uninstall the App
+1) Delete the App (move it to the Bin)
+2) Delete the .ath Folder inside of your User Folder
+2a) With Terminal it's the easiest: `rm -rf /` nah joke `rm -r ~/.ath`
+
+
 # Credits
 [MDNich](https://github.com/MDNich) for helping out a ton with features, code, and setting up the update server. <br>
 [LordNaut](https://github.com/Nautilus704) for helping me fix stuff with AppDelegate and sorting out a bunch of minor, but important features! <br>
