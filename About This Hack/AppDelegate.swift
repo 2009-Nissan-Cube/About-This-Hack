@@ -19,8 +19,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // This is where you can also pass an updater delegate if you need one
         updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
     }
-
-
+    
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Hooking up the menu item's target/action to the standard updater controller does two things:
         // 1. The menu item's action is set to perform a user-initiated check for new updates

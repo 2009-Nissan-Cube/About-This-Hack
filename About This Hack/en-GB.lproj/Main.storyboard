@@ -247,7 +247,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gm1-7a-Pie">
-                                        <rect key="frame" x="237" y="188" width="350" height="15"/>
+                                        <rect key="frame" x="237" y="188" width="345" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Mac" id="rXS-ws-Emd">
                                             <font key="font" metaFont="systemSemibold" size="11"/>
@@ -337,7 +337,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yae-Uv-NND">
-                                        <rect key="frame" x="292" y="88" width="270" height="15"/>
+                                        <rect key="frame" x="292" y="88" width="290" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" id="FW5-i7-qdF">
                                             <font key="font" metaFont="smallSystem"/>
