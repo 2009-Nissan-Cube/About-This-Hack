@@ -16,8 +16,9 @@ class HCGPU {
             graphicsTmp = graphicsTmp.replacingOccurrences(of: "Intel ", with: "")
             graphicsTmp = graphicsTmp.replacingOccurrences(of: "NVIDIA ", with: "")
         }
-        var graphicsRAM  = run("cat ~/.ath/scr.txt | grep VRAM | sed 's/.*: //'")
-        let graphicsArray = graphicsTmp.components(separatedBy: "\n")
+        let graphicsRAM  = run("cat ~/.ath/scr.txt | grep VRAM | sed 's/.*: //'")
+        let graphicsArray = graphicsTmp.components(separatedBy: "\n").filter({ $0 != ""})
+        print(graphicsArray)
         print(graphicsArray.count)
         let vramArray = graphicsRAM.components(separatedBy: "\n")
         var gpuInfoFormatted = ""

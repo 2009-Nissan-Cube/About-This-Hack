@@ -31,7 +31,7 @@ class HCMacModel {
         let infoString = getModelIdentifier()
         
         // Determines if Desktop or Laptop
-        let desktopStrings = ["iMac", "Macmini", "ADP", "MacPro", "Mac13,1", "Mac13,2"]
+        _ = ["iMac", "Macmini", "ADP", "MacPro", "Mac13,1", "Mac13,2"]
         // macType = desktopStrings.contains(where: infoString.contains) ? .DESKTOP : .LAPTOP
 
         
