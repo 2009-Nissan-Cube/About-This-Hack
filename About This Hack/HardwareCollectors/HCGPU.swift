@@ -27,7 +27,7 @@ class HCGPU {
         } else {
             for index in 0..<graphicsArray.count {
                 gpuInfoFormatted += "\(graphicsArray[index]) \(vramArray[index])"
-                if index <= graphicsArray.count - 3 {
+                if index <= graphicsArray.count - 2 {
                     gpuInfoFormatted += " + "
                 }
             }
