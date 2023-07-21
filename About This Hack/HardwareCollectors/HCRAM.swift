@@ -14,6 +14,7 @@ class HCRAM {
         let ramType = run("cat ~/.ath/sysmem.txt  | grep 'Type' | awk '{print $2}' | sed -n '1p'")
         print("RAM Type: " + ramType)
         let ramSpeed = run("cat ~/.ath/sysmem.txt | grep 'Speed' | grep 'MHz' | awk '{print $2\" \"$3}' | sed -n '1p'").trimmingCharacters(in: .whitespacesAndNewlines)
+        print("RAM Speed: " + ramSpeed)
         let ramReturn = "\(ram) GB \(ramSpeed) \(ramType)"
         return ramReturn
     }
