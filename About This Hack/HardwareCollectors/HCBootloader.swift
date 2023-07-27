@@ -22,7 +22,11 @@ class HCBootloader {
                 BootloaderInfo += run("echo \"(\"$(/usr/local/bin/bdmesg | grep -i \"Build with: \\[Args:\" | awk -F '\\-b' '{print $NF}' |  awk -F '\\-t' '{print $1 $2}' | awk  '{print $2}' | awk '{print toupper(substr($0,0,1))tolower(substr($0,2))}') $(/usr/local/bin/bdmesg | grep -i \"Build with: \\[Args:\" | awk -F '\\-b' '{print $NF}' |  awk -F '\\-t' '{print $1 $2}' | awk  '{print $1}' | awk '{print toupper(substr($0,0,1))tolower(substr($0,2))}')\")\"")
             }
             else {
-                BootloaderInfo = "Apple UEFI"
+                if run("sysctl -n machdep.cpu.brand_string").contains("Apple") {
+                    BootloaderInfo = "Apple iBoot"
+                } else {
+                    BootloaderInfo = "Apple UEFI"
+                }
             }
         }
         return BootloaderInfo
