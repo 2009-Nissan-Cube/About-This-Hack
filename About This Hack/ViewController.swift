@@ -32,13 +32,13 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        run("mkdir ~/.ath")
+        _ = run("mkdir ~/.ath")
         print("Directory created...")
         func createFileIfNeeded(atPath path: String, withCommand command: String) {
             let fileManager = FileManager.default
 
             if !fileManager.fileExists(atPath: path) {
-                run(command)
+                _ = run(command)
             }
         }
 
@@ -60,10 +60,10 @@ class ViewController: NSViewController {
         // Call Functions to init Overview
         HCVersion.getVersion()
         HCMacModel.getMacModel()
-        HCCPU.getCPU()
-        HCRAM.getRam()
-        HCStartupDisk.getStartupDisk()
-        HCDisplay.getDisp()
+        _ = HCCPU.getCPU()
+        _ = HCRAM.getRam()
+        _ = HCStartupDisk.getStartupDisk()
+        _ = HCDisplay.getDisp()
         
     }
     
