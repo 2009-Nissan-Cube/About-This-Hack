@@ -60,6 +60,7 @@
 		DC6870572A6473E400CAD908 /* HCSerialNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSerialNumber.swift; sourceTree = "<group>"; };
 		DC6870592A6473F000CAD908 /* HCBootloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCBootloader.swift; sourceTree = "<group>"; };
 		DC68705B2A6474B600CAD908 /* HCDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCDisplay.swift; sourceTree = "<group>"; };
+		F0F6E65B2A9B32E800FB937E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Main.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +176,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 115D920526D6F65500F5DF35;
 			packageReferences = (
@@ -237,6 +239,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D91B9F7429B27FA800AB58B7 /* en */,
+				F0F6E65B2A9B32E800FB937E /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -374,11 +377,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "About This Hack/About_This_Hack.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 425;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = T474C55Q79;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "About This Hack/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "About This Hack";
@@ -403,11 +407,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "About This Hack/About_This_Hack.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 425;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = T474C55Q79;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "About This Hack/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "About This Hack";
