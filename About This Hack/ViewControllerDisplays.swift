@@ -42,7 +42,7 @@ class ViewControllerDisplays: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        start()
     }
     
 
@@ -53,11 +53,10 @@ class ViewControllerDisplays: NSViewController {
 
     override func viewDidAppear() {
         self.view.window?.styleMask.remove(NSWindow.StyleMask.resizable)
-        start()
     }
     
     func start() {
-        print("Display View Initializing")
+        print("Initializing Display View...")
         if (!HardwareCollector.dataHasBeenSet) {HardwareCollector.getAllData()}
         var dispArr: [NSImageView] = []
         var nameArr: [NSTextField] = []

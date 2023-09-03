@@ -65,6 +65,8 @@ class ViewController: NSViewController {
         _ = HCStartupDisk.getStartupDisk()
         _ = HCDisplay.getDisp()
         
+        self.start()
+        
     }
     
 
@@ -76,14 +78,13 @@ class ViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
         self.view.window?.styleMask.remove(NSWindow.StyleMask.resizable)
-        
-        // Call Start Function
-        self.start()
     }
     
     
     func start() {
-        print("Initializing...")
+        print("Initializing Main View...")
+        
+        if (!HardwareCollector.dataHasBeenSet) {HardwareCollector.getAllData()}
         
         switch HCVersion.OSvers {
         case .SONOMA:

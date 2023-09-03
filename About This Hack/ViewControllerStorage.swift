@@ -16,7 +16,7 @@ class ViewControllerStorage: NSViewController {
     @IBOutlet weak var storageAmount: NSLevelIndicatorCell!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        start()
     }
 
 
@@ -27,11 +27,12 @@ class ViewControllerStorage: NSViewController {
 
     override func viewDidAppear() {
         self.view.window?.styleMask.remove(NSWindow.StyleMask.resizable)
-        start()
     }
 
     func start() {
-        print("Storage View Initializing...")
+        print("Initializing Storage View...")
+        
+        if (!HardwareCollector.dataHasBeenSet) {HardwareCollector.getAllData()}
 
         // Image
         if HardwareCollector.getStorageType() == true {
