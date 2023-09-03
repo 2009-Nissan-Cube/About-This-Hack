@@ -31,7 +31,7 @@ class UpdateController {
         print("Starting Update...")
         print("Starting Download...")
         notify(title: "Starting Download", informativeText: "This may take awhile...")
-        _ = run("curl -L https://github.com/0xCUB3/About-This-Hack/releases/download/" + "0.9.1" + "/About.This.Hack.zip -o ~/.ath/new_ath.zip")
+        _ = run("curl -L https://github.com/0xCUB3/About-This-Hack/releases/download/" + run("cat ~/.ath/version.txt | tr -d '[:space:]'") + "/About.This.Hack.zip -o ~/.ath/new_ath.zip")
         print("Killing Old App...")
         notify(title: "Replacing Apps", informativeText: "Deleting the old version and replacing it with the new version")
         // Thanks for the code, Ben216k
