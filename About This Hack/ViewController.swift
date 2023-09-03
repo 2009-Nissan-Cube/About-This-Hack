@@ -110,15 +110,6 @@ class ViewController: NSViewController {
         case .SIERRA:
             picture.image = NSImage(named: "Sierra")
             break
-        case .EL_CAPITAN:
-            picture.image = NSImage(named: "El Capitan")
-            break
-        case .YOSEMITE:
-            picture.image = NSImage(named: "Yosemite")
-            break
-        case .MAVERICKS:
-            picture.image = NSImage(named: "Mavericks")
-            break
         case .macOS:
             picture.image = NSImage(named: "Unknown")
             break

@@ -1,10 +1,3 @@
-//
-//  HCVersion.swift
-//  About This Hack
-//
-//  Created by Felix on 15.07.23.
-//
-
 import Foundation
 
 class HCVersion {
@@ -24,7 +17,7 @@ class HCVersion {
         print(OSnum)
         setOSvers(osNumber: OSnum)
         OSname = macOSversToString()
-        osPrefix = getOSPrefix()
+        osPrefix = "macOS"
         OSBuildNum = getOSBuildNum()
         
         dataHasBeenSet = true
@@ -47,9 +40,6 @@ class HCVersion {
                 else if osNumber.contains("14") { OSvers = macOSvers.MOJAVE }
                 else if osNumber.contains("13") { OSvers = macOSvers.HIGH_SIERRA }
                 else if osNumber.contains("12") { OSvers = macOSvers.SIERRA }
-                else if osNumber.contains("11") { OSvers = macOSvers.EL_CAPITAN }
-                else if osNumber.contains("10") { OSvers = macOSvers.YOSEMITE }
-                else if osNumber.contains("9") { OSvers = macOSvers.MAVERICKS }
                 else { OSvers = macOSvers.macOS }
             default: OSvers = macOSvers.macOS
         }
@@ -59,9 +49,6 @@ class HCVersion {
 
     static func macOSversToString() -> String {
         switch OSvers {
-        case .MAVERICKS: return "Mavericks"
-        case .YOSEMITE: return "Yosemite"
-        case .EL_CAPITAN: return "El Capitan"
         case .SIERRA: return "Sierra"
         case .HIGH_SIERRA: return "High Sierra"
         case .MOJAVE: return "Mojave"
@@ -78,21 +65,9 @@ class HCVersion {
     static func getOSBuildNum() -> String {
         return " (" + run("sw_vers -buildVersion | tr -d '\n'") + ")"
     }
-    
-    static func getOSPrefix() -> String{
-        switch OSvers {
-        case .MAVERICKS,.YOSEMITE,.EL_CAPITAN:
-            return "OS X"
-        case .SIERRA,.HIGH_SIERRA,.MOJAVE,.CATALINA,.BIG_SUR,.MONTEREY,.VENTURA,.SONOMA,.macOS:
-            return "macOS"
-        }
-    }
 }
 
 enum macOSvers {
-    case MAVERICKS
-    case YOSEMITE
-    case EL_CAPITAN
     case SIERRA
     case HIGH_SIERRA
     case MOJAVE
