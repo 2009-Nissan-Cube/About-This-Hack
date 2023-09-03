@@ -29,15 +29,12 @@ class HCVersion {
         
         dataHasBeenSet = true
     }
-    
-    
 
     static func getOSnum() -> String {
-        
-        let osVersion = run("sw_vers -productVersion")
-        
+        let osVersion = run("sw_vers -productVersion | tr -d '\n'")
         return osVersion
     }
+    
     static func setOSvers(osNumber: String) {
         switch osNumber.prefix(2) {
             case "14": OSvers = macOSvers.SONOMA
@@ -79,7 +76,7 @@ class HCVersion {
 
 
     static func getOSBuildNum() -> String {
-        return "(" + run("sw_vers -buildVersion") + ")"
+        return " (" + run("sw_vers -buildVersion | tr -d '\n'") + ")"
     }
     
     static func getOSPrefix() -> String{

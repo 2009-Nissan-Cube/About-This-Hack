@@ -61,7 +61,6 @@ class ViewControllerDisplays: NSViewController {
         var dispArr: [NSImageView] = []
         var nameArr: [NSTextField] = []
         var labelArr2: [NSTextField] = []
-        if (!HardwareCollector.dataHasBeenSet) {HardwareCollector.getAllData()}
         if (HardwareCollector.macType == .DESKTOP) {
             DisplayPicCenter.image = NSImage(named: "genericLCD")
         }
