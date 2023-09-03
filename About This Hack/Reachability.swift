@@ -1,10 +1,3 @@
-//
-//  Reachability.swift
-//  About This Hack
-//
-//  Created by MDNich on 3/27/22.
-//
-
 import Foundation
 import SystemConfiguration
 

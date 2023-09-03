@@ -19,6 +19,8 @@
 		58B988DA26D7ACD80092EC5B /* ViewControllerSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B988D726D7ACD80092EC5B /* ViewControllerSupport.swift */; };
 		72E686C32862453700B8316D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E686C22862453700B8316D /* Reachability.swift */; };
 		C1BAD6FF26D70091008460FB /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BAD6FE26D70091008460FB /* WindowController.swift */; };
+		C1DEC6552AA52820001F37A2 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = C1DEC6542AA52820001F37A2 /* Zip */; };
+		C1F22EAF2AA4EDE000236BB6 /* UpdateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F22EAE2AA4EDE000236BB6 /* UpdateController.swift */; };
 		D91B9F7329B27FA800AB58B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D91B9F7529B27FA800AB58B7 /* Main.storyboard */; };
 		DC6870462A63334400CAD908 /* HCVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870452A63334400CAD908 /* HCVersion.swift */; };
 		DC6870482A63336E00CAD908 /* HardwareCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870472A63336E00CAD908 /* HardwareCollector.swift */; };
@@ -30,7 +32,6 @@
 		DC6870582A6473E400CAD908 /* HCSerialNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870572A6473E400CAD908 /* HCSerialNumber.swift */; };
 		DC68705A2A6473F000CAD908 /* HCBootloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870592A6473F000CAD908 /* HCBootloader.swift */; };
 		DC68705C2A6474B600CAD908 /* HCDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68705B2A6474B600CAD908 /* HCDisplay.swift */; };
-		DC6870612A6487B600CAD908 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = DC6870602A6487B600CAD908 /* Sparkle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		58B988D726D7ACD80092EC5B /* ViewControllerSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSupport.swift; sourceTree = "<group>"; };
 		72E686C22862453700B8316D /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		C1BAD6FE26D70091008460FB /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		C1F22EAE2AA4EDE000236BB6 /* UpdateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateController.swift; sourceTree = "<group>"; };
 		D91B9F7429B27FA800AB58B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DC6870452A63334400CAD908 /* HCVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCVersion.swift; sourceTree = "<group>"; };
 		DC6870472A63336E00CAD908 /* HardwareCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HardwareCollector.swift; path = ../HardwareCollector.swift; sourceTree = "<group>"; };
@@ -67,7 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC6870612A6487B600CAD908 /* Sparkle in Frameworks */,
+				C1DEC6552AA52820001F37A2 /* Zip in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +81,7 @@
 			children = (
 				115D921026D6F65500F5DF35 /* About This Hack */,
 				115D920F26D6F65500F5DF35 /* Products */,
+				C1DEC6512AA52812001F37A2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,8 +113,16 @@
 				115D921A26D6F65600F5DF35 /* Info.plist */,
 				115D921B26D6F65600F5DF35 /* About_This_Hack.entitlements */,
 				58134C0128668FF70008B00D /* Keycodes.swift */,
+				C1F22EAE2AA4EDE000236BB6 /* UpdateController.swift */,
 			);
 			path = "About This Hack";
+			sourceTree = "<group>";
+		};
+		C1DEC6512AA52812001F37A2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		DC6870442A63332C00CAD908 /* HardwareCollectors */ = {
@@ -147,7 +158,7 @@
 			);
 			name = "About This Hack";
 			packageProductDependencies = (
-				DC6870602A6487B600CAD908 /* Sparkle */,
+				C1DEC6542AA52820001F37A2 /* Zip */,
 			);
 			productName = "About This Hack";
 			productReference = 115D920E26D6F65500F5DF35 /* About This Hack.app */;
@@ -178,7 +189,7 @@
 			);
 			mainGroup = 115D920526D6F65500F5DF35;
 			packageReferences = (
-				DC68705F2A6487B600CAD908 /* XCRemoteSwiftPackageReference "Sparkle" */,
+				C1DEC64E2AA51BE6001F37A2 /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = 115D920F26D6F65500F5DF35 /* Products */;
 			projectDirPath = "";
@@ -210,6 +221,7 @@
 				DC6870582A6473E400CAD908 /* HCSerialNumber.swift in Sources */,
 				DC6870502A640A9F00CAD908 /* HCStartupDisk.swift in Sources */,
 				DC68704E2A63453900CAD908 /* HCRAM.swift in Sources */,
+				C1F22EAF2AA4EDE000236BB6 /* UpdateController.swift in Sources */,
 				72E686C32862453700B8316D /* Reachability.swift in Sources */,
 				58134C0228668FF70008B00D /* Keycodes.swift in Sources */,
 				58B988D826D7ACD80092EC5B /* ViewControllerService.swift in Sources */,
@@ -385,7 +397,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 0.9.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "app.netlify.0xCUBE.About-This-Hack";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -414,7 +426,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 0.9.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "app.netlify.0xCUBE.About-This-Hack";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -447,21 +459,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		DC68705F2A6487B600CAD908 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+		C1DEC64E2AA51BE6001F37A2 /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
-				branch = 2.x;
-				kind = branch;
+				kind = upToNextMinorVersion;
+				minimumVersion = 2.1.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DC6870602A6487B600CAD908 /* Sparkle */ = {
+		C1DEC6542AA52820001F37A2 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DC68705F2A6487B600CAD908 /* XCRemoteSwiftPackageReference "Sparkle" */;
-			productName = Sparkle;
+			package = C1DEC64E2AA51BE6001F37A2 /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -80,8 +80,6 @@ class ViewController: NSViewController {
         super.viewDidAppear()
         self.view.window?.styleMask.remove(NSWindow.StyleMask.resizable)
     }
-    
-    
     func start() {
         print("Initializing Main View...")
         
@@ -158,8 +156,6 @@ class ViewController: NSViewController {
 
         // Make Serial Number Toggle Transparent
         serialToggle.isTransparent = true
-
-        // Add credit text
     }
 
     
