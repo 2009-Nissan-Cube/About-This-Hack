@@ -59,6 +59,7 @@ class ViewController: NSViewController {
         
         // Call Functions to init Overview
         HCVersion.getVersion()
+        Thread.sleep(forTimeInterval: 0.500)
         HCMacModel.getMacModel()
         _ = HCCPU.getCPU()
         _ = HCRAM.getRam()
