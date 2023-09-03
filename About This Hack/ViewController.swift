@@ -56,10 +56,10 @@ class ViewController: NSViewController {
         createFileIfNeeded(atPath: scrFilePath, withCommand: "system_profiler SPDisplaysDataType > \"\(scrFilePath)\"")
         createFileIfNeeded(atPath: scrXmlFilePath, withCommand: "system_profiler SPDisplaysDataType -xml > \"\(scrXmlFilePath)\"")
         print("Files created...")
+        Thread.sleep(forTimeInterval: 0.500)
         
         // Call Functions to init Overview
         HCVersion.getVersion()
-        Thread.sleep(forTimeInterval: 0.500)
         HCMacModel.getMacModel()
         _ = HCCPU.getCPU()
         _ = HCRAM.getRam()
