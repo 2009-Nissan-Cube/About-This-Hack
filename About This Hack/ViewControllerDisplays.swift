@@ -42,7 +42,6 @@ class ViewControllerDisplays: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        start()
     }
     
 
@@ -53,6 +52,7 @@ class ViewControllerDisplays: NSViewController {
 
     override func viewDidAppear() {
         self.view.window?.styleMask.remove(NSWindow.StyleMask.resizable)
+        start()
     }
     
     func start() {
