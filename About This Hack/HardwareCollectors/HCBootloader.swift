@@ -16,7 +16,7 @@ class HCBootloader {
         if BootloaderInfo != "" {
             // Regular OpenCore
             if run("grep -A1 \"OpenCore Legacy Patcher\" /System/Library/CoreServices/OpenCore-Legacy-Patcher.plist | tail -1 | sed -e 's?.?OCLP: ?g' -e 's??, ?g'").contains("No") {
-                BootloaderInfo = run("echo \"OpenCore - Version \" $(nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | awk '{print $2}' | awk -F'-' '{print $2}' | sed -e 's/ */./g' -e s'/^.//g' -e 's/.$//g' -e 's/ .//g' -e 's/. //g' | tr -d '\n') $( nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | awk '{print $2}' | awk -F'-' '{print $1}' | sed -e 's/REL/(Release)/g' -e s'/N\\/A//g' -e 's/DEB/(Debug)/g' | tr -d '\n')")
+                BootloaderInfo = run("echo \"OpenCore v\" $(nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | awk '{print $2}' | awk -F'-' '{print $2}' | sed -e 's/ */./g' -e s'/^.//g' -e 's/.$//g' -e 's/ .//g' -e 's/. //g' | tr -d '\n') $( nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | awk '{print $2}' | awk -F'-' '{print $1}' | sed -e 's/REL/(Release)/g' -e s'/N\\/A//g' -e 's/DEB/(Debug)/g' | tr -d '\n')")
             } else {
                 BootloaderInfo = run("grep -A1 \"OpenCore Legacy Patcher\" /System/Library/CoreServices/OpenCore-Legacy-Patcher.plist | tail -1 | sed -e 's?.?OCLP ?g' -e 's??, ?g'") + run("echo \"(OpenCore v\" $(nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version | awk '{print $2}' | awk -F'-' '{print $2}' | sed -e 's/ */./g' -e s'/^.//g' -e 's/.$//g' -e 's/ .//g' -e 's/. //g' | tr -d '\n'))")
             }
