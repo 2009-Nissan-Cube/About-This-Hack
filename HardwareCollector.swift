@@ -128,7 +128,7 @@ echo "$(cat ~/.ath/scr.txt | grep "        " | cut -c 9- | grep "^[A-Za-z]" | cu
     static func getStorageType() -> Bool {
         let name = "\(HCStartupDisk.getStartupDisk())"
         print("Startup Disk Name " + name)
-        let storageType = run("diskutil info \"\(name)\" | grep 'Solid State'")
+        let storageType = run("grep 'Solid State' ~/.ath/sysvolname.txt")
         
         return storageType.contains("Yes")
         
