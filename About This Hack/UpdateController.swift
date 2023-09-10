@@ -7,7 +7,7 @@ class UpdateController {
         print("Checking for updates...")
         let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
         _ = run("curl -o ~/.ath/version.txt https://raw.githubusercontent.com/0xCUB3/Website/main/content/ath.txt")
-        let latestVersion = run("cat ~/.ath/version.txt | tr -d '[:space:]'")
+        let latestVersion = run("tr -d '[:space:]' < ~/.ath/version.txt")
         if appVersion < latestVersion {
             print("Newer version (" + latestVersion + ") available")
             let prompt = alert(message: "Update found!", text: "The latest version is " + latestVersion + ". You are currently running " + appVersion + ".")
@@ -31,7 +31,7 @@ class UpdateController {
         print("Starting Update...")
         print("Starting Download...")
         notify(title: "Starting Download", informativeText: "This may take awhile...")
-        _ = run("curl -L https://github.com/0xCUB3/About-This-Hack/releases/download/" + run("cat ~/.ath/version.txt | tr -d '[:space:]'") + "/About.This.Hack.zip -o ~/.ath/new_ath.zip")
+        _ = run("curl -L https://github.com/0xCUB3/About-This-Hack/releases/download/" + run("tr -d '[:space:]' <  ~/.ath/version.txt") + "/About.This.Hack.zip -o ~/.ath/new_ath.zip")
         print("Killing Old App...")
         notify(title: "Replacing Apps", informativeText: "Deleting the old version and replacing it with the new version")
         // Thanks for the code, Ben216k
@@ -67,4 +67,3 @@ class UpdateController {
         NSUserNotificationCenter.default.deliver(notification)
     }
 }
-

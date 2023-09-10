@@ -29,13 +29,13 @@ class ViewController: NSViewController {
     var ocLevel = "Unknown"
     var ocVersionID = "Version"
     
+    var fileManager = FileManager.default
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
         _ = run("mkdir ~/.ath")
         print("Directory created...")
         func createFileIfNeeded(atPath path: String, withCommand command: String) {
-            let fileManager = FileManager.default
 
             if !fileManager.fileExists(atPath: path) {
                 _ = run(command)
@@ -49,14 +49,19 @@ class ViewController: NSViewController {
         let sysvolnameFilePath = homeDirectory + "/.ath/sysvolname.txt"
         let scrFilePath = homeDirectory + "/.ath/scr.txt"
         let scrXmlFilePath = homeDirectory + "/.ath/scrXml.txt"
+        let oclpXmlFilePath = homeDirectory + "/.ath/oclp.txt"
+        let oclppatchplist = "/System/Library/CoreServices/OpenCore-Legacy-Patcher.plist"
 
         createFileIfNeeded(atPath: hwFilePath, withCommand: "system_profiler SPHardwareDataType > \"\(hwFilePath)\"")
         createFileIfNeeded(atPath: sysmemFilePath, withCommand: "system_profiler SPMemoryDataType > \"\(sysmemFilePath)\"")
         createFileIfNeeded(atPath: sysvolnameFilePath, withCommand: "diskutil info / > \"\(sysvolnameFilePath)\"")
         createFileIfNeeded(atPath: scrFilePath, withCommand: "system_profiler SPDisplaysDataType > \"\(scrFilePath)\"")
         createFileIfNeeded(atPath: scrXmlFilePath, withCommand: "system_profiler SPDisplaysDataType -xml > \"\(scrXmlFilePath)\"")
+        if fileManager.fileExists(atPath: oclppatchplist) {
+            createFileIfNeeded(atPath: oclpXmlFilePath, withCommand: "egrep -A1 \"OpenCore Legacy Patcher|Time Patched|Commit URL\" " +  oclppatchplist + " > \"\(oclpXmlFilePath)\"")
+        }
         print("Files created...")
-        Thread.sleep(forTimeInterval: 0.5)
+        Thread.sleep(forTimeInterval: 1)
         
         // Call Functions to init Overview
         HCVersion.getVersion()
@@ -78,11 +83,12 @@ class ViewController: NSViewController {
         self.view.window?.styleMask.remove(NSWindow.StyleMask.resizable)
 
         self.start()
+        setToolTips()
     }
     func start() {
         print("Initializing Main View...")
         
-        if (!HardwareCollector.dataHasBeenSet) {HardwareCollector.getAllData()}
+        if (!HardwareCollector.dataHasBeenSet) {HardwareCollector.getAllData()
         
         switch HCVersion.OSvers {
         case .SONOMA:
@@ -147,7 +153,7 @@ class ViewController: NSViewController {
         // Make Serial Number Toggle Transparent
         serialToggle.isTransparent = true
     }
-
+}
     
     func updateView() {
         picture.needsDisplay = true
@@ -161,6 +167,11 @@ class ViewController: NSViewController {
         startupDisk.needsDisplay = true
         serialNumber.needsDisplay = true
         blVersion.needsDisplay = true
+    }
+    
+    func setToolTips(){
+        blPrefix.toolTip = blPrefixtoolTip
+        blVersion.toolTip   = blVersiontoolTip
     }
     
     @IBAction func hideSerialNumber(_ sender: NSButton) {

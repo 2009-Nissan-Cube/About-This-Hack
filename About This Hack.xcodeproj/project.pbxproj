@@ -19,6 +19,7 @@
 		58B988DA26D7ACD80092EC5B /* ViewControllerSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B988D726D7ACD80092EC5B /* ViewControllerSupport.swift */; };
 		72E686C32862453700B8316D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E686C22862453700B8316D /* Reachability.swift */; };
 		C1BAD6FF26D70091008460FB /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BAD6FE26D70091008460FB /* WindowController.swift */; };
+		C1D8307D2AAE57E500ABD4A4 /* Tooltips.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D8307C2AAE57E500ABD4A4 /* Tooltips.swift */; };
 		C1DEC6552AA52820001F37A2 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = C1DEC6542AA52820001F37A2 /* Zip */; };
 		C1F22EAF2AA4EDE000236BB6 /* UpdateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F22EAE2AA4EDE000236BB6 /* UpdateController.swift */; };
 		D91B9F7329B27FA800AB58B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D91B9F7529B27FA800AB58B7 /* Main.storyboard */; };
@@ -50,6 +51,7 @@
 		58B988D726D7ACD80092EC5B /* ViewControllerSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSupport.swift; sourceTree = "<group>"; };
 		72E686C22862453700B8316D /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		C1BAD6FE26D70091008460FB /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		C1D8307C2AAE57E500ABD4A4 /* Tooltips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tooltips.swift; sourceTree = "<group>"; };
 		C1F22EAE2AA4EDE000236BB6 /* UpdateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateController.swift; sourceTree = "<group>"; };
 		D91B9F7429B27FA800AB58B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DC6870452A63334400CAD908 /* HCVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCVersion.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				115D921B26D6F65600F5DF35 /* About_This_Hack.entitlements */,
 				58134C0128668FF70008B00D /* Keycodes.swift */,
 				C1F22EAE2AA4EDE000236BB6 /* UpdateController.swift */,
+				C1D8307C2AAE57E500ABD4A4 /* Tooltips.swift */,
 			);
 			path = "About This Hack";
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				C1BAD6FF26D70091008460FB /* WindowController.swift in Sources */,
 				DC6870482A63336E00CAD908 /* HardwareCollector.swift in Sources */,
 				114545F62710E3AE0017655D /* Shell.swift in Sources */,
+				C1D8307D2AAE57E500ABD4A4 /* Tooltips.swift in Sources */,
 				DC68705C2A6474B600CAD908 /* HCDisplay.swift in Sources */,
 				DC68705A2A6473F000CAD908 /* HCBootloader.swift in Sources */,
 				DC68704C2A6341E700CAD908 /* HCCPU.swift in Sources */,

@@ -1,18 +1,11 @@
-//
-//  HCDisplay.swift
-//  About This Hack
-//
-//  Created by Felix on 16.07.23.
-//
-
 import Foundation
 
 class HCDisplay {
     
     static func getDisp() -> String {
-        var tmp = run("cat ~/.ath/scr.txt | grep Resolution | sed 's/.*: //'")
+        var tmp = run("grep Resolution ~/.ath/scr.txt | sed 's/.*: //'")
         if tmp.contains("(QHD"){
-            tmp = run("cat ~/.ath/scr.txt | grep Resolution | sed 's/.*: //' | cut -c -11")
+            tmp = run("grep Resolution ~/.ath/scr.txt | sed 's/.*: //' | cut -c -11")
         }
         if(tmp.contains("\n")) {
             let displayID = tmp.firstIndex(of: "\n")!
@@ -21,5 +14,4 @@ class HCDisplay {
         }
         return tmp
     }
-    
 }

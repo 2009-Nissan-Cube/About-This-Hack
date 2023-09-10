@@ -1,22 +1,15 @@
-//
-//  HCGPU.swift
-//  About This Hack
-//
-//  Created by Felix on 16.07.23.
-//
-
 import Foundation
 
 class HCGPU {
     
     
     static func getGPU() -> String {
-        var graphicsTmp = run("cat ~/.ath/scr.txt | grep 'Chipset' | sed 's/.*: //'")
+        var graphicsTmp = run("grep 'Chipset' ~/.ath/scr.txt | sed 's/.*: //'")
         if graphicsTmp.contains("Intel") || graphicsTmp.contains("NVIDIA") {
             graphicsTmp = graphicsTmp.replacingOccurrences(of: "Intel ", with: "")
             graphicsTmp = graphicsTmp.replacingOccurrences(of: "NVIDIA ", with: "")
         }
-        let graphicsRAM  = run("cat ~/.ath/scr.txt | grep VRAM | sed 's/.*: //'")
+        let graphicsRAM  = run("grep VRAM ~/.ath/scr.txt | sed 's/.*: //'")
         let graphicsArray = graphicsTmp.components(separatedBy: "\n").filter({ $0 != ""})
         print(graphicsArray)
         print(graphicsArray.count)
@@ -32,13 +25,10 @@ class HCGPU {
                 }
             }
         }
-
 //        while x < min(vramArray.count, graphicsArray.count) {
 //            gpuInfoFormatted.append("\(graphicsArray[x]) \(vramArray[x])\n")
 //            x += 1
 //        }
         return gpuInfoFormatted
     }
-    
-    
 }

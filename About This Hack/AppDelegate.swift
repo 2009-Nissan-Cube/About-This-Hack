@@ -1,9 +1,3 @@
-//
-//  AppDelegate.swift
-//  About This Hack
-//
-//
-
 import Cocoa
 import Foundation
 
@@ -23,6 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
+        _ = run("rm -rf ~/.ath 2>/dev/null")
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
@@ -50,4 +45,3 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         windCtrl.changeView(new: 3)
     }
 }
-
