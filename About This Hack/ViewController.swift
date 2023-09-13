@@ -49,17 +49,12 @@ class ViewController: NSViewController {
         let sysvolnameFilePath = homeDirectory + "/.ath/sysvolname.txt"
         let scrFilePath = homeDirectory + "/.ath/scr.txt"
         let scrXmlFilePath = homeDirectory + "/.ath/scrXml.txt"
-        let oclpXmlFilePath = homeDirectory + "/.ath/oclp.txt"
-        let oclppatchplist = "/System/Library/CoreServices/OpenCore-Legacy-Patcher.plist"
 
         createFileIfNeeded(atPath: hwFilePath, withCommand: "system_profiler SPHardwareDataType > \"\(hwFilePath)\"")
         createFileIfNeeded(atPath: sysmemFilePath, withCommand: "system_profiler SPMemoryDataType > \"\(sysmemFilePath)\"")
         createFileIfNeeded(atPath: sysvolnameFilePath, withCommand: "diskutil info / > \"\(sysvolnameFilePath)\"")
         createFileIfNeeded(atPath: scrFilePath, withCommand: "system_profiler SPDisplaysDataType > \"\(scrFilePath)\"")
         createFileIfNeeded(atPath: scrXmlFilePath, withCommand: "system_profiler SPDisplaysDataType -xml > \"\(scrXmlFilePath)\"")
-        if fileManager.fileExists(atPath: oclppatchplist) {
-            createFileIfNeeded(atPath: oclpXmlFilePath, withCommand: "egrep -A1 \"OpenCore Legacy Patcher|Time Patched|Commit URL\" " +  oclppatchplist + " > \"\(oclpXmlFilePath)\"")
-        }
         print("Files created...")
         Thread.sleep(forTimeInterval: 1)
         
@@ -171,7 +166,8 @@ class ViewController: NSViewController {
     
     func setToolTips(){
         blPrefix.toolTip = blPrefixtoolTip
-        blVersion.toolTip   = blVersiontoolTip
+        blVersion.toolTip = blVersiontoolTip
+        graphics.toolTip = graphicstoolTip
     }
     
     @IBAction func hideSerialNumber(_ sender: NSButton) {
