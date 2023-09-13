@@ -18,13 +18,13 @@
 		58B988D926D7ACD80092EC5B /* ViewControllerStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B988D626D7ACD70092EC5B /* ViewControllerStorage.swift */; };
 		58B988DA26D7ACD80092EC5B /* ViewControllerSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B988D726D7ACD80092EC5B /* ViewControllerSupport.swift */; };
 		72E686C32862453700B8316D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E686C22862453700B8316D /* Reachability.swift */; };
+		96F6E1B92AB1A93E00AE7497 /* HardwareCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F6E1B82AB1A93E00AE7497 /* HardwareCollector.swift */; };
 		C1BAD6FF26D70091008460FB /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BAD6FE26D70091008460FB /* WindowController.swift */; };
 		C1D8307D2AAE57E500ABD4A4 /* Tooltips.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D8307C2AAE57E500ABD4A4 /* Tooltips.swift */; };
 		C1DEC6552AA52820001F37A2 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = C1DEC6542AA52820001F37A2 /* Zip */; };
 		C1F22EAF2AA4EDE000236BB6 /* UpdateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F22EAE2AA4EDE000236BB6 /* UpdateController.swift */; };
 		D91B9F7329B27FA800AB58B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D91B9F7529B27FA800AB58B7 /* Main.storyboard */; };
 		DC6870462A63334400CAD908 /* HCVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870452A63334400CAD908 /* HCVersion.swift */; };
-		DC6870482A63336E00CAD908 /* HardwareCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870472A63336E00CAD908 /* HardwareCollector.swift */; };
 		DC68704A2A633DDD00CAD908 /* HCMacModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870492A633DDD00CAD908 /* HCMacModel.swift */; };
 		DC68704C2A6341E700CAD908 /* HCCPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68704B2A6341E700CAD908 /* HCCPU.swift */; };
 		DC68704E2A63453900CAD908 /* HCRAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68704D2A63453900CAD908 /* HCRAM.swift */; };
@@ -50,12 +50,12 @@
 		58B988D626D7ACD70092EC5B /* ViewControllerStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerStorage.swift; sourceTree = "<group>"; };
 		58B988D726D7ACD80092EC5B /* ViewControllerSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSupport.swift; sourceTree = "<group>"; };
 		72E686C22862453700B8316D /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		96F6E1B82AB1A93E00AE7497 /* HardwareCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardwareCollector.swift; sourceTree = "<group>"; };
 		C1BAD6FE26D70091008460FB /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		C1D8307C2AAE57E500ABD4A4 /* Tooltips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tooltips.swift; sourceTree = "<group>"; };
 		C1F22EAE2AA4EDE000236BB6 /* UpdateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateController.swift; sourceTree = "<group>"; };
 		D91B9F7429B27FA800AB58B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DC6870452A63334400CAD908 /* HCVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCVersion.swift; sourceTree = "<group>"; };
-		DC6870472A63336E00CAD908 /* HardwareCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HardwareCollector.swift; path = ../HardwareCollector.swift; sourceTree = "<group>"; };
 		DC6870492A633DDD00CAD908 /* HCMacModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMacModel.swift; sourceTree = "<group>"; };
 		DC68704B2A6341E700CAD908 /* HCCPU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCCPU.swift; sourceTree = "<group>"; };
 		DC68704D2A63453900CAD908 /* HCRAM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRAM.swift; sourceTree = "<group>"; };
@@ -98,11 +98,11 @@
 		115D921026D6F65500F5DF35 /* About This Hack */ = {
 			isa = PBXGroup;
 			children = (
+				96F6E1B82AB1A93E00AE7497 /* HardwareCollector.swift */,
 				C1BAD6FE26D70091008460FB /* WindowController.swift */,
 				115D921126D6F65500F5DF35 /* AppDelegate.swift */,
 				D91B9F7529B27FA800AB58B7 /* Main.storyboard */,
 				115D921326D6F65500F5DF35 /* ViewController.swift */,
-				DC6870472A63336E00CAD908 /* HardwareCollector.swift */,
 				DC6870442A63332C00CAD908 /* HardwareCollectors */,
 				58B988D326D7ABFE0092EC5B /* ViewControllerDisplays.swift */,
 				58B988D626D7ACD70092EC5B /* ViewControllerStorage.swift */,
@@ -234,7 +234,7 @@
 				DC6870562A6473AE00CAD908 /* HCGPU.swift in Sources */,
 				DC6870462A63334400CAD908 /* HCVersion.swift in Sources */,
 				C1BAD6FF26D70091008460FB /* WindowController.swift in Sources */,
-				DC6870482A63336E00CAD908 /* HardwareCollector.swift in Sources */,
+				96F6E1B92AB1A93E00AE7497 /* HardwareCollector.swift in Sources */,
 				114545F62710E3AE0017655D /* Shell.swift in Sources */,
 				C1D8307D2AAE57E500ABD4A4 /* Tooltips.swift in Sources */,
 				DC68705C2A6474B600CAD908 /* HCDisplay.swift in Sources */,
@@ -388,11 +388,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "About This Hack/About_This_Hack.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 425;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = T474C55Q79;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "About This Hack/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "About This Hack";
@@ -417,11 +418,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "About This Hack/About_This_Hack.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 425;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = T474C55Q79;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "About This Hack/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "About This Hack";
