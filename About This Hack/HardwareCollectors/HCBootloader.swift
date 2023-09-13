@@ -2,13 +2,13 @@ import Foundation
 
 class HCBootloader {
     
-    
+
     static func getBootloader() -> String {
         
         let fileManager = FileManager.default
         let homeDirectory = NSHomeDirectory()
         let hwFilePath = homeDirectory + "/.ath/hw.txt"
-        let oclpXmlFilePath = homeDirectory + "/.ath/oclp.txt"
+        let oclpXmlFilePath = "/System/Library/CoreServices/OpenCore-Legacy-Patcher.plist"
         let bdmesgExecID = "/usr/local/bin/bdmesg"
 
         var BootloaderInfo: String = ""
@@ -18,9 +18,9 @@ class HCBootloader {
         var oclpCommit: String = ""
 
         if fileManager.fileExists(atPath: oclpXmlFilePath) {
-            oclpRelease = run("grep -A1 \"OpenCore Legacy Patcher\" " + oclpXmlFilePath + " | tail -1 | sed -e 's?.*<string>?OCLP ?' -e 's?<\\/string>??' | tr -d '\n'")
-            oclpDateTime = run("grep -A1 \"Time Patched\" " + oclpXmlFilePath + " | tail -1 | sed -e 's?.*<string>??' -e 's?<\\/string>??' -e 's?@ ? ?' | tr -d '\n'")
-            oclpCommit = run("grep -A1 \"Commit URL\" " + oclpXmlFilePath + " | tail -1 | sed -e 's?.*<string>??' -e 's?<\\/string>??' | awk -F'/' '{print substr($NF,1,7)}' | tr -d '\n'")
+            oclpRelease = run("grep -A1 \"<key>OpenCore Legacy Patcher</key>\" " + oclpXmlFilePath + " | tail -1 | sed -e 's?.*<string>?OCLP ?' -e 's?<\\/string>??' | tr -d '\n'")
+            oclpDateTime = run("grep -A1 \"<key>Time Patched</key>\" " + oclpXmlFilePath + " | tail -1 | sed -e 's?.*<string>??' -e 's?<\\/string>??' -e 's?@ ? ?' | tr -d '\n'")
+            oclpCommit = run("grep -A1 \"<key>Commit URL</key>\" " + oclpXmlFilePath + " | tail -1 | sed -e 's?.*<string>??' -e 's?<\\/string>??' | awk -F'/' '{print substr($NF,1,7)}' | tr -d '\n'")
 
             if oclpCommit != "" { oclpRelease += (" (\(oclpCommit))") }
             if oclpDateTime != "" { oclpRelease += (" (\(oclpDateTime))") }
