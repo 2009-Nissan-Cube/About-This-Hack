@@ -127,9 +127,9 @@ class HardwareCollector {
         let sizeTrimmed = run("echo \"\(size)\" | cut -f1 -d\" \"").dropLast(1)
         let available = run("grep \"Container Free Space\" ~/.ath/sysvolname.txt | awk '{print $4,$5}' | tr -d '\n'")
         let availableTrimmed = run("echo \"\(available)\" | cut -f1 -d\" \"").dropLast(1)
-        let percentused = NSString(format: "%.2f", (100 - ((Double(availableTrimmed)!) / Double(sizeTrimmed)!) * 100))
-        let percentfree = NSString(format: "%.2f",(((Double(availableTrimmed)!) / Double(sizeTrimmed)!) * 100))
         let percent = (Double(availableTrimmed)!) / Double(sizeTrimmed)!
+        let percentused = NSString(format: "%.2f", (100 - percent * 100))
+        let percentfree = NSString(format: "%.2f",(percent * 100))
         print("Size: \(sizeTrimmed)")
         print("Available: \(availableTrimmed)")
         print("%: \(percentused)")
