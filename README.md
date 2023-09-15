@@ -5,7 +5,7 @@ Discover your hardware on macOS with this simple, user-friendly hardware info ap
 
 In the app, there are four tabs on a tab bar at the top of the window, and each one visually presents some information about your system.
 
-The Overview tab presents standard system specifications, such as computer model, OS, processor, etc. The app also shows the Clover or OpenCore bootloader version, if applicable.
+The Overview tab presents standard system specifications, such as computer model, OS, processor, etc. The app also shows the Clover or OpenCore bootloader version, if applicable. There is also a tooltip if you hover over your GPU(s) and your bootloader, as the text can often extend beyond the window's size.
 
 <img width="692" alt="M2 Pro Macbook Pro 14 Ventura" src="https://github.com/0xCUB3/About-This-Hack/assets/94565160/abd5906e-3f51-49a0-a75a-23f4ffad022b">
 
@@ -22,9 +22,9 @@ Or with only one display:
 
 <img width="692" alt="Single Display" text="Single Display" src="ImagesTMP/one-screen.png">
 
-The Storage tab presents your startup disk with its name, free and total storage, and a bar to indicate the amount used.
+The Storage tab presents your startup disk with its name, free and total storage, the percentage available, its type (internal, external, USB, etc.), and a bar to indicate the amount used.
 
-<img width="692" alt="Storage Screen" src="https://user-images.githubusercontent.com/94565160/222528481-1379ebdf-912f-4df6-b1a6-9439f23a88ad.png">
+<img width="692" alt="Storage Screen" src="https://github.com/0xCUB3/About-This-Hack/assets/94565160/b6f3ffb2-2bf9-47e9-ae01-0035ae5e6928">
 
 The Support tab contains numerous links to provide support with your Mac or Hackintosh. Note that the Mac links point to Apple's website, and the Hackintosh ones point to Dortania's guide.
 
@@ -44,6 +44,7 @@ The Support tab contains numerous links to provide support with your Mac or Hack
 - Click "Open Anyway"
 
 # Credits
+[matxpa](https://github.com/matxpa) for doing so much and helping add so many features. <br>
 [MDNich](https://github.com/MDNich) for helping out a ton with features, code, and setting up the update server. <br>
 [LordNaut](https://github.com/Nautilus704) for helping me fix stuff with AppDelegate and sorting out a bunch of minor, but important features! <br>
 [Ben216k](https://github.com/Ben216k) for being awesome, providing some of the commands, and helping me debug a lot. <br>
