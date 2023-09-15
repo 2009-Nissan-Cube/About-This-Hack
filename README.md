@@ -7,7 +7,8 @@ In the app, there are four tabs on a tab bar at the top of the window, and each 
 
 The Overview tab presents standard system specifications, such as computer model, OS, processor, etc. The app also shows the Clover or OpenCore bootloader version, if applicable.
 
-<img width="692" alt="M2 Pro Macbook Pro 14 Ventura" src="https://github.com/0xCUB3/About-This-Hack/assets/94565160/1aceda39-5405-4827-a0e2-6677e8103aeb">
+<img width="692" alt="M2 Pro Macbook Pro 14 Ventura" src="https://github.com/0xCUB3/About-This-Hack/assets/94565160/abd5906e-3f51-49a0-a75a-23f4ffad022b">
+
 
 <img width="692" alt="OpenCore Hackintosh" text="OpenCore Hackintosh" src="https://github.com/0xCUB3/About-This-Hack/assets/94565160/e813fb25-f66f-48c8-9a8f-d72746d95956">
 
