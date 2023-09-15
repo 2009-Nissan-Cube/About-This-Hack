@@ -1,19 +1,6 @@
 # About This Hack
 Discover your hardware on macOS with this simple, user-friendly hardware info app that retains the beloved design language of the classic 'About This Mac' interface, while gaining access to a wealth of additional features. Our app provides comprehensive information, including AMD Processor Support, display resolution, and much more. Whether you're on a Hackintosh or a real Mac, experience the best of all worlds with this intuitive and informative tool.<br>
 
-# Supported OS's
-- **10.12 Sierra and newer**
-- Not supported in any way on Linux or Windows
-
-# How To Install
-1) Download the zip file from the [latest release](https://github.com/0xCUB3/About-This-Hack/releases/latest)
-2) Drag the enclosed app to your Applications Folder
-3) Open it!
-4) If you get [this error](https://user-images.githubusercontent.com/79278890/111886978-4af4cb80-89a8-11eb-90c8-522a89abb48e.png) when opening:
-- Open `System Preferences` and go to `Security & Privacy`.
-- Under `General` you should see [this prompt](https://user-images.githubusercontent.com/79278890/111887197-c6a34800-89a9-11eb-83e2-9fd3d61e2c15.png):
-- Click "Open Anyway"
-
 # Overview of Features
 
 In the app, there are four tabs on a tab bar at the top of the window, and each one visually presents some information about your system.
@@ -40,11 +27,18 @@ The Support tab contains numerous links to provide support with your Mac or Hack
 
 <img width="692" alt="Support Screen" src="https://github.com/0xCUB3/About-This-Hack/assets/94565160/0ac9d6c5-a014-4939-b728-77073d5f1e53">
 
-# Uninstall the App
-1) Delete the App (move it to the Bin)
-2) Delete the .ath Folder inside of your User Folder
-2a) With Terminal it's the easiest: `rm -rf /` nah joke `rm -r ~/.ath`
+## Supported OS's
+- **10.13 Sierra and newer**
+- Not supported in any way on Linux or Windows
 
+## How To Install
+1) Download the zip file from the [latest release](https://github.com/0xCUB3/About-This-Hack/releases/latest)
+2) Drag the enclosed app to your Applications Folder
+3) Open it!
+4) If you get [this error](https://user-images.githubusercontent.com/79278890/111886978-4af4cb80-89a8-11eb-90c8-522a89abb48e.png) when opening:
+- Open `System Preferences` and go to `Security & Privacy`.
+- Under `General` you should see [this prompt](https://user-images.githubusercontent.com/79278890/111887197-c6a34800-89a9-11eb-83e2-9fd3d61e2c15.png):
+- Click "Open Anyway"
 
 # Credits
 [MDNich](https://github.com/MDNich) for helping out a ton with features, code, and setting up the update server. <br>
