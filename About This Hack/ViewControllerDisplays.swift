@@ -36,7 +36,7 @@ class ViewControllerDisplays: NSViewController {
 
     
     @IBAction func openPrefsDispl(_ sender: Any) {
-        _ = run("open /System/Library/PreferencePanes/Displays.prefPane")
+        _ = run("open " + initGlobVar.displayPrefPane)
     }
     
     

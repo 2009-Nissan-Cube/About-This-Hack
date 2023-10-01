@@ -6,8 +6,8 @@ class UpdateController {
     static func checkForUpdates() -> Bool {
         print("Checking for updates...")
         let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
-        _ = run("curl -o ~/.ath/version.txt https://raw.githubusercontent.com/0xCUB3/Website/main/content/ath.txt")
-        let latestVersion = run("tr -d '[:space:]' < ~/.ath/version.txt")
+        _ = run("curl -o" + " " + initGlobVar.athtargetversionfile + " " + initGlobVar.athsourceversionfile)
+        let latestVersion = run("tr -d '[:space:]' < " + initGlobVar.athtargetversionfile)
         if appVersion < latestVersion {
             print("Newer version (" + latestVersion + ") available")
             let prompt = alert(message: "Update found!", text: "The latest version is " + latestVersion + ". You are currently running " + appVersion + ".")
@@ -31,31 +31,30 @@ class UpdateController {
         print("Starting Update...")
         print("Starting Download...")
         notify(title: "Starting Download", informativeText: "This may take awhile...")
-        _ = run("curl -L https://github.com/0xCUB3/About-This-Hack/releases/download/" + run("tr -d '[:space:]' <  ~/.ath/version.txt") + "/About.This.Hack.zip -o ~/.ath/new_ath.zip")
+        _ = run("curl -L " + initGlobVar.lastAthreleaseURL + run("tr -d '[:space:]' <  " + initGlobVar.athtargetversionfile) +  initGlobVar.newAthziprelease + " -o " + initGlobVar.newAthreleasezip)
         print("Killing Old App...")
         notify(title: "Replacing Apps", informativeText: "Deleting the old version and replacing it with the new version")
         // Thanks for the code, Ben216k
-        let rm = run("rm -r '/Applications/About This Hack.app'")
+        let rm = run("rm -rf \"" + initGlobVar.thisAppliLocation + "\"")
         if rm.contains("No") {
             notify(title: "Failed to delete the old copy of About This Hack.app", informativeText: "Please make sure it is in the Applications folder!!!")
             return
         }
-        _ = run("[[ ! -d '/Applications/About This Hack.app' ]]")
+        _ = run("[[ ! -d \"" + initGlobVar.thisAppliLocation + "\" ]]")
         print("Unzipping Archive...")
         notify(title: "Unzipping Archive", informativeText: "")
         do {
-            _ = try Zip.unzipFile(URL(string: "/Users/alexanderskula/.ath/new_ath.zip")!, destination: URL(string: "/Users/alexanderskula/")!, overwrite: true, password: "")
+            _ = try Zip.unzipFile(URL(string: " " + initGlobVar.newAthreleasezip)!, destination: URL(string: " " + initGlobVar.athDirectory)!, overwrite: true, password: "")
         } catch {
             print(error)
         }
         
-        
-        print("Copying New Version...")
+         print("Copying New Version...")
         notify(title: "Copying New Version", informativeText: "Almost there!")
-        _ = run("cp -rf ~/About\\ This\\ Hack.app /Applications")
-        
+        _ = run("cp -rf " + initGlobVar.athDirectory + "\"" + initGlobVar.thisAppliname + "\" " + initGlobVar.allAppliLocation)
+
         notify(title: "Update Complete!", informativeText: "Launching New Version...")
-        _ = run("open /Applications/About\\ This\\ Hack\\.app")
+        _ = run("open " + initGlobVar.allAppliLocation + "\"" + initGlobVar.thisAppliname + "\"")
         exit(0)
     }
     

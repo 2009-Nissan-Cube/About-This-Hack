@@ -4,8 +4,10 @@ import Foundation
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    override init() {
-        
+   override init() {
+        // Call Function to create Data Files
+        CreateDataFiles.getInitDataFiles()
+        Thread.sleep(forTimeInterval: 0.5)
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -16,8 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-        _ = run("rm -rf ~/.ath 2>/dev/null")
+        _ = run("rm -rf " + initGlobVar.athDirectory + " 2>/dev/null")
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {

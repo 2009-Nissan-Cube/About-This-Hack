@@ -29,34 +29,8 @@ class ViewController: NSViewController {
     var ocLevel = "Unknown"
     var ocVersionID = "Version"
     
-    var fileManager = FileManager.default
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        _ = run("mkdir ~/.ath")
-        print("Directory created...")
-        func createFileIfNeeded(atPath path: String, withCommand command: String) {
-
-            if !fileManager.fileExists(atPath: path) {
-                _ = run(command)
-            }
-        }
-
-        // Example usage
-        let homeDirectory = NSHomeDirectory()
-        let hwFilePath = homeDirectory + "/.ath/hw.txt"
-        let sysmemFilePath = homeDirectory + "/.ath/sysmem.txt"
-        let sysvolnameFilePath = homeDirectory + "/.ath/sysvolname.txt"
-        let scrFilePath = homeDirectory + "/.ath/scr.txt"
-        let scrXmlFilePath = homeDirectory + "/.ath/scrXml.txt"
-
-        createFileIfNeeded(atPath: hwFilePath, withCommand: "system_profiler SPHardwareDataType > \"\(hwFilePath)\"")
-        createFileIfNeeded(atPath: sysmemFilePath, withCommand: "system_profiler SPMemoryDataType > \"\(sysmemFilePath)\"")
-        createFileIfNeeded(atPath: sysvolnameFilePath, withCommand: "diskutil info / > \"\(sysvolnameFilePath)\"")
-        createFileIfNeeded(atPath: scrFilePath, withCommand: "system_profiler SPDisplaysDataType > \"\(scrFilePath)\"")
-        createFileIfNeeded(atPath: scrXmlFilePath, withCommand: "system_profiler SPDisplaysDataType -xml > \"\(scrXmlFilePath)\"")
-        print("Files created...")
-        Thread.sleep(forTimeInterval: 1)
         
         // Call Functions to init Overview
         HCVersion.getVersion()
@@ -65,8 +39,18 @@ class ViewController: NSViewController {
         _ = HCRAM.getRam()
         _ = HCStartupDisk.getStartupDisk()
         _ = HCDisplay.getDisp()
+        _ = HCGPU.getGPU()
+        
+        var sleepValue:Double = 0
+        switch HCVersion.OSname {
+        case "Big Sur"     : sleepValue = 0.5
+        case "Catalina"    : sleepValue = 0.5
+        case "Mojave"      : sleepValue = 0.5
+        case "High Sierra" : sleepValue = 0.5
+        default            : sleepValue = 0
+        }
+        if sleepValue > 0  { Thread.sleep(forTimeInterval: sleepValue) }
     }
-    
 
     override var representedObject: Any? {
         didSet {
@@ -119,7 +103,7 @@ class ViewController: NSViewController {
         osVersion.stringValue = HCVersion.OSname
 
         // macOS Version ID
-        systemVersion.stringValue = HCVersion.getOSnum() + HCVersion.OSBuildNum
+        systemVersion.stringValue = HCVersion.getOSnum() + HCVersion.getOSbuild()
 
         // Mac Model
         macModel.stringValue = HCMacModel.macName + " - " + HCMacModel.getModelIdentifier()
@@ -164,10 +148,19 @@ class ViewController: NSViewController {
         blVersion.needsDisplay = true
     }
     
-    func setToolTips(){
-        blPrefix.toolTip = blPrefixtoolTip
-        blVersion.toolTip = blVersiontoolTip
-        graphics.toolTip = graphicstoolTip
+    func setToolTips() {
+        osVersion.toolTip     = osVersiontoolTip
+        systemVersion.toolTip = systemVersiontoolTip
+        macModel.toolTip      = macModeltoolTip
+        cpu.toolTip           = cputoolTip
+        ram.toolTip           = ramtoolTip
+        startupDisk.toolTip   = startupDisktoolTip
+        display.toolTip       = displaytoolTip
+        graphics.toolTip      = graphicstoolTip
+        serialToggle.toolTip  = serialToggletoolTip
+        blVersion.toolTip     = blVersiontoolTip
+        btSysInfo.toolTip     = btSysInfotoolTip
+        btSoftUpd.toolTip     = btSoftUpdtoolTip
     }
     
     @IBAction func hideSerialNumber(_ sender: NSButton) {

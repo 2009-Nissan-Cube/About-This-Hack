@@ -4,13 +4,13 @@ class HCGPU {
     
     
     static func getGPU() -> String {
-        var graphicsTmp = run("grep \"Chipset\" ~/.ath/scr.txt | sed 's/.*: //'")
+        var graphicsTmp = run("grep \"Chipset\" " + initGlobVar.scrFilePath + " | sed 's/.*: //'")
         if graphicsTmp.contains("Intel") || graphicsTmp.contains("NVIDIA") {
             graphicsTmp = graphicsTmp.replacingOccurrences(of: "Intel ", with: "")
             graphicsTmp = graphicsTmp.replacingOccurrences(of: "NVIDIA ", with: "")
         }
-        let graphicsRAM  = run("grep \"VRAM\" ~/.ath/scr.txt | sed 's/.*: //'")
-        let metalsupport = run ("grep \"Metal Support:\" ~/.ath/scr.txt | sed 's/.*: //' | tr -d '\n'")
+        let graphicsRAM  = run("grep \"VRAM\" " + initGlobVar.scrFilePath + " | sed 's/.*: //'")
+        let metalsupport = run ("grep \"Metal Support:\" " + initGlobVar.scrFilePath + " | sed 's/.*: //' | tr -d '\n'")
         let graphicsArray = graphicsTmp.components(separatedBy: "\n").filter({ $0 != ""})
         print(graphicsArray)
         print(graphicsArray.count)
@@ -31,8 +31,12 @@ class HCGPU {
 //            x += 1
 //        }
         if metalsupport != "" {
-            gpuInfoFormatted += "(" + metalsupport + ")"
+            gpuInfoFormatted += " (" + metalsupport + ")"
         }
         return gpuInfoFormatted
+    }
+    
+    static func getGPUInfo() -> String {
+        return run("head -$(grep -n \" Displays:\" " + initGlobVar.scrFilePath + " | awk -F':' '{print $1-1}' | tr -d '\n') " + initGlobVar.scrFilePath + " | sed 's?/Displays:?:?'")
     }
 }

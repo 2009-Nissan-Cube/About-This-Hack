@@ -22,6 +22,8 @@ class HardwareCollector {
     static var storageType: Bool = false
     static var storageData: String = ""
     static var storagePercent: Double = 0.0
+    static var devicelocation:String = ""
+    static var deviceprotocol:String = ""
     
     static var qhasBuiltInDisplay: Bool = (macType == .LAPTOP)
     
@@ -29,7 +31,7 @@ class HardwareCollector {
     
     static func getAllData() {
         if (dataHasBeenSet) {return}
-        let queue = DispatchQueue(label: "ga.0xCUBE.athqueue", attributes: .concurrent)
+        let queue = DispatchQueue(label: initGlobVar.dispatchQueue, attributes: .concurrent)
         
         queue.async {
             numberOfDisplays = getNumDisplays()
@@ -62,10 +64,10 @@ class HardwareCollector {
     static func getDisplayRes() -> [String] {
         let numDispl = getNumDisplays()
         if numDispl == 1 {
-            return [run("grep -A1 \"_spdisplays_resolution\" ~/.ath/scrXml.txt | grep string | cut -c 15- | cut -f1 -d'<'")]
+            return [run("grep -A1 \"_spdisplays_resolution\" " + initGlobVar.scrXmlFilePath + " | grep string | cut -c 15- | cut -f1 -d'<'")]
         }
         else if (numDispl > 1) {
-            let tmp = run("grep \"Resolutiont\" ~/.ath/scr.txt | cut -c 23-")
+            let tmp = run("grep \"Resolution\" " + initGlobVar.scrFilePath  + " | cut -c 23-")
             let tmpParts = tmp.components(separatedBy: "\n")
             return tmpParts
         }
@@ -75,11 +77,11 @@ class HardwareCollector {
     static func getDisplayNames() -> [String] {
         let numDispl = getNumDisplays()
         // secondPart data extracted in all cases (numDispl =1, 2 or 3)
-        let secondPart = run("grep \"        \" ~/.ath/scr.txt | cut -c 9- | grep \"^[A-Za-z]\" | cut -f 1 -d ':'")
+        let secondPart = run("grep \"        \" " + initGlobVar.scrFilePath + " | cut -c 9- | grep \"^[A-Za-z]\" | cut -f 1 -d ':'")
         
         if numDispl == 1 {
             if(qhasBuiltInDisplay) {
-                return [run("echo $(grep \"Display Type\" ~/.ath/scr.txt | cut -c 25-) $(grep -A2 \"</data>\" ~/.ath/scrXml.txt | awk -F'>|<' '/_name/{getline; print $3}') | tr -d '\n' ")]
+                return [run("echo $(grep \"Display Type\" " + initGlobVar.scrFilePath + " | cut -c 25-) $(grep -A2 \"</data>\" " + initGlobVar.scrXmlFilePath + " | awk -F'>|<' '/_name/{getline; print $3}') | tr -d '\n' ")]
             }
             else {
                 return [secondPart]
@@ -87,7 +89,7 @@ class HardwareCollector {
         }
         else if (numDispl == 2 || numDispl == 3) {
             print("2 or 3 displays found")
-            let tmp = run("echo $(grep \"Display Type\" ~/.ath/scr.txt | cut -c 25-)" + secondPart)
+            let tmp = run("echo $(grep \"Display Type\" " + initGlobVar.scrFilePath + " | cut -c 25-)" + secondPart)
             let tmpParts = tmp.components(separatedBy: "\n")
             var toSend: [String] = []
             if(qhasBuiltInDisplay) {
@@ -105,30 +107,30 @@ class HardwareCollector {
     }
     
     static func getNumDisplays() -> Int {
-        return Int(run("grep -c \"Resolution\" ~/.ath/scr.txt | tr -d '\n'")) ?? 0x0
+        return Int(run("grep -c \"Resolution\" " + initGlobVar.scrFilePath + " | tr -d '\n'")) ?? 0x0
     }
     
     static func hasBuiltInDisplay() -> Bool {
-        let tmp = run("grep \"Built-In\" ~/.ath/scr.txt | tr -d '\n'")
+        let tmp = run("grep \"Built-In\" " + initGlobVar.scrFilePath + " | tr -d '\n'")
         return !(tmp == "")
     }
     
     static func getStorageType() -> Bool {
         print("Startup Disk Name " + name)
-        let storageType = run("grep \"Solid State:\" ~/.ath/sysvolname.txt")
+        let storageType = run("grep \"Solid State:\" " + initGlobVar.bootvolnameFilePath)
         return storageType.contains("Yes")
         
     }
     
     static func getStorageData() -> [String] {
-        let deviceprotocol = run("grep \"Protocol:\" ~/.ath/sysvolname.txt | awk '{print $2}' | tr -d '\n'")
-        let devicelocation = run("grep \"Device Location:\" ~/.ath/sysvolname.txt | awk '{print $3}' | tr -d '\n'")
-        let size = run("grep \"Container Total Space:\" ~/.ath/sysvolname.txt | awk '{print $4,$5}'  | tr -d '\n'")
-        let sizeTrimmed = run("echo \"\(size)\" | cut -f1 -d\" \"").dropLast(1)
-        let available = run("grep \"Container Free Space\" ~/.ath/sysvolname.txt | awk '{print $4,$5}' | tr -d '\n'")
-        let availableTrimmed = run("echo \"\(available)\" | cut -f1 -d\" \"").dropLast(1)
+        deviceprotocol = run("grep \"Protocol:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $2}' | tr -d '\n'")
+        devicelocation = run("grep \"Device Location:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $3}' | tr -d '\n'")
+        let size = run("egrep \"[Container|Volume] Total Space:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $4,$5}'  | tr -d '\n'")
+        let sizeTrimmed = run("echo \"\(size)\" | awk '{print $1}' | tr -d '\n'")
+        let available = run("grep \"[Container|Volume] Free Space:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $4,$5}' | tr -d '\n'")
+        let availableTrimmed = run("echo \"\(available)\" | awk '{print $1}' | tr -d '\n'")
         let percent = (Double(availableTrimmed)!) / Double(sizeTrimmed)!
-        let percentfree = NSString(format: "%.2f",(percent * 100))
+        let percentfree = NSString(format: "%.2f",((Double(availableTrimmed)!) / Double(sizeTrimmed)! * 100))
         print("Size: \(sizeTrimmed)")
         print("Available: \(availableTrimmed)")
         print("%: \(percentfree)")
