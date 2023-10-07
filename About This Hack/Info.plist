@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>SUPublicEDKey</key>
-	<string>+ugzpdsp1RQDH/YVaRuh7HYK1rgy8GZNEANeptJRjss=</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -32,5 +30,7 @@
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>
 	<string>https://0xcube.netlify.app/updates.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>+ugzpdsp1RQDH/YVaRuh7HYK1rgy8GZNEANeptJRjss=</string>
 </dict>
 </plist>
