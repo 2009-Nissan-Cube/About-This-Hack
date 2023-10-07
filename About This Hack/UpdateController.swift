@@ -50,6 +50,7 @@ class UpdateController {
         notify(title: "Copying New Version", informativeText: "Almost there!")
 //        _ = run("cp -rf " + initGlobVar.athDirectory + "\"" + initGlobVar.thisAppliname + "\" " + initGlobVar.allAppliLocation)
         _ = run("mv -f \(initGlobVar.athDirectory)" + "\"\(initGlobVar.thisAppliname)\"" + " \(initGlobVar.allAppliLocation)")
+        Thread.sleep(forTimeInterval: 0.5)
 
         notify(title: "Update Complete!", informativeText: "Launching New Version...")
 //        _ = run("open " + initGlobVar.allAppliLocation + "\"" + initGlobVar.thisAppliname + "\"")
