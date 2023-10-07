@@ -20,15 +20,15 @@ The Displays tab presents your monitors and internal displays. Up to 3 displays 
 
 Or with only one display:
 
-<img width="692" alt="Single Display" text="Single Display" src="ImagesTMP/one-screen.png">
+![image](https://github.com/0xCUB3/About-This-Hack/assets/94565160/7b8835cd-400b-4f48-81f8-aa3a4a536b23)
 
 The Storage tab presents your startup disk with its name, free and total storage, the percentage available, its type (internal, external, USB, etc.), and a bar to indicate the amount used.
 
-<img width="692" alt="Storage Screen" src="https://github.com/0xCUB3/About-This-Hack/assets/94565160/b6f3ffb2-2bf9-47e9-ae01-0035ae5e6928">
+![image](https://github.com/0xCUB3/About-This-Hack/assets/94565160/f05ce8cb-550d-443e-9966-e991da23bf02)
 
 The Support tab contains numerous links to provide support with your Mac or Hackintosh. Note that the Mac links point to Apple's website, and the Hackintosh ones point to Dortania's guide.
 
-<img width="692" alt="Support Screen" src="https://github.com/0xCUB3/About-This-Hack/assets/94565160/0ac9d6c5-a014-4939-b728-77073d5f1e53">
+![image](https://github.com/0xCUB3/About-This-Hack/assets/94565160/46d26d13-319d-488e-ab5a-d6a0d01f09a4)
 
 ## Supported OS's
 - **10.12 Sierra and newer**
