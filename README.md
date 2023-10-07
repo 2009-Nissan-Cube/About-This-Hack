@@ -30,6 +30,11 @@ The Support tab contains numerous links to provide support with your Mac or Hack
 
 ![image](https://github.com/0xCUB3/About-This-Hack/assets/94565160/46d26d13-319d-488e-ab5a-d6a0d01f09a4)
 
+Some values show more details when hovered over. See if you can find them all! 😉
+
+![CleanShot 2023-10-07 at 15 54 25](https://github.com/0xCUB3/About-This-Hack/assets/94565160/1b90c22b-a56b-4c58-9ef1-f27276db8850)
+
+
 ## Supported OS's
 - **10.12 Sierra and newer**
 - Not supported in any way on Linux or Windows
