@@ -32,7 +32,5 @@ class WindowController: NSWindowController {
         if(segmentedControl != nil) {
             segmentedControl.selectedSegment = new
         }
-       /* let segCtrl = self.window?.toolbar?.items[1].view.
-        segCtrl.selectedSegment = new*/
     }
 }

@@ -64,8 +64,10 @@ class ViewControllerDisplays: NSViewController {
         if (HardwareCollector.macType == .DESKTOP) {
             DisplayPicCenter.image = NSImage(named: "genericLCD")
         }
+        print("Test")
         switch (HardwareCollector.numberOfDisplays) {
         case 1:
+            print("1 Display Detected")
             dispArr.append(DisplayPicCenter)
             if (HardwareCollector.macType == .DESKTOP) {
                 DisplayPicCenter.image = NSImage(named: "genericLCD")
@@ -77,6 +79,7 @@ class ViewControllerDisplays: NSViewController {
             DisplaySizeResCenter.stringValue = HardwareCollector.displayRes[0]
             break
         case 2:
+            print("2 Displays Detected")
             labelArr2.append(DisplaySizeResL2)
             labelArr2.append(DisplaySizeResR2)
             nameArr.append(DisplayNameL2)
@@ -119,7 +122,7 @@ class ViewControllerDisplays: NSViewController {
             
             break
         case 3:
-            print("Found 3 Displays")
+            print("3 Displays Detected")
             labelArr2.append(DisplaySizeResL1)
             labelArr2.append(DisplaySizeResCenter)
             labelArr2.append(DisplaySizeResR1)
@@ -190,6 +193,7 @@ class ViewControllerDisplays: NSViewController {
             }
             break
         default:
+            print("Error detecting displays!")
             dispArr.append(DisplayPicCenter)
             if (HardwareCollector.macType == .DESKTOP) {
                 DisplayPicCenter.image = NSImage(named: "genericLCD")

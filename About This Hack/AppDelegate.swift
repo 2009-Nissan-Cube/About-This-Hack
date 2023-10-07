@@ -7,7 +7,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
    override init() {
         // Call Function to create Data Files
         CreateDataFiles.getInitDataFiles()
-        Thread.sleep(forTimeInterval: 0.5)
+    Thread.sleep(forTimeInterval: 1.5)
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {

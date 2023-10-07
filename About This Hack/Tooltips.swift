@@ -24,6 +24,6 @@ let storageValuetoolTip = startupDisktoolTip
 
 let blVersiontoolTip = "\nBootLoader: " + HCBootloader.getBootloader() + "\nBoot-args: " + HCBootloader.getBootargs()
 
-let btSysInfotoolTip = " Hardware, Network and Sofware detailed data"
-let btSoftUpdtoolTip = " Find and Install OS Updates, Security Updates and App Store Applications Updates"
+let btSysInfotoolTip = " Hardware, Network, Software, Etc. Detailed Data"
+let btSoftUpdtoolTip = " Find and Install OS and Security Updates"
 

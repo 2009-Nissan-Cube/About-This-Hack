@@ -18,7 +18,6 @@ class initGlobVar {
     static var athtargetversionfile    = athDirectory + "/version.txt"
 
     static var athsourceversionfile    = "https://raw.githubusercontent.com/0xCUB3/Website/main/content/ath.txt"
-    static var dispatchQueue           = "ga.0xCUBE.athqueue"
         
     // OCLP Dict File (if exists) where Patch Version Commit and DateTime will be extracted
     static var oclpXmlFilePath         = "/System/Library/CoreServices/OpenCore-Legacy-Patcher.plist"

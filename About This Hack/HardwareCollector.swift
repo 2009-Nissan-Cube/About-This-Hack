@@ -31,34 +31,20 @@ class HardwareCollector {
     
     static func getAllData() {
         if (dataHasBeenSet) {return}
-        let queue = DispatchQueue(label: initGlobVar.dispatchQueue, attributes: .concurrent)
-        
-        queue.async {
-            numberOfDisplays = getNumDisplays()
-            print("Number of Displays: \(numberOfDisplays)")
-            qhasBuiltInDisplay = hasBuiltInDisplay()
-            print("Has built-in display: \(qhasBuiltInDisplay)")
-            // getDisplayDiagonal() Having some issues, removing for now
-        }
-        
-        queue.async {
-            storageType = getStorageType()
-            print("Storage Type: \(storageType)")
-            storageData = getStorageData()[0]
-            print("Storage Data: \(storageData)")
-            storagePercent = Double(getStorageData()[1])!
-            print("Storage Percent: \(storagePercent)")
-        }
-        
-        // For some reason these don't work in groups, to be fixed
+        numberOfDisplays = getNumDisplays()
+        print("Number of Displays: \(numberOfDisplays)")
+        qhasBuiltInDisplay = hasBuiltInDisplay()
+        print("Has built-in display: \(qhasBuiltInDisplay)")
+        storageType = getStorageType()
+        print("Storage Type: \(storageType)")
+        storageData = getStorageData()[0]
+        print("Storage Data: \(storageData)")
+        storagePercent = Double(getStorageData()[1])!
+        print("Storage Percent: \(storagePercent)")
         displayRes = getDisplayRes()
         displayNames = getDisplayNames()
         
         dataHasBeenSet = true
-    }
-    
-    static func getDisplayDiagonal() -> Float {
-        return 13.3
     }
     
     static func getDisplayRes() -> [String] {
@@ -107,6 +93,7 @@ class HardwareCollector {
     }
     
     static func getNumDisplays() -> Int {
+        print("TEST TEST \(initGlobVar.scrFilePath)")
         return Int(run("grep -c \"Resolution\" " + initGlobVar.scrFilePath + " | tr -d '\n'")) ?? 0x0
     }
     

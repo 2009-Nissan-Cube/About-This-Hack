@@ -1,9 +1,3 @@
-//
-//  ViewControllerDisplays.swift
-//  ViewControllerDisplays
-//
-//
-
 import Foundation
 import Cocoa
 
