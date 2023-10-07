@@ -4,7 +4,7 @@ let osVersiontoolTip = "\n" + HCVersion.getOSBuildInfo()
 
 let systemVersiontoolTip = osVersiontoolTip
 
-let macModeltoolTip = "\n" + HCMacModel.macName + " - " + HCMacModel.getModelIdentifier() + "\n"
+let macModeltoolTip = "\n" + HCMacModel.macName + " - " + HCMacModel.getModelIdentifier() + "\n\n" + run("system_profiler SPPCIDataType | grep \":$\" | sed 's/://g'")
 
 let cputoolTip = "\n" + HCCPU.getCPUInfo()
 
