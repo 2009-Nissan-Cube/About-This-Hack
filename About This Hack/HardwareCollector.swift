@@ -141,7 +141,7 @@ class HardwareCollector {
         
         return ["""
         \(name) (\(devicelocation) \(deviceprotocol))
-        \(size) \(unitsize) (\(available) \(unitavailable) Available - \(percentfree)%)
+        \(size) \(unit)B (\(available) \(unitA)B Available - \(percentfree)%)
         """, String(1 - percent)]
     }
 }
