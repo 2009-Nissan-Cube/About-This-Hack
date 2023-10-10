@@ -124,15 +124,24 @@ class HardwareCollector {
         }
         var sizeTrimmed = String((Double(run("echo \"\(size)\" | awk '{print $1}' | tr -d '\n'")) ?? 2)*coeffMultDiskSize)
         let available = run("grep \"[Container|Volume] Free Space:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $4,$5}' | tr -d '\n'")
-        let availableTrimmed = run("echo \"\(available)\" | awk '{print $1}' | tr -d '\n'")
+        let unitA = available[available.length-2]
+        var coeffMultDiskSizeA = 1.0
+        switch unitA {
+            case "G" : coeffMultDiskSizeA = 1.0
+            case "M" : coeffMultDiskSizeA = 1/1028
+            case "T" : coeffMultDiskSizeA = 1028.0
+            default : coeffMultDiskSizeA = 1.0
+        }
+        let availableTrimmed = String((Double(run("echo \"\(available)\" | awk '{print $1}' | tr -d '\n'")) ?? 2)*coeffMultDiskSizeA)
         let percent = (Double(availableTrimmed)!) / Double(sizeTrimmed)!
         let percentfree = NSString(format: "%.2f",((Double(availableTrimmed)!) / Double(sizeTrimmed)! * 100))
         print("Size: \(sizeTrimmed)")
         print("Available: \(availableTrimmed)")
         print("%: \(percentfree)")
+        
         return ["""
         \(name) (\(devicelocation) \(deviceprotocol))
-        \(size) (\(available) Available - \(percentfree)%)
+        \(size) \(unitsize) (\(available) \(unitavailable) Available - \(percentfree)%)
         """, String(1 - percent)]
     }
 }
