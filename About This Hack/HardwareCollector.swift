@@ -139,9 +139,10 @@ class HardwareCollector {
         print("Available: \(availableTrimmed)")
         print("%: \(percentfree)")
         
+
         return ["""
         \(name) (\(devicelocation) \(deviceprotocol))
-        \(size) \(unit)B (\(available) \(unitA)B Available - \(percentfree)%)
+        \(size) (\(available) Available - \(percentfree)%)
         """, String(1 - percent)]
     }
 }
