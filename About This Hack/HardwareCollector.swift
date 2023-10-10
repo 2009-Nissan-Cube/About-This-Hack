@@ -112,49 +112,64 @@ class HardwareCollector {
     static func getStorageData() -> [String] {
         deviceprotocol = run("grep \"Protocol:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $2}' | tr -d '\n'")
         devicelocation = run("grep \"Device Location:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $3}' | tr -d '\n'")
-
-        let size = run("egrep \"[Container|Volume] Total Space:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $4}' | tr -d '\n'")
-        let unitsize = run("egrep \"[Container|Volume] Total Space:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $5}' | tr -d '\n'")
-//        let size     = "2.0"        //test code
-//        let unitsize = "TB"         //test code
-//        let size     = "128.0"      //test code
-//        let unitsize = "MB"         //test code
-        var coeffMultDiskSize = 1.0
-            switch unitsize {
-            case "GB"   : coeffMultDiskSize = 1.0
-            case "MB"   : coeffMultDiskSize = 0.001
-            case "TB"   : coeffMultDiskSize = 1000.0
-            default     : coeffMultDiskSize = 1.0
-            }
-        let sizeTrimmed = (Double(size)! * coeffMultDiskSize)
-        print(coeffMultDiskSize)
-
-        let available = run("grep \"[Container|Volume] Free Space:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $4}' | tr -d '\n'")
-        let unitavailable = run("grep \"[Container|Volume] Free Space:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $5}' | tr -d '\n'")
-//        let available     = "227.43"    //test code
-//        let unitavailable = "GB"        //test code
-//        let available     = "62.73"     //test code
-//        let unitavailable = "MB"        //test code
-        var coeffMultAvailableSize = 1.0
-            switch unitavailable {
-            case "GB"   : coeffMultAvailableSize = 1.0
-            case "MB"   : coeffMultAvailableSize = 0.001
-            case "TB"   : coeffMultAvailableSize = 1000.0
-            default     : coeffMultAvailableSize = 1.0
-            }
-        let availableTrimmed = (Double(available)! * coeffMultAvailableSize)
-        print(coeffMultAvailableSize)
+        let size = run("egrep \"[Container|Volume] Total Space:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $4,$5}'  | tr -d '\n'")
         
-        let percent = (availableTrimmed / sizeTrimmed)
-        let percentfree = NSString(format: "%.2f",(availableTrimmed) / sizeTrimmed * 100)
-
-        print("Size: Double(\(sizeTrimmed))")
-        print("Available: Double(\(availableTrimmed))")
+        let unit = size[size.length-2]
+        var coeffMultDiskSize = 1.0
+        switch unit {
+            case "G" : coeffMultDiskSize = 1.0
+            case "M" : coeffMultDiskSize = 1/1028
+            case "T" : coeffMultDiskSize = 1028.0
+            default : coeffMultDiskSize = 1.0
+        }
+        var sizeTrimmed = String((Double(run("echo \"\(size)\" | awk '{print $1}' | tr -d '\n'")) ?? 2)*coeffMultDiskSize)
+        let available = run("grep \"[Container|Volume] Free Space:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $4,$5}' | tr -d '\n'")
+        let unitA = available[available.length-2]
+        var coeffMultDiskSizeA = 1.0
+        switch unitA {
+            case "G" : coeffMultDiskSizeA = 1.0
+            case "M" : coeffMultDiskSizeA = 1/1028
+            case "T" : coeffMultDiskSizeA = 1028.0
+            default : coeffMultDiskSizeA = 1.0
+        }
+        let availableTrimmed = String((Double(run("echo \"\(available)\" | awk '{print $1}' | tr -d '\n'")) ?? 2)*coeffMultDiskSizeA)
+        let percent = (Double(availableTrimmed)!) / Double(sizeTrimmed)!
+        let percentfree = NSString(format: "%.2f",((Double(availableTrimmed)!) / Double(sizeTrimmed)! * 100))
+        print("Size: \(sizeTrimmed)")
+        print("Available: \(availableTrimmed)")
         print("%: \(percentfree)")
         
         return ["""
         \(name) (\(devicelocation) \(deviceprotocol))
         \(size) \(unitsize) (\(available) \(unitavailable) Available - \(percentfree)%)
         """, String(1 - percent)]
+    }
+}
+
+
+extension String {
+
+    var length: Int {
+        return count
+    }
+
+    subscript (i: Int) -> String {
+        return self[i ..< i + 1]
+    }
+
+    func substring(fromIndex: Int) -> String {
+        return self[min(fromIndex, length) ..< length]
+    }
+
+    func substring(toIndex: Int) -> String {
+        return self[0 ..< max(0, toIndex)]
+    }
+
+    subscript (r: Range<Int>) -> String {
+        let range = Range(uncheckedBounds: (lower: max(0, min(length, r.lowerBound)),
+                                            upper: min(length, max(0, r.upperBound))))
+        let start = index(startIndex, offsetBy: range.lowerBound)
+        let end = index(start, offsetBy: range.upperBound - range.lowerBound)
+        return String(self[start ..< end])
     }
 }
