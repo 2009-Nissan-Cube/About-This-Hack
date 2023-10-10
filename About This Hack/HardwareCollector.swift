@@ -113,7 +113,16 @@ class HardwareCollector {
         deviceprotocol = run("grep \"Protocol:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $2}' | tr -d '\n'")
         devicelocation = run("grep \"Device Location:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $3}' | tr -d '\n'")
         let size = run("egrep \"[Container|Volume] Total Space:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $4,$5}'  | tr -d '\n'")
-        let sizeTrimmed = run("echo \"\(size)\" | awk '{print $1}' | tr -d '\n'")
+        
+        let unit = size[size.length-2]
+        var coeffMultDiskSize = 1.0
+        switch unit {
+            case "G" : coeffMultDiskSize = 1.0
+            case "M" : coeffMultDiskSize = 1/1028
+            case "T" : coeffMultDiskSize = 1028.0
+            default : coeffMultDiskSize = 1.0
+        }
+        var sizeTrimmed = String((Double(run("echo \"\(size)\" | awk '{print $1}' | tr -d '\n'")) ?? 2)*coeffMultDiskSize)
         let available = run("grep \"[Container|Volume] Free Space:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $4,$5}' | tr -d '\n'")
         let availableTrimmed = run("echo \"\(available)\" | awk '{print $1}' | tr -d '\n'")
         let percent = (Double(availableTrimmed)!) / Double(sizeTrimmed)!
@@ -125,5 +134,33 @@ class HardwareCollector {
         \(name) (\(devicelocation) \(deviceprotocol))
         \(size) (\(available) Available - \(percentfree)%)
         """, String(1 - percent)]
+    }
+}
+
+
+extension String {
+
+    var length: Int {
+        return count
+    }
+
+    subscript (i: Int) -> String {
+        return self[i ..< i + 1]
+    }
+
+    func substring(fromIndex: Int) -> String {
+        return self[min(fromIndex, length) ..< length]
+    }
+
+    func substring(toIndex: Int) -> String {
+        return self[0 ..< max(0, toIndex)]
+    }
+
+    subscript (r: Range<Int>) -> String {
+        let range = Range(uncheckedBounds: (lower: max(0, min(length, r.lowerBound)),
+                                            upper: min(length, max(0, r.upperBound))))
+        let start = index(startIndex, offsetBy: range.lowerBound)
+        let end = index(start, offsetBy: range.upperBound - range.lowerBound)
+        return String(self[start ..< end])
     }
 }
