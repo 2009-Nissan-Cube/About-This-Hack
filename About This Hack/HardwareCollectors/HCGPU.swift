@@ -37,6 +37,14 @@ class HCGPU {
     }
     
     static func getGPUInfo() -> String {
-        return run("head -$(grep -n \" Displays:\" " + initGlobVar.scrFilePath + " | awk -F':' '{print $1-1}' | tr -d '\n') " + initGlobVar.scrFilePath + " | sed 's?/Displays:?:?'")
+//        return run("head -$(grep -n \" Displays:\" " + initGlobVar.scrFilePath + " | awk -F':' '{print $1-1}' | tr -d '\n') " + initGlobVar.scrFilePath + " | sed 's?/Displays:?:?'")
+        
+        let gpuendline = (Int(run("grep -n \" Displays:\" " + initGlobVar.scrFilePath + " | awk -F':' '{print $1-1}' | tr -d '\n'")) ?? 0)
+        print("Displays: " + initGlobVar.scrFilePath + "\(gpuendline)")
+        if gpuendline > 0 {
+            return run("head -\(gpuendline)" + " " + initGlobVar.scrFilePath + " | sed 's?/Displays:?:?'")
+        } else {
+            return " "
+        }
     }
 }
