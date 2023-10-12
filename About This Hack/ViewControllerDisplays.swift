@@ -65,6 +65,9 @@ class ViewControllerDisplays: NSViewController {
             DisplayPicCenter.image = NSImage(named: "genericLCD")
         }
         print("Test")
+        print("HardwareCollector.displayNames = \"\(HardwareCollector.displayNames)\"")
+        print("HardwareCollector.displayRes = \"\(HardwareCollector.displayRes)\"")
+
         switch (HardwareCollector.numberOfDisplays) {
         case 1:
             print("1 Display Detected")
@@ -77,6 +80,8 @@ class ViewControllerDisplays: NSViewController {
             DisplayNameCenter.stringValue = HardwareCollector.displayNames[0]
             DisplaySizeResCenter.isHidden = false
             DisplaySizeResCenter.stringValue = HardwareCollector.displayRes[0]
+            print("DisplayName: \"\(HardwareCollector.displayNames[0])\"")
+            print("DisplayName: \"\(HardwareCollector.displayRes[0])\"")
             break
         case 2:
             print("2 Displays Detected")
@@ -87,15 +92,13 @@ class ViewControllerDisplays: NSViewController {
             dispArr.append(DisplayPicL2)
             dispArr.append(DisplayPicR2)
             
-            print("HardwareCollector.displayNames = \"(HardwareCollector.displayNames)\"")
-            print("HardwareCollector.displayRes = \"(HardwareCollector.displayRes)\"")
-            
             if (HardwareCollector.macType == .DESKTOP) {
                 let indiceArray = [0,1]
                 indiceArray.forEach { i in
                     if i <= (HardwareCollector.displayNames.count-1) {
                         nameArr[i].isHidden = false
                         nameArr[i].stringValue = HardwareCollector.displayNames[i]
+                        print("DisplayName: \"\(HardwareCollector.displayNames[i])\"")
                         if (!(HardwareCollector.displayNames[i] == "LG HDR 4K")) {dispArr[i].image = NSImage(named: "genericLCD")}
                         else {
                             dispArr[i].image = NSImage(named: "LG4K")
@@ -104,6 +107,7 @@ class ViewControllerDisplays: NSViewController {
                     if i <= (HardwareCollector.displayRes.count-1) {
                         labelArr2[i].isHidden = false
                         labelArr2[i].stringValue = HardwareCollector.displayRes[i]
+                        print("DisplayName: \"\(HardwareCollector.displayRes[i])\"")
                     }
                 }
             }
@@ -153,10 +157,12 @@ class ViewControllerDisplays: NSViewController {
                     if i <= (HardwareCollector.displayNames.count-1) {
                         nameArr[i].isHidden = false
                         nameArr[i].stringValue = HardwareCollector.displayNames[i]
+                        print("DisplayName: \"\(HardwareCollector.displayNames[i])\"")
                     }
                     if i <= (HardwareCollector.displayRes.count-1) {
                         labelArr2[i].isHidden = false
                         labelArr2[i].stringValue = HardwareCollector.displayRes[i]
+                        print("DisplayName: \"\(HardwareCollector.displayRes[i])\"")
                     }
                     if i <= (HardwareCollector.displayNames.count-1) {
                         
@@ -186,10 +192,12 @@ class ViewControllerDisplays: NSViewController {
                     if i <= (HardwareCollector.displayNames.count-1) {
                         nameArr[i].isHidden = false
                         nameArr[i].stringValue = HardwareCollector.displayNames[i]
+                        print("DisplayName: \"\(HardwareCollector.displayNames[i])\"")
                     }
                     if i <= (HardwareCollector.displayRes.count-1) {
                         labelArr2[i].isHidden = false
                         labelArr2[i].stringValue = HardwareCollector.displayRes[i]
+                        print("DisplayName: \"\(HardwareCollector.displayRes[i])\"")
                     }
                     if i <= (HardwareCollector.displayNames.count-1) {
 
@@ -214,10 +222,12 @@ class ViewControllerDisplays: NSViewController {
                 if i <= (HardwareCollector.displayNames.count-1) {
                     nameArr[i].isHidden = false
                     nameArr[i].stringValue = HardwareCollector.displayNames[i]
+                    print("DisplayName: \"\(HardwareCollector.displayNames[i])\"")
                 }
                 if i <= (HardwareCollector.displayRes.count-1) {
                     labelArr2[i].isHidden = false
                     labelArr2[i].stringValue = HardwareCollector.displayRes[i]
+                    print("DisplayName: \"\(HardwareCollector.displayRes[i])\"")
                 }
             }
             for disp in dispArr {
