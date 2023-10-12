@@ -86,15 +86,24 @@ class ViewControllerDisplays: NSViewController {
             nameArr.append(DisplayNameR2)
             dispArr.append(DisplayPicL2)
             dispArr.append(DisplayPicR2)
+            
+            print("HardwareCollector.displayNames = \"(HardwareCollector.displayNames)\"")
+            print("HardwareCollector.displayRes = \"(HardwareCollector.displayRes)\"")
+            
             if (HardwareCollector.macType == .DESKTOP) {
-                for i in [0,1] {
-                    nameArr[i].isHidden = false
-                    nameArr[i].stringValue = HardwareCollector.displayNames[i]
-                    labelArr2[i].isHidden = false
-                    labelArr2[i].stringValue = HardwareCollector.displayRes[i]
-                    if (!(HardwareCollector.displayNames[i] == "LG HDR 4K")) {dispArr[i].image = NSImage(named: "genericLCD")}
-                    else {
-                        dispArr[i].image = NSImage(named: "LG4K")
+                let indiceArray = [0,1]
+                indiceArray.forEach { i in
+                    if i <= (HardwareCollector.displayNames.count-1) {
+                        nameArr[i].isHidden = false
+                        nameArr[i].stringValue = HardwareCollector.displayNames[i]
+                        if (!(HardwareCollector.displayNames[i] == "LG HDR 4K")) {dispArr[i].image = NSImage(named: "genericLCD")}
+                        else {
+                            dispArr[i].image = NSImage(named: "LG4K")
+                        }
+                    }
+                    if i <= (HardwareCollector.displayRes.count-1) {
+                        labelArr2[i].isHidden = false
+                        labelArr2[i].stringValue = HardwareCollector.displayRes[i]
                     }
                 }
             }
@@ -103,11 +112,16 @@ class ViewControllerDisplays: NSViewController {
                     dispArr[1].image = NSImage(named: "genericLCD") // not first one
                 }
             }
-            for i in [0,1] {
-                nameArr[i].isHidden = false
-                nameArr[i].stringValue = HardwareCollector.displayNames[i]
-                labelArr2[i].isHidden = false
-                labelArr2[i].stringValue = HardwareCollector.displayRes[i]
+            let indiceArray = [0,1]
+            indiceArray.forEach { i in
+                if i <= (HardwareCollector.displayNames.count-1) {
+                    nameArr[i].isHidden = false
+                    nameArr[i].stringValue = HardwareCollector.displayNames[i]
+                }
+                if i <= (HardwareCollector.displayRes.count-1) {
+                    labelArr2[i].isHidden = false
+                    labelArr2[i].stringValue = HardwareCollector.displayRes[i]
+                }
             }
             for disp in dispArr {
                 disp.isHidden = false
@@ -134,59 +148,77 @@ class ViewControllerDisplays: NSViewController {
             dispArr.append(DisplayPicR1)
             //if (HardwareCollector.macType == .DESKTOP) {
             if(HardwareCollector.macType == .DESKTOP) {
-                for i in [0,1,2] {
-                    nameArr[i].isHidden = false
-                    nameArr[i].stringValue = HardwareCollector.displayNames[i]
-                    labelArr2[i].isHidden = false
-                    labelArr2[i].stringValue = HardwareCollector.displayRes[i]
-                    print("DisplayName: \"\(HardwareCollector.displayNames[i])\"")
-                    
-                    if(HardwareCollector.displayNames[i] == "iMac") {
-                        dispArr[0].image = NSImage(named: "NSComputer")
+                let indiceArray = [0,1,2]
+                indiceArray.forEach { i in
+                    if i <= (HardwareCollector.displayNames.count-1) {
+                        nameArr[i].isHidden = false
+                        nameArr[i].stringValue = HardwareCollector.displayNames[i]
                     }
-                    
-                    else if (HardwareCollector.displayNames[i] == "LG HDR 4K") {
-                        dispArr[i].image = NSImage(named: "LG4K")
+                    if i <= (HardwareCollector.displayRes.count-1) {
+                        labelArr2[i].isHidden = false
+                        labelArr2[i].stringValue = HardwareCollector.displayRes[i]
                     }
-                    else if (HardwareCollector.displayNames[i] == "Sidecar Display") {
-                        print("Found a SidecarDisplay")
-                        dispArr[i].image = NSImage(named: "ipad")
-                    }
-                    else if (HardwareCollector.displayNames[i] == "LED Cinema Display") {
-                        dispArr[i].image = NSImage(named: "appledisp")
-                    }
-                    else {
-                        dispArr[i].image = NSImage(named: "genericLCD")
+                    if i <= (HardwareCollector.displayNames.count-1) {
+                        
+                        if(HardwareCollector.displayNames[i] == "iMac") {
+                            dispArr[0].image = NSImage(named: "NSComputer")
+                        }
+                        
+                        else if (HardwareCollector.displayNames[i] == "LG HDR 4K") {
+                            dispArr[i].image = NSImage(named: "LG4K")
+                        }
+                        else if (HardwareCollector.displayNames[i] == "Sidecar Display") {
+                            print("Found a SidecarDisplay")
+                            dispArr[i].image = NSImage(named: "ipad")
+                        }
+                        else if (HardwareCollector.displayNames[i] == "LED Cinema Display") {
+                            dispArr[i].image = NSImage(named: "appledisp")
+                        }
+                        else {
+                            dispArr[i].image = NSImage(named: "genericLCD")
+                        }
                     }
                 }
             }
             else if HardwareCollector.qhasBuiltInDisplay {
-                for i in [1,2] {
-                    nameArr[i].isHidden = false
-                    nameArr[i].stringValue = HardwareCollector.displayNames[i]
-                    labelArr2[i].isHidden = false
-                    labelArr2[i].stringValue = HardwareCollector.displayRes[i]
-                    print("DisplayName: \"\(HardwareCollector.displayNames[i])\"")
-                    if (HardwareCollector.displayNames[i] == "LG HDR 4K") {
-                        dispArr[i].image = NSImage(named: "LG4K")
+                let indiceArray = [1,2]
+                indiceArray.forEach { i in
+                    if i <= (HardwareCollector.displayNames.count-1) {
+                        nameArr[i].isHidden = false
+                        nameArr[i].stringValue = HardwareCollector.displayNames[i]
                     }
-                    else if (HardwareCollector.displayNames[i] == "Sidecar Display") {
-                        print("Found a SidecarDisplay")
-                        dispArr[i].image = NSImage(named: "ipad")
+                    if i <= (HardwareCollector.displayRes.count-1) {
+                        labelArr2[i].isHidden = false
+                        labelArr2[i].stringValue = HardwareCollector.displayRes[i]
                     }
-                    else if (HardwareCollector.displayNames[i] == "LED Cinema Display") {
-                        dispArr[i].image = NSImage(named: "appledisp")
-                    }
-                    else {
-                        dispArr[i].image = NSImage(named: "genericLCD")
+                    if i <= (HardwareCollector.displayNames.count-1) {
+
+                        if (HardwareCollector.displayNames[i] == "LG HDR 4K") {
+                            dispArr[i].image = NSImage(named: "LG4K")
+                        }
+                        else if (HardwareCollector.displayNames[i] == "Sidecar Display") {
+                            print("Found a SidecarDisplay")
+                            dispArr[i].image = NSImage(named: "ipad")
+                        }
+                        else if (HardwareCollector.displayNames[i] == "LED Cinema Display") {
+                            dispArr[i].image = NSImage(named: "appledisp")
+                        }
+                        else {
+                            dispArr[i].image = NSImage(named: "genericLCD")
+                        }
                     }
                 }
             }
-            for i in [0,1,2] {
-                nameArr[i].isHidden = false
-                nameArr[i].stringValue = HardwareCollector.displayNames[i]
-                labelArr2[i].isHidden = false
-                labelArr2[i].stringValue = HardwareCollector.displayRes[i]
+            let indiceArray = [0,1,2]
+            indiceArray.forEach { i in
+                if i <= (HardwareCollector.displayNames.count-1) {
+                    nameArr[i].isHidden = false
+                    nameArr[i].stringValue = HardwareCollector.displayNames[i]
+                }
+                if i <= (HardwareCollector.displayRes.count-1) {
+                    labelArr2[i].isHidden = false
+                    labelArr2[i].stringValue = HardwareCollector.displayRes[i]
+                }
             }
             for disp in dispArr {
                 disp.isHidden = false
