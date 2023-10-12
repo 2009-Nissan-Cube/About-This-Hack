@@ -58,7 +58,7 @@ class HardwareCollector {
         }
         return []
     }
-    
+
     static func getDisplayNames() -> [String] {
         let numDispl = getNumDisplays()
         // secondPart data extracted in all cases (numDispl =1, 2 or 3)
@@ -89,8 +89,7 @@ class HardwareCollector {
                         toSend.append(secondPart[i])
                     }
                 }
-                        print("toSend = below")
-                        print(toSend)
+                print("toSend = \"\(toSend)\"")
                 return toSend
             } else {
                         print([String](firsPart.dropFirst()))
@@ -114,7 +113,6 @@ class HardwareCollector {
         print("Startup Disk Name " + name)
         let storageType = run("grep \"Solid State:\" " + initGlobVar.bootvolnameFilePath)
         return storageType.contains("Yes")
-        
     }
     
     static func getStorageData() -> [String] {
@@ -130,7 +128,7 @@ class HardwareCollector {
             case "T" : coeffMultDiskSize = 1028.0
             default : coeffMultDiskSize = 1.0
         }
-        var sizeTrimmed = String((Double(run("echo \"\(size)\" | awk '{print $1}' | tr -d '\n'")) ?? 2)*coeffMultDiskSize)
+        let sizeTrimmed = String((Double(run("echo \"\(size)\" | awk '{print $1}' | tr -d '\n'")) ?? 2)*coeffMultDiskSize)
         let available = run("grep \"[Container|Volume] Free Space:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $4,$5}' | tr -d '\n'")
         let unitA = available[available.length-2]
         var coeffMultDiskSizeA = 1.0
@@ -146,7 +144,6 @@ class HardwareCollector {
         print("Size: \(sizeTrimmed)")
         print("Available: \(availableTrimmed)")
         print("%: \(percentfree)")
-        
 
         return ["""
         \(name) (\(devicelocation) \(deviceprotocol))
