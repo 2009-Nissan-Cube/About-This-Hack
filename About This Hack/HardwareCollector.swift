@@ -53,45 +53,52 @@ class HardwareCollector {
             return [run("grep -A1 \"_spdisplays_resolution\" " + initGlobVar.scrXmlFilePath + " | grep string | cut -c 15- | cut -f1 -d'<'")]
         }
         else if (numDispl > 1) {
-            let tmp = run("grep \"Resolution\" " + initGlobVar.scrFilePath  + " | cut -c 23-")
-            let tmpParts = tmp.components(separatedBy: "\n")
-            return tmpParts
+            let firsPart = run("grep \"Resolution\" " + initGlobVar.scrFilePath  + " | cut -c 23-").components(separatedBy: "\n")
+            return firsPart
         }
         return []
     }
-    
+
     static func getDisplayNames() -> [String] {
         let numDispl = getNumDisplays()
         // secondPart data extracted in all cases (numDispl =1, 2 or 3)
-        let secondPart = run("grep \"        \" " + initGlobVar.scrFilePath + " | cut -c 9- | grep \"^[A-Za-z]\" | cut -f 1 -d ':'")
+        let secondPart = run("grep \"        \" " + initGlobVar.scrFilePath + " | cut -c 9- | grep \"^[A-Za-z]\" | cut -f 1 -d ':'").components(separatedBy: "\n")
+        print("secondPart = " + "\(secondPart)")
         
         if numDispl == 1 {
-            if(qhasBuiltInDisplay) {
+            if (qhasBuiltInDisplay) {
                 return [run("echo $(grep \"Display Type\" " + initGlobVar.scrFilePath + " | cut -c 25-) $(grep -A2 \"</data>\" " + initGlobVar.scrXmlFilePath + " | awk -F'>|<' '/_name/{getline; print $3}') | tr -d '\n' ")]
+            } else {
+                return secondPart
             }
-            else {
-                return [secondPart]
-            }
-        }
-        else if (numDispl == 2 || numDispl == 3) {
+        } else if (numDispl == 2 || numDispl == 3) {
             print("2 or 3 displays found")
-            let tmp = run("echo $(grep \"Display Type\" " + initGlobVar.scrFilePath + " | cut -c 25-)" + secondPart)
-            let tmpParts = tmp.components(separatedBy: "\n")
+            let firsPart = run("grep \"Display Type\" " + initGlobVar.scrFilePath + " | cut -c 25-").components(separatedBy: "\n")
+            print("firsPart =  " + "\(firsPart)")
             var toSend: [String] = []
             if(qhasBuiltInDisplay) {
-                toSend.append(tmpParts[0])
-                for i in 2...tmpParts.count-1 {
-                    toSend.append(tmpParts[i])
+                toSend.append(firsPart[0] + " " + secondPart[0])
+                var loopCount = (secondPart.count-1)
+                if (firsPart.count-1) > loopCount {
+                    loopCount = (firsPart.count-1)
                 }
+                for i in stride(from: 1, to: loopCount, by: 1) {
+                    if i <= (firsPart.count-1) {
+                        toSend.append(firsPart[i] + " " + secondPart[i])
+                    } else if i <= (secondPart.count-1){
+                        toSend.append(secondPart[i])
+                    }
+                }
+                print("toSend = \"\(toSend)\"")
                 return toSend
-            }
-            else {
-                return [String](tmpParts.dropFirst())
+            } else {
+                        print([String](firsPart.dropFirst()))
+                return [String](firsPart.dropFirst())
             }
         }
         return []
     }
-    
+
     static func getNumDisplays() -> Int {
         print("TEST TEST \(initGlobVar.scrFilePath)")
         return Int(run("grep -c \"Resolution\" " + initGlobVar.scrFilePath + " | tr -d '\n'")) ?? 0x0
@@ -106,7 +113,6 @@ class HardwareCollector {
         print("Startup Disk Name " + name)
         let storageType = run("grep \"Solid State:\" " + initGlobVar.bootvolnameFilePath)
         return storageType.contains("Yes")
-        
     }
     
     static func getStorageData() -> [String] {
@@ -122,7 +128,7 @@ class HardwareCollector {
             case "T" : coeffMultDiskSize = 1028.0
             default : coeffMultDiskSize = 1.0
         }
-        var sizeTrimmed = String((Double(run("echo \"\(size)\" | awk '{print $1}' | tr -d '\n'")) ?? 2)*coeffMultDiskSize)
+        let sizeTrimmed = String((Double(run("echo \"\(size)\" | awk '{print $1}' | tr -d '\n'")) ?? 2)*coeffMultDiskSize)
         let available = run("grep \"[Container|Volume] Free Space:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $4,$5}' | tr -d '\n'")
         let unitA = available[available.length-2]
         var coeffMultDiskSizeA = 1.0
@@ -138,7 +144,6 @@ class HardwareCollector {
         print("Size: \(sizeTrimmed)")
         print("Available: \(availableTrimmed)")
         print("%: \(percentfree)")
-        
 
         return ["""
         \(name) (\(devicelocation) \(deviceprotocol))
