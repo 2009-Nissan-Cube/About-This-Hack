@@ -81,7 +81,7 @@ class ViewControllerDisplays: NSViewController {
             DisplaySizeResCenter.isHidden = false
             DisplaySizeResCenter.stringValue = HardwareCollector.displayRes[0]
             print("DisplayName: \"\(HardwareCollector.displayNames[0])\"")
-            print("DisplayName: \"\(HardwareCollector.displayRes[0])\"")
+            print("DisplayReso: \"\(HardwareCollector.displayRes[0])\"")
             break
         case 2:
             print("2 Displays Detected")
@@ -107,7 +107,7 @@ class ViewControllerDisplays: NSViewController {
                     if i <= (HardwareCollector.displayRes.count-1) {
                         labelArr2[i].isHidden = false
                         labelArr2[i].stringValue = HardwareCollector.displayRes[i]
-                        print("DisplayName: \"\(HardwareCollector.displayRes[i])\"")
+                        print("DisplayReso: \"\(HardwareCollector.displayRes[i])\"")
                     }
                 }
             }
@@ -162,7 +162,7 @@ class ViewControllerDisplays: NSViewController {
                     if i <= (HardwareCollector.displayRes.count-1) {
                         labelArr2[i].isHidden = false
                         labelArr2[i].stringValue = HardwareCollector.displayRes[i]
-                        print("DisplayName: \"\(HardwareCollector.displayRes[i])\"")
+                        print("DisplayReso: \"\(HardwareCollector.displayRes[i])\"")
                     }
                     if i <= (HardwareCollector.displayNames.count-1) {
                         
@@ -197,7 +197,7 @@ class ViewControllerDisplays: NSViewController {
                     if i <= (HardwareCollector.displayRes.count-1) {
                         labelArr2[i].isHidden = false
                         labelArr2[i].stringValue = HardwareCollector.displayRes[i]
-                        print("DisplayName: \"\(HardwareCollector.displayRes[i])\"")
+                        print("DisplayReso: \"\(HardwareCollector.displayRes[i])\"")
                     }
                     if i <= (HardwareCollector.displayNames.count-1) {
 
@@ -227,7 +227,7 @@ class ViewControllerDisplays: NSViewController {
                 if i <= (HardwareCollector.displayRes.count-1) {
                     labelArr2[i].isHidden = false
                     labelArr2[i].stringValue = HardwareCollector.displayRes[i]
-                    print("DisplayName: \"\(HardwareCollector.displayRes[i])\"")
+                    print("DisplayReso: \"\(HardwareCollector.displayRes[i])\"")
                 }
             }
             for disp in dispArr {
