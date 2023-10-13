@@ -50,11 +50,10 @@ class HardwareCollector {
     static func getDisplayRes() -> [String] {
         let numDispl = getNumDisplays()
         if numDispl == 1 {
-            return [run("grep -A1 \"_spdisplays_resolution\" " + initGlobVar.scrXmlFilePath + " | grep string | cut -c 15- | cut -f1 -d'<'")]
+            return run("grep -A1 \"_spdisplays_resolution\" " + initGlobVar.scrXmlFilePath + " | grep string | cut -c 15- | cut -f1 -d'<'").components(separatedBy: "\n")
         }
         else if (numDispl > 1) {
-            let firsPart = run("grep \"Resolution\" " + initGlobVar.scrFilePath  + " | cut -c 23-").components(separatedBy: "\n")
-            return firsPart
+            return run("grep \"Resolution\" " + initGlobVar.scrFilePath  + " | cut -c 23-").components(separatedBy: "\n")
         }
         return []
     }
