@@ -81,10 +81,10 @@ class HCVersion {
         
         if initGlobVar.defaultfileManager.fileExists(atPath: initGlobVar.oclpXmlFilePath) {
             oclppatchInfo = run("grep -A1 \"<key>OpenCore Legacy Patcher</key>\" " + initGlobVar.oclpXmlFilePath + " | tail -1 | sed -e 's?.*<string>?OCLP ?' -e 's?<\\/string>??' | tr -d '\n'")
-//            let oclpCommit = run("grep -A1 \"<key>Commit URL</key>\" " + initGlobVar.oclpXmlFilePath + " | tail -1 | sed -e 's?.*<string>??' -e 's?<\\/string>??' | awk -F'/' '{print \"(\" substr($NF,1,7) \")\"}' | tr -d '\n'")
+            let oclpCommit = run("grep -A1 \"<key>Commit URL</key>\" " + initGlobVar.oclpXmlFilePath + " | tail -1 | sed -e 's?.*<string>??' -e 's?<\\/string>??' | awk -F'/' '{print \"(\" substr($NF,1,7) \")\"}' | tr -d '\n'")
             let oclpDateTime = run("grep -A1 \"<key>Time Patched</key>\" " + initGlobVar.oclpXmlFilePath + " | tail -1 | sed -e 's?.*<string>?(?' -e 's?@ ? ?' -e 's?<\\/string>?)?'")
 
-//            if oclpCommit != "" { oclppatchInfo += " \(oclpCommit)" }
+            if oclpCommit != "" { oclppatchInfo += " \(oclpCommit)" }
             if oclpDateTime != "" { oclppatchInfo += " \(oclpDateTime)" }
 
         }
