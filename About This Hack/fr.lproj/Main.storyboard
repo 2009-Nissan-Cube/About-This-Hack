@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22146" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22146"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,48 +12,48 @@
         <scene sceneID="JPo-4y-FX3">
             <objects>
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
-                    <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
+                    <menu key="mainMenu" title="Menu principal" systemMenu="main" id="AYu-sK-qS6">
                         <items>
-                            <menuItem title="About This Hack" id="1Xt-HY-uBw">
+                            <menuItem title="A propos de ce Hack" id="1Xt-HY-uBw">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="About This Hack" systemMenu="apple" id="uQy-DD-JDr">
+                                <menu key="submenu" title="A propos de ce Hack" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="About This Hack" id="5kV-Vb-QxS">
+                                        <menuItem title="A propos de ce Hack" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Check for updates..." id="pq4-KE-Q0r">
+                                        <menuItem title="Chercher des MàJ..." id="pq4-KE-Q0r">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Préférences..." keyEquivalent="," id="BOF-NM-1cW"/>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
-                                        <menuItem title="Hide About This Hack" keyEquivalent="h" id="Olw-nP-bQN">
+                                        <menuItem title="Masquer A propos de ce Hack" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
                                                 <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Hide Others" keyEquivalent="h" id="Vdr-fp-XzO">
+                                        <menuItem title="Masquer les autres" keyEquivalent="h" id="Vdr-fp-XzO">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="hideOtherApplications:" target="Ady-hI-5gd" id="VT4-aY-XCT"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Show All" id="Kd2-mp-pUS">
+                                        <menuItem title="Tout afficher" id="Kd2-mp-pUS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="unhideAllApplications:" target="Ady-hI-5gd" id="Dhg-Le-xox"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                                        <menuItem title="Quit About This Hack" keyEquivalent="q" id="4sb-4s-VLi">
+                                        <menuItem title="Quitter A propos de ce Hack" keyEquivalent="q" id="4sb-4s-VLi">
                                             <connections>
                                                 <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
                                             </connections>
@@ -61,48 +61,48 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Window" id="CGo-wv-2KW">
+                            <menuItem title="Edition" id="CGo-wv-2KW">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Window" systemMenu="window" id="DUf-nJ-qcj">
+                                <menu key="submenu" title="Edition" id="DUf-nJ-qcj">
                                     <items>
-                                        <menuItem title="Minimize" keyEquivalent="m" id="Fdn-tF-SyD">
+                                        <menuItem title="Réduire" keyEquivalent="m" id="Fdn-tF-SyD">
                                             <connections>
                                                 <action selector="performMiniaturize:" target="Ady-hI-5gd" id="i5s-nF-DGo"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Close" keyEquivalent="w" id="rT6-YD-Lao">
+                                        <menuItem title="Fermer" keyEquivalent="w" id="rT6-YD-Lao">
                                             <connections>
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="61M-kq-lQy"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Zoom" id="5HS-Mc-tod">
+                                        <menuItem title="Agrandir" id="5HS-Mc-tod">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="performZoom:" target="Ady-hI-5gd" id="rVx-uu-IEB"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Overview" keyEquivalent="1" id="Rw1-hT-NzJ">
+                                        <menuItem title="Aperçu" keyEquivalent="1" id="Rw1-hT-NzJ">
                                             <connections>
                                                 <action selector="showOverview:" target="Voe-Tx-rLC" id="Q0Q-mk-BHg"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Displays" keyEquivalent="2" id="pHH-rO-4Am">
+                                        <menuItem title="Moniteurs" keyEquivalent="2" id="pHH-rO-4Am">
                                             <connections>
                                                 <action selector="showDisplays:" target="Voe-Tx-rLC" id="ifg-0w-Ou9"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Storage" keyEquivalent="3" id="tsM-eT-fG4">
+                                        <menuItem title="Stockage" keyEquivalent="3" id="tsM-eT-fG4">
                                             <connections>
                                                 <action selector="showStorage:" target="Voe-Tx-rLC" id="sRY-v1-JKg"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Support" keyEquivalent="4" id="3AK-j7-ksI">
+                                        <menuItem title="Ressources" keyEquivalent="4" id="3AK-j7-ksI">
                                             <connections>
                                                 <action selector="showHelp:" target="Voe-Tx-rLC" id="E74-Lp-QCb"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="hNE-XU-1EN"/>
-                                        <menuItem title="Bring All to Front" id="MvP-56-vIj">
+                                        <menuItem title="Placer au premier plan" id="MvP-56-vIj">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="arrangeInFront:" target="Ady-hI-5gd" id="X2l-Av-4h0"/>
@@ -111,11 +111,11 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Help" id="wpr-3q-Mcd">
+                            <menuItem title="Aide" id="wpr-3q-Mcd">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
+                                <menu key="submenu" title="Aide" systemMenu="help" id="F2S-fz-NVQ">
                                     <items>
-                                        <menuItem title="About This Hack Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                                        <menuItem title="Aide A propos de ce Hack" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
                                                 <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
                                             </connections>
@@ -165,10 +165,10 @@
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="texturedRounded" trackingMode="selectOne" id="Kat-cT-SH6">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment label="Overview" toolTip="General presentation of system specifications" selected="YES"/>
-                                                <segment label="Displays" tag="1"/>
-                                                <segment label="Storage"/>
-                                                <segment label="Support" toolTip="Presentation of support links for help with your hackintosh or mac"/>
+                                                <segment label="Aperçu" toolTip="General presentation of system specifications" selected="YES"/>
+                                                <segment label="Moniteurs" tag="1"/>
+                                                <segment label="Stockage"/>
+                                                <segment label="Ressources" toolTip="Presentation of support links for help with your hackintosh or mac"/>
                                             </segments>
                                         </segmentedCell>
                                         <connections>
@@ -205,7 +205,7 @@
                                 <rect key="frame" x="0.0" y="-5" width="580" height="305"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a6l-aN-htH">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="a6l-aN-htH">
                                         <rect key="frame" x="235" y="255" width="94" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="macOS" id="xRa-qB-6LO">
@@ -214,7 +214,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bk2-am-ChW">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="bk2-am-ChW">
                                         <rect key="frame" x="324" y="255" width="237" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Big Sur" id="J4g-R2-Wek">
@@ -223,7 +223,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="faQ-JW-cWW">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="faQ-JW-cWW">
                                         <rect key="frame" x="280" y="240" width="282" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" id="KcK-Pm-bqk">
@@ -232,8 +232,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="749" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gm1-7a-Pie">
-                                        <rect key="frame" x="235" y="205" width="347" height="15"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="749" id="Gm1-7a-Pie">
+                                        <rect key="frame" x="235" y="205" width="340" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Mac" id="rXS-ws-Emd">
                                             <font key="font" metaFont="systemSemibold" size="11"/>
@@ -241,7 +241,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J4m-r0-guW">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="J4m-r0-guW">
                                         <rect key="frame" x="235" y="186" width="66" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Processeur" id="JAl-xV-Ro8">
@@ -250,8 +250,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9oc-mK-Jxd">
-                                        <rect key="frame" x="299" y="186" width="266" height="14"/>
+                                    <textField verticalHuggingPriority="750" id="9oc-mK-Jxd">
+                                        <rect key="frame" x="299" y="186" width="276" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" id="wIQ-kS-OWB">
                                             <font key="font" metaFont="smallSystem"/>
@@ -259,7 +259,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IQE-EP-kfD">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="IQE-EP-kfD">
                                         <rect key="frame" x="235" y="167" width="52" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Memoire" id="XCF-fy-S4y">
@@ -268,8 +268,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ws0-cm-b2A">
-                                        <rect key="frame" x="288" y="167" width="274" height="14"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Ws0-cm-b2A">
+                                        <rect key="frame" x="286" y="167" width="287" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" id="2P8-rA-RSf">
                                             <font key="font" metaFont="smallSystem"/>
@@ -277,8 +277,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qMp-jo-qFY">
-                                        <rect key="frame" x="235" y="147" width="122" height="15"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="qMp-jo-qFY">
+                                        <rect key="frame" x="235" y="147" width="122" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Disque de Démarrage" id="Voc-xL-sTc">
                                             <font key="font" metaFont="systemSemibold" size="11"/>
@@ -286,8 +286,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6QW-gr-uh8">
-                                        <rect key="frame" x="361" y="147" width="201" height="15"/>
+                                    <textField verticalHuggingPriority="750" id="6QW-gr-uh8">
+                                        <rect key="frame" x="357" y="147" width="218" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" id="fd7-Ik-LqD">
                                             <font key="font" metaFont="smallSystem"/>
@@ -295,26 +295,26 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sC4-6H-9SK">
-                                        <rect key="frame" x="235" y="128" width="35" height="14"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="sC4-6H-9SK">
+                                        <rect key="frame" x="235" y="128" width="57" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Écran" id="Dhc-IR-WqN">
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Moniteur" id="Dhc-IR-WqN">
                                             <font key="font" metaFont="systemSemibold" size="11"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rzs-BA-fEG">
-                                        <rect key="frame" x="235" y="108" width="67" height="15"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="rzs-BA-fEG">
+                                        <rect key="frame" x="235" y="108" width="67" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Graphiques" id="bTR-ER-8AD">
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Graphisme" id="bTR-ER-8AD">
                                             <font key="font" metaFont="systemSemibold" size="11"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yae-Uv-NND">
-                                        <rect key="frame" x="304" y="108" width="290" height="15"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="yae-Uv-NND">
+                                        <rect key="frame" x="298" y="108" width="277" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" id="FW5-i7-qdF">
                                             <font key="font" metaFont="smallSystem"/>
@@ -322,17 +322,17 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="749" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Le-qQ-XKI">
-                                        <rect key="frame" x="235" y="89" width="81" height="14"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="749" id="6Le-qQ-XKI">
+                                        <rect key="frame" x="235" y="89" width="93" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Num. de Série" id="JyF-l5-OcY">
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Numéro de série" id="JyF-l5-OcY">
                                             <font key="font" metaFont="systemSemibold" size="11"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tRC-kB-coB">
-                                        <rect key="frame" x="321" y="89" width="241" height="14"/>
+                                    <textField verticalHuggingPriority="750" id="tRC-kB-coB">
+                                        <rect key="frame" x="330" y="89" width="243" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" id="BvK-0H-RC4">
                                             <font key="font" metaFont="smallSystem"/>
@@ -343,8 +343,8 @@
                                             <action selector="hideSerialNumber:" target="XfG-lQ-9wD" id="5WY-OX-IVL"/>
                                         </connections>
                                     </textField>
-                                    <button focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eIV-GT-Iqb">
-                                        <rect key="frame" x="316" y="79" width="251" height="32"/>
+                                    <button focusRingType="none" verticalHuggingPriority="750" id="eIV-GT-Iqb">
+                                        <rect key="frame" x="325" y="79" width="253" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="B5B-ie-0ij">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -354,7 +354,7 @@
                                             <action selector="hideSerialNumber:" target="XfG-lQ-9wD" id="rDu-fs-jMm"/>
                                         </connections>
                                     </button>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x8i-fO-ag7" userLabel="Bl Prefix">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="x8i-fO-ag7" userLabel="Bl Prefix">
                                         <rect key="frame" x="235" y="70" width="65" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Bootloader" id="Mgu-Wg-99b">
@@ -363,8 +363,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A0q-SM-khO" userLabel="Bl Version">
-                                        <rect key="frame" x="304" y="70" width="258" height="14"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="A0q-SM-khO" userLabel="Bl Version">
+                                        <rect key="frame" x="300" y="70" width="275" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" id="GrF-N1-VJa">
                                             <font key="font" metaFont="smallSystem"/>
@@ -372,10 +372,10 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ku4-K5-p9x" userLabel="bt Sys Info">
+                                    <button verticalHuggingPriority="750" id="ku4-K5-p9x" userLabel="bt Sys Info">
                                         <rect key="frame" x="232" y="30" width="120" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" title="System Report..." bezelStyle="rounded" imagePosition="leading" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="T5m-Kc-jOC" userLabel="System Report...">
+                                        <buttonCell key="cell" type="push" title="Rapport système..." bezelStyle="rounded" imagePosition="leading" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="T5m-Kc-jOC" userLabel="System Report...">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                         </buttonCell>
@@ -383,10 +383,10 @@
                                             <action selector="showSystemReport:" target="XfG-lQ-9wD" id="6ou-sL-KVi"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pot-uo-okh" userLabel="bt Soft Updt">
-                                        <rect key="frame" x="348" y="30" width="127" height="32"/>
+                                    <button verticalHuggingPriority="750" id="Pot-uo-okh" userLabel="bt Soft Updt">
+                                        <rect key="frame" x="348" y="30" width="150" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" title="Software Update..." bezelStyle="rounded" imagePosition="leading" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="URi-ul-7cV" userLabel="Software Update...">
+                                        <buttonCell key="cell" type="push" title="Mise à jour de logiciels..." bezelStyle="rounded" imagePosition="leading" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="URi-ul-7cV" userLabel="Software Update...">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                         </buttonCell>
@@ -394,12 +394,12 @@
                                             <action selector="showSoftwareUpdate:" target="XfG-lQ-9wD" id="6ou-sL-KVj"/>
                                         </connections>
                                     </button>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aW5-VD-mei">
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="aW5-VD-mei">
                                         <rect key="frame" x="32" y="70" width="168" height="165"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="CVN-5K-wws"/>
                                     </imageView>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JaM-2k-3ag">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="JaM-2k-3ag">
                                         <rect key="frame" x="82" y="-2" width="400" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="™ et © 2021-2023 0xCUB3 et al. Tous Droits Réservés." id="wwU-zy-Nw8">
@@ -408,7 +408,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zDm-sx-dYS">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="zDm-sx-dYS">
                                         <rect key="frame" x="235" y="240" width="45" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Version" id="u8u-HO-U2g">
@@ -417,8 +417,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XaB-5G-KGc">
-                                        <rect key="frame" x="276" y="128" width="278" height="14"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="XaB-5G-KGc">
+                                        <rect key="frame" x="289" y="128" width="286" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" id="1Vi-4h-pCw">
                                             <font key="font" metaFont="smallSystem"/>
@@ -498,7 +498,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Orh-dQ-0M1">
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Orh-dQ-0M1">
                                         <rect key="frame" x="124" y="5" width="333" height="125"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" alignment="center" title="Display" id="sJc-j1-qmk">
@@ -507,32 +507,32 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <imageView hidden="YES" focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PA5-nE-SAD">
+                                    <imageView hidden="YES" focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="PA5-nE-SAD">
                                         <rect key="frame" x="190" y="131" width="200" height="118"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" focusRingType="exterior" alignment="left" imageScaling="proportionallyUpOrDown" image="NSComputer" id="XOo-uO-Qd0"/>
                                     </imageView>
-                                    <imageView hidden="YES" focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="trV-Oe-iKo">
+                                    <imageView hidden="YES" focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="trV-Oe-iKo">
                                         <rect key="frame" x="321" y="131" width="200" height="118"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" focusRingType="exterior" alignment="left" imageScaling="proportionallyUpOrDown" image="NSComputer" id="FMn-AH-1ZX"/>
                                     </imageView>
-                                    <imageView hidden="YES" focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hop-8T-aK3">
+                                    <imageView hidden="YES" focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="hop-8T-aK3">
                                         <rect key="frame" x="56" y="131" width="200" height="118"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" focusRingType="exterior" alignment="left" imageScaling="proportionallyUpOrDown" image="NSComputer" id="nC2-4F-XW2"/>
                                     </imageView>
-                                    <imageView hidden="YES" focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fsK-UG-uc6">
+                                    <imageView hidden="YES" focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="fsK-UG-uc6">
                                         <rect key="frame" x="120" y="131" width="200" height="118"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" focusRingType="exterior" alignment="left" imageScaling="proportionallyUpOrDown" image="NSComputer" id="DXl-nB-Rrn"/>
                                     </imageView>
-                                    <imageView hidden="YES" focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3e-Et-8op">
+                                    <imageView hidden="YES" focusRingType="exterior" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="z3e-Et-8op">
                                         <rect key="frame" x="249" y="131" width="200" height="118"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" focusRingType="exterior" alignment="left" imageScaling="proportionallyUpOrDown" image="NSComputer" id="aMw-hD-eDx"/>
                                     </imageView>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SjI-Or-BeG">
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="SjI-Or-BeG">
                                         <rect key="frame" x="131" y="75" width="178" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" alignment="center" title="Display" id="PPg-3k-9fc">
@@ -541,7 +541,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="haK-Zb-8ht">
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="haK-Zb-8ht">
                                         <rect key="frame" x="56" y="75" width="201" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" alignment="center" title="Display" id="EMs-f0-ueV">
@@ -550,7 +550,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="858-f8-xta">
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="858-f8-xta">
                                         <rect key="frame" x="258" y="75" width="183" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" alignment="center" title="Display" id="edR-gc-Tis">
@@ -559,7 +559,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xEq-6a-wft">
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="xEq-6a-wft">
                                         <rect key="frame" x="337" y="75" width="169" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" alignment="center" title="Display" id="Cti-yT-IUK">
@@ -568,7 +568,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wNI-Ij-lp9">
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="wNI-Ij-lp9">
                                         <rect key="frame" x="221" y="20" width="138" height="79"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" alignment="center" title="Resolution" id="2z4-hu-X9K">
@@ -577,7 +577,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5AF-gZ-4T3">
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="5AF-gZ-4T3">
                                         <rect key="frame" x="99" y="20" width="118" height="79"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" alignment="center" title="Resolution" id="gFI-Cs-sI6">
@@ -586,7 +586,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yhX-vN-zmQ">
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="yhX-vN-zmQ">
                                         <rect key="frame" x="136" y="44" width="162" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" alignment="center" title="Resolution" id="eif-aS-JZY">
@@ -595,7 +595,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I1c-Up-oSG">
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="I1c-Up-oSG">
                                         <rect key="frame" x="363" y="44" width="126" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" alignment="center" title="Resolution" id="MjX-1e-gVr">
@@ -604,7 +604,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3C-3W-8fs">
+                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="z3C-3W-8fs">
                                         <rect key="frame" x="287" y="44" width="125" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" alignment="center" title="Resolution" id="FPS-OW-rKW">
@@ -613,10 +613,10 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RfR-aa-wQA">
+                                    <button verticalHuggingPriority="750" id="RfR-aa-wQA">
                                         <rect key="frame" x="201" y="13" width="178" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" title="Display Preferences..." bezelStyle="rounded" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="l4g-r5-TtG">
+                                        <buttonCell key="cell" type="push" title="Préférences Moniteurs..." bezelStyle="rounded" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="l4g-r5-TtG">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -662,21 +662,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v7b-El-G0K">
-                                        <rect key="frame" x="221" y="232" width="139" height="28"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="v7b-El-G0K">
+                                        <rect key="frame" x="169" y="231" width="243" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Startup Disk" id="ehO-L1-X7O">
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Disque de Démarrage" id="ehO-L1-X7O">
                                             <font key="font" metaFont="systemSemibold" size="24"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8kv-X3-qib">
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="8kv-X3-qib">
                                         <rect key="frame" x="220" y="84" width="140" height="140"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="HDD" id="ErU-rD-tJ2"/>
                                     </imageView>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CRL-U4-0CV">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="CRL-U4-0CV">
                                         <rect key="frame" x="-2" y="22" width="584" height="54"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Storage" id="G5x-4p-VmO">
@@ -685,7 +685,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" drawsTieredCapacityLevels="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y6J-CA-TEe">
+                                    <levelIndicator verticalHuggingPriority="750" drawsTieredCapacityLevels="YES" id="Y6J-CA-TEe">
                                         <rect key="frame" x="90" y="7" width="401" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <levelIndicatorCell key="cell" alignment="left" doubleValue="500000" maxValue="1000000" warningValue="600000" criticalValue="800000" levelIndicatorStyle="continuousCapacity" id="7TX-47-UbS"/>
@@ -720,8 +720,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Npq-wh-d6q">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Npq-wh-d6q">
                                         <rect key="frame" x="244" y="226" width="92" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="88" id="bLe-aG-F7H"/>
                                         </constraints>
@@ -731,31 +732,34 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Tm-z8-QVR">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="1Tm-z8-QVR">
                                         <rect key="frame" x="73" y="198" width="84" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="uRT-qh-nsf"/>
                                         </constraints>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="macOS Help" id="qaK-5G-98g">
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Aide macOS" id="qaK-5G-98g">
                                             <font key="font" textStyle="headline" name=".SFNS-Bold"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GrT-Zi-ddp">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="GrT-Zi-ddp">
                                         <rect key="frame" x="425" y="198" width="101" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="97" id="q9D-DH-cpF"/>
                                         </constraints>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Hardware Help" id="HuZ-JY-TSx">
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Aide Matériel" id="HuZ-JY-TSx">
                                             <font key="font" textStyle="headline" name=".SFNS-Bold"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dtY-jd-Ip0">
-                                        <rect key="frame" x="47" y="168" width="136" height="18"/>
-                                        <buttonCell key="cell" type="inline" title="macOS User Guide " bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="ttV-6r-KWU" userLabel="macOS User Guide">
+                                    <button verticalHuggingPriority="750" id="dtY-jd-Ip0">
+                                        <rect key="frame" x="20" y="168" width="163" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="inline" title="Guide utilisateur macOS" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="ttV-6r-KWU" userLabel="macOS User Guide">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -763,9 +767,10 @@
                                             <action selector="macOSUserGuidePress:" target="Nau-hC-e0F" id="kOe-JK-Pcm"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5OQ-us-odM">
+                                    <button verticalHuggingPriority="750" id="5OQ-us-odM">
                                         <rect key="frame" x="421" y="168" width="109" height="18"/>
-                                        <buttonCell key="cell" type="inline" title="Apple Support" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="rsW-PX-wvK">
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="inline" title="Support Apple" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="rsW-PX-wvK">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -773,9 +778,10 @@
                                             <action selector="AppleSupportPress:" target="Nau-hC-e0F" id="wBF-Xq-nYv"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0aH-Ip-0jT">
-                                        <rect key="frame" x="418" y="109" width="114" height="18"/>
-                                        <buttonCell key="cell" type="inline" title="Mac User Guide" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="xTZ-yl-yG1">
+                                    <button verticalHuggingPriority="750" id="0aH-Ip-0jT">
+                                        <rect key="frame" x="425" y="109" width="105" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="inline" title="Manuels Mac" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="xTZ-yl-yG1">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -783,9 +789,10 @@
                                             <action selector="MacUserGuidePress:" target="Nau-hC-e0F" id="Wkb-SN-siW"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lIP-i4-RkP">
-                                        <rect key="frame" x="412" y="138" width="127" height="18"/>
-                                        <buttonCell key="cell" type="inline" title="Hackintosh Guide" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="6g6-V5-YHx">
+                                    <button verticalHuggingPriority="750" id="lIP-i4-RkP">
+                                        <rect key="frame" x="383" y="138" width="147" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="inline" title="Guide OC Hackintosh" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="6g6-V5-YHx">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -793,9 +800,10 @@
                                             <action selector="HackintoshPress:" target="Nau-hC-e0F" id="JTO-u8-u5d"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q27-be-TLE">
-                                        <rect key="frame" x="42" y="139" width="146" height="18"/>
-                                        <buttonCell key="cell" type="inline" title="Whats New in macOS" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="OTr-vA-9vX">
+                                    <button verticalHuggingPriority="750" id="q27-be-TLE">
+                                        <rect key="frame" x="45" y="139" width="137" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="inline" title="Nouveautés macOS" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="OTr-vA-9vX">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -803,9 +811,10 @@
                                             <action selector="whatsNewInMacOSPress:" target="Nau-hC-e0F" id="pMA-xu-Mwi"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ise-M2-RUF">
-                                        <rect key="frame" x="69" y="109" width="92" height="18"/>
-                                        <buttonCell key="cell" type="inline" title="Mac Basics" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="iVE-To-f0E">
+                                    <button verticalHuggingPriority="750" id="Ise-M2-RUF">
+                                        <rect key="frame" x="74" y="109" width="108" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="inline" title="Basiques Mac" bezelStyle="inline" image="safari" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="iVE-To-f0E">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -813,8 +822,8 @@
                                             <action selector="MacBasicsPress:" target="Nau-hC-e0F" id="aS2-sg-mZl"/>
                                         </connections>
                                     </button>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9RX-Xn-wg3">
-                                        <rect key="frame" x="170" y="-11" width="241" height="16"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="9RX-Xn-wg3">
+                                        <rect key="frame" x="170" y="-10" width="241" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Made with ❤️ by 0xCUBE and astroKid" id="aFJ-b7-Jfk">
                                             <font key="font" metaFont="system" size="10"/>
@@ -859,7 +868,7 @@
     </scenes>
     <resources>
         <image name="HDD" width="256" height="256"/>
-        <image name="NSActionTemplate" width="19" height="19"/>
+        <image name="NSActionTemplate" width="15" height="15"/>
         <image name="NSComputer" width="32" height="32"/>
         <image name="safari" catalog="system" width="15" height="15"/>
         <namedColor name="AccentColor">
