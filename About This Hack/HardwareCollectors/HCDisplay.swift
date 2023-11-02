@@ -16,15 +16,15 @@ class HCDisplay {
     }
     
     static func getDispInfo() -> String {
- //       return run("tail -$(echo $(wc -l " + initGlobVar.scrFilePath + " | awk '{print $1}' | tr -d '\n') - $(grep -n \" Displays:\" " + initGlobVar.scrFilePath + " | awk -F':' '{print $1-1}' | tr -d '\n') | bc) " + initGlobVar.scrFilePath)
-        
-        let displtotline = run("wc -l " + initGlobVar.scrFilePath + " | awk '{print $1}' | tr -d '\n'")
-        print("wc -l " + initGlobVar.scrFilePath + "\(displtotline)")
-        let displendline = run("grep -n \" Displays:\" " + initGlobVar.scrFilePath + " | awk -F':' '{print $1-1}' | tr -d '\n'")
-        print("Displays: " + initGlobVar.scrFilePath + "\(displendline)")
-        let dispnbrlines = (Int(displtotline) ?? 0) - (Int(displendline) ?? 0)
-        print("tail -\(dispnbrlines)" + " " + initGlobVar.scrFilePath)
-        
-        return run("tail -\(dispnbrlines)" + " " + initGlobVar.scrFilePath)
-   }
+        let dispArray:[String] = run("egrep \"^        [A-Za-z0-9]|^--$\" \(initGlobVar.scrFilePath)").components(separatedBy: "\n")
+        var dispContent:String = run("egrep \"^        [A-Za-z0-9]|^          [A-Za-z0-9]|^--$\" \(initGlobVar.scrFilePath)")
+        print("Tooltip Displays array : \(dispArray)")
+        if dispArray != [""] {
+            for dispIndice in 0..<dispArray.count {
+                dispContent = dispContent.replacingOccurrences(of: "\(dispArray[dispIndice])", with: "\n\(dispArray[dispIndice])\n")
+            }
+        }
+//        print("Tooltip Displays content : \nDisplays\n\(dispContent)")
+        return "Displays\n\(dispContent)"
+    }
 }
