@@ -8,13 +8,6 @@ import Foundation
 let name = "\(HCStartupDisk.getStartupDisk())"
 
 class HardwareCollector {
-    static var macInfo: String = "Hackintosh Extreme Plus"
-    static var SMBios: String = ""
-    static var GPUstring: String = "Radeon Pro 560 4GB"
-    static var DisplayString: String = "Generic LCD"
-    static var SerialNumberString: String = "XXXXXXXXXXX"
-    static var BootloaderString: String = ""
-    static var BootloaderInfo: String = ""
     static var numberOfDisplays: Int = 1
     static var dataHasBeenSet: Bool = false
     static var displayRes: [String] = []
@@ -91,8 +84,13 @@ class HardwareCollector {
                 print("toSend = \"\(toSend)\"")
                 return toSend
             } else {
-                        print([String](firsPart.dropFirst()))
-                return [String](firsPart.dropFirst())
+                if firsPart != [""] {
+                    print([String](firsPart.dropFirst()))
+                    return [String](firsPart.dropFirst())
+                } else {
+                    print([String](secondPart))
+                    return [String](secondPart)
+                }
             }
         }
         return []
