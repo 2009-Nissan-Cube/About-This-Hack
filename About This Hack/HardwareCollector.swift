@@ -54,7 +54,7 @@ class HardwareCollector {
     static func getDisplayNames() -> [String] {
         let numDispl = getNumDisplays()
         // secondPart data extracted in all cases (numDispl =1, 2 or 3)
-        let secondPart = run("grep \"        \" " + initGlobVar.scrFilePath + " | cut -c 9- | grep \"^[A-Za-z]\" | cut -f 1 -d ':'").components(separatedBy: "\n")
+        let secondPart = run("grep \"        \" " + initGlobVar.scrFilePath + " | cut -c 9- | grep \"^[A-Za-z0-9]\" | cut -f 1 -d ':'").components(separatedBy: "\n")
         print("secondPart = " + "\(secondPart)")
         
         if numDispl == 1 {
