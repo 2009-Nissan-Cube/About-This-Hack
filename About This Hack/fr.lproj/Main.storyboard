@@ -24,11 +24,11 @@
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Chercher des M√†J..." id="pq4-KE-Q0r">
+                                        <menuItem title="Chercher des MàJ..." id="pq4-KE-Q0r">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Pr√©f√©rences..." keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Préférences..." keyEquivalent="," id="BOF-NM-1cW"/>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -65,7 +65,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Edition" id="DUf-nJ-qcj">
                                     <items>
-                                        <menuItem title="R√©duire" keyEquivalent="m" id="Fdn-tF-SyD">
+                                        <menuItem title="Réduire" keyEquivalent="m" id="Fdn-tF-SyD">
                                             <connections>
                                                 <action selector="performMiniaturize:" target="Ady-hI-5gd" id="i5s-nF-DGo"/>
                                             </connections>
@@ -81,7 +81,7 @@
                                                 <action selector="performZoom:" target="Ady-hI-5gd" id="rVx-uu-IEB"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Aper√ßu" keyEquivalent="1" id="Rw1-hT-NzJ">
+                                        <menuItem title="Aperçu" keyEquivalent="1" id="Rw1-hT-NzJ">
                                             <connections>
                                                 <action selector="showOverview:" target="Voe-Tx-rLC" id="Q0Q-mk-BHg"/>
                                             </connections>
@@ -165,7 +165,7 @@
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="texturedRounded" trackingMode="selectOne" id="Kat-cT-SH6">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment label="Aper√ßu" toolTip="General presentation of system specifications" selected="YES"/>
+                                                <segment label="Aperçu" toolTip="General presentation of system specifications" selected="YES"/>
                                                 <segment label="Moniteurs" tag="1"/>
                                                 <segment label="Stockage"/>
                                                 <segment label="Ressources" toolTip="Presentation of support links for help with your hackintosh or mac"/>
@@ -289,7 +289,7 @@
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="qMp-jo-qFY">
                                         <rect key="frame" x="235" y="147" width="122" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Disque de D√©marrage" id="Voc-xL-sTc">
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Disque de Démarrage" id="Voc-xL-sTc">
                                             <font key="font" metaFont="systemSemibold" size="11"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -343,7 +343,7 @@
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="749" id="6Le-qQ-XKI">
                                         <rect key="frame" x="235" y="89" width="93" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Num√©ro de s√©rie" id="JyF-l5-OcY">
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Numéro de série" id="JyF-l5-OcY">
                                             <font key="font" metaFont="systemSemibold" size="11"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -393,7 +393,7 @@
                                     <button verticalHuggingPriority="750" id="ku4-K5-p9x" userLabel="bt Sys Info">
                                         <rect key="frame" x="232" y="30" width="120" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" title="Rapport syst√®me..." bezelStyle="rounded" imagePosition="leading" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="T5m-Kc-jOC" userLabel="System Report...">
+                                        <buttonCell key="cell" type="push" title="Rapport système..." bezelStyle="rounded" imagePosition="leading" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="T5m-Kc-jOC" userLabel="System Report...">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                         </buttonCell>
@@ -404,7 +404,7 @@
                                     <button verticalHuggingPriority="750" id="Pot-uo-okh" userLabel="bt Soft Updt">
                                         <rect key="frame" x="348" y="30" width="150" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" title="Mise √† jour de logiciels..." bezelStyle="rounded" imagePosition="leading" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="URi-ul-7cV" userLabel="Software Update...">
+                                        <buttonCell key="cell" type="push" title="Mise à jour de logiciels..." bezelStyle="rounded" imagePosition="leading" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="URi-ul-7cV" userLabel="Software Update...">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                         </buttonCell>
@@ -420,7 +420,7 @@
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="JaM-2k-3ag">
                                         <rect key="frame" x="82" y="-2" width="400" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="‚Ñ¢ et ¬© 2021-2023 0xCUB3 et al. Tous Droits R√©serv√©s." id="wwU-zy-Nw8">
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="™ et © 2021-2023 0xCUB3 et al. Tous Droits Réservés." id="wwU-zy-Nw8">
                                             <font key="font" metaFont="system" size="10"/>
                                             <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -625,7 +625,7 @@
                                     <button verticalHuggingPriority="750" id="RfR-aa-wQA">
                                         <rect key="frame" x="201" y="13" width="178" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" title="Pr√©f√©rences Moniteurs..." bezelStyle="rounded" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="l4g-r5-TtG">
+                                        <buttonCell key="cell" type="push" title="Préférences Moniteurs..." bezelStyle="rounded" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="l4g-r5-TtG">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                         </buttonCell>
@@ -674,7 +674,7 @@
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="v7b-El-G0K">
                                         <rect key="frame" x="169" y="231" width="243" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Disque de D√©marrage" id="ehO-L1-X7O">
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Disque de Démarrage" id="ehO-L1-X7O">
                                             <font key="font" metaFont="systemSemibold" size="24"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -759,7 +759,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="97" id="q9D-DH-cpF"/>
                                         </constraints>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Aide Mat√©riel" id="HuZ-JY-TSx">
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Aide Matériel" id="HuZ-JY-TSx">
                                             <font key="font" textStyle="headline" name=".SFNS-Bold"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -812,7 +812,7 @@
                                     <button verticalHuggingPriority="750" id="q27-be-TLE">
                                         <rect key="frame" x="45" y="139" width="137" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="inline" title="Nouveaut√©s macOS" bezelStyle="inline" image="arrow.right.circle.fill" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="OTr-vA-9vX">
+                                        <buttonCell key="cell" type="inline" title="Nouveautés macOS" bezelStyle="inline" image="arrow.right.circle.fill" catalog="system" imagePosition="right" alignment="center" alternateImage="NSActionTemplate" borderStyle="border" inset="2" id="OTr-vA-9vX">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
@@ -834,7 +834,7 @@
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="9RX-Xn-wg3">
                                         <rect key="frame" x="170" y="-10" width="241" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Made with ‚ù§Ô∏è by 0xCUBE and astroKid" id="aFJ-b7-Jfk">
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Made with ❤️ by 0xCUBE and astroKid" id="aFJ-b7-Jfk">
                                             <font key="font" metaFont="system" size="10"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
