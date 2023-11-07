@@ -6,7 +6,7 @@ class initGlobVar {
     static var tempDirectory           = "/private/tmp" // "/tmp" is equiv.
     static var athDirectory            = tempDirectory + athfilesDirectory
 //    static var athDirectory            = NSHomeDirectory() + athfilesDirectory
-    static var defaultfileManager             = FileManager.default
+    static var defaultfileManager      = FileManager.default
 
     // Used by UpdateController
     static var lastAthreleaseURL       = "https://github.com/0xCUB3/About-This-Hack/releases/download/"

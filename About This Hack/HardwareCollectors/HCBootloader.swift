@@ -7,10 +7,10 @@ class HCBootloader {
 
     static func getBootloader() -> String {
         
-        BootloaderInfo = run("nvram " + initGlobVar.nvramOpencoreVersion + " | awk '{print $2}' | awk -F'-' '{print $2}'")
+        BootloaderInfo = run("nvram " + initGlobVar.nvramOpencoreVersion + " 2>/dev/null | awk '{print $2}' | awk -F'-' '{print $2}'")
         if BootloaderInfo != "" {
             // Regular OpenCore
-                BootloaderInfo = run("echo \"OpenCore \"$(nvram " + initGlobVar.nvramOpencoreVersion + " | awk '{print $2}' | awk -F'-' '{print $2}' | sed -e 's/ */./g' -e s'/^.//g' -e 's/.$//g' -e 's/ .//g' -e 's/. //g' | tr -d '\n') $( nvram " + initGlobVar.nvramOpencoreVersion + " | awk '{print $2}' | awk -F'-' '{print $1}' | sed -e 's/REL/(Release)/g' -e s'/N\\/A//g' -e 's/DEB/(Debug)/g' | tr -d '\n')")
+                BootloaderInfo = run("echo \"OpenCore \"$(nvram " + initGlobVar.nvramOpencoreVersion + " 2>/dev/null | awk '{print $2}' | awk -F'-' '{print $2}' | sed -e 's/ */./g' -e s'/^.//g' -e 's/.$//g' -e 's/ .//g' -e 's/. //g' | tr -d '\n') $( nvram " + initGlobVar.nvramOpencoreVersion + " 2>/dev/null | awk '{print $2}' | awk -F'-' '{print $1}' | sed -e 's/REL/(Release)/g' -e s'/N\\/A//g' -e 's/DEB/(Debug)/g' | tr -d '\n')")
             }
         else {
 //            BootloaderInfo = run("grep \"Clover\" " + initGlobVar.hwFilePath + " | awk '{print $4,\"r\" $6,\"(\" substr($9,1,7) \") \"}' | tr -d '\n'")

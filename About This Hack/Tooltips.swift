@@ -6,7 +6,7 @@ let systemVersiontoolTip = osVersiontoolTip
 
 let macModeltoolTip = "\n" + HCMacModel.macName + " - " + HCMacModel.getModelIdentifier() + "\n\n" + run("system_profiler SPPCIDataType | grep \":$\" | sed 's/://g'")
 
-let cputoolTip = "\n" + HCCPU.getCPUInfo()
+let cputoolTip = "\n" + HCCPU.getCPU() + "\n\n" + HCCPU.getCPUInfo()
 
 let ramtoolTip = run("cat " + initGlobVar.sysmemFilePath)
 

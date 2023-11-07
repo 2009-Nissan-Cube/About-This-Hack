@@ -8,13 +8,6 @@ import Foundation
 let name = "\(HCStartupDisk.getStartupDisk())"
 
 class HardwareCollector {
-    static var macInfo: String = "Hackintosh Extreme Plus"
-    static var SMBios: String = ""
-    static var GPUstring: String = "Radeon Pro 560 4GB"
-    static var DisplayString: String = "Generic LCD"
-    static var SerialNumberString: String = "XXXXXXXXXXX"
-    static var BootloaderString: String = ""
-    static var BootloaderInfo: String = ""
     static var numberOfDisplays: Int = 1
     static var dataHasBeenSet: Bool = false
     static var displayRes: [String] = []
@@ -61,12 +54,19 @@ class HardwareCollector {
     static func getDisplayNames() -> [String] {
         let numDispl = getNumDisplays()
         // secondPart data extracted in all cases (numDispl =1, 2 or 3)
-        let secondPart = run("grep \"        \" " + initGlobVar.scrFilePath + " | cut -c 9- | grep \"^[A-Za-z]\" | cut -f 1 -d ':'").components(separatedBy: "\n")
-        print("secondPart = " + "\(secondPart)")
+        let secondPart = run("grep \"        \" " + initGlobVar.scrFilePath + " | cut -c 9- | grep \"^[A-Za-z0-9]\" | cut -f 1 -d ':'").components(separatedBy: "\n")
+        print("secondPart =  \(secondPart)")
         
         if numDispl == 1 {
             if (qhasBuiltInDisplay) {
-                return [run("echo $(grep \"Display Type\" " + initGlobVar.scrFilePath + " | cut -c 25-) $(grep -A2 \"</data>\" " + initGlobVar.scrXmlFilePath + " | awk -F'>|<' '/_name/{getline; print $3}') | tr -d '\n' ")]
+                let firsPart: String = run("grep \"Display Type\" " + initGlobVar.scrFilePath + " | cut -c 25- | tr -d '\n'")
+                print("Display Type with 1 Display is Built In : \(firsPart)")
+                var displayName:String = run("grep -A2 \"</data>\" " + initGlobVar.scrXmlFilePath + " | awk -F'>|<' '/_name/{getline; print $3}' | tr -d '\n'")
+                if displayName == "" {
+                    displayName = run("grep -B2 \"_spdisplays_display-product-id\" " + initGlobVar.scrXmlFilePath + " | awk -F'>|<' '/_name/{getline; print $3}' | tr -d '\n'")
+                }
+                print("Display Name with 1 Display is Built In : \(displayName)")
+                return [firsPart + " " + displayName]
             } else {
                 return secondPart
             }
@@ -91,8 +91,13 @@ class HardwareCollector {
                 print("toSend = \"\(toSend)\"")
                 return toSend
             } else {
-                        print([String](firsPart.dropFirst()))
-                return [String](firsPart.dropFirst())
+                if firsPart != [""] {
+                    print([String](firsPart.dropFirst()))
+                    return [String](firsPart.dropFirst())
+                } else {
+                    print([String](secondPart))
+                    return [String](secondPart)
+                }
             }
         }
         return []
@@ -104,7 +109,8 @@ class HardwareCollector {
     }
     
     static func hasBuiltInDisplay() -> Bool {
-        let tmp = run("grep \"Built-In\" " + initGlobVar.scrFilePath + " | tr -d '\n'")
+//        let tmp = run("grep \"Built-In\" " + initGlobVar.scrFilePath + " | tr -d '\n'")
+        let tmp = run("grep \"          \"  " + initGlobVar.scrFilePath + " | egrep \"Built-[I|i]n\" | tr -d '\n'")
         return !(tmp == "")
     }
     

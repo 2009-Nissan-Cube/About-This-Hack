@@ -74,10 +74,9 @@ class HCVersion {
         osSipInfo   = run ("grep \"System Integrity Protection: \" " + initGlobVar.syssoftdataFilePath + "| awk -F': ' '{print \"SIP: \"$2\" \"}' | tr -d '\n'")
 //         osSipInfo   = "SIP: Enable" // test code
         if osSipInfo.contains("Disabled") {
-            osSipInfo += run ("ioreg -fiw0 -p IODeviceTree -rn options | grep \"csr-active-config\" | awk '{print \" (0x\"substr($3,4,2) substr($3,2,2) substr($3,6,4)\")\"}'")
-        } else {
-            osSipInfo += " (0x00000000)\n"
-        }
+            let sipValue = run ("ioreg -fiw0 -p IODeviceTree -rn options | grep \"csr-active-config\" | awk '{print \"(0x\"substr($3,4,2) substr($3,2,2) substr($3,6,4)\")\"}' | tr -d '\n'")
+            if sipValue.length == 12 && !sipValue.contains("(0x\">\"g)") { osSipInfo += "\(sipValue)\n" } else { osSipInfo += "\n"}
+        } else { osSipInfo += " (0x00000000)\n" }
         
         if initGlobVar.defaultfileManager.fileExists(atPath: initGlobVar.oclpXmlFilePath) {
             oclppatchInfo = run("grep -A1 \"<key>OpenCore Legacy Patcher</key>\" " + initGlobVar.oclpXmlFilePath + " | tail -1 | sed -e 's?.*<string>?OCLP ?' -e 's?<\\/string>??' | tr -d '\n'")

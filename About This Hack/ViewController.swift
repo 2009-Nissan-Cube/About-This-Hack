@@ -188,6 +188,12 @@ class ViewController: NSViewController {
         
     @IBAction func showSoftwareUpdate(_ sender: NSButton) {
         print("Software Update...")
-        _ = run("open /System/Library/PreferencePanes/SoftwareUpdate.prefPane")
+        let dirObject = "/System/Library/PreferencePanes/SoftwareUpdate.prefPane"
+        var dirExist : ObjCBool = false
+        if initGlobVar.defaultfileManager.fileExists(atPath: dirObject, isDirectory: &dirExist) && dirExist.boolValue {
+            _ = run("open /System/Library/PreferencePanes/SoftwareUpdate.prefPane")
+        } else {
+            _ = run("open \(initGlobVar.allAppliLocation)/\"App Store.app\"")
+        }
     }
 }

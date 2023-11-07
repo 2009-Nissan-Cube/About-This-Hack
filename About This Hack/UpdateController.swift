@@ -34,13 +34,11 @@ class UpdateController {
         print("Killing Old App...")
         notify(title: "Replacing Apps", informativeText: "Deleting the old version and replacing it with the new version")
         // Thanks for the code, Ben216k
-//        let rm = run("rm -rf \"" + initGlobVar.thisAppliLocation + "\"")
         let rm = run("rm -rf  \"\(initGlobVar.thisAppliLocation)\"")
         if rm.contains("No") {
             notify(title: "Failed to delete the old copy of About This Hack.app", informativeText: "Please make sure it is in the Applications folder!!!")
             return
         }
-//        _ = run("[[ ! -d \"" + initGlobVar.thisAppliLocation + "\" ]]")
         _ = run("[[ ! -d \"\(initGlobVar.thisAppliLocation)\" ]]")
         print("Unzipping Archive...")
         notify(title: "Unzipping Archive", informativeText: "")
@@ -48,12 +46,10 @@ class UpdateController {
         
          print("Copying New Version...")
         notify(title: "Copying New Version", informativeText: "Almost there!")
-//        _ = run("cp -rf " + initGlobVar.athDirectory + "\"" + initGlobVar.thisAppliname + "\" " + initGlobVar.allAppliLocation)
         _ = run("mv -f \(initGlobVar.athDirectory)" + "\"\(initGlobVar.thisAppliname)\"" + " \(initGlobVar.allAppliLocation)")
         Thread.sleep(forTimeInterval: 0.5)
 
         notify(title: "Update Complete!", informativeText: "Launching New Version...")
-//        _ = run("open " + initGlobVar.allAppliLocation + "\"" + initGlobVar.thisAppliname + "\"")
         _ = run("open \"\(initGlobVar.thisAppliLocation)\"")
         exit(0)
     }
