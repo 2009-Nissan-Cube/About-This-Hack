@@ -55,7 +55,7 @@ class initGlobVar {
     static var whatsNewInMacOSPress    = "https://www.apple.com/macos/ventura/"
     static var AppleSupportPress       = "https://support.apple.com"
     static var HackintoshPress         = "https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html#table-of-contents"
-    static var MacBasicsPress          =  "https://help.apple.com/macos/big-sur/mac-basics/"
+    static var MacBasicsPress          = "https://help.apple.com/macos/big-sur/mac-basics/"
     static var MacUserGuidePress       = "https://support.apple.com/manuals"
 
 }
