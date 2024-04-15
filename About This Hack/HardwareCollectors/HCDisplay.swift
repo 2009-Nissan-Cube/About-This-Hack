@@ -3,14 +3,10 @@ import Foundation
 class HCDisplay {
     
     static func getDisp() -> String {
-        var tmp = run("grep Resolution: " + initGlobVar.scrFilePath + " | sed 's/.*: //'")
-        if tmp.contains("(QHD"){
-            tmp = run("grep Resolution: " + initGlobVar.scrFilePath + " | sed 's/.*: //' | cut -c -11")
-        }
-        if(tmp.contains("\n")) {
-            let displayID = tmp.firstIndex(of: "\n")!
-            let displayTrimmed = String(tmp[..<displayID])
-            tmp = displayTrimmed
+        let regex = try! NSRegularExpression(pattern: "Resolution: (.*)\\(.*\\)")
+        let tmp = run("grep Resolution: " + initGlobVar.scrFilePath + " | sed 's/.*: //'")
+        if let match = regex.firstMatch(in: tmp, range: NSRange(tmp.startIndex..., in: tmp)) {
+            return String(tmp[Range(match.range(at: 1), in: tmp)!])
         }
         return tmp
     }
