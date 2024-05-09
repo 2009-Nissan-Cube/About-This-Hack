@@ -14,7 +14,7 @@ var thisAppNameContentsResources = "\(thisApplicationName)/Contents/Resources"
 
 var withDataFiles: Int = 0  // 0 = NO DataFiles (Data provided by system functions), 1 = Local DataFiles extraction, 2 = Linked DataFiles (Remote DataFiles sent)
 
-var sp_SystemProfiler = "\(initGlobVar.sysprofLocation)"
+//var sp_SystemProfiler = "\(initGlobVar.sysprofLocation)"
 var sp_DataMaskJson   = "-json"
 var sp_DataMaskXml    = "-xml"
 var sp_DataMaskEmpty  = ""
