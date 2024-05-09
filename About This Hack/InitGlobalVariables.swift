@@ -41,8 +41,8 @@ class initGlobVar {
 //    static var sysctlLocation          = run(whichLocation + " sysctl | /usr/bin/tr -d '\n'")
 //    static var catLocation             = run(whichLocation + " cat | /usr/bin/tr -d '\n'")
 //    static var ioregLocation           = run(whichLocation + " ioreg | /usr/bin/tr -d '\n'")
-//    static var curlLocation            = run(whichLocation + " curl  | /usr/bin/tr -d '\n'")
-    static var perlLocation            = run(whichLocation + " perl  | /usr/bin/tr -d '\n'")
+    static var curlLocation            = run(whichLocation + " curl  | /usr/bin/tr -d '\n'")
+//    static var perlLocation            = run(whichLocation + " perl  | /usr/bin/tr -d '\n'")
 
     // Files with Overview, Displays and Storage detailed Datas
     static var hwFilePath              = athDirectory + "/hw.txt"
