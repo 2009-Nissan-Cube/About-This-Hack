@@ -13,35 +13,37 @@ class UpdateController {
         return String(describing: self)
     }
 
-    static var latestVersion     :String = ""
-    static var latestVersionNum  :Int    = 0
+    static var lastTagVersion    :String = ""
+    static var marketVersion     :String = ""
     static var minSystemVersion  :String = "Unknown"
-    static var localVersionNum   :Int    = (Int(thisApplicationVersion.replacingOccurrences(of: ".", with: "")) ?? 0)
-    static var exeToSearchIsApp  :String = "\(initGlobVar.athDirectory)/\(thisApplicationName).app"
-    static var exeToSearchIsDmg  :String = "\(initGlobVar.athDirectory)/\(thisApplicationName)xxx.dmg"
     static var exeToSearch       :String = ""
     static var kindToSearch      :String = "app"
     static var isUpdateAvailable :Bool   = false
     static var alertheader       :String = ""
     static var alertdetail       :Any    = ""
     static var notificationID    :Int    = 0
+    static var unzippedFile      :Bool   = false
 
     static func checkForUpdates() -> Bool {
         print("\(thisComponent) : Checking for updates...")
-        latestVersion = run("GIT_TERMINAL_PROMPT=0 git ls-remote --tags --refs \(initGlobVar.athrepositoryURL) | grep \"/tags/[0-9]\" | awk -F'/' '{print  $NF}' | sort -u | tail -n1 | tr -d '\n'")
-        if latestVersion != "" && !latestVersion.starts(with: "fatal") {
-            print("\(thisComponent) : Local version (\(thisApplicationVersion)) and Remote version (\(latestVersion))")
-            latestVersionNum  = (Int(latestVersion.replacingOccurrences(of: ".", with: "")) ?? 0)
-            if localVersionNum < latestVersionNum {
+        lastTagVersion = run("GIT_TERMINAL_PROMPT=0 git ls-remote --tags --refs \(initGlobVar.athrepositoryURL) | grep \"/tags/[0-9]\" | awk -F'/' '{print  $NF}' | sort -u | tail -n1 | tr -d '\n'")
+        if lastTagVersion != "" && !lastTagVersion.starts(with: "fatal") {
+            let pbxProjLocat = initGlobVar.athlasttagpbxproj.replacingOccurrences(of: "[LASTTAG]", with: lastTagVersion)
+            marketVersion = run("\(initGlobVar.curlLocation) -s \(initGlobVar.athrepositoryURL)\(pbxProjLocat) | sed -e 's?,?\\n?g' -e 's?;?\\n?g' | grep \"MARKETING_VERSION = \" | awk '{print $NF}' | sort -u | tail -n1 | tr -d '\n' 2>/dev/null")
+// Postulat : there is one and only one target in pbxproj
+            if marketVersion == "" {
+                marketVersion = thisApplicationVersion  // fake marketVersion (ie. = localVersion) so no Update and no app. crash
+            }
+            print("\(thisComponent) : Local version (\(thisApplicationVersion)) and Remote version (\(marketVersion)) in .pbxproj from tag (\(lastTagVersion))")
+            if thisApplicationVersion < marketVersion {
                 //MARK: newer app found
-                print("\(thisComponent) : Newer version (\(latestVersion)) available")
-                let prompt = updateAlert(message: "Update found!", text: "The latest version is \(latestVersion).\nYou are currently running \(thisApplicationVersion).", buttonArray: ["Update", "Skip"])
+                print("\(thisComponent) : Newer version (\(marketVersion)) available")
+                let prompt = updateAlert(message: "Update found!", text: "The latest version is \(marketVersion).\nYou are currently running \(thisApplicationVersion).", buttonArray: ["Update", "Skip"])
                 print("\(thisComponent) : Done")
-                exeToSearchIsDmg = exeToSearchIsDmg.replacingOccurrences(of: "xxx.dmg", with: " v\(latestVersion).dmg")
                 return prompt
             }
         } else {
-            alertheader = "Can't get latest tag version from repo"
+            alertheader = "Can't get version from last remote repo tag"
             alertdetail = "\(initGlobVar.athrepositoryURL)"
             print("\(thisComponent) : \(alertheader) \(alertdetail)")
             _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
@@ -53,11 +55,11 @@ class UpdateController {
         isUpdateAvailable = true
         
         //MARK: DownLoad new app.zip from repo
-        print("\(thisComponent) : Starting Download v\(latestVersion) Update...")
-        notify(title: "Starting Download... v\(latestVersion) Update...", informativeText: "")
-        guard run("\(initGlobVar.curlLocation) -L \(initGlobVar.lastAthreleaseURL)\(latestVersion)/\(initGlobVar.newAthziprelease) -o \(initGlobVar.newAthreleasezip)") == "" else {
+        print("\(thisComponent) : Starting Download v\(marketVersion) Update...")
+        notify(title: "Starting Download... v\(marketVersion) Update...", informativeText: "")
+        guard run("\(initGlobVar.curlLocation) -L \(initGlobVar.lastAthreleaseURL)\(lastTagVersion)/\(initGlobVar.newAthziprelease) -o \(initGlobVar.newAthreleasezip)") == "" else {
             alertheader = "Can't Download Update"
-            alertdetail = "\(initGlobVar.lastAthreleaseURL)\(latestVersion)/\(initGlobVar.newAthziprelease)"
+            alertdetail = "\(initGlobVar.lastAthreleaseURL)\(lastTagVersion)/\(initGlobVar.newAthziprelease)"
             print("\(thisComponent) : \(alertheader) \(alertdetail)")
             _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
             isUpdateAvailable = false
@@ -79,26 +81,28 @@ class UpdateController {
                 isUpdateAvailable = false
                 return
             }
-            // what kind of component ".app" or ".dmg"
-            var unzippedFile:Bool = false
-            while (!unzippedFile) {
+            // what kind of extracted component a ".app" or a ".dmg" and man try 5 times
+            var notFoundLoop : Int = 0
+            while (!unzippedFile) && (notFoundLoop < 5) {
                 Thread.sleep(forTimeInterval: 0.2)
-                if initGlobVar.defaultfileManager.fileExists(atPath: exeToSearchIsApp) {
+                exeToSearch = checkFileExtension(atPath: initGlobVar.athDirectory, withExtensions: [".app", ".dmg"])
+                if exeToSearch != "" {
                     unzippedFile = true
-                    exeToSearch = exeToSearchIsApp
-                    kindToSearch = "app"
-                }
-                if initGlobVar.defaultfileManager.fileExists(atPath: exeToSearchIsDmg) {
-                    unzippedFile = true
-                    exeToSearch = exeToSearchIsDmg
-                    kindToSearch = "dmg"
+                    notFoundLoop = 5
+                    kindToSearch = String(exeToSearch.suffix(3))
+                } else {
+                    notFoundLoop += 1
                 }
             }
-            if kindToSearch == "dmg" {
-                print("\(thisComponent) : From archive was extracted : \(exeToSearchIsDmg)")
-            } else {
-                print("\(thisComponent) : From archive was extracted : \(exeToSearchIsApp)")
+            if (!unzippedFile) && (notFoundLoop > 4) {
+                alertheader = "Can't find .app or .dmg extension on files name extracted from Archive"
+                alertdetail = "\(initGlobVar.newAthreleasezip) into \(initGlobVar.athDirectory)"
+                print("\(thisComponent) : \(alertheader) \(alertdetail)")
+                _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
+                isUpdateAvailable = false
+                return
             }
+            print("\(thisComponent) : From archive was extracted : \(exeToSearch)")
         }
         
         //MARK: from new app.zip extracted .dmg or .app
@@ -157,8 +161,8 @@ class UpdateController {
             while (!initGlobVar.defaultfileManager.fileExists(atPath: "\(initGlobVar.athDirectory)/\(thisApplicationName).app")) {
                 Thread.sleep(forTimeInterval: 0.2)
             }
-            print("\(thisComponent) : Is new app v\(latestVersion) allowed on current OS \(HCVersion.OSnum)?")
-            notify(title: "Is new app v\(latestVersion) allowed...", informativeText: "")
+            print("\(thisComponent) : Is new app v\(marketVersion) allowed on current OS \(HCVersion.OSnum)?")
+            notify(title: "Is new app v\(marketVersion) allowed...", informativeText: "")
             let plistNewVersion = "\(initGlobVar.athDirectory)/\(thisApplicationName).app/Contents/Info.plist"
             if initGlobVar.defaultfileManager.fileExists(atPath: "\(plistNewVersion)") {
                 if let resourceFileDictionaryContent = NSDictionary(contentsOfFile: "\(plistNewVersion)") {
@@ -196,7 +200,7 @@ class UpdateController {
                     print("\(thisComponent) : Index (\(index)) : Current OS version \(arrayCurOSVersion[index]) and Minimum OS Version \(arrayMinOSVersion[index])")
                 }
                 if !allowed {
-                    alertheader = "Update can't be achieve"
+                    alertheader = "Update can't be achieved"
                     alertdetail = "Minimum OS Version \(minSystemVersion) is greater than current OS version \(HCVersion.OSnum)"
                     print("\(thisComponent) : \(alertheader) \(alertdetail)")
                     _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
@@ -293,5 +297,24 @@ class UpdateController {
             NSUserNotificationCenter.default.deliver(notification)
         }
     }
-    
+
+    static func checkFileExtension(atPath path: String, withExtensions fileExtensionInArray:[String]) -> String {
+        let pathURL = NSURL(fileURLWithPath: path, isDirectory: true)
+        var fileNameToReturn: String = ""
+        if let enumerator = initGlobVar.defaultfileManager.enumerator(atPath: path) {
+            for file in enumerator {
+                let pathElement = NSURL(fileURLWithPath: file as! String, relativeTo: pathURL as URL).path
+                print("\(thisComponent) : Element from archive : \(String(describing: pathElement))")
+                if pathElement?.replacingOccurrences(of: "%20", with: " ").contains("\(initGlobVar.athDirectory)/\(thisApplicationName)") ?? false {
+                    fileExtensionInArray.forEach { extention in
+                        if pathElement?.hasSuffix(extention) ?? false {
+                            fileNameToReturn = pathElement?.replacingOccurrences(of: "%20", with: " ") ?? ""
+                        }
+                    }
+                }
+           }
+        }
+        print("\(thisComponent) : Element returned \(fileNameToReturn)")
+        return fileNameToReturn
+    }
 }
