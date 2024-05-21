@@ -14,21 +14,18 @@ class initGlobVar {
     static var athfilesDirectory       = "/.ath"
     static var tempDirectory           = "/private/tmp" // "/tmp" is equiv.
     static var athDirectory            = tempDirectory + athfilesDirectory
-//    static var athDirectory            = NSHomeDirectory() + athfilesDirectory
     static var defaultfileManager      = FileManager.default
 
     // Used by UpdateController
     static var athrepositoryURL        = "https://github.com/0xCUB3/About-This-Hack"
-    static var lastAthreleaseURL       = "https://github.com/0xCUB3/About-This-Hack/releases/download/"
+    static var lastAthreleaseURL       = athrepositoryURL + "/releases/download/"
     static var allAppliLocation        = "/Applications"
-    static var thisAppliname           = "/About This Hack.app"
-    static var thisAppliLocation       = allAppliLocation + thisAppliname
-    static var newAthziprelease        = "/About.This.Hack.zip"
+    static var thisAppliLocation       = "\(allAppliLocation)/\(thisApplicationName).app"
+    static var newAthziprelease        = "\(thisApplicationName.replacingOccurrences(of: " ", with: ".")).zip"
     static var newAthreleasezip        = athDirectory + "/new_ath.zip"
-    static var athtargetversionfile    = athDirectory + "/version.txt"
 
-    static var athsourceversionfile    = "https://raw.githubusercontent.com/0xCUB3/Website/main/content/ath.txt"
-        
+    static var athlasttagpbxproj       = "/blob/[LASTTAG]/About%20This%20Hack.xcodeproj/project.pbxproj"
+
     // OCLP Dict File (if exists) where Patch Version Commit and DateTime will be extracted
     static var oclpXmlFilePath         = "/System/Library/CoreServices/OpenCore-Legacy-Patcher.plist"
     static var bdmesgExecID            = "/usr/local/bin/bdmesg"
