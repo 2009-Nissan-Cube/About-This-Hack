@@ -1,18 +1,18 @@
 # About This Hack
-Discover your hardware on macOS with this simple, user-friendly hardware info app that retains the beloved design language of the classic 'About This Mac' interface, while gaining access to a wealth of additional features. Our app provides comprehensive information, including AMD Processor Support, display resolution, and much more. Whether you're on a Hackintosh or a real Mac, experience the best of all worlds with this intuitive and informative tool.<br>
+Discover your hardware on macOS with this simple, user-friendly hardware info app that retains the beloved design language of the classic 'About This Mac' interface while gaining access to a wealth of additional features. Our app provides comprehensive information, including AMD Processor Support, display resolution, and much more. Whether you're on a Hackintosh or a real Mac, experience the best of all worlds with this intuitive and informative tool.<br>
 
 # Overview of Features
 
 In the app, there are four tabs on a tab bar at the top of the window, and each one visually presents some information about your system.
 
-The Overview tab presents standard system specifications, such as computer model, OS, processor, etc. The app also shows the Clover or OpenCore bootloader version, if applicable. There is also a tooltip if you hover over your GPU(s) and your bootloader, as the text can often extend beyond the window's size.
+The Overview tab presents standard system specifications, including the computer model, OS, and processor. The app also shows the Clover or OpenCore bootloader version, if applicable. There is also a tooltip if you hover over your GPU(s) and your bootloader, as the text can often extend beyond the window's size.
 
 ![CleanShot 2023-10-07 at 15 53 14](https://github.com/0xCUB3/About-This-Hack/assets/94565160/b4986e55-e3a1-4fdc-bb76-c2bdbc70567d)
 
 
 <img width="692" alt="OpenCore Hackintosh" text="OpenCore Hackintosh" src="https://github.com/0xCUB3/About-This-Hack/assets/94565160/18d29cff-1db1-4060-8e02-64307dafa20c">
 
-*Pro tip: Click your serial number to hide it!*
+*Pro tip: Click your serial number to hide it !*
 
 The Displays tab presents your monitors and internal displays. Up to 3 displays with their respective resolutions can be shown.
 
@@ -53,7 +53,7 @@ Update process with notifications (if you allow notifications on About This Hack
 
 ## Supported OS's
 - **10.12 Sierra and newer**
-- Not supported in any way on Linux or Windows
+- ***Not*** supported in any way on Linux or Windows
 
 ## How To Install
 1) Download the zip file from the [latest release](https://github.com/0xCUB3/About-This-Hack/releases/latest)
