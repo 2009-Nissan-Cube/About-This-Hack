@@ -12,7 +12,7 @@ The Overview tab presents standard system specifications, including the computer
 
 <img width="692" alt="OpenCore Hackintosh" text="OpenCore Hackintosh" src="https://github.com/0xCUB3/About-This-Hack/assets/94565160/18d29cff-1db1-4060-8e02-64307dafa20c">
 
-*Pro tip: Click your serial number to hide it !*
+*Pro tip: Click your serial number to hide it!*
 
 The Displays tab presents your monitors and internal displays. Up to 3 displays with their respective resolutions can be shown.
 
