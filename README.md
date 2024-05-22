@@ -34,6 +34,22 @@ Some values show more details when hovered over. See if you can find them all! ð
 
 ![CleanShot 2023-10-07 at 15 54 25](https://github.com/0xCUB3/About-This-Hack/assets/94565160/1b90c22b-a56b-4c58-9ef1-f27276db8850)
 
+On High Sierra Update found
+
+![image](https://github.com/matxpa/About-This-Hack/assets/70573409/837c4265-77b1-46bf-ad84-4589fa307f08)
+
+Update found but not allowed (OS too old)
+
+![image](https://github.com/matxpa/About-This-Hack/assets/70573409/d171a1fb-44f9-4ec1-b8bc-4c1c7dd5b844)
+
+Update found on Monterey (and newer)
+
+![image](https://github.com/matxpa/About-This-Hack/assets/70573409/ca7481a0-c0ae-4952-9c2a-7dc717bad927)
+
+Update process with notifications (if you allow notifications on About This Hack)
+
+![image](https://github.com/matxpa/About-This-Hack/assets/70573409/27e1b9a5-dd01-4832-a058-798a5c249ba4)
+
 
 ## Supported OS's
 - **10.12 Sierra and newer**
