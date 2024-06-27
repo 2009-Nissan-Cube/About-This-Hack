@@ -2,12 +2,12 @@ class HCRAM {
     
     static func getRam() -> String {
         let memInfo = run("echo \"$(($(sysctl -n hw.memsize) / 1073741824))\" | tr -d '\n'")
-        let ramType = run("grep 'Type' " + initGlobVar.sysmemFilePath + " | awk '{print $2}' | sed -n '1p'")
+        let ramType = run("grep 'Type' " + initGlobVar.sysmemFilePath + " | awk '{print $2}' | sed -n '1p' | tr -d '\n'")
         let ramSpeed = run("grep 'Speed' " + initGlobVar.sysmemFilePath + " | grep 'MHz' | awk '{print $2\" \"$3}' | sed -n '1p'").trimmingCharacters(in: .whitespacesAndNewlines)
 
         var result = "\(memInfo) GB"
-        if ramType.contains("D") { result += " \(ramType)" }
         if !ramSpeed.isEmpty { result += " \(ramSpeed)" }
+        if ramType.contains("D") { result += " \(ramType)" }
         return result
     }
     

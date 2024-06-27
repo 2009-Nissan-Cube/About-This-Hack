@@ -3,12 +3,9 @@ import Foundation
 class HCDisplay {
     
     static func getDisp() -> String {
-        let regex = try! NSRegularExpression(pattern: "Resolution: (.*)\\(.*\\)")
-        let tmp = run("grep Resolution: " + initGlobVar.scrFilePath + " | sed 's/.*: //'")
-        if let match = regex.firstMatch(in: tmp, range: NSRange(tmp.startIndex..., in: tmp)) {
-            return String(tmp[Range(match.range(at: 1), in: tmp)!])
-        }
-        return tmp
+        let dispName = run("system_profiler SPDisplaysDataType | awk -F ' {8}|:' '/^ {8}[^ :]+/ {print $2}' | sed -n '1p' | tr -d '\n'")
+        let resolution = run("system_profiler SPDisplaysDataType | awk -F ': ' '/ {10}.+/ {print $2}' | sed -n '1p' | tr -d '\n'")
+        return "\(dispName) (\(resolution))"
     }
     
     static func getDispInfo() -> String {
