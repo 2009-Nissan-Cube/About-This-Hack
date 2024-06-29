@@ -1,3 +1,8 @@
+//
+//  HardwareCollector.swift
+//  HardwareCollector
+//
+
 import Foundation
 import AppKit
 
@@ -11,52 +16,27 @@ class HardwareCollector {
     static var storageType: Bool = false
     static var storageData: String = ""
     static var storagePercent: Double = 0.0
-    static var devicelocation: String = ""
-    static var deviceprotocol: String = ""
+    static var devicelocation:String = ""
+    static var deviceprotocol:String = ""
     
     static var qhasBuiltInDisplay: Bool = (macType == .LAPTOP)
     
     static var macType: macType = .LAPTOP
     
-    private static let queue = DispatchQueue(label: "com.hardwarecollector.queue", attributes: .concurrent)
-    
     static func getAllData() {
-        if (dataHasBeenSet) { return }
-        
-        let group = DispatchGroup()
-        
-        queue.async(group: group) {
-            numberOfDisplays = getNumDisplays()
-            print("Number of Displays: \(numberOfDisplays)")
-        }
-        
-        queue.async(group: group) {
-            qhasBuiltInDisplay = hasBuiltInDisplay()
-            print("Has built-in display: \(qhasBuiltInDisplay)")
-        }
-        
-        queue.async(group: group) {
-            storageType = getStorageType()
-            print("Storage Type: \(storageType)")
-        }
-        
-        queue.async(group: group) {
-            let storageInfo = getStorageData()
-            storageData = storageInfo[0]
-            storagePercent = Double(storageInfo[1])!
-            print("Storage Data: \(storageData)")
-            print("Storage Percent: \(storagePercent)")
-        }
-        
-        queue.async(group: group) {
-            displayRes = getDisplayRes()
-        }
-        
-        queue.async(group: group) {
-            displayNames = getDisplayNames()
-        }
-        
-        group.wait()
+        if (dataHasBeenSet) {return}
+        numberOfDisplays = getNumDisplays()
+        print("Number of Displays: \(numberOfDisplays)")
+        qhasBuiltInDisplay = hasBuiltInDisplay()
+        print("Has built-in display: \(qhasBuiltInDisplay)")
+        storageType = getStorageType()
+        print("Storage Type: \(storageType)")
+        storageData = getStorageData()[0]
+        print("Storage Data: \(storageData)")
+        storagePercent = Double(getStorageData()[1])!
+        print("Storage Percent: \(storagePercent)")
+        displayRes = getDisplayRes()
+        displayNames = getDisplayNames()
         
         dataHasBeenSet = true
     }
@@ -69,7 +49,7 @@ class HardwareCollector {
                 return []
             }
             
-            return content.components(separatedBy: "_spdisplays_resolution")
+            let resolutions = content.components(separatedBy: "_spdisplays_resolution")
                 .dropFirst()
                 .compactMap { section -> String? in
                     let lines = section.components(separatedBy: .newlines)
@@ -78,98 +58,71 @@ class HardwareCollector {
                         .replacingOccurrences(of: "<string>", with: "")
                         .replacingOccurrences(of: "</string>", with: "")
                 }
+            
+            return resolutions
         }
         else if numDispl > 1 {
             guard let content = try? String(contentsOfFile: initGlobVar.scrFilePath, encoding: .utf8) else {
                 return []
             }
             
-            return content.components(separatedBy: .newlines)
+            let resolutions = content.components(separatedBy: .newlines)
                 .filter { $0.contains("Resolution") }
                 .map { line -> String in
                     let startIndex = line.index(line.startIndex, offsetBy: 22)
                     return String(line[startIndex...]).trimmingCharacters(in: .whitespaces)
                 }
+            
+            return resolutions
         }
         
         return []
     }
 
     static func getDisplayNames() -> [String] {
-        let numDispl = NSScreen.screens.count
-        
-        // Read and parse scrFilePath
-        let scrFileContent = try? String(contentsOfFile: initGlobVar.scrFilePath, encoding: .utf8)
-        let secondPart = scrFileContent?
-            .components(separatedBy: .newlines)
-            .filter { $0.hasPrefix("        ") }
-            .compactMap { $0.dropFirst(8).split(separator: ":").first?.trimmingCharacters(in: .whitespaces) }
-            ?? []
-        
-        print("secondPart = \(secondPart)")
+        let numDispl = getNumDisplays()
+        // secondPart data extracted in all cases (numDispl =1, 2 or 3)
+//        let secondPart = run("grep \"        \" " + initGlobVar.scrFilePath + " | cut -c 9- | grep \"^[A-Za-z0-9]\" | cut -f 1 -d ':'").components(separatedBy: "\n")
+        let secondPart = run("system_profiler SPDisplaysDataType | awk -F ' {8}|:' '/^ {8}[^ :]+/ {print $2}'").components(separatedBy: "\n")
+        print("secondPart =  \(secondPart)")
         
         if numDispl == 1 {
-            if qhasBuiltInDisplay {
-                let firstPart = scrFileContent?
-                    .components(separatedBy: .newlines)
-                    .first { $0.contains("Display Type") }?
-                    .dropFirst(24)
-                    .trimmingCharacters(in: .whitespaces) ?? ""
-                
-                print("Display Type with 1 Display is Built In : \(firstPart)")
-                
-                let scrXmlFileContent = try? String(contentsOfFile: initGlobVar.scrXmlFilePath, encoding: .utf8)
-                var displayName = scrXmlFileContent?
-                    .components(separatedBy: "</data>")
-                    .compactMap { part -> String? in
-                        let lines = part.components(separatedBy: .newlines)
-                        guard lines.contains(where: { $0.contains("_name") }) else { return nil }
-                        return lines.first { !$0.contains("<") && !$0.isEmpty }?.trimmingCharacters(in: .whitespaces)
-                    }
-                    .first ?? ""
-                
-                if displayName.isEmpty {
-                    displayName = scrXmlFileContent?
-                        .components(separatedBy: "_spdisplays_display-product-id")
-                        .first?
-                        .components(separatedBy: .newlines)
-                        .reversed()
-                        .first { !$0.contains("<") && !$0.isEmpty }?
-                        .trimmingCharacters(in: .whitespaces) ?? ""
+            if (qhasBuiltInDisplay) {
+                let firsPart: String = run("grep \"Display Type\" " + initGlobVar.scrFilePath + " | cut -c 25- | tr -d '\n'")
+                print("Display Type with 1 Display is Built In : \(firsPart)")
+                var displayName:String = run("grep -A2 \"</data>\" " + initGlobVar.scrXmlFilePath + " | awk -F'>|<' '/_name/{getline; print $3}' | tr -d '\n'")
+                if displayName == "" {
+                    displayName = run("grep -B2 \"_spdisplays_display-product-id\" " + initGlobVar.scrXmlFilePath + " | awk -F'>|<' '/_name/{getline; print $3}' | tr -d '\n'")
                 }
-                
                 print("Display Name with 1 Display is Built In : \(displayName)")
-                return [firstPart + " " + displayName]
+                return [firsPart + " " + displayName]
             } else {
                 return secondPart
             }
-        } else if numDispl == 2 || numDispl == 3 {
+        } else if (numDispl == 2 || numDispl == 3) {
             print("2 or 3 displays found")
-            let firstPart = scrFileContent?
-                .components(separatedBy: .newlines)
-                .filter { $0.contains("Display Type") }
-                .map { $0.dropFirst(24).trimmingCharacters(in: .whitespaces) }
-                ?? []
-            
-            print("firstPart = \(firstPart)")
-            
+            let firsPart = run("grep \"Display Type\" " + initGlobVar.scrFilePath + " | cut -c 25-").components(separatedBy: "\n")
+            print("firsPart =  " + "\(firsPart)")
             var toSend: [String] = []
-            if qhasBuiltInDisplay {
-                toSend.append(firstPart[0] + " " + secondPart[0])
-                let loopCount = min(max(firstPart.count, secondPart.count) - 1, numDispl - 1)
-                for i in 1..<loopCount {
-                    if i < firstPart.count {
-                        toSend.append(firstPart[i] + " " + secondPart[i])
-                    } else if i < secondPart.count {
+            if(qhasBuiltInDisplay) {
+                toSend.append(firsPart[0] + " " + secondPart[0])
+                var loopCount = (secondPart.count-1)
+                if (firsPart.count-1) > loopCount {
+                    loopCount = (firsPart.count-1)
+                }
+                for i in stride(from: 1, to: loopCount, by: 1) {
+                    if i <= (firsPart.count-1) {
+                        toSend.append(firsPart[i] + " " + secondPart[i])
+                    } else if i <= (secondPart.count-1){
                         toSend.append(secondPart[i])
                     }
                 }
                 print("toSend = \"\(toSend)\"")
                 return toSend
             } else {
-                if !firstPart.isEmpty {
-                    print([String](firstPart.dropFirst()))
-                    return [String](firstPart.dropFirst())
+                if firsPart != [""] {
+                    print([String](firsPart.dropFirst()))
+                    return [String](firsPart.dropFirst())
                 } else {
                     print([String](secondPart))
                     return [String](secondPart)
