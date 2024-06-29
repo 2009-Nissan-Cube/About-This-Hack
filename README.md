@@ -10,6 +10,7 @@ Discover the heart of your macOS device with About This Hack – a sleek, intuit
 A throwback to the (better) About This Mac view from pre-Ventura. Get instant access to essential system specs, including your computer model, OS version, and processor details. Hackintosh users will appreciate the Clover or OpenCore bootloader version display.
 
 <img width="692" alt="OpenCore Hackintosh" text="OpenCore Hackintosh" src="https://github.com/0xCUB3/About-This-Hack/assets/94565160/18d29cff-1db1-4060-8e02-64307dafa20c">
+
 > 💡 Pro Tip: Click your serial number to hide it for screenshots!
 
 ## Displays: See Your Screen(s)
