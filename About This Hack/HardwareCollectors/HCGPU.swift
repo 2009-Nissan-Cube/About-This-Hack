@@ -1,37 +1,56 @@
 import Foundation
 
 class HCGPU {
-     
-    static func getGPU() -> String {
-        var gpuInfoFormatted: String = ""
-        var gpuArray:[String] = []
-        var chipFound:Bool = false
-        var vramFound:Bool = false
-        var metaFound:Bool = false
+    static let gpuInfo: String = {
+        guard let content = try? String(contentsOfFile: initGlobVar.scrFilePath, encoding: .utf8) else {
+            return ""
+        }
         
-        gpuArray = run("egrep \"Chipset|VRAM|Metal\" " + initGlobVar.scrFilePath + " | grep -A2 \"Chipset\" | sed 's/^. *//'").components(separatedBy: "\n")
-        if gpuArray != [""] {
-            for gpuIndex in 0..<gpuArray.count {
-                if gpuArray[gpuIndex].contains("Chipset") && !chipFound {
-                    gpuInfoFormatted = String(gpuArray[gpuIndex].split(separator: ":")[1].replacingOccurrences(of: "Intel ", with: "").replacingOccurrences(of: "NVIDIA ", with: "").trimmingCharacters(in: .whitespacesAndNewlines))
-                    chipFound = true
-                }
-                if gpuArray[gpuIndex].contains("VRAM") && !vramFound {
-                    gpuInfoFormatted += " " + String(gpuArray[gpuIndex].split(separator: ":")[1].trimmingCharacters(in: .whitespacesAndNewlines))
-                    vramFound = true
-                }
-                if gpuArray[gpuIndex].contains("Metal") && !metaFound {
-                    gpuInfoFormatted += " (Metal " + String(gpuArray[gpuIndex].split(separator: ":")[1]).replacingOccurrences(of: "Metal", with: "").trimmingCharacters(in: .whitespacesAndNewlines) + ")"
-                    metaFound = true
-                }
+        let lines = content.components(separatedBy: .newlines)
+        var chipset = "", vram = "", metal = ""
+        
+        for line in lines {
+            if line.contains("Chipset") && chipset.isEmpty {
+                chipset = line.components(separatedBy: ":").last?
+                    .trimmingCharacters(in: .whitespaces)
+                    .replacingOccurrences(of: "Intel ", with: "")
+                    .replacingOccurrences(of: "NVIDIA ", with: "") ?? ""
+            } else if line.contains("VRAM") && vram.isEmpty {
+                vram = line.components(separatedBy: ":").last?.trimmingCharacters(in: .whitespaces) ?? ""
+            } else if line.contains("Metal") && metal.isEmpty {
+                metal = line.components(separatedBy: ":").last?
+                    .trimmingCharacters(in: .whitespaces)
+                    .replacingOccurrences(of: "Metal", with: "") ?? ""
+            }
+            
+            if !chipset.isEmpty && !vram.isEmpty && !metal.isEmpty {
+                break
             }
         }
-        print("\(gpuInfoFormatted)")
-        return "\(gpuInfoFormatted)"
+        chipset = chipset.trimmingCharacters(in: .whitespaces)
+        vram = vram.trimmingCharacters(in: .whitespaces)
+        metal = metal.trimmingCharacters(in: .whitespaces)
+        
+        return "\(chipset) \(vram)(Metal \(metal))".trimmingCharacters(in: .whitespaces)
+    }()
+    
+    static func getGPU() -> String {
+        return gpuInfo
     }
     
     static func getGPUInfo() -> String {
-        return "Graphics\n" + run("egrep -v \"Graphics/Displays:|^      Displays:|^        [A-Za-z0-9]|^          [A-Za-z0-9]\" \(initGlobVar.scrFilePath)")
+        guard let content = try? String(contentsOfFile: initGlobVar.scrFilePath, encoding: .utf8) else {
+            return "Graphics\n"
+        }
+        
+        let relevantLines = content.components(separatedBy: .newlines)
+            .filter { line in
+                !line.contains("Graphics/Displays:") &&
+                !line.hasPrefix("      Displays:") &&
+                !line.hasPrefix("        ") &&
+                !line.hasPrefix("          ")
+            }
+        
+        return "Graphics\n" + relevantLines.joined(separator: "\n")
     }
-
 }

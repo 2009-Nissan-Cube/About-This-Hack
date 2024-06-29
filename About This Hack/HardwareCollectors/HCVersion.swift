@@ -1,4 +1,5 @@
 import Foundation
+import IOKit
 
 class HCVersion {
     
@@ -22,13 +23,17 @@ class HCVersion {
     }
 
     static func getOSnum() -> String {
-        let osVersion = run("sw_vers -productVersion | tr -d '\n'")
-        return osVersion
+        let osVersion = ProcessInfo.processInfo.operatingSystemVersion
+        return "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
     }
   
     static func getOSbuild() -> String {
-        let osSHA = " (" + run("sw_vers -buildVersion | tr -d '\n'") + ") "
-        return osSHA
+        var size = 0
+        sysctlbyname("kern.osversion", nil, &size, nil, 0)
+        var machine = [CChar](repeating: 0, count: size)
+        sysctlbyname("kern.osversion", &machine, &size, nil, 0)
+        let build = String(cString: machine)
+        return " (\(build)) "
     }
     
     static func setOSvers(osNumber: String) {
@@ -66,40 +71,93 @@ class HCVersion {
         }
     }
 
-// ToolTip osVersiontoolTip
     static func getOSBuildInfo() -> String {
-        var osKernelInfo: String   = ""
-        var osSipInfo: String     = ""
-        var oclppatchInfo: String = ""
+        let kernelVersion = getKernelVersion()
+        let sipInfo = getSIPInfo()
+        let oclpInfo = getOCLPInfo()
         
-        osKernelInfo = run ("grep \"Kernel Version: \" " + initGlobVar.syssoftdataFilePath + " | awk -F': ' '{print $2}'")
-        osSipInfo   = run ("grep \"System Integrity Protection: \" " + initGlobVar.syssoftdataFilePath + "| awk -F': ' '{print \"SIP: \"$2\" \"}' | tr -d '\n'")
-//         osSipInfo   = "SIP: Enable" // test code
-        if osSipInfo.contains("Disabled") {
-            let sipValue = run ("ioreg -fiw0 -p IODeviceTree -rn options | grep \"csr-active-config\" | awk '{print \"(0x\"substr($3,4,2) substr($3,2,2) substr($3,6,4)\")\"}' | tr -d '\n'")
-            if sipValue.length == 12 && !sipValue.contains("(0x\">\"g)") { osSipInfo += "\(sipValue)\n" } else { osSipInfo += "\n"}
-        } else { osSipInfo += " (0x00000000)\n" }
+        var result = kernelVersion
+        if !sipInfo.isEmpty { result += sipInfo }
+        if !oclpInfo.isEmpty { result += oclpInfo }
         
-        if initGlobVar.defaultfileManager.fileExists(atPath: initGlobVar.oclpXmlFilePath) {
-            oclppatchInfo = run("grep -A1 \"<key>OpenCore Legacy Patcher</key>\" " + initGlobVar.oclpXmlFilePath + " | tail -1 | sed -e 's?.*<string>?OCLP ?' -e 's?<\\/string>??' | tr -d '\n'")
-            let oclpCommit = run("grep -A1 \"<key>Commit URL</key>\" " + initGlobVar.oclpXmlFilePath + " | tail -1 | sed -e 's?.*<string>??' -e 's?<\\/string>??' | awk -F'/' '{print \"(\" substr($NF,1,7) \")\"}' | tr -d '\n'")
-            let oclpDateTime = run("grep -A1 \"<key>Time Patched</key>\" " + initGlobVar.oclpXmlFilePath + " | tail -1 | sed -e 's?.*<string>?(?' -e 's?@ ? ?' -e 's?<\\/string>?)?'")
+        print("OS Build Info: \(result)")
+        return result
+    }
 
-            if oclpCommit != "" { oclppatchInfo += " \(oclpCommit)" }
-            if oclpDateTime != "" { oclppatchInfo += " \(oclpDateTime)" }
+    private static func getKernelVersion() -> String {
+        var size = 0
+        sysctlbyname("kern.version", nil, &size, nil, 0)
+        var kernel = [CChar](repeating: 0, count: size)
+        sysctlbyname("kern.version", &kernel, &size, nil, 0)
+        return String(cString: kernel)
+    }
+    
+    private static func getSIPInfo() -> String {
+        let csrConfig = csrActiveConfig()
+        let sipStatus = (csrConfig == 0) ? "Enabled" : "Disabled"
+        return "System Integrity Protection: \(sipStatus) (0x\(String(format:"%08x", csrConfig)))\n"
+    }
 
+    private static func csrActiveConfig() -> UInt32 {
+        var config: UInt32 = 0
+        var size = MemoryLayout<UInt32>.size
+        sysctlbyname("kern.bootargs", nil, &size, nil, 0)
+        var bootArgs = [CChar](repeating: 0, count: size)
+        sysctlbyname("kern.bootargs", &bootArgs, &size, nil, 0)
+        let bootArgsString = String(cString: bootArgs)
+        if bootArgsString.contains("csr-active-config") {
+            if let range = bootArgsString.range(of: "csr-active-config=(0x[0-9a-fA-F]+)", options: .regularExpression) {
+                let valueString = String(bootArgsString[range].dropFirst(19))
+                config = UInt32(valueString, radix: 16) ?? 0
+            }
+        } else {
+            sysctlbyname("kern.csr_active_config", &config, &size, nil, 0)
         }
+        return config
+    }
 
-        if osSipInfo != "" {
-            osKernelInfo += "\(osSipInfo)"
-        }
-
-        if oclppatchInfo != "" {
-            osKernelInfo += "\(oclppatchInfo)"
+    private static func getOCLPInfo() -> String {
+        guard FileManager.default.fileExists(atPath: initGlobVar.oclpXmlFilePath),
+              let xmlData = FileManager.default.contents(atPath: initGlobVar.oclpXmlFilePath),
+              let xmlString = String(data: xmlData, encoding: .utf8) else {
+            return ""
         }
         
-        print("OS Build Info: \(osKernelInfo)")
-        return osKernelInfo
+        var oclpInfo = ""
+        
+        if let versionRange = xmlString.range(of: "<key>OpenCore Legacy Patcher</key>\\s*<string>([^<]+)</string>", options: .regularExpression) {
+            let startIndex = xmlString.index(versionRange.lowerBound, offsetBy: "<key>OpenCore Legacy Patcher</key><string>".count)
+            let endIndex = xmlString.index(versionRange.upperBound, offsetBy: -"</string>".count)
+            oclpInfo += "OCLP \(xmlString[startIndex..<endIndex])"
+        }
+        
+        if let commitRange = xmlString.range(of: "<key>Commit URL</key>\\s*<string>[^/]+/([^<]+)</string>", options: .regularExpression) {
+            let startIndex = xmlString.index(commitRange.lowerBound, offsetBy: "<key>Commit URL</key><string>".count)
+            let endIndex = xmlString.index(commitRange.upperBound, offsetBy: -"</string>".count)
+            let commit = String(xmlString[startIndex..<endIndex].split(separator: "/").last ?? "")
+            oclpInfo += " (\(commit.prefix(7)))"
+        }
+        
+        if let dateRange = xmlString.range(of: "<key>Time Patched</key>\\s*<string>([^<]+)</string>", options: .regularExpression) {
+            let startIndex = xmlString.index(dateRange.lowerBound, offsetBy: "<key>Time Patched</key><string>".count)
+            let endIndex = xmlString.index(dateRange.upperBound, offsetBy: -"</string>".count)
+            let date = xmlString[startIndex..<endIndex].replacingOccurrences(of: "@", with: "")
+            oclpInfo += " (\(date))"
+        }
+        
+        return oclpInfo.isEmpty ? "" : oclpInfo + "\n"
+    }
+}
+
+extension String {
+    func captureGroup(at index: Int) -> String? {
+        let range = NSRange(self.startIndex..., in: self)
+        guard let regex = try? NSRegularExpression(pattern: self),
+              let match = regex.firstMatch(in: self, options: [], range: range),
+              let captureRange = Range(match.range(at: index), in: self) else {
+            return nil
+        }
+        return String(self[captureRange])
     }
 }
 
