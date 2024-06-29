@@ -66,6 +66,8 @@ class HCMacModel {
             "iMac20,2": (27, "iMac (Retina 5K, 2020)"),
             "iMac21,1": (24, "iMac (24-inch, M1, 2021)"),
             "iMac21,2": (24, "iMac (24-inch, M1, 2021)"),
+            "Mac15,4": (24, "iMac (24-inch, M3, 2023)"),
+            "Mac15,5": (24, "iMac (24-inch, M3, 2023)"),
             
             // iMac Pros
             "iMacPro1,1": (27, "iMac Pro (2017)"),
@@ -93,10 +95,13 @@ class HCMacModel {
             "MacPro5,1": (0, "Mac Pro (2010-2012)"),
             "MacPro6,1": (0, "Mac Pro (Late 2013)"),
             "MacPro7,1": (0, "Mac Pro (2019)"),
+            "Mac14,8": (0, "Mac Pro (2023)"),
             
             // Mac Studios
-            "Mac13,1": (0, "Mac Studio (2022)"),
-            "Mac13,2": (0, "Mac Studio (2022)"),
+            "Mac13,1": (0, "Mac Studio (M1 Max, 2022)"),
+            "Mac13,2": (0, "Mac Studio (M1 Ultra, 2022)"),
+            "Mac14,13": (0, "Mac Studio (M2 Max, 2023)"),
+            "Mac14,14": (0, "Mac Studio (M2 Ultra, 2023)"),
             
             // MacBooks
             "MacBook5,1": (13, "MacBook"),
@@ -125,6 +130,9 @@ class HCMacModel {
             "MacBookAir9,1": (13, "MacBook Air (13-inch, 2020)"),
             "MacBookAir10,1": (13, "MacBook Air (13-inch, M1, 2020)"),
             "Mac14,2": (13, "MacBook Air (13-inch, M2, 2022)"),
+            "Mac14,15": (15, "MacBook Air (15-inch, M2, 2023)"),
+            "Mac15,12": (13, "MacBook Air (13-inch, M3, 2024)"),
+            "Mac15,13": (15, "MacBook Air (15-inch, M3, 2024)"),
             
             // MacBook Pros
             // 13-inch
@@ -151,6 +159,10 @@ class HCMacModel {
             "MacBookPro18,4": (14, "MacBook Pro (14-inch, 2021)"),
             "Mac14,5": (14, "MacBook Pro (14-inch, 2023)"),
             "Mac14,9": (14, "MacBook Pro (14-inch, 2023)"),
+            "Mac15,3": (14, "MacBook Pro (14-inch, M3, Late 2023)"),
+            "Mac15,6": (14, "MacBook Pro (14-inch, M3 Pro, Late 2023)"),
+            "Mac15,10": (14, "MacBook Pro (14-inch, M3 Max, Late 2023)"),
+            "Mac15,8": (14, "MacBook Pro (14-inch, M3 Max, Late 2023)"),
             
             // 15-inch
             "MacBookPro4,1": (15, "MacBook Pro (15/17-inch, 2008)"),
@@ -174,6 +186,9 @@ class HCMacModel {
             "MacBookPro18,2": (16, "MacBook Pro (16-inch, 2021)"),
             "Mac14,6": (16, "MacBook Pro (16-inch, 2023)"),
             "Mac14,10": (16, "MacBook Pro (16-inch, 2023)"),
+            "Mac15,7": (16, "MacBook Pro (16-inch, M3 Pro, Late 2023)"),
+            "Mac15,9": (16, "MacBook Pro (16-inch, M3 Max, Late 2023)"),
+            "Mac15,11": (16, "MacBook Pro (16-inch, M3 Max, Late 2023)"),
             
             // 17-inch
             "MacBookPro8,3": (17, "MacBook Pro (17-inch, Late 2011)"),
