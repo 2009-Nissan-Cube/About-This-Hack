@@ -1,9 +1,5 @@
-//
-//  HardwareCollector.swift
-//  HardwareCollector
-//
-
 import Foundation
+import AppKit
 
 let name = "\(HCStartupDisk.getStartupDisk())"
 
@@ -15,86 +11,165 @@ class HardwareCollector {
     static var storageType: Bool = false
     static var storageData: String = ""
     static var storagePercent: Double = 0.0
-    static var devicelocation:String = ""
-    static var deviceprotocol:String = ""
+    static var devicelocation: String = ""
+    static var deviceprotocol: String = ""
     
     static var qhasBuiltInDisplay: Bool = (macType == .LAPTOP)
     
     static var macType: macType = .LAPTOP
     
+    private static let queue = DispatchQueue(label: "com.hardwarecollector.queue", attributes: .concurrent)
+    
     static func getAllData() {
-        if (dataHasBeenSet) {return}
-        numberOfDisplays = getNumDisplays()
-        print("Number of Displays: \(numberOfDisplays)")
-        qhasBuiltInDisplay = hasBuiltInDisplay()
-        print("Has built-in display: \(qhasBuiltInDisplay)")
-        storageType = getStorageType()
-        print("Storage Type: \(storageType)")
-        storageData = getStorageData()[0]
-        print("Storage Data: \(storageData)")
-        storagePercent = Double(getStorageData()[1])!
-        print("Storage Percent: \(storagePercent)")
-        displayRes = getDisplayRes()
-        displayNames = getDisplayNames()
+        if (dataHasBeenSet) { return }
+        
+        let group = DispatchGroup()
+        
+        queue.async(group: group) {
+            numberOfDisplays = getNumDisplays()
+            print("Number of Displays: \(numberOfDisplays)")
+        }
+        
+        queue.async(group: group) {
+            qhasBuiltInDisplay = hasBuiltInDisplay()
+            print("Has built-in display: \(qhasBuiltInDisplay)")
+        }
+        
+        queue.async(group: group) {
+            storageType = getStorageType()
+            print("Storage Type: \(storageType)")
+        }
+        
+        queue.async(group: group) {
+            let storageInfo = getStorageData()
+            storageData = storageInfo[0]
+            storagePercent = Double(storageInfo[1])!
+            print("Storage Data: \(storageData)")
+            print("Storage Percent: \(storagePercent)")
+        }
+        
+        queue.async(group: group) {
+            displayRes = getDisplayRes()
+        }
+        
+        queue.async(group: group) {
+            displayNames = getDisplayNames()
+        }
+        
+        group.wait()
         
         dataHasBeenSet = true
     }
     
     static func getDisplayRes() -> [String] {
-        let numDispl = getNumDisplays()
+        let numDispl = NSScreen.screens.count
+        
         if numDispl == 1 {
-            return run("grep -A1 \"_spdisplays_resolution\" " + initGlobVar.scrXmlFilePath + " | grep string | cut -c 15- | cut -f1 -d'<'").components(separatedBy: "\n")
+            guard let content = try? String(contentsOfFile: initGlobVar.scrXmlFilePath, encoding: .utf8) else {
+                return []
+            }
+            
+            return content.components(separatedBy: "_spdisplays_resolution")
+                .dropFirst()
+                .compactMap { section -> String? in
+                    let lines = section.components(separatedBy: .newlines)
+                    return lines.first { $0.contains("<string>") }?
+                        .trimmingCharacters(in: .whitespaces)
+                        .replacingOccurrences(of: "<string>", with: "")
+                        .replacingOccurrences(of: "</string>", with: "")
+                }
         }
-        else if (numDispl > 1) {
-            return run("grep \"Resolution\" " + initGlobVar.scrFilePath  + " | cut -c 23-").components(separatedBy: "\n")
+        else if numDispl > 1 {
+            guard let content = try? String(contentsOfFile: initGlobVar.scrFilePath, encoding: .utf8) else {
+                return []
+            }
+            
+            return content.components(separatedBy: .newlines)
+                .filter { $0.contains("Resolution") }
+                .map { line -> String in
+                    let startIndex = line.index(line.startIndex, offsetBy: 22)
+                    return String(line[startIndex...]).trimmingCharacters(in: .whitespaces)
+                }
         }
+        
         return []
     }
 
     static func getDisplayNames() -> [String] {
-        let numDispl = getNumDisplays()
-        // secondPart data extracted in all cases (numDispl =1, 2 or 3)
-//        let secondPart = run("grep \"        \" " + initGlobVar.scrFilePath + " | cut -c 9- | grep \"^[A-Za-z0-9]\" | cut -f 1 -d ':'").components(separatedBy: "\n")
-        let secondPart = run("system_profiler SPDisplaysDataType | awk -F ' {8}|:' '/^ {8}[^ :]+/ {print $2}'").components(separatedBy: "\n")
-        print("secondPart =  \(secondPart)")
+        let numDispl = NSScreen.screens.count
+        
+        // Read and parse scrFilePath
+        let scrFileContent = try? String(contentsOfFile: initGlobVar.scrFilePath, encoding: .utf8)
+        let secondPart = scrFileContent?
+            .components(separatedBy: .newlines)
+            .filter { $0.hasPrefix("        ") }
+            .compactMap { $0.dropFirst(8).split(separator: ":").first?.trimmingCharacters(in: .whitespaces) }
+            ?? []
+        
+        print("secondPart = \(secondPart)")
         
         if numDispl == 1 {
-            if (qhasBuiltInDisplay) {
-                let firsPart: String = run("grep \"Display Type\" " + initGlobVar.scrFilePath + " | cut -c 25- | tr -d '\n'")
-                print("Display Type with 1 Display is Built In : \(firsPart)")
-                var displayName:String = run("grep -A2 \"</data>\" " + initGlobVar.scrXmlFilePath + " | awk -F'>|<' '/_name/{getline; print $3}' | tr -d '\n'")
-                if displayName == "" {
-                    displayName = run("grep -B2 \"_spdisplays_display-product-id\" " + initGlobVar.scrXmlFilePath + " | awk -F'>|<' '/_name/{getline; print $3}' | tr -d '\n'")
+            if qhasBuiltInDisplay {
+                let firstPart = scrFileContent?
+                    .components(separatedBy: .newlines)
+                    .first { $0.contains("Display Type") }?
+                    .dropFirst(24)
+                    .trimmingCharacters(in: .whitespaces) ?? ""
+                
+                print("Display Type with 1 Display is Built In : \(firstPart)")
+                
+                let scrXmlFileContent = try? String(contentsOfFile: initGlobVar.scrXmlFilePath, encoding: .utf8)
+                var displayName = scrXmlFileContent?
+                    .components(separatedBy: "</data>")
+                    .compactMap { part -> String? in
+                        let lines = part.components(separatedBy: .newlines)
+                        guard lines.contains(where: { $0.contains("_name") }) else { return nil }
+                        return lines.first { !$0.contains("<") && !$0.isEmpty }?.trimmingCharacters(in: .whitespaces)
+                    }
+                    .first ?? ""
+                
+                if displayName.isEmpty {
+                    displayName = scrXmlFileContent?
+                        .components(separatedBy: "_spdisplays_display-product-id")
+                        .first?
+                        .components(separatedBy: .newlines)
+                        .reversed()
+                        .first { !$0.contains("<") && !$0.isEmpty }?
+                        .trimmingCharacters(in: .whitespaces) ?? ""
                 }
+                
                 print("Display Name with 1 Display is Built In : \(displayName)")
-                return [firsPart + " " + displayName]
+                return [firstPart + " " + displayName]
             } else {
                 return secondPart
             }
-        } else if (numDispl == 2 || numDispl == 3) {
+        } else if numDispl == 2 || numDispl == 3 {
             print("2 or 3 displays found")
-            let firsPart = run("grep \"Display Type\" " + initGlobVar.scrFilePath + " | cut -c 25-").components(separatedBy: "\n")
-            print("firsPart =  " + "\(firsPart)")
+            let firstPart = scrFileContent?
+                .components(separatedBy: .newlines)
+                .filter { $0.contains("Display Type") }
+                .map { $0.dropFirst(24).trimmingCharacters(in: .whitespaces) }
+                ?? []
+            
+            print("firstPart = \(firstPart)")
+            
             var toSend: [String] = []
-            if(qhasBuiltInDisplay) {
-                toSend.append(firsPart[0] + " " + secondPart[0])
-                var loopCount = (secondPart.count-1)
-                if (firsPart.count-1) > loopCount {
-                    loopCount = (firsPart.count-1)
-                }
-                for i in stride(from: 1, to: loopCount, by: 1) {
-                    if i <= (firsPart.count-1) {
-                        toSend.append(firsPart[i] + " " + secondPart[i])
-                    } else if i <= (secondPart.count-1){
+            if qhasBuiltInDisplay {
+                toSend.append(firstPart[0] + " " + secondPart[0])
+                let loopCount = min(max(firstPart.count, secondPart.count) - 1, numDispl - 1)
+                for i in 1..<loopCount {
+                    if i < firstPart.count {
+                        toSend.append(firstPart[i] + " " + secondPart[i])
+                    } else if i < secondPart.count {
                         toSend.append(secondPart[i])
                     }
                 }
                 print("toSend = \"\(toSend)\"")
                 return toSend
             } else {
-                if firsPart != [""] {
-                    print([String](firsPart.dropFirst()))
-                    return [String](firsPart.dropFirst())
+                if !firstPart.isEmpty {
+                    print([String](firstPart.dropFirst()))
+                    return [String](firstPart.dropFirst())
                 } else {
                     print([String](secondPart))
                     return [String](secondPart)
@@ -105,55 +180,75 @@ class HardwareCollector {
     }
 
     static func getNumDisplays() -> Int {
-        print("TEST TEST \(initGlobVar.scrFilePath)")
-        return Int(run("grep -c \"Resolution\" " + initGlobVar.scrFilePath + " | tr -d '\n'")) ?? 0x0
+        return NSScreen.screens.count
     }
-    
+
     static func hasBuiltInDisplay() -> Bool {
-//        let tmp = run("grep \"Built-In\" " + initGlobVar.scrFilePath + " | tr -d '\n'")
-        let tmp = run("grep \"          \"  " + initGlobVar.scrFilePath + " | egrep \"Built-[I|i]n\" | tr -d '\n'")
-        return !(tmp == "")
+        guard let content = try? String(contentsOfFile: initGlobVar.scrFilePath, encoding: .utf8) else {
+            return false
+        }
+        return content.lowercased().contains("built-in")
     }
-    
+
     static func getStorageType() -> Bool {
-        print("Startup Disk Name " + name)
-        let storageType = run("grep \"Solid State:\" " + initGlobVar.bootvolnameFilePath)
-        return storageType.contains("Yes")
+        print("Startup Disk Name: " + name)
+        guard let content = try? String(contentsOfFile: initGlobVar.bootvolnameFilePath, encoding: .utf8) else {
+            return false
+        }
+        return content.contains("Solid State: Yes")
     }
-    
+
     static func getStorageData() -> [String] {
-        deviceprotocol = run("grep \"Protocol:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $2}' | tr -d '\n'")
-        devicelocation = run("grep \"Device Location:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $3}' | tr -d '\n'")
-        let size = run("egrep \"[Container|Volume] Total Space:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $4,$5}'  | tr -d '\n'")
+        guard let content = try? String(contentsOfFile: initGlobVar.bootvolnameFilePath, encoding: .utf8) else {
+            return ["Error reading file", "0"]
+        }
         
-        let unit = size[size.length-2]
-        var coeffMultDiskSize = 1.0
-        switch unit {
-            case "G" : coeffMultDiskSize = 1.0
-            case "M" : coeffMultDiskSize = 1/1028
-            case "T" : coeffMultDiskSize = 1028.0
-            default : coeffMultDiskSize = 1.0
-        }
-        let sizeTrimmed = String((Double(run("echo \"\(size)\" | awk '{print $1}' | tr -d '\n'")) ?? 2)*coeffMultDiskSize)
-        let available = run("grep \"[Container|Volume] Free Space:\" " + initGlobVar.bootvolnameFilePath + " | awk '{print $4,$5}' | tr -d '\n'")
-        let unitA = available[available.length-2]
-        var coeffMultDiskSizeA = 1.0
-        switch unitA {
-            case "G" : coeffMultDiskSizeA = 1.0
-            case "M" : coeffMultDiskSizeA = 1/1028
-            case "T" : coeffMultDiskSizeA = 1028.0
-            default : coeffMultDiskSizeA = 1.0
-        }
-        let availableTrimmed = String((Double(run("echo \"\(available)\" | awk '{print $1}' | tr -d '\n'")) ?? 2)*coeffMultDiskSizeA)
-        let percent = (Double(availableTrimmed)!) / Double(sizeTrimmed)!
-        let percentfree = NSString(format: "%.2f",((Double(availableTrimmed)!) / Double(sizeTrimmed)! * 100))
-        print("Size: \(sizeTrimmed)")
-        print("Available: \(availableTrimmed)")
-        print("%: \(percentfree)")
+        let lines = content.components(separatedBy: .newlines)
+        
+        deviceprotocol = lines.first(where: { $0.contains("Protocol:") })?.components(separatedBy: ":").last?.trimmingCharacters(in: .whitespaces) ?? "Unknown"
+        deviceprotocol = deviceprotocol.replacingOccurrences(of: " fabric$", with: "", options: [.regularExpression, .caseInsensitive])
+        devicelocation = lines.first(where: { $0.contains("Device Location:") })?.components(separatedBy: ":").last?.trimmingCharacters(in: .whitespaces) ?? "Unknown"
+        
+        let sizeLine = lines.first(where: { $0.contains("Total Space:") })?.components(separatedBy: ":").last?.trimmingCharacters(in: .whitespaces) ?? "0 B"
+        let availableLine = lines.first(where: { $0.contains("Free Space:") })?.components(separatedBy: ":").last?.trimmingCharacters(in: .whitespaces) ?? "0 B"
+        
+        let (size, sizeUnit) = parseSize(sizeLine)
+        let (available, availableUnit) = parseSize(availableLine)
+        
+        let sizeGB = convertToGB(size, unit: sizeUnit)
+        let availableGB = convertToGB(available, unit: availableUnit)
+        
+        let percent = availableGB / sizeGB
+        let percentFree = String(format: "%.2f", percent * 100)
+        
+        print("Storage Info:")
+        print("Size: \(String(format: "%.2f", sizeGB)) GB")
+        print("Available: \(String(format: "%.2f", availableGB)) GB")
+        print("Free: \(percentFree)%")
 
         return ["""
         \(name) (\(devicelocation) \(deviceprotocol))
-        \(size) (\(available) Available - \(percentfree)%)
+        \(String(format: "%.2f", sizeGB)) GB (\(String(format: "%.2f", availableGB)) GB Available - \(percentFree)%)
         """, String(1 - percent)]
+    }
+
+    private static func parseSize(_ sizeString: String) -> (Double, String) {
+        let components = sizeString.components(separatedBy: .whitespaces)
+        guard components.count >= 2,
+              let size = Double(components[0]) else {
+            return (0, "B")
+        }
+        return (size, components[1])
+    }
+
+    private static func convertToGB(_ size: Double, unit: String) -> Double {
+        switch unit.uppercased() {
+        case "B": return size / 1_000_000_000
+        case "KB": return size / 1_000_000
+        case "MB": return size / 1_000
+        case "GB": return size
+        case "TB": return size * 1_000
+        default: return size
+        }
     }
 }
