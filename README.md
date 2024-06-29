@@ -55,6 +55,7 @@ There is also a native auto-updater that reminds you when a new version releases
 
 ## 🙌 Credits
 A big thank you to our contributors:
+
 [matxpa](https://github.com/matxpa) for doing so much and helping add so many features. <br>
 [MDNich](https://github.com/MDNich) for helping out a ton with features, code, and setting up the update server. <br>
 [LordNaut](https://github.com/Nautilus704) for helping me fix stuff with AppDelegate and sorting out a bunch of minor, but important features! <br>
