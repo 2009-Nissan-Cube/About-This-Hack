@@ -1,13 +1,31 @@
 import Cocoa
+import Foundation
 
 class HCStartupDisk {
+    static let startupDisk: String = {
+        guard let content = try? String(contentsOfFile: initGlobVar.bootvolnameFilePath, encoding: .utf8) else {
+            return ""
+        }
+        return content.components(separatedBy: "\n")
+            .first { $0.contains("Volume Name") }?
+            .components(separatedBy: ":")
+            .last?
+            .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+    }()
+    
     static func getStartupDisk() -> String {
-        return run("grep \"Volume Name\" " + initGlobVar.bootvolnameFilePath + " | sed 's/.*:[[:space:]]*//' | tr -d '\n'")
+        return startupDisk
     }
 
     static func getStartupDiskInfo() -> String {
-        let firstLineDisk = run("echo $(egrep -n \"" + HCStartupDisk.getStartupDisk() + ":|Mount Point: /$|^$\" " + initGlobVar.storagedataFilePath + " | grep -B2 \"Mount Point: /$\" | head -1 | awk -F':' '{print $1-2}') | tr -d '\n'")
-        let lastLineDisk  = run("echo $(egrep -n \"" + HCStartupDisk.getStartupDisk() + ":|Mount Point: /$|^$\"  " + initGlobVar.storagedataFilePath + " | grep -A1 \"Mount Point: /$\" | tail -1 | awk -F':' '{print $1-1}') | tr -d '\n'")
-        return run("head -" + lastLineDisk  + " " + initGlobVar.storagedataFilePath + " | tail -$(echo " + lastLineDisk + "-" + firstLineDisk + " | bc)")
+        guard let content = try? String(contentsOfFile: initGlobVar.storagedataFilePath, encoding: .utf8) else {
+            return ""
+        }
+        
+        let lines = content.components(separatedBy: .newlines)
+        let startIndex = lines.firstIndex { $0.contains(startupDisk) || $0.contains("Mount Point: /") } ?? 0
+        let endIndex = lines[startIndex...].firstIndex(where: { $0.isEmpty }) ?? lines.count
+        
+        return lines[startIndex..<endIndex].joined(separator: "\n")
     }
 }

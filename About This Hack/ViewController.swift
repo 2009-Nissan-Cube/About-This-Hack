@@ -70,6 +70,9 @@ class ViewController: NSViewController {
         if (!HardwareCollector.dataHasBeenSet) {HardwareCollector.getAllData()
         
         switch HCVersion.OSvers {
+        case .SEQUOIA:
+            picture.image = NSImage(named: "Sequoia")
+            break
         case .SONOMA:
             picture.image = NSImage(named: "Sonoma")
             break

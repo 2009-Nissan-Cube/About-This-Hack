@@ -33,6 +33,7 @@ class HCVersion {
     
     static func setOSvers(osNumber: String) {
         switch osNumber.prefix(2) {
+            case "15": OSvers = macOSvers.SEQUOIA
             case "14": OSvers = macOSvers.SONOMA
             case "13": OSvers = macOSvers.VENTURA
             case "12": OSvers = macOSvers.MONTEREY
@@ -52,15 +53,16 @@ class HCVersion {
 
     static func macOSversToString() -> String {
         switch OSvers {
-        case .SIERRA: return "Sierra"
-        case .HIGH_SIERRA: return "High Sierra"
-        case .MOJAVE: return "Mojave"
-        case .CATALINA: return "Catalina"
-        case .BIG_SUR: return "Big Sur"
-        case .MONTEREY: return "Monterey"
-        case .VENTURA: return "Ventura"
-        case .SONOMA: return "Sonoma"
-        case .macOS: return ""
+            case .SIERRA: return "Sierra"
+            case .HIGH_SIERRA: return "High Sierra"
+            case .MOJAVE: return "Mojave"
+            case .CATALINA: return "Catalina"
+            case .BIG_SUR: return "Big Sur"
+            case .MONTEREY: return "Monterey"
+            case .VENTURA: return "Ventura"
+            case .SONOMA: return "Sonoma"
+            case .SEQUOIA: return "Sequoia"
+            case .macOS: return ""
         }
     }
 
@@ -110,6 +112,7 @@ enum macOSvers {
     case MONTEREY
     case VENTURA
     case SONOMA
+    case SEQUOIA
     case macOS
 }
 

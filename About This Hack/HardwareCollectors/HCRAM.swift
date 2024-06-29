@@ -1,28 +1,57 @@
+import Foundation
+
 class HCRAM {
+    static let memoryInfo: (total: Int, type: String, speed: String) = {
+        let memSize = Int(ProcessInfo.processInfo.physicalMemory / 1_073_741_824) // Convert to GB and cast to Int
+        let sysMemContent = (try? String(contentsOfFile: initGlobVar.sysmemFilePath, encoding: .utf8)) ?? ""
+        let lines = sysMemContent.components(separatedBy: .newlines)
+        
+        let type = lines.first { $0.contains("Type") }?.components(separatedBy: " ").last ?? ""
+        let speed = lines.first { $0.contains("Speed") && $0.contains("MHz") }?
+            .components(separatedBy: " ")
+            .dropFirst()
+            .prefix(2)
+            .joined(separator: " ") ?? ""
+        
+        return (memSize, type, speed)
+    }()
     
     static func getRam() -> String {
-        let memInfo = run("echo \"$(($(sysctl -n hw.memsize) / 1073741824))\" | tr -d '\n'")
-        let ramType = run("grep 'Type' " + initGlobVar.sysmemFilePath + " | awk '{print $2}' | sed -n '1p' | tr -d '\n'")
-        let ramSpeed = run("grep 'Speed' " + initGlobVar.sysmemFilePath + " | grep 'MHz' | awk '{print $2\" \"$3}' | sed -n '1p'").trimmingCharacters(in: .whitespacesAndNewlines)
-
-        var result = "\(memInfo) GB"
-        if !ramSpeed.isEmpty { result += " \(ramSpeed)" }
-        if ramType.contains("D") { result += " \(ramType)" }
+        var result = "\(memoryInfo.total) GB"
+        if !memoryInfo.speed.isEmpty { result += " \(memoryInfo.speed)" }
+        if memoryInfo.type.contains("D") { result += " \(memoryInfo.type)" }
         return result
     }
     
     static func getMemDesc() -> String {
-        return run("echo \"$(egrep \"ECC:|BANK |Size:|Type:|Speed:|Manufacturer:|Part Number:\" " + initGlobVar.sysmemFilePath + ")\"")
+        guard let content = try? String(contentsOfFile: initGlobVar.sysmemFilePath, encoding: .utf8) else {
+            return ""
+        }
+        
+        let relevantLines = content.components(separatedBy: .newlines)
+            .filter { line in
+                ["ECC:", "BANK", "Size:", "Type:", "Speed:", "Manufacturer:", "Part Number:"]
+                    .contains { line.contains($0) }
+            }
+        
+        return relevantLines.joined(separator: "\n")
     }
 
-    // Another Data display way
     static func getMemDescArray() -> String {
-        var memInfoFormatted = ""
-        let memoryDataTmp = run("echo $(egrep \"BANK |Size:|Type:|Speed:|Manufacturer:|Part Number:\" " + initGlobVar.sysmemFilePath + " | sed -e 's/$/ /g' -e 's/^. *//g' -e 's/:/: /g' -e 's/:  /: /g' | tr -d '\n' | sed 's/BANK /\\nBANK /g' )")
-        let memoryDataArray = memoryDataTmp.components(separatedBy: "BANK ").filter({ $0 != ""})
-        for index in 0..<memoryDataArray.count {
-            memInfoFormatted += ("BANK " + "\(memoryDataArray[index])" + run("echo \"\n\""))
+        guard let content = try? String(contentsOfFile: initGlobVar.sysmemFilePath, encoding: .utf8) else {
+            return ""
         }
-        return "\(memInfoFormatted)"
+        
+        let relevantLines = content.components(separatedBy: .newlines)
+            .filter { line in
+                ["BANK", "Size:", "Type:", "Speed:", "Manufacturer:", "Part Number:"]
+                    .contains { line.contains($0) }
+            }
+            .map { $0.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: ":", with: ": ") }
+        
+        let banks = relevantLines.split(whereSeparator: { $0.starts(with: "BANK") })
+        
+        return banks.map { "BANK " + $0.joined(separator: " ") }
+            .joined(separator: "\n")
     }
 }
