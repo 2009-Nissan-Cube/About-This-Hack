@@ -27,6 +27,7 @@ class HardwareCollector {
         numberOfDisplays = getNumDisplays()
         print("Number of Displays: \(numberOfDisplays)")
         qhasBuiltInDisplay = hasBuiltInDisplay()
+        displayRes = getDisplayRes()
         print("Has built-in display: \(qhasBuiltInDisplay)")
         storageType = getStorageType()
         print("Storage Type: \(storageType)")
@@ -34,7 +35,6 @@ class HardwareCollector {
         print("Storage Data: \(storageData)")
         storagePercent = Double(getStorageData()[1])!
         print("Storage Percent: \(storagePercent)")
-        displayRes = getDisplayRes()
         displayNames = getDisplayNames()
         
         dataHasBeenSet = true
@@ -106,8 +106,6 @@ class HardwareCollector {
         } else if numDispl >= 2 {
             print("2 or more displays found")
             
-            print("firstPart = \(firstPart)")
-            
             var toSend: [String] = []
             
             if qhasBuiltInDisplay {
@@ -115,7 +113,7 @@ class HardwareCollector {
                     toSend.append(firstPart[0] + " " + secondPart[0])
                 }
                 
-                let loopCount = min(firstPart.count, secondPart.count)
+                let loopCount = secondPart.count
                 
                 for i in 1..<loopCount {
                     if i < firstPart.count && i < secondPart.count {

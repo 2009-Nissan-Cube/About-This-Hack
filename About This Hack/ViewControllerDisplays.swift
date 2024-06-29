@@ -76,30 +76,55 @@ class ViewControllerDisplays: NSViewController {
         
         if index < HardwareCollector.displayNames.count {
             nameField.isHidden = false
-            nameField.stringValue = HardwareCollector.displayNames[index]
-            print("DisplayName: \"\(HardwareCollector.displayNames[index])\"")
+            let fullName = HardwareCollector.displayNames[index]
+            let trimmedName = trimDisplayName(fullName)
+            nameField.stringValue = trimmedName
+            print("DisplayName: \"\(trimmedName)\"")
             
-            setDisplayImage(imageView, for: HardwareCollector.displayNames[index])
+            setDisplayImage(imageView, for: trimmedName)
         }
         
         if index < HardwareCollector.displayRes.count {
             resField.isHidden = false
-            resField.stringValue = HardwareCollector.displayRes[index]
-            print("DisplayReso: \"\(HardwareCollector.displayRes[index])\"")
+            let fullRes = HardwareCollector.displayRes[index]
+            let trimmedRes = removeParentheses(fullRes)
+            resField.stringValue = trimmedRes
+            print("DisplayReso: \"\(trimmedRes)\"")
         }
+    }
+
+    private func trimDisplayName(_ name: String) -> String {
+        // Remove text in parentheses
+        let withoutParentheses = removeParentheses(name)
+        
+        // Cut off text after "display"
+        if let range = withoutParentheses.range(of: "display", options: .caseInsensitive) {
+            let trimmed = String(withoutParentheses[..<range.upperBound])
+            return trimmed.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        
+        // If "display" is not found, return the string without parentheses
+        return withoutParentheses.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private func removeParentheses(_ text: String) -> String {
+        return text.replacingOccurrences(of: "\\([^)]+\\)", with: "", options: .regularExpression)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     private func setDisplayImage(_ imageView: NSImageView, for displayName: String) {
         let imageName: String
-        switch displayName {
-        case "iMac":
+        switch displayName.lowercased() {
+        case let name where name.contains("imac"):
             imageName = "NSComputer"
-        case "LG HDR 4K":
+        case let name where name.contains("lg") && (name.contains("hdr") || name.contains("4k")):
             imageName = "LG4K"
-        case "Sidecar Display":
+        case let name where name.contains("sidecar"):
             imageName = "ipad"
-        case "LED Cinema Display":
+        case let name where name.contains("led") && name.contains("cinema"):
             imageName = "appledisp"
+        case let name where name.contains("built"):
+            imageName = "macbook"
         default:
             imageName = "genericLCD"
         }
