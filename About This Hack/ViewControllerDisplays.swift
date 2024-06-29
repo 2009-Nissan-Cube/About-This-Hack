@@ -54,24 +54,38 @@ class ViewControllerDisplays: NSViewController {
         print("HardwareCollector.displayNames = \"\(HardwareCollector.displayNames)\"")
         print("HardwareCollector.displayRes = \"\(HardwareCollector.displayRes)\"")
         
-        let numDisplays = min(HardwareCollector.numberOfDisplays, 5)  // Limit to 5 displays
+        let numDisplays = min(HardwareCollector.numberOfDisplays, 3)  // Limit to 3 displays
         
-        for i in 0..<numDisplays {
-            dispArr[i].isHidden = false
+        switch numDisplays {
+        case 1:
+            showDisplay(index: 0, imageView: DisplayPicCenter, nameField: DisplayNameCenter, resField: DisplaySizeResCenter)
+        case 2:
+            showDisplay(index: 0, imageView: DisplayPicL2, nameField: DisplayNameL2, resField: DisplaySizeResL2)
+            showDisplay(index: 1, imageView: DisplayPicR2, nameField: DisplayNameR2, resField: DisplaySizeResR2)
+        case 3:
+            showDisplay(index: 0, imageView: DisplayPicCenter, nameField: DisplayNameCenter, resField: DisplaySizeResCenter)
+            showDisplay(index: 1, imageView: DisplayPicL1, nameField: DisplayNameL1, resField: DisplaySizeResL1)
+            showDisplay(index: 2, imageView: DisplayPicR1, nameField: DisplayNameR1, resField: DisplaySizeResR1)
+        default:
+            break
+        }
+    }
+
+    private func showDisplay(index: Int, imageView: NSImageView, nameField: NSTextField, resField: NSTextField) {
+        imageView.isHidden = false
+        
+        if index < HardwareCollector.displayNames.count {
+            nameField.isHidden = false
+            nameField.stringValue = HardwareCollector.displayNames[index]
+            print("DisplayName: \"\(HardwareCollector.displayNames[index])\"")
             
-            if i < HardwareCollector.displayNames.count {
-                nameArr[i].isHidden = false
-                nameArr[i].stringValue = HardwareCollector.displayNames[i]
-                print("DisplayName: \"\(HardwareCollector.displayNames[i])\"")
-                
-                setDisplayImage(dispArr[i], for: HardwareCollector.displayNames[i])
-            }
-            
-            if i < HardwareCollector.displayRes.count {
-                labelArr2[i].isHidden = false
-                labelArr2[i].stringValue = HardwareCollector.displayRes[i]
-                print("DisplayReso: \"\(HardwareCollector.displayRes[i])\"")
-            }
+            setDisplayImage(imageView, for: HardwareCollector.displayNames[index])
+        }
+        
+        if index < HardwareCollector.displayRes.count {
+            resField.isHidden = false
+            resField.stringValue = HardwareCollector.displayRes[index]
+            print("DisplayReso: \"\(HardwareCollector.displayRes[index])\"")
         }
     }
     
