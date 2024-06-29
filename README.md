@@ -16,44 +16,32 @@ The Overview tab presents standard system specifications, including the computer
 
 The Displays tab presents your monitors and internal displays. Up to 3 displays with their respective resolutions can be shown.
 
-<img width="692" alt="Display Screen" text="Display Screen" src="ImagesTMP/display-screen.png">
+![CleanShot 2024-06-29 at 13 14 22@2x](https://github.com/0xCUB3/About-This-Hack/assets/94565160/99a06cba-a491-4db3-a0f3-b69cd6ef8cca)
 
 Or with only one display:
 
-![image](https://github.com/0xCUB3/About-This-Hack/assets/94565160/7b8835cd-400b-4f48-81f8-aa3a4a536b23)
+![CleanShot 2024-06-29 at 13 10 16](https://github.com/0xCUB3/About-This-Hack/assets/94565160/b5b433bc-b708-4646-9301-84c8ff043315)
 
 The Storage tab presents your startup disk with its name, free and total storage, the percentage available, its type (internal, external, USB, etc.), and a bar to indicate the amount used.
 
-![image](https://github.com/0xCUB3/About-This-Hack/assets/94565160/f05ce8cb-550d-443e-9966-e991da23bf02)
+![CleanShot 2024-06-29 at 13 10 59](https://github.com/0xCUB3/About-This-Hack/assets/94565160/96ca5d35-3026-4d42-a171-6f6fcb3daeae)
 
 The Support tab contains numerous links to provide support with your Mac or Hackintosh. Note that the Mac links point to Apple's website, and the Hackintosh ones point to Dortania's guide.
 
-![image](https://github.com/0xCUB3/About-This-Hack/assets/94565160/46d26d13-319d-488e-ab5a-d6a0d01f09a4)
+![CleanShot 2024-06-29 at 13 11 22](https://github.com/0xCUB3/About-This-Hack/assets/94565160/49c1d426-b006-4a4c-a960-49cc4481638f)
 
 Some values show more details when hovered over. See if you can find them all! 😉
 
-![CleanShot 2023-10-07 at 15 54 25](https://github.com/0xCUB3/About-This-Hack/assets/94565160/1b90c22b-a56b-4c58-9ef1-f27276db8850)
+![CleanShot 2024-06-29 at 13 11 56](https://github.com/0xCUB3/About-This-Hack/assets/94565160/227bae23-5157-4895-965a-86e826e947f9)
 
-On High Sierra Update found
-
-![image](https://github.com/matxpa/About-This-Hack/assets/70573409/837c4265-77b1-46bf-ad84-4589fa307f08)
-
-Update found but not allowed (OS too old)
-
-![image](https://github.com/matxpa/About-This-Hack/assets/70573409/d171a1fb-44f9-4ec1-b8bc-4c1c7dd5b844)
-
-Update found on Monterey (and newer)
+There is also a native auto-updater that reminds you when a new version releases!
 
 ![image](https://github.com/matxpa/About-This-Hack/assets/70573409/ca7481a0-c0ae-4952-9c2a-7dc717bad927)
-
-Update process with notifications (if you allow notifications on About This Hack)
-
-![image](https://github.com/matxpa/About-This-Hack/assets/70573409/27e1b9a5-dd01-4832-a058-798a5c249ba4)
 
 
 ## Supported OS's
 - **10.12 Sierra and newer**
-- ***Not*** supported in any way on Linux or Windows
+- ***Not*** supported on Linux or Windows
 
 ## How To Install
 1) Download the zip file from the [latest release](https://github.com/0xCUB3/About-This-Hack/releases/latest)
@@ -74,7 +62,7 @@ The internet for helping me with a lot of the code.
 
 # Contact
 You can reach me at the following destinations: <br>
-Discord - 0xCUBE#9118 <br>
+Discord - 0xcube <br>
 Reddit - [u/0xCUBE](https://www.reddit.com/user/0xCUBE)
 
 ## Star History
