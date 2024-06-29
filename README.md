@@ -7,7 +7,7 @@ In the app, there are four tabs on a tab bar at the top of the window, and each 
 
 The Overview tab presents standard system specifications, including the computer model, OS, and processor. The app also shows the Clover or OpenCore bootloader version, if applicable. There is also a tooltip if you hover over your GPU(s) and your bootloader, as the text can often extend beyond the window's size.
 
-![CleanShot 2023-10-07 at 15 53 14](https://github.com/0xCUB3/About-This-Hack/assets/94565160/b4986e55-e3a1-4fdc-bb76-c2bdbc70567d)
+![CleanShot 2024-06-29 at 13 08 51](https://github.com/0xCUB3/About-This-Hack/assets/94565160/fc6f228f-41f9-4699-9e78-155843d46532)
 
 
 <img width="692" alt="OpenCore Hackintosh" text="OpenCore Hackintosh" src="https://github.com/0xCUB3/About-This-Hack/assets/94565160/18d29cff-1db1-4060-8e02-64307dafa20c">
