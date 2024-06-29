@@ -1,17 +1,14 @@
-import Foundation
 import Cocoa
 
 class ViewControllerStorage: NSViewController {
 
     @IBOutlet weak var startupDiskImage: NSImageView!
     @IBOutlet weak var storageValue: NSTextField!
-
-
     @IBOutlet weak var storageAmount: NSLevelIndicatorCell!
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
 
     override var representedObject: Any? {
         didSet {
@@ -19,7 +16,7 @@ class ViewControllerStorage: NSViewController {
     }
 
     override func viewDidAppear() {
-        self.view.window?.styleMask.remove(NSWindow.StyleMask.resizable)
+        self.view.window?.styleMask.remove(.resizable)
         start()
         setToolTips()
     }
@@ -27,32 +24,32 @@ class ViewControllerStorage: NSViewController {
     func start() {
         print("Initializing Storage View...")
         
-        if (!HardwareCollector.dataHasBeenSet) {HardwareCollector.getAllData()}
-
-        // Image
-        let imageShortName = (HCVersion.OSname + " " + HardwareCollector.devicelocation)
-        switch HardwareCollector.getStorageType() {
-            case true:
-                if let specificImage = NSImage(named: imageShortName + " SSD") {
-                    startupDiskImage.image = specificImage
-                } else {
-                    startupDiskImage.image = NSImage(named: "SSD")
-                }
-            case false:
-                if let specificImage = NSImage(named: imageShortName + " HDD") {
-                    startupDiskImage.image = specificImage
-                } else {
-                    startupDiskImage.image = NSImage(named: "HDD")
-                }
+        if (!HardwareCollector.dataHasBeenSet) {
+            HardwareCollector.getAllData()
         }
- 
-        // Text
-        storageValue.stringValue = HardwareCollector.storageData
-        storageAmount.doubleValue = HardwareCollector.storagePercent*1000000
+
+        setStartupDiskImage()
+        updateStorageInfo()
     }
     
-    func setToolTips(){
+    private func setStartupDiskImage() {
+        let imageShortName = "\(HCVersion.OSname) \(HardwareCollector.devicelocation)"
+        let storageType = HardwareCollector.getStorageType() ? "SSD" : "HDD"
+        
+        if let specificImage = NSImage(named: "\(imageShortName) \(storageType)") {
+            startupDiskImage.image = specificImage
+        } else {
+            startupDiskImage.image = NSImage(named: storageType)
+        }
+    }
+    
+    private func updateStorageInfo() {
+        storageValue.stringValue = HardwareCollector.storageData
+        storageAmount.doubleValue = HardwareCollector.storagePercent * 1_000_000
+    }
+    
+    private func setToolTips() {
         startupDiskImage.toolTip = startupDiskImagetoolTip
-        storageValue.toolTip     = storageValuetoolTip
+        storageValue.toolTip = storageValuetoolTip
     }
 }

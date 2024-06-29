@@ -2,201 +2,159 @@ import Cocoa
 
 class ViewController: NSViewController {
     
+    // MARK: - IBOutlets
     
-    // MARK: IBOutlets Overview
+    @IBOutlet private weak var picture: NSImageView!
+    @IBOutlet private weak var osVersion: NSTextField!
+    @IBOutlet private weak var osPrefix: NSTextField!
+    @IBOutlet private weak var systemVersion: NSTextField!
+    @IBOutlet private weak var macModel: NSTextField!
+    @IBOutlet private weak var cpu: NSTextField!
+    @IBOutlet private weak var ram: NSTextField!
+    @IBOutlet private weak var graphics: NSTextField!
+    @IBOutlet private weak var display: NSTextField!
+    @IBOutlet private weak var startupDisk: NSTextField!
+    @IBOutlet private weak var serialNumber: NSTextField!
+    @IBOutlet private weak var serialToggle: NSButton!
+    @IBOutlet private weak var blVersion: NSTextField!
+    @IBOutlet private weak var blPrefix: NSTextField!
+    @IBOutlet private weak var creditText: NSTextField!
+    @IBOutlet private weak var btSysInfo: NSButton!
+    @IBOutlet private weak var btSoftUpd: NSButton!
     
-    @IBOutlet weak var picture: NSImageView!
-    @IBOutlet weak var osVersion: NSTextField!
-    @IBOutlet weak var osPrefix: NSTextField!
-    @IBOutlet weak var systemVersion: NSTextField!
-    @IBOutlet weak var macModel: NSTextField!
-    @IBOutlet weak var cpu: NSTextField!
-    @IBOutlet weak var ram: NSTextField!
-    @IBOutlet weak var graphics: NSTextField!
-    @IBOutlet weak var display: NSTextField!
-    @IBOutlet weak var startupDisk: NSTextField!
-    @IBOutlet weak var serialNumber: NSTextField!
-    @IBOutlet weak var serialToggle: NSButton!
-    @IBOutlet weak var blVersion: NSTextField!
-    @IBOutlet weak var blPrefix: NSTextField!
-    @IBOutlet weak var creditText: NSTextField!
+    // MARK: - Properties
     
-    @IBOutlet weak var btSysInfo: NSButton!
-    @IBOutlet weak var btSoftUpd: NSButton!
+    private lazy var osNumber = ProcessInfo.processInfo.operatingSystemVersionString
+    private let modelID = "Mac"
+    private let ocLevel = "Unknown"
+    private let ocVersionID = "Version"
     
-    var osNumber = run("sw_vers | grep ProductVersion | cut -c 17-")
-    var modelID = "Mac"
-    var ocLevel = "Unknown"
-    var ocVersionID = "Version"
+    // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Call Functions to init Overview
-        HCVersion.getVersion()
-        HCMacModel.getMacModel()
-        _ = HCCPU.getCPU()
-        _ = HCRAM.getRam()
-        _ = HCStartupDisk.getStartupDisk()
-        _ = HCDisplay.getDisp()
-        _ = HCGPU.getGPU()
-        
-        var sleepValue:Double = 0
-        switch HCVersion.OSname {
-        case "Big Sur"     : sleepValue = 0.5
-        case "Catalina"    : sleepValue = 0.5
-        case "Mojave"      : sleepValue = 0.5
-        case "High Sierra" : sleepValue = 0.5
-        default            : sleepValue = 0
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.initializeOverview()
         }
-        if sleepValue > 0  { Thread.sleep(forTimeInterval: sleepValue) }
     }
-
+    
     override var representedObject: Any? {
         didSet {
+            // Update the view if the represented object changes.
         }
     }
-
+    
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        view.window?.styleMask.remove(.resizable)
+    }
+    
     override func viewDidAppear() {
         super.viewDidAppear()
-        self.view.window?.styleMask.remove(NSWindow.StyleMask.resizable)
-
-        self.start()
+        updateUI()
         setToolTips()
     }
-    func start() {
-        print("Initializing Main View...")
-        
-        if (!HardwareCollector.dataHasBeenSet) {HardwareCollector.getAllData()
-        
-        switch HCVersion.OSvers {
-        case .SEQUOIA:
-            picture.image = NSImage(named: "Sequoia")
-            break
-        case .SONOMA:
-            picture.image = NSImage(named: "Sonoma")
-            break
-        case .VENTURA:
-            picture.image = NSImage(named: "Ventura")
-            break
-        case .MONTEREY:
-            picture.image = NSImage(named: "Monterey")
-            break
-        case .BIG_SUR:
-            picture.image = NSImage(named: "Big Sur")
-            break
-        case .CATALINA:
-            picture.image = NSImage(named: "Catalina")
-            break
-        case .MOJAVE:
-            picture.image = NSImage(named: "Mojave")
-            break
-        case .HIGH_SIERRA:
-            picture.image = NSImage(named: "High Sierra")
-            break
-        case .SIERRA:
-            picture.image = NSImage(named: "Sierra")
-            break
-        case .macOS:
-            picture.image = NSImage(named: "Unknown")
-            break
+    
+    // MARK: - Private Methods
+    
+    private func initializeOverview() {
+        DispatchQueue.concurrentPerform(iterations: 7) { index in
+            switch index {
+            case 0: HCVersion.getVersion()
+            case 1: HCMacModel.getMacModel()
+            case 2: _ = HCCPU.getCPU()
+            case 3: _ = HCRAM.getRam()
+            case 4: _ = HCStartupDisk.getStartupDisk()
+            case 5: _ = HCDisplay.getDisp()
+            case 6: _ = HCGPU.getGPU()
+            default: break
+            }
         }
         
-        // macOS Version Name
-        osVersion.stringValue = HCVersion.OSname
-
-        // macOS Version ID
-        systemVersion.stringValue = HCVersion.getOSnum() + HCVersion.getOSbuild()
-
-        // Mac Model
-        macModel.stringValue = HCMacModel.macName + " - " + HCMacModel.getModelIdentifier()
-
-        // CPU
-        cpu.stringValue = HCCPU.getCPU()
+        DispatchQueue.main.async { [weak self] in
+            self?.updateUI()
+        }
+    }
+    
+    private func updateUI() {
+        if !HardwareCollector.dataHasBeenSet {
+            HardwareCollector.getAllData()
+        }
         
-        // RAM
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        
+        picture.image = NSImage(named: getOSImageName())
+        osVersion.stringValue = HCVersion.OSname
+        systemVersion.stringValue = HCVersion.getOSnum() + HCVersion.getOSbuild()
+        macModel.stringValue = "\(HCMacModel.macName) - \(HCMacModel.getModelIdentifier())"
+        cpu.stringValue = HCCPU.getCPU()
         ram.stringValue = HCRAM.getRam()
-
-        // GPU
         graphics.stringValue = HCGPU.getGPU()
-
-        // Display
         display.stringValue = HCDisplay.getDisp()
-
-        // Startup Disk
         startupDisk.stringValue = HCStartupDisk.getStartupDisk()
-
-        // Serial Number
         serialNumber.stringValue = HCSerialNumber.getSerialNumber()
-
-        // Bootloader Version (Optional)
         blVersion.stringValue = HCBootloader.getBootloader()
-
-        // Make Serial Number Toggle Transparent
         serialToggle.isTransparent = true
-    }
-}
-    
-    func updateView() {
-        picture.needsDisplay = true
-        osVersion.needsDisplay = true
-        systemVersion.needsDisplay = true
-        macModel.needsDisplay = true
-        cpu.needsDisplay = true
-        ram.needsDisplay = true
-        graphics.needsDisplay = true
-        display.needsDisplay = true
-        startupDisk.needsDisplay = true
-        serialNumber.needsDisplay = true
-        blVersion.needsDisplay = true
+        
+        CATransaction.commit()
     }
     
-    func setToolTips() {
-        osVersion.toolTip     = osVersiontoolTip
-        systemVersion.toolTip = systemVersiontoolTip
-        macModel.toolTip      = macModeltoolTip
-        cpu.toolTip           = cputoolTip
-        ram.toolTip           = ramtoolTip
-        startupDisk.toolTip   = startupDisktoolTip
-        display.toolTip       = displaytoolTip
-        graphics.toolTip      = graphicstoolTip
-        serialToggle.toolTip  = serialToggletoolTip
-        blVersion.toolTip     = blVersiontoolTip
-        btSysInfo.toolTip     = btSysInfotoolTip
-        btSoftUpd.toolTip     = btSoftUpdtoolTip
+    private func getOSImageName() -> String {
+        let osImageNames: [macOSvers: String] = [
+            .SEQUOIA: "Sequoia", .SONOMA: "Sonoma", .VENTURA: "Ventura",
+            .MONTEREY: "Monterey", .BIG_SUR: "Big Sur", .CATALINA: "Catalina",
+            .MOJAVE: "Mojave", .HIGH_SIERRA: "High Sierra", .SIERRA: "Sierra"
+        ]
+        return osImageNames[HCVersion.OSvers] ?? "Unknown"
     }
+    
+    private func setToolTips() {
+        let tooltips: [(NSView, String?)] = [
+            (osVersion, osVersiontoolTip),
+            (systemVersion, systemVersiontoolTip),
+            (macModel, macModeltoolTip),
+            (cpu, cputoolTip),
+            (ram, ramtoolTip),
+            (startupDisk, startupDisktoolTip),
+            (display, displaytoolTip),
+            (graphics, graphicstoolTip),
+            (serialToggle, serialToggletoolTip),
+            (blVersion, blVersiontoolTip),
+            (btSysInfo, btSysInfotoolTip),
+            (btSoftUpd, btSoftUpdtoolTip)
+        ]
+        
+        tooltips.forEach { view, tooltip in
+            view.toolTip = tooltip
+        }
+    }
+    
+    // MARK: - IBActions
     
     @IBAction func hideSerialNumber(_ sender: NSButton) {
-        print("Serial Number toggled")
-        if serialNumber.stringValue == "" {
-            serialNumber.stringValue = HCSerialNumber.getSerialNumber()
-        } else {
-            serialNumber.stringValue = ""
-        }
+        toggleSerialNumber()
     }
-
-    func showSerialNumber(_ sender: NSButton) {
-          print("Serial Number toggled")
-          if serialNumber.stringValue == HCSerialNumber.getSerialNumber() {
-              serialNumber.stringValue = ""
-          } else {
-              serialNumber.stringValue = HCSerialNumber.getSerialNumber()
-          }
-      }
     
     @IBAction func showSystemReport(_ sender: NSButton) {
         print("System Report...")
-        _ = run("open /System/Library/SystemProfiler/SPPlatformReporter.spreporter")
+        NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/SystemProfiler/SPPlatformReporter.spreporter"))
     }
-        
+    
     @IBAction func showSoftwareUpdate(_ sender: NSButton) {
         print("Software Update...")
-        let dirObject = "/System/Library/PreferencePanes/SoftwareUpdate.prefPane"
-        var dirExist : ObjCBool = false
-        if initGlobVar.defaultfileManager.fileExists(atPath: dirObject, isDirectory: &dirExist) && dirExist.boolValue {
-            _ = run("open /System/Library/PreferencePanes/SoftwareUpdate.prefPane")
+        let softwareUpdatePath = "/System/Library/PreferencePanes/SoftwareUpdate.prefPane"
+        if FileManager.default.fileExists(atPath: softwareUpdatePath) {
+            NSWorkspace.shared.open(URL(fileURLWithPath: softwareUpdatePath))
         } else {
-            _ = run("open \(initGlobVar.allAppliLocation)/\"App Store.app\"")
+            NSWorkspace.shared.open(URL(fileURLWithPath: "\(initGlobVar.allAppliLocation)/App Store.app"))
         }
+    }
+    
+    // MARK: - Helper Methods
+    
+    private func toggleSerialNumber() {
+        print("Serial Number toggled")
+        serialNumber.stringValue = serialNumber.stringValue.isEmpty ? HCSerialNumber.getSerialNumber() : ""
     }
 }
