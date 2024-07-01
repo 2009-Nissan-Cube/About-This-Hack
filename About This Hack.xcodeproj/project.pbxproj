@@ -46,6 +46,7 @@
 		115D921A26D6F65600F5DF35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		115D921B26D6F65600F5DF35 /* About_This_Hack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = About_This_Hack.entitlements; sourceTree = "<group>"; };
 		115D922326D6F6AE00F5DF35 /* InsertExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertExtension.swift; sourceTree = "<group>"; };
+		45E889922C3310470054BE45 /* pl */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pl; path = pl.lproj/Main.storyboard; sourceTree = "<group>"; };
 		58134C0128668FF70008B00D /* Keycodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keycodes.swift; sourceTree = "<group>"; };
 		58B988D326D7ABFE0092EC5B /* ViewControllerDisplays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDisplays.swift; sourceTree = "<group>"; };
 		58B988D526D7ACD70092EC5B /* ViewControllerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerService.swift; sourceTree = "<group>"; };
@@ -197,6 +198,7 @@
 				en,
 				Base,
 				fr,
+				pl,
 			);
 			mainGroup = 115D920526D6F65500F5DF35;
 			packageReferences = (
@@ -264,6 +266,7 @@
 			children = (
 				D91B9F7429B27FA800AB58B7 /* en */,
 				965FD7C32AF3947B007E88BC /* fr */,
+				45E889922C3310470054BE45 /* pl */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -405,7 +408,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1534;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = DNP7DGUB7B;
+				DEVELOPMENT_TEAM = LJPF5T982T;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "About This Hack/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "About This Hack";
@@ -438,7 +441,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1534;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = DNP7DGUB7B;
+				DEVELOPMENT_TEAM = LJPF5T982T;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "About This Hack/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "About This Hack";
