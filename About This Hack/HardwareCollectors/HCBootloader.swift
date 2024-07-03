@@ -1,94 +1,41 @@
-import Foundation
-
 class HCBootloader {
-    static let bootloaderInfo: (bootloader: String, bootargs: String) = {
-        let nvramOutput = run("nvram -x")
-        let bdmesgOutput = run(initGlobVar.bdmesgExecID)
-        
-        let bootloader = getBootloaderInfo(nvramOutput: nvramOutput, bdmesgOutput: bdmesgOutput)
-        let bootargs = getBootargsInfo(nvramOutput: nvramOutput, bdmesgOutput: bdmesgOutput)
-        
-        return (bootloader, bootargs)
-    }()
-    
+
+    static var BootloaderInfo: String = ""
+    static var BootargsInfo: String = ""
+
     static func getBootloader() -> String {
-        return bootloaderInfo.bootloader
+        
+        BootloaderInfo = run("nvram " + initGlobVar.nvramOpencoreVersion + " 2>/dev/null | awk '{print $2}' | awk -F'-' '{print $2}'")
+        if BootloaderInfo != "" {
+            // Regular OpenCore
+                BootloaderInfo = run("echo \"OpenCore \"$(nvram " + initGlobVar.nvramOpencoreVersion + " 2>/dev/null | awk '{print $2}' | awk -F'-' '{print $2}' | sed -e 's/ */./g' -e s'/^.//g' -e 's/.$//g' -e 's/ .//g' -e 's/. //g' | tr -d '\n') $( nvram " + initGlobVar.nvramOpencoreVersion + " 2>/dev/null | awk '{print $2}' | awk -F'-' '{print $1}' | sed -e 's/REL/(Release)/g' -e s'/N\\/A//g' -e 's/DEB/(Debug)/g' | tr -d '\n')")
+            }
+        else {
+//            BootloaderInfo = run("grep \"Clover\" " + initGlobVar.hwFilePath + " | awk '{print $4,\"r\" $6,\"(\" substr($9,1,7) \") \"}' | tr -d '\n'")
+            BootloaderInfo = run(initGlobVar.bdmesgExecID + " | grep -i \"Starting Clover revision:\" | awk -F 'Starting Clover revision:' '{print $NF}'  | awk '{print \"Clover r\"$1\" (\"substr($4,1,7)\") \"}' | tr -d '\n'")
+            if BootloaderInfo  != "" {
+                BootloaderInfo += run("echo $(" + initGlobVar.bdmesgExecID + " | grep -i \"Build with: \\[Args:\" | awk -F '\\-b' '{print $NF}' |  awk -F '\\-t' '{print $1,$2}' |  awk '{print toupper(substr($2,0,1))tolower(substr($2,2)),toupper(substr($1,0,1))tolower(substr($1,2))}') $(" + initGlobVar.bdmesgExecID + " | grep -i \"Build id:\" | awk -F 'Build id:' '{print $NF}' | awk -F '-' '{print  substr($1,1,5)\"/\"substr($1,6,2)\"/\"substr($1,8,2)\" \"substr($1,10,2)\":\"substr($1,12,2)\":\"substr($1,14,2)}'  | tr -d '\n')")
+            }
+            else {
+                if run("sysctl -n machdep.cpu.brand_string").contains("Apple") {
+                    BootloaderInfo = "Apple iBoot"
+                } else {
+                    BootloaderInfo = "Apple UEFI"
+                }
+            }
+        }
+        return BootloaderInfo
     }
     
     static func getBootargs() -> String {
-        return bootloaderInfo.bootargs
+        BootargsInfo = run("nvram -x boot-args 2>/dev/null | grep -A1 \"<key>boot-args</key>\" | tail -1 | awk -F \"<string>\" '{print $NF}' | awk -F \"<\\/string>\" '{print $1}'  | tr -d '\n'")
+        if BootargsInfo == "" {
+            BootargsInfo = run(initGlobVar.bdmesgExecID + " 2>/dev/null | grep ' boot-args=' | tail -1 | awk -F ' boot-args=' '{print $NF}' | tr -d '\n'")
+        }
+        if BootargsInfo == "" {
+            BootargsInfo = "Empty/Unknown"
+        }
+        return BootargsInfo
     }
-    
-    private static func getBootloaderInfo(nvramOutput: String, bdmesgOutput: String) -> String {
-        // Check for OpenCore
-        if let opencoreVersion = nvramOutput.range(of: "\(initGlobVar.nvramOpencoreVersion)\\s+(.+)", options: .regularExpression) {
-            let versionString = String(nvramOutput[opencoreVersion].split(separator: " ")[1])
-            let components = versionString.split(separator: "-")
-            if components.count >= 2 {
-                let version = components[1].replacingOccurrences(of: " ", with: ".")
-                let type = components[0].replacingOccurrences(of: "REL", with: "(Release)")
-                    .replacingOccurrences(of: "N/A", with: "")
-                    .replacingOccurrences(of: "DEB", with: "(Debug)")
-                return "OpenCore \(version) \(type)"
-            }
-        }
-        
-        // Check for Clover
-        if let cloverInfo = bdmesgOutput.range(of: "Starting Clover revision:\\s+(\\S+).*\\((\\w{7})\\)", options: .regularExpression) {
-            let matches = bdmesgOutput[cloverInfo].split(separator: " ")
-            if matches.count >= 4 {
-                let revision = matches[3]
-                let hash = String(matches[matches.count - 1].prefix(7))
-                
-                // Extract build info
-                let buildInfo = extractCloverBuildInfo(from: bdmesgOutput)
-                
-                return "Clover r\(revision) (\(hash)) \(buildInfo)"
-            }
-        }
-        
-        // Check for Apple bootloader
-        if run("sysctl -n machdep.cpu.brand_string").contains("Apple") {
-            return "Apple iBoot"
-        } else {
-            return "Apple UEFI"
-        }
-    }
-    
-    private static func getBootargsInfo(nvramOutput: String, bdmesgOutput: String) -> String {
-        if let bootArgs = nvramOutput.range(of: "<key>boot-args</key>\\s*<string>(.+?)</string>", options: .regularExpression) {
-            return String(nvramOutput[bootArgs].split(separator: ">")[2].dropLast(9))
-        }
-        
-        if let bootArgs = bdmesgOutput.range(of: "boot-args=(.+)", options: .regularExpression) {
-            return String(bdmesgOutput[bootArgs].split(separator: "=")[1])
-        }
-        
-        return "Empty/Unknown"
-    }
-    
-    private static func extractCloverBuildInfo(from bdmesgOutput: String) -> String {
-        var buildInfo = ""
-        
-        if let buildArgs = bdmesgOutput.range(of: "Build with: \\[Args:.*-b\\s+(\\w+)\\s+-t\\s+(\\w+)", options: .regularExpression) {
-            let matches = bdmesgOutput[buildArgs].split(separator: " ")
-            if matches.count >= 4 {
-                let arg1 = matches[matches.count - 3].capitalized
-                let arg2 = matches[matches.count - 1].capitalized
-                buildInfo += "\(arg2)\(arg1) "
-            }
-        }
-        
-        if let buildId = bdmesgOutput.range(of: "Build id:.*-(\\d{14})", options: .regularExpression) {
-            let dateString = String(bdmesgOutput[buildId].suffix(14))
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyyMMddHHmmss"
-            if let date = formatter.date(from: dateString) {
-                formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-                buildInfo += formatter.string(from: date)
-            }
-        }
-        
-        return buildInfo.trimmingCharacters(in: .whitespaces)
-    }
+
 }
