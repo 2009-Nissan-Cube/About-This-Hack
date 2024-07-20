@@ -126,8 +126,15 @@ class ViewController: NSViewController {
         ]
         
         tooltips.forEach { view, tooltip in
-            view.toolTip = tooltip
+            view.toolTip = trimTooltip(tooltip)
         }
+    }
+
+    private func trimTooltip(_ tooltip: String?) -> String? {
+        guard let tooltip = tooltip else { return nil }
+        let lines = tooltip.components(separatedBy: .newlines)
+        let nonEmptyLines = lines.filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+        return nonEmptyLines.joined(separator: "\n")
     }
     
     // MARK: - IBActions
