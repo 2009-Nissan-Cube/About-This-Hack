@@ -1,38 +1,42 @@
 import Foundation
 
 class HCDisplay {
-    static let displayInfo: (mainDisplay: String, allDisplays: String) = {
+    static let shared = HCDisplay()
+    private init() {}
+    
+    private lazy var displayInfo: (mainDisplay: String, allDisplays: String) = {
         guard let content = try? String(contentsOfFile: InitGlobVar.scrFilePath, encoding: .utf8) else {
             return ("Unknown Display", "No display information available")
         }
         
         let lines = content.components(separatedBy: .newlines)
-                           .map { cleanLine($0) }
+                           .map { self.cleanLine($0) }
                            .drop { !$0.hasPrefix("Displays") }
                            .dropFirst() // Drop the "Displays" line
                            .prefix { !$0.isEmpty && !$0.hasPrefix("Memory") }
         
-        let mainDisplay = getMainDisplayInfo(from: Array(lines))
-        let allDisplays = getAllDisplaysInfo(from: Array(lines))
+        let mainDisplay = self.getMainDisplayInfo(from: Array(lines))
+        let allDisplays = self.getAllDisplaysInfo(from: Array(lines))
         
         return (mainDisplay, allDisplays)
     }()
     
-    static func getDisp() -> String {
+    func getDisp() -> String {
         return displayInfo.mainDisplay
     }
     
-    static func getDispInfo() -> String {
+    func getDispInfo() -> String {
         return displayInfo.allDisplays
     }
     
-    private static func cleanLine(_ line: String) -> String {
-        let trimmed = line.trimmingCharacters(in: .whitespaces)
-        let withoutParentheses = trimmed.replacingOccurrences(of: "\\([^)]*\\)", with: "", options: .regularExpression)
-        return withoutParentheses.replacingOccurrences(of: ":", with: "").trimmingCharacters(in: .whitespaces)
+    private func cleanLine(_ line: String) -> String {
+        line.trimmingCharacters(in: .whitespaces)
+            .replacingOccurrences(of: "\\([^)]*\\)", with: "", options: .regularExpression)
+            .replacingOccurrences(of: ":", with: "")
+            .trimmingCharacters(in: .whitespaces)
     }
     
-    private static func getMainDisplayInfo(from lines: [String]) -> String {
+    private func getMainDisplayInfo(from lines: [String]) -> String {
         let displayName = lines.first { !$0.isEmpty && $0.first?.isLetter == true } ?? "Unknown Display"
         let resolution = lines.first { $0.contains("Resolution") }?
                               .components(separatedBy: "Resolution").last?
@@ -40,19 +44,16 @@ class HCDisplay {
         return "\(displayName) (\(resolution))"
     }
     
-    private static func getAllDisplaysInfo(from lines: [String]) -> String {
-        var formattedLines: [String] = []
-        var isNewDisplay = false
-        
-        for line in lines {
+    private func getAllDisplaysInfo(from lines: [String]) -> String {
+        lines.reduce(into: "") { result, line in
             if !line.isEmpty && line.first?.isLetter == true {
-                isNewDisplay = true
-                formattedLines.append("\n" + line)
-            } else if isNewDisplay && !line.isEmpty {
-                formattedLines.append("  " + line)
+                if !result.isEmpty {
+                    result += "\n"
+                }
+                result += "\n\(line)"
+            } else if !result.isEmpty && !line.isEmpty {
+                result += "\n  \(line)"
             }
-        }
-        
-        return formattedLines.joined(separator: "\n").trimmingCharacters(in: .newlines)
+        }.trimmingCharacters(in: .newlines)
     }
 }

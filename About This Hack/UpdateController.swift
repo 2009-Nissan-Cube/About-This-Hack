@@ -161,7 +161,7 @@ class UpdateController {
             while (!InitGlobVar.defaultfileManager.fileExists(atPath: "\(InitGlobVar.athDirectory)/\(thisApplicationName).app")) {
                 Thread.sleep(forTimeInterval: 0.2)
             }
-            print("\(thisComponent) : Is new app v\(marketVersion) allowed on current OS \(HCVersion.OSnum)?")
+            print("\(thisComponent) : Is new app v\(marketVersion) allowed on current OS \(HCVersion.shared.osNumber)?")
             notify(title: "Is new app v\(marketVersion) allowed...", informativeText: "")
             let plistNewVersion = "\(InitGlobVar.athDirectory)/\(thisApplicationName).app/Contents/Info.plist"
             if InitGlobVar.defaultfileManager.fileExists(atPath: "\(plistNewVersion)") {
@@ -179,7 +179,7 @@ class UpdateController {
                 return
             } else {
                 let arrayMinOSVersion:[String] = minSystemVersion.components(separatedBy: ".")
-                let arrayCurOSVersion:[String] = HCVersion.OSnum.components(separatedBy: ".")
+                let arrayCurOSVersion:[String] = HCVersion.shared.osNumber.components(separatedBy: ".")
                 var minCountIndex:Int = 0
                 var allowed:Bool = true
                 if arrayMinOSVersion.count > arrayCurOSVersion.count {
@@ -187,7 +187,7 @@ class UpdateController {
                 } else {
                     minCountIndex = arrayMinOSVersion.count
                 }
-                print("\(thisComponent) : Current OS version \(HCVersion.OSnum) and Minimum OS Version \(minSystemVersion)")
+                print("\(thisComponent) : Current OS version \(HCVersion.shared.osNumber) and Minimum OS Version \(minSystemVersion)")
                 for index in 0...minCountIndex-1 {
                     if arrayCurOSVersion[index] < arrayMinOSVersion[index] {
                         allowed = false
@@ -201,13 +201,13 @@ class UpdateController {
                 }
                 if !allowed {
                     alertheader = "Update can't be achieved"
-                    alertdetail = "Minimum OS Version \(minSystemVersion) is greater than current OS version \(HCVersion.OSnum)"
+                    alertdetail = "Minimum OS Version \(minSystemVersion) is greater than current OS version \(HCVersion.shared.osNumber)"
                     print("\(thisComponent) : \(alertheader) \(alertdetail)")
                     _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
                     isUpdateAvailable = false
                     return
                 } else {
-                    print("\(thisComponent) : Update (with \(minSystemVersion) as minimum OS version ) is allowed on current OS version \(HCVersion.OSnum)")
+                    print("\(thisComponent) : Update (with \(minSystemVersion) as minimum OS version ) is allowed on current OS version \(HCVersion.shared.osNumber)")
                 }
             }
         }

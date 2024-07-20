@@ -1,7 +1,10 @@
 import Foundation
 
 class HCSerialNumber {
-    static let hardwareInfo: (serialNumber: String, details: String) = {
+    static let shared = HCSerialNumber()
+    private init() {}
+    
+    private lazy var HardwareInfo: (serialNumber: String, details: String) = {
         guard let content = try? String(contentsOfFile: InitGlobVar.hwFilePath, encoding: .utf8) else {
             return ("", "")
         }
@@ -12,24 +15,29 @@ class HCSerialNumber {
             .components(separatedBy: .whitespaces)
             .last ?? ""
         
-        let relevantLines = lines.filter { line in
-            ["System Firmware Version", "OS Loader Version", "SMC Version",
-             "Apple ROM Info:", "Board-ID :", "Hardware UUID:", "Provisioning UDID:"]
-                .contains { line.contains($0) }
-        }
+        let relevantKeys = [
+            "System Firmware Version", "OS Loader Version", "SMC Version",
+            "Apple ROM Info:", "Board-ID :", "Hardware UUID:", "Provisioning UDID:"
+        ]
         
-        let formattedDetails = relevantLines
+        let formattedDetails = lines
+            .filter { line in relevantKeys.contains { line.contains($0) } }
             .map { "      " + $0.trimmingCharacters(in: .whitespaces) }
+            .map { line in
+                line.components(separatedBy: .whitespaces)
+                    .filter { !$0.isEmpty }
+                    .joined(separator: " ")
+            }
             .joined(separator: "\n")
         
         return (serialNumber, formattedDetails)
     }()
     
-    static func getSerialNumber() -> String {
-        return hardwareInfo.serialNumber
+    func getSerialNumber() -> String {
+        return HardwareInfo.serialNumber
     }
     
-    static func getHardWareInfo() -> String {
-        return hardwareInfo.details
+    func getHardwareInfo() -> String {
+        return HardwareInfo.details
     }
 }

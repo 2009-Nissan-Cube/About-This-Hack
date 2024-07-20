@@ -2,32 +2,33 @@ import Foundation
 import IOKit
 
 class HCVersion {
+    static let shared = HCVersion()
+    private init() {}
     
-    static var OSnum: String = "10.10.0"
-    static var OSvers: macOSvers = macOSvers.macOS
-    static var OSname: String = ""
-    static var OSBuildNum: String = "19G101"
-    static var osPrefix: String = "macOS"
-    static var dataHasBeenSet: Bool = false
+    var osNumber: String = "10.10.0"
+    var osVersion: MacOSVersion = .macOS
+    var osName: String = ""
+    var osBuildNumber: String = "19G101"
+    var osPrefix: String = "macOS"
+    var dataHasBeenSet: Bool = false
     
-    static func getVersion() {
-        if (dataHasBeenSet) {return}
+    func getVersion() {
+        guard !dataHasBeenSet else { return }
+        
         osPrefix = "macOS"
-        OSnum = getOSnum()
-        OSBuildNum = getOSbuild()
-        print(OSnum)
-        setOSvers(osNumber: OSnum)
-        OSname = macOSversToString()
-        print("OS Build Number: \(OSBuildNum)")
+        osNumber = getOSNumber()
+        osBuildNumber = getOSBuild()
+        setOSVersion(osNumber: osNumber)
+        osName = macOSVersionToString()
         dataHasBeenSet = true
     }
 
-    static func getOSnum() -> String {
+    private func getOSNumber() -> String {
         let osVersion = ProcessInfo.processInfo.operatingSystemVersion
         return "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
     }
   
-    static func getOSbuild() -> String {
+    private func getOSBuild() -> String {
         var size = 0
         sysctlbyname("kern.osversion", nil, &size, nil, 0)
         var machine = [CChar](repeating: 0, count: size)
@@ -36,55 +37,55 @@ class HCVersion {
         return " (\(build)) "
     }
     
-    static func setOSvers(osNumber: String) {
-        switch osNumber.prefix(2) {
-            case "15": OSvers = macOSvers.SEQUOIA
-            case "14": OSvers = macOSvers.SONOMA
-            case "13": OSvers = macOSvers.VENTURA
-            case "12": OSvers = macOSvers.MONTEREY
-            case "11": OSvers = macOSvers.BIG_SUR
-            case "10":
-                switch osNumber.prefix(5) {
-                    case "10.16": OSvers = macOSvers.BIG_SUR
-                    case "10.15": OSvers = macOSvers.CATALINA
-                    case "10.14": OSvers = macOSvers.MOJAVE
-                    case "10.13": OSvers = macOSvers.HIGH_SIERRA
-                    case "10.12": OSvers = macOSvers.SIERRA
-                    default: OSvers = macOSvers.macOS
-                }
-            default: OSvers = macOSvers.macOS
+    private func setOSVersion(osNumber: String) {
+        let majorVersion = osNumber.prefix(2)
+        let minorVersion = osNumber.prefix(5)
+        
+        switch majorVersion {
+        case "15": osVersion = .sequoia
+        case "14": osVersion = .sonoma
+        case "13": osVersion = .ventura
+        case "12": osVersion = .monterey
+        case "11": osVersion = .bigSur
+        case "10":
+            switch minorVersion {
+            case "10.16": osVersion = .bigSur
+            case "10.15": osVersion = .catalina
+            case "10.14": osVersion = .mojave
+            case "10.13": osVersion = .highSierra
+            case "10.12": osVersion = .sierra
+            default: osVersion = .macOS
+            }
+        default: osVersion = .macOS
         }
     }
 
-    static func macOSversToString() -> String {
-        switch OSvers {
-            case .SIERRA: return "Sierra"
-            case .HIGH_SIERRA: return "High Sierra"
-            case .MOJAVE: return "Mojave"
-            case .CATALINA: return "Catalina"
-            case .BIG_SUR: return "Big Sur"
-            case .MONTEREY: return "Monterey"
-            case .VENTURA: return "Ventura"
-            case .SONOMA: return "Sonoma"
-            case .SEQUOIA: return "Sequoia"
-            case .macOS: return ""
+    private func macOSVersionToString() -> String {
+        switch osVersion {
+        case .sierra: return "Sierra"
+        case .highSierra: return "High Sierra"
+        case .mojave: return "Mojave"
+        case .catalina: return "Catalina"
+        case .bigSur: return "Big Sur"
+        case .monterey: return "Monterey"
+        case .ventura: return "Ventura"
+        case .sonoma: return "Sonoma"
+        case .sequoia: return "Sequoia"
+        case .macOS: return ""
         }
     }
 
-    static func getOSBuildInfo() -> String {
+    func getOSBuildInfo() -> String {
         let kernelVersion = getKernelVersion()
         let sipInfo = getSIPInfo()
         let oclpInfo = getOCLPInfo()
         
-        var result = kernelVersion
-        if !sipInfo.isEmpty { result += sipInfo }
-        if !oclpInfo.isEmpty { result += oclpInfo }
-        
-        print("OS Build Info: \(result)")
-        return result
+        return [kernelVersion, sipInfo, oclpInfo]
+            .filter { !$0.isEmpty }
+            .joined(separator: "\n")
     }
 
-    private static func getKernelVersion() -> String {
+    private func getKernelVersion() -> String {
         var size = 0
         sysctlbyname("kern.version", nil, &size, nil, 0)
         var kernel = [CChar](repeating: 0, count: size)
@@ -92,86 +93,57 @@ class HCVersion {
         return String(cString: kernel)
     }
     
-    private static func getSIPInfo() -> String {
+    private func getSIPInfo() -> String {
         let csrConfig = csrActiveConfig()
         let sipStatus = (csrConfig == 0) ? "Enabled" : "Disabled"
-        return "System Integrity Protection: \(sipStatus) (0x\(String(format:"%08x", csrConfig)))\n"
+        return "System Integrity Protection: \(sipStatus) (0x\(String(format:"%08x", csrConfig)))"
     }
 
-    private static func csrActiveConfig() -> UInt32 {
+    private func csrActiveConfig() -> UInt32 {
         var config: UInt32 = 0
         var size = MemoryLayout<UInt32>.size
         sysctlbyname("kern.bootargs", nil, &size, nil, 0)
         var bootArgs = [CChar](repeating: 0, count: size)
         sysctlbyname("kern.bootargs", &bootArgs, &size, nil, 0)
         let bootArgsString = String(cString: bootArgs)
-        if bootArgsString.contains("csr-active-config") {
-            if let range = bootArgsString.range(of: "csr-active-config=(0x[0-9a-fA-F]+)", options: .regularExpression) {
-                let valueString = String(bootArgsString[range].dropFirst(19))
-                config = UInt32(valueString, radix: 16) ?? 0
-            }
+        
+        if let configValue = bootArgsString.captureGroup(for: "csr-active-config=(0x[0-9a-fA-F]+)") {
+            config = UInt32(configValue.dropFirst(2), radix: 16) ?? 0
         } else {
             sysctlbyname("kern.csr_active_config", &config, &size, nil, 0)
         }
+        
         return config
     }
 
-    private static func getOCLPInfo() -> String {
-        guard FileManager.default.fileExists(atPath: InitGlobVar.oclpXmlFilePath),
-              let xmlData = FileManager.default.contents(atPath: InitGlobVar.oclpXmlFilePath),
-              let xmlString = String(data: xmlData, encoding: .utf8) else {
+    private func getOCLPInfo() -> String {
+        guard let xmlString = try? String(contentsOfFile: InitGlobVar.oclpXmlFilePath, encoding: .utf8) else {
             return ""
         }
         
-        var oclpInfo = ""
+        let version = xmlString.captureGroup(for: "<key>OpenCore Legacy Patcher</key>\\s*<string>([^<]+)</string>") ?? ""
+        let commit = xmlString.captureGroup(for: "<key>Commit URL</key>\\s*<string>[^/]+/([^<]+)</string>")?.split(separator: "/").last?.prefix(7) ?? ""
+        let date = xmlString.captureGroup(for: "<key>Time Patched</key>\\s*<string>([^<]+)</string>")?.replacingOccurrences(of: "@", with: "") ?? ""
         
-        if let versionRange = xmlString.range(of: "<key>OpenCore Legacy Patcher</key>\\s*<string>([^<]+)</string>", options: .regularExpression) {
-            let startIndex = xmlString.index(versionRange.lowerBound, offsetBy: "<key>OpenCore Legacy Patcher</key><string>".count)
-            let endIndex = xmlString.index(versionRange.upperBound, offsetBy: -"</string>".count)
-            oclpInfo += "OCLP \(xmlString[startIndex..<endIndex])"
+        if !version.isEmpty {
+            return "OCLP \(version) (\(commit)) (\(date))"
         }
         
-        if let commitRange = xmlString.range(of: "<key>Commit URL</key>\\s*<string>[^/]+/([^<]+)</string>", options: .regularExpression) {
-            let startIndex = xmlString.index(commitRange.lowerBound, offsetBy: "<key>Commit URL</key><string>".count)
-            let endIndex = xmlString.index(commitRange.upperBound, offsetBy: -"</string>".count)
-            let commit = String(xmlString[startIndex..<endIndex].split(separator: "/").last ?? "")
-            oclpInfo += " (\(commit.prefix(7)))"
-        }
-        
-        if let dateRange = xmlString.range(of: "<key>Time Patched</key>\\s*<string>([^<]+)</string>", options: .regularExpression) {
-            let startIndex = xmlString.index(dateRange.lowerBound, offsetBy: "<key>Time Patched</key><string>".count)
-            let endIndex = xmlString.index(dateRange.upperBound, offsetBy: -"</string>".count)
-            let date = xmlString[startIndex..<endIndex].replacingOccurrences(of: "@", with: "")
-            oclpInfo += " (\(date))"
-        }
-        
-        return oclpInfo.isEmpty ? "" : oclpInfo + "\n"
+        return ""
     }
 }
 
 extension String {
-    func captureGroup(at index: Int) -> String? {
-        let range = NSRange(self.startIndex..., in: self)
-        guard let regex = try? NSRegularExpression(pattern: self),
-              let match = regex.firstMatch(in: self, options: [], range: range),
-              let captureRange = Range(match.range(at: index), in: self) else {
+    func captureGroup(for pattern: String) -> String? {
+        guard let regex = try? NSRegularExpression(pattern: pattern),
+              let match = regex.firstMatch(in: self, range: NSRange(startIndex..., in: self)),
+              let range = Range(match.range(at: 1), in: self) else {
             return nil
         }
-        return String(self[captureRange])
+        return String(self[range])
     }
 }
 
-enum macOSvers {
-    case SIERRA
-    case HIGH_SIERRA
-    case MOJAVE
-    case CATALINA
-    case BIG_SUR
-    case MONTEREY
-    case VENTURA
-    case SONOMA
-    case SEQUOIA
-    case macOS
+enum MacOSVersion {
+    case sierra, highSierra, mojave, catalina, bigSur, monterey, ventura, sonoma, sequoia, macOS
 }
-
-

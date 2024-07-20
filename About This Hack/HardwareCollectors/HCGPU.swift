@@ -1,7 +1,10 @@
 import Foundation
 
 class HCGPU {
-    static let gpuInfo: String = {
+    static let shared = HCGPU()
+    private init() {}
+    
+    private lazy var gpuInfo: String = {
         guard let content = try? String(contentsOfFile: InitGlobVar.scrFilePath, encoding: .utf8) else {
             return ""
         }
@@ -10,47 +13,51 @@ class HCGPU {
         var chipset = "", vram = "", metal = ""
         
         for line in lines {
-            if line.contains("Chipset") && chipset.isEmpty {
-                chipset = line.components(separatedBy: ":").last?
-                    .trimmingCharacters(in: .whitespaces)
-                    .replacingOccurrences(of: "Intel ", with: "")
-                    .replacingOccurrences(of: "NVIDIA ", with: "") ?? ""
-            } else if line.contains("VRAM") && vram.isEmpty {
-                vram = line.components(separatedBy: ":").last?.trimmingCharacters(in: .whitespaces) ?? ""
-            } else if line.contains("Metal") && metal.isEmpty {
-                metal = line.components(separatedBy: ":").last?
-                    .trimmingCharacters(in: .whitespaces)
-                    .replacingOccurrences(of: "Metal", with: "") ?? ""
+            if chipset.isEmpty, line.contains("Chipset"),
+               let value = line.components(separatedBy: ":").last?.trimmingCharacters(in: .whitespaces) {
+                chipset = value.replacingOccurrences(of: "Intel ", with: "")
+                               .replacingOccurrences(of: "NVIDIA ", with: "")
+            } else if vram.isEmpty, line.contains("VRAM"),
+                      let value = line.components(separatedBy: ":").last?.trimmingCharacters(in: .whitespaces) {
+                vram = value
+            } else if metal.isEmpty, line.contains("Metal"),
+                      let value = line.components(separatedBy: ":").last?.trimmingCharacters(in: .whitespaces) {
+                metal = value.replacingOccurrences(of: "Metal", with: "")
             }
             
             if !chipset.isEmpty && !vram.isEmpty && !metal.isEmpty {
                 break
             }
         }
-        chipset = chipset.trimmingCharacters(in: .whitespaces)
-        vram = vram.trimmingCharacters(in: .whitespaces)
-        metal = metal.trimmingCharacters(in: .whitespaces)
         
-        return "\(chipset) \(vram) (Metal \(metal))".trimmingCharacters(in: .whitespaces)
+        return "\(chipset) \(vram) (Metal \(metal))"
+            .trimmingCharacters(in: .whitespaces)
+            .components(separatedBy: .whitespaces)
+            .filter { !$0.isEmpty }
+            .joined(separator: " ")
     }()
     
-    static func getGPU() -> String {
+    func getGPU() -> String {
         return gpuInfo
     }
     
-    static func getGPUInfo() -> String {
+    func getGPUInfo() -> String {
         guard let content = try? String(contentsOfFile: InitGlobVar.scrFilePath, encoding: .utf8) else {
             return "Graphics\n"
         }
         
-        let relevantLines = content.components(separatedBy: .newlines)
-            .filter { line in
-                !line.contains("Graphics/Displays:") &&
-                !line.hasPrefix("      Displays:") &&
-                !line.hasPrefix("        ") &&
-                !line.hasPrefix("          ")
+        let filteredLines = content.components(separatedBy: .newlines)
+            .filter { !$0.contains("Graphics/Displays:") &&
+                      !$0.hasPrefix("      Displays:") &&
+                      !$0.hasPrefix("        ") &&
+                      !$0.hasPrefix("          ") }
+            .map { line in
+                line.trimmingCharacters(in: .whitespaces)
+                    .components(separatedBy: .whitespaces)
+                    .filter { !$0.isEmpty }
+                    .joined(separator: " ")
             }
         
-        return "Graphics\n" + relevantLines.joined(separator: "\n")
+        return "Graphics\n" + filteredLines.joined(separator: "\n")
     }
 }

@@ -1,8 +1,10 @@
-import Cocoa
 import Foundation
 
 class HCStartupDisk {
-    static let startupDisk: String = {
+    static let shared = HCStartupDisk()
+    private init() {}
+    
+    private lazy var startupDisk: String = {
         guard let content = try? String(contentsOfFile: InitGlobVar.bootvolnameFilePath, encoding: .utf8) else {
             return ""
         }
@@ -13,19 +15,18 @@ class HCStartupDisk {
             .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
     }()
     
-    static func getStartupDisk() -> String {
+    func getStartupDisk() -> String {
         return startupDisk
     }
 
-    static func getStartupDiskInfo() -> String {
+    func getStartupDiskInfo() -> String {
         guard let content = try? String(contentsOfFile: InitGlobVar.storagedataFilePath, encoding: .utf8) else {
             return ""
         }
         
-        let lines = content.components(separatedBy: .newlines)
-        let startIndex = lines.firstIndex { $0.contains(startupDisk) || $0.contains("Mount Point: /") } ?? 0
-        let endIndex = lines[startIndex...].firstIndex(where: { $0.isEmpty }) ?? lines.count
-        
-        return lines[startIndex..<endIndex].joined(separator: "\n")
+        return content.components(separatedBy: .newlines)
+            .drop { !$0.contains(startupDisk) && !$0.contains("Mount Point: /") }
+            .prefix { !$0.isEmpty }
+            .joined(separator: "\n")
     }
 }

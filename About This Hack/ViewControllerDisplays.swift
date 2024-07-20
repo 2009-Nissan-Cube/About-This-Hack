@@ -42,7 +42,7 @@ class ViewControllerDisplays: NSViewController {
     
     func start() {
         print("Initializing Display View...")
-        if (!HardwareCollector.dataHasBeenSet) { HardwareCollector.getAllData() }
+        if (!HardwareCollector.shared.dataHasBeenSet) { HardwareCollector.shared.getAllData() }
         
         let dispArr: [NSImageView] = [DisplayPicCenter, DisplayPicL1, DisplayPicL2, DisplayPicR1, DisplayPicR2]
         let nameArr: [NSTextField] = [DisplayNameCenter, DisplayNameL1, DisplayNameL2, DisplayNameR1, DisplayNameR2]
@@ -51,10 +51,10 @@ class ViewControllerDisplays: NSViewController {
         // Hide all display elements initially
         (dispArr + nameArr + labelArr2).forEach { $0.isHidden = true }
         
-        print("HardwareCollector.displayNames = \"\(HardwareCollector.displayNames)\"")
-        print("HardwareCollector.displayRes = \"\(HardwareCollector.displayRes)\"")
+        print("HardwareCollector.displayNames = \"\(HardwareCollector.shared.displayNames)\"")
+        print("HardwareCollector.displayRes = \"\(HardwareCollector.shared.displayRes)\"")
         
-        let numDisplays = min(HardwareCollector.numberOfDisplays, 3)  // Limit to 3 displays
+        let numDisplays = min(HardwareCollector.shared.numberOfDisplays, 3)  // Limit to 3 displays
         
         switch numDisplays {
         case 1:
@@ -74,9 +74,9 @@ class ViewControllerDisplays: NSViewController {
     private func showDisplay(index: Int, imageView: NSImageView, nameField: NSTextField, resField: NSTextField) {
         imageView.isHidden = false
         
-        if index < HardwareCollector.displayNames.count {
+        if index < HardwareCollector.shared.displayNames.count {
             nameField.isHidden = false
-            let fullName = HardwareCollector.displayNames[index]
+            let fullName = HardwareCollector.shared.displayNames[index]
             let trimmedName = trimDisplayName(fullName)
             nameField.stringValue = trimmedName
             print("DisplayName: \"\(trimmedName)\"")
@@ -84,9 +84,9 @@ class ViewControllerDisplays: NSViewController {
             setDisplayImage(imageView, for: trimmedName)
         }
         
-        if index < HardwareCollector.displayRes.count {
+        if index < HardwareCollector.shared.displayRes.count {
             resField.isHidden = false
-            let fullRes = HardwareCollector.displayRes[index]
+            let fullRes = HardwareCollector.shared.displayRes[index]
             let trimmedRes = removeParentheses(fullRes)
             resField.stringValue = trimmedRes
             print("DisplayReso: \"\(trimmedRes)\"")

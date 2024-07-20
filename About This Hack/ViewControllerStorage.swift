@@ -10,22 +10,18 @@ class ViewControllerStorage: NSViewController {
         super.viewDidLoad()
     }
 
-    override var representedObject: Any? {
-        didSet {
-        }
-    }
-
     override func viewDidAppear() {
+        super.viewDidAppear()
         self.view.window?.styleMask.remove(.resizable)
         start()
         setToolTips()
     }
 
-    func start() {
+    private func start() {
         print("Initializing Storage View...")
         
-        if (!HardwareCollector.dataHasBeenSet) {
-            HardwareCollector.getAllData()
+        if (!HardwareCollector.shared.dataHasBeenSet) {
+            HardwareCollector.shared.getAllData()
         }
 
         setStartupDiskImage()
@@ -33,8 +29,8 @@ class ViewControllerStorage: NSViewController {
     }
     
     private func setStartupDiskImage() {
-        let imageShortName = "\(HCVersion.getOSBuildInfo()) \(HardwareCollector.devicelocation)"
-        let storageType = HardwareCollector.getStorageType() ? "SSD" : "HDD"
+        let imageShortName = "\(HCVersion.shared.osName) \(HardwareCollector.shared.deviceLocation)"
+        let storageType = HardwareCollector.shared.storageType ? "SSD" : "HDD"
         
         if let specificImage = NSImage(named: "\(imageShortName) \(storageType)") {
             startupDiskImage.image = specificImage
@@ -44,8 +40,8 @@ class ViewControllerStorage: NSViewController {
     }
     
     private func updateStorageInfo() {
-        storageValue.stringValue = HardwareCollector.storageData
-        storageAmount.doubleValue = HardwareCollector.storagePercent * 1_000_000
+        storageValue.stringValue = HardwareCollector.shared.storageData
+        storageAmount.doubleValue = HardwareCollector.shared.storagePercent * storageAmount.maxValue
     }
     
     private func setToolTips() {
