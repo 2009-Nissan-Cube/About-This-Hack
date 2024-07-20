@@ -31,7 +31,7 @@ class HCGPU {
         vram = vram.trimmingCharacters(in: .whitespaces)
         metal = metal.trimmingCharacters(in: .whitespaces)
         
-        return "\(chipset) \(vram)(Metal \(metal))".trimmingCharacters(in: .whitespaces)
+        return "\(chipset) \(vram) (Metal \(metal))".trimmingCharacters(in: .whitespaces)
     }()
     
     static func getGPU() -> String {
