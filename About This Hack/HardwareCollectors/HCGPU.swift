@@ -2,7 +2,7 @@ import Foundation
 
 class HCGPU {
     static let gpuInfo: String = {
-        guard let content = try? String(contentsOfFile: initGlobVar.scrFilePath, encoding: .utf8) else {
+        guard let content = try? String(contentsOfFile: InitGlobVar.scrFilePath, encoding: .utf8) else {
             return ""
         }
         
@@ -39,7 +39,7 @@ class HCGPU {
     }
     
     static func getGPUInfo() -> String {
-        guard let content = try? String(contentsOfFile: initGlobVar.scrFilePath, encoding: .utf8) else {
+        guard let content = try? String(contentsOfFile: InitGlobVar.scrFilePath, encoding: .utf8) else {
             return "Graphics\n"
         }
         

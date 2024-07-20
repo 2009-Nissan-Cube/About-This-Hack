@@ -33,7 +33,7 @@ class ViewControllerStorage: NSViewController {
     }
     
     private func setStartupDiskImage() {
-        let imageShortName = "\(HCVersion.OSname) \(HardwareCollector.devicelocation)"
+        let imageShortName = "\(HCVersion.getOSBuildInfo()) \(HardwareCollector.devicelocation)"
         let storageType = HardwareCollector.getStorageType() ? "SSD" : "HDD"
         
         if let specificImage = NSImage(named: "\(imageShortName) \(storageType)") {

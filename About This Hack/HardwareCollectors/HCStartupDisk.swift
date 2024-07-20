@@ -3,7 +3,7 @@ import Foundation
 
 class HCStartupDisk {
     static let startupDisk: String = {
-        guard let content = try? String(contentsOfFile: initGlobVar.bootvolnameFilePath, encoding: .utf8) else {
+        guard let content = try? String(contentsOfFile: InitGlobVar.bootvolnameFilePath, encoding: .utf8) else {
             return ""
         }
         return content.components(separatedBy: "\n")
@@ -18,7 +18,7 @@ class HCStartupDisk {
     }
 
     static func getStartupDiskInfo() -> String {
-        guard let content = try? String(contentsOfFile: initGlobVar.storagedataFilePath, encoding: .utf8) else {
+        guard let content = try? String(contentsOfFile: InitGlobVar.storagedataFilePath, encoding: .utf8) else {
             return ""
         }
         

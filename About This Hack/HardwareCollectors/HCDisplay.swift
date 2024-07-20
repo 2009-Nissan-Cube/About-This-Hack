@@ -2,7 +2,7 @@ import Foundation
 
 class HCDisplay {
     static let displayInfo: (mainDisplay: String, allDisplays: String) = {
-        guard let content = try? String(contentsOfFile: initGlobVar.scrFilePath, encoding: .utf8) else {
+        guard let content = try? String(contentsOfFile: InitGlobVar.scrFilePath, encoding: .utf8) else {
             return ("Unknown Display", "No display information available")
         }
         

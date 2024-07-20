@@ -44,7 +44,7 @@ class HardwareCollector {
         let numDispl = NSScreen.screens.count
         
         if numDispl == 1 {
-            guard let content = try? String(contentsOfFile: initGlobVar.scrXmlFilePath, encoding: .utf8) else {
+            guard let content = try? String(contentsOfFile: InitGlobVar.scrXmlFilePath, encoding: .utf8) else {
                 return []
             }
             
@@ -61,7 +61,7 @@ class HardwareCollector {
             return resolutions
         }
         else if numDispl > 1 {
-            guard let content = try? String(contentsOfFile: initGlobVar.scrFilePath, encoding: .utf8) else {
+            guard let content = try? String(contentsOfFile: InitGlobVar.scrFilePath, encoding: .utf8) else {
                 return []
             }
             
@@ -82,7 +82,7 @@ class HardwareCollector {
         let numDispl = getNumDisplays()
         
         // Filter out blank entries
-        let firstPart = run("grep \"Display Type\" " + initGlobVar.scrFilePath + " | cut -c 25-")
+        let firstPart = run("grep \"Display Type\" " + InitGlobVar.scrFilePath + " | cut -c 25-")
             .components(separatedBy: "\n")
             .filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
         let secondPart = run("system_profiler SPDisplaysDataType | awk -F ' {8}|:' '/^ {8}[^ :]+/ {print $2}'")
@@ -96,7 +96,7 @@ class HardwareCollector {
                 let firstPart = firstPart[0]
                 print("Display Type with 1 Display is Built In : \(firstPart)")
                 
-                var displayName = run("grep -A2 \"</data>\" " + initGlobVar.scrXmlFilePath + " | awk -F'>|<' '/_name/{getline; print $3}' | tr -d '\n'")
+                var displayName = run("grep -A2 \"</data>\" " + InitGlobVar.scrXmlFilePath + " | awk -F'>|<' '/_name/{getline; print $3}' | tr -d '\n'")
                 
                 print("Display Name with 1 Display is Built In: \(displayName)")
                 return [firstPart + " " + displayName].filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
@@ -146,7 +146,7 @@ class HardwareCollector {
     }
 
     static func hasBuiltInDisplay() -> Bool {
-        let scrFileContent = try? String(contentsOfFile: initGlobVar.scrFilePath, encoding: .utf8)
+        let scrFileContent = try? String(contentsOfFile: InitGlobVar.scrFilePath, encoding: .utf8)
         
         guard let content = scrFileContent else {
             print("Error reading system_profiler output file")
@@ -161,14 +161,14 @@ class HardwareCollector {
 
     static func getStorageType() -> Bool {
         print("Startup Disk Name: " + name)
-        guard let content = try? String(contentsOfFile: initGlobVar.bootvolnameFilePath, encoding: .utf8) else {
+        guard let content = try? String(contentsOfFile: InitGlobVar.bootvolnameFilePath, encoding: .utf8) else {
             return false
         }
         return content.contains("Solid State: Yes")
     }
 
     static func getStorageData() -> [String] {
-        guard let content = try? String(contentsOfFile: initGlobVar.bootvolnameFilePath, encoding: .utf8) else {
+        guard let content = try? String(contentsOfFile: InitGlobVar.bootvolnameFilePath, encoding: .utf8) else {
             return ["Error reading file", "0"]
         }
         

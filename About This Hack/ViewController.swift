@@ -51,6 +51,7 @@ class ViewController: NSViewController {
     
     override func viewDidAppear() {
         super.viewDidAppear()
+        view.window?.styleMask.remove(.resizable)
         updateUI()
         setToolTips()
     }
@@ -154,7 +155,7 @@ class ViewController: NSViewController {
         if FileManager.default.fileExists(atPath: softwareUpdatePath) {
             NSWorkspace.shared.open(URL(fileURLWithPath: softwareUpdatePath))
         } else {
-            NSWorkspace.shared.open(URL(fileURLWithPath: "\(initGlobVar.allAppliLocation)/App Store.app"))
+            NSWorkspace.shared.open(URL(fileURLWithPath: "\(InitGlobVar.allAppliLocation)/App Store.app"))
         }
     }
     

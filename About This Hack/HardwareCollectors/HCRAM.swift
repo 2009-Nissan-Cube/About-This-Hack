@@ -3,7 +3,7 @@ import Foundation
 class HCRAM {
     static let memoryInfo: (total: Int, type: String, speed: String) = {
         let memSize = Int(ProcessInfo.processInfo.physicalMemory / 1_073_741_824) // Convert to GB and cast to Int
-        let sysMemContent = (try? String(contentsOfFile: initGlobVar.sysmemFilePath, encoding: .utf8)) ?? ""
+        let sysMemContent = (try? String(contentsOfFile: InitGlobVar.sysmemFilePath, encoding: .utf8)) ?? ""
         let lines = sysMemContent.components(separatedBy: .newlines)
         
         let type = lines.first { $0.contains("Type") }?.components(separatedBy: " ").last ?? ""
@@ -24,7 +24,7 @@ class HCRAM {
     }
     
     static func getMemDesc() -> String {
-        guard let content = try? String(contentsOfFile: initGlobVar.sysmemFilePath, encoding: .utf8) else {
+        guard let content = try? String(contentsOfFile: InitGlobVar.sysmemFilePath, encoding: .utf8) else {
             return ""
         }
         
@@ -38,7 +38,7 @@ class HCRAM {
     }
 
     static func getMemDescArray() -> String {
-        guard let content = try? String(contentsOfFile: initGlobVar.sysmemFilePath, encoding: .utf8) else {
+        guard let content = try? String(contentsOfFile: InitGlobVar.sysmemFilePath, encoding: .utf8) else {
             return ""
         }
         

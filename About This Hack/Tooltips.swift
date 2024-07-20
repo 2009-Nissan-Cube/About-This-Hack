@@ -8,7 +8,7 @@ let macModeltoolTip = HCMacModel.macName + " - " + HCMacModel.getModelIdentifier
 
 let cputoolTip = HCCPU.getCPU() + "\n\n" + HCCPU.getCPUInfo()
 
-let ramtoolTip = run("cat " + initGlobVar.sysmemFilePath)
+let ramtoolTip = run("cat " + InitGlobVar.sysmemFilePath)
 
 let startupDisktoolTip = HCStartupDisk.getStartupDiskInfo()
 
@@ -18,7 +18,7 @@ let graphicstoolTip = HCGPU.getGPUInfo()
 
 let serialToggletoolTip = HCSerialNumber.getHardWareInfo()
 
-let startupDiskImagetoolTip = run("cat " + initGlobVar.bootvollistFilePath)
+let startupDiskImagetoolTip = run("cat " + InitGlobVar.bootvollistFilePath)
 
 let storageValuetoolTip = startupDisktoolTip
 

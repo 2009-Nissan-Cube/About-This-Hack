@@ -16,27 +16,27 @@ class ViewControllerSupport: NSViewController {
     }
 
     @IBAction func macOSUserGuidePress(_ sender: NSButton) {
-        let url = URL(string: initGlobVar.macOSUserGuidePress)!
+        let url = URL(string: InitGlobVar.macOSUserGuidePress)!
         if NSWorkspace.shared.open(url) { print(successMessage) }
     }
     @IBAction func whatsNewInMacOSPress(_ sender: NSButton) {
-        let url = URL(string: initGlobVar.whatsNewInMacOSPress)!
+        let url = URL(string: InitGlobVar.whatsNewInMacOSPress)!
         if NSWorkspace.shared.open(url) { print(successMessage) }
     }
     @IBAction func AppleSupportPress(_ sender: NSButton) {
-        let url = URL(string: initGlobVar.AppleSupportPress)!
+        let url = URL(string: InitGlobVar.AppleSupportPress)!
         if NSWorkspace.shared.open(url) { print(successMessage) }
     }
     @IBAction func HackintoshPress(_ sender: NSButton) {
-        let url = URL(string: initGlobVar.HackintoshPress)!
+        let url = URL(string: InitGlobVar.HackintoshPress)!
         if NSWorkspace.shared.open(url) { print(successMessage) }
     }
     @IBAction func MacBasicsPress(_ sender: NSButton) {
-        let url = URL(string: initGlobVar.MacBasicsPress)!
+        let url = URL(string: InitGlobVar.MacBasicsPress)!
         if NSWorkspace.shared.open(url) { print(successMessage) }
     }
     @IBAction func MacUserGuidePress(_ sender: NSButton) {
-        let url = URL(string: initGlobVar.MacUserGuidePress)!
+        let url = URL(string: InitGlobVar.MacUserGuidePress)!
         if NSWorkspace.shared.open(url) { print(successMessage) }
     }
     

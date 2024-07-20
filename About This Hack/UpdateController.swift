@@ -26,10 +26,10 @@ class UpdateController {
 
     static func checkForUpdates() -> Bool {
         print("\(thisComponent) : Checking for updates...")
-        lastTagVersion = run("GIT_TERMINAL_PROMPT=0 git ls-remote --tags --refs \(initGlobVar.athrepositoryURL) | grep \"/tags/[0-9]\" | awk -F'/' '{print  $NF}' | sort -u | tail -n1 | tr -d '\n'")
+        lastTagVersion = run("GIT_TERMINAL_PROMPT=0 git ls-remote --tags --refs \(InitGlobVar.athrepositoryURL) | grep \"/tags/[0-9]\" | awk -F'/' '{print  $NF}' | sort -u | tail -n1 | tr -d '\n'")
         if lastTagVersion != "" && !lastTagVersion.starts(with: "fatal") {
-            let pbxProjLocat = initGlobVar.athlasttagpbxproj.replacingOccurrences(of: "[LASTTAG]", with: lastTagVersion)
-            marketVersion = run("\(initGlobVar.curlLocation) -s \(initGlobVar.athrepositoryURL)\(pbxProjLocat) | sed -e 's?,?\\n?g' -e 's?;?\\n?g' | grep \"MARKETING_VERSION = \" | awk '{print $NF}' | sort -u | tail -n1 | tr -d '\n' 2>/dev/null")
+            let pbxProjLocat = InitGlobVar.athlasttagpbxproj.replacingOccurrences(of: "[LASTTAG]", with: lastTagVersion)
+            marketVersion = run("\(InitGlobVar.curlLocation) -s \(InitGlobVar.athrepositoryURL)\(pbxProjLocat) | sed -e 's?,?\\n?g' -e 's?;?\\n?g' | grep \"MARKETING_VERSION = \" | awk '{print $NF}' | sort -u | tail -n1 | tr -d '\n' 2>/dev/null")
 // Postulat : there is one and only one target in pbxproj
             if marketVersion == "" {
                 marketVersion = thisApplicationVersion  // fake marketVersion (ie. = localVersion) so no Update and no app. crash
@@ -44,7 +44,7 @@ class UpdateController {
             }
         } else {
             alertheader = "Can't get version from last remote repo tag"
-            alertdetail = "\(initGlobVar.athrepositoryURL)"
+            alertdetail = "\(InitGlobVar.athrepositoryURL)"
             print("\(thisComponent) : \(alertheader) \(alertdetail)")
             _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
         }
@@ -57,9 +57,9 @@ class UpdateController {
         //MARK: DownLoad new app.zip from repo
         print("\(thisComponent) : Starting Download v\(marketVersion) Update...")
         notify(title: "Starting Download... v\(marketVersion) Update...", informativeText: "")
-        guard run("\(initGlobVar.curlLocation) -L \(initGlobVar.lastAthreleaseURL)\(lastTagVersion)/\(initGlobVar.newAthziprelease) -o \(initGlobVar.newAthreleasezip)") == "" else {
+        guard run("\(InitGlobVar.curlLocation) -L \(InitGlobVar.lastAthreleaseURL)\(lastTagVersion)/\(InitGlobVar.newAthziprelease) -o \(InitGlobVar.newAthreleasezip)") == "" else {
             alertheader = "Can't Download Update"
-            alertdetail = "\(initGlobVar.lastAthreleaseURL)\(lastTagVersion)/\(initGlobVar.newAthziprelease)"
+            alertdetail = "\(InitGlobVar.lastAthreleaseURL)\(lastTagVersion)/\(InitGlobVar.newAthziprelease)"
             print("\(thisComponent) : \(alertheader) \(alertdetail)")
             _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
             isUpdateAvailable = false
@@ -68,14 +68,14 @@ class UpdateController {
 
         //MARK: unzip new app.zip
         if isUpdateAvailable {
-            while (!initGlobVar.defaultfileManager.fileExists(atPath: initGlobVar.newAthreleasezip)) {
+            while (!InitGlobVar.defaultfileManager.fileExists(atPath: InitGlobVar.newAthreleasezip)) {
                 Thread.sleep(forTimeInterval: 0.2)
             }
             print("\(thisComponent) : Unzipping Archive...")
             notify(title: "Unzipping Archive...", informativeText: "")
-            guard run("/usr/bin/unzip -q -o \(initGlobVar.newAthreleasezip) -d \(initGlobVar.athDirectory)") == "" else {
+            guard run("/usr/bin/unzip -q -o \(InitGlobVar.newAthreleasezip) -d \(InitGlobVar.athDirectory)") == "" else {
                 alertheader = "Can't unzip Archive"
-                alertdetail = "\(initGlobVar.newAthreleasezip) into \(initGlobVar.athDirectory)"
+                alertdetail = "\(InitGlobVar.newAthreleasezip) into \(InitGlobVar.athDirectory)"
                 print("\(thisComponent) : \(alertheader) \(alertdetail)")
                 _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
                 isUpdateAvailable = false
@@ -85,7 +85,7 @@ class UpdateController {
             var notFoundLoop : Int = 0
             while (!unzippedFile) && (notFoundLoop < 5) {
                 Thread.sleep(forTimeInterval: 0.2)
-                exeToSearch = checkFileExtension(atPath: initGlobVar.athDirectory, withExtensions: [".app", ".dmg"])
+                exeToSearch = checkFileExtension(atPath: InitGlobVar.athDirectory, withExtensions: [".app", ".dmg"])
                 if exeToSearch != "" {
                     unzippedFile = true
                     notFoundLoop = 5
@@ -96,7 +96,7 @@ class UpdateController {
             }
             if (!unzippedFile) && (notFoundLoop > 4) {
                 alertheader = "Can't find .app or .dmg extension on files name extracted from Archive"
-                alertdetail = "\(initGlobVar.newAthreleasezip) into \(initGlobVar.athDirectory)"
+                alertdetail = "\(InitGlobVar.newAthreleasezip) into \(InitGlobVar.athDirectory)"
                 print("\(thisComponent) : \(alertheader) \(alertdetail)")
                 _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
                 isUpdateAvailable = false
@@ -107,7 +107,7 @@ class UpdateController {
         
         //MARK: from new app.zip extracted .dmg or .app
         if isUpdateAvailable && kindToSearch == "dmg" {
-            while (!initGlobVar.defaultfileManager.fileExists(atPath: exeToSearch)) {
+            while (!InitGlobVar.defaultfileManager.fileExists(atPath: exeToSearch)) {
                 Thread.sleep(forTimeInterval: 0.2)
             }
             //MARK: from new app.zip a .dmg extracted must be attached
@@ -122,14 +122,14 @@ class UpdateController {
                 return
             }
             if isUpdateAvailable {
-                while (!initGlobVar.defaultfileManager.fileExists(atPath: "/Volumes/\(thisApplicationName)")) {
+                while (!InitGlobVar.defaultfileManager.fileExists(atPath: "/Volumes/\(thisApplicationName)")) {
                     Thread.sleep(forTimeInterval: 2)
                 }
                 //MARK: .dmg is mounted containing a .app so we copy it to temp Dir
-                print("\(thisComponent) : \(exeToSearch) mounted in /Volumes/\(thisApplicationName)!\n\(thisComponent) : Try to copy application /Volumes/\"\(thisApplicationName)/\(thisApplicationName).app\" to \(initGlobVar.athDirectory)")
-                guard run("/bin/cp -prf /Volumes/\"\(thisApplicationName)/\(thisApplicationName).app\" \(initGlobVar.athDirectory)/\"\(thisApplicationName).app\"") == "" else {
+                print("\(thisComponent) : \(exeToSearch) mounted in /Volumes/\(thisApplicationName)!\n\(thisComponent) : Try to copy application /Volumes/\"\(thisApplicationName)/\(thisApplicationName).app\" to \(InitGlobVar.athDirectory)")
+                guard run("/bin/cp -prf /Volumes/\"\(thisApplicationName)/\(thisApplicationName).app\" \(InitGlobVar.athDirectory)/\"\(thisApplicationName).app\"") == "" else {
                     alertheader = "Can't copy application"
-                    alertdetail = "/Volumes/\"\(thisApplicationName)/\(thisApplicationName).app\" to \(initGlobVar.athDirectory)"
+                    alertdetail = "/Volumes/\"\(thisApplicationName)/\(thisApplicationName).app\" to \(InitGlobVar.athDirectory)"
                     print("\(thisComponent) : \(alertheader) \(alertdetail)")
                     _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
                     isUpdateAvailable = false
@@ -137,11 +137,11 @@ class UpdateController {
                 }
             }
             if isUpdateAvailable {
-                while (!initGlobVar.defaultfileManager.fileExists(atPath: "\(initGlobVar.athDirectory)/\(thisApplicationName).app")) {
+                while (!InitGlobVar.defaultfileManager.fileExists(atPath: "\(InitGlobVar.athDirectory)/\(thisApplicationName).app")) {
                     Thread.sleep(forTimeInterval: 0.2)
                 }
                 //MARK: .app from .dmg copied to temp Dir .dmg is detached
-                print("\(thisComponent) : /Volumes/\"\(thisApplicationName)/\(thisApplicationName).app\" copied to \(initGlobVar.athDirectory)!")
+                print("\(thisComponent) : /Volumes/\"\(thisApplicationName)/\(thisApplicationName).app\" copied to \(InitGlobVar.athDirectory)!")
                 print("\(thisComponent) : Try to umount Volume \"/Volumes/\(thisApplicationName)\"")
                 notify(title: "Try to umount dmg...", informativeText: "")
                 guard run("/usr/bin/hdiutil detach  /Volumes/\"\(thisApplicationName)\" -force -quiet") == "" else {
@@ -158,13 +158,13 @@ class UpdateController {
         
         //MARK: does this new .app alowed on this OS version
         if isUpdateAvailable {
-            while (!initGlobVar.defaultfileManager.fileExists(atPath: "\(initGlobVar.athDirectory)/\(thisApplicationName).app")) {
+            while (!InitGlobVar.defaultfileManager.fileExists(atPath: "\(InitGlobVar.athDirectory)/\(thisApplicationName).app")) {
                 Thread.sleep(forTimeInterval: 0.2)
             }
             print("\(thisComponent) : Is new app v\(marketVersion) allowed on current OS \(HCVersion.OSnum)?")
             notify(title: "Is new app v\(marketVersion) allowed...", informativeText: "")
-            let plistNewVersion = "\(initGlobVar.athDirectory)/\(thisApplicationName).app/Contents/Info.plist"
-            if initGlobVar.defaultfileManager.fileExists(atPath: "\(plistNewVersion)") {
+            let plistNewVersion = "\(InitGlobVar.athDirectory)/\(thisApplicationName).app/Contents/Info.plist"
+            if InitGlobVar.defaultfileManager.fileExists(atPath: "\(plistNewVersion)") {
                 if let resourceFileDictionaryContent = NSDictionary(contentsOfFile: "\(plistNewVersion)") {
                     // Get "LSMinimumSystemVersion" value by key
                     minSystemVersion = resourceFileDictionaryContent.object(forKey: "LSMinimumSystemVersion")! as! String
@@ -213,20 +213,20 @@ class UpdateController {
         }
 
         //MARK: this new .app allowed current app is removed before installing new one
-        if isUpdateAvailable && initGlobVar.defaultfileManager.fileExists(atPath: initGlobVar.thisAppliLocation) {
-            while (!initGlobVar.defaultfileManager.fileExists(atPath: exeToSearch)) {
+        if isUpdateAvailable && InitGlobVar.defaultfileManager.fileExists(atPath: InitGlobVar.thisAppliLocation) {
+            while (!InitGlobVar.defaultfileManager.fileExists(atPath: exeToSearch)) {
                 Thread.sleep(forTimeInterval: 0.2)
             }
             print("\(thisComponent) : Removing Old App...")
             notify(title: "Removing Old App...", informativeText: "")
-            if initGlobVar.defaultfileManager.fileExists(atPath: initGlobVar.thisAppliLocation) {
+            if InitGlobVar.defaultfileManager.fileExists(atPath: InitGlobVar.thisAppliLocation) {
                 do {
-                    try initGlobVar.defaultfileManager.removeItem(atPath: "\(initGlobVar.thisAppliLocation)")
-                    print("\(thisComponent) : Directory \(initGlobVar.thisAppliLocation) deleted successfully")
+                    try InitGlobVar.defaultfileManager.removeItem(atPath: "\(InitGlobVar.thisAppliLocation)")
+                    print("\(thisComponent) : Directory \(InitGlobVar.thisAppliLocation) deleted successfully")
                 } catch {
-                    print("\(thisComponent) : Error deleting Directory \(initGlobVar.thisAppliLocation) with error : (\(error))")
+                    print("\(thisComponent) : Error deleting Directory \(InitGlobVar.thisAppliLocation) with error : (\(error))")
                     alertheader = "Failed to delete the old copy of"
-                    alertdetail = "\(initGlobVar.thisAppliLocation)\nPlease make sure it is in \(initGlobVar.allAppliLocation) folder!!!"
+                    alertdetail = "\(InitGlobVar.thisAppliLocation)\nPlease make sure it is in \(InitGlobVar.allAppliLocation) folder!!!"
                     print("\(thisComponent) : \(alertheader) \(alertdetail)")
                     _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
                     isUpdateAvailable = false
@@ -239,7 +239,7 @@ class UpdateController {
         if isUpdateAvailable {
             print("\(thisComponent) : Copying New Version \"/\(thisApplicationName).app\" Almost there!")
             notify(title: "New Version Install...", informativeText: "")
-            guard run("/bin/mv -f \(initGlobVar.athDirectory)\"/\(thisApplicationName).app\" \(initGlobVar.allAppliLocation)") == "" else {
+            guard run("/bin/mv -f \(InitGlobVar.athDirectory)\"/\(thisApplicationName).app\" \(InitGlobVar.allAppliLocation)") == "" else {
                 alertheader = "Can't replace application"
                 alertdetail = "\"\(thisApplicationName)\""
                 print("\(thisComponent) : \(alertheader) \(alertdetail)")
@@ -251,13 +251,13 @@ class UpdateController {
 
         //MARK: update complete, that's all folks
         if isUpdateAvailable {
-            while (!initGlobVar.defaultfileManager.fileExists(atPath: initGlobVar.thisAppliLocation)) {
+            while (!InitGlobVar.defaultfileManager.fileExists(atPath: InitGlobVar.thisAppliLocation)) {
                 Thread.sleep(forTimeInterval: 0.2)
             }
             if isUpdateAvailable {
                 print("\(thisComponent) : Update Complete!...Launching New \"\(thisApplicationName).app\" Version...")
                 notify(title: "Update Complete...Launching  New Version...", informativeText: "")
-                _ = run("/usr/bin/open \"\(initGlobVar.thisAppliLocation)\"")
+                _ = run("/usr/bin/open \"\(InitGlobVar.thisAppliLocation)\"")
                 exit(0)
             }
         }
@@ -301,11 +301,11 @@ class UpdateController {
     static func checkFileExtension(atPath path: String, withExtensions fileExtensionInArray:[String]) -> String {
         let pathURL = NSURL(fileURLWithPath: path, isDirectory: true)
         var fileNameToReturn: String = ""
-        if let enumerator = initGlobVar.defaultfileManager.enumerator(atPath: path) {
+        if let enumerator = InitGlobVar.defaultfileManager.enumerator(atPath: path) {
             for file in enumerator {
                 let pathElement = NSURL(fileURLWithPath: file as! String, relativeTo: pathURL as URL).path
                 print("\(thisComponent) : Element from archive : \(String(describing: pathElement))")
-                if pathElement?.replacingOccurrences(of: "%20", with: " ").contains("\(initGlobVar.athDirectory)/\(thisApplicationName)") ?? false {
+                if pathElement?.replacingOccurrences(of: "%20", with: " ").contains("\(InitGlobVar.athDirectory)/\(thisApplicationName)") ?? false {
                     fileExtensionInArray.forEach { extention in
                         if pathElement?.hasSuffix(extention) ?? false {
                             fileNameToReturn = pathElement?.replacingOccurrences(of: "%20", with: " ") ?? ""

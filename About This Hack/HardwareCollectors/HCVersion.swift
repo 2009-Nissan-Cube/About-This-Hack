@@ -117,8 +117,8 @@ class HCVersion {
     }
 
     private static func getOCLPInfo() -> String {
-        guard FileManager.default.fileExists(atPath: initGlobVar.oclpXmlFilePath),
-              let xmlData = FileManager.default.contents(atPath: initGlobVar.oclpXmlFilePath),
+        guard FileManager.default.fileExists(atPath: InitGlobVar.oclpXmlFilePath),
+              let xmlData = FileManager.default.contents(atPath: InitGlobVar.oclpXmlFilePath),
               let xmlString = String(data: xmlData, encoding: .utf8) else {
             return ""
         }

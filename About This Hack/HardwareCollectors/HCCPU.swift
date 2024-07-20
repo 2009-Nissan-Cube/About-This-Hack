@@ -17,7 +17,7 @@ class HCCPU {
     }
     
     private static func getCPUDetails() -> String {
-        guard let content = try? String(contentsOfFile: initGlobVar.hwFilePath, encoding: .utf8) else {
+        guard let content = try? String(contentsOfFile: InitGlobVar.hwFilePath, encoding: .utf8) else {
             return "Unable to read CPU details"
         }
         

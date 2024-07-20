@@ -15,22 +15,19 @@ class WindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         print("loaded")
-        
         self.tabViewController = self.window?.contentViewController as? NSTabViewController
     }
 
     @IBAction func segmentedControlSwitched(_ sender: Any) {
-        
         print("switched")
-        let segCtrl = sender as! NSSegmentedControl
+        guard let segCtrl = sender as? NSSegmentedControl else { return }
         currentView = segCtrl.selectedSegment
-        self.tabViewController?.selectedTabViewItemIndex = currentView
+        tabViewController?.selectedTabViewItemIndex = currentView
     }
+    
     public func changeView(new: Int) {
         print("changed to \(new)")
-        self.tabViewController?.selectedTabViewItemIndex = new
-        if(segmentedControl != nil) {
-            segmentedControl.selectedSegment = new
-        }
+        tabViewController?.selectedTabViewItemIndex = new
+        segmentedControl?.selectedSegment = new
     }
 }

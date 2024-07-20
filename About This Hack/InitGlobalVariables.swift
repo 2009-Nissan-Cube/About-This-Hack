@@ -5,26 +5,33 @@
 import Foundation
 import AppKit
 
-class initGlobVar {
+class InitGlobVar {
     
-    static var thisComponent: String {
-        return String(describing: self)
+    // Computed property for thisApplicationName
+    static var thisApplicationName: String {
+        (Bundle.main.applicationName ?? "").replacingOccurrences(of: ".app", with: "")
     }
     
     static var athfilesDirectory       = "/.ath"
-    static var tempDirectory           = "/private/tmp" // "/tmp" is equiv.
-    static var athDirectory            = tempDirectory + athfilesDirectory
-    static var defaultfileManager      = FileManager.default
+    static var tempDirectory           = "/private/tmp"
+    
+    // Calculated property for athDirectory
+    static var athDirectory: String {
+        tempDirectory + athfilesDirectory
+    }
+    
+    static let defaultfileManager      = FileManager.default
 
     // Used by UpdateController
     static var athrepositoryURL        = "https://github.com/0xCUB3/About-This-Hack"
-    static var lastAthreleaseURL       = athrepositoryURL + "/releases/download/"
-    static var allAppliLocation        = "/Applications"
-    static var thisAppliLocation       = "\(allAppliLocation)/\(thisApplicationName).app"
-    static var newAthziprelease        = "\(thisApplicationName.replacingOccurrences(of: " ", with: ".")).zip"
-    static var newAthreleasezip        = athDirectory + "/new_ath.zip"
-
-    static var athlasttagpbxproj       = "/blob/[LASTTAG]/About%20This%20Hack.xcodeproj/project.pbxproj"
+    
+    // Calculated properties for URLs and file paths (Corrected)
+    static var lastAthreleaseURL: String { athrepositoryURL + "/releases/download/" }
+    static var allAppliLocation: String { "/Applications" }
+    static var thisAppliLocation: String { "\(allAppliLocation)/\(thisApplicationName).app" }
+    static var newAthziprelease: String { "\(thisApplicationName.replacingOccurrences(of: " ", with: ".")).zip" }
+    static var newAthreleasezip: String { athDirectory + "/new_ath.zip" }
+    static var athlasttagpbxproj: String { "/blob/[LASTTAG]/About%20This%20Hack.xcodeproj/project.pbxproj" }
 
     // OCLP Dict File (if exists) where Patch Version Commit and DateTime will be extracted
     static var oclpXmlFilePath         = "/System/Library/CoreServices/OpenCore-Legacy-Patcher.plist"
@@ -32,14 +39,7 @@ class initGlobVar {
         
     // ioreg Dir perl script and pci ids and names files
     static var whichLocation           = "/usr/bin/which"
-
-//    static var sysprofLocation         = run(whichLocation + " system_profiler | /usr/bin/tr -d '\n'")
-//    static var diskutilLocation        = run(whichLocation + " diskutil | /usr/bin/tr -d '\n'")
-//    static var sysctlLocation          = run(whichLocation + " sysctl | /usr/bin/tr -d '\n'")
-//    static var catLocation             = run(whichLocation + " cat | /usr/bin/tr -d '\n'")
-//    static var ioregLocation           = run(whichLocation + " ioreg | /usr/bin/tr -d '\n'")
     static var curlLocation            = run(whichLocation + " curl  | /usr/bin/tr -d '\n'")
-//    static var perlLocation            = run(whichLocation + " perl  | /usr/bin/tr -d '\n'")
 
     // Files with Overview, Displays and Storage detailed Datas
     static var hwFilePath              = athDirectory + "/hw.txt"
@@ -68,12 +68,12 @@ class initGlobVar {
         
     static var nvramOpencoreVersion    = "4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version"
 
-    // Support URLs
+    // Support URLs -  Note: These seem identical to the above URLs.
+    // You might want to consolidate or clarify their usage.
     static var macOSUserGuidePress     = "https://support.apple.com/guide/mac-help/welcome/mac"
     static var whatsNewInMacOSPress    = "https://www.apple.com/macos/ventura/"
     static var AppleSupportPress       = "https://support.apple.com"
     static var HackintoshPress         = "https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html#table-of-contents"
     static var MacBasicsPress          = "https://help.apple.com/macos/big-sur/mac-basics/"
     static var MacUserGuidePress       = "https://support.apple.com/manuals"
-
 }
