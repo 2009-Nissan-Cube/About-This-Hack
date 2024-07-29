@@ -54,12 +54,8 @@ class HCRAM {
         }
         
         let lines = content.components(separatedBy: .newlines)
-        let type = lines.first { $0.contains("Type") }?.components(separatedBy: " ").last ?? ""
-        let speed = lines.first { $0.contains("Speed") && $0.contains("MHz") }?
-            .components(separatedBy: " ")
-            .dropFirst()
-            .prefix(2)
-            .joined(separator: " ") ?? ""
+        let type = lines.first { $0.contains("Type") }?.components(separatedBy: ": ").last ?? ""
+        let speed = lines.first { $0.contains("Speed") && $0.contains("MHz") }?.components(separatedBy: ": ").last ?? ""
         
         return (type, speed)
     }

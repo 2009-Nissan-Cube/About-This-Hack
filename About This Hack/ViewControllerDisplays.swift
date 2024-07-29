@@ -81,7 +81,9 @@ class ViewControllerDisplays: NSViewController {
             nameField.stringValue = trimmedName
             print("DisplayName: \"\(trimmedName)\"")
             
-            setDisplayImage(imageView, for: trimmedName)
+            if (!(index == 0 && HardwareCollector.shared.hasBuiltInDisplay)) {
+                setDisplayImage(imageView, for: trimmedName)
+            }
         }
         
         if index < HardwareCollector.shared.displayRes.count {

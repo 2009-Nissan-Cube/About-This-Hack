@@ -15,6 +15,7 @@ class ViewController: NSViewController {
     @IBOutlet private weak var serialNumber: NSTextField!
     @IBOutlet private weak var serialToggle: NSButton!
     @IBOutlet private weak var blVersion: NSTextField!
+    @IBOutlet private weak var blVersionToggle: NSButton!
     @IBOutlet private weak var blPrefix: NSTextField!
     @IBOutlet private weak var creditText: NSTextField!
     @IBOutlet private weak var btSysInfo: NSButton!
@@ -70,6 +71,7 @@ class ViewController: NSViewController {
         serialNumber.stringValue = HCSerialNumber.shared.getSerialNumber()
         blVersion.stringValue = HCBootloader.shared.getBootloader()
         serialToggle.isTransparent = true
+        blVersionToggle.isTransparent = true
         
         CATransaction.commit()
     }
@@ -110,7 +112,17 @@ class ViewController: NSViewController {
     
     // MARK: - IBActions
     @IBAction func hideSerialNumber(_ sender: NSButton) {
-        serialNumber.stringValue = serialNumber.stringValue.isEmpty ? HCSerialNumber.shared.getSerialNumber() : ""
+        serialNumber.stringValue = (serialNumber.stringValue == "▇▇▇▇▇▇▇▇") ? HCSerialNumber.shared.getSerialNumber() : "▇▇▇▇▇▇▇▇"
+    }
+    
+    @IBAction func hideBlVersion(_ sender: NSButton) {
+        if (blPrefix.stringValue == "") {
+            blPrefix.stringValue = "Bootloader"
+            blVersion.stringValue = HCBootloader.shared.getBootloader()
+        } else {
+            blPrefix.stringValue = ""
+            blVersion.stringValue = ""
+        }
     }
     
     @IBAction func showSystemReport(_ sender: NSButton) {

@@ -34,62 +34,21 @@ class HardwareCollector {
     }
     
     private func getDisplayRes() -> [String] {
-        let filePath = numberOfDisplays == 1 ? InitGlobVar.scrXmlFilePath : InitGlobVar.scrFilePath
-        guard let content = try? String(contentsOfFile: filePath, encoding: .utf8) else { return [] }
-        
-        if numberOfDisplays == 1 {
-            return content.components(separatedBy: "_spdisplays_resolution")
-                .dropFirst()
-                .compactMap { $0.components(separatedBy: .newlines)
-                    .first { $0.contains("<string>") }?
-                    .trimmingCharacters(in: .whitespaces)
-                    .replacingOccurrences(of: "<string>", with: "")
-                    .replacingOccurrences(of: "</string>", with: "")
-                }
-        } else {
-            return content.components(separatedBy: .newlines)
-                .filter { $0.contains("Resolution") }
-                .map { String($0.dropFirst(22)).trimmingCharacters(in: .whitespaces) }
-        }
+        guard let content = try? String(contentsOfFile: InitGlobVar.scrFilePath, encoding: .utf8) else { return [] }
+        return content.components(separatedBy: .newlines)
+            .filter { $0.contains("Resolution") }
+            .map { String($0.dropFirst(22)).trimmingCharacters(in: .whitespaces) }
     }
 
     private func getDisplayNames() -> [String] {
-        let firstPart = run("grep \"Display Type\" \(InitGlobVar.scrFilePath) | cut -c 25-").components(separatedBy: "\n").filter { !$0.isEmpty }
-        let secondPart = run("system_profiler SPDisplaysDataType | awk -F ' {8}|:' '/^ {8}[^ :]+/ {print $2}'").components(separatedBy: "\n").filter { !$0.isEmpty }
-        
-        if numberOfDisplays == 1 {
-            return hasBuiltInDisplay ? ["\(firstPart[0]) \(getBuiltInDisplayName())"] : secondPart
-        } else {
-            return combineDisplayNames(firstPart, secondPart)
-        }
+        let displayNames = run("cat \(InitGlobVar.scrFilePath) | awk -F ' {8}|:' '/^ {8}[^ :]+/ {print $2}'").components(separatedBy: "\n").filter { !$0.isEmpty }
+        return displayNames
     }
-    
-    private func getBuiltInDisplayName() -> String {
-        run("grep -A2 \"</data>\" \(InitGlobVar.scrXmlFilePath) | awk -F'>|<' '/_name/{getline; print $3}' | tr -d '\n'")
-    }
-    
-    private func combineDisplayNames(_ firstPart: [String], _ secondPart: [String]) -> [String] {
-        var combined: [String] = []
-        if hasBuiltInDisplay && !firstPart.isEmpty && !secondPart.isEmpty {
-            combined.append("\(firstPart[0]) \(secondPart[0])")
-        }
-        for i in 1..<max(firstPart.count, secondPart.count) {
-            if i < firstPart.count && i < secondPart.count {
-                combined.append("\(firstPart[i]) \(secondPart[i])")
-            } else if i < firstPart.count {
-                combined.append(firstPart[i])
-            } else if i < secondPart.count {
-                combined.append(secondPart[i])
-            }
-        }
-        return combined.filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
-    }
+
     
     private func checkForBuiltInDisplay() -> Bool {
         guard let content = try? String(contentsOfFile: InitGlobVar.scrFilePath, encoding: .utf8) else { return false }
-        return content.components(separatedBy: .newlines)
-            .filter { $0.contains("Display Type:") }
-            .contains { $0.lowercased().contains("built-in") }
+        return content.lowercased().contains("connection type: internal") || content.lowercased().contains("display type: built-in")
     }
 
     private func getStorageInfo() -> (Bool, String, Double) {
