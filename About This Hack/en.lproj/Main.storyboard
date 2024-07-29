@@ -444,11 +444,23 @@
                                     <action selector="hideSerialNumber:" target="f5d-9Y-QYV" id="ZOz-KY-9Oj"/>
                                 </connections>
                             </button>
+                            <button focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8bQ-4Z-3Cr">
+                                <rect key="frame" x="231" y="37" width="337" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="udU-Nt-QmA">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="hideBlVersion:" target="f5d-9Y-QYV" id="cVh-da-6B1"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="blPrefix" destination="znt-Qx-7tD" id="ZdX-FL-Dvh"/>
                         <outlet property="blVersion" destination="IuZ-wD-zIo" id="eqo-4Z-ZWR"/>
+                        <outlet property="blVersionToggle" destination="8bQ-4Z-3Cr" id="rZD-vb-xst"/>
                         <outlet property="btSoftUpd" destination="C4y-y2-XtL" id="M6z-79-c3D"/>
                         <outlet property="btSysInfo" destination="9bU-5I-G69" id="8IN-2p-ydT"/>
                         <outlet property="cpu" destination="afk-bp-wk1" id="IBN-uD-tnp"/>
