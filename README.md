@@ -63,6 +63,17 @@ A big thank you to our contributors:
 [Snoopy](https://macosicons.com/#/u/Squid4572) for helping create the new icon. <br>
 The internet for helping me with a lot of the code.
 
+---
+
+## 💖 Support About This Hack
+About This Hack is a labor of love, bringing back the classic Mac experience with modern enhancements. If you enjoy using it, consider supporting its development:
+
+<p align="center">
+  <a href="https://opencollective.com/about-this-hack" target="_blank">
+    <img src="https://opencollective.com/about-this-hack/donate/button@2x.png?color=blue" width=300 />
+  </a>
+</p>
+
 ## 📞 Contact
 Got questions or suggestions? Reach out:
 - Discord: 0xcube
