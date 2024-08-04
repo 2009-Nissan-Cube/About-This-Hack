@@ -23,7 +23,7 @@ class InitGlobVar {
     static let defaultfileManager      = FileManager.default
 
     // Used by UpdateController
-    static var athrepositoryURL        = "https://github.com/0xCUB3/About-This-Hack"
+    static var athrepositoryURL        = "https://github.com/2009-Nissan-Cube/About-This-Hack"
     
     // Calculated properties for URLs and file paths (Corrected)
     static var lastAthreleaseURL: String { athrepositoryURL + "/releases/download/" }
