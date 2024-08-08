@@ -25,7 +25,11 @@ class HCVersion {
 
     private func getOSNumber() -> String {
         let osVersion = ProcessInfo.processInfo.operatingSystemVersion
-        return "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
+        if (osVersion.patchVersion == 0) {
+            return "\(osVersion.majorVersion).\(osVersion.minorVersion)"
+        } else {
+            return "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
+        }
     }
   
     private func getOSBuild() -> String {
