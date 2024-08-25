@@ -36,8 +36,6 @@ Some values show more details when hovered over. See if you can find them all! ð
 
 There is also a native auto-updater that reminds you when a new version releases!
 
-![image](https://github.com/matxpa/About-This-Hack/assets/70573409/ca7481a0-c0ae-4952-9c2a-7dc717bad927)
-
 ---
 
 ## ðŸš€ Getting Started
