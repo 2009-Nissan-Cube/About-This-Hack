@@ -20,13 +20,14 @@ class HCMacModel {
     }
     
     private func getMacName() -> String {
-        //let infoString = getModelIdentifier()
-        //let (displaySize, name) = macModels[infoString] ?? (0, "Mac")
-        //builtInDisplaySize = displaySize
+        let infoString = getModelIdentifier()
+        let (displaySize, name) = macModels[infoString] ?? (0, "Mac")
+        builtInDisplaySize = displaySize
         //return name
         
         let baseCommand = "defaults read"
-        let plistPath = "~/Library/Preferences/com.apple.SystemProfiler.plist"
+//        let plistPath = "~/Library/Preferences/com.apple.SystemProfiler.plist"
+        let plistPath = "~/temp/sp.plist"
         let key = "\"CPU Names\""
         let cutCommand = "| cut -sd '\"' -f 4"
         let uniqCommand = "| uniq"
@@ -34,7 +35,7 @@ class HCMacModel {
         // Combine all parts into a single command string
         let fullCommand = "\(baseCommand) \(plistPath) \(key) \(cutCommand) \(uniqCommand)"
         
-        return run(fullCommand).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? "Unknown"
+        return run(fullCommand).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
 
     }
     
