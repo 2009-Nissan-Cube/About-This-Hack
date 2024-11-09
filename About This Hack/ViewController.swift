@@ -72,6 +72,8 @@ class ViewController: NSViewController {
         blVersion.stringValue = HCBootloader.shared.getBootloader()
         serialToggle.isTransparent = true
         blVersionToggle.isTransparent = true
+        blPrefix.isHidden = false
+        blVersion.isHidden = false
         
         CATransaction.commit()
     }
@@ -116,12 +118,12 @@ class ViewController: NSViewController {
     }
     
     @IBAction func hideBlVersion(_ sender: NSButton) {
-        if (blPrefix.stringValue == "") {
-            blPrefix.stringValue = "Bootloader"
-            blVersion.stringValue = HCBootloader.shared.getBootloader()
+        if (blPrefix.isHidden) {
+            blPrefix.isHidden = false
+            blVersion.isHidden = false
         } else {
-            blPrefix.stringValue = ""
-            blVersion.stringValue = ""
+            blPrefix.isHidden = true
+            blVersion.isHidden = true
         }
     }
     
