@@ -4,18 +4,42 @@ class HCCPU {
     static let shared = HCCPU()
     private init() {}
     
-    private lazy var cpuInfo: (brand: String, details: String) = {
+    private lazy var cpuInfo: (brand: String, details: String, coreCount: Int) = {
         let brand = run("sysctl -n machdep.cpu.brand_string").trimmingCharacters(in: .whitespacesAndNewlines)
         let details = getCPUDetails()
-        return (brand, details)
+        let coreCount = getCPUCoreCount()
+        return (brand, details, coreCount)
     }()
     
     func getCPU() -> String {
-        return cpuInfo.brand
+        
+        let cpuCoreCount = getCPUCoreCount()
+        
+        let modifiedBrand = cpuInfo.brand.replacingOccurrences(of: "(R)", with: "").replacingOccurrences(of: "(TM)", with: "")
+        
+
+        if cpuCoreCount >= 2 {
+            return "\(cpuCoreCount)x \(modifiedBrand)"
+        } else {
+            return modifiedBrand
+        }
     }
     
     func getCPUInfo() -> String {
         return cpuInfo.details
+    }
+    
+    func getCPUCoreCount() -> Int {
+        var count: UInt32 = 0
+        var size = MemoryLayout<UInt32>.size
+        let result = sysctlbyname("hw.packages", &count, &size, nil, 0)
+        
+        if result == 0 {
+             return Int(count)
+        } else {
+            print("Failed to get physical CPU count")
+            return -1
+        }
     }
     
     private func getCPUDetails() -> String {
