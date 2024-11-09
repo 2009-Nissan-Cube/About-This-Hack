@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -403,7 +403,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1602;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = DNP7DGUB7B;
+				DEVELOPMENT_TEAM = 7XQ65R8AB5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "About This Hack/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "About This Hack";
@@ -437,7 +437,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1602;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = DNP7DGUB7B;
+				DEVELOPMENT_TEAM = 7XQ65R8AB5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "About This Hack/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "About This Hack";
