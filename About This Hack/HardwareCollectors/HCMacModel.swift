@@ -20,9 +20,9 @@ class HCMacModel {
     }
     
     private func getMacName() -> String {
-        //let infoString = getModelIdentifier()
-        //let (displaySize, name) = macModels[infoString] ?? (0, "Mac")
-        //builtInDisplaySize = displaySize
+        let infoString = getModelIdentifier()
+        let (displaySize, name) = macModels[infoString] ?? (0, "Mac")
+        builtInDisplaySize = displaySize
         //return name
         
         let baseCommand = "defaults read"
@@ -34,7 +34,7 @@ class HCMacModel {
         // Combine all parts into a single command string
         let fullCommand = "\(baseCommand) \(plistPath) \(key) \(cutCommand) \(uniqCommand)"
         
-        return run(fullCommand).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? "Unknown"
+        return run(fullCommand).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
 
     }
     
