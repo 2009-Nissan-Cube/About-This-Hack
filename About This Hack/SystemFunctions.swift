@@ -77,7 +77,7 @@ var toolTips_SrN_Info_Displayed:  String = "Unknown"
 var IOMainorMasterPortDefault:UInt32 = 0
 func initPortDefault() {
 	if #available(macOS 12.0, *)  {
-		IOMainorMasterPortDefault = kIOMainPortDefault      // New name as of macOS 12
+        IOMainorMasterPortDefault = kIOMainPortDefault      // New name as of macOS 12
 	} else {
 		IOMainorMasterPortDefault = kIOMasterPortDefault    // Old name up to macOS 11
 	}

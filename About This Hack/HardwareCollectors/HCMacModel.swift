@@ -16,13 +16,26 @@ class HCMacModel {
     
     func getModelIdentifier() -> String {
         run("sysctl hw.model | awk '{print $2}' | tr -d '\n'").nilIfEmpty ?? "Unknown"
+
     }
     
     private func getMacName() -> String {
-        let infoString = getModelIdentifier()
-        let (displaySize, name) = macModels[infoString] ?? (0, "Mac")
-        builtInDisplaySize = displaySize
-        return name
+        //let infoString = getModelIdentifier()
+        //let (displaySize, name) = macModels[infoString] ?? (0, "Mac")
+        //builtInDisplaySize = displaySize
+        //return name
+        
+        let baseCommand = "defaults read"
+        let plistPath = "~/Library/Preferences/com.apple.SystemProfiler.plist"
+        let key = "\"CPU Names\""
+        let cutCommand = "| cut -sd '\"' -f 4"
+        let uniqCommand = "| uniq"
+
+        // Combine all parts into a single command string
+        let fullCommand = "\(baseCommand) \(plistPath) \(key) \(cutCommand) \(uniqCommand)"
+        
+        return run(fullCommand).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? "Unknown"
+
     }
     
     private lazy var macModels: [String: (Float, String)] = [
