@@ -26,8 +26,7 @@ class HCMacModel {
         //return name
         
         let baseCommand = "defaults read"
-//        let plistPath = "~/Library/Preferences/com.apple.SystemProfiler.plist"
-        let plistPath = "~/temp/sp.plist"
+        let plistPath = "~/Library/Preferences/com.apple.SystemProfiler.plist"
         let key = "\"CPU Names\""
         let cutCommand = "| cut -sd '\"' -f 4"
         let uniqCommand = "| uniq"
