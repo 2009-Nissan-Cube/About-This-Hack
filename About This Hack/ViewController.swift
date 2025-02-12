@@ -117,15 +117,15 @@ class ViewController: NSViewController {
         serialNumber.stringValue = (serialNumber.stringValue == "") ? HCSerialNumber.shared.getSerialNumber() : ""
     }
     
-    @IBAction func hideBlVersion(_ sender: NSButton) {
-        if (blPrefix.isHidden) {
-            blPrefix.isHidden = false
-            blVersion.isHidden = false
-        } else {
-            blPrefix.isHidden = true
-            blVersion.isHidden = true
-        }
-    }
+//    @IBAction func hideBlVersion(_ sender: NSButton) {
+//        if (blPrefix.isHidden) {
+//            blPrefix.isHidden = false
+//            blVersion.isHidden = false
+//        } else {
+//            blPrefix.isHidden = true
+//            blVersion.isHidden = true
+//        }
+//    }
     
     @IBAction func showSystemReport(_ sender: NSButton) {
         NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/SystemProfiler/SPPlatformReporter.spreporter"))
