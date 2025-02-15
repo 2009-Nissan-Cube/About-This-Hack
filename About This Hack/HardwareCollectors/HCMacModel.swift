@@ -16,22 +16,22 @@ class HCMacModel {
     
     func getModelIdentifier() -> String {
         run("sysctl hw.model | awk '{print $2}' | tr -d '\n'").nilIfEmpty ?? "Unknown"
-
     }
     
     private func getMacName() -> String {
+        
         let infoString = getModelIdentifier()
         let (displaySize, name) = macModels[infoString] ?? (0, "Mac")
         builtInDisplaySize = displaySize
         //return name
-        
-//        // MacPro7,1 OK
-//        let command = "cat \(InitGlobVar.hwFilePath) | grep \"Model Identifier\" | cut -d \":\" -f4"
-//        return run(command).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
 
-        // MacPro7,1 OK
-        let command = "/usr/sbin/sysctl -n hw.model"
+//        // MacPro7,1 OK
+        let command = "cat \(InitGlobVar.hwFilePath) | grep \"Model Identifier\" | cut -d \":\" -f4"
         return run(command).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
+
+         // MacPro7,1 error
+//       let command = "/usr/sbin/sysctl -n hw.model"
+//       return run(command).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
 
 //        // MacPro7,1 error
 //        let command = "ioreg -l | grep product-name | cut -c 28- | sed 's/.\\{2\\}$//'"
