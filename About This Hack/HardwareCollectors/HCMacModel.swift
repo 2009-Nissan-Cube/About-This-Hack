@@ -25,28 +25,28 @@ class HCMacModel {
         builtInDisplaySize = displaySize
         //return name
 
-//      // MacPro7,1 OK
+        // MacPro7,1 OK
         let command = "cat \(InitGlobVar.hwFilePath) | grep \"Model Identifier\" | cut -d \":\" -f4"
         return run(command).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
 
-         // MacPro7,1 error
-//       let command = "/usr/sbin/sysctl -n hw.model"
-//       return run(command).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
+        // MacPro7,1 error
+//        let command = "/usr/sbin/sysctl -n hw.model"
+//        return run(command).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
 
-          // MacPro7,1 error
+        // MacPro7,1 error
 //        let command = "ioreg -l | grep product-name | cut -c 28- | sed 's/.\\{2\\}$//'"
 //        return run(command).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
-//        
-          // MacPro7,1 error
+
+        // MacPro7,1 error
 //        let baseCommand = "defaults read"
 //        let plistPath = "~/Library/Preferences/com.apple.SystemProfiler.plist"
 //        let key = "\"CPU Names\""
 //        let cutCommand = "| cut -sd '\"' -f 4"
 //        let uniqCommand = "| uniq"
-//
-//        // Combine all parts into a single command string
+
+        // Combine all parts into a single command string
 //        let fullCommand = "\(baseCommand) \(plistPath) \(key) \(cutCommand) \(uniqCommand)"
-//        
+//
 //        return run(fullCommand).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
 
     }
