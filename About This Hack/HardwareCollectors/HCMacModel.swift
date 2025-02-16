@@ -25,16 +25,21 @@ class HCMacModel {
         builtInDisplaySize = displaySize
         //return name
         
-        let baseCommand = "defaults read"
-        let plistPath = "~/Library/Preferences/com.apple.SystemProfiler.plist"
-        let key = "\"CPU Names\""
-        let cutCommand = "| cut -sd '\"' -f 4"
-        let uniqCommand = "| uniq"
+        // MacPro7,1 OK
+        let command = "cat \(InitGlobVar.hwFilePath) | grep \"Model Identifier\" | cut -d \":\" -f4"
+        return run(command).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
+
+        // MacPro7,1 error
+//        let baseCommand = "defaults read"
+//        let plistPath = "~/Library/Preferences/com.apple.SystemProfiler.plist"
+//        let key = "\"CPU Names\""
+//        let cutCommand = "| cut -sd '\"' -f 4"
+//        let uniqCommand = "| uniq"
 
         // Combine all parts into a single command string
-        let fullCommand = "\(baseCommand) \(plistPath) \(key) \(cutCommand) \(uniqCommand)"
-        
-        return run(fullCommand).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
+//        let fullCommand = "\(baseCommand) \(plistPath) \(key) \(cutCommand) \(uniqCommand)"
+//
+//        return run(fullCommand).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
 
     }
     
