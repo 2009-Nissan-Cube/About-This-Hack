@@ -25,7 +25,7 @@ class HCMacModel {
         builtInDisplaySize = displaySize
         //return name
 
-//        // MacPro7,1 OK
+//      // MacPro7,1 OK
         let command = "cat \(InitGlobVar.hwFilePath) | grep \"Model Identifier\" | cut -d \":\" -f4"
         return run(command).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
 
@@ -33,11 +33,11 @@ class HCMacModel {
 //       let command = "/usr/sbin/sysctl -n hw.model"
 //       return run(command).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
 
-//        // MacPro7,1 error
+          // MacPro7,1 error
 //        let command = "ioreg -l | grep product-name | cut -c 28- | sed 's/.\\{2\\}$//'"
 //        return run(command).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
 //        
-//        // MacPro7,1 error
+          // MacPro7,1 error
 //        let baseCommand = "defaults read"
 //        let plistPath = "~/Library/Preferences/com.apple.SystemProfiler.plist"
 //        let key = "\"CPU Names\""
