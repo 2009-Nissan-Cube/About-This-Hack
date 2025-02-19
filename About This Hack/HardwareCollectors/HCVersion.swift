@@ -105,7 +105,7 @@ class HCVersion {
         // Bootloader is OpenCore or Clover
         if !cloverOCcommand.contains("Apple") {
             
-            let csrConfig = run("ioreg -l | grep csr-active-config | cut -c 38- | cut -c -8")
+            let csrConfig = run("ioreg -l | grep csr-active-config | cut -c 38- | cut -c -8 | tr -d '\n'")
             let sipStatus = (csrConfig == "00000000") ? "Enabled" : "Disabled"
             return "System Integrity Protection: \(sipStatus) \n0x" + csrConfig
             
