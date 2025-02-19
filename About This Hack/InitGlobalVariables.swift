@@ -21,6 +21,9 @@ class InitGlobVar {
     }
     
     static let defaultfileManager      = FileManager.default
+    
+    // Used to check OC/Clover or Apple bootloader
+    static var cloverOC                 = run("sysctl -n machdep.cpu.brand_string")
 
     // Used by UpdateController
     static var athrepositoryURL        = "https://github.com/2009-Nissan-Cube/About-This-Hack"

@@ -12,6 +12,9 @@ class HCVersion {
     var osPrefix: String = "macOS"
     var dataHasBeenSet: Bool = false
     
+    // Clover/OC or Apple bootloader
+    let cloverOCcommand = InitGlobVar.cloverOC
+    
     func getVersion() {
         guard !dataHasBeenSet else { return }
         
@@ -98,25 +101,45 @@ class HCVersion {
     }
     
     private func getSIPInfo() -> String {
-        let csrConfig = csrActiveConfig()
-        let sipStatus = (csrConfig == 0) ? "Enabled" : "Disabled"
-        return "System Integrity Protection: \(sipStatus) (0x\(String(format:"%08x", csrConfig)))"
-    }
-
-    private func csrActiveConfig() -> UInt32 {
-        var config: UInt32 = 0
-        var size = MemoryLayout<UInt32>.size
-        sysctlbyname("kern.bootargs", nil, &size, nil, 0)
-        var bootArgs = [CChar](repeating: 0, count: size)
-        sysctlbyname("kern.bootargs", &bootArgs, &size, nil, 0)
-        let bootArgsString = String(cString: bootArgs)
         
-        if let configValue = bootArgsString.captureGroup(for: "csr-active-config=(0x[0-9a-fA-F]+)") {
-            config = UInt32(configValue.dropFirst(2), radix: 16) ?? 0
-        } else {
-            sysctlbyname("kern.csr_active_config", &config, &size, nil, 0)
+        // Bootloader is OpenCore or Clover
+        if !cloverOCcommand.contains("Apple") {
+            
+            let csrConfig = run("ioreg -l | grep csr-active-config | cut -c 38- | cut -c -8")
+            let sipStatus = (csrConfig == "00000000") ? "Enabled" : "Disabled"
+            return "System Integrity Protection: \(sipStatus) \n0x" + csrConfig
+            
         }
         
+        // Bootloader is Apple
+        else {
+            
+            let csrConfig = csrActiveConfig()
+            let sipStatus = (csrConfig == 0) ? "Enabled" : "Disabled"
+            return "System Integrity Protection: \(sipStatus) (0x\(String(format:"%08x", csrConfig)))"
+            
+        }
+    }
+    
+    // Needed if bootloader is Apple
+    private func csrActiveConfig() -> UInt32 {
+        var config: UInt32 = 0
+        
+        if cloverOCcommand.contains("Apple") {
+            //var config: UInt32 = 0
+            var size = MemoryLayout<UInt32>.size
+            sysctlbyname("kern.bootargs", nil, &size, nil, 0)
+            var bootArgs = [CChar](repeating: 0, count: size)
+            sysctlbyname("kern.bootargs", &bootArgs, &size, nil, 0)
+            let bootArgsString = String(cString: bootArgs)
+            
+            if let configValue = bootArgsString.captureGroup(for: "csr-active-config=(0x[0-9a-fA-F]+)") {
+                config = UInt32(configValue.dropFirst(2), radix: 16) ?? 0
+            } 
+            else {
+                sysctlbyname("kern.csr_active_config", &config, &size, nil, 0)
+            }
+        }
         return config
     }
 
