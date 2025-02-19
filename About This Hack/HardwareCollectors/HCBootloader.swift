@@ -21,11 +21,16 @@ class HCBootloader {
     }()
     
     private lazy var bootargsInfo: String = {
+    
+        // Commnad in Terminal
+        // nvram -x boot-args 2>/dev/null | grep -A1 "<key>boot-args</key>" | tail -1 | awk -F "<string>" '{print $NF}' | awk -F "</string>" '{print $1}' | tr -d '\n'
         var bootargs = run("nvram -x boot-args 2>/dev/null | grep -A1 \"<key>boot-args</key>\" | tail -1 | awk -F \"<string>\" '{print $NF}' | awk -F \"<\\/string>\" '{print $1}'  | tr -d '\n'")
         
-        if bootargs.isEmpty {
-            bootargs = run("\(InitGlobVar.bdmesgExecID) 2>/dev/null | grep ' boot-args=' | tail -1 | awk -F ' boot-args=' '{print $NF}' | tr -d '\n'")
-        }
+        // Skipped since bdmesg may or may not be present
+        // and cloverInfo is got from InitGlobVar.hwFilePath
+//        if bootargs.isEmpty {
+//            bootargs = run("\(InitGlobVar.bdmesgExecID) 2>/dev/null | grep ' boot-args=' | tail -1 | awk -F ' boot-args=' '{print $NF}' | tr -d '\n'")
+//        }
         
         return bootargs.isEmpty ? "Empty/Unknown" : bootargs
     }()
