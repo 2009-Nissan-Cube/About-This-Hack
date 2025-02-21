@@ -14,7 +14,7 @@ class HCVersion {
     
     // Clover/OC or Apple bootloader
     let cloverOCcommand = InitGlobVar.cloverOC
-    
+
     func getVersion() {
         guard !dataHasBeenSet else { return }
         
@@ -100,49 +100,58 @@ class HCVersion {
         return String(cString: kernel)
     }
     
+    
     private func getSIPInfo() -> String {
         
         // Bootloader is OpenCore or Clover
-        if !cloverOCcommand.contains("Apple") {
-            
-            let csrConfig = run("ioreg -l | grep csr-active-config | cut -c 38- | cut -c -8 | tr -d '\n'")
-            let sipStatus = (csrConfig == "00000000") ? "Enabled" : "Disabled"
-            return "System Integrity Protection: \(sipStatus) \n0x" + csrConfig
-            
-        }
-        
-        // Bootloader is Apple
-        else {
-            
-            let csrConfig = csrActiveConfig()
-            let sipStatus = (csrConfig == 0) ? "Enabled" : "Disabled"
-            return "System Integrity Protection: \(sipStatus) (0x\(String(format:"%08x", csrConfig)))"
-            
-        }
-    }
-    
-    // Needed if bootloader is Apple
-    private func csrActiveConfig() -> UInt32 {
-        var config: UInt32 = 0
-        
-        if cloverOCcommand.contains("Apple") {
-            //var config: UInt32 = 0
-            var size = MemoryLayout<UInt32>.size
-            sysctlbyname("kern.bootargs", nil, &size, nil, 0)
-            var bootArgs = [CChar](repeating: 0, count: size)
-            sysctlbyname("kern.bootargs", &bootArgs, &size, nil, 0)
-            let bootArgsString = String(cString: bootArgs)
-            
-            if let configValue = bootArgsString.captureGroup(for: "csr-active-config=(0x[0-9a-fA-F]+)") {
-                config = UInt32(configValue.dropFirst(2), radix: 16) ?? 0
-            } 
-            else {
-                sysctlbyname("kern.csr_active_config", &config, &size, nil, 0)
-            }
-        }
-        return config
-    }
+         if !cloverOCcommand.contains("Apple") {
+             
+             print("This is Intel with OC / Clover") //Test
+             
+             // Working only on Intel Macs
+             let csrConfig = run("ioreg -l | grep csr-active-config | cut -c 38- | cut -c -8 | tr -d '\n'")
+             let sipStatus = (csrConfig == "00000000") ? "Enabled" : "Disabled"
+             return "System Integrity Protection: \(sipStatus) \n0x" + csrConfig
+             
+         }
+         
+         // Bootloader is Apple
+         else {
+             
+             print("This is Apple Intel without OC or Silicon") //Test
+             
+             // Working on Apple Silicon (Intel Macs too)
+             // Get NVRAM csr-active-config value as 8 characters string >> 08030000
+             // Reverse order of character pairs miming reverse byte order >> 00000308
+             // Swap firts 4 with last 4 characters (perl) >> 03080000
+             let csrConfig = run("nvram -x csr-active-config | grep -E '\\s<data>$' -A1 | tail -1 | base64 -d | hexdump | cut -c 9- | tr -d ' ' | xxd -revert -plain | LC_ALL=C rev | tr -d '\n' | xxd -plain | perl -pe 's/^(.{4})(.{4})$/\\2\\1/g'")
+             let sipStatus = (csrConfig == "00000000") ? "Enabled" : "Disabled"
+             return "System Integrity Protection: \(sipStatus) \n0x" + csrConfig
+             
+         }
+     }
 
+//    private func csrActiveConfig() -> UInt32 {
+//        var config: UInt32 = 0
+//        
+//        if cloverOCcommand.contains("Apple") {
+//            //var config: UInt32 = 0
+//            var size = MemoryLayout<UInt32>.size
+//            sysctlbyname("kern.bootargs", nil, &size, nil, 0)
+//            var bootArgs = [CChar](repeating: 0, count: size)
+//            sysctlbyname("kern.bootargs", &bootArgs, &size, nil, 0)
+//            let bootArgsString = String(cString: bootArgs)
+//            
+//            if let configValue = bootArgsString.captureGroup(for: "csr-active-config=(0x[0-9a-fA-F]+)") {
+//                config = UInt32(configValue.dropFirst(2), radix: 16) ?? 0
+//            }
+//            else {
+//                sysctlbyname("kern.csr_active_config", &config, &size, nil, 0)
+//            }
+//        }
+//        return config
+//    }
+    
     private func getOCLPInfo() -> String {
         guard let xmlString = try? String(contentsOfFile: InitGlobVar.oclpXmlFilePath, encoding: .utf8) else {
             return ""
