@@ -102,23 +102,31 @@ class HCVersion {
         let sipStatus = (csrConfig == 0) ? "Enabled" : "Disabled"
         return "System Integrity Protection: \(sipStatus) (0x\(String(format:"%08x", csrConfig)))"
     }
-
+    
     private func csrActiveConfig() -> UInt32 {
-        var config: UInt32 = 0
-        var size = MemoryLayout<UInt32>.size
-        sysctlbyname("kern.bootargs", nil, &size, nil, 0)
-        var bootArgs = [CChar](repeating: 0, count: size)
-        sysctlbyname("kern.bootargs", &bootArgs, &size, nil, 0)
-        let bootArgsString = String(cString: bootArgs)
-        
-        if let configValue = bootArgsString.captureGroup(for: "csr-active-config=(0x[0-9a-fA-F]+)") {
-            config = UInt32(configValue.dropFirst(2), radix: 16) ?? 0
-        } else {
-            sysctlbyname("kern.csr_active_config", &config, &size, nil, 0)
-        }
-        
-        return config
+        let config = ObjCSIP() // reference to Objective-C file
+        var csrConfig = UInt32(config.sipValue()) // method of the Objective-C file (long >> UInt32)
+        csrConfig = csrConfig.byteSwapped // big endian to litle endian e.g. 00000803 to 03080000
+        //print("csrConfig \(csrConfig)") // testing
+        return csrConfig
     }
+
+//    private func csrActiveConfig() -> UInt32 {
+//        var config: UInt32 = 0
+//        var size = MemoryLayout<UInt32>.size
+//        sysctlbyname("kern.bootargs", nil, &size, nil, 0)
+//        var bootArgs = [CChar](repeating: 0, count: size)
+//        sysctlbyname("kern.bootargs", &bootArgs, &size, nil, 0)
+//        let bootArgsString = String(cString: bootArgs)
+//        
+//        if let configValue = bootArgsString.captureGroup(for: "csr-active-config=(0x[0-9a-fA-F]+)") {
+//            config = UInt32(configValue.dropFirst(2), radix: 16) ?? 0
+//        } else {
+//            sysctlbyname("kern.csr_active_config", &config, &size, nil, 0)
+//        }
+//        
+//        return config
+//    }
 
     private func getOCLPInfo() -> String {
         guard let xmlString = try? String(contentsOfFile: InitGlobVar.oclpXmlFilePath, encoding: .utf8) else {
