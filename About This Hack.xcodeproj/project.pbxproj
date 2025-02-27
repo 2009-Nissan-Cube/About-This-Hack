@@ -24,6 +24,7 @@
 		C1EDE5612AC9E70C00878889 /* InitGlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EDE5602AC9E70C00878889 /* InitGlobalVariables.swift */; };
 		C1EDE5632AC9E72900878889 /* CreateDataFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EDE5622AC9E72900878889 /* CreateDataFiles.swift */; };
 		C1F22EAF2AA4EDE000236BB6 /* UpdateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F22EAE2AA4EDE000236BB6 /* UpdateController.swift */; };
+		D90473D82D6FD62900B738E3 /* ObjCSIP.m in Sources */ = {isa = PBXBuildFile; fileRef = D90473D72D6FD62900B738E3 /* ObjCSIP.m */; };
 		D91B9F7329B27FA800AB58B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D91B9F7529B27FA800AB58B7 /* Main.storyboard */; };
 		DC6870462A63334400CAD908 /* HCVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870452A63334400CAD908 /* HCVersion.swift */; };
 		DC6870482A63336E00CAD908 /* HardwareCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870472A63336E00CAD908 /* HardwareCollector.swift */; };
@@ -58,6 +59,9 @@
 		C1EDE5602AC9E70C00878889 /* InitGlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitGlobalVariables.swift; sourceTree = "<group>"; };
 		C1EDE5622AC9E72900878889 /* CreateDataFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDataFiles.swift; sourceTree = "<group>"; };
 		C1F22EAE2AA4EDE000236BB6 /* UpdateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateController.swift; sourceTree = "<group>"; };
+		D90473D62D6FD62900B738E3 /* About This Hack-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "About This Hack-Bridging-Header.h"; sourceTree = "<group>"; };
+		D90473D72D6FD62900B738E3 /* ObjCSIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCSIP.m; sourceTree = "<group>"; };
+		D90473D92D6FD70800B738E3 /* ObjCSIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCSIP.h; sourceTree = "<group>"; };
 		D91B9F7429B27FA800AB58B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DC6870452A63334400CAD908 /* HCVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCVersion.swift; sourceTree = "<group>"; };
 		DC6870472A63336E00CAD908 /* HardwareCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardwareCollector.swift; sourceTree = "<group>"; };
@@ -102,28 +106,31 @@
 		115D921026D6F65500F5DF35 /* About This Hack */ = {
 			isa = PBXGroup;
 			children = (
-				C1EDE5602AC9E70C00878889 /* InitGlobalVariables.swift */,
-				C1EDE5622AC9E72900878889 /* CreateDataFiles.swift */,
-				C1BAD6FE26D70091008460FB /* WindowController.swift */,
+				D90473D62D6FD62900B738E3 /* About This Hack-Bridging-Header.h */,
+				115D921B26D6F65600F5DF35 /* About_This_Hack.entitlements */,
 				115D921126D6F65500F5DF35 /* AppDelegate.swift */,
-				D91B9F7529B27FA800AB58B7 /* Main.storyboard */,
-				115D921326D6F65500F5DF35 /* ViewController.swift */,
+				115D921526D6F65600F5DF35 /* Assets.xcassets */,
+				C1EDE5622AC9E72900878889 /* CreateDataFiles.swift */,
 				DC6870472A63336E00CAD908 /* HardwareCollector.swift */,
 				DC6870442A63332C00CAD908 /* HardwareCollectors */,
-				58B988D326D7ABFE0092EC5B /* ViewControllerDisplays.swift */,
-				58B988D626D7ACD70092EC5B /* ViewControllerStorage.swift */,
-				58B988D526D7ACD70092EC5B /* ViewControllerService.swift */,
-				58B988D726D7ACD80092EC5B /* ViewControllerSupport.swift */,
-				114545F52710E3AE0017655D /* Shell.swift */,
-				115D922326D6F6AE00F5DF35 /* InsertExtension.swift */,
-				72E686C22862453700B8316D /* Reachability.swift */,
-				115D921526D6F65600F5DF35 /* Assets.xcassets */,
 				115D921A26D6F65600F5DF35 /* Info.plist */,
-				115D921B26D6F65600F5DF35 /* About_This_Hack.entitlements */,
+				C1EDE5602AC9E70C00878889 /* InitGlobalVariables.swift */,
+				115D922326D6F6AE00F5DF35 /* InsertExtension.swift */,
 				58134C0128668FF70008B00D /* Keycodes.swift */,
-				C1F22EAE2AA4EDE000236BB6 /* UpdateController.swift */,
-				C1D8307C2AAE57E500ABD4A4 /* Tooltips.swift */,
+				D91B9F7529B27FA800AB58B7 /* Main.storyboard */,
+				72E686C22862453700B8316D /* Reachability.swift */,
+				114545F52710E3AE0017655D /* Shell.swift */,
+				D90473D92D6FD70800B738E3 /* ObjCSIP.h */,
+				D90473D72D6FD62900B738E3 /* ObjCSIP.m */,
 				9664A9122BECC81D00B5E306 /* SystemFunctions.swift */,
+				C1D8307C2AAE57E500ABD4A4 /* Tooltips.swift */,
+				C1F22EAE2AA4EDE000236BB6 /* UpdateController.swift */,
+				115D921326D6F65500F5DF35 /* ViewController.swift */,
+				58B988D326D7ABFE0092EC5B /* ViewControllerDisplays.swift */,
+				58B988D526D7ACD70092EC5B /* ViewControllerService.swift */,
+				58B988D626D7ACD70092EC5B /* ViewControllerStorage.swift */,
+				58B988D726D7ACD80092EC5B /* ViewControllerSupport.swift */,
+				C1BAD6FE26D70091008460FB /* WindowController.swift */,
 			);
 			path = "About This Hack";
 			sourceTree = "<group>";
@@ -138,15 +145,15 @@
 		DC6870442A63332C00CAD908 /* HardwareCollectors */ = {
 			isa = PBXGroup;
 			children = (
-				DC6870452A63334400CAD908 /* HCVersion.swift */,
-				DC68705B2A6474B600CAD908 /* HCDisplay.swift */,
-				DC6870492A633DDD00CAD908 /* HCMacModel.swift */,
-				DC68704B2A6341E700CAD908 /* HCCPU.swift */,
-				DC68704D2A63453900CAD908 /* HCRAM.swift */,
-				DC68704F2A640A9F00CAD908 /* HCStartupDisk.swift */,
-				DC6870552A6473AE00CAD908 /* HCGPU.swift */,
-				DC6870572A6473E400CAD908 /* HCSerialNumber.swift */,
 				DC6870592A6473F000CAD908 /* HCBootloader.swift */,
+				DC68704B2A6341E700CAD908 /* HCCPU.swift */,
+				DC68705B2A6474B600CAD908 /* HCDisplay.swift */,
+				DC6870552A6473AE00CAD908 /* HCGPU.swift */,
+				DC6870492A633DDD00CAD908 /* HCMacModel.swift */,
+				DC68704D2A63453900CAD908 /* HCRAM.swift */,
+				DC6870572A6473E400CAD908 /* HCSerialNumber.swift */,
+				DC68704F2A640A9F00CAD908 /* HCStartupDisk.swift */,
+				DC6870452A63334400CAD908 /* HCVersion.swift */,
 			);
 			path = HardwareCollectors;
 			sourceTree = "<group>";
@@ -185,6 +192,7 @@
 				TargetAttributes = {
 					115D920D26D6F65500F5DF35 = {
 						CreatedOnToolsVersion = 12.5;
+						LastSwiftMigration = 1520;
 					};
 				};
 			};
@@ -225,6 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D90473D82D6FD62900B738E3 /* ObjCSIP.m in Sources */,
 				115D921426D6F65500F5DF35 /* ViewController.swift in Sources */,
 				DC6870582A6473E400CAD908 /* HCSerialNumber.swift in Sources */,
 				DC6870502A640A9F00CAD908 /* HCStartupDisk.swift in Sources */,
@@ -329,6 +338,7 @@
 				OTHER_LDFLAGS = "";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/yo/Developer/About-This-Hack/About This Hack/About This Hack-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -387,6 +397,7 @@
 				OTHER_LDFLAGS = "";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/yo/Developer/About-This-Hack/About This Hack/About This Hack-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
@@ -396,14 +407,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "About This Hack/About_This_Hack.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1603;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = DNP7DGUB7B;
+				DEVELOPMENT_TEAM = ER43ZD2S4U;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "About This Hack/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "About This Hack";
@@ -421,6 +433,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.0xCUBE.About-This-Hack";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "About This Hack/About This Hack-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -430,14 +444,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "About This Hack/About_This_Hack.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1603;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = DNP7DGUB7B;
+				DEVELOPMENT_TEAM = ER43ZD2S4U;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "About This Hack/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "About This Hack";
@@ -455,6 +470,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.0xCUBE.About-This-Hack";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "About This Hack/About This Hack-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
