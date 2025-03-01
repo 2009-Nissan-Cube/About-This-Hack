@@ -11,6 +11,8 @@
 #import "ObjCSIP.h"
 #include <dlfcn.h> // to use dlopen and dlclose
 
+// #define NSLog(FORMAT, ...) printf("%s\n", [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]); //NSLog without date at the beginning
+
 @implementation ObjCSIP
 
 // Method to return SIP value
@@ -43,9 +45,11 @@
 
         dlclose(libSystem);
 
-        //NSLog(@"Current SIP value in decimal: %d", sip_int);
+//         NSLog(@"Current SIP value in decimal: %d", sip_int);
         
-        //NSLog(@"Current SIP value in hexadecimal: 0x%02x", (sip_int));
+//         NSLog(@"_____________________________________________");
+//         NSLog(@"Current SIP value in hexadecimal: 0x%08x", (sip_int));
+//         NSLog(@"---------------------------------------------");
         
         return sip_int;
         

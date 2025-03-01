@@ -97,10 +97,23 @@ class HCVersion {
         return String(cString: kernel)
     }
     
-    private func getSIPInfo() -> String {
+     private func getSIPInfo() -> String {
         let csrConfig = csrActiveConfig()
         let sipStatus = (csrConfig == 0) ? "Enabled" : "Disabled"
-        return "System Integrity Protection: \(sipStatus) (0x\(String(format:"%08x", csrConfig)))"
+        
+        // If Enabled, Apple Silicon may display only "Enabled", hex value is missing
+        // If Disabled, both platforms Intel and Silicon display "sipStatus + hex value"
+        var sipValue = ""
+
+        if sipStatus == "Enabled" {
+            sipValue = "System Integrity Protection: \(sipStatus) (0x00000000)"
+        }
+        else {
+            sipValue = "System Integrity Protection: \(sipStatus) (0x\(String(format:"%08x", csrConfig)))"
+        }        
+        return sipValue
+        
+//        return "System Integrity Protection: \(sipStatus) (0x\(String(format:"%08x", csrConfig)))"
     }
     
     private func csrActiveConfig() -> UInt32 {
