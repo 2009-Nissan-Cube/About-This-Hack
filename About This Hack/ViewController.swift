@@ -62,7 +62,16 @@ class ViewController: NSViewController {
         picture.image = NSImage(named: getOSImageName())
         osVersion.stringValue = HCVersion.shared.osName
         systemVersion.stringValue = HCVersion.shared.osNumber + HCVersion.shared.osBuildNumber
-        macModel.stringValue = "\(HCMacModel.shared.macName) - \(HCMacModel.shared.getModelIdentifier())"
+        
+        let macNamePart = HCMacModel.shared.macName
+        let modelIdentifierPart = HCMacModel.shared.getModelIdentifier()
+        let fullMacModelString = "\(macNamePart) - \(modelIdentifierPart)"
+        if fullMacModelString.count > 60 {
+            macModel.stringValue = macNamePart
+        } else {
+            macModel.stringValue = fullMacModelString
+        }
+
         cpu.stringValue = HCCPU.shared.getCPU()
         ram.stringValue = HCRAM.shared.getRam()
         graphics.stringValue = HCGPU.shared.getGPU()
@@ -70,6 +79,7 @@ class ViewController: NSViewController {
         startupDisk.stringValue = HCStartupDisk.shared.getStartupDisk()
         serialNumber.stringValue = HCSerialNumber.shared.getSerialNumber()
         blVersion.stringValue = HCBootloader.shared.getBootloader()
+        
         serialToggle.isTransparent = true
         blVersionToggle.isTransparent = true
         blPrefix.isHidden = false
