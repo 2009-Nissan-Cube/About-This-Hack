@@ -114,7 +114,7 @@ class ViewController: NSViewController {
     
     // MARK: - IBActions
     @IBAction func hideSerialNumber(_ sender: NSButton) {
-        serialNumber.stringValue = (serialNumber.stringValue == "") ? HCSerialNumber.shared.getSerialNumber() : ""
+        serialNumber.isHidden = !serialNumber.isHidden
     }
     
 //    @IBAction func hideBlVersion(_ sender: NSButton) {
