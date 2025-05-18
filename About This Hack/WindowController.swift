@@ -14,15 +14,23 @@ class WindowController: NSWindowController {
     
     private let defaults = UserDefaults.standard
     private let windowFrameKey = "MainWindowFrame"
+    private let defaultWindowSize = NSSize(width: 580, height: 350)
     
     override func windowDidLoad() {
         super.windowDidLoad()
         print("loaded")
         self.tabViewController = self.window?.contentViewController as? NSTabViewController
         
+        // Set fixed window size
+        window?.setContentSize(defaultWindowSize)
+        window?.maxSize = defaultWindowSize
+        window?.minSize = defaultWindowSize
+        
         // Restore window position or center if no saved position
         if let savedFrame = defaults.string(forKey: windowFrameKey) {
-            window?.setFrame(NSRectFromString(savedFrame), display: true)
+            var frame = NSRectFromString(savedFrame)
+            frame.size = defaultWindowSize
+            window?.setFrame(frame, display: true)
         } else {
             window?.center()
         }

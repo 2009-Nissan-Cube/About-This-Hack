@@ -492,7 +492,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <visualEffectView fixedFrame="YES" blendingMode="behindWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="EGc-6g-wEc">
-                                <rect key="frame" x="0.0" y="-48" width="580" height="436"/>
+                                <rect key="frame" x="0.0" y="0.0" width="580" height="438"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </visualEffectView>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UdA-Gl-lc5">
