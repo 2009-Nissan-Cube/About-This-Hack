@@ -5,7 +5,7 @@ class HCCPU {
     private init() {}
     
     private lazy var cpuInfo: (brand: String, details: String, coreCount: Int) = {
-        let brand = run("sysctl -n machdep.cpu.brand_string").trimmingCharacters(in: .whitespacesAndNewlines)
+        let brand = getSysctlValueByKey(inputKey: "machdep.cpu.brand_string")?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "Unknown CPU"
         let details = getCPUDetails()
         let coreCount = getCPUCoreCount()
         return (brand, details, coreCount)
