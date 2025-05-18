@@ -59,15 +59,11 @@ class HCDisplay {
     private func getAllDisplaysInfo(from lines: [String]) -> String {
         var result = ""
         var currentSection = ""
-        var inDisplaysSection = false
         
         for line in lines {
             let trimmed = line.trimmingCharacters(in: .whitespaces)
             
             if trimmed.hasSuffix(":") {
-                if trimmed == "Displays:" {
-                    inDisplaysSection = true
-                }
                 if !currentSection.isEmpty {
                     result += currentSection + "\n"
                 }

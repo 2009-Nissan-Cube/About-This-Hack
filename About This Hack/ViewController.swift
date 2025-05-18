@@ -46,7 +46,15 @@ class ViewController: NSViewController {
     
     // MARK: - Private Methods
     private func initializeOverview() {
-        let tasks = [HCVersion.shared.getVersion, HCMacModel.shared.getMacModel, HCCPU.shared.getCPU, HCRAM.shared.getRam, HCStartupDisk.shared.getStartupDisk, HCDisplay.shared.getDisp, HCGPU.shared.getGPU]
+        let tasks = [
+            { HCVersion.shared.getVersion() },
+            { HCMacModel.shared.getMacModel() },
+            { _ = HCCPU.shared.getCPU() },
+            { _ = HCRAM.shared.getRam() },
+            { _ = HCStartupDisk.shared.getStartupDisk() },
+            { _ = HCDisplay.shared.getDisp() },
+            { _ = HCGPU.shared.getGPU() }
+        ]
         DispatchQueue.concurrentPerform(iterations: tasks.count) { tasks[$0]() }
         DispatchQueue.main.async { [weak self] in self?.updateUI() }
     }

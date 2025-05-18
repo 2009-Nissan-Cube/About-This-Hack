@@ -12,10 +12,36 @@ class WindowController: NSWindowController {
     public var currentView: Int = 0
     @IBOutlet public weak var segmentedControl: NSSegmentedControl!
     
+    private let defaults = UserDefaults.standard
+    private let windowFrameKey = "MainWindowFrame"
+    
     override func windowDidLoad() {
         super.windowDidLoad()
         print("loaded")
         self.tabViewController = self.window?.contentViewController as? NSTabViewController
+        
+        // Restore window position or center if no saved position
+        if let savedFrame = defaults.string(forKey: windowFrameKey) {
+            window?.setFrame(NSRectFromString(savedFrame), display: true)
+        } else {
+            window?.center()
+        }
+        
+        // Add window move observer
+        NotificationCenter.default.addObserver(self,
+                                            selector: #selector(windowDidMove),
+                                            name: NSWindow.didMoveNotification,
+                                            object: window)
+        
+        // Add window resize observer
+        NotificationCenter.default.addObserver(self,
+                                            selector: #selector(windowDidResize),
+                                            name: NSWindow.didResizeNotification,
+                                            object: window)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     @IBAction func segmentedControlSwitched(_ sender: Any) {
@@ -29,5 +55,20 @@ class WindowController: NSWindowController {
         print("changed to \(new)")
         tabViewController?.selectedTabViewItemIndex = new
         segmentedControl?.selectedSegment = new
+    }
+    
+    @objc private func windowDidMove(_ notification: Notification) {
+        saveWindowFrame()
+    }
+    
+    @objc private func windowDidResize(_ notification: Notification) {
+        saveWindowFrame()
+    }
+    
+    private func saveWindowFrame() {
+        if let window = self.window {
+            let frameString = NSStringFromRect(window.frame)
+            defaults.set(frameString, forKey: windowFrameKey)
+        }
     }
 }
