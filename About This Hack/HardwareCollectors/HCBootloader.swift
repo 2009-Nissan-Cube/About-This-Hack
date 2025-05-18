@@ -5,6 +5,11 @@ class HCBootloader {
     private init() {}
     
     private lazy var bootloaderInfo: String = {
+        // Prioritize Apple Silicon check
+        if run("sysctl -n machdep.cpu.brand_string").contains("Apple") {
+            return "Apple iBoot"
+        }
+
         let openCoreVersion = run("nvram \(InitGlobVar.nvramOpencoreVersion) 2>/dev/null | awk '{print $2}' | awk -F'-' '{print $2}'")
         
         if !openCoreVersion.isEmpty {
@@ -12,10 +17,12 @@ class HCBootloader {
         } else {
             let cloverInfo = "Clover " + run ("cat \(InitGlobVar.hwFilePath) | grep Clover | cut -d \":\" -f2")
             
-            if !cloverInfo.isEmpty {
+            // Check if cloverInfo actually contains a version or is just "Clover "
+            if !cloverInfo.trimmingCharacters(in: .whitespacesAndNewlines).hasSuffix("Clover") {
                 return cloverInfo
             } else {
-                return run("sysctl -n machdep.cpu.brand_string").contains("Apple") ? "Apple iBoot" : "Apple UEFI"
+                // Fallback if not Apple Silicon, not OpenCore, and Clover check is not definitive
+                return "Apple UEFI" 
             }
         }
     }()
