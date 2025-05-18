@@ -14,34 +14,51 @@ class HCVersion {
     
     func getVersion() {
         guard !dataHasBeenSet else { return }
+        ATHLogger.info("Initializing OS Version Info...", category: .system)
         
         osPrefix = "macOS"
+        ATHLogger.debug("OS Prefix set to: \(osPrefix)", category: .system)
         osNumber = getOSNumber()
+        ATHLogger.debug("OS Number: \(osNumber)", category: .system)
         osBuildNumber = getOSBuild()
+        ATHLogger.debug("OS Build Number: \(osBuildNumber)", category: .system)
         setOSVersion(osNumber: osNumber)
+        ATHLogger.debug("Internal OS Version enum set based on osNumber", category: .system)
         osName = macOSVersionToString()
+        ATHLogger.debug("OS Name: \(osName)", category: .system)
         dataHasBeenSet = true
+        ATHLogger.info("OS Version Info collection complete.", category: .system)
     }
 
     private func getOSNumber() -> String {
+        ATHLogger.debug("Getting OS Number...", category: .system)
         let osVersion = ProcessInfo.processInfo.operatingSystemVersion
+        var versionString = ""
         if (osVersion.patchVersion == 0) {
-            return "\(osVersion.majorVersion).\(osVersion.minorVersion)"
+            versionString = "\(osVersion.majorVersion).\(osVersion.minorVersion)"
         } else {
-            return "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
+            versionString = "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
         }
+        ATHLogger.debug("Determined OS Number: \(versionString)", category: .system)
+        return versionString
     }
   
     private func getOSBuild() -> String {
+        ATHLogger.debug("Getting OS Build Number...", category: .system)
+        var mib = [CTL_KERN, KERN_OSVERSION]
         var size = 0
-        sysctlbyname("kern.osversion", nil, &size, nil, 0)
-        var machine = [CChar](repeating: 0, count: size)
-        sysctlbyname("kern.osversion", &machine, &size, nil, 0)
-        let build = String(cString: machine)
-        return " (\(build)) "
+        // Get the size of the C string
+        sysctl(&mib, 2, nil, &size, nil, 0)
+        var build = [CChar](repeating: 0, count: size)
+        // Get the C string
+        sysctl(&mib, 2, &build, &size, nil, 0)
+        let buildString = String(cString: build)
+        ATHLogger.debug("Determined OS Build Number: \(buildString)", category: .system)
+        return buildString
     }
     
     private func setOSVersion(osNumber: String) {
+        ATHLogger.debug("Setting internal OS Version enum from OS Number: \(osNumber)", category: .system)
         let majorVersion = osNumber.prefix(2)
         let minorVersion = osNumber.prefix(5)
         
@@ -62,21 +79,26 @@ class HCVersion {
             }
         default: osVersion = .macOS
         }
+        ATHLogger.debug("Internal OS Version set to: \(osVersion)", category: .system)
     }
 
     private func macOSVersionToString() -> String {
+        ATHLogger.debug("Converting internal OS Version enum (\(osVersion)) to string name...", category: .system)
+        var stringVersion = ""
         switch osVersion {
-        case .sierra: return "Sierra"
-        case .highSierra: return "High Sierra"
-        case .mojave: return "Mojave"
-        case .catalina: return "Catalina"
-        case .bigSur: return "Big Sur"
-        case .monterey: return "Monterey"
-        case .ventura: return "Ventura"
-        case .sonoma: return "Sonoma"
-        case .sequoia: return "Sequoia"
-        case .macOS: return ""
+        case .sierra: stringVersion = "Sierra"
+        case .highSierra: stringVersion = "High Sierra"
+        case .mojave: stringVersion = "Mojave"
+        case .catalina: stringVersion = "Catalina"
+        case .bigSur: stringVersion = "Big Sur"
+        case .monterey: stringVersion = "Monterey"
+        case .ventura: stringVersion = "Ventura"
+        case .sonoma: stringVersion = "Sonoma"
+        case .sequoia: stringVersion = "Sequoia"
+        case .macOS: stringVersion = osPrefix + " X"
         }
+        ATHLogger.debug("Converted OS Name: \(stringVersion)", category: .system)
+        return stringVersion
     }
 
     func getOSBuildInfo() -> String {

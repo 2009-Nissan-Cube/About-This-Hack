@@ -10,28 +10,38 @@ class HCMacModel {
     
     func getMacModel() {
         guard !dataHasBeenSet else { return }
+        ATHLogger.debug("Initializing Mac Model Info...", category: .hardware)
         macName = getMacName()
+        ATHLogger.debug("Mac Name: \(macName)", category: .hardware)
         dataHasBeenSet = true
     }
     
     func getModelIdentifier() -> String {
+        ATHLogger.debug("Getting Model Identifier...", category: .hardware)
         if let fullIdentifier = getSysctlValueByKey(inputKey: "hw.model") {
             let parts = fullIdentifier.components(separatedBy: ":")
             let modelId = parts.last?.trimmingCharacters(in: .whitespacesAndNewlines)
-            return modelId?.nilIfEmpty ?? "Unknown"
+            let finalModelId = modelId?.nilIfEmpty ?? "Unknown"
+            ATHLogger.debug("Full Model Identifier (hw.model): \(fullIdentifier), Parsed ID: \(finalModelId)", category: .hardware)
+            return finalModelId
         }
+        ATHLogger.warning("Failed to get Model Identifier from hw.model.", category: .hardware)
         return "Unknown"
     }
     
     private func getMacName() -> String {
+        ATHLogger.debug("Getting Mac Name...", category: .hardware)
         let infoString = getModelIdentifier()
         let (displaySize, name) = macModels[infoString] ?? (0, "Mac")
         builtInDisplaySize = displaySize
+        ATHLogger.debug("Looked up Mac Name for identifier '\(infoString)': (\(displaySize), \(name))", category: .hardware)
         //return name
         
         // MacPro7,1 OK
         let command = "cat \(InitGlobVar.hwFilePath) | grep \"Model Identifier\" | cut -d \":\" -f4"
-        return run(command).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
+        let macNameFromHwFile = run(command).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
+        ATHLogger.debug("Mac Name from hwFilePath: \(macNameFromHwFile)", category: .hardware)
+        return macNameFromHwFile
 
         // MacPro7,1 error
 //        let baseCommand = "defaults read"

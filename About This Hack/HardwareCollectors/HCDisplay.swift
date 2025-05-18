@@ -5,9 +5,12 @@ class HCDisplay {
     private init() {}
     
     private lazy var displayInfo: (mainDisplay: String, allDisplays: String) = {
+        ATHLogger.debug("Initializing Display Info...", category: .hardware)
         guard let content = try? String(contentsOfFile: InitGlobVar.scrFilePath, encoding: .utf8) else {
+            ATHLogger.error("Failed to read display info from \(InitGlobVar.scrFilePath)", category: .hardware)
             return ("Unknown Display", "No display information available")
         }
+        ATHLogger.debug("Successfully read \(InitGlobVar.scrFilePath) for display info.", category: .hardware)
         
         let lines = content.components(separatedBy: .newlines)
         
@@ -21,16 +24,20 @@ class HCDisplay {
                                              .prefix { !$0.isEmpty }
         
         let mainDisplay = self.getMainDisplayInfo(from: Array(displaysSubsection))
+        ATHLogger.debug("Main Display Info: \(mainDisplay)", category: .hardware)
         let allDisplays = self.getAllDisplaysInfo(from: Array(displaySection))
+        ATHLogger.debug("All Displays Info: \(allDisplays)", category: .hardware)
         
         return (mainDisplay, allDisplays)
     }()
     
     func getDisp() -> String {
+        ATHLogger.debug("Getting main display string...", category: .hardware)
         return displayInfo.mainDisplay
     }
     
     func getDispInfo() -> String {
+        ATHLogger.debug("Getting all displays info string...", category: .hardware)
         return displayInfo.allDisplays
     }
     
@@ -39,6 +46,7 @@ class HCDisplay {
     }
     
     private func getMainDisplayInfo(from lines: [String]) -> String {
+        ATHLogger.debug("Parsing main display info...", category: .hardware)
         var displayName = "Unknown Display"
         var resolution = "Unknown Resolution"
         
@@ -53,10 +61,12 @@ class HCDisplay {
             }
         }
         
+        ATHLogger.debug("Parsed Main Display Name: \(displayName), Resolution: \(resolution)", category: .hardware)
         return "\(displayName) (\(resolution))"
     }
     
     private func getAllDisplaysInfo(from lines: [String]) -> String {
+        ATHLogger.debug("Parsing all displays info...", category: .hardware)
         var result = ""
         var currentSection = ""
         
@@ -77,6 +87,7 @@ class HCDisplay {
             result += currentSection
         }
         
+        ATHLogger.debug("Parsed All Displays Info: \(result)", category: .hardware)
         return result.trimmingCharacters(in: .newlines)
     }
 }

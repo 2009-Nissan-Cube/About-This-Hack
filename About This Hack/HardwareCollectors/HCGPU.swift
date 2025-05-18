@@ -5,9 +5,12 @@ class HCGPU {
     private init() {}
     
     private lazy var gpuInfo: String = {
+        ATHLogger.debug("Initializing GPU Info...", category: .hardware)
         guard let content = try? String(contentsOfFile: InitGlobVar.scrFilePath, encoding: .utf8) else {
+            ATHLogger.error("Failed to read GPU info from \(InitGlobVar.scrFilePath)", category: .hardware)
             return ""
         }
+        ATHLogger.debug("Successfully read \(InitGlobVar.scrFilePath) for GPU info.", category: .hardware)
         
         let lines = content.components(separatedBy: .newlines)
         var chipset = "", vram = "", metal = ""
@@ -30,6 +33,8 @@ class HCGPU {
             }
         }
         
+        ATHLogger.debug("GPU Chipset: \(chipset), VRAM: \(vram), Metal: \(metal)", category: .hardware)
+        
         return "\(chipset) \(vram) (Metal \(metal))"
             .trimmingCharacters(in: .whitespaces)
             .components(separatedBy: .whitespaces)
@@ -38,13 +43,17 @@ class HCGPU {
     }()
     
     func getGPU() -> String {
+        ATHLogger.debug("Getting GPU string...", category: .hardware)
         return gpuInfo
     }
     
     func getGPUInfo() -> String {
+        ATHLogger.debug("Getting detailed GPU info string...", category: .hardware)
         guard let content = try? String(contentsOfFile: InitGlobVar.scrFilePath, encoding: .utf8) else {
+            ATHLogger.error("Failed to read GPU details from \(InitGlobVar.scrFilePath)", category: .hardware)
             return "Graphics\n"
         }
+        ATHLogger.debug("Successfully read \(InitGlobVar.scrFilePath) for detailed GPU info.", category: .hardware)
         
         let filteredLines = content.components(separatedBy: .newlines)
             .filter { !$0.contains("Graphics/Displays:") &&

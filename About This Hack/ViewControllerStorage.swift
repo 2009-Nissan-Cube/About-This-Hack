@@ -18,7 +18,7 @@ class ViewControllerStorage: NSViewController {
     }
 
     private func start() {
-        print("Initializing Storage View...")
+        ATHLogger.info("Initializing Storage View...", category: .ui)
         
         if (!HardwareCollector.shared.dataHasBeenSet) {
             HardwareCollector.shared.getAllData()
@@ -32,9 +32,12 @@ class ViewControllerStorage: NSViewController {
         let imageShortName = "\(HCVersion.shared.osName) \(HardwareCollector.shared.deviceLocation)"
         let storageType = HardwareCollector.shared.storageType ? "SSD" : "HDD"
         
+        ATHLogger.debug("Setting storage image: \(imageShortName) \(storageType)", category: .hardware)
+        
         if let specificImage = NSImage(named: "\(imageShortName) \(storageType)") {
             startupDiskImage.image = specificImage
         } else {
+            ATHLogger.debug("Specific image not found, using generic \(storageType) image", category: .hardware)
             startupDiskImage.image = NSImage(named: storageType)
         }
     }
@@ -42,10 +45,14 @@ class ViewControllerStorage: NSViewController {
     private func updateStorageInfo() {
         storageValue.stringValue = HardwareCollector.shared.storageData
         storageAmount.doubleValue = HardwareCollector.shared.storagePercent * storageAmount.maxValue
+        
+        ATHLogger.debug("Updated storage info: \(HardwareCollector.shared.storageData), \(HardwareCollector.shared.storagePercent * 100)%", category: .hardware)
     }
     
     private func setToolTips() {
         startupDiskImage.toolTip = startupDiskImagetoolTip
         storageValue.toolTip = storageValuetoolTip
+        
+        ATHLogger.debug("Storage tooltips configured", category: .ui)
     }
 }

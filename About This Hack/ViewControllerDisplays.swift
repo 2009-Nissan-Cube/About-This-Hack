@@ -41,7 +41,7 @@ class ViewControllerDisplays: NSViewController {
     }
     
     func start() {
-        print("Initializing Display View...")
+        ATHLogger.info("Initializing Display View...", category: .ui)
         if (!HardwareCollector.shared.dataHasBeenSet) { HardwareCollector.shared.getAllData() }
         
         let dispArr: [NSImageView] = [DisplayPicCenter, DisplayPicL1, DisplayPicL2, DisplayPicR1, DisplayPicR2]
@@ -51,8 +51,8 @@ class ViewControllerDisplays: NSViewController {
         // Hide all display elements initially
         (dispArr + nameArr + labelArr2).forEach { $0.isHidden = true }
         
-        print("HardwareCollector.displayNames = \"\(HardwareCollector.shared.displayNames)\"")
-        print("HardwareCollector.displayRes = \"\(HardwareCollector.shared.displayRes)\"")
+        ATHLogger.debug("Display names: \(HardwareCollector.shared.displayNames)", category: .hardware)
+        ATHLogger.debug("Display resolutions: \(HardwareCollector.shared.displayRes)", category: .hardware)
         
         let numDisplays = min(HardwareCollector.shared.numberOfDisplays, 3)  // Limit to 3 displays
         
@@ -79,7 +79,7 @@ class ViewControllerDisplays: NSViewController {
             let fullName = HardwareCollector.shared.displayNames[index]
             let trimmedName = trimDisplayName(fullName)
             nameField.stringValue = trimmedName
-            print("DisplayName: \"\(trimmedName)\"")
+            ATHLogger.debug("Display name for index \(index): \"\(trimmedName)\"", category: .hardware)
             
             if (!(index == 0 && HardwareCollector.shared.hasBuiltInDisplay)) {
                 setDisplayImage(imageView, for: trimmedName)
@@ -91,7 +91,7 @@ class ViewControllerDisplays: NSViewController {
             let fullRes = HardwareCollector.shared.displayRes[index]
             let trimmedRes = removeParentheses(fullRes)
             resField.stringValue = trimmedRes
-            print("DisplayReso: \"\(trimmedRes)\"")
+            ATHLogger.debug("Display resolution for index \(index): \"\(trimmedRes)\"", category: .hardware)
         }
     }
 

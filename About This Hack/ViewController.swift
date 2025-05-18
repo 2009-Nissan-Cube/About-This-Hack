@@ -69,7 +69,7 @@ class ViewController: NSViewController {
         
         picture.image = NSImage(named: getOSImageName())
         osVersion.stringValue = HCVersion.shared.osName
-        systemVersion.stringValue = HCVersion.shared.osNumber + HCVersion.shared.osBuildNumber
+        systemVersion.stringValue = "\(HCVersion.shared.osNumber) (\(HCVersion.shared.osBuildNumber))"
         
         let macNamePart = HCMacModel.shared.macName
         let modelIdentifierPart = HCMacModel.shared.getModelIdentifier()
