@@ -16,8 +16,6 @@ class HCMacModel {
     
     func getModelIdentifier() -> String {
         if let fullIdentifier = getSysctlValueByKey(inputKey: "hw.model") {
-            // Expected format: "hw.model: ModelIdentifier" or just "ModelIdentifier" if fetched via sysctl -n
-            // getSysctlValueByKey likely returns just the value part for string types based on its C implementation
             let parts = fullIdentifier.components(separatedBy: ":")
             let modelId = parts.last?.trimmingCharacters(in: .whitespacesAndNewlines)
             return modelId?.nilIfEmpty ?? "Unknown"

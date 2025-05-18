@@ -10,6 +10,10 @@ class HardwareCollector {
     static let shared = HardwareCollector()
     private init() {}
     
+    // File content cache
+    private var fileContentCache: [String: String] = [:]
+    private let cacheLock = NSLock()
+    
     var numberOfDisplays = NSScreen.screens.count
     var dataHasBeenSet = false
     var displayRes: [String] = []
@@ -22,37 +26,109 @@ class HardwareCollector {
     var hasBuiltInDisplay = false
     var macType: MacType = .laptop
     
+    func getCachedFileContent(_ path: String) -> String? {
+        cacheLock.lock()
+        defer { cacheLock.unlock() }
+        
+        if let cached = fileContentCache[path] {
+            return cached
+        }
+        
+        guard let content = try? String(contentsOfFile: path, encoding: .utf8) else {
+            return nil
+        }
+        
+        fileContentCache[path] = content
+        return content
+    }
+    
     func getAllData() {
         guard !dataHasBeenSet else { return }
         
-        hasBuiltInDisplay = checkForBuiltInDisplay()
-        displayRes = getDisplayRes()
-        (storageType, storageData, storagePercent) = getStorageInfo()
-        displayNames = getDisplayNames()
+        // Create a dispatch group for parallel processing
+        let group = DispatchGroup()
+        
+        // Prefetch commonly used files in parallel
+        let commonFiles = [
+            InitGlobVar.hwFilePath,
+            InitGlobVar.scrFilePath,
+            InitGlobVar.bootvolnameFilePath,
+            InitGlobVar.storagedataFilePath,
+            InitGlobVar.sysmemFilePath
+        ]
+        
+        for path in commonFiles {
+            DispatchQueue.global().async(group: group) {
+                _ = self.getCachedFileContent(path)
+            }
+        }
+        
+        // Wait for file prefetch to complete
+        group.wait()
+        
+        // Process data in parallel
+        DispatchQueue.concurrentPerform(iterations: 4) { index in
+            switch index {
+            case 0:
+                hasBuiltInDisplay = checkForBuiltInDisplay()
+                displayRes = getDisplayRes()
+            case 1:
+                displayNames = getDisplayNames()
+            case 2:
+                (storageType, storageData, storagePercent) = getStorageInfo()
+            case 3:
+                // Initialize other hardware collectors
+                HCMacModel.shared.getMacModel()
+                _ = HCCPU.shared.getCPU()
+                _ = HCRAM.shared.getRam()
+                _ = HCGPU.shared.getGPU()
+            default:
+                break
+            }
+        }
         
         dataHasBeenSet = true
     }
     
     private func getDisplayRes() -> [String] {
-        guard let content = try? String(contentsOfFile: InitGlobVar.scrFilePath, encoding: .utf8) else { return [] }
+        guard let content = getCachedFileContent(InitGlobVar.scrFilePath) else { return [] }
         return content.components(separatedBy: .newlines)
             .filter { $0.contains("Resolution") }
             .map { String($0.dropFirst(22)).trimmingCharacters(in: .whitespaces) }
     }
 
     private func getDisplayNames() -> [String] {
-        let displayNames = run("cat \(InitGlobVar.scrFilePath) | awk -F ' {8}|:' '/^ {8}[^ :]+/ {print $2}'").components(separatedBy: "\n").filter { !$0.isEmpty }
+        guard let content = getCachedFileContent(InitGlobVar.scrFilePath) else { return [] }
+        
+        var displayNames: [String] = []
+        var inDisplaysSection = false
+        
+        let lines = content.components(separatedBy: .newlines)
+        for line in lines {
+            let trimmed = line.trimmingCharacters(in: .whitespaces)
+            
+            if trimmed == "Displays:" {
+                inDisplaysSection = true
+                continue
+            }
+            
+            if inDisplaysSection && trimmed.hasSuffix(":") {
+                // This is a display name (e.g., "G27Q:")
+                let name = String(trimmed.dropLast())
+                displayNames.append(name)
+            }
+        }
+        
         return displayNames
     }
-
     
     private func checkForBuiltInDisplay() -> Bool {
-        guard let content = try? String(contentsOfFile: InitGlobVar.scrFilePath, encoding: .utf8) else { return false }
+        guard let content = getCachedFileContent(InitGlobVar.scrFilePath) else { return false }
         return content.lowercased().contains("connection type: internal") || content.lowercased().contains("display type: built-in")
     }
 
     private func getStorageInfo() -> (Bool, String, Double) {
-        guard let content = try? String(contentsOfFile: InitGlobVar.bootvolnameFilePath, encoding: .utf8) else {
+        guard let content = getCachedFileContent(InitGlobVar.bootvolnameFilePath) else {
             return (false, "Error reading file", 0)
         }
         

@@ -10,13 +10,18 @@ class HCDisplay {
         }
         
         let lines = content.components(separatedBy: .newlines)
-                           .map { self.cleanLine($0) }
-                           .drop { !$0.hasPrefix("Displays") }
-                           .dropFirst() // Drop the "Displays" line
-                           .prefix { !$0.isEmpty && !$0.hasPrefix("Memory") }
         
-        let mainDisplay = self.getMainDisplayInfo(from: Array(lines))
-        let allDisplays = self.getAllDisplaysInfo(from: Array(lines))
+        // First find the Graphics/Displays section
+        let displaySection = lines.drop { !$0.contains("Graphics/Displays:") }
+                                .dropFirst() // Drop the Graphics/Displays line
+        
+        // Then find the Displays subsection
+        let displaysSubsection = displaySection.drop { !$0.contains("Displays:") }
+                                             .dropFirst() // Drop the Displays: line
+                                             .prefix { !$0.isEmpty }
+        
+        let mainDisplay = self.getMainDisplayInfo(from: Array(displaysSubsection))
+        let allDisplays = self.getAllDisplaysInfo(from: Array(displaySection))
         
         return (mainDisplay, allDisplays)
     }()
@@ -31,29 +36,51 @@ class HCDisplay {
     
     private func cleanLine(_ line: String) -> String {
         line.trimmingCharacters(in: .whitespaces)
-            .replacingOccurrences(of: "\\([^)]*\\)", with: "", options: .regularExpression)
-            .replacingOccurrences(of: ":", with: "")
-            .trimmingCharacters(in: .whitespaces)
     }
     
     private func getMainDisplayInfo(from lines: [String]) -> String {
-        let displayName = lines.first { !$0.isEmpty && $0.first?.isLetter == true } ?? "Unknown Display"
-        let resolution = lines.first { $0.contains("Resolution") }?
-                              .components(separatedBy: "Resolution").last?
-                              .trimmingCharacters(in: .whitespaces) ?? "Unknown Resolution"
+        var displayName = "Unknown Display"
+        var resolution = "Unknown Resolution"
+        
+        for line in lines {
+            let trimmed = line.trimmingCharacters(in: .whitespaces)
+            if trimmed.hasSuffix(":") {
+                displayName = String(trimmed.dropLast())
+            } else if trimmed.contains("Resolution:") {
+                resolution = trimmed.components(separatedBy: "Resolution:").last?
+                    .components(separatedBy: "(").first?
+                    .trimmingCharacters(in: .whitespaces) ?? resolution
+            }
+        }
+        
         return "\(displayName) (\(resolution))"
     }
     
     private func getAllDisplaysInfo(from lines: [String]) -> String {
-        lines.reduce(into: "") { result, line in
-            if !line.isEmpty && line.first?.isLetter == true {
-                if !result.isEmpty {
-                    result += "\n"
+        var result = ""
+        var currentSection = ""
+        var inDisplaysSection = false
+        
+        for line in lines {
+            let trimmed = line.trimmingCharacters(in: .whitespaces)
+            
+            if trimmed.hasSuffix(":") {
+                if trimmed == "Displays:" {
+                    inDisplaysSection = true
                 }
-                result += "\n\(line)"
-            } else if !result.isEmpty && !line.isEmpty {
-                result += "\n  \(line)"
+                if !currentSection.isEmpty {
+                    result += currentSection + "\n"
+                }
+                currentSection = "\n" + line
+            } else if !trimmed.isEmpty {
+                currentSection += "\n" + line
             }
-        }.trimmingCharacters(in: .newlines)
+        }
+        
+        if !currentSection.isEmpty {
+            result += currentSection
+        }
+        
+        return result.trimmingCharacters(in: .newlines)
     }
 }

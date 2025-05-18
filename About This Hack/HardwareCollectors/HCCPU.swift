@@ -12,12 +12,9 @@ class HCCPU {
     }()
     
     func getCPU() -> String {
-        
         let cpuCoreCount = getCPUCoreCount()
-        
         let modifiedBrand = cpuInfo.brand.replacingOccurrences(of: "(R)", with: "").replacingOccurrences(of: "(TM)", with: "")
         
-
         if cpuCoreCount >= 2 {
             return "\(cpuCoreCount)x \(modifiedBrand)"
         } else {
@@ -43,7 +40,7 @@ class HCCPU {
     }
     
     private func getCPUDetails() -> String {
-        guard let content = try? String(contentsOfFile: InitGlobVar.hwFilePath, encoding: .utf8) else {
+        guard let content = HardwareCollector.shared.getCachedFileContent(InitGlobVar.hwFilePath) else {
             return "Unable to read CPU details"
         }
         
