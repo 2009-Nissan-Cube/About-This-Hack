@@ -32,5 +32,7 @@
 	<string>https://0xcube.netlify.app/updates.xml</string>
 	<key>SUPublicEDKey</key>
 	<string>+ugzpdsp1RQDH/YVaRuh7HYK1rgy8GZNEANeptJRjss=</string>
+	<key>NSWindowSupportsAutomaticInlineTitle</key>
+	<false/>
 </dict>
 </plist>

@@ -88,8 +88,8 @@ class ViewController: NSViewController {
         serialNumber.stringValue = HCSerialNumber.shared.getSerialNumber()
         blVersion.stringValue = HCBootloader.shared.getBootloader()
         
-        serialToggle.isTransparent = true
-        blVersionToggle.isTransparent = true
+        serialToggle.isBordered = false
+        serialToggle.isTransparent = false
         blPrefix.isHidden = false
         blVersion.isHidden = false
         
@@ -97,7 +97,7 @@ class ViewController: NSViewController {
     }
     
     private func getOSImageName() -> String {
-        let osImageNames: [MacOSVersion: String] = [.sequoia: "Sequoia", .sonoma: "Sonoma", .ventura: "Ventura",
+        let osImageNames: [MacOSVersion: String] = [.tahoe: "Tahoe", .sequoia: "Sequoia", .sonoma: "Sonoma", .ventura: "Ventura",
                                                     .monterey: "Monterey", .bigSur: "Big Sur", .catalina: "Catalina",
                                                     .mojave: "Mojave", .highSierra: "High Sierra", .sierra: "Sierra"]
         return osImageNames[HCVersion.shared.osVersion] ?? "Unknown"
@@ -134,16 +134,6 @@ class ViewController: NSViewController {
     @IBAction func hideSerialNumber(_ sender: NSButton) {
         serialNumber.isHidden = !serialNumber.isHidden
     }
-    
-//    @IBAction func hideBlVersion(_ sender: NSButton) {
-//        if (blPrefix.isHidden) {
-//            blPrefix.isHidden = false
-//            blVersion.isHidden = false
-//        } else {
-//            blPrefix.isHidden = true
-//            blVersion.isHidden = true
-//        }
-//    }
     
     @IBAction func showSystemReport(_ sender: NSButton) {
         NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/SystemProfiler/SPPlatformReporter.spreporter"))
