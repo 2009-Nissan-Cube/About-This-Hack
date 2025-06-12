@@ -1,6 +1,6 @@
 # About This Hack: Your Mac's Story, Beautifully Told
 
-![CleanShot 2024-06-29 at 13 48 37](https://github.com/0xCUB3/About-This-Hack/assets/94565160/26457de7-881b-4d4e-ab36-ee77a825da64)
+![image](https://github.com/user-attachments/assets/abf73d22-1228-424a-ad50-705150adbef8)
 
 Discover the heart of your macOS device with About This Hack – a sleek, intuitive hardware info app that brings back the beloved classic 'About This Mac' interface while offering a treasure trove of additional features. Whether you're running a Hackintosh or a genuine Mac, this app delivers comprehensive data with style and simplicity. Whether you're on a Hackintosh or a real Mac, experience the best of all worlds with About This Hack!<br>
 
