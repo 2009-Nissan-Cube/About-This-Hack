@@ -480,18 +480,20 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <visualEffectView fixedFrame="YES" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="EGc-6g-wEc">
-                                <rect key="frame" x="0.0" y="0.0" width="580" height="438"/>
+                                <rect key="frame" x="0.0" y="0.0" width="580" height="350"/>
                                 <autoresizingMask key="autoresizingMask"/>
+                                <subviews>
+                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UdA-Gl-lc5">
+                                        <rect key="frame" x="240" y="265" width="101" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Displays" id="8AG-xG-bwN">
+                                            <font key="font" metaFont="systemSemibold" size="24"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
                             </visualEffectView>
-                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UdA-Gl-lc5">
-                                <rect key="frame" x="242" y="231" width="101" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Displays" id="8AG-xG-bwN">
-                                    <font key="font" metaFont="systemSemibold" size="24"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField hidden="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FJb-Ld-OMk">
                                 <rect key="frame" x="225" y="50" width="130" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -651,20 +653,20 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <visualEffectView fixedFrame="YES" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="cZg-9c-paQ">
-                                <rect key="frame" x="0.0" y="0.0" width="580" height="351"/>
+                                <rect key="frame" x="0.0" y="0.0" width="580" height="350"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hyh-k6-2ic">
-                                        <rect key="frame" x="218" y="255" width="145" height="29"/>
+                                        <rect key="frame" x="219" y="265" width="145" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Startup Disk" id="85G-9L-vZu">
-                                            <font key="font" metaFont="systemSemibold" size="25"/>
+                                            <font key="font" metaFont="systemSemibold" size="24"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" drawsTieredCapacityLevels="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNJ-z8-wvM">
-                                        <rect key="frame" x="91" y="35" width="401" height="18"/>
+                                        <rect key="frame" x="91" y="34" width="401" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <levelIndicatorCell key="cell" alignment="left" doubleValue="500000" maxValue="1000000" warningValue="600000" criticalValue="800000" levelIndicatorStyle="continuousCapacity" id="ikm-QE-TPW"/>
                                         <color key="fillColor" name="AccentColor"/>
@@ -672,12 +674,12 @@
                                         <color key="criticalFillColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                                     </levelIndicator>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t4L-4i-vH7">
-                                        <rect key="frame" x="220" y="110" width="140" height="140"/>
+                                        <rect key="frame" x="220" y="109" width="140" height="140"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="HDD" id="7wg-dY-FMe"/>
                                     </imageView>
                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gSo-qA-1SS">
-                                        <rect key="frame" x="-2" y="50" width="584" height="54"/>
+                                        <rect key="frame" x="-2" y="49" width="584" height="54"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Storage" id="CCk-HG-RPK">
                                             <font key="font" metaFont="system" size="14"/>
@@ -708,7 +710,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <visualEffectView fixedFrame="YES" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="9HK-GK-DBm">
-                                <rect key="frame" x="0.0" y="-70" width="580" height="350"/>
+                                <rect key="frame" x="0.0" y="0.0" width="580" height="350"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <button wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jB3-EG-hJx">
@@ -756,10 +758,10 @@
                                         </connections>
                                     </button>
                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GS6-Tb-kfb">
-                                        <rect key="frame" x="248" y="235" width="96" height="29"/>
+                                        <rect key="frame" x="242" y="265" width="96" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Support" id="nfD-48-h8U">
-                                            <font key="font" metaFont="systemSemibold" size="25"/>
+                                            <font key="font" metaFont="systemSemibold" size="24"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
