@@ -825,7 +825,7 @@
     </scenes>
     <resources>
         <image name="HDD" width="256" height="256"/>
-        <image name="NSActionTemplate" width="20" height="20"/>
+        <image name="NSActionTemplate" width="19" height="19"/>
         <image name="NSComputer" width="32" height="32"/>
         <image name="arrow.right.circle.fill" catalog="system" width="15" height="15"/>
         <namedColor name="AccentColor">
