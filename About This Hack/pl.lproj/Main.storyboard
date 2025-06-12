@@ -149,8 +149,6 @@
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Jtn-pX-f66"/>
                                 <toolbarItem implicitItemIdentifier="88CCF72C-7D82-4627-B3A1-154D73ADC1B1" explicitItemIdentifier="SegCTRL" label="Custom View" paletteLabel="Custom View" autovalidates="NO" id="5iE-AH-Dbz">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="263" height="22"/>
-                                    <size key="maxSize" width="447" height="28"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" springLoaded="YES" id="L8Y-nK-bWF">
                                         <rect key="frame" x="0.0" y="14" width="447" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -223,7 +221,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <visualEffectView fixedFrame="YES" blendingMode="behindWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="OYy-cZ-3Gd">
+                            <visualEffectView fixedFrame="YES" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="OYy-cZ-3Gd">
                                 <rect key="frame" x="0.0" y="0.0" width="580" height="350"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </visualEffectView>
@@ -646,7 +644,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <visualEffectView fixedFrame="YES" blendingMode="behindWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="cZg-9c-paQ">
+                            <visualEffectView fixedFrame="YES" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="cZg-9c-paQ">
                                 <rect key="frame" x="0.0" y="0.0" width="580" height="351"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
@@ -703,8 +701,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <visualEffectView blendingMode="behindWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="9HK-GK-DBm">
-                                <rect key="frame" x="0.0" y="0.0" width="580" height="347"/>
+                            <visualEffectView blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="9HK-GK-DBm">
+                                <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
                                 <subviews>
                                     <button wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1XD-tb-fA8">
                                         <rect key="frame" x="382" y="102" width="188" height="18"/>
