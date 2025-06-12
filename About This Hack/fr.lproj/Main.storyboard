@@ -500,7 +500,7 @@
                                         <rect key="frame" x="242" y="231" width="119" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Moniteurs" id="wc9-GB-4aM">
-                                            <font key="font" metaFont="systemSemibold" size="25"/>
+                                            <font key="font" metaFont="systemSemibold" size="24"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -723,6 +723,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <visualEffectView fixedFrame="YES" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="9HK-GK-DBm-fr">
+                                <rect key="frame" x="0.0" y="-67" width="580" height="350"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <subviews>
                             <view id="geq-4f-G90">
                                 <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -862,6 +866,8 @@
                                     <constraint firstItem="q27-be-TLE" firstAttribute="top" secondItem="dtY-jd-Ip0" secondAttribute="bottom" constant="11" id="rJe-3g-HRU"/>
                                 </constraints>
                             </view>
+                                </subviews>
+                            </visualEffectView>
                         </subviews>
                     </view>
                     <connections>

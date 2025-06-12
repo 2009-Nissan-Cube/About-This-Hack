@@ -481,7 +481,7 @@
                                 <rect key="frame" x="242" y="231" width="161" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Wyświetlacze" id="8AG-xG-bwN">
-                                    <font key="font" metaFont="systemSemibold" size="25"/>
+                                    <font key="font" metaFont="systemSemibold" size="24"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -702,7 +702,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <visualEffectView blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="9HK-GK-DBm">
-                                <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
+                                <rect key="frame" x="0.0" y="0.0" width="580" height="350"/>
                                 <subviews>
                                     <button wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1XD-tb-fA8">
                                         <rect key="frame" x="382" y="102" width="188" height="18"/>

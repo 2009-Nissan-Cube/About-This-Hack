@@ -487,7 +487,7 @@
                                 <rect key="frame" x="242" y="231" width="101" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Displays" id="8AG-xG-bwN">
-                                    <font key="font" metaFont="systemSemibold" size="25"/>
+                                    <font key="font" metaFont="systemSemibold" size="24"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -708,7 +708,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <visualEffectView fixedFrame="YES" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="9HK-GK-DBm">
-                                <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
+                                <rect key="frame" x="0.0" y="-70" width="580" height="350"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <button wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jB3-EG-hJx">
