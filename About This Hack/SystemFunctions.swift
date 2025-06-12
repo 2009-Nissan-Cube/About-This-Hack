@@ -75,12 +75,21 @@ var toolTips_SrN_Info_Displayed:  String = "Unknown"
 
 //IOReg
 var IOMainorMasterPortDefault:UInt32 = 0
-func initPortDefault() {
-	if #available(macOS 12.0, *)  {
-        IOMainorMasterPortDefault = kIOMainPortDefault      // New name as of macOS 12
-	} else {
-		IOMainorMasterPortDefault = kIOMasterPortDefault    // Old name up to macOS 11
-	}
+import Darwin
+
+// Define RTLD_DEFAULT for symbol lookup
+let RTLD_DEFAULT = UnsafeMutableRawPointer(bitPattern: -2)
+
+func initPortDefault() -> mach_port_t {
+    if #available(macOS 12.0, *) {
+        guard let sym = dlsym(RTLD_DEFAULT, "kIOMainPortDefault") else {
+            return kIOMasterPortDefault
+        }
+        let ptr = sym.assumingMemoryBound(to: mach_port_t.self)
+        return ptr.pointee
+    } else {
+        return kIOMasterPortDefault
+    }
 }
 
 struct disp_light_s {
