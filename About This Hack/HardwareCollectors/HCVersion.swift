@@ -63,6 +63,7 @@ class HCVersion {
         let minorVersion = osNumber.prefix(5)
         
         switch majorVersion {
+        case "26": osVersion = .tahoe
         case "15": osVersion = .sequoia
         case "14": osVersion = .sonoma
         case "13": osVersion = .ventura
@@ -95,6 +96,7 @@ class HCVersion {
         case .ventura: stringVersion = "Ventura"
         case .sonoma: stringVersion = "Sonoma"
         case .sequoia: stringVersion = "Sequoia"
+        case .tahoe: stringVersion = "Tahoe"
         case .macOS: stringVersion = osPrefix + " X"
         }
         ATHLogger.debug("Converted OS Name: \(stringVersion)", category: .system)
@@ -192,5 +194,5 @@ extension String {
 }
 
 enum MacOSVersion {
-    case sierra, highSierra, mojave, catalina, bigSur, monterey, ventura, sonoma, sequoia, macOS
+    case sierra, highSierra, mojave, catalina, bigSur, monterey, ventura, sonoma, sequoia, tahoe, macOS
 }

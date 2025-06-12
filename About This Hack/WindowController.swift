@@ -27,6 +27,12 @@ class WindowController: NSWindowController {
         window?.maxSize = defaultWindowSize
         window?.styleMask.remove(.resizable)
         
+        // Compact toolbar for macOS Tahoe
+        if #available(macOS 26.0, *) {
+            window?.toolbarStyle = .unifiedCompact
+            window?.toolbar?.displayMode = .iconOnly
+        }
+        
         // Restore window position or center if no saved position
         if let savedFrame = defaults.string(forKey: windowFrameKey) {
             var frame = NSRectFromString(savedFrame)
