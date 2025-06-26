@@ -2,7 +2,7 @@
 
 ![image](https://github.com/user-attachments/assets/abf73d22-1228-424a-ad50-705150adbef8)
 
-Discover the heart of your macOS device with About This Hack – a sleek, intuitive hardware info app that brings back the beloved classic 'About This Mac' interface while offering a treasure trove of additional features. Whether you're running a Hackintosh or a genuine Mac, this app delivers comprehensive data with style and simplicity. Whether you're on a Hackintosh or a real Mac, experience the best of all worlds with About This Hack!<br>
+Discover the heart of your macOS device with About This Hack: a sleek, intuitive hardware info app that brings back the beloved classic 'About This Mac' interface while offering a treasure trove of additional features. Whether you're on a Hackintosh or a real Mac, experience the best of all worlds with About This Hack!<br>
 
 # 🌟 Key Features
 
