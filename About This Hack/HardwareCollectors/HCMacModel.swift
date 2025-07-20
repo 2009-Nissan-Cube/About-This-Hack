@@ -35,26 +35,26 @@ class HCMacModel {
         let (displaySize, name) = macModels[infoString] ?? (0, "Mac")
         builtInDisplaySize = displaySize
         ATHLogger.debug("Looked up Mac Name for identifier '\(infoString)': (\(displaySize), \(name))", category: .hardware)
-        //return name
+        
+        // if not in macModels, use plist just in case
+        if (name == "Mac" && infoString != "MacPro7,1") {
+            let baseCommand = "defaults read"
+            let plistPath = "~/Library/Preferences/com.apple.SystemProfiler.plist"
+            let key = "\"CPU Names\""
+            let cutCommand = "| cut -sd '\"' -f 4"
+            let uniqCommand = "| uniq"
+
+            // Combine all parts into a single command string
+            let fullCommand = "\(baseCommand) \(plistPath) \(key) \(cutCommand) \(uniqCommand)"
+    
+            return run(fullCommand).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
+        }
         
         // MacPro7,1 OK
         let command = "cat \(InitGlobVar.hwFilePath) | grep \"Model Identifier\" | cut -d \":\" -f4"
         let macNameFromHwFile = run(command).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
         ATHLogger.debug("Mac Name from hwFilePath: \(macNameFromHwFile)", category: .hardware)
         return macNameFromHwFile
-
-        // MacPro7,1 error
-//        let baseCommand = "defaults read"
-//        let plistPath = "~/Library/Preferences/com.apple.SystemProfiler.plist"
-//        let key = "\"CPU Names\""
-//        let cutCommand = "| cut -sd '\"' -f 4"
-//        let uniqCommand = "| uniq"
-
-        // Combine all parts into a single command string
-//        let fullCommand = "\(baseCommand) \(plistPath) \(key) \(cutCommand) \(uniqCommand)"
-//
-//        return run(fullCommand).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
-
     }
     
     private lazy var macModels: [String: (Float, String)] = [
@@ -94,6 +94,8 @@ class HCMacModel {
         "iMac21,2": (24, "iMac (24-inch, M1, 2021)"),
         "Mac15,4": (24, "iMac (24-inch, M3, 2023)"),
         "Mac15,5": (24, "iMac (24-inch, M3, 2023)"),
+        "Mac16,2": (24, "iMac (24-inch, M4, 2024)"), // two ports
+        "Mac16,3": (24, "iMac (24-inch, M4, 2024)"), // four ports
         
         // iMac Pros
         "iMacPro1,1": (27, "iMac Pro (2017)"),
@@ -114,7 +116,9 @@ class HCMacModel {
         "Macmini9,1": (0, "Mac Mini (M1, 2020)"),
         "Mac14,3": (0, "Mac Mini (M2, 2023)"),
         "Mac14,12": (0, "Mac Mini (M2 Pro, 2023)"),
-        
+        "Mac16,10": (0, "Mac Mini (2024)"), // not sure which ones m4 vs pro
+        "Mac16,11": (0, "Mac Mini (2024)"),
+
         // Mac Pros
         "MacPro3,1": (0, "Mac Pro (2008)"),
         "MacPro4,1": (0, "Mac Pro (2009)"),
@@ -128,6 +132,8 @@ class HCMacModel {
         "Mac13,2": (0, "Mac Studio (M1 Ultra, 2022)"),
         "Mac14,13": (0, "Mac Studio (M2 Max, 2023)"),
         "Mac14,14": (0, "Mac Studio (M2 Ultra, 2023)"),
+        "Mac15,14": (0, "Mac Studio (M3 Ultra, 2025)"),
+        "Mac16,9": (0, "Mac Studio (M4 Max, 2025)"),
         
         // MacBooks
         "MacBook5,1": (13, "MacBook"),
@@ -159,6 +165,8 @@ class HCMacModel {
         "Mac14,15": (15, "MacBook Air (15-inch, M2, 2023)"),
         "Mac15,12": (13, "MacBook Air (13-inch, M3, 2024)"),
         "Mac15,13": (15, "MacBook Air (15-inch, M3, 2024)"),
+        "Mac16,12": (13, "MacBook Air (13-inch, M4, 2025)"),
+        "Mac16,13": (15, "MacBook Air (15-inch, M4, 2025)"),
         
         // MacBook Pros
         // 13-inch
@@ -189,6 +197,9 @@ class HCMacModel {
         "Mac15,6": (14, "MacBook Pro (14-inch, M3 Pro, Late 2023)"),
         "Mac15,10": (14, "MacBook Pro (14-inch, M3 Max, Late 2023)"),
         "Mac15,8": (14, "MacBook Pro (14-inch, M3 Max, Late 2023)"),
+        "Mac16,1": (14, "MacBook Pro (14-inch, Nov 2024)"), // M4
+        "Mac16,6": (14, "MacBook Pro (14-inch, Nov 2024)"), // M4 Pro/Max
+        "Mac16,8": (14, "MacBook Pro (14-inch, Nov 2024)"), // M4 Pro/Max
         
         // 15-inch
         "MacBookPro4,1": (15, "MacBook Pro (15/17-inch, 2008)"),
@@ -215,6 +226,8 @@ class HCMacModel {
         "Mac15,7": (16, "MacBook Pro (16-inch, M3 Pro, Late 2023)"),
         "Mac15,9": (16, "MacBook Pro (16-inch, M3 Max, Late 2023)"),
         "Mac15,11": (16, "MacBook Pro (16-inch, M3 Max, Late 2023)"),
+        "Mac16,5": (16, "MacBook Pro (16-inch, Nov 2024)"),
+        "Mac16,7": (16, "MacBook Pro (16-inch, Nov 2024)"),
         
         // 17-inch
         "MacBookPro8,3": (17, "MacBook Pro (17-inch, Late 2011)"),
