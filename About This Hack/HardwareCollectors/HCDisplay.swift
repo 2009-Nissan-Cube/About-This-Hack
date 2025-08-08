@@ -6,18 +6,21 @@ class HCDisplay {
     
     private lazy var displayInfo: (mainDisplay: String, allDisplays: String) = {
         ATHLogger.debug("Initializing Display Info...", category: .hardware)
-        guard let content = try? String(contentsOfFile: InitGlobVar.scrFilePath, encoding: .utf8) else {
-            ATHLogger.error("Failed to read display info from \(InitGlobVar.scrFilePath)", category: .hardware)
+        
+        // Use cached data from HardwareCollector instead of file I/O
+        guard let content = HardwareCollector.shared.getCachedFileContent(InitGlobVar.scrFilePath) else {
+            ATHLogger.error("No display data available from HardwareCollector", category: .hardware)
             return ("Unknown Display", "No display information available")
         }
-        ATHLogger.debug("Successfully read \(InitGlobVar.scrFilePath) for display info.", category: .hardware)
+        
+        ATHLogger.debug("Successfully retrieved display info from HardwareCollector.", category: .hardware)
         
         let lines = content.components(separatedBy: .newlines)
         // Find the Displays: subsection anywhere in the output
         guard let displaysIndex = lines.firstIndex(where: {
             $0.trimmingCharacters(in: .whitespaces) == "Displays:"
         }) else {
-            ATHLogger.error("Displays section not found in \(InitGlobVar.scrFilePath)", category: .hardware)
+            ATHLogger.error("Displays section not found in cached data", category: .hardware)
             return ("Unknown Display", "No display information available")
         }
         // Collect all non-empty lines after "Displays:" for the main display block

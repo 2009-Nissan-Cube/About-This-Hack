@@ -23,11 +23,14 @@ class HCRAM {
     
     func getMemDesc() -> String {
         ATHLogger.debug("Getting RAM description string...", category: .hardware)
-        guard let content = try? String(contentsOfFile: InitGlobVar.sysmemFilePath, encoding: .utf8) else {
-            ATHLogger.error("Failed to read RAM description from \(InitGlobVar.sysmemFilePath)", category: .hardware)
+        
+        // Use cached data from HardwareCollector
+        guard let content = HardwareCollector.shared.getCachedFileContent(InitGlobVar.sysmemFilePath) else {
+            ATHLogger.error("No RAM description available from HardwareCollector", category: .hardware)
             return ""
         }
-        ATHLogger.debug("Successfully read \(InitGlobVar.sysmemFilePath) for RAM description.", category: .hardware)
+        
+        ATHLogger.debug("Successfully retrieved RAM description from HardwareCollector.", category: .hardware)
         
         return content.components(separatedBy: .newlines)
             .filter { line in
@@ -39,11 +42,14 @@ class HCRAM {
 
     func getMemDescArray() -> String {
         ATHLogger.debug("Getting RAM description array string...", category: .hardware)
-        guard let content = try? String(contentsOfFile: InitGlobVar.sysmemFilePath, encoding: .utf8) else {
-            ATHLogger.error("Failed to read RAM description for array from \(InitGlobVar.sysmemFilePath)", category: .hardware)
+        
+        // Use cached data from HardwareCollector
+        guard let content = HardwareCollector.shared.getCachedFileContent(InitGlobVar.sysmemFilePath) else {
+            ATHLogger.error("No RAM description available from HardwareCollector for array", category: .hardware)
             return ""
         }
-        ATHLogger.debug("Successfully read \(InitGlobVar.sysmemFilePath) for RAM description array.", category: .hardware)
+        
+        ATHLogger.debug("Successfully retrieved RAM description from HardwareCollector for array.", category: .hardware)
         
         let relevantLines = content.components(separatedBy: .newlines)
             .filter { line in
@@ -59,9 +65,11 @@ class HCRAM {
     }
     
     private func parseMemoryDetails() -> (type: String, speed: String) {
-        ATHLogger.debug("Parsing memory details from \(InitGlobVar.sysmemFilePath)...", category: .hardware)
-        guard let content = try? String(contentsOfFile: InitGlobVar.sysmemFilePath, encoding: .utf8) else {
-            ATHLogger.error("Failed to read memory details for parsing from \(InitGlobVar.sysmemFilePath)", category: .hardware)
+        ATHLogger.debug("Parsing memory details from HardwareCollector...", category: .hardware)
+        
+        // Use cached data from HardwareCollector
+        guard let content = HardwareCollector.shared.getCachedFileContent(InitGlobVar.sysmemFilePath) else {
+            ATHLogger.error("No memory details available from HardwareCollector for parsing", category: .hardware)
             return ("", "")
         }
         

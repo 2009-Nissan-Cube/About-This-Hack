@@ -35,9 +35,9 @@ class ViewController: NSViewController {
         super.viewWillAppear()
         view.window?.styleMask.remove(.resizable)
         
-        // Ensure all data is loaded before the view appears
+        // Use optimized HardwareCollector with file caching - much faster!
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            // This will block until all data is ready
+            // This will use cached file content and serial data loading
             HardwareCollector.shared.getAllData()
             
             // Now update UI on main thread
@@ -53,12 +53,6 @@ class ViewController: NSViewController {
     }
     
     // MARK: - Private Methods
-    private func initializeOverview() {
-        // This method is no longer needed as we use HardwareCollector.shared.getAllData()
-        // Keeping for backward compatibility but it just ensures data is ready
-        HardwareCollector.shared.getAllData()
-    }
-    
     private func updateUI() {
         // Ensure we're on the main thread
         guard Thread.isMainThread else {

@@ -6,11 +6,14 @@ class HCSerialNumber {
     
     private lazy var HardwareInfo: (serialNumber: String, details: String) = {
         ATHLogger.debug("Initializing Serial Number & Hardware Info...", category: .hardware)
-        guard let content = try? String(contentsOfFile: InitGlobVar.hwFilePath, encoding: .utf8) else {
-            ATHLogger.error("Failed to read hardware info from \(InitGlobVar.hwFilePath) for serial number.", category: .hardware)
+        
+        // Use cached data from HardwareCollector
+        guard let content = HardwareCollector.shared.getCachedFileContent(InitGlobVar.hwFilePath) else {
+            ATHLogger.error("No hardware info available from HardwareCollector for serial number.", category: .hardware)
             return ("", "")
         }
-        ATHLogger.debug("Successfully read \(InitGlobVar.hwFilePath) for serial number and hardware info.", category: .hardware)
+        
+        ATHLogger.debug("Successfully retrieved hardware info from HardwareCollector for serial number.", category: .hardware)
         
         let lines = content.components(separatedBy: .newlines)
         
