@@ -28,40 +28,49 @@ class ViewController: NSViewController {
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            self?.initializeOverview()
-        }
+        // Don't initialize UI until all data is ready
     }
     
     override func viewWillAppear() {
         super.viewWillAppear()
         view.window?.styleMask.remove(.resizable)
+        
+        // Ensure all data is loaded before the view appears
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            // This will block until all data is ready
+            HardwareCollector.shared.getAllData()
+            
+            // Now update UI on main thread
+            DispatchQueue.main.async {
+                self?.updateUI()
+            }
+        }
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
-        updateUI()
         setToolTips()
     }
     
     // MARK: - Private Methods
     private func initializeOverview() {
-        let tasks = [
-            { HCVersion.shared.getVersion() },
-            { HCMacModel.shared.getMacModel() },
-            { _ = HCCPU.shared.getCPU() },
-            { _ = HCRAM.shared.getRam() },
-            { _ = HCStartupDisk.shared.getStartupDisk() },
-            { _ = HCDisplay.shared.getDisp() },
-            { _ = HCGPU.shared.getGPU() }
-        ]
-        DispatchQueue.concurrentPerform(iterations: tasks.count) { tasks[$0]() }
-        DispatchQueue.main.async { [weak self] in self?.updateUI() }
+        // This method is no longer needed as we use HardwareCollector.shared.getAllData()
+        // Keeping for backward compatibility but it just ensures data is ready
+        HardwareCollector.shared.getAllData()
     }
     
     private func updateUI() {
-        if !HardwareCollector.shared.dataHasBeenSet {
-            HardwareCollector.shared.getAllData()
+        // Ensure we're on the main thread
+        guard Thread.isMainThread else {
+            DispatchQueue.main.async { [weak self] in
+                self?.updateUI()
+            }
+            return
+        }
+        
+        // Data should already be loaded by now
+        guard HardwareCollector.shared.dataHasBeenSet else {
+            return
         }
         
         CATransaction.begin()

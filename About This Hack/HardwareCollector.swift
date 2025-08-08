@@ -45,46 +45,37 @@ class HardwareCollector {
     func getAllData() {
         guard !dataHasBeenSet else { return }
         
-        // Create a dispatch group for parallel processing
-        let group = DispatchGroup()
+        // Use a serial queue to ensure everything loads in order
+        let serialQueue = DispatchQueue(label: "com.aboutthishack.datacollection", qos: .userInitiated)
         
-        // Prefetch commonly used files in parallel
-        let commonFiles = [
-            InitGlobVar.hwFilePath,
-            InitGlobVar.scrFilePath,
-            InitGlobVar.bootvolnameFilePath,
-            InitGlobVar.storagedataFilePath,
-            InitGlobVar.sysmemFilePath
-        ]
-        
-        for path in commonFiles {
-            DispatchQueue.global().async(group: group) {
-                _ = self.getCachedFileContent(path)
+        serialQueue.sync {
+            // Prefetch commonly used files first
+            let commonFiles = [
+                InitGlobVar.hwFilePath,
+                InitGlobVar.scrFilePath,
+                InitGlobVar.bootvolnameFilePath,
+                InitGlobVar.storagedataFilePath,
+                InitGlobVar.sysmemFilePath
+            ]
+            
+            for path in commonFiles {
+                _ = getCachedFileContent(path)
             }
-        }
-        
-        // Wait for file prefetch to complete
-        group.wait()
-        
-        // Process data in parallel
-        DispatchQueue.concurrentPerform(iterations: 4) { index in
-            switch index {
-            case 0:
-                hasBuiltInDisplay = checkForBuiltInDisplay()
-                displayRes = getDisplayRes()
-            case 1:
-                displayNames = getDisplayNames()
-            case 2:
-                (storageType, storageData, storagePercent) = getStorageInfo()
-            case 3:
-                // Initialize other hardware collectors
-                HCMacModel.shared.getMacModel()
-                _ = HCCPU.shared.getCPU()
-                _ = HCRAM.shared.getRam()
-                _ = HCGPU.shared.getGPU()
-            default:
-                break
-            }
+            
+            // Initialize all hardware collectors in a specific order to avoid race conditions
+            HCVersion.shared.getVersion()
+            HCMacModel.shared.getMacModel()
+            _ = HCCPU.shared.getCPU()
+            _ = HCRAM.shared.getRam()
+            _ = HCStartupDisk.shared.getStartupDisk()
+            _ = HCDisplay.shared.getDisp()
+            _ = HCGPU.shared.getGPU()
+            
+            // Initialize display and storage info
+            hasBuiltInDisplay = checkForBuiltInDisplay()
+            displayRes = getDisplayRes()
+            displayNames = getDisplayNames()
+            (storageType, storageData, storagePercent) = getStorageInfo()
         }
         
         dataHasBeenSet = true

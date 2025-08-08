@@ -13,19 +13,20 @@ class HCDisplay {
         ATHLogger.debug("Successfully read \(InitGlobVar.scrFilePath) for display info.", category: .hardware)
         
         let lines = content.components(separatedBy: .newlines)
-        
-        // First find the Graphics/Displays section
-        let displaySection = lines.drop { !$0.contains("Graphics/Displays:") }
-                                .dropFirst() // Drop the Graphics/Displays line
-        
-        // Then find the Displays subsection
-        let displaysSubsection = displaySection.drop { !$0.contains("Displays:") }
-                                             .dropFirst() // Drop the Displays: line
-                                             .prefix { !$0.isEmpty }
-        
-        let mainDisplay = self.getMainDisplayInfo(from: Array(displaysSubsection))
+        // Find the Displays: subsection anywhere in the output
+        guard let displaysIndex = lines.firstIndex(where: {
+            $0.trimmingCharacters(in: .whitespaces) == "Displays:"
+        }) else {
+            ATHLogger.error("Displays section not found in \(InitGlobVar.scrFilePath)", category: .hardware)
+            return ("Unknown Display", "No display information available")
+        }
+        // Collect all non-empty lines after "Displays:" for the main display block
+        let displayLines = lines[(displaysIndex + 1)...]
+            .prefix { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+        let mainDisplay = self.getMainDisplayInfo(from: Array(displayLines))
         ATHLogger.debug("Main Display Info: \(mainDisplay)", category: .hardware)
-        let allDisplays = self.getAllDisplaysInfo(from: Array(displaySection))
+        // For a full list, include the same block
+        let allDisplays = self.getAllDisplaysInfo(from: Array(displayLines))
         ATHLogger.debug("All Displays Info: \(allDisplays)", category: .hardware)
         
         return (mainDisplay, allDisplays)

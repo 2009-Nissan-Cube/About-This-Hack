@@ -15,6 +15,21 @@ class HCGPU {
         let lines = content.components(separatedBy: .newlines)
         var chipset = "", vram = "", metal = ""
         
+        // Fallback: if standard parsing fails, grab first meaningful line under Graphics/Displays
+        if let displaysIdx = lines.firstIndex(where: { $0.trimmingCharacters(in: .whitespaces) == "Displays:" }),
+           let gfxIdx = lines.firstIndex(where: { $0.contains("Graphics/Displays:") }) {
+            let gpuBlock = lines[(gfxIdx+1)..<displaysIdx]
+            let trimmed = gpuBlock.map { $0.trimmingCharacters(in: .whitespaces) }.filter { !$0.isEmpty }
+            let meaningful = trimmed.filter { !$0.hasSuffix(":") }
+            if let first = meaningful.first {
+                // Clean up the chipset line by removing common prefixes
+                let cleaned = first.replacingOccurrences(of: "Chipset Model:", with: "")
+                                  .replacingOccurrences(of: "Chipset:", with: "")
+                                  .trimmingCharacters(in: .whitespaces)
+                ATHLogger.debug("Fallback GPU Info: \(cleaned)", category: .hardware)
+                return cleaned
+            }
+        }
         for line in lines {
             if chipset.isEmpty, line.contains("Chipset"),
                let value = line.components(separatedBy: ":").last?.trimmingCharacters(in: .whitespaces) {
