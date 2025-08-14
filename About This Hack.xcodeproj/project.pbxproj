@@ -75,6 +75,7 @@
 		DC6870572A6473E400CAD908 /* HCSerialNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSerialNumber.swift; sourceTree = "<group>"; };
 		DC6870592A6473F000CAD908 /* HCBootloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCBootloader.swift; sourceTree = "<group>"; };
 		DC68705B2A6474B600CAD908 /* HCDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCDisplay.swift; sourceTree = "<group>"; };
+		DDE19D2C2E4C2E4E00DE5F13 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "pt-BR"; path = "pt-BR.lproj/Main.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +215,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = 115D920526D6F65500F5DF35;
 			packageReferences = (
@@ -282,6 +284,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D91B9F7429B27FA800AB58B7 /* en */,
+				DDE19D2C2E4C2E4E00DE5F13 /* pt-BR */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -424,12 +427,12 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "About This Hack/About_This_Hack.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1648;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = DNP7DGUB7B;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "About This Hack/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "About This Hack";
@@ -461,12 +464,12 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "About This Hack/About_This_Hack.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1648;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = DNP7DGUB7B;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "About This Hack/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "About This Hack";
