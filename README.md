@@ -67,7 +67,7 @@ The internet for helping me with a lot of the code.
 About This Hack is a labor of love, bringing back the classic Mac experience with modern enhancements. If you enjoy using it, consider supporting its development:
 
 <p align="center">
-  <a href="https://opencollective.com/about-this-hack" target="_blank">
+  <a href="https://opencollective.com/skula/" target="_blank">
     <img src="https://opencollective.com/about-this-hack/donate/button@2x.png?color=blue" width=300 />
   </a>
 </p>
