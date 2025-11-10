@@ -4,7 +4,7 @@
 
 Discover the heart of your macOS device with About This Hack: a sleek, intuitive hardware info app that brings back the beloved classic 'About This Mac' interface while offering a treasure trove of additional features. Whether you're on a Hackintosh or a real Mac, experience the best of all worlds with About This Hack!<br>
 
-# 🌟 Key Features
+# Features
 
 ## Overview: Remember this?
 A throwback to the (better) About This Mac view from pre-Ventura. Get instant access to essential system specs, including your computer model, OS version, and processor details. Hackintosh users will appreciate the Clover or OpenCore bootloader version display.
@@ -38,7 +38,7 @@ There is also a native auto-updater that reminds you when a new version releases
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 1. Download the latest release [here](https://github.com/0xCUB3/About-This-Hack/releases/latest)
 2. Drag the app to your Applications folder
 3. Launch and explore!
@@ -47,11 +47,11 @@ There is also a native auto-updater that reminds you when a new version releases
 - Under `General` you should see [this prompt](https://user-images.githubusercontent.com/79278890/111887197-c6a34800-89a9-11eb-83e2-9fd3d61e2c15.png):
 - Click "Open Anyway"
 
-## 🔧 Compatibility
+## Compatibility
 - Supports macOS 10.12 Sierra and newer
 - Not compatible with Linux or Windows
 
-## 🙌 Credits
+## Credits
 A big thank you to our contributors:
 
 [matxpa](https://github.com/matxpa) for doing so much and helping add so many features. <br>
@@ -63,7 +63,7 @@ The internet for helping me with a lot of the code.
 
 ---
 
-## 💖 Support About This Hack
+## Support About This Hack
 About This Hack is a labor of love, bringing back the classic Mac experience with modern enhancements. If you enjoy using it, consider supporting its development:
 
 <p align="center">
@@ -72,11 +72,10 @@ About This Hack is a labor of love, bringing back the classic Mac experience wit
   </a>
 </p>
 
-## 📞 Contact
+## Contact
 Got questions or suggestions? Reach out:
-- Discord: 0xcube
-- Reddit: [u/0xCUBE](https://www.reddit.com/user/0xCUBE)
+- Discord: aspiringubi
 
-## 📈 Star History
+## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=0xCUB3/About-This-Hack&type=Date)](https://star-history.com/#0xCUB3/About-This-Hack&Date)
