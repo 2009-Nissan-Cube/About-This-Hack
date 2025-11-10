@@ -10,21 +10,54 @@ class HCBootloader {
             return "Apple iBoot"
         }
 
-        let openCoreVersion = run("nvram \(InitGlobVar.nvramOpencoreVersion) 2>/dev/null | awk '{print $2}' | awk -F'-' '{print $2}'")
-        
-        if !openCoreVersion.isEmpty {
-            return run("echo \"OpenCore \"$(nvram \(InitGlobVar.nvramOpencoreVersion) 2>/dev/null | awk '{print $2}' | awk -F'-' '{print $2}' | sed -e 's/ */./g' -e s'/^.//g' -e 's/.$//g' -e 's/ .//g' -e 's/. //g' | tr -d '\n') $( nvram \(InitGlobVar.nvramOpencoreVersion) 2>/dev/null | awk '{print $2}' | awk -F'-' '{print $1}' | sed -e 's/REL/(Release)/g' -e s'/N\\/A//g' -e 's/DEB/(Debug)/g' | tr -d '\n')")
-        } else {
-            let cloverInfo = "Clover " + run ("cat \(InitGlobVar.hwFilePath) | grep Clover | cut -d \":\" -f2")
-            
-            // Check if cloverInfo actually contains a version or is just "Clover "
-            if !cloverInfo.trimmingCharacters(in: .whitespacesAndNewlines).hasSuffix("Clover") {
-                return cloverInfo
-            } else {
-                // Fallback if not Apple Silicon, not OpenCore, and Clover check is not definitive
-                return "Apple UEFI" 
+        // Cache nvram result to avoid multiple calls
+        let nvramOutput = run("nvram \(InitGlobVar.nvramOpencoreVersion) 2>/dev/null")
+
+        if !nvramOutput.isEmpty {
+            let parts = nvramOutput.components(separatedBy: "\t")
+            guard parts.count >= 2 else { return "Apple UEFI" }
+
+            let versionPart = parts[1].trimmingCharacters(in: .whitespacesAndNewlines)
+            let components = versionPart.split(separator: "-", maxSplits: 1)
+
+            if components.count >= 2 {
+                let buildType = String(components[0])
+                let version = String(components[1])
+
+                // Clean up version string
+                let cleanVersion = version
+                    .replacingOccurrences(of: " ", with: ".")
+                    .trimmingCharacters(in: CharacterSet(charactersIn: "."))
+
+                // Format build type
+                let formattedBuildType: String
+                switch buildType {
+                case "REL": formattedBuildType = "(Release)"
+                case "DEB": formattedBuildType = "(Debug)"
+                default: formattedBuildType = buildType.isEmpty ? "" : "(\(buildType))"
+                }
+
+                return "OpenCore \(cleanVersion) \(formattedBuildType)".trimmingCharacters(in: .whitespaces)
             }
         }
+
+        // Check for Clover using cached file content
+        if let hwContent = HardwareCollector.shared.getCachedFileContent(InitGlobVar.hwFilePath) {
+            let cloverLine = hwContent.components(separatedBy: .newlines)
+                .first { $0.contains("Clover") }
+
+            if let line = cloverLine,
+               let colonIndex = line.firstIndex(of: ":") {
+                let version = String(line[line.index(after: colonIndex)...])
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                if !version.isEmpty {
+                    return "Clover \(version)"
+                }
+            }
+        }
+
+        // Fallback
+        return "Apple UEFI"
     }()
     
     private lazy var bootargsInfo: String = {

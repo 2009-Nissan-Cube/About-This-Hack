@@ -20,41 +20,66 @@ class WindowController: NSWindowController {
         super.windowDidLoad()
         ATHLogger.info("Window controller loaded", category: .ui)
         self.tabViewController = self.window?.contentViewController as? NSTabViewController
-        
+
+        // Hide window initially - will show once data is loaded
+        window?.setIsVisible(false)
+
         // Set fixed window size
-        window?.setFrame(NSRect(origin: window?.frame.origin ?? .zero, size: defaultWindowSize), display: true)
+        window?.setFrame(NSRect(origin: window?.frame.origin ?? .zero, size: defaultWindowSize), display: false)
         window?.minSize = defaultWindowSize
         window?.maxSize = defaultWindowSize
         window?.styleMask.remove(.resizable)
-        
-        // Compact toolbar for macOS Tahoe
-        if #available(macOS 26.0, *) {
-            window?.toolbarStyle = .unifiedCompact
-            window?.toolbar?.displayMode = .iconOnly
-        }
-        
+
         // Restore window position or center if no saved position
         if let savedFrame = defaults.string(forKey: windowFrameKey) {
             var frame = NSRectFromString(savedFrame)
             frame.size = defaultWindowSize  // Ensure correct size even if saved frame has different size
-            window?.setFrame(frame, display: true)
+            window?.setFrame(frame, display: false)
             ATHLogger.debug("Restored window position from saved frame", category: .ui)
         } else {
             window?.center()
             ATHLogger.debug("No saved window position, centering window", category: .ui)
         }
-        
+
         // Add window move observer
         NotificationCenter.default.addObserver(self,
                                             selector: #selector(windowDidMove),
                                             name: NSWindow.didMoveNotification,
                                             object: window)
-        
+
         // Add window resize observer
         NotificationCenter.default.addObserver(self,
                                             selector: #selector(windowDidResize),
                                             name: NSWindow.didResizeNotification,
                                             object: window)
+
+        // Wait for data to be ready before showing window
+        waitForDataAndShowWindow()
+    }
+
+    private func waitForDataAndShowWindow() {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            // Wait for data files to be created
+            while !CreateDataFiles.dataFilesCreated {
+                Thread.sleep(forTimeInterval: 0.05)
+            }
+
+            // Collect all hardware data
+            HardwareCollector.shared.getAllData()
+
+            // Show window on main thread
+            DispatchQueue.main.async {
+                // Trigger initial UI update for the Overview tab
+                if let tabVC = self?.tabViewController,
+                   let overviewVC = tabVC.tabViewItems.first?.viewController as? ViewController {
+                    overviewVC.updateUIAfterDataLoaded()
+                }
+
+                self?.window?.setIsVisible(true)
+                self?.window?.makeKeyAndOrderFront(nil)
+                ATHLogger.info("Window shown after data loaded", category: .ui)
+            }
+        }
     }
     
     deinit {

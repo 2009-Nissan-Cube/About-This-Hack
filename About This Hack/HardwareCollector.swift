@@ -13,9 +13,24 @@ class HardwareCollector {
     // File content cache
     private var fileContentCache: [String: String] = [:]
     private let cacheLock = NSLock()
-    
+
+    // Thread-safe flag for getAllData()
+    private var _dataHasBeenSet = false
+    private let dataInitLock = NSLock()
+    var dataHasBeenSet: Bool {
+        get {
+            dataInitLock.lock()
+            defer { dataInitLock.unlock() }
+            return _dataHasBeenSet
+        }
+        set {
+            dataInitLock.lock()
+            defer { dataInitLock.unlock() }
+            _dataHasBeenSet = newValue
+        }
+    }
+
     var numberOfDisplays = NSScreen.screens.count
-    var dataHasBeenSet = false
     var displayRes: [String] = []
     var displayNames: [String] = []
     var storageType = false
@@ -29,25 +44,39 @@ class HardwareCollector {
     func getCachedFileContent(_ path: String) -> String? {
         cacheLock.lock()
         defer { cacheLock.unlock() }
-        
+
         if let cached = fileContentCache[path] {
             return cached
         }
-        
-        guard let content = try? String(contentsOfFile: path, encoding: .utf8) else {
+
+        guard let content = try? String(contentsOfFile: path, encoding: .utf8), !content.isEmpty else {
             return nil
         }
-        
+
         fileContentCache[path] = content
         return content
     }
-    
+
+    func clearCache() {
+        cacheLock.lock()
+        defer { cacheLock.unlock() }
+        fileContentCache.removeAll()
+        ATHLogger.debug("File cache cleared", category: .hardware)
+
+        // Reset lazy properties in hardware collectors
+        HCGPU.shared.reset()
+        HCDisplay.shared.reset()
+    }
+
     func getAllData() {
         guard !dataHasBeenSet else { return }
-        
+
+        // Clear cache to ensure we read fresh data files
+        clearCache()
+
         // Use a serial queue to ensure everything loads in order
         let serialQueue = DispatchQueue(label: "com.aboutthishack.datacollection", qos: .userInitiated)
-        
+
         serialQueue.sync {
             // Prefetch commonly used files first
             let commonFiles = [
@@ -55,9 +84,11 @@ class HardwareCollector {
                 InitGlobVar.scrFilePath,
                 InitGlobVar.bootvolnameFilePath,
                 InitGlobVar.storagedataFilePath,
-                InitGlobVar.sysmemFilePath
+                InitGlobVar.sysmemFilePath,
+                InitGlobVar.bootvollistFilePath,
+                InitGlobVar.oclpXmlFilePath
             ]
-            
+
             for path in commonFiles {
                 _ = getCachedFileContent(path)
             }

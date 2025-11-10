@@ -17,9 +17,10 @@ class HCCPU {
     
     func getCPU() -> String {
         ATHLogger.debug("Getting CPU info...", category: .hardware)
-        let cpuCoreCount = getCPUCoreCount()
+        // Use cached core count from cpuInfo instead of calling getCPUCoreCount() again
+        let cpuCoreCount = cpuInfo.coreCount
         let modifiedBrand = cpuInfo.brand.replacingOccurrences(of: "(R)", with: "").replacingOccurrences(of: "(TM)", with: "")
-        
+
         if cpuCoreCount >= 2 {
             return "\(cpuCoreCount)x \(modifiedBrand)"
         } else {

@@ -1,29 +1,62 @@
 import Foundation
 
-let osVersiontoolTip = HCVersion.shared.getOSBuildInfo()
+/// Tooltips class with lazy computed properties to avoid expensive operations at module load time
+/// All properties are computed on-demand and thread-safe
+class Tooltips {
+    static let shared = Tooltips()
+    private init() {}
 
-let systemVersiontoolTip = osVersiontoolTip
+    var osVersiontoolTip: String {
+        HCVersion.shared.getOSBuildInfo()
+    }
 
-let macModeltoolTip = HCMacModel.shared.macName + " - " + HCMacModel.shared.getModelIdentifier() + "\n" + run("system_profiler SPPCIDataType | grep \":$\" | sed 's/://g'")
+    var systemVersiontoolTip: String {
+        osVersiontoolTip
+    }
 
-let cputoolTip = HCCPU.shared.getCPU() + "\n" + HCCPU.shared.getCPUInfo()
+    private lazy var _macModeltoolTip: String = {
+        let pciData = run("system_profiler SPPCIDataType | grep \":$\" | sed 's/://g'")
+        return HCMacModel.shared.macName + " - " + HCMacModel.shared.getModelIdentifier() + "\n" + pciData
+    }()
+    var macModeltoolTip: String { _macModeltoolTip }
 
-let ramtoolTip = run("cat " + InitGlobVar.sysmemFilePath)
+    var cputoolTip: String {
+        HCCPU.shared.getCPU() + "\n" + HCCPU.shared.getCPUInfo()
+    }
 
-let startupDisktoolTip = HCStartupDisk.shared.getStartupDiskInfo()
+    var ramtoolTip: String {
+        HardwareCollector.shared.getCachedFileContent(InitGlobVar.sysmemFilePath) ?? ""
+    }
 
-let displaytoolTip = HCDisplay.shared.getDispInfo()
+    var startupDisktoolTip: String {
+        HCStartupDisk.shared.getStartupDiskInfo()
+    }
 
-let graphicstoolTip = HCGPU.shared.getGPUInfo()
+    var displaytoolTip: String {
+        HCDisplay.shared.getDispInfo()
+    }
 
-let serialToggletoolTip = HCSerialNumber.shared.getHardwareInfo()
+    var graphicstoolTip: String {
+        HCGPU.shared.getGPUInfo()
+    }
 
-let startupDiskImagetoolTip = run("cat " + InitGlobVar.bootvollistFilePath)
+    var serialToggletoolTip: String {
+        HCSerialNumber.shared.getHardwareInfo()
+    }
 
-let storageValuetoolTip = startupDisktoolTip
+    var startupDiskImagetoolTip: String {
+        HardwareCollector.shared.getCachedFileContent(InitGlobVar.bootvollistFilePath) ?? ""
+    }
 
-let blVersiontoolTip = "BootLoader: " + HCBootloader.shared.getBootloader() + "\nBoot-args: " + HCBootloader.shared.getBootargs()
+    var storageValuetoolTip: String {
+        startupDisktoolTip
+    }
 
-let btSysInfotoolTip = " Hardware, Network, Software, Etc. Detailed Data"
-let btSoftUpdtoolTip = " Find and Install OS and Security Updates"
+    var blVersiontoolTip: String {
+        "BootLoader: " + HCBootloader.shared.getBootloader() + "\nBoot-args: " + HCBootloader.shared.getBootargs()
+    }
+
+    let btSysInfotoolTip = " Hardware, Network, Software, Etc. Detailed Data"
+    let btSoftUpdtoolTip = " Find and Install OS and Security Updates"
+}
 

@@ -42,7 +42,12 @@ class ViewControllerDisplays: NSViewController {
     
     func start() {
         ATHLogger.info("Initializing Display View...", category: .ui)
-        if (!HardwareCollector.shared.dataHasBeenSet) { HardwareCollector.shared.getAllData() }
+
+        // Data is already loaded by WindowController, just update UI
+        updateDisplayUI()
+    }
+
+    private func updateDisplayUI() {
         
         let dispArr: [NSImageView] = [DisplayPicCenter, DisplayPicL1, DisplayPicL2, DisplayPicR1, DisplayPicR2]
         let nameArr: [NSTextField] = [DisplayNameCenter, DisplayNameL1, DisplayNameL2, DisplayNameR1, DisplayNameR2]

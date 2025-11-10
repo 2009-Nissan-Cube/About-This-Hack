@@ -3,7 +3,17 @@ import Foundation
 class HCRAM {
     static let shared = HCRAM()
     private init() {}
-    
+
+    // Shared parsed memory lines for efficiency
+    private lazy var parsedMemoryLines: [String] = {
+        ATHLogger.debug("Parsing memory file lines...", category: .hardware)
+        guard let content = HardwareCollector.shared.getCachedFileContent(InitGlobVar.sysmemFilePath) else {
+            ATHLogger.error("No RAM data available from HardwareCollector", category: .hardware)
+            return []
+        }
+        return content.components(separatedBy: .newlines)
+    }()
+
     private lazy var memoryInfo: (total: Int, type: String, speed: String) = {
         ATHLogger.debug("Initializing RAM Info...", category: .hardware)
         let memSize = Int(ProcessInfo.processInfo.physicalMemory / 1_073_741_824) // Convert to GB and cast to Int
@@ -23,16 +33,9 @@ class HCRAM {
     
     func getMemDesc() -> String {
         ATHLogger.debug("Getting RAM description string...", category: .hardware)
-        
-        // Use cached data from HardwareCollector
-        guard let content = HardwareCollector.shared.getCachedFileContent(InitGlobVar.sysmemFilePath) else {
-            ATHLogger.error("No RAM description available from HardwareCollector", category: .hardware)
-            return ""
-        }
-        
-        ATHLogger.debug("Successfully retrieved RAM description from HardwareCollector.", category: .hardware)
-        
-        return content.components(separatedBy: .newlines)
+
+        // Use shared parsed lines instead of re-parsing
+        return parsedMemoryLines
             .filter { line in
                 ["ECC:", "BANK", "Size:", "Type:", "Speed:", "Manufacturer:", "Part Number:"]
                     .contains { line.contains($0) }
@@ -42,22 +45,15 @@ class HCRAM {
 
     func getMemDescArray() -> String {
         ATHLogger.debug("Getting RAM description array string...", category: .hardware)
-        
-        // Use cached data from HardwareCollector
-        guard let content = HardwareCollector.shared.getCachedFileContent(InitGlobVar.sysmemFilePath) else {
-            ATHLogger.error("No RAM description available from HardwareCollector for array", category: .hardware)
-            return ""
-        }
-        
-        ATHLogger.debug("Successfully retrieved RAM description from HardwareCollector for array.", category: .hardware)
-        
-        let relevantLines = content.components(separatedBy: .newlines)
+
+        // Use shared parsed lines instead of re-parsing
+        let relevantLines = parsedMemoryLines
             .filter { line in
                 ["BANK", "Size:", "Type:", "Speed:", "Manufacturer:", "Part Number:"]
                     .contains { line.contains($0) }
             }
             .map { $0.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: ":", with: ": ") }
-        
+
         return relevantLines
             .split(whereSeparator: { $0.starts(with: "BANK") })
             .map { "BANK " + $0.joined(separator: " ") }
@@ -65,18 +61,12 @@ class HCRAM {
     }
     
     private func parseMemoryDetails() -> (type: String, speed: String) {
-        ATHLogger.debug("Parsing memory details from HardwareCollector...", category: .hardware)
-        
-        // Use cached data from HardwareCollector
-        guard let content = HardwareCollector.shared.getCachedFileContent(InitGlobVar.sysmemFilePath) else {
-            ATHLogger.error("No memory details available from HardwareCollector for parsing", category: .hardware)
-            return ("", "")
-        }
-        
-        let lines = content.components(separatedBy: .newlines)
-        let type = lines.first { $0.contains("Type") }?.components(separatedBy: ": ").last ?? ""
-        let speed = lines.first { $0.contains("Speed") && $0.contains("MHz") }?.components(separatedBy: ": ").last ?? ""
-        
+        ATHLogger.debug("Parsing memory details from shared lines...", category: .hardware)
+
+        // Use shared parsed lines instead of re-parsing
+        let type = parsedMemoryLines.first { $0.contains("Type") }?.components(separatedBy: ": ").last ?? ""
+        let speed = parsedMemoryLines.first { $0.contains("Speed") && $0.contains("MHz") }?.components(separatedBy: ": ").last ?? ""
+
         return (type, speed)
     }
 }

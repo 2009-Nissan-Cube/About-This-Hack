@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xcodebuild:*)",
+      "Bash(if [ -f /private/tmp/.ath/scr.txt ])",
+      "Bash(then head -50 /private/tmp/.ath/scr.txt)",
+      "Bash(else echo \"File not found\")",
+      "Bash(fi)",
+      "Bash(cat:*)",
+      "Bash(system_profiler:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

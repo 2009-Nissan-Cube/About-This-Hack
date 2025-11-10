@@ -19,11 +19,12 @@ class ViewControllerStorage: NSViewController {
 
     private func start() {
         ATHLogger.info("Initializing Storage View...", category: .ui)
-        
-        if (!HardwareCollector.shared.dataHasBeenSet) {
-            HardwareCollector.shared.getAllData()
-        }
 
+        // Data is already loaded by WindowController, just update UI
+        updateStorageUI()
+    }
+
+    private func updateStorageUI() {
         setStartupDiskImage()
         updateStorageInfo()
     }
@@ -50,9 +51,10 @@ class ViewControllerStorage: NSViewController {
     }
     
     private func setToolTips() {
-        startupDiskImage.toolTip = startupDiskImagetoolTip
-        storageValue.toolTip = storageValuetoolTip
-        
+        let t = Tooltips.shared
+        startupDiskImage.toolTip = t.startupDiskImagetoolTip
+        storageValue.toolTip = t.storageValuetoolTip
+
         ATHLogger.debug("Storage tooltips configured", category: .ui)
     }
 }

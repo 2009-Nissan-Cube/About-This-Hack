@@ -166,18 +166,18 @@ class HCVersion {
 //    }
 
     private func getOCLPInfo() -> String {
-        guard let xmlString = try? String(contentsOfFile: InitGlobVar.oclpXmlFilePath, encoding: .utf8) else {
+        guard let xmlString = HardwareCollector.shared.getCachedFileContent(InitGlobVar.oclpXmlFilePath) else {
             return ""
         }
-        
+
         let version = xmlString.captureGroup(for: "<key>OpenCore Legacy Patcher</key>\\s*<string>([^<]+)</string>") ?? ""
         let commit = xmlString.captureGroup(for: "<key>Commit URL</key>\\s*<string>[^/]+/([^<]+)</string>")?.split(separator: "/").last?.prefix(7) ?? ""
         let date = xmlString.captureGroup(for: "<key>Time Patched</key>\\s*<string>([^<]+)</string>")?.replacingOccurrences(of: "@", with: "") ?? ""
-        
+
         if !version.isEmpty {
             return "OCLP \(version) (\(commit)) (\(date))"
         }
-        
+
         return ""
     }
 }

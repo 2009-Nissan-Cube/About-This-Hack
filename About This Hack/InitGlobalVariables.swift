@@ -39,7 +39,9 @@ class InitGlobVar {
         
     // ioreg Dir perl script and pci ids and names files
     static var whichLocation           = "/usr/bin/which"
-    static var curlLocation            = run(whichLocation + " curl  | /usr/bin/tr -d '\n'")
+    static var curlLocation: String = {
+        run(whichLocation + " curl  | /usr/bin/tr -d '\n'")
+    }()
 
     // Files with Overview, Displays and Storage detailed Datas
     static var hwFilePath              = athDirectory + "/hw.txt"

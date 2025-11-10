@@ -2,16 +2,48 @@ import Foundation
 
 class CreateDataFiles {
 
-    static var dataFilesCreated: Bool = false
+    static private var _dataFilesCreated: Bool = false
+    static private let lock = NSLock()
+
+    static var dataFilesCreated: Bool {
+        lock.lock()
+        defer { lock.unlock() }
+        return _dataFilesCreated
+    }
+
+    /// Asynchronously creates initial data files
+    /// - Parameter completion: Called on completion (main thread)
+    static func getInitDataFilesAsync(completion: @escaping () -> Void) {
+        lock.lock()
+        if _dataFilesCreated {
+            lock.unlock()
+            DispatchQueue.main.async {
+                completion()
+            }
+            return
+        }
+        lock.unlock()
+
+        DispatchQueue.global(qos: .userInitiated).async {
+            getInitDataFiles()
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
+    }
 
     static func getInitDataFiles() {
-        
-        if (dataFilesCreated) { return }
+        lock.lock()
+        if _dataFilesCreated {
+            lock.unlock()
+            return
+        }
+        lock.unlock()
 
         _ = run("rm -rf " + InitGlobVar.athDirectory + " 2>/dev/null")
         _ = run("mkdir " + InitGlobVar.athDirectory + " 2>/dev/null")
-        print("Directory created...")
-        
+        ATHLogger.debug("Data directory created", category: .system)
+
         func createFileIfNeeded(atPath path: String, withCommand command: String) {
             _ = run(command)
         }
@@ -29,12 +61,15 @@ class CreateDataFiles {
 
 /*  Testing phase - Uncomment and modify path for testing phase
         let testDataRep = "~/Downloads/0-ath-issue-N78" // Replace with your test data directory
-        
+
         createFileIfNeeded(atPath: InitGlobVar.hwFilePath, withCommand: "ln -s \(testDataRep)/hw.txt  \"\(InitGlobVar.hwFilePath)\"")
         // ... Add similar lines for other files
 */
 
-        print("Files created...")
-        dataFilesCreated = true
+        ATHLogger.info("Data files created successfully", category: .system)
+
+        lock.lock()
+        _dataFilesCreated = true
+        lock.unlock()
     }
 }

@@ -34,17 +34,16 @@ class ViewController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         view.window?.styleMask.remove(.resizable)
-        
-        // Use optimized HardwareCollector with file caching - much faster!
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            // This will use cached file content and serial data loading
-            HardwareCollector.shared.getAllData()
-            
-            // Now update UI on main thread
-            DispatchQueue.main.async {
-                self?.updateUI()
-            }
+
+        // Only update UI if data is already loaded
+        if HardwareCollector.shared.dataHasBeenSet {
+            updateUI()
         }
+    }
+
+    // Called by WindowController after data is loaded
+    func updateUIAfterDataLoaded() {
+        updateUI()
     }
     
     override func viewDidAppear() {
@@ -107,21 +106,22 @@ class ViewController: NSViewController {
     }
     
     private func setToolTips() {
+        let t = Tooltips.shared
         let tooltips: [(NSView, String?)] = [
-            (osVersion, osVersiontoolTip),
-            (systemVersion, systemVersiontoolTip),
-            (macModel, macModeltoolTip),
-            (cpu, cputoolTip),
-            (ram, ramtoolTip),
-            (startupDisk, startupDisktoolTip),
-            (display, displaytoolTip),
-            (graphics, graphicstoolTip),
-            (serialToggle, serialToggletoolTip),
-            (blVersion, blVersiontoolTip),
-            (btSysInfo, btSysInfotoolTip),
-            (btSoftUpd, btSoftUpdtoolTip)
+            (osVersion, t.osVersiontoolTip),
+            (systemVersion, t.systemVersiontoolTip),
+            (macModel, t.macModeltoolTip),
+            (cpu, t.cputoolTip),
+            (ram, t.ramtoolTip),
+            (startupDisk, t.startupDisktoolTip),
+            (display, t.displaytoolTip),
+            (graphics, t.graphicstoolTip),
+            (serialToggle, t.serialToggletoolTip),
+            (blVersion, t.blVersiontoolTip),
+            (btSysInfo, t.btSysInfotoolTip),
+            (btSoftUpd, t.btSoftUpdtoolTip)
         ]
-        
+
         tooltips.forEach { view, tooltip in
             view.toolTip = trimTooltip(tooltip)
         }

@@ -3,8 +3,31 @@ import Foundation
 class HCGPU {
     static let shared = HCGPU()
     private init() {}
-    
-    private lazy var gpuInfo: String = {
+
+    private var _gpuInfo: String?
+    private let gpuLock = NSLock()
+
+    private var gpuInfo: String {
+        gpuLock.lock()
+        defer { gpuLock.unlock() }
+
+        if let cached = _gpuInfo {
+            return cached
+        }
+
+        let computed = computeGPUInfo()
+        _gpuInfo = computed
+        return computed
+    }
+
+    func reset() {
+        gpuLock.lock()
+        defer { gpuLock.unlock() }
+        _gpuInfo = nil
+        ATHLogger.debug("GPU info reset", category: .hardware)
+    }
+
+    private func computeGPUInfo() -> String {
         ATHLogger.debug("Initializing GPU Info...", category: .hardware)
         
         // Use cached data from HardwareCollector instead of file I/O
@@ -17,48 +40,59 @@ class HCGPU {
         
         let lines = content.components(separatedBy: .newlines)
         var chipset = "", vram = "", metal = ""
-        
-        // Fallback: if standard parsing fails, grab first meaningful line under Graphics/Displays
-        if let displaysIdx = lines.firstIndex(where: { $0.trimmingCharacters(in: .whitespaces) == "Displays:" }),
-           let gfxIdx = lines.firstIndex(where: { $0.contains("Graphics/Displays:") }) {
-            let gpuBlock = lines[(gfxIdx+1)..<displaysIdx]
-            let trimmed = gpuBlock.map { $0.trimmingCharacters(in: .whitespaces) }.filter { !$0.isEmpty }
-            let meaningful = trimmed.filter { !$0.hasSuffix(":") }
-            if let first = meaningful.first {
-                // Clean up the chipset line by removing common prefixes
-                let cleaned = first.replacingOccurrences(of: "Chipset Model:", with: "")
-                                  .replacingOccurrences(of: "Chipset:", with: "")
-                                  .trimmingCharacters(in: .whitespaces)
-                ATHLogger.debug("Fallback GPU Info: \(cleaned)", category: .hardware)
-                return cleaned
+
+        ATHLogger.debug("Parsing GPU data from \(lines.count) lines", category: .hardware)
+
+        for (index, line) in lines.enumerated() {
+            let trimmed = line.trimmingCharacters(in: .whitespaces)
+
+            // Log first 15 lines for debugging
+            if index < 15 {
+                ATHLogger.debug("Line \(index): '\(trimmed)'", category: .hardware)
             }
-        }
-        for line in lines {
-            if chipset.isEmpty, line.contains("Chipset"),
-               let value = line.components(separatedBy: ":").last?.trimmingCharacters(in: .whitespaces) {
-                chipset = value.replacingOccurrences(of: "Intel ", with: "")
-                               .replacingOccurrences(of: "NVIDIA ", with: "")
-            } else if vram.isEmpty, line.contains("VRAM"),
-                      let value = line.components(separatedBy: ":").last?.trimmingCharacters(in: .whitespaces) {
-                vram = value
-            } else if metal.isEmpty, line.contains("Metal"),
-                      let value = line.components(separatedBy: ":").last?.trimmingCharacters(in: .whitespaces) {
-                metal = value.replacingOccurrences(of: "Metal", with: "")
+
+            if chipset.isEmpty, trimmed.hasPrefix("Chipset Model:") {
+                let value = trimmed.components(separatedBy: ":").dropFirst().joined(separator: ":").trimmingCharacters(in: .whitespaces)
+                if !value.isEmpty {
+                    chipset = value.replacingOccurrences(of: "Intel ", with: "")
+                                   .replacingOccurrences(of: "NVIDIA ", with: "")
+                                   .replacingOccurrences(of: "AMD ", with: "")
+                    ATHLogger.debug("Found Chipset at line \(index): \(chipset)", category: .hardware)
+                }
+            } else if vram.isEmpty, trimmed.hasPrefix("VRAM") {
+                let value = trimmed.components(separatedBy: ":").dropFirst().joined(separator: ":").trimmingCharacters(in: .whitespaces)
+                if !value.isEmpty {
+                    vram = value
+                    ATHLogger.debug("Found VRAM at line \(index): \(vram)", category: .hardware)
+                }
+            } else if metal.isEmpty, trimmed.hasPrefix("Metal Support:") {
+                let value = trimmed.components(separatedBy: ":").dropFirst().joined(separator: ":").trimmingCharacters(in: .whitespaces)
+                if !value.isEmpty {
+                    metal = value
+                    ATHLogger.debug("Found Metal at line \(index): \(metal)", category: .hardware)
+                }
             }
-            
-            if !chipset.isEmpty && !vram.isEmpty && !metal.isEmpty {
+
+            // Stop when we hit the Displays section
+            if trimmed == "Displays:" {
+                ATHLogger.debug("Stopping GPU parse at Displays section (line \(index))", category: .hardware)
                 break
             }
         }
-        
-        ATHLogger.debug("GPU Chipset: \(chipset), VRAM: \(vram), Metal: \(metal)", category: .hardware)
-        
-        return "\(chipset) \(vram) (Metal \(metal))"
-            .trimmingCharacters(in: .whitespaces)
-            .components(separatedBy: .whitespaces)
-            .filter { !$0.isEmpty }
-            .joined(separator: " ")
-    }()
+
+        ATHLogger.debug("Final GPU Chipset: '\(chipset)', VRAM: '\(vram)', Metal: '\(metal)'", category: .hardware)
+
+        // Build result based on what we found
+        var result = chipset
+        if !vram.isEmpty {
+            result += " \(vram)"
+        }
+        if !metal.isEmpty {
+            result += " (\(metal))"
+        }
+
+        return result.trimmingCharacters(in: .whitespaces)
+    }
     
     func getGPU() -> String {
         ATHLogger.debug("Getting GPU string...", category: .hardware)

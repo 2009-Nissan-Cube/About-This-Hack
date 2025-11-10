@@ -3,14 +3,16 @@ import Foundation
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-    
+
     override init() {
         super.init()
         ATHLogger.info("Application starting...", category: .system)
-        CreateDataFiles.getInitDataFiles()
-        Thread.sleep(forTimeInterval: 1.5)
+        // Start async data file creation - no blocking!
+        CreateDataFiles.getInitDataFilesAsync {
+            ATHLogger.info("Data files ready", category: .system)
+        }
     }
-    
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         ATHLogger.info("Checking for Updates...", category: .system)
         if UpdateController.checkForUpdates() {
