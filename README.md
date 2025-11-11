@@ -46,7 +46,7 @@ There is also a native auto-updater that reminds you when a new version releases
 
 ## 🚀 Getting Started
 
-1. Download the latest release [here](https://github.com/Alexander Skula/About-This-Hack/releases/latest)
+1. Download the latest release [here](https://github.com/0xCUB3/About-This-Hack/releases/latest)
 2. Drag the app to your Applications folder
 3. Launch and explore!
 4) If you get [this error](https://user-images.githubusercontent.com/79278890/111886978-4af4cb80-89a8-11eb-90c8-522a89abb48e.png) when opening:
