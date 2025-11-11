@@ -7,38 +7,45 @@ Discover the heart of your macOS device with About This Hack: a sleek, intuitive
 # 🌟 Key Features
 
 ## Overview: Remember this?
+
 A throwback to the (better) About This Mac view from pre-Ventura. Get instant access to essential system specs, including your computer model, OS version, and processor details. Hackintosh users will appreciate the Clover or OpenCore bootloader version display.
 
-<img width="692" alt="OpenCore Hackintosh" text="OpenCore Hackintosh" src="https://github.com/Alexander Skula/About-This-Hack/assets/94565160/18d29cff-1db1-4060-8e02-64307dafa20c">
+<img width="692" alt="OpenCore Hackintosh" text="OpenCore Hackintosh" src="https://github.com/0xCUB3/About-This-Hack/assets/94565160/18d29cff-1db1-4060-8e02-64307dafa20c">
 
 > 💡 Pro Tip: Click your serial number to hide it for screenshots!
 
 ## Displays: See Your Screen(s)
+
 Visualize up to three of your connected displays with their respective resolutions.
 
-![CleanShot 2024-06-29 at 13 14 22@2x](https://github.com/Alexander Skula/About-This-Hack/assets/94565160/99a06cba-a491-4db3-a0f3-b69cd6ef8cca)
-![CleanShot 2024-06-29 at 13 10 16](https://github.com/Alexander Skula/About-This-Hack/assets/94565160/b5b433bc-b708-4646-9301-84c8ff043315)
+![CleanShot 2024-06-29 at 13 14 22@2x](https://github.com/0xCUB3/About-This-Hack/assets/94565160/99a06cba-a491-4db3-a0f3-b69cd6ef8cca)
+
+![CleanShot 2024-06-29 at 13 10 16](https://github.com/0xCUB3/About-This-Hack/assets/94565160/b5b433bc-b708-4646-9301-84c8ff043315)
 
 ## Storage: Your Space
+
 Get a clear picture of your startup disk, including name, available space, and disk type, all presented with an easy-to-read usage bar.
 
-![CleanShot 2024-06-29 at 13 10 59](https://github.com/Alexander Skula/About-This-Hack/assets/94565160/96ca5d35-3026-4d42-a171-6f6fcb3daeae)
+![CleanShot 2024-06-29 at 13 10 59](https://github.com/0xCUB3/About-This-Hack/assets/94565160/96ca5d35-3026-4d42-a171-6f6fcb3daeae)
 
 ## Support: Another View from a Bygone Era
+
 Access a list of support resources for both Mac and Hackintosh users.
-![CleanShot 2024-06-29 at 13 11 22](https://github.com/Alexander Skula/About-This-Hack/assets/94565160/49c1d426-b006-4a4c-a960-49cc4481638f)
+
+![CleanShot 2024-06-29 at 13 11 22](https://github.com/0xCUB3/About-This-Hack/assets/94565160/49c1d426-b006-4a4c-a960-49cc4481638f)
 
 ---
 
 Some values show more details when hovered over. See if you can find them all! 😉
 
-![CleanShot 2024-06-29 at 13 11 56](https://github.com/Alexander Skula/About-This-Hack/assets/94565160/227bae23-5157-4895-965a-86e826e947f9)
+![CleanShot 2024-06-29 at 13 11 56](https://github.com/0xCUB3/About-This-Hack/assets/94565160/227bae23-5157-4895-965a-86e826e947f9)
 
 There is also a native auto-updater that reminds you when a new version releases!
 
 ---
 
 ## 🚀 Getting Started
+
 1. Download the latest release [here](https://github.com/Alexander Skula/About-This-Hack/releases/latest)
 2. Drag the app to your Applications folder
 3. Launch and explore!
@@ -48,10 +55,12 @@ There is also a native auto-updater that reminds you when a new version releases
 - Click "Open Anyway"
 
 ## 🔧 Compatibility
-- Supports macOS 10.12 Sierra and newer
+
+- Supports macOS 12 Monterey and newer
 - Not compatible with Linux or Windows
 
 ## 🙌 Credits
+
 A big thank you to our contributors:
 
 [matxpa](https://github.com/matxpa) for doing so much and helping add so many features. <br>
@@ -64,6 +73,7 @@ The internet for helping me with a lot of the code.
 ---
 
 ## 💖 Support About This Hack
+
 About This Hack is a labor of love, bringing back the classic Mac experience with modern enhancements. If you enjoy using it, consider supporting its development:
 
 <p align="center">
@@ -73,6 +83,7 @@ About This Hack is a labor of love, bringing back the classic Mac experience wit
 </p>
 
 ## 📞 Contact
+
 Got questions or suggestions? Reach out:
 - Discord: 0xcube
 - Reddit: [u/0xCUBE](https://www.reddit.com/user/0xCUBE)
@@ -80,4 +91,4 @@ Got questions or suggestions? Reach out:
 
 ## 📈 Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Alexander Skula/About-This-Hack&type=Date)](https://star-history.com/#Alexander Skula/About-This-Hack&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=0xCUB3/About-This-Hack&type=Date)](https://star-history.com/#0xCUB3/About-This-Hack&Date)
