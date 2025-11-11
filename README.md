@@ -49,15 +49,15 @@ There is also a native auto-updater that reminds you when a new version releases
 1. Download the latest release [here](https://github.com/0xCUB3/About-This-Hack/releases/latest)
 2. Drag the app to your Applications folder
 3. Launch and explore!
-4) If you get [this error](https://user-images.githubusercontent.com/79278890/111886978-4af4cb80-89a8-11eb-90c8-522a89abb48e.png) when opening:
-- Open `System Preferences` and go to `Security & Privacy`.
-- Under `General` you should see [this prompt](https://user-images.githubusercontent.com/79278890/111887197-c6a34800-89a9-11eb-83e2-9fd3d61e2c15.png):
-- Click "Open Anyway"
+4. If you get [this error](https://user-images.githubusercontent.com/79278890/111886978-4af4cb80-89a8-11eb-90c8-522a89abb48e.png) when opening
+- Open `System Preferences` and go to `Security & Privacy`
+- You'll see a notice saying About This Hack app is blocked
+- Click "Open Anyway".
 
 ## 🔧 Compatibility
 
 - Supports macOS 10.12 Sierra and newer
-- Not compatible with Linux or Windows
+- Not compatible with Linux or Windows.
 
 ## 🙌 Credits
 
@@ -85,10 +85,12 @@ About This Hack is a labor of love, bringing back the classic Mac experience wit
 ## 📞 Contact
 
 Got questions or suggestions? Reach out:
+
 - Discord: 0xcube
 - Reddit: [u/0xCUBE](https://www.reddit.com/user/0xCUBE)
-- Email: Alexander Skula
+- Email: Alexander Skula.
 
 ## 📈 Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=0xCUB3/About-This-Hack&type=Date)](https://star-history.com/#0xCUB3/About-This-Hack&Date)
+1. 
