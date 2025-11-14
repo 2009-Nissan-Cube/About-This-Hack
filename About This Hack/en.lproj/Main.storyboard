@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="24127" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24127"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24128"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -158,8 +158,8 @@
                                             <font key="font" metaFont="system"/>
                                             <segments>
                                                 <segment label="Overview" toolTip="General presentation of system specifications" selected="YES"/>
-                                                <segment label="Displays" tag="1"/>
-                                                <segment label="Storage"/>
+                                                <segment label="Displays" toolTip="Screens: brands, models, and resolutions" tag="1"/>
+                                                <segment label="Storage" toolTip="Boot disk, connection type and available space"/>
                                                 <segment label="Support" toolTip="Presentation of support links for help with your hackintosh or mac"/>
                                             </segments>
                                         </segmentedCell>
@@ -239,7 +239,7 @@
                                 </connections>
                             </button>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xUp-pm-2ff">
-                                <rect key="frame" x="284" y="114" width="278" height="14"/>
+                                <rect key="frame" x="313" y="114" width="258" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" id="9GR-YY-0Qn">
                                     <font key="font" metaFont="smallSystem"/>
@@ -248,7 +248,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P80-IN-7ra">
-                                <rect key="frame" x="288" y="153" width="274" height="14"/>
+                                <rect key="frame" x="313" y="153" width="258" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" id="Sua-79-DX8">
                                     <font key="font" metaFont="smallSystem"/>
@@ -266,7 +266,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="afk-bp-wk1">
-                                <rect key="frame" x="299" y="172" width="266" height="14"/>
+                                <rect key="frame" x="313" y="172" width="258" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" id="lqi-32-Rhm">
                                     <font key="font" metaFont="smallSystem"/>
@@ -293,7 +293,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uqM-yy-cth">
-                                <rect key="frame" x="292" y="94" width="290" height="15"/>
+                                <rect key="frame" x="313" y="94" width="258" height="15"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" id="apd-KF-PGO">
                                     <font key="font" metaFont="smallSystem"/>
@@ -379,7 +379,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IuZ-wD-zIo" userLabel="Bl Version">
-                                <rect key="frame" x="304" y="56" width="258" height="14"/>
+                                <rect key="frame" x="313" y="56" width="258" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" id="zZ1-md-7Vy">
                                     <font key="font" metaFont="smallSystem"/>
@@ -426,7 +426,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MIz-OE-XB1">
-                                <rect key="frame" x="311" y="133" width="251" height="15"/>
+                                <rect key="frame" x="313" y="133" width="258" height="15"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" id="vOj-z8-NrJ">
                                     <font key="font" metaFont="smallSystem"/>
