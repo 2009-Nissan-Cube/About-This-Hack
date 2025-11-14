@@ -37,6 +37,8 @@
 		DC6870582A6473E400CAD908 /* HCSerialNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870572A6473E400CAD908 /* HCSerialNumber.swift */; };
 		DC68705A2A6473F000CAD908 /* HCBootloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870592A6473F000CAD908 /* HCBootloader.swift */; };
 		DC68705C2A6474B600CAD908 /* HCDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68705B2A6474B600CAD908 /* HCDisplay.swift */; };
+		LOCBUILD000000000000001 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = LOCVAR00000000000000001 /* Localizable.strings */; };
+		MAINBUILD00000000000001 /* Main.strings in Resources */ = {isa = PBXBuildFile; fileRef = MAINVAR000000000000001 /* Main.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,7 +66,7 @@
 		D90473D62D6FD62900B738E3 /* About This Hack-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "About This Hack-Bridging-Header.h"; sourceTree = "<group>"; };
 		D90473D72D6FD62900B738E3 /* ObjCSIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCSIP.m; sourceTree = "<group>"; };
 		D90473D92D6FD70800B738E3 /* ObjCSIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCSIP.h; sourceTree = "<group>"; };
-		D91B9F7429B27FA800AB58B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D91B9F7429B27FA800AB58B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DC6870452A63334400CAD908 /* HCVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCVersion.swift; sourceTree = "<group>"; };
 		DC6870472A63336E00CAD908 /* HardwareCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardwareCollector.swift; sourceTree = "<group>"; };
 		DC6870492A633DDD00CAD908 /* HCMacModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMacModel.swift; sourceTree = "<group>"; };
@@ -75,6 +77,12 @@
 		DC6870572A6473E400CAD908 /* HCSerialNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSerialNumber.swift; sourceTree = "<group>"; };
 		DC6870592A6473F000CAD908 /* HCBootloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCBootloader.swift; sourceTree = "<group>"; };
 		DC68705B2A6474B600CAD908 /* HCDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCDisplay.swift; sourceTree = "<group>"; };
+		LOCEN00000000000000000001 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		LOCES00000000000000000001 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		LOCFR00000000000000000001 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		MAINEN000000000000000001 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		MAINES000000000000000001 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		MAINFR000000000000000001 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +129,8 @@
 				115D922326D6F6AE00F5DF35 /* InsertExtension.swift */,
 				58134C0128668FF70008B00D /* Keycodes.swift */,
 				D91B9F7529B27FA800AB58B7 /* Main.storyboard */,
+				MAINVAR000000000000001 /* Main.strings */,
+				LOCVAR00000000000000001 /* Localizable.strings */,
 				72E686C22862453700B8316D /* Reachability.swift */,
 				114545F52710E3AE0017655D /* Shell.swift */,
 				D90473D92D6FD70800B738E3 /* ObjCSIP.h */,
@@ -214,6 +224,8 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
+				fr,
 			);
 			mainGroup = 115D920526D6F65500F5DF35;
 			packageReferences = (
@@ -234,6 +246,8 @@
 			files = (
 				D91B9F7329B27FA800AB58B7 /* Main.storyboard in Resources */,
 				115D921626D6F65600F5DF35 /* Assets.xcassets in Resources */,
+				LOCBUILD000000000000001 /* Localizable.strings in Resources */,
+				MAINBUILD00000000000001 /* Main.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,9 +295,29 @@
 		D91B9F7529B27FA800AB58B7 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D91B9F7429B27FA800AB58B7 /* en */,
+				D91B9F7429B27FA800AB58B7 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		LOCVAR00000000000000001 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				LOCEN00000000000000000001 /* en */,
+				LOCES00000000000000000001 /* es */,
+				LOCFR00000000000000000001 /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		MAINVAR000000000000001 /* Main.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				MAINEN000000000000000001 /* en */,
+				MAINES000000000000000001 /* es */,
+				MAINFR000000000000000001 /* fr */,
+			);
+			name = Main.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -427,7 +461,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1648;
+				CURRENT_PROJECT_VERSION = 1653;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = ER43ZD2S4U;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -443,7 +477,7 @@
 					"$(SDKROOT)/usr/lib/swift",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 2.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.0xCUBE.About-This-Hack";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -464,7 +498,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1648;
+				CURRENT_PROJECT_VERSION = 1653;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = ER43ZD2S4U;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -480,7 +514,7 @@
 					"$(SDKROOT)/usr/lib/swift",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 2.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.0xCUBE.About-This-Hack";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

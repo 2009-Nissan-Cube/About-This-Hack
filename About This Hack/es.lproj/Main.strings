@@ -1,0 +1,105 @@
+/* 
+  Main.strings
+  About This Hack
+  
+  Spanish localization for Main.storyboard
+*/
+
+/* Menu Items - System menus are automatically localized by macOS */
+"1Xt-HY-uBw.title" = "About This Hack";
+"5kV-Vb-QxS.title" = "About This Hack";
+"BOF-NM-1cW.title" = "Preferencias…";
+"Olw-nP-bQN.title" = "Ocultar About This Hack";
+"Vdr-fp-XzO.title" = "Ocultar Otras";
+"Kd2-mp-pUS.title" = "Mostrar Todo";
+"4sb-4s-VLi.title" = "Salir de About This Hack";
+
+/* Window Menu */
+"Fdn-tF-SyD.title" = "Minimizar";
+"rT6-YD-Lao.title" = "Cerrar";
+"5HS-Mc-tod.title" = "Ampliar";
+"Rw1-hT-NzJ.title" = "General";
+"pHH-rO-4Am.title" = "Pantallas";
+"tsM-eT-fG4.title" = "Almacenamiento";
+"3AK-j7-ksI.title" = "Soporte";
+"MvP-56-vIj.title" = "Traer Todo al Frente";
+
+/* Help Menu */
+"FKE-Sm-Kum.title" = "Ayuda de About This Hack";
+
+/* Toolbar segments */
+"Kat-cT-SH6.IBSegmentTitles[0]" = "General";
+"Kat-cT-SH6.IBSegmentTitles[1]" = "Pantallas";
+"Kat-cT-SH6.IBSegmentTitles[2]" = "Almacenamiento";
+"Kat-cT-SH6.IBSegmentTitles[3]" = "Soporte";
+
+/* Toolbar tooltips */
+"Kat-cT-SH6.IBSegmentToolTips[0]" = "Presentación general de las especificaciones del sistema";
+"Kat-cT-SH6.IBSegmentToolTips[1]" = "Pantallas: marcas, modelos y resoluciones";
+"Kat-cT-SH6.IBSegmentToolTips[2]" = "Disco de arranque, tipo de conexión y espacio disponible";
+"Kat-cT-SH6.IBSegmentToolTips[3]" = "Presentación de enlaces de soporte para ayuda con tu hackintosh o mac";
+
+/* Tab titles */
+"n4n-EV-VRJ.label" = "General";
+"V5g-8l-HD9.label" = "Pantallas";
+"Ulr-Rw-AuM.label" = "Almacenamiento";
+"jDc-xR-PKa.label" = "Soporte";
+"f5d-9Y-QYV.title" = "General";
+"4Ic-HP-FIG.title" = "Pantallas";
+"ZgD-vw-Fms.title" = "Almacenamiento";
+"X4p-pe-eWz.title" = "Soporte";
+
+/* Overview tab labels */
+"hsI-Jh-8ZB.title" = "macOS";
+"aVv-ik-X5U.title" = "Mac";
+"50u-5m-bF6.title" = "Versión";
+"eNr-cL-YIx.title" = "CPU";
+"9po-WS-dwb.title" = "Memoria";
+"uBB-9W-UNN.title" = "Gráficos";
+"PHp-lf-HSW.title" = "Pantalla";
+"hGd-h4-VZu.title" = "D. arranque";
+"GF7-VV-kJE.title" = "Nº de serie";
+"Zix-Se-woD.title" = "Cargador";
+
+/* Overview tab buttons */
+"trQ-CB-Gy7.title" = "Informe del sistema...";
+"qm6-0M-m5S.title" = "Actualización de software...";
+
+/* Overview tab credit */
+"9m4-Aj-Z9s.title" = "™ y © 2021-2025 Alexander Skula et al. Todos los derechos reservados.";
+
+/* Displays tab labels */
+"8AG-xG-bwN.title" = "Pantallas";
+"nYR-td-SZA.title" = "Resolución";
+"WXb-rf-pHE.title" = "Resolución";
+"nOf-u5-ixc.title" = "Pantalla";
+"JIq-tG-Wde.title" = "Pantalla";
+"9QZ-Xd-dKW.title" = "Pantalla";
+"eAd-AP-sCo.title" = "Pantalla";
+"lGD-66-fqQ.title" = "Resolución";
+"EDC-LZ-Yz0.title" = "Resolución";
+"AGy-pu-xsl.title" = "Resolución";
+"G5H-Ki-eA3.title" = "Pantalla";
+
+/* Displays tab button */
+"YdJ-D9-bdb.title" = "Preferencias de pantalla...";
+
+/* Storage tab labels */
+"85G-9L-vZu.title" = "Disco de arranque";
+"CCk-HG-RPK.title" = "Almacenamiento";
+
+/* Support tab labels */
+"nfD-48-h8U.title" = "Soporte";
+"WiG-h4-nct.title" = "Ayuda de hardware";
+"60O-tk-qQQ.title" = "Ayuda de macOS";
+
+/* Support tab buttons */
+"IGp-2D-udq.title" = "Guía de macOS ";
+"FDH-dC-Hhn.title" = "Novedades de macOS";
+"RNQ-U8-Ogt.title" = "Soporte de Apple";
+"jqb-7v-wlV.title" = "Guía Hackintosh";
+"7cd-Yi-m3m.title" = "Lo básico del Mac";
+"6F2-TI-rX7.title" = "Guía del Mac";
+
+/* Support tab credit */
+"bMz-NI-dWZ.title" = "Hecho con ❤️ por Alexander Skula, MDNich y matxpa";
