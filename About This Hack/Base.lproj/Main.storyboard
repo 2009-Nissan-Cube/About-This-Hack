@@ -143,13 +143,13 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <value key="minSize" type="size" width="580" height="280"/>
                         <value key="maxSize" type="size" width="580" height="280"/>
-                        <toolbar key="toolbar" implicitIdentifier="507F4FF9-8B58-4513-B8A2-0D484D04E6BB" centeredItem="5iE-AH-Dbz" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="default" sizeMode="regular" id="AUk-9O-EXi">
+                        <toolbar key="toolbar" implicitIdentifier="507F4FF9-8B58-4513-B8A2-0D484D04E6BB" centeredItem="5iE-AH-Dbz" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="AUk-9O-EXi">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="F6F-um-AUh"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Jtn-pX-f66"/>
-                                <toolbarItem implicitItemIdentifier="88CCF72C-7D82-4627-B3A1-154D73ADC1B1" explicitItemIdentifier="SegCTRL" label="Custom View" paletteLabel="Custom View" autovalidates="NO" id="5iE-AH-Dbz">
+                                <toolbarItem implicitItemIdentifier="88CCF72C-7D82-4627-B3A1-154D73ADC1B1" explicitItemIdentifier="SegCTRL" label="" paletteLabel="Custom View" autovalidates="NO" id="5iE-AH-Dbz">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="328" height="28"/>
+                                    <size key="minSize" width="292" height="26"/>
                                     <size key="maxSize" width="328" height="28"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" springLoaded="YES" id="L8Y-nK-bWF">
                                         <rect key="frame" x="0.0" y="14" width="292" height="26"/>
