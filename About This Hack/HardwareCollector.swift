@@ -165,7 +165,7 @@ class HardwareCollector {
         
         let storageInfo = """
         \(HCStartupDisk.shared.getStartupDisk()) (\(deviceLocation) \(deviceProtocol))
-        \(String(format: "%.2f", sizeGB)) GB (\(String(format: "%.2f", availableGB)) GB Available - \(percentFree)%)
+        \(String(format: "%.2f", sizeGB)) GB (\(String(format: "%.2f", availableGB)) GB \(NSLocalizedString("storage.available", comment: "Available storage label")) - \(percentFree)%)
         """
         
         return (isSSd, storageInfo, 1 - percent)

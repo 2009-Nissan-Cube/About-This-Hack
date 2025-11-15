@@ -1,0 +1,61 @@
+/* 
+  Localizable.strings
+  About This Hack
+  
+  French localization
+*/
+
+/* Tooltips */
+"tooltip.bootloader" = "Chargeur d'amorçage : %@\nBoot-args : %@";
+"tooltip.sysinfo" = " Données détaillées : Matériel, Réseau, Logiciel, etc.";
+"tooltip.softupd" = " Rechercher et installer les mises à jour système et de sécurité";
+
+/* Segmented Control Titles */
+"segment.title.overview" = "Aperçu";
+"segment.title.displays" = "Écrans";
+"segment.title.storage" = "Stockage";
+"segment.title.support" = "Assistance";
+
+/* Segmented Control Tooltips */
+"segment.tooltip.overview" = "Présentation générale des spécifications du système";
+"segment.tooltip.displays" = "Écrans et résolutions";
+"segment.tooltip.storage" = "Disque de démarrage, type de connexion et espace disponible";
+"segment.tooltip.support" = "Présentation des liens d'assistance pour votre hackintosh ou Mac";
+
+/* ViewControllerSupport */
+"browser.success" = "Navigateur ouvert avec succès";
+
+/* Storage */
+"storage.available" = "Disponible";
+
+/* Logging messages */
+"log.browser.opened.macos_user_guide" = "Navigateur ouvert : Guide de l'utilisateur macOS";
+"log.browser.opened.whats_new" = "Navigateur ouvert : Nouveautés de macOS";
+"log.browser.opened.apple_support" = "Navigateur ouvert : Assistance Apple";
+"log.browser.opened.hackintosh" = "Navigateur ouvert : Guide Hackintosh";
+"log.browser.opened.mac_basics" = "Navigateur ouvert : Notions de base sur Mac";
+"log.browser.opened.mac_user_guide" = "Navigateur ouvert : Guide de l'utilisateur Mac";
+"log.browser.failed" = "Échec de l'ouverture de l'URL : %@";
+"log.support_view.init" = "Initialisation de la vue d'assistance...";
+"log.storage.init" = "Initialisation de la vue de stockage...";
+"log.storage.image_setting" = "Configuration de l'image de stockage : %@ %@";
+"log.storage.image_not_found" = "Image spécifique introuvable, utilisation de l'image générique %@";
+"log.storage.updated" = "Informations de stockage mises à jour : %@, %@%%";
+"log.storage.tooltips" = "Infobulles de stockage configurées";
+"log.window.loaded" = "Contrôleur de fenêtre chargé";
+"log.window.restored" = "Position de fenêtre restaurée depuis le cadre enregistré";
+"log.window.centered" = "Aucune position de fenêtre enregistrée, centrage de la fenêtre";
+"log.window.shown" = "Fenêtre affichée après le chargement des données";
+"log.app.starting" = "Démarrage de l'application...";
+"log.data_files.ready" = "Fichiers de données prêts";
+"log.checking_updates" = "Vérification des mises à jour...";
+"log.update_available" = "Mise à jour disponible, lancement du processus de mise à jour";
+"log.no_updates" = "Aucune mise à jour disponible";
+"log.app.terminating" = "Fermeture de l'application, nettoyage des fichiers temporaires";
+"log.view.show_error" = "Impossible d'afficher la vue : contrôleur de fenêtre principal introuvable";
+"log.display_view.init" = "Initialisation de la vue des écrans...";
+"log.service_view.init" = "Initialisation de la vue de service...";
+"log.display.names" = "Noms des écrans : %@";
+"log.display.resolutions" = "Résolutions des écrans : %@";
+"log.display.name_for_index" = "Nom de l'écran pour l'index %d : \"%@\"";
+"log.display.resolution_for_index" = "Résolution de l'écran pour l'index %d : \"%@\"";

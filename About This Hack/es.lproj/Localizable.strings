@@ -1,0 +1,61 @@
+/* 
+  Localizable.strings
+  About This Hack
+  
+  Spanish localization
+*/
+
+/* Tooltips */
+"tooltip.bootloader" = "BootLoader: %@\nBoot-args: %@";
+"tooltip.sysinfo" = " Datos detallados: Hardware, Red, Software, etc.";
+"tooltip.softupd" = " Buscar e instalar actualizaciones del sistema y de seguridad";
+
+/* Segmented Control Titles */
+"segment.title.overview" = "General";
+"segment.title.displays" = "Pantallas";
+"segment.title.storage" = "Almacenamiento";
+"segment.title.support" = "Soporte";
+
+/* Segmented Control Tooltips */
+"segment.tooltip.overview" = "Presentación general de las especificaciones del sistema";
+"segment.tooltip.displays" = "Pantallas y resoluciones";
+"segment.tooltip.storage" = "Disco de arranque, tipo de conexión y espacio disponible";
+"segment.tooltip.support" = "Presentación de enlaces de soporte para ayuda con tu hackintosh o mac";
+
+/* ViewControllerSupport */
+"browser.success" = "Navegador abierto correctamente";
+
+/* Storage */
+"storage.available" = "Disponible";
+
+/* Logging messages */
+"log.browser.opened.macos_user_guide" = "Navegador abierto: Guía del usuario de macOS";
+"log.browser.opened.whats_new" = "Navegador abierto: Novedades de macOS";
+"log.browser.opened.apple_support" = "Navegador abierto: Soporte de Apple";
+"log.browser.opened.hackintosh" = "Navegador abierto: Guía Hackintosh";
+"log.browser.opened.mac_basics" = "Navegador abierto: Conceptos básicos de Mac";
+"log.browser.opened.mac_user_guide" = "Navegador abierto: Guía del usuario de Mac";
+"log.browser.failed" = "Error al abrir la URL: %@";
+"log.support_view.init" = "Inicializando vista de soporte...";
+"log.storage.init" = "Inicializando vista de almacenamiento...";
+"log.storage.image_setting" = "Configurando imagen de almacenamiento: %@ %@";
+"log.storage.image_not_found" = "Imagen específica no encontrada, usando imagen genérica %@";
+"log.storage.updated" = "Información de almacenamiento actualizada: %@, %@%%";
+"log.storage.tooltips" = "Información sobre herramientas de almacenamiento configurada";
+"log.window.loaded" = "Controlador de ventana cargado";
+"log.window.restored" = "Posición de ventana restaurada desde marco guardado";
+"log.window.centered" = "No hay posición de ventana guardada, centrando ventana";
+"log.window.shown" = "Ventana mostrada después de cargar los datos";
+"log.app.starting" = "Iniciando aplicación...";
+"log.data_files.ready" = "Archivos de datos listos";
+"log.checking_updates" = "Buscando actualizaciones...";
+"log.update_available" = "Actualización disponible, iniciando proceso de actualización";
+"log.no_updates" = "No hay actualizaciones disponibles";
+"log.app.terminating" = "Cerrando aplicación, limpiando archivos temporales";
+"log.view.show_error" = "No se puede mostrar la vista: no se encontró el controlador de ventana principal";
+"log.display_view.init" = "Inicializando vista de pantallas...";
+"log.service_view.init" = "Inicializando vista de servicio...";
+"log.display.names" = "Nombres de pantallas: %@";
+"log.display.resolutions" = "Resoluciones de pantallas: %@";
+"log.display.name_for_index" = "Nombre de pantalla para índice %d: \"%@\"";
+"log.display.resolution_for_index" = "Resolución de pantalla para índice %d: \"%@\"";
