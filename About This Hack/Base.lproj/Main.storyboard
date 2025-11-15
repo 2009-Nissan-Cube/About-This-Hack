@@ -158,7 +158,7 @@
                                             <font key="font" metaFont="system"/>
                                             <segments>
                                                 <segment label="Overview" toolTip="General presentation of system specifications" selected="YES"/>
-                                                <segment label="Displays" toolTip="Screens: brands, models, and resolutions" tag="1"/>
+                                                <segment label="Displays" toolTip="Screens and resolutions" tag="1"/>
                                                 <segment label="Storage" toolTip="Boot disk, connection type and available space"/>
                                                 <segment label="Support" toolTip="Presentation of support links for help with your hackintosh or mac"/>
                                             </segments>

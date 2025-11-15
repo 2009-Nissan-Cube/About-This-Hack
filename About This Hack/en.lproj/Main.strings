@@ -35,7 +35,7 @@
 
 /* Toolbar tooltips */
 "Kat-cT-SH6.IBSegmentToolTips[0]" = "General presentation of system specifications";
-"Kat-cT-SH6.IBSegmentToolTips[1]" = "Screens: brands, models, and resolutions";
+"Kat-cT-SH6.IBSegmentToolTips[1]" = "Screens and resolutions";
 "Kat-cT-SH6.IBSegmentToolTips[2]" = "Boot disk, connection type and available space";
 "Kat-cT-SH6.IBSegmentToolTips[3]" = "Presentation of support links for help with your hackintosh or mac";
 

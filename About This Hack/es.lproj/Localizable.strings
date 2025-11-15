@@ -18,7 +18,7 @@
 
 /* Segmented Control Tooltips */
 "segment.tooltip.overview" = "Presentación general de las especificaciones del sistema";
-"segment.tooltip.displays" = "Pantallas: marcas, modelos y resoluciones";
+"segment.tooltip.displays" = "Pantallas y resoluciones";
 "segment.tooltip.storage" = "Disco de arranque, tipo de conexión y espacio disponible";
 "segment.tooltip.support" = "Presentación de enlaces de soporte para ayuda con tu hackintosh o mac";
 
