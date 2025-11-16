@@ -18,7 +18,7 @@ class ViewControllerStorage: NSViewController {
     }
 
     private func start() {
-        ATHLogger.info("Initializing Storage View...", category: .ui)
+        ATHLogger.info(NSLocalizedString("log.storage.init", comment: "Storage view initializing"), category: .ui)
 
         // Data is already loaded by WindowController, just update UI
         updateStorageUI()
@@ -33,12 +33,12 @@ class ViewControllerStorage: NSViewController {
         let imageShortName = "\(HCVersion.shared.osName) \(HardwareCollector.shared.deviceLocation)"
         let storageType = HardwareCollector.shared.storageType ? "SSD" : "HDD"
         
-        ATHLogger.debug("Setting storage image: \(imageShortName) \(storageType)", category: .hardware)
+        ATHLogger.debug(String(format: NSLocalizedString("log.storage.image_setting", comment: "Setting storage image"), imageShortName, storageType), category: .hardware)
         
         if let specificImage = NSImage(named: "\(imageShortName) \(storageType)") {
             startupDiskImage.image = specificImage
         } else {
-            ATHLogger.debug("Specific image not found, using generic \(storageType) image", category: .hardware)
+            ATHLogger.debug(String(format: NSLocalizedString("log.storage.image_not_found", comment: "Image not found"), storageType), category: .hardware)
             startupDiskImage.image = NSImage(named: storageType)
         }
     }
@@ -47,7 +47,7 @@ class ViewControllerStorage: NSViewController {
         storageValue.stringValue = HardwareCollector.shared.storageData
         storageAmount.doubleValue = HardwareCollector.shared.storagePercent * storageAmount.maxValue
         
-        ATHLogger.debug("Updated storage info: \(HardwareCollector.shared.storageData), \(HardwareCollector.shared.storagePercent * 100)%", category: .hardware)
+        ATHLogger.debug(String(format: NSLocalizedString("log.storage.updated", comment: "Storage info updated"), HardwareCollector.shared.storageData, String(format: "%.0f", HardwareCollector.shared.storagePercent * 100)), category: .hardware)
     }
     
     private func setToolTips() {
@@ -55,6 +55,6 @@ class ViewControllerStorage: NSViewController {
         startupDiskImage.toolTip = t.startupDiskImagetoolTip
         storageValue.toolTip = t.storageValuetoolTip
 
-        ATHLogger.debug("Storage tooltips configured", category: .ui)
+        ATHLogger.debug(NSLocalizedString("log.storage.tooltips", comment: "Storage tooltips configured"), category: .ui)
     }
 }
