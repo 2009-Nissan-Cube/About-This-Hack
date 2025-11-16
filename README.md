@@ -1,5 +1,9 @@
 # About This Hack: Your Mac's Story, Beautifully Told
 
+![Platform](https://img.shields.io/badge/macOS-10.13+-green.svg)
+![Platform](https://img.shields.io/badge/Xcode-15-lavender.svg)
+![Downloads](https://img.shields.io/github/downloads/2009-Nissan-Cube/About-This-Hack/total?label=Downloads&color=9494ff)
+
 ![image](https://github.com/user-attachments/assets/abf73d22-1228-424a-ad50-705150adbef8)
 
 Discover the heart of your macOS device with About This Hack: a sleek, intuitive hardware info app that brings back the beloved classic 'About This Mac' interface while offering a treasure trove of additional features. Whether you're on a Hackintosh or a real Mac, experience the best of all worlds with About This Hack!<br>
@@ -56,7 +60,7 @@ There is also a native auto-updater that reminds you when a new version releases
 
 ## 🔧 Compatibility
 
-- Supports macOS 10.12 Sierra and newer
+- Supports macOS 10.13 High Sierra and newer
 - Not compatible with Linux or Windows.
 
 ## 🙌 Credits

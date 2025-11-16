@@ -53,10 +53,15 @@ class Tooltips {
     }
 
     var blVersiontoolTip: String {
-        "BootLoader: " + HCBootloader.shared.getBootloader() + "\nBoot-args: " + HCBootloader.shared.getBootargs()
+        String(format: NSLocalizedString("tooltip.bootloader", comment: "Bootloader tooltip format"), 
+           HCBootloader.shared.getBootloader(), 
+           HCBootloader.shared.getBootargs())
     }
-
-    let btSysInfotoolTip = " Hardware, Network, Software, Etc. Detailed Data"
-    let btSoftUpdtoolTip = " Find and Install OS and Security Updates"
+    var btSysInfotoolTip: String {
+        NSLocalizedString("tooltip.sysinfo", comment: "System Info button tooltip")
+    }
+    var btSoftUpdtoolTip: String {
+        NSLocalizedString("tooltip.softupd", comment: "Software Update button tooltip")
+    }
 }
 
