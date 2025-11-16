@@ -467,6 +467,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = ER43ZD2S4U;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_TESTABILITY = NO;
 				INFOPLIST_FILE = "About This Hack/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "About This Hack";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
@@ -504,6 +505,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = ER43ZD2S4U;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_TESTABILITY = NO;
 				INFOPLIST_FILE = "About This Hack/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "About This Hack";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
