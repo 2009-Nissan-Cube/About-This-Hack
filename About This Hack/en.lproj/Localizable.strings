@@ -1,0 +1,61 @@
+/* 
+  Localizable.strings
+  About This Hack
+  
+  English localization
+*/
+
+/* Tooltips */
+"tooltip.bootloader" = "BootLoader: %@\nBoot-args: %@";
+"tooltip.sysinfo" = " Hardware, Network, Software, Etc. Detailed Data";
+"tooltip.softupd" = " Find and Install OS and Security Updates";
+
+/* Segmented Control Titles */
+"segment.title.overview" = "Overview";
+"segment.title.displays" = "Displays";
+"segment.title.storage" = "Storage";
+"segment.title.support" = "Support";
+
+/* Segmented Control Tooltips */
+"segment.tooltip.overview" = "General presentation of system specifications";
+"segment.tooltip.displays" = "Screens and resolutions";
+"segment.tooltip.storage" = "Boot disk, connection type and available space";
+"segment.tooltip.support" = "Presentation of support links for help with your hackintosh or mac";
+
+/* ViewControllerSupport */
+"browser.success" = "Browser Successfully opened";
+
+/* Storage */
+"storage.available" = "Available";
+
+/* Logging messages */
+"log.browser.opened.macos_user_guide" = "Browser opened: macOS User Guide";
+"log.browser.opened.whats_new" = "Browser opened: What's New in macOS";
+"log.browser.opened.apple_support" = "Browser opened: Apple Support";
+"log.browser.opened.hackintosh" = "Browser opened: Hackintosh Guide";
+"log.browser.opened.mac_basics" = "Browser opened: Mac Basics";
+"log.browser.opened.mac_user_guide" = "Browser opened: Mac User Guide";
+"log.browser.failed" = "Failed to open URL: %@";
+"log.support_view.init" = "Support View Initializing...";
+"log.storage.init" = "Initializing Storage View...";
+"log.storage.image_setting" = "Setting storage image: %@ %@";
+"log.storage.image_not_found" = "Specific image not found, using generic %@ image";
+"log.storage.updated" = "Updated storage info: %@, %@%%";
+"log.storage.tooltips" = "Storage tooltips configured";
+"log.window.loaded" = "Window controller loaded";
+"log.window.restored" = "Restored window position from saved frame";
+"log.window.centered" = "No saved window position, centering window";
+"log.window.shown" = "Window shown after data loaded";
+"log.app.starting" = "Application starting...";
+"log.data_files.ready" = "Data files ready";
+"log.checking_updates" = "Checking for Updates...";
+"log.update_available" = "Update available, initiating update process";
+"log.no_updates" = "No updates available";
+"log.app.terminating" = "Application terminating, cleaning up temporary files";
+"log.view.show_error" = "Cannot show view: main window controller not found";
+"log.display_view.init" = "Initializing Display View...";
+"log.service_view.init" = "Initializing Service View...";
+"log.display.names" = "Display names: %@";
+"log.display.resolutions" = "Display resolutions: %@";
+"log.display.name_for_index" = "Display name for index %d: \"%@\"";
+"log.display.resolution_for_index" = "Display resolution for index %d: \"%@\"";

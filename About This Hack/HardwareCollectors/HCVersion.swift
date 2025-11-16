@@ -45,16 +45,9 @@ class HCVersion {
   
     private func getOSBuild() -> String {
         ATHLogger.debug("Getting OS Build Number...", category: .system)
-        var mib = [CTL_KERN, KERN_OSVERSION]
-        var size = 0
-        // Get the size of the C string
-        sysctl(&mib, 2, nil, &size, nil, 0)
-        var build = [CChar](repeating: 0, count: size)
-        // Get the C string
-        sysctl(&mib, 2, &build, &size, nil, 0)
-        let buildString = String(cString: build)
+        let buildString = run("sw_vers -buildVersion").trimmingCharacters(in: .whitespacesAndNewlines)
         ATHLogger.debug("Determined OS Build Number: \(buildString)", category: .system)
-        return buildString
+        return buildString        
     }
     
     private func setOSVersion(osNumber: String) {

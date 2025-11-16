@@ -18,8 +18,11 @@ class WindowController: NSWindowController {
     
     override func windowDidLoad() {
         super.windowDidLoad()
-        ATHLogger.info("Window controller loaded", category: .ui)
+        ATHLogger.info(NSLocalizedString("log.window.loaded", comment: "Window controller loaded"), category: .ui)
         self.tabViewController = self.window?.contentViewController as? NSTabViewController
+
+        // Localize segmented control
+        localizeSegmentedControl()
 
         // Hide window initially - will show once data is loaded
         window?.setIsVisible(false)
@@ -35,10 +38,10 @@ class WindowController: NSWindowController {
             var frame = NSRectFromString(savedFrame)
             frame.size = defaultWindowSize  // Ensure correct size even if saved frame has different size
             window?.setFrame(frame, display: false)
-            ATHLogger.debug("Restored window position from saved frame", category: .ui)
+            ATHLogger.debug(NSLocalizedString("log.window.restored", comment: "Window position restored"), category: .ui)
         } else {
             window?.center()
-            ATHLogger.debug("No saved window position, centering window", category: .ui)
+            ATHLogger.debug(NSLocalizedString("log.window.centered", comment: "Window centered"), category: .ui)
         }
 
         // Add window move observer
@@ -77,9 +80,45 @@ class WindowController: NSWindowController {
 
                 self?.window?.setIsVisible(true)
                 self?.window?.makeKeyAndOrderFront(nil)
-                ATHLogger.info("Window shown after data loaded", category: .ui)
+                ATHLogger.info(NSLocalizedString("log.window.shown", comment: "Window shown after data loaded"), category: .ui)
             }
         }
+    }
+    
+    private func localizeSegmentedControl() {
+        guard let segmentedControl = segmentedControl else { return }
+        
+        // Localize segment titles
+        let titles = [
+            NSLocalizedString("segment.title.overview", comment: "Overview segment title"),
+            NSLocalizedString("segment.title.displays", comment: "Displays segment title"),
+            NSLocalizedString("segment.title.storage", comment: "Storage segment title"),
+            NSLocalizedString("segment.title.support", comment: "Support segment title")
+        ]
+        
+        // Localize segment tooltips
+        let tooltips = [
+            NSLocalizedString("segment.tooltip.overview", comment: "Overview segment tooltip"),
+            NSLocalizedString("segment.tooltip.displays", comment: "Displays segment tooltip"),
+            NSLocalizedString("segment.tooltip.storage", comment: "Storage segment tooltip"),
+            NSLocalizedString("segment.tooltip.support", comment: "Support segment tooltip")
+        ]
+        
+        // Apply localized titles and tooltips to each segment
+        for index in 0..<segmentedControl.segmentCount {
+            if index < titles.count {
+                segmentedControl.setLabel(titles[index], forSegment: index)
+            }
+            if index < tooltips.count {
+				if #available(macOS 10.13, *) {
+					segmentedControl.setToolTip(tooltips[index], forSegment: index)
+				} else {
+						// Fallback on earlier versions
+				}
+            }
+        }
+        
+        ATHLogger.debug("Segmented control localized", category: .ui)
     }
     
     deinit {
