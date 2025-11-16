@@ -228,7 +228,7 @@
                                 <autoresizingMask key="autoresizingMask"/>
                             </visualEffectView>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9bU-5I-G69" userLabel="bt Sys Info">
-                                <rect key="frame" x="232" y="16" width="140" height="32"/>
+                                <rect key="frame" x="232" y="16" width="120" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="System Report..." bezelStyle="rounded" imagePosition="left" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="trQ-CB-Gy7" userLabel="System Report...">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -397,7 +397,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C4y-y2-XtL" userLabel="bt Soft Updt">
-                                <rect key="frame" x="360" y="16" width="140" height="32"/>
+                                <rect key="frame" x="360" y="16" width="130" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Software Update..." bezelStyle="rounded" imagePosition="left" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qm6-0M-m5S" userLabel="Software Update...">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
