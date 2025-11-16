@@ -49,10 +49,15 @@ class ViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
         setToolTips()
+        resizeButtonsToFit()
     }
     
     // MARK: - Private Methods
     private func updateUI() {
+
+        // Ensure buttons reflect current titles after UI update
+        resizeButtonsToFit()
+        
         // Ensure we're on the main thread
         guard Thread.isMainThread else {
             DispatchQueue.main.async { [weak self] in
@@ -96,6 +101,41 @@ class ViewController: NSViewController {
         blVersion.isHidden = false
         
         CATransaction.commit()
+    }
+
+    /// Resize the two action buttons so their widths fit their current titles.
+    /// This uses the button's font to measure the title and applies a small padding.
+    /// Ensures at least a 10-point gap between the two buttons.
+    private func resizeButtonsToFit() {
+        guard let sysInfoBtn = btSysInfo, let softUpdBtn = btSoftUpd else { return }
+        
+        let minGap: CGFloat = 10.0
+        let padding: CGFloat = 30.0 // left + right padding
+        
+        // Measure and resize first button (System Report)
+        let sysRptFont = (sysInfoBtn.cell as? NSButtonCell)?.font ?? NSFont.systemFont(ofSize: NSFont.systemFontSize)
+        let sysRptAttrs: [NSAttributedString.Key: Any] = [.font: sysRptFont]
+        let sysRptTitleSize = (sysInfoBtn.title as NSString).size(withAttributes: sysRptAttrs)
+        let newSysRptTitleWidth = max(44.0, ceil(sysRptTitleSize.width + padding))
+        var sysRptButtonFrame = sysInfoBtn.frame
+        sysRptButtonFrame.size.width = newSysRptTitleWidth
+        sysInfoBtn.frame = sysRptButtonFrame
+        
+        // Measure and resize second button (Software Update)
+        let softUpdFont = (softUpdBtn.cell as? NSButtonCell)?.font ?? NSFont.systemFont(ofSize: NSFont.systemFontSize)
+        let softUpdAttrs: [NSAttributedString.Key: Any] = [.font: softUpdFont]
+        let softUpdTitleSize = (softUpdBtn.title as NSString).size(withAttributes: softUpdAttrs)
+        let newSoftUpdTitleWidth = max(44.0, ceil(softUpdTitleSize.width + padding))
+        var softUpdButtonFrame = softUpdBtn.frame
+        softUpdButtonFrame.size.width = newSoftUpdTitleWidth
+        
+        // Ensure minimum gap: if buttons overlap, shift second button to the right
+        let gap = softUpdButtonFrame.origin.x - (sysRptButtonFrame.origin.x + sysRptButtonFrame.size.width)
+        if gap < minGap {
+            softUpdButtonFrame.origin.x = sysRptButtonFrame.origin.x + sysRptButtonFrame.size.width + minGap
+        }
+        
+        softUpdBtn.frame = softUpdButtonFrame
     }
     
     private func getOSImageName() -> String {
