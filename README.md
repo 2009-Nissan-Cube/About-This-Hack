@@ -60,7 +60,7 @@ There is also a native auto-updater that reminds you when a new version releases
 
 ## 🔧 Compatibility
 
-- Supports macOS 10.12 Sierra and newer
+- Supports macOS 10.13 High Sierra and newer
 - Not compatible with Linux or Windows.
 
 ## 🙌 Credits
