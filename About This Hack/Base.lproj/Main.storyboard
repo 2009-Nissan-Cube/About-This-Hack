@@ -227,8 +227,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="580" height="350"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </visualEffectView>
-                            <button verticalHuggingPriority="750" fixedFrame="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bU-5I-G69" userLabel="bt Sys Info">
-                                <rect key="frame" x="232" y="16" height="32"/>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9bU-5I-G69" userLabel="bt Sys Info">
+                                <rect key="frame" x="226" y="16" width="12" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="System Report..." bezelStyle="rounded" imagePosition="left" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="trQ-CB-Gy7" userLabel="System Report...">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -396,8 +396,8 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4y-y2-XtL" userLabel="bt Soft Updt">
-                                <rect key="frame" x="360" y="16" height="32"/>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C4y-y2-XtL" userLabel="bt Soft Updt">
+                                <rect key="frame" x="354" y="16" width="12" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Software Update..." bezelStyle="rounded" imagePosition="left" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qm6-0M-m5S" userLabel="Software Update...">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -450,20 +450,27 @@
                     <connections>
                         <outlet property="blPrefix" destination="znt-Qx-7tD" id="ZdX-FL-Dvh"/>
                         <outlet property="blVersion" destination="IuZ-wD-zIo" id="eqo-4Z-ZWR"/>
+                        <outlet property="bootloaderLabel" destination="znt-Qx-7tD" id="aaa-bb-001"/>
                         <outlet property="btSoftUpd" destination="C4y-y2-XtL" id="M6z-79-c3D"/>
                         <outlet property="btSysInfo" destination="9bU-5I-G69" id="8IN-2p-ydT"/>
                         <outlet property="cpu" destination="afk-bp-wk1" id="IBN-uD-tnp"/>
                         <outlet property="creditText" destination="Frv-p2-mrc" id="SIf-5c-NT7"/>
                         <outlet property="display" destination="xUp-pm-2ff" id="i7b-wM-MGk"/>
+                        <outlet property="displayLabel" destination="Gow-KY-cel" id="aaa-bb-002"/>
                         <outlet property="graphics" destination="uqM-yy-cth" id="6to-lM-mSV"/>
+                        <outlet property="graphicsLabel" destination="Psq-60-VVr" id="aaa-bb-003"/>
                         <outlet property="macModel" destination="RdV-JS-DQP" id="ppj-P7-Xfi"/>
+                        <outlet property="memoryLabel" destination="tgM-nb-gnY" id="aaa-bb-004"/>
                         <outlet property="osPrefix" destination="IHc-0h-Y3G" id="aa6-qI-x2k"/>
                         <outlet property="osVersion" destination="dbo-ek-0Uq" id="uzh-KU-ShO"/>
                         <outlet property="picture" destination="kMH-P4-iAx" id="lGI-Ia-UxM"/>
+                        <outlet property="processorLabel" destination="ebQ-jk-AX6" id="aaa-bb-005"/>
                         <outlet property="ram" destination="P80-IN-7ra" id="hzM-2H-10m"/>
                         <outlet property="serialNumber" destination="mPK-dl-AwR" id="waQ-Wl-AyU"/>
+                        <outlet property="serialNumberLabel" destination="wD3-GO-J5y" id="aaa-bb-006"/>
                         <outlet property="serialToggle" destination="U8x-JZ-xx1" id="NgP-Z8-LE9"/>
                         <outlet property="startupDisk" destination="MIz-OE-XB1" id="6QF-AN-l4J"/>
+                        <outlet property="startupDiskLabel" destination="6wO-eZ-wzz" id="aaa-bb-007"/>
                         <outlet property="systemVersion" destination="sHZ-Vd-NwZ" id="0JB-u8-p1X"/>
                     </connections>
                 </viewController>
@@ -483,7 +490,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="580" height="350"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8KF-fR-qz4">
+                                    <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8KF-fR-qz4">
                                         <rect key="frame" x="185" y="9" width="211" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="push" title="Display Preferences..." bezelStyle="rounded" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YdJ-D9-bdb">

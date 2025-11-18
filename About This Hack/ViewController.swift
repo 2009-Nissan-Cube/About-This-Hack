@@ -20,6 +20,15 @@ class ViewController: NSViewController {
     @IBOutlet private weak var creditText: NSTextField!
     @IBOutlet private weak var btSysInfo: NSButton!
     @IBOutlet private weak var btSoftUpd: NSButton!
+
+    // Label text fields for dynamic resizing
+    @IBOutlet private weak var memoryLabel: NSTextField!
+    @IBOutlet private weak var processorLabel: NSTextField!
+    @IBOutlet private weak var serialNumberLabel: NSTextField!
+    @IBOutlet private weak var graphicsLabel: NSTextField!
+    @IBOutlet private weak var displayLabel: NSTextField!
+    @IBOutlet private weak var bootloaderLabel: NSTextField!
+    @IBOutlet private weak var startupDiskLabel: NSTextField!
     
     // MARK: - Properties
     private lazy var osNumber = ProcessInfo.processInfo.operatingSystemVersionString
@@ -50,6 +59,7 @@ class ViewController: NSViewController {
         super.viewDidAppear()
         setToolTips()
         resizeButtonsToFit()
+        resizeLabelFieldsToFit()
     }
     
     // MARK: - Private Methods
@@ -137,7 +147,49 @@ class ViewController: NSViewController {
         
         softUpdBtn.frame = softUpdButtonFrame
     }
-    
+
+    /// Resize the label text fields so their widths fit their current title content.
+    /// This ensures labels like "Memory", "Processor", etc. are sized appropriately.
+    /// Also positions the corresponding value text fields 5 points after each label.
+    private func resizeLabelFieldsToFit() {
+        let labelValuePairs: [(label: NSTextField?, value: NSTextField?)] = [
+            (memoryLabel, ram),
+            (processorLabel, cpu),
+            (serialNumberLabel, serialNumber),
+            (graphicsLabel, graphics),
+            (displayLabel, display),
+            (bootloaderLabel, blVersion),
+            (startupDiskLabel, startupDisk)
+        ]
+
+        let padding: CGFloat = 8.0 // horizontal padding for the label text field
+        let gap: CGFloat = 5.0 // gap between label and value fields
+
+        for pair in labelValuePairs {
+            guard let labelField = pair.label, let valueField = pair.value else { continue }
+
+            // Get the font used by the label text field
+            let font = (labelField.cell as? NSTextFieldCell)?.font ?? NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
+            let attrs: [NSAttributedString.Key: Any] = [.font: font]
+
+            // Measure the title string
+            let titleSize = (labelField.stringValue as NSString).size(withAttributes: attrs)
+
+            // Calculate new width with padding
+            let newWidth = max(20.0, ceil(titleSize.width + padding))
+
+            // Update the label field frame
+            var labelFrame = labelField.frame
+            labelFrame.size.width = newWidth
+            labelField.frame = labelFrame
+
+            // Position the value field 5 points after the label field
+            var valueFrame = valueField.frame
+            valueFrame.origin.x = labelFrame.origin.x + labelFrame.size.width + gap
+            valueField.frame = valueFrame
+        }
+    }
+
     private func getOSImageName() -> String {
         let osImageNames: [MacOSVersion: String] = [.tahoe: "Tahoe", .sequoia: "Sequoia", .sonoma: "Sonoma", .ventura: "Ventura",
                                                     .monterey: "Monterey", .bigSur: "Big Sur", .catalina: "Catalina",
