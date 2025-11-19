@@ -100,12 +100,10 @@ class ViewController: NSViewController {
         blPrefix.isHidden = false
         blVersion.isHidden = false
         
-        // Hide credits text in Overview tab when running on Tahoe
-        // This prevents the text from being hidden below the window edge due to
-        // different vertical positioning of elements in Tahoe
-        let isTahoe = HCVersion.shared.osVersion == .tahoe
-        creditText.isHidden = isTahoe
-        creditText.alphaValue = isTahoe ? 0 : 1
+        // Show credits text - no longer needs to be hidden in Tahoe since
+        // we've adjusted the window size to accommodate the increased toolbar height
+        creditText.isHidden = false
+        creditText.alphaValue = 1
         
         CATransaction.commit()
     }
