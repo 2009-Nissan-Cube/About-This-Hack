@@ -8,9 +8,9 @@
 
 Discover the heart of your macOS device with About This Hack: a sleek, intuitive hardware info app that brings back the beloved classic 'About This Mac' interface while offering a treasure trove of additional features. Whether you're on a Hackintosh or a real Mac, experience the best of all worlds with About This Hack!<br>
 
-# 🌟 Key Features
+# Key Features
 
-## Overview: Remember this?
+## Overview (Remember this?)
 
 A throwback to the (better) About This Mac view from pre-Ventura. Get instant access to essential system specs, including your computer model, OS version, and processor details. Hackintosh users will appreciate the Clover or OpenCore bootloader version display.
 
@@ -18,7 +18,7 @@ A throwback to the (better) About This Mac view from pre-Ventura. Get instant ac
 
 > 💡 Pro Tip: Click your serial number to hide it for screenshots!
 
-## Displays: See Your Screen(s)
+## Displays
 
 Visualize up to three of your connected displays with their respective resolutions.
 
@@ -26,13 +26,13 @@ Visualize up to three of your connected displays with their respective resolutio
 
 ![CleanShot 2024-06-29 at 13 10 16](https://github.com/0xCUB3/About-This-Hack/assets/94565160/b5b433bc-b708-4646-9301-84c8ff043315)
 
-## Storage: Your Space
+## Storage
 
 Get a clear picture of your startup disk, including name, available space, and disk type, all presented with an easy-to-read usage bar.
 
 ![CleanShot 2024-06-29 at 13 10 59](https://github.com/0xCUB3/About-This-Hack/assets/94565160/96ca5d35-3026-4d42-a171-6f6fcb3daeae)
 
-## Support: Another View from a Bygone Era
+## Support
 
 Access a list of support resources for both Mac and Hackintosh users.
 
@@ -48,7 +48,7 @@ There is also a native auto-updater that reminds you when a new version releases
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 1. Download the latest release [here](https://github.com/0xCUB3/About-This-Hack/releases/latest)
 2. Drag the app to your Applications folder
@@ -58,12 +58,12 @@ There is also a native auto-updater that reminds you when a new version releases
 - You'll see a notice saying About This Hack app is blocked
 - Click "Open Anyway".
 
-## 🔧 Compatibility
+## Compatibility
 
 - Supports macOS 10.13 High Sierra and newer
 - Not compatible with Linux or Windows.
 
-## 🙌 Credits
+## Credits
 
 A big thank you to our contributors:
 
@@ -76,7 +76,7 @@ The internet for helping me with a lot of the code.
 
 ---
 
-## 💖 Support About This Hack
+## Support About This Hack
 
 About This Hack is a labor of love, bringing back the classic Mac experience with modern enhancements. If you enjoy using it, consider supporting its development:
 
@@ -86,15 +86,7 @@ About This Hack is a labor of love, bringing back the classic Mac experience wit
   </a>
 </p>
 
-## 📞 Contact
-
-Got questions or suggestions? Reach out:
-
-- Discord: 0xcube
-- Reddit: [u/0xCUBE](https://www.reddit.com/user/0xCUBE)
-- Email: Alexander Skula.
-
-## 📈 Star History
+## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=0xCUB3/About-This-Hack&type=Date)](https://star-history.com/#0xCUB3/About-This-Hack&Date)
 1. 
