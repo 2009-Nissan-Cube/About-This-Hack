@@ -29,6 +29,11 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Don't initialize UI until all data is ready
+        
+        // Hide creditText immediately to prevent it from being visible during startup
+        // It will be shown/hidden appropriately in updateUI() based on OS version
+        creditText.isHidden = true
+        creditText.alphaValue = 0
     }
     
     override func viewWillAppear() {
@@ -94,6 +99,13 @@ class ViewController: NSViewController {
         serialToggle.isTransparent = false
         blPrefix.isHidden = false
         blVersion.isHidden = false
+        
+        // Hide credits text in Overview tab when running on Tahoe
+        // This prevents the text from being hidden below the window edge due to
+        // different vertical positioning of elements in Tahoe
+        let isTahoe = HCVersion.shared.osVersion == .tahoe
+        creditText.isHidden = isTahoe
+        creditText.alphaValue = isTahoe ? 0 : 1
         
         CATransaction.commit()
     }

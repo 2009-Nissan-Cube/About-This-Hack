@@ -21,8 +21,11 @@ class WindowController: NSWindowController {
         ATHLogger.info(NSLocalizedString("log.window.loaded", comment: "Window controller loaded"), category: .ui)
         self.tabViewController = self.window?.contentViewController as? NSTabViewController
 
-        // Localize segmented control
-        localizeSegmentedControl()
+        // Localize segmented control - defer to ensure outlets are connected
+        // This fixes a race condition in Tahoe where the outlet might not be ready yet
+        DispatchQueue.main.async { [weak self] in
+            self?.localizeSegmentedControl()
+        }
 
         // Hide window initially - will show once data is loaded
         window?.setIsVisible(false)
@@ -72,6 +75,10 @@ class WindowController: NSWindowController {
 
             // Show window on main thread
             DispatchQueue.main.async {
+                // Ensure segmented control is properly localized before showing window
+                // This is a safety measure for Tahoe where outlets might not be ready earlier
+                self?.localizeSegmentedControl()
+                
                 // Trigger initial UI update for the Overview tab
                 if let tabVC = self?.tabViewController,
                    let overviewVC = tabVC.tabViewItems.first?.viewController as? ViewController {
@@ -86,7 +93,10 @@ class WindowController: NSWindowController {
     }
     
     private func localizeSegmentedControl() {
-        guard let segmentedControl = segmentedControl else { return }
+        guard let segmentedControl = segmentedControl else {
+            ATHLogger.warning(NSLocalizedString("log.window.segmented_not_ready", comment: "Segmented control outlet not ready"), category: .ui)
+            return
+        }
         
         // Localize segment titles
         let titles = [
@@ -118,23 +128,23 @@ class WindowController: NSWindowController {
             }
         }
         
-        ATHLogger.debug("Segmented control localized", category: .ui)
+        ATHLogger.debug(NSLocalizedString("log.window.segmented_localized", comment: "Segmented control localized"), category: .ui)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        ATHLogger.debug("Window controller deinitialized", category: .ui)
+        ATHLogger.debug(NSLocalizedString("log.window.deinitialized", comment: "Window controller deinitialized"), category: .ui)
     }
 
     @IBAction func segmentedControlSwitched(_ sender: Any) {
         guard let segCtrl = sender as? NSSegmentedControl else { return }
         currentView = segCtrl.selectedSegment
         tabViewController?.selectedTabViewItemIndex = currentView
-        ATHLogger.info("View switched to index: \(currentView)", category: .ui)
+        ATHLogger.info(String(format: NSLocalizedString("log.window.view_switched", comment: "View switched to index"), currentView), category: .ui)
     }
     
     public func changeView(new: Int) {
-        ATHLogger.info("Changing view to index: \(new)", category: .ui)
+        ATHLogger.info(String(format: NSLocalizedString("log.window.view_changing", comment: "Changing view to index"), new), category: .ui)
         tabViewController?.selectedTabViewItemIndex = new
         segmentedControl?.selectedSegment = new
     }
@@ -153,7 +163,7 @@ class WindowController: NSWindowController {
         if let window = self.window {
             let frameString = NSStringFromRect(window.frame)
             defaults.set(frameString, forKey: windowFrameKey)
-            ATHLogger.debug("Saved window frame: \(frameString)", category: .ui)
+            ATHLogger.debug(String(format: NSLocalizedString("log.window.frame_saved", comment: "Saved window frame"), frameString), category: .ui)
         }
     }
 }

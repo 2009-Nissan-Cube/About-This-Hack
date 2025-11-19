@@ -41,7 +41,7 @@ class ViewControllerDisplays: NSViewController {
     }
     
     func start() {
-        ATHLogger.info("Initializing Display View...", category: .ui)
+        ATHLogger.info(NSLocalizedString("log.display_view.init", comment: "Display view initializing"), category: .ui)
 
         // Data is already loaded by WindowController, just update UI
         updateDisplayUI()
@@ -56,8 +56,8 @@ class ViewControllerDisplays: NSViewController {
         // Hide all display elements initially
         (dispArr + nameArr + labelArr2).forEach { $0.isHidden = true }
         
-        ATHLogger.debug("Display names: \(HardwareCollector.shared.displayNames)", category: .hardware)
-        ATHLogger.debug("Display resolutions: \(HardwareCollector.shared.displayRes)", category: .hardware)
+        ATHLogger.debug(String(format: NSLocalizedString("log.display.names", comment: "Display names log"), "\(HardwareCollector.shared.displayNames)"), category: .hardware)
+        ATHLogger.debug(String(format: NSLocalizedString("log.display.resolutions", comment: "Display resolutions log"), "\(HardwareCollector.shared.displayRes)"), category: .hardware)
         
         let numDisplays = min(HardwareCollector.shared.numberOfDisplays, 3)  // Limit to 3 displays
         
@@ -84,7 +84,7 @@ class ViewControllerDisplays: NSViewController {
             let fullName = HardwareCollector.shared.displayNames[index]
             let trimmedName = trimDisplayName(fullName)
             nameField.stringValue = trimmedName
-            ATHLogger.debug("Display name for index \(index): \"\(trimmedName)\"", category: .hardware)
+            ATHLogger.debug(String(format: NSLocalizedString("log.display.name_for_index", comment: "Display name for index log"), index, trimmedName), category: .hardware)
             
             if (!(index == 0 && HardwareCollector.shared.hasBuiltInDisplay)) {
                 setDisplayImage(imageView, for: trimmedName)
@@ -96,7 +96,7 @@ class ViewControllerDisplays: NSViewController {
             let fullRes = HardwareCollector.shared.displayRes[index]
             let trimmedRes = removeParentheses(fullRes)
             resField.stringValue = trimmedRes
-            ATHLogger.debug("Display resolution for index \(index): \"\(trimmedRes)\"", category: .hardware)
+            ATHLogger.debug(String(format: NSLocalizedString("log.display.resolution_for_index", comment: "Display resolution for index log"), index, trimmedRes), category: .hardware)
         }
     }
 

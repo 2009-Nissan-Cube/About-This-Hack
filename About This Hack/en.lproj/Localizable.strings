@@ -59,3 +59,152 @@
 "log.display.resolutions" = "Display resolutions: %@";
 "log.display.name_for_index" = "Display name for index %d: \"%@\"";
 "log.display.resolution_for_index" = "Display resolution for index %d: \"%@\"";
+
+/* System & Data Files */
+"log.data.directory_created" = "Data directory created";
+"log.hardware.cache_cleared" = "File cache cleared";
+
+/* Window Controller */
+"log.window.segmented_localized" = "Segmented control localized";
+"log.window.segmented_not_ready" = "Segmented control outlet not ready";
+"log.window.deinitialized" = "Window controller deinitialized";
+"log.window.frame_saved" = "Saved window frame: %@";
+
+/* CPU Hardware Collector */
+"log.cpu.init" = "Initializing CPU Info...";
+"log.cpu.brand" = "CPU Brand: %@";
+"log.cpu.details" = "CPU Details: %@";
+"log.cpu.core_count" = "CPU Core Count: %d";
+"log.cpu.getting_info" = "Getting CPU info...";
+"log.cpu.getting_details" = "Getting CPU details string...";
+"log.cpu.getting_core_count" = "Getting CPU core count...";
+"log.cpu.core_count_packages" = "CPU Core count (hw.packages): %d";
+"log.cpu.core_count_physical" = "CPU Core count (hw.physicalcpu): %d";
+"log.cpu.core_count_logical" = "CPU Core count (hw.logicalcpu): %d";
+"log.cpu.fetching_details" = "Fetching CPU details from hwFilePath...";
+
+/* GPU Hardware Collector */
+"log.gpu.reset" = "GPU info reset";
+"log.gpu.init" = "Initializing GPU Info...";
+"log.gpu.retrieved" = "Successfully retrieved GPU info from HardwareCollector.";
+"log.gpu.parsing_data" = "Parsing GPU data from %d lines";
+"log.gpu.line" = "Line %d: '%@'";
+"log.gpu.found_chipset" = "Found Chipset at line %d: %@";
+"log.gpu.found_vram" = "Found VRAM at line %d: %@";
+"log.gpu.found_metal" = "Found Metal at line %d: %@";
+"log.gpu.stopping_parse" = "Stopping GPU parse at Displays section (line %d)";
+"log.gpu.final_info" = "Final GPU Chipset: '%@', VRAM: '%@', Metal: '%@'";
+"log.gpu.getting_string" = "Getting GPU string...";
+"log.gpu.getting_detailed_info" = "Getting detailed GPU info string...";
+"log.gpu.retrieved_detailed" = "Successfully retrieved detailed GPU info from HardwareCollector.";
+
+/* Display Hardware Collector */
+"log.display.reset" = "Display info reset";
+"log.display.init" = "Initializing Display Info...";
+"log.display.retrieved" = "Successfully retrieved display info from HardwareCollector.";
+"log.display.parsing_data" = "Parsing display data from %d lines";
+"log.display.line" = "Line %d: '%@'";
+"log.display.found_displays" = "Found 'Displays:' at line %d";
+"log.display.main_info" = "Main Display Info: %@";
+"log.display.all_info" = "All Displays Info: %@";
+"log.display.getting_main" = "Getting main display string...";
+"log.display.getting_all" = "Getting all displays info string...";
+"log.display.parsing_main" = "Parsing main display info...";
+"log.display.found_name" = "Found display name: %@";
+"log.display.found_resolution" = "Found resolution for first display: %@";
+"log.display.parsed_main" = "Parsed Main Display Name: %@, Resolution: %@";
+"log.display.parsing_all" = "Parsing all displays info...";
+"log.display.parsed_all" = "Parsed All Displays Info: %@";
+
+/* RAM Hardware Collector */
+"log.ram.parsing_lines" = "Parsing memory file lines...";
+"log.ram.init" = "Initializing RAM Info...";
+"log.ram.size" = "RAM Total Size (GB): %d";
+"log.ram.type_speed" = "RAM Type: %@, Speed: %@";
+"log.ram.getting_string" = "Getting RAM string...";
+"log.ram.getting_description" = "Getting RAM description string...";
+"log.ram.getting_description_array" = "Getting RAM description array string...";
+"log.ram.parsing_details" = "Parsing memory details from shared lines...";
+
+/* Version/OS Hardware Collector */
+"log.version.prefix_set" = "OS Prefix set to: %@";
+"log.version.number" = "OS Number: %@";
+"log.version.build" = "OS Build Number: %@";
+"log.version.enum_set" = "Internal OS Version enum set based on osNumber";
+"log.version.name" = "OS Name: %@";
+"log.version.getting_number" = "Getting OS Number...";
+"log.version.determined_number" = "Determined OS Number: %@";
+"log.version.getting_build" = "Getting OS Build Number...";
+"log.version.determined_build" = "Determined OS Build Number: %@";
+"log.version.setting_enum" = "Setting internal OS Version enum from OS Number: %@";
+"log.version.internal_set" = "Internal OS Version set to: %@";
+"log.version.converting_enum" = "Converting internal OS Version enum (%@) to string name...";
+"log.version.converted_name" = "Converted OS Name: %@";
+
+/* Serial Number Hardware Collector */
+"log.serial.init" = "Initializing Serial Number & Hardware Info...";
+"log.serial.retrieved" = "Successfully retrieved hardware info from HardwareCollector for serial number.";
+"log.serial.parsed" = "Parsed Serial Number: %@";
+"log.serial.formatted_details" = "Formatted Hardware Details: \n%@";
+"log.serial.getting_string" = "Getting serial number string...";
+"log.serial.getting_details" = "Getting hardware info details string...";
+
+/* Startup Disk Hardware Collector */
+"log.startup.init" = "Initializing Startup Disk Info...";
+"log.startup.read_cache" = "Successfully read %@ from cache.";
+"log.startup.parsed_name" = "Parsed Startup Disk Name: %@";
+"log.startup.getting_name" = "Getting startup disk name string...";
+"log.startup.getting_detailed" = "Getting detailed startup disk info string...";
+"log.startup.read_storage_cache" = "Successfully read %@ from cache.";
+
+/* Mac Model Hardware Collector */
+"log.macmodel.init" = "Initializing Mac Model Info...";
+"log.macmodel.name" = "Mac Name: %@";
+"log.macmodel.getting_identifier" = "Getting Model Identifier...";
+"log.macmodel.full_identifier" = "Full Model Identifier (hw.model): %@, Parsed ID: %@";
+"log.macmodel.getting_name" = "Getting Mac Name...";
+"log.macmodel.looked_up_name" = "Looked up Mac Name for identifier '%@': (%@, %@)";
+"log.macmodel.name_from_file" = "Mac Name from hwFilePath: %@";
+"log.macmodel.failed_identifier" = "Failed to get Model Identifier from hw.model.";
+
+/* Network/Reachability */
+"log.reachability.failed_create" = "Failed to create network reachability";
+"log.reachability.failed_flags" = "Failed to get reachability flags";
+"log.reachability.status" = "Internet is %@";
+"log.reachability.reachable" = "reachable";
+"log.reachability.not_reachable" = "NOT reachable";
+
+/* Window Controller */
+"log.window.view_switched" = "View switched to index: %d";
+"log.window.view_changing" = "Changing view to index: %d";
+
+/* Data Files */
+"log.data.files_created" = "Data files created successfully";
+
+/* CPU Hardware Collector Errors */
+"log.cpu.failed_packages" = "Failed to get physical CPU count via hw.packages. Error: %@";
+"log.cpu.failed_physical" = "Failed to get physical CPU count via hw.physicalcpu. Error: %@";
+"log.cpu.failed_any_count" = "Failed to get any CPU count. Error: %@";
+"log.cpu.failed_read_details" = "Unable to read CPU details from hwFilePath: %@";
+
+/* Startup Disk Errors */
+"log.startup.failed_read_cache" = "Failed to read startup disk info from HardwareCollector cache";
+"log.startup.failed_read_detailed_cache" = "Failed to read detailed startup disk info from HardwareCollector cache";
+
+/* GPU Hardware Collector Errors */
+"log.gpu.no_data" = "No GPU data available from HardwareCollector";
+"log.gpu.no_details" = "No GPU details available from HardwareCollector";
+
+/* OS Version Hardware Collector */
+"log.version.init" = "Initializing OS Version Info...";
+"log.version.complete" = "OS Version Info collection complete.";
+
+/* Serial Number Errors */
+"log.serial.no_hardware_info" = "No hardware info available from HardwareCollector for serial number.";
+
+/* RAM Errors */
+"log.ram.no_data" = "No RAM data available from HardwareCollector";
+
+/* Display Errors */
+"log.display.no_data" = "No display data available from HardwareCollector";
+"log.display.section_not_found" = "Displays section not found in cached data (searched for 'Displays:')";
