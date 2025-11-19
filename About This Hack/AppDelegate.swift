@@ -6,25 +6,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     override init() {
         super.init()
-        ATHLogger.info("Application starting...", category: .system)
+        ATHLogger.info(NSLocalizedString("log.app.starting", comment: "Application starting"), category: .system)
         // Start async data file creation - no blocking!
         CreateDataFiles.getInitDataFilesAsync {
-            ATHLogger.info("Data files ready", category: .system)
+            ATHLogger.info(NSLocalizedString("log.data_files.ready", comment: "Data files ready"), category: .system)
         }
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        ATHLogger.info("Checking for Updates...", category: .system)
+        ATHLogger.info(NSLocalizedString("log.checking_updates", comment: "Checking for updates"), category: .system)
         if UpdateController.checkForUpdates() {
-            ATHLogger.info("Update available, initiating update process", category: .system)
+            ATHLogger.info(NSLocalizedString("log.update_available", comment: "Update available"), category: .system)
             UpdateController.updateATH()
         } else {
-            ATHLogger.info("No updates available", category: .system)
+            ATHLogger.info(NSLocalizedString("log.no_updates", comment: "No updates available"), category: .system)
         }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        ATHLogger.info("Application terminating, cleaning up temporary files", category: .system)
+        ATHLogger.info(NSLocalizedString("log.app.terminating", comment: "Application terminating"), category: .system)
         _ = run("rm -rf " + InitGlobVar.athDirectory + " 2>/dev/null")
     }
 
@@ -39,7 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // Refactor show views into a single function:
     private func showView(atIndex index: Int) {
         guard let windowController = NSApplication.shared.mainWindow?.windowController as? WindowController else { 
-            ATHLogger.warning("Cannot show view: main window controller not found", category: .ui)
+            ATHLogger.warning(NSLocalizedString("log.view.show_error", comment: "Cannot show view"), category: .ui)
             return 
         }
         windowController.changeView(new: index)

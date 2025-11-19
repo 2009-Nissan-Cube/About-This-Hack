@@ -91,8 +91,7 @@ final class ATHLogger {
             line: line
         )
         
-        // Log using both Console and OSLog
-        print(formattedMessage)
+        // Log using OSLog (which also outputs to console)
         os_log("%{public}@", log: category.osLog, type: level.osLogType, formattedMessage)
     }
     

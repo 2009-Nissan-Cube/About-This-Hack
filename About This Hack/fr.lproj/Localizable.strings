@@ -59,3 +59,152 @@
 "log.display.resolutions" = "Résolutions des écrans : %@";
 "log.display.name_for_index" = "Nom de l'écran pour l'index %d : \"%@\"";
 "log.display.resolution_for_index" = "Résolution de l'écran pour l'index %d : \"%@\"";
+
+/* System & Data Files */
+"log.data.directory_created" = "Répertoire de données créé";
+"log.hardware.cache_cleared" = "Cache des fichiers vidé";
+
+/* Window Controller */
+"log.window.segmented_localized" = "Segmented control localisé";
+"log.window.segmented_not_ready" = "Segmented control n'est pas prêt";
+"log.window.deinitialized" = "Contrôleur de fenêtre déinitialisé";
+"log.window.frame_saved" = "Cadre de fenêtre enregistré : %@";
+
+/* CPU Hardware Collector */
+"log.cpu.init" = "Initialisation des informations CPU...";
+"log.cpu.brand" = "Marque du CPU : %@";
+"log.cpu.details" = "Détails du CPU : %@";
+"log.cpu.core_count" = "Nombre de cœurs CPU : %d";
+"log.cpu.getting_info" = "Récupération des informations CPU...";
+"log.cpu.getting_details" = "Récupération de la chaîne de détails CPU...";
+"log.cpu.getting_core_count" = "Récupération du nombre de cœurs CPU...";
+"log.cpu.core_count_packages" = "Nombre de cœurs CPU (hw.packages) : %d";
+"log.cpu.core_count_physical" = "Nombre de cœurs CPU (hw.physicalcpu) : %d";
+"log.cpu.core_count_logical" = "Nombre de cœurs CPU (hw.logicalcpu) : %d";
+"log.cpu.fetching_details" = "Récupération des détails CPU depuis hwFilePath...";
+
+/* GPU Hardware Collector */
+"log.gpu.reset" = "Informations GPU réinitialisées";
+"log.gpu.init" = "Initialisation des informations GPU...";
+"log.gpu.retrieved" = "Informations GPU récupérées avec succès depuis HardwareCollector.";
+"log.gpu.parsing_data" = "Analyse des données GPU à partir de %d lignes";
+"log.gpu.line" = "Ligne %d : '%@'";
+"log.gpu.found_chipset" = "Chipset trouvé à la ligne %d : %@";
+"log.gpu.found_vram" = "VRAM trouvée à la ligne %d : %@";
+"log.gpu.found_metal" = "Metal trouvé à la ligne %d : %@";
+"log.gpu.stopping_parse" = "Arrêt de l'analyse GPU à la section Displays (ligne %d)";
+"log.gpu.final_info" = "Informations GPU finales - Chipset : '%@', VRAM : '%@', Metal : '%@'";
+"log.gpu.getting_string" = "Récupération de la chaîne GPU...";
+"log.gpu.getting_detailed_info" = "Récupération de la chaîne d'informations GPU détaillées...";
+"log.gpu.retrieved_detailed" = "Informations GPU détaillées récupérées avec succès depuis HardwareCollector.";
+
+/* Display Hardware Collector */
+"log.display.reset" = "Informations d'écran réinitialisées";
+"log.display.init" = "Initialisation des informations d'écran...";
+"log.display.retrieved" = "Informations d'écran récupérées avec succès depuis HardwareCollector.";
+"log.display.parsing_data" = "Analyse des données d'écran à partir de %d lignes";
+"log.display.line" = "Ligne %d : '%@'";
+"log.display.found_displays" = "'Displays:' trouvé à la ligne %d";
+"log.display.main_info" = "Informations de l'écran principal : %@";
+"log.display.all_info" = "Informations de tous les écrans : %@";
+"log.display.getting_main" = "Récupération de la chaîne de l'écran principal...";
+"log.display.getting_all" = "Récupération de la chaîne de tous les écrans...";
+"log.display.parsing_main" = "Analyse des informations de l'écran principal...";
+"log.display.found_name" = "Nom d'écran trouvé : %@";
+"log.display.found_resolution" = "Résolution trouvée pour le premier écran : %@";
+"log.display.parsed_main" = "Nom de l'écran principal analysé : %@, Résolution : %@";
+"log.display.parsing_all" = "Analyse de tous les écrans...";
+"log.display.parsed_all" = "Informations de tous les écrans analysées : %@";
+
+/* RAM Hardware Collector */
+"log.ram.parsing_lines" = "Analyse des lignes du fichier mémoire...";
+"log.ram.init" = "Initialisation des informations RAM...";
+"log.ram.size" = "Taille totale de la RAM (Go) : %d";
+"log.ram.type_speed" = "Type de RAM : %@, Vitesse : %@";
+"log.ram.getting_string" = "Récupération de la chaîne RAM...";
+"log.ram.getting_description" = "Récupération de la chaîne de description RAM...";
+"log.ram.getting_description_array" = "Récupération de la chaîne de tableau de description RAM...";
+"log.ram.parsing_details" = "Analyse des détails mémoire depuis les lignes partagées...";
+
+/* Version/OS Hardware Collector */
+"log.version.prefix_set" = "Préfixe OS défini à : %@";
+"log.version.number" = "Numéro OS : %@";
+"log.version.build" = "Numéro de build OS : %@";
+"log.version.enum_set" = "Énumération de version OS interne définie selon osNumber";
+"log.version.name" = "Nom OS : %@";
+"log.version.getting_number" = "Récupération du numéro OS...";
+"log.version.determined_number" = "Numéro OS déterminé : %@";
+"log.version.getting_build" = "Récupération du numéro de build OS...";
+"log.version.determined_build" = "Numéro de build OS déterminé : %@";
+"log.version.setting_enum" = "Définition de l'énumération de version OS interne depuis le numéro OS : %@";
+"log.version.internal_set" = "Version OS interne définie à : %@";
+"log.version.converting_enum" = "Conversion de l'énumération de version OS interne (%@) en nom de chaîne...";
+"log.version.converted_name" = "Nom OS converti : %@";
+
+/* Serial Number Hardware Collector */
+"log.serial.init" = "Initialisation du numéro de série et des informations matérielles...";
+"log.serial.retrieved" = "Informations matérielles récupérées avec succès depuis HardwareCollector pour le numéro de série.";
+"log.serial.parsed" = "Numéro de série analysé : %@";
+"log.serial.formatted_details" = "Détails matériels formatés : \n%@";
+"log.serial.getting_string" = "Récupération de la chaîne du numéro de série...";
+"log.serial.getting_details" = "Récupération de la chaîne de détails des informations matérielles...";
+
+/* Startup Disk Hardware Collector */
+"log.startup.init" = "Initialisation des informations du disque de démarrage...";
+"log.startup.read_cache" = "%@ lu avec succès depuis le cache.";
+"log.startup.parsed_name" = "Nom du disque de démarrage analysé : %@";
+"log.startup.getting_name" = "Récupération de la chaîne du nom du disque de démarrage...";
+"log.startup.getting_detailed" = "Récupération de la chaîne d'informations détaillées du disque de démarrage...";
+"log.startup.read_storage_cache" = "%@ lu avec succès depuis le cache.";
+
+/* Mac Model Hardware Collector */
+"log.macmodel.init" = "Initialisation des informations du modèle Mac...";
+"log.macmodel.name" = "Nom du Mac : %@";
+"log.macmodel.getting_identifier" = "Récupération de l'identifiant du modèle...";
+"log.macmodel.full_identifier" = "Identifiant de modèle complet (hw.model) : %@, ID analysé : %@";
+"log.macmodel.getting_name" = "Récupération du nom du Mac...";
+"log.macmodel.looked_up_name" = "Nom du Mac recherché pour l'identifiant '%@' : (%@, %@)";
+"log.macmodel.name_from_file" = "Nom du Mac depuis hwFilePath : %@";
+"log.macmodel.failed_identifier" = "Échec de l'obtention de l'identifiant du modèle depuis hw.model.";
+
+/* Network/Reachability */
+"log.reachability.failed_create" = "Le réseau était inaccessible.";
+"log.reachability.failed_flags" = "Échec de l'obtention des indicateurs d'accessibilité";
+"log.reachability.status" = "Internet est %@";
+"log.reachability.reachable" = "accessible";
+"log.reachability.not_reachable" = "NON accessible";
+
+/* Window Controller */
+"log.window.view_switched" = "Vue basculée vers l'index : %d";
+"log.window.view_changing" = "Changement de vue vers l'index : %d";
+
+/* Data Files */
+"log.data.files_created" = "Fichiers de données créés avec succès";
+
+/* CPU Hardware Collector Errors */
+"log.cpu.failed_packages" = "Échec de l'obtention du nombre de CPU physiques via hw.packages. Erreur : %@";
+"log.cpu.failed_physical" = "Échec de l'obtention du nombre de CPU physiques via hw.physicalcpu. Erreur : %@";
+"log.cpu.failed_any_count" = "Échec de l'obtention de tout nombre de CPU. Erreur : %@";
+"log.cpu.failed_read_details" = "Impossible de lire les détails du CPU depuis hwFilePath : %@";
+
+/* Startup Disk Errors */
+"log.startup.failed_read_cache" = "Échec de la lecture des informations du disque de démarrage depuis le cache HardwareCollector";
+"log.startup.failed_read_detailed_cache" = "Échec de la lecture des informations détaillées du disque de démarrage depuis le cache HardwareCollector";
+
+/* GPU Hardware Collector Errors */
+"log.gpu.no_data" = "Aucune donnée GPU disponible depuis HardwareCollector";
+"log.gpu.no_details" = "Aucun détail GPU disponible depuis HardwareCollector";
+
+/* OS Version Hardware Collector */
+"log.version.init" = "Initialisation des informations de version du système d'exploitation...";
+"log.version.complete" = "Collecte des informations de version du système d'exploitation terminée.";
+
+/* Serial Number Errors */
+"log.serial.no_hardware_info" = "Aucune information matérielle disponible depuis HardwareCollector pour le numéro de série.";
+
+/* RAM Errors */
+"log.ram.no_data" = "Aucune donnée RAM disponible depuis HardwareCollector";
+
+/* Display Errors */
+"log.display.no_data" = "Aucune donnée d'affichage disponible depuis HardwareCollector";
+"log.display.section_not_found" = "Section d'affichages introuvable dans les données en cache (recherche de 'Displays :')";
