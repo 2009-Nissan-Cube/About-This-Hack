@@ -16,6 +16,20 @@ class WindowController: NSWindowController {
     private let windowFrameKey = "MainWindowFrame"
     private let defaultWindowSize = NSSize(width: 580, height: 350)
     
+    // Computed property to get the appropriate window size based on macOS version
+    private var windowSize: NSSize {
+        // In macOS Tahoe, the toolbar takes up more vertical space
+        // We need to compensate by making the window slightly taller
+        let isTahoe = isMacOSTahoe()
+        return isTahoe ? NSSize(width: 580, height: 370) : defaultWindowSize
+    }
+    
+    // Detect if running on macOS Tahoe (26.x) without waiting for HCVersion
+    private func isMacOSTahoe() -> Bool {
+        let osVersion = ProcessInfo.processInfo.operatingSystemVersion
+        return osVersion.majorVersion == 26
+    }
+    
     override func windowDidLoad() {
         super.windowDidLoad()
         ATHLogger.info(NSLocalizedString("log.window.loaded", comment: "Window controller loaded"), category: .ui)
@@ -30,16 +44,17 @@ class WindowController: NSWindowController {
         // Hide window initially - will show once data is loaded
         window?.setIsVisible(false)
 
-        // Set fixed window size
-        window?.setFrame(NSRect(origin: window?.frame.origin ?? .zero, size: defaultWindowSize), display: false)
-        window?.minSize = defaultWindowSize
-        window?.maxSize = defaultWindowSize
+        // Set fixed window size - adjusted for Tahoe if needed
+        let size = windowSize
+        window?.setFrame(NSRect(origin: window?.frame.origin ?? .zero, size: size), display: false)
+        window?.minSize = size
+        window?.maxSize = size
         window?.styleMask.remove(.resizable)
 
         // Restore window position or center if no saved position
         if let savedFrame = defaults.string(forKey: windowFrameKey) {
             var frame = NSRectFromString(savedFrame)
-            frame.size = defaultWindowSize  // Ensure correct size even if saved frame has different size
+            frame.size = size  // Ensure correct size even if saved frame has different size
             window?.setFrame(frame, display: false)
             ATHLogger.debug(NSLocalizedString("log.window.restored", comment: "Window position restored"), category: .ui)
         } else {
@@ -155,7 +170,7 @@ class WindowController: NSWindowController {
     
     @objc private func windowDidResize(_ notification: Notification) {
         // Ensure window maintains fixed size even if somehow resized
-        window?.setFrame(NSRect(origin: window?.frame.origin ?? .zero, size: defaultWindowSize), display: true)
+        window?.setFrame(NSRect(origin: window?.frame.origin ?? .zero, size: windowSize), display: true)
         saveWindowFrame()
     }
     
