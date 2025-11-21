@@ -43,17 +43,22 @@ class ViewController: NSViewController {
         // Only update UI if data is already loaded
         if HardwareCollector.shared.dataHasBeenSet {
             updateUI()
+            setToolTips()
         }
     }
 
     // Called by WindowController after data is loaded
     func updateUIAfterDataLoaded() {
         updateUI()
+        setToolTips()
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
-        setToolTips()
+        // Only set tooltips if data has already been loaded
+        if HardwareCollector.shared.dataHasBeenSet {
+            setToolTips()
+        }
     }
     
     // MARK: - Private Methods
