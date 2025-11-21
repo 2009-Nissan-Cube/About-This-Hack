@@ -6,25 +6,25 @@ class HCRAM {
 
     // Shared parsed memory lines for efficiency
     private lazy var parsedMemoryLines: [String] = {
-        ATHLogger.debug("Parsing memory file lines...", category: .hardware)
+        ATHLogger.debug(NSLocalizedString("log.ram.parsing_lines", comment: "Parsing memory file lines"), category: .hardware)
         guard let content = HardwareCollector.shared.getCachedFileContent(InitGlobVar.sysmemFilePath) else {
-            ATHLogger.error("No RAM data available from HardwareCollector", category: .hardware)
+            ATHLogger.error(NSLocalizedString("log.ram.no_data", comment: "No RAM data available from HardwareCollector"), category: .hardware)
             return []
         }
         return content.components(separatedBy: .newlines)
     }()
 
     private lazy var memoryInfo: (total: Int, type: String, speed: String) = {
-        ATHLogger.debug("Initializing RAM Info...", category: .hardware)
+        ATHLogger.debug(NSLocalizedString("log.ram.init", comment: "Initializing RAM Info"), category: .hardware)
         let memSize = Int(ProcessInfo.processInfo.physicalMemory / 1_073_741_824) // Convert to GB and cast to Int
-        ATHLogger.debug("RAM Total Size (GB): \(memSize)", category: .hardware)
+        ATHLogger.debug(String(format: NSLocalizedString("log.ram.size", comment: "RAM Total Size"), memSize), category: .hardware)
         let (type, speed) = parseMemoryDetails()
-        ATHLogger.debug("RAM Type: \(type), Speed: \(speed)", category: .hardware)
+        ATHLogger.debug(String(format: NSLocalizedString("log.ram.type_speed", comment: "RAM Type and Speed"), type, speed), category: .hardware)
         return (memSize, type, speed)
     }()
     
     func getRam() -> String {
-        ATHLogger.debug("Getting RAM string...", category: .hardware)
+        ATHLogger.debug(NSLocalizedString("log.ram.getting_string", comment: "Getting RAM string"), category: .hardware)
         var result = "\(memoryInfo.total) GB"
         if !memoryInfo.speed.isEmpty { result += " \(memoryInfo.speed)" }
         if memoryInfo.type.contains("D") { result += " \(memoryInfo.type)" }
@@ -32,7 +32,7 @@ class HCRAM {
     }
     
     func getMemDesc() -> String {
-        ATHLogger.debug("Getting RAM description string...", category: .hardware)
+        ATHLogger.debug(NSLocalizedString("log.ram.getting_description", comment: "Getting RAM description string"), category: .hardware)
 
         // Use shared parsed lines instead of re-parsing
         return parsedMemoryLines
@@ -44,7 +44,7 @@ class HCRAM {
     }
 
     func getMemDescArray() -> String {
-        ATHLogger.debug("Getting RAM description array string...", category: .hardware)
+        ATHLogger.debug(NSLocalizedString("log.ram.getting_description_array", comment: "Getting RAM description array string"), category: .hardware)
 
         // Use shared parsed lines instead of re-parsing
         let relevantLines = parsedMemoryLines
@@ -61,7 +61,7 @@ class HCRAM {
     }
     
     private func parseMemoryDetails() -> (type: String, speed: String) {
-        ATHLogger.debug("Parsing memory details from shared lines...", category: .hardware)
+        ATHLogger.debug(NSLocalizedString("log.ram.parsing_details", comment: "Parsing memory details from shared lines"), category: .hardware)
 
         // Use shared parsed lines instead of re-parsing
         let type = parsedMemoryLines.first { $0.contains("Type") }?.components(separatedBy: ": ").last ?? ""

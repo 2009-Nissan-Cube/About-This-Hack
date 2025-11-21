@@ -25,6 +25,6 @@ class ViewControllerService: NSViewController {
     }
     
     func start() {
-        ATHLogger.info("Initializing Service View...", category: .ui)
+        ATHLogger.info(NSLocalizedString("log.service_view.init", comment: "Service view initializing"), category: .ui)
     }
 }

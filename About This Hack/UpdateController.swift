@@ -25,7 +25,7 @@ class UpdateController {
     static var unzippedFile      :Bool   = false
 
     static func checkForUpdates() -> Bool {
-        print("\(thisComponent) : Checking for updates...")
+        ATHLogger.info("\(thisComponent) : Checking for updates...", category: .system)
         lastTagVersion = run("GIT_TERMINAL_PROMPT=0 git ls-remote --tags --refs \(InitGlobVar.athrepositoryURL) | grep \"/tags/[0-9]\" | awk -F'/' '{print  $NF}' | sort -u | tail -n1 | tr -d '\n'")
         if lastTagVersion != "" && !lastTagVersion.starts(with: "fatal") {
             let pbxProjLocat = InitGlobVar.athlasttagpbxproj.replacingOccurrences(of: "[LASTTAG]", with: lastTagVersion)
@@ -34,18 +34,18 @@ class UpdateController {
             if marketVersion == "" {
                 marketVersion = thisApplicationVersion  // fake marketVersion (ie. = localVersion) so no Update and no app. crash
             }
-            print("\(thisComponent) : Local version (\(thisApplicationVersion)) and Remote version (\(marketVersion)) in .pbxproj from tag (\(lastTagVersion))")
+            ATHLogger.info("\(thisComponent) : Local version (\(thisApplicationVersion)) and Remote version (\(marketVersion)) in .pbxproj from tag (\(lastTagVersion))", category: .system)
             if thisApplicationVersion < marketVersion {
                 //MARK: newer app found
-                print("\(thisComponent) : Newer version (\(marketVersion)) available")
+                ATHLogger.info("\(thisComponent) : Newer version (\(marketVersion)) available", category: .system)
                 let prompt = updateAlert(message: "Update found!", text: "The latest version is \(marketVersion).\nYou are currently running \(thisApplicationVersion).", buttonArray: ["Update", "Skip"])
-                print("\(thisComponent) : Done")
+                ATHLogger.info("\(thisComponent) : Done", category: .system)
                 return prompt
             }
         } else {
             alertheader = "Can't get version from last remote repo tag"
             alertdetail = "\(InitGlobVar.athrepositoryURL)"
-            print("\(thisComponent) : \(alertheader) \(alertdetail)")
+            ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
             _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
         }
         return false
@@ -55,12 +55,12 @@ class UpdateController {
         isUpdateAvailable = true
         
         //MARK: DownLoad new app.zip from repo
-        print("\(thisComponent) : Starting Download v\(marketVersion) Update...")
+        ATHLogger.info("\(thisComponent) : Starting Download v\(marketVersion) Update...", category: .system)
         notify(title: "Starting Download... v\(marketVersion) Update...", informativeText: "")
         guard run("\(InitGlobVar.curlLocation) -L \(InitGlobVar.lastAthreleaseURL)\(lastTagVersion)/\(InitGlobVar.newAthziprelease) -o \(InitGlobVar.newAthreleasezip)") == "" else {
             alertheader = "Can't Download Update"
             alertdetail = "\(InitGlobVar.lastAthreleaseURL)\(lastTagVersion)/\(InitGlobVar.newAthziprelease)"
-            print("\(thisComponent) : \(alertheader) \(alertdetail)")
+            ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
             _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
             isUpdateAvailable = false
             return
@@ -71,12 +71,12 @@ class UpdateController {
             while (!InitGlobVar.defaultfileManager.fileExists(atPath: InitGlobVar.newAthreleasezip)) {
                 Thread.sleep(forTimeInterval: 0.2)
             }
-            print("\(thisComponent) : Unzipping Archive...")
+            ATHLogger.info("\(thisComponent) : Unzipping Archive...", category: .system)
             notify(title: "Unzipping Archive...", informativeText: "")
             guard run("/usr/bin/unzip -q -o \(InitGlobVar.newAthreleasezip) -d \(InitGlobVar.athDirectory)") == "" else {
                 alertheader = "Can't unzip Archive"
                 alertdetail = "\(InitGlobVar.newAthreleasezip) into \(InitGlobVar.athDirectory)"
-                print("\(thisComponent) : \(alertheader) \(alertdetail)")
+                ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
                 _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
                 isUpdateAvailable = false
                 return
@@ -97,12 +97,12 @@ class UpdateController {
             if (!unzippedFile) && (notFoundLoop > 4) {
                 alertheader = "Can't find .app or .dmg extension on files name extracted from Archive"
                 alertdetail = "\(InitGlobVar.newAthreleasezip) into \(InitGlobVar.athDirectory)"
-                print("\(thisComponent) : \(alertheader) \(alertdetail)")
+                ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
                 _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
                 isUpdateAvailable = false
                 return
             }
-            print("\(thisComponent) : From archive was extracted : \(exeToSearch)")
+            ATHLogger.info("\(thisComponent) : From archive was extracted : \(exeToSearch)", category: .system)
         }
         
         //MARK: from new app.zip extracted .dmg or .app
@@ -111,12 +111,12 @@ class UpdateController {
                 Thread.sleep(forTimeInterval: 0.2)
             }
             //MARK: from new app.zip a .dmg extracted must be attached
-            print("\(thisComponent) : Try to mount dmg \(exeToSearch)")
+            ATHLogger.info("\(thisComponent) : Try to mount dmg \(exeToSearch)", category: .system)
             notify(title: "Try to mount dmg...", informativeText: "")
             guard run("/usr/bin/hdiutil attach \"\(exeToSearch)\" -nobrowse -quiet") == "" else {
                 alertheader = "Can't mount dmg"
                 alertdetail = "\(exeToSearch)"
-                print("\(thisComponent) : \(alertheader) \(alertdetail)")
+                ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
                 _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
                 isUpdateAvailable = false
                 return
@@ -126,11 +126,11 @@ class UpdateController {
                     Thread.sleep(forTimeInterval: 2)
                 }
                 //MARK: .dmg is mounted containing a .app so we copy it to temp Dir
-                print("\(thisComponent) : \(exeToSearch) mounted in /Volumes/\(thisApplicationName)!\n\(thisComponent) : Try to copy application /Volumes/\"\(thisApplicationName)/\(thisApplicationName).app\" to \(InitGlobVar.athDirectory)")
+                ATHLogger.info("\(thisComponent) : \(exeToSearch) mounted in /Volumes/\(thisApplicationName)!\n\(thisComponent) : Try to copy application /Volumes/\"\(thisApplicationName)/\(thisApplicationName).app\" to \(InitGlobVar.athDirectory)", category: .system)
                 guard run("/bin/cp -prf /Volumes/\"\(thisApplicationName)/\(thisApplicationName).app\" \(InitGlobVar.athDirectory)/\"\(thisApplicationName).app\"") == "" else {
                     alertheader = "Can't copy application"
                     alertdetail = "/Volumes/\"\(thisApplicationName)/\(thisApplicationName).app\" to \(InitGlobVar.athDirectory)"
-                    print("\(thisComponent) : \(alertheader) \(alertdetail)")
+                    ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
                     _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
                     isUpdateAvailable = false
                     return
@@ -141,18 +141,18 @@ class UpdateController {
                     Thread.sleep(forTimeInterval: 0.2)
                 }
                 //MARK: .app from .dmg copied to temp Dir .dmg is detached
-                print("\(thisComponent) : /Volumes/\"\(thisApplicationName)/\(thisApplicationName).app\" copied to \(InitGlobVar.athDirectory)!")
-                print("\(thisComponent) : Try to umount Volume \"/Volumes/\(thisApplicationName)\"")
+                ATHLogger.info("\(thisComponent) : /Volumes/\"\(thisApplicationName)/\(thisApplicationName).app\" copied to \(InitGlobVar.athDirectory)!", category: .system)
+                ATHLogger.info("\(thisComponent) : Try to umount Volume \"/Volumes/\(thisApplicationName)\"", category: .system)
                 notify(title: "Try to umount dmg...", informativeText: "")
                 guard run("/usr/bin/hdiutil detach  /Volumes/\"\(thisApplicationName)\" -force -quiet") == "" else {
                     alertheader = "Can't umount \(thisApplicationName)dmg"
                     alertdetail = "/Volumes/\"\(thisApplicationName)\""
-                    print("\(thisComponent) : \(alertheader) \(alertdetail)")
+                    ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
                     _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
                     isUpdateAvailable = false
                     return
                 }
-                print("\(thisComponent) : /Volumes/\"\(thisApplicationName)\" ejected!")
+                ATHLogger.info("\(thisComponent) : /Volumes/\"\(thisApplicationName)\" ejected!", category: .system)
             }
         }
         
@@ -161,7 +161,7 @@ class UpdateController {
             while (!InitGlobVar.defaultfileManager.fileExists(atPath: "\(InitGlobVar.athDirectory)/\(thisApplicationName).app")) {
                 Thread.sleep(forTimeInterval: 0.2)
             }
-            print("\(thisComponent) : Is new app v\(marketVersion) allowed on current OS \(HCVersion.shared.osNumber)?")
+            ATHLogger.info("\(thisComponent) : Is new app v\(marketVersion) allowed on current OS \(HCVersion.shared.osNumber)?", category: .system)
             notify(title: "Is new app v\(marketVersion) allowed...", informativeText: "")
             let plistNewVersion = "\(InitGlobVar.athDirectory)/\(thisApplicationName).app/Contents/Info.plist"
             if InitGlobVar.defaultfileManager.fileExists(atPath: "\(plistNewVersion)") {
@@ -173,7 +173,7 @@ class UpdateController {
             if minSystemVersion == "Unknown" || minSystemVersion == "" { //plistNewVersion not found or LSMinimumSystemVersion key not found
                 alertheader = "Can't get Minimum OS Version"
                 alertdetail = "LSMinimumSystemVersion not found in\n\"\(plistNewVersion)\""
-                print("\(thisComponent) : \(alertheader) \(alertdetail)")
+                ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
                 _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
                 isUpdateAvailable = false
                 return
@@ -187,7 +187,7 @@ class UpdateController {
                 } else {
                     minCountIndex = arrayMinOSVersion.count
                 }
-                print("\(thisComponent) : Current OS version \(HCVersion.shared.osNumber) and Minimum OS Version \(minSystemVersion)")
+                ATHLogger.info("\(thisComponent) : Current OS version \(HCVersion.shared.osNumber) and Minimum OS Version \(minSystemVersion)", category: .system)
                 for index in 0...minCountIndex-1 {
                     if arrayCurOSVersion[index] < arrayMinOSVersion[index] {
                         allowed = false
@@ -197,17 +197,17 @@ class UpdateController {
                             break
                         }
                     } // if arrayCurOSVersion[index] = arrayMinOSVersion[index] go on to check with next index (next part of tows versions)
-                    print("\(thisComponent) : Index (\(index)) : Current OS version \(arrayCurOSVersion[index]) and Minimum OS Version \(arrayMinOSVersion[index])")
+                    ATHLogger.debug("\(thisComponent) : Index (\(index)) : Current OS version \(arrayCurOSVersion[index]) and Minimum OS Version \(arrayMinOSVersion[index])", category: .system)
                 }
                 if !allowed {
                     alertheader = "Update can't be achieved"
                     alertdetail = "Minimum OS Version \(minSystemVersion) is greater than current OS version \(HCVersion.shared.osNumber)"
-                    print("\(thisComponent) : \(alertheader) \(alertdetail)")
+                    ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
                     _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
                     isUpdateAvailable = false
                     return
                 } else {
-                    print("\(thisComponent) : Update (with \(minSystemVersion) as minimum OS version ) is allowed on current OS version \(HCVersion.shared.osNumber)")
+                    ATHLogger.info("\(thisComponent) : Update (with \(minSystemVersion) as minimum OS version ) is allowed on current OS version \(HCVersion.shared.osNumber)", category: .system)
                 }
             }
         }
@@ -217,17 +217,17 @@ class UpdateController {
             while (!InitGlobVar.defaultfileManager.fileExists(atPath: exeToSearch)) {
                 Thread.sleep(forTimeInterval: 0.2)
             }
-            print("\(thisComponent) : Removing Old App...")
+            ATHLogger.info("\(thisComponent) : Removing Old App...", category: .system)
             notify(title: "Removing Old App...", informativeText: "")
             if InitGlobVar.defaultfileManager.fileExists(atPath: InitGlobVar.thisAppliLocation) {
                 do {
                     try InitGlobVar.defaultfileManager.removeItem(atPath: "\(InitGlobVar.thisAppliLocation)")
-                    print("\(thisComponent) : Directory \(InitGlobVar.thisAppliLocation) deleted successfully")
+                    ATHLogger.info("\(thisComponent) : Directory \(InitGlobVar.thisAppliLocation) deleted successfully", category: .system)
                 } catch {
-                    print("\(thisComponent) : Error deleting Directory \(InitGlobVar.thisAppliLocation) with error : (\(error))")
+                    ATHLogger.error("\(thisComponent) : Error deleting Directory \(InitGlobVar.thisAppliLocation) with error : (\(error))", category: .system)
                     alertheader = "Failed to delete the old copy of"
                     alertdetail = "\(InitGlobVar.thisAppliLocation)\nPlease make sure it is in \(InitGlobVar.allAppliLocation) folder!!!"
-                    print("\(thisComponent) : \(alertheader) \(alertdetail)")
+                    ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
                     _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
                     isUpdateAvailable = false
                     return
@@ -237,12 +237,12 @@ class UpdateController {
 
         //MARK: current app removed new one replaces it
         if isUpdateAvailable {
-            print("\(thisComponent) : Copying New Version \"/\(thisApplicationName).app\" Almost there!")
+            ATHLogger.info("\(thisComponent) : Copying New Version \"/\(thisApplicationName).app\" Almost there!", category: .system)
             notify(title: "New Version Install...", informativeText: "")
             guard run("/bin/mv -f \(InitGlobVar.athDirectory)\"/\(thisApplicationName).app\" \(InitGlobVar.allAppliLocation)") == "" else {
                 alertheader = "Can't replace application"
                 alertdetail = "\"\(thisApplicationName)\""
-                print("\(thisComponent) : \(alertheader) \(alertdetail)")
+                ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
                 _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
                 isUpdateAvailable = false
                 return
@@ -255,7 +255,7 @@ class UpdateController {
                 Thread.sleep(forTimeInterval: 0.2)
             }
             if isUpdateAvailable {
-                print("\(thisComponent) : Update Complete!...Launching New \"\(thisApplicationName).app\" Version...")
+                ATHLogger.info("\(thisComponent) : Update Complete!...Launching New \"\(thisApplicationName).app\" Version...", category: .system)
                 notify(title: "Update Complete...Launching  New Version...", informativeText: "")
                 _ = run("/usr/bin/open \"\(InitGlobVar.thisAppliLocation)\"")
                 exit(0)
@@ -285,7 +285,7 @@ class UpdateController {
             let request = UNNotificationRequest(identifier: "ATH \(notificationID)", content: notification, trigger: trigger)
             UNUserNotificationCenter.current().add(request) { (error) in
                 if (error != nil) {
-                    print("\(thisComponent) : \(String(describing: error))!")
+                    ATHLogger.error("\(thisComponent) : \(String(describing: error))!", category: .system)
                 }
             }
         } else { // macOS 10.13 and less
@@ -304,7 +304,7 @@ class UpdateController {
         if let enumerator = InitGlobVar.defaultfileManager.enumerator(atPath: path) {
             for file in enumerator {
                 let pathElement = NSURL(fileURLWithPath: file as! String, relativeTo: pathURL as URL).path
-                print("\(thisComponent) : Element from archive : \(String(describing: pathElement))")
+                ATHLogger.debug("\(thisComponent) : Element from archive : \(String(describing: pathElement))", category: .system)
                 if pathElement?.replacingOccurrences(of: "%20", with: " ").contains("\(InitGlobVar.athDirectory)/\(thisApplicationName)") ?? false {
                     fileExtensionInArray.forEach { extention in
                         if pathElement?.hasSuffix(extention) ?? false {
@@ -314,7 +314,7 @@ class UpdateController {
                 }
            }
         }
-        print("\(thisComponent) : Element returned \(fileNameToReturn)")
+        ATHLogger.debug("\(thisComponent) : Element returned \(fileNameToReturn)", category: .system)
         return fileNameToReturn
     }
 }
