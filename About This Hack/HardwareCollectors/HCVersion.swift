@@ -14,24 +14,24 @@ class HCVersion {
     
     func getVersion() {
         guard !dataHasBeenSet else { return }
-        ATHLogger.info("Initializing OS Version Info...", category: .system)
+        ATHLogger.info(NSLocalizedString("log.version.init", comment: "Initializing OS Version Info"), category: .system)
         
         osPrefix = "macOS"
-        ATHLogger.debug("OS Prefix set to: \(osPrefix)", category: .system)
+        ATHLogger.debug(String(format: NSLocalizedString("log.version.prefix_set", comment: "OS Prefix set"), osPrefix), category: .system)
         osNumber = getOSNumber()
-        ATHLogger.debug("OS Number: \(osNumber)", category: .system)
+        ATHLogger.debug(String(format: NSLocalizedString("log.version.number", comment: "OS Number"), osNumber), category: .system)
         osBuildNumber = getOSBuild()
-        ATHLogger.debug("OS Build Number: \(osBuildNumber)", category: .system)
+        ATHLogger.debug(String(format: NSLocalizedString("log.version.build", comment: "OS Build Number"), osBuildNumber), category: .system)
         setOSVersion(osNumber: osNumber)
-        ATHLogger.debug("Internal OS Version enum set based on osNumber", category: .system)
+        ATHLogger.debug(NSLocalizedString("log.version.enum_set", comment: "Internal OS Version enum set"), category: .system)
         osName = macOSVersionToString()
-        ATHLogger.debug("OS Name: \(osName)", category: .system)
+        ATHLogger.debug(String(format: NSLocalizedString("log.version.name", comment: "OS Name"), osName), category: .system)
         dataHasBeenSet = true
-        ATHLogger.info("OS Version Info collection complete.", category: .system)
+        ATHLogger.info(NSLocalizedString("log.version.complete", comment: "OS Version Info collection complete"), category: .system)
     }
 
     private func getOSNumber() -> String {
-        ATHLogger.debug("Getting OS Number...", category: .system)
+        ATHLogger.debug(NSLocalizedString("log.version.getting_number", comment: "Getting OS Number"), category: .system)
         let osVersion = ProcessInfo.processInfo.operatingSystemVersion
         var versionString = ""
         if (osVersion.patchVersion == 0) {
@@ -39,19 +39,19 @@ class HCVersion {
         } else {
             versionString = "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
         }
-        ATHLogger.debug("Determined OS Number: \(versionString)", category: .system)
+        ATHLogger.debug(String(format: NSLocalizedString("log.version.determined_number", comment: "Determined OS Number"), versionString), category: .system)
         return versionString
     }
   
     private func getOSBuild() -> String {
-        ATHLogger.debug("Getting OS Build Number...", category: .system)
+        ATHLogger.debug(NSLocalizedString("log.version.getting_build", comment: "Getting OS Build Number"), category: .system)
         let buildString = run("sw_vers -buildVersion").trimmingCharacters(in: .whitespacesAndNewlines)
-        ATHLogger.debug("Determined OS Build Number: \(buildString)", category: .system)
+        ATHLogger.debug(String(format: NSLocalizedString("log.version.determined_build", comment: "Determined OS Build Number"), buildString), category: .system)
         return buildString        
     }
     
     private func setOSVersion(osNumber: String) {
-        ATHLogger.debug("Setting internal OS Version enum from OS Number: \(osNumber)", category: .system)
+        ATHLogger.debug(String(format: NSLocalizedString("log.version.setting_enum", comment: "Setting internal OS Version enum"), osNumber), category: .system)
         let majorVersion = osNumber.prefix(2)
         let minorVersion = osNumber.prefix(5)
         
@@ -73,11 +73,11 @@ class HCVersion {
             }
         default: osVersion = .macOS
         }
-        ATHLogger.debug("Internal OS Version set to: \(osVersion)", category: .system)
+        ATHLogger.debug(String(format: NSLocalizedString("log.version.internal_set", comment: "Internal OS Version set"), "\(osVersion)"), category: .system)
     }
 
     private func macOSVersionToString() -> String {
-        ATHLogger.debug("Converting internal OS Version enum (\(osVersion)) to string name...", category: .system)
+        ATHLogger.debug(String(format: NSLocalizedString("log.version.converting_enum", comment: "Converting internal OS Version enum"), "\(osVersion)"), category: .system)
         var stringVersion = ""
         switch osVersion {
         case .sierra: stringVersion = "Sierra"
@@ -92,7 +92,7 @@ class HCVersion {
         case .tahoe: stringVersion = "Tahoe"
         case .macOS: stringVersion = osPrefix + " X"
         }
-        ATHLogger.debug("Converted OS Name: \(stringVersion)", category: .system)
+        ATHLogger.debug(String(format: NSLocalizedString("log.version.converted_name", comment: "Converted OS Name"), stringVersion), category: .system)
         return stringVersion
     }
 

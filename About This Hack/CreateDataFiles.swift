@@ -42,7 +42,7 @@ class CreateDataFiles {
 
         _ = run("rm -rf " + InitGlobVar.athDirectory + " 2>/dev/null")
         _ = run("mkdir " + InitGlobVar.athDirectory + " 2>/dev/null")
-        ATHLogger.debug("Data directory created", category: .system)
+        ATHLogger.debug(NSLocalizedString("log.data.directory_created", comment: "Data directory created"), category: .system)
 
         func createFileIfNeeded(atPath path: String, withCommand command: String) {
             _ = run(command)
@@ -66,7 +66,7 @@ class CreateDataFiles {
         // ... Add similar lines for other files
 */
 
-        ATHLogger.info("Data files created successfully", category: .system)
+        ATHLogger.info(NSLocalizedString("log.data.files_created", comment: "Data files created successfully"), category: .system)
 
         lock.lock()
         _dataFilesCreated = true

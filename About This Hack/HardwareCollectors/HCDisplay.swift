@@ -24,27 +24,27 @@ class HCDisplay {
         displayLock.lock()
         defer { displayLock.unlock() }
         _displayInfo = nil
-        ATHLogger.debug("Display info reset", category: .hardware)
+        ATHLogger.debug(NSLocalizedString("log.display.reset", comment: "Display info reset"), category: .hardware)
     }
 
     private func computeDisplayInfo() -> (mainDisplay: String, allDisplays: String) {
-        ATHLogger.debug("Initializing Display Info...", category: .hardware)
+        ATHLogger.debug(NSLocalizedString("log.display.init", comment: "Initializing Display Info"), category: .hardware)
         
         // Use cached data from HardwareCollector instead of file I/O
         guard let content = HardwareCollector.shared.getCachedFileContent(InitGlobVar.scrFilePath) else {
-            ATHLogger.error("No display data available from HardwareCollector", category: .hardware)
+            ATHLogger.error(NSLocalizedString("log.display.no_data", comment: "No display data available from HardwareCollector"), category: .hardware)
             return ("Unknown Display", "No display information available")
         }
         
-        ATHLogger.debug("Successfully retrieved display info from HardwareCollector.", category: .hardware)
+        ATHLogger.debug(NSLocalizedString("log.display.retrieved", comment: "Successfully retrieved display info"), category: .hardware)
         
         let lines = content.components(separatedBy: .newlines)
 
-        ATHLogger.debug("Parsing display data from \(lines.count) lines", category: .hardware)
+        ATHLogger.debug(String(format: NSLocalizedString("log.display.parsing_data", comment: "Parsing display data"), lines.count), category: .hardware)
 
         // Log first 15 lines for debugging
         for (index, line) in lines.prefix(15).enumerated() {
-            ATHLogger.debug("Line \(index): '\(line.trimmingCharacters(in: .whitespaces))'", category: .hardware)
+            ATHLogger.debug(String(format: NSLocalizedString("log.display.line", comment: "Display line"), index, line.trimmingCharacters(in: .whitespaces)), category: .hardware)
         }
 
         // Find the Displays: subsection anywhere in the output
@@ -52,11 +52,11 @@ class HCDisplay {
             let trimmed = line.trimmingCharacters(in: .whitespaces)
             return trimmed == "Displays:"
         }) else {
-            ATHLogger.error("Displays section not found in cached data (searched for 'Displays:')", category: .hardware)
+            ATHLogger.error(NSLocalizedString("log.display.section_not_found", comment: "Displays section not found in cached data"), category: .hardware)
             return ("Unknown Display", "No display information available")
         }
 
-        ATHLogger.debug("Found 'Displays:' at line \(displaysIndex)", category: .hardware)
+        ATHLogger.debug(String(format: NSLocalizedString("log.display.found_displays", comment: "Found Displays section"), displaysIndex), category: .hardware)
 
         // Collect display lines - they are indented after "Displays:"
         // Continue until we hit an empty line or end of file
@@ -76,21 +76,21 @@ class HCDisplay {
         }
 
         let mainDisplay = self.getMainDisplayInfo(from: displayLines)
-        ATHLogger.debug("Main Display Info: \(mainDisplay)", category: .hardware)
+        ATHLogger.debug(String(format: NSLocalizedString("log.display.main_info", comment: "Main Display Info"), mainDisplay), category: .hardware)
         // For a full list, include the same block
         let allDisplays = self.getAllDisplaysInfo(from: displayLines)
-        ATHLogger.debug("All Displays Info: \(allDisplays)", category: .hardware)
+        ATHLogger.debug(String(format: NSLocalizedString("log.display.all_info", comment: "All Displays Info"), allDisplays), category: .hardware)
 
         return (mainDisplay, allDisplays)
     }
     
     func getDisp() -> String {
-        ATHLogger.debug("Getting main display string...", category: .hardware)
+        ATHLogger.debug(NSLocalizedString("log.display.getting_main", comment: "Getting main display string"), category: .hardware)
         return displayInfo.mainDisplay
     }
     
     func getDispInfo() -> String {
-        ATHLogger.debug("Getting all displays info string...", category: .hardware)
+        ATHLogger.debug(NSLocalizedString("log.display.getting_all", comment: "Getting all displays info string"), category: .hardware)
         return displayInfo.allDisplays
     }
     
@@ -99,7 +99,7 @@ class HCDisplay {
     }
     
     private func getMainDisplayInfo(from lines: [String]) -> String {
-        ATHLogger.debug("Parsing main display info...", category: .hardware)
+        ATHLogger.debug(NSLocalizedString("log.display.parsing_main", comment: "Parsing main display info"), category: .hardware)
         var displayName = "Unknown Display"
         var resolution = "Unknown Resolution"
         var foundFirstDisplay = false
@@ -111,22 +111,22 @@ class HCDisplay {
             if trimmed.hasSuffix(":") && !foundFirstDisplay {
                 displayName = String(trimmed.dropLast())
                 foundFirstDisplay = true
-                ATHLogger.debug("Found display name: \(displayName)", category: .hardware)
+                ATHLogger.debug(String(format: NSLocalizedString("log.display.found_name", comment: "Found display name"), displayName), category: .hardware)
             } else if foundFirstDisplay && trimmed.contains("Resolution:") {
                 resolution = trimmed.components(separatedBy: "Resolution:").last?
                     .components(separatedBy: "(").first?
                     .trimmingCharacters(in: .whitespaces) ?? resolution
-                ATHLogger.debug("Found resolution for first display: \(resolution)", category: .hardware)
+                ATHLogger.debug(String(format: NSLocalizedString("log.display.found_resolution", comment: "Found resolution for first display"), resolution), category: .hardware)
                 break  // We have the first display's info
             }
         }
 
-        ATHLogger.debug("Parsed Main Display Name: \(displayName), Resolution: \(resolution)", category: .hardware)
+        ATHLogger.debug(String(format: NSLocalizedString("log.display.parsed_main", comment: "Parsed Main Display"), displayName, resolution), category: .hardware)
         return "\(displayName) (\(resolution))"
     }
     
     private func getAllDisplaysInfo(from lines: [String]) -> String {
-        ATHLogger.debug("Parsing all displays info...", category: .hardware)
+        ATHLogger.debug(NSLocalizedString("log.display.parsing_all", comment: "Parsing all displays info"), category: .hardware)
         var result = ""
         var currentSection = ""
         
@@ -147,7 +147,7 @@ class HCDisplay {
             result += currentSection
         }
         
-        ATHLogger.debug("Parsed All Displays Info: \(result)", category: .hardware)
+        ATHLogger.debug(String(format: NSLocalizedString("log.display.parsed_all", comment: "Parsed All Displays Info"), result), category: .hardware)
         return result.trimmingCharacters(in: .newlines)
     }
 }

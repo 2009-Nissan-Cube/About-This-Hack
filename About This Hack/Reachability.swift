@@ -11,13 +11,13 @@ public enum Reachability {
                 SCNetworkReachabilityCreateWithAddress(nil, $0)
             }
         }) else {
-            ATHLogger.error("Failed to create network reachability", category: .system)
+            ATHLogger.error(NSLocalizedString("log.reachability.failed_create", comment: "Failed to create network reachability"), category: .system)
             return false
         }
 
         var flags: SCNetworkReachabilityFlags = []
         if !SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) {
-            ATHLogger.error("Failed to get reachability flags", category: .system)
+            ATHLogger.error(NSLocalizedString("log.reachability.failed_flags", comment: "Failed to get reachability flags"), category: .system)
             return false
         }
 
@@ -25,7 +25,8 @@ public enum Reachability {
         let needsConnection = flags.contains(.connectionRequired)
         let isConnected = isReachable && !needsConnection
 
-        ATHLogger.info("Internet is \(isConnected ? "reachable" : "NOT reachable")", category: .system)
+        let status = isConnected ? NSLocalizedString("log.reachability.reachable", comment: "reachable") : NSLocalizedString("log.reachability.not_reachable", comment: "NOT reachable")
+        ATHLogger.info(String(format: NSLocalizedString("log.reachability.status", comment: "Internet status"), status), category: .system)
         
         return isConnected
     }

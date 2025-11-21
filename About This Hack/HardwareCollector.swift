@@ -61,7 +61,7 @@ class HardwareCollector {
         cacheLock.lock()
         defer { cacheLock.unlock() }
         fileContentCache.removeAll()
-        ATHLogger.debug("File cache cleared", category: .hardware)
+        ATHLogger.debug(NSLocalizedString("log.hardware.cache_cleared", comment: "File cache cleared"), category: .hardware)
 
         // Reset lazy properties in hardware collectors
         HCGPU.shared.reset()
