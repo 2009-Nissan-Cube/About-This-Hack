@@ -4,6 +4,9 @@ class CreateDataFiles {
 
     static private var _dataFilesCreated: Bool = false
     static private let lock = NSLock()
+    
+    // Notification name for when data files are created
+    static let dataFilesCreatedNotification = Notification.Name("DataFilesCreated")
 
     static var dataFilesCreated: Bool {
         lock.lock()
@@ -28,6 +31,8 @@ class CreateDataFiles {
             getInitDataFiles()
             DispatchQueue.main.async {
                 completion()
+                // Post notification that data files are ready
+                NotificationCenter.default.post(name: dataFilesCreatedNotification, object: nil)
             }
         }
     }
@@ -44,19 +49,35 @@ class CreateDataFiles {
         _ = run("mkdir " + InitGlobVar.athDirectory + " 2>/dev/null")
         ATHLogger.debug(NSLocalizedString("log.data.directory_created", comment: "Data directory created"), category: .system)
 
-        func createFileIfNeeded(atPath path: String, withCommand command: String) {
-            _ = run(command)
-        }
-
 // /* Product phase  - Uncomment for product phase
-        createFileIfNeeded(atPath: InitGlobVar.hwFilePath, withCommand: "system_profiler SPHardwareDataType > \"\(InitGlobVar.hwFilePath)\"")
-        createFileIfNeeded(atPath: InitGlobVar.sysmemFilePath, withCommand: "system_profiler SPMemoryDataType  | grep -v \"^Memory:$\" > \"\(InitGlobVar.sysmemFilePath)\"")
-        createFileIfNeeded(atPath: InitGlobVar.bootvolnameFilePath, withCommand: "diskutil info / > \"\(InitGlobVar.bootvolnameFilePath)\"")
-        createFileIfNeeded(atPath: InitGlobVar.bootvollistFilePath, withCommand: "diskutil list / > \"\(InitGlobVar.bootvollistFilePath)\"")
-        createFileIfNeeded(atPath: InitGlobVar.scrFilePath, withCommand: "system_profiler SPDisplaysDataType > \"\(InitGlobVar.scrFilePath)\"")
-        createFileIfNeeded(atPath: InitGlobVar.scrXmlFilePath, withCommand: "system_profiler SPDisplaysDataType -xml > \"\(InitGlobVar.scrXmlFilePath)\"")
-        createFileIfNeeded(atPath: InitGlobVar.syssoftdataFilePath, withCommand: "system_profiler SPSoftwareDataType > \"\(InitGlobVar.syssoftdataFilePath)\"")
-        createFileIfNeeded(atPath: InitGlobVar.storagedataFilePath, withCommand: "system_profiler SPStorageDataType > \"\(InitGlobVar.storagedataFilePath)\"")
+        // Use DispatchGroup to run all commands in parallel
+        let group = DispatchGroup()
+        let queue = DispatchQueue.global(qos: .userInitiated)
+        
+        // Define all file creation commands
+        // Note: scrXmlFilePath and syssoftdataFilePath removed - they were never used in the codebase
+        let commands = [
+            "system_profiler SPHardwareDataType > \"\(InitGlobVar.hwFilePath)\"",
+            "system_profiler SPMemoryDataType | grep -v \"^Memory:$\" > \"\(InitGlobVar.sysmemFilePath)\"",
+            "diskutil info / > \"\(InitGlobVar.bootvolnameFilePath)\"",
+            "diskutil list / > \"\(InitGlobVar.bootvollistFilePath)\"",
+            "system_profiler SPDisplaysDataType > \"\(InitGlobVar.scrFilePath)\"",
+            "system_profiler SPStorageDataType > \"\(InitGlobVar.storagedataFilePath)\""
+        ]
+        
+        // Execute all commands concurrently
+        for command in commands {
+            group.enter()
+            queue.async {
+                _ = run(command)
+                group.leave()
+            }
+        }
+        
+        // Wait for all commands to complete (this is called from a background thread in getInitDataFilesAsync)
+        // Note: In rare cases, if a command hangs, this could block. However, these are standard macOS
+        // system commands that are unlikely to hang. Future improvement: consider adding timeout.
+        group.wait()
 // */
 
 /*  Testing phase - Uncomment and modify path for testing phase
