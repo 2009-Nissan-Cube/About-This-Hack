@@ -208,3 +208,63 @@
 /* Display Errors */
 "log.display.no_data" = "No display data available from HardwareCollector";
 "log.display.section_not_found" = "Displays section not found in cached data (searched for 'Displays:')";
+
+/* UpdateController */
+"log.update.checking" = "%@ : Checking for updates...";
+"log.update.versions" = "%@ : Local version (%@) and Remote version (%@) in .pbxproj from tag (%@)";
+"log.update.newer_version" = "%@ : Newer version (%@) available";
+"log.update.done" = "%@ : Done";
+"log.update.starting_download" = "%@ : Starting Download v%@ Update...";
+"log.update.unzipping" = "%@ : Unzipping Archive...";
+"log.update.extracted" = "%@ : From archive was extracted : %@";
+"log.update.mounting_dmg" = "%@ : Try to mount dmg %@";
+"log.update.dmg_mounted" = "%@ : %@ mounted in /Volumes/%@!\n%@ : Try to copy application /Volumes/\"%@/%@.app\" to %@";
+"log.update.app_copied" = "%@ : /Volumes/\"%@/%@.app\" copied to %@!";
+"log.update.unmounting_dmg" = "%@ : Try to unmount Volume \"/Volumes/%@\"";
+"log.update.dmg_ejected" = "%@ : /Volumes/\"%@\" ejected!";
+"log.update.checking_os_compatibility" = "%@ : Is new app v%@ allowed on current OS %@?";
+"log.update.os_versions" = "%@ : Current OS version %@ and Minimum OS Version %@";
+"log.update.os_version_index" = "%@ : Index (%d) : Current OS version %@ and Minimum OS Version %@";
+"log.update.update_allowed" = "%@ : Update (with %@ as minimum OS version ) is allowed on current OS version %@";
+"log.update.removing_old_app" = "%@ : Removing Old App...";
+"log.update.directory_deleted" = "%@ : Directory %@ deleted successfully";
+"log.update.error_deleting_directory" = "%@ : Error deleting Directory %@ with error : (%@)";
+"log.update.copying_new_version" = "%@ : Copying New Version \"/%@.app\" Almost there!";
+"log.update.complete_launching" = "%@ : Update Complete!...Launching New \"%@.app\" Version...";
+"log.update.element_from_archive" = "%@ : Element from archive : %@";
+"log.update.element_returned" = "%@ : Element returned %@";
+
+/* UpdateController Alerts */
+"update.alert.update_found" = "Update found!";
+"update.alert.latest_version" = "The latest version is %@.\nYou are currently running %@.";
+"update.alert.button.update" = "Update";
+"update.alert.button.skip" = "Skip";
+"update.alert.button.return" = "Return";
+"update.alert.cant_get_version" = "Can't get version from last remote repo tag";
+"update.alert.cant_download" = "Can't Download Update";
+"update.alert.cant_unzip" = "Can't unzip Archive";
+"update.alert.cant_unzip_detail" = "%@ into %@";
+"update.alert.cant_find_extension" = "Can't find .app or .dmg extension on files name extracted from Archive";
+"update.alert.cant_mount_dmg" = "Can't mount dmg";
+"update.alert.cant_copy_app" = "Can't copy application";
+"update.alert.cant_copy_app_detail" = "/Volumes/\"%@/%@.app\" to %@";
+"update.alert.cant_unmount_dmg" = "Can't unmount %@dmg";
+"update.alert.cant_unmount_dmg_detail" = "/Volumes/\"%@\"";
+"update.alert.cant_get_min_os" = "Can't get Minimum OS Version";
+"update.alert.cant_get_min_os_detail" = "LSMinimumSystemVersion not found in\n\"%@\"";
+"update.alert.update_cant_be_achieved" = "Update can't be achieved";
+"update.alert.update_cant_be_achieved_detail" = "Minimum OS Version %@ is greater than current OS version %@";
+"update.alert.failed_delete_old" = "Failed to delete the old copy of";
+"update.alert.failed_delete_old_detail" = "%@\nPlease make sure it is in %@ folder!!!";
+"update.alert.cant_replace_app" = "Can't replace application";
+"update.alert.cant_replace_app_detail" = "\"%@\"";
+
+/* UpdateController Notifications */
+"update.notify.starting_download" = "Starting Download... v%@ Update...";
+"update.notify.unzipping" = "Unzipping Archive...";
+"update.notify.mounting_dmg" = "Try to mount dmg...";
+"update.notify.unmounting_dmg" = "Try to unmount dmg...";
+"update.notify.checking_allowed" = "Is new app v%@ allowed...";
+"update.notify.removing_old" = "Removing Old App...";
+"update.notify.installing" = "New Version Install...";
+"update.notify.complete" = "Update Complete...Launching New Version...";

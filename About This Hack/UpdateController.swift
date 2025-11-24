@@ -38,15 +38,15 @@ class UpdateController {
             if thisApplicationVersion < marketVersion {
                 //MARK: newer app found
                 ATHLogger.info(String(format: NSLocalizedString("log.update.newer_version", comment: "Newer version available"), thisComponent, marketVersion), category: .system)
-                let prompt = updateAlert(message: "Update found!", text: "The latest version is \(marketVersion).\nYou are currently running \(thisApplicationVersion).", buttonArray: ["Update", "Skip"])
+                let prompt = updateAlert(message: NSLocalizedString("update.alert.update_found", comment: "Update found!"), text: String(format: NSLocalizedString("update.alert.latest_version", comment: "Latest version info"), marketVersion, thisApplicationVersion), buttonArray: [NSLocalizedString("update.alert.button.update", comment: "Update"), NSLocalizedString("update.alert.button.skip", comment: "Skip")])
                 ATHLogger.info(String(format: NSLocalizedString("log.update.done", comment: "Update check done"), thisComponent), category: .system)
                 return prompt
             }
         } else {
-            alertheader = "Can't get version from last remote repo tag"
+            alertheader = NSLocalizedString("update.alert.cant_get_version", comment: "Can't get version from remote repo")
             alertdetail = "\(InitGlobVar.athrepositoryURL)"
             ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
-            _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
+            _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: [NSLocalizedString("update.alert.button.return", comment: "Return")])
         }
         return false
     }
@@ -56,12 +56,12 @@ class UpdateController {
         
         //MARK: DownLoad new app.zip from repo
         ATHLogger.info(String(format: NSLocalizedString("log.update.starting_download", comment: "Starting download"), thisComponent, marketVersion), category: .system)
-        notify(title: "Starting Download... v\(marketVersion) Update...", informativeText: "")
+        notify(title: String(format: NSLocalizedString("update.notify.starting_download", comment: "Starting Download"), marketVersion), informativeText: "")
         guard run("\(InitGlobVar.curlLocation) -L \(InitGlobVar.lastAthreleaseURL)\(lastTagVersion)/\(InitGlobVar.newAthziprelease) -o \(InitGlobVar.newAthreleasezip)") == "" else {
-            alertheader = "Can't Download Update"
+            alertheader = NSLocalizedString("update.alert.cant_download", comment: "Can't Download Update")
             alertdetail = "\(InitGlobVar.lastAthreleaseURL)\(lastTagVersion)/\(InitGlobVar.newAthziprelease)"
             ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
-            _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
+            _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: [NSLocalizedString("update.alert.button.return", comment: "Return")])
             isUpdateAvailable = false
             return
         }
@@ -72,12 +72,12 @@ class UpdateController {
                 Thread.sleep(forTimeInterval: 0.2)
             }
             ATHLogger.info(String(format: NSLocalizedString("log.update.unzipping", comment: "Unzipping archive"), thisComponent), category: .system)
-            notify(title: "Unzipping Archive...", informativeText: "")
+            notify(title: NSLocalizedString("update.notify.unzipping", comment: "Unzipping Archive"), informativeText: "")
             guard run("/usr/bin/unzip -q -o \(InitGlobVar.newAthreleasezip) -d \(InitGlobVar.athDirectory)") == "" else {
-                alertheader = "Can't unzip Archive"
-                alertdetail = "\(InitGlobVar.newAthreleasezip) into \(InitGlobVar.athDirectory)"
+                alertheader = NSLocalizedString("update.alert.cant_unzip", comment: "Can't unzip Archive")
+                alertdetail = String(format: NSLocalizedString("update.alert.cant_unzip_detail", comment: "Archive unzip detail"), InitGlobVar.newAthreleasezip, InitGlobVar.athDirectory)
                 ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
-                _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
+                _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: [NSLocalizedString("update.alert.button.return", comment: "Return")])
                 isUpdateAvailable = false
                 return
             }
@@ -95,10 +95,10 @@ class UpdateController {
                 }
             }
             if (!unzippedFile) && (notFoundLoop > 4) {
-                alertheader = "Can't find .app or .dmg extension on files name extracted from Archive"
-                alertdetail = "\(InitGlobVar.newAthreleasezip) into \(InitGlobVar.athDirectory)"
+                alertheader = NSLocalizedString("update.alert.cant_find_extension", comment: "Can't find .app or .dmg extension")
+                alertdetail = String(format: NSLocalizedString("update.alert.cant_unzip_detail", comment: "Archive extraction detail"), InitGlobVar.newAthreleasezip, InitGlobVar.athDirectory)
                 ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
-                _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
+                _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: [NSLocalizedString("update.alert.button.return", comment: "Return")])
                 isUpdateAvailable = false
                 return
             }
@@ -112,12 +112,12 @@ class UpdateController {
             }
             //MARK: from new app.zip a .dmg extracted must be attached
             ATHLogger.info(String(format: NSLocalizedString("log.update.mounting_dmg", comment: "Try to mount dmg"), thisComponent, exeToSearch), category: .system)
-            notify(title: "Try to mount dmg...", informativeText: "")
+            notify(title: NSLocalizedString("update.notify.mounting_dmg", comment: "Try to mount dmg"), informativeText: "")
             guard run("/usr/bin/hdiutil attach \"\(exeToSearch)\" -nobrowse -quiet") == "" else {
-                alertheader = "Can't mount dmg"
+                alertheader = NSLocalizedString("update.alert.cant_mount_dmg", comment: "Can't mount dmg")
                 alertdetail = "\(exeToSearch)"
                 ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
-                _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
+                _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: [NSLocalizedString("update.alert.button.return", comment: "Return")])
                 isUpdateAvailable = false
                 return
             }
@@ -128,10 +128,10 @@ class UpdateController {
                 //MARK: .dmg is mounted containing a .app so we copy it to temp Dir
                 ATHLogger.info(String(format: NSLocalizedString("log.update.dmg_mounted", comment: "DMG mounted and copying"), thisComponent, exeToSearch, thisApplicationName, thisComponent, thisApplicationName, thisApplicationName, InitGlobVar.athDirectory), category: .system)
                 guard run("/bin/cp -prf /Volumes/\"\(thisApplicationName)/\(thisApplicationName).app\" \(InitGlobVar.athDirectory)/\"\(thisApplicationName).app\"") == "" else {
-                    alertheader = "Can't copy application"
-                    alertdetail = "/Volumes/\"\(thisApplicationName)/\(thisApplicationName).app\" to \(InitGlobVar.athDirectory)"
+                    alertheader = NSLocalizedString("update.alert.cant_copy_app", comment: "Can't copy application")
+                    alertdetail = String(format: NSLocalizedString("update.alert.cant_copy_app_detail", comment: "Can't copy app detail"), thisApplicationName, thisApplicationName, InitGlobVar.athDirectory)
                     ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
-                    _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
+                    _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: [NSLocalizedString("update.alert.button.return", comment: "Return")])
                     isUpdateAvailable = false
                     return
                 }
@@ -143,12 +143,12 @@ class UpdateController {
                 //MARK: .app from .dmg copied to temp Dir .dmg is detached
                 ATHLogger.info(String(format: NSLocalizedString("log.update.app_copied", comment: "App copied to directory"), thisComponent, thisApplicationName, thisApplicationName, InitGlobVar.athDirectory), category: .system)
                 ATHLogger.info(String(format: NSLocalizedString("log.update.unmounting_dmg", comment: "Try to unmount dmg"), thisComponent, thisApplicationName), category: .system)
-                notify(title: "Try to umount dmg...", informativeText: "")
+                notify(title: NSLocalizedString("update.notify.unmounting_dmg", comment: "Try to unmount dmg"), informativeText: "")
                 guard run("/usr/bin/hdiutil detach  /Volumes/\"\(thisApplicationName)\" -force -quiet") == "" else {
-                    alertheader = "Can't umount \(thisApplicationName)dmg"
-                    alertdetail = "/Volumes/\"\(thisApplicationName)\""
+                    alertheader = String(format: NSLocalizedString("update.alert.cant_unmount_dmg", comment: "Can't unmount dmg"), thisApplicationName)
+                    alertdetail = String(format: NSLocalizedString("update.alert.cant_unmount_dmg_detail", comment: "Can't unmount dmg detail"), thisApplicationName)
                     ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
-                    _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
+                    _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: [NSLocalizedString("update.alert.button.return", comment: "Return")])
                     isUpdateAvailable = false
                     return
                 }
@@ -162,7 +162,7 @@ class UpdateController {
                 Thread.sleep(forTimeInterval: 0.2)
             }
             ATHLogger.info(String(format: NSLocalizedString("log.update.checking_os_compatibility", comment: "Checking OS compatibility"), thisComponent, marketVersion, HCVersion.shared.osNumber), category: .system)
-            notify(title: "Is new app v\(marketVersion) allowed...", informativeText: "")
+            notify(title: String(format: NSLocalizedString("update.notify.checking_allowed", comment: "Checking if new app is allowed"), marketVersion), informativeText: "")
             let plistNewVersion = "\(InitGlobVar.athDirectory)/\(thisApplicationName).app/Contents/Info.plist"
             if InitGlobVar.defaultfileManager.fileExists(atPath: "\(plistNewVersion)") {
                 if let resourceFileDictionaryContent = NSDictionary(contentsOfFile: "\(plistNewVersion)") {
@@ -171,10 +171,10 @@ class UpdateController {
                 }
             }
             if minSystemVersion == "Unknown" || minSystemVersion == "" { //plistNewVersion not found or LSMinimumSystemVersion key not found
-                alertheader = "Can't get Minimum OS Version"
-                alertdetail = "LSMinimumSystemVersion not found in\n\"\(plistNewVersion)\""
+                alertheader = NSLocalizedString("update.alert.cant_get_min_os", comment: "Can't get Minimum OS Version")
+                alertdetail = String(format: NSLocalizedString("update.alert.cant_get_min_os_detail", comment: "LSMinimumSystemVersion not found"), plistNewVersion)
                 ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
-                _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
+                _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: [NSLocalizedString("update.alert.button.return", comment: "Return")])
                 isUpdateAvailable = false
                 return
             } else {
@@ -200,10 +200,10 @@ class UpdateController {
                     ATHLogger.debug(String(format: NSLocalizedString("log.update.os_version_index", comment: "OS version comparison at index"), thisComponent, index, arrayCurOSVersion[index], arrayMinOSVersion[index]), category: .system)
                 }
                 if !allowed {
-                    alertheader = "Update can't be achieved"
-                    alertdetail = "Minimum OS Version \(minSystemVersion) is greater than current OS version \(HCVersion.shared.osNumber)"
+                    alertheader = NSLocalizedString("update.alert.update_cant_be_achieved", comment: "Update can't be achieved")
+                    alertdetail = String(format: NSLocalizedString("update.alert.update_cant_be_achieved_detail", comment: "Update can't be achieved detail"), minSystemVersion, HCVersion.shared.osNumber)
                     ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
-                    _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
+                    _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: [NSLocalizedString("update.alert.button.return", comment: "Return")])
                     isUpdateAvailable = false
                     return
                 } else {
@@ -218,17 +218,17 @@ class UpdateController {
                 Thread.sleep(forTimeInterval: 0.2)
             }
             ATHLogger.info(String(format: NSLocalizedString("log.update.removing_old_app", comment: "Removing old app"), thisComponent), category: .system)
-            notify(title: "Removing Old App...", informativeText: "")
+            notify(title: NSLocalizedString("update.notify.removing_old", comment: "Removing Old App"), informativeText: "")
             if InitGlobVar.defaultfileManager.fileExists(atPath: InitGlobVar.thisAppliLocation) {
                 do {
                     try InitGlobVar.defaultfileManager.removeItem(atPath: "\(InitGlobVar.thisAppliLocation)")
                     ATHLogger.info(String(format: NSLocalizedString("log.update.directory_deleted", comment: "Directory deleted successfully"), thisComponent, InitGlobVar.thisAppliLocation), category: .system)
                 } catch {
                     ATHLogger.error(String(format: NSLocalizedString("log.update.error_deleting_directory", comment: "Error deleting directory"), thisComponent, InitGlobVar.thisAppliLocation, String(describing: error)), category: .system)
-                    alertheader = "Failed to delete the old copy of"
-                    alertdetail = "\(InitGlobVar.thisAppliLocation)\nPlease make sure it is in \(InitGlobVar.allAppliLocation) folder!!!"
+                    alertheader = NSLocalizedString("update.alert.failed_delete_old", comment: "Failed to delete the old copy of")
+                    alertdetail = String(format: NSLocalizedString("update.alert.failed_delete_old_detail", comment: "Failed to delete old detail"), InitGlobVar.thisAppliLocation, InitGlobVar.allAppliLocation)
                     ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
-                    _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
+                    _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: [NSLocalizedString("update.alert.button.return", comment: "Return")])
                     isUpdateAvailable = false
                     return
                 }
@@ -238,12 +238,12 @@ class UpdateController {
         //MARK: current app removed new one replaces it
         if isUpdateAvailable {
             ATHLogger.info(String(format: NSLocalizedString("log.update.copying_new_version", comment: "Copying new version"), thisComponent, thisApplicationName), category: .system)
-            notify(title: "New Version Install...", informativeText: "")
+            notify(title: NSLocalizedString("update.notify.installing", comment: "New Version Install"), informativeText: "")
             guard run("/bin/mv -f \(InitGlobVar.athDirectory)\"/\(thisApplicationName).app\" \(InitGlobVar.allAppliLocation)") == "" else {
-                alertheader = "Can't replace application"
-                alertdetail = "\"\(thisApplicationName)\""
+                alertheader = NSLocalizedString("update.alert.cant_replace_app", comment: "Can't replace application")
+                alertdetail = String(format: NSLocalizedString("update.alert.cant_replace_app_detail", comment: "Can't replace app detail"), thisApplicationName)
                 ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
-                _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: ["Return"])
+                _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: [NSLocalizedString("update.alert.button.return", comment: "Return")])
                 isUpdateAvailable = false
                 return
             }
@@ -256,7 +256,7 @@ class UpdateController {
             }
             if isUpdateAvailable {
                 ATHLogger.info(String(format: NSLocalizedString("log.update.complete_launching", comment: "Update complete, launching new version"), thisComponent, thisApplicationName), category: .system)
-                notify(title: "Update Complete...Launching  New Version...", informativeText: "")
+                notify(title: NSLocalizedString("update.notify.complete", comment: "Update Complete, Launching New Version"), informativeText: "")
                 _ = run("/usr/bin/open \"\(InitGlobVar.thisAppliLocation)\"")
                 exit(0)
             }

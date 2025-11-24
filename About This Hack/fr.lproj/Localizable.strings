@@ -208,3 +208,63 @@
 /* Display Errors */
 "log.display.no_data" = "Aucune donnée d'affichage disponible depuis HardwareCollector";
 "log.display.section_not_found" = "Section d'affichages introuvable dans les données en cache (recherche de 'Displays :')";
+
+/* UpdateController */
+"log.update.checking" = "%@ : Vérification des mises à jour...";
+"log.update.versions" = "%@ : Version locale (%@) et version distante (%@) dans .pbxproj depuis l'étiquette (%@)";
+"log.update.newer_version" = "%@ : Nouvelle version (%@) disponible";
+"log.update.done" = "%@ : Terminé";
+"log.update.starting_download" = "%@ : Début du téléchargement de la mise à jour v%@...";
+"log.update.unzipping" = "%@ : Décompression de l'archive...";
+"log.update.extracted" = "%@ : De l'archive a été extrait : %@";
+"log.update.mounting_dmg" = "%@ : Tentative de montage du dmg %@";
+"log.update.dmg_mounted" = "%@ : %@ monté dans /Volumes/%@ !\n%@ : Tentative de copie de l'application /Volumes/\"%@/%@.app\" vers %@";
+"log.update.app_copied" = "%@ : /Volumes/\"%@/%@.app\" copié vers %@ !";
+"log.update.unmounting_dmg" = "%@ : Tentative de démontage du volume \"/Volumes/%@\"";
+"log.update.dmg_ejected" = "%@ : /Volumes/\"%@\" éjecté !";
+"log.update.checking_os_compatibility" = "%@ : La nouvelle application v%@ est-elle autorisée sur le système d'exploitation actuel %@ ?";
+"log.update.os_versions" = "%@ : Version actuelle du système d'exploitation %@ et version minimale du système d'exploitation %@";
+"log.update.os_version_index" = "%@ : Index (%d) : Version actuelle du système d'exploitation %@ et version minimale du système d'exploitation %@";
+"log.update.update_allowed" = "%@ : Mise à jour (avec %@ comme version minimale du système d'exploitation) autorisée sur la version actuelle du système d'exploitation %@";
+"log.update.removing_old_app" = "%@ : Suppression de l'ancienne application...";
+"log.update.directory_deleted" = "%@ : Répertoire %@ supprimé avec succès";
+"log.update.error_deleting_directory" = "%@ : Erreur lors de la suppression du répertoire %@ avec l'erreur : (%@)";
+"log.update.copying_new_version" = "%@ : Copie de la nouvelle version \"/%@.app\" Presque terminé !";
+"log.update.complete_launching" = "%@ : Mise à jour terminée !...Lancement de la nouvelle version \"%@.app\"...";
+"log.update.element_from_archive" = "%@ : Élément de l'archive : %@";
+"log.update.element_returned" = "%@ : Élément retourné %@";
+
+/* UpdateController Alerts */
+"update.alert.update_found" = "Mise à jour trouvée !";
+"update.alert.latest_version" = "La dernière version est %@.\nVous utilisez actuellement %@.";
+"update.alert.button.update" = "Mettre à jour";
+"update.alert.button.skip" = "Ignorer";
+"update.alert.button.return" = "Retour";
+"update.alert.cant_get_version" = "Impossible d'obtenir la version depuis la dernière étiquette du dépôt distant";
+"update.alert.cant_download" = "Impossible de télécharger la mise à jour";
+"update.alert.cant_unzip" = "Impossible de décompresser l'archive";
+"update.alert.cant_unzip_detail" = "%@ dans %@";
+"update.alert.cant_find_extension" = "Impossible de trouver l'extension .app ou .dmg sur les noms de fichiers extraits de l'archive";
+"update.alert.cant_mount_dmg" = "Impossible de monter le dmg";
+"update.alert.cant_copy_app" = "Impossible de copier l'application";
+"update.alert.cant_copy_app_detail" = "/Volumes/\"%@/%@.app\" vers %@";
+"update.alert.cant_unmount_dmg" = "Impossible de démonter le %@dmg";
+"update.alert.cant_unmount_dmg_detail" = "/Volumes/\"%@\"";
+"update.alert.cant_get_min_os" = "Impossible d'obtenir la version minimale du système d'exploitation";
+"update.alert.cant_get_min_os_detail" = "LSMinimumSystemVersion introuvable dans\n\"%@\"";
+"update.alert.update_cant_be_achieved" = "La mise à jour ne peut pas être effectuée";
+"update.alert.update_cant_be_achieved_detail" = "La version minimale du système d'exploitation %@ est supérieure à la version actuelle du système d'exploitation %@";
+"update.alert.failed_delete_old" = "Échec de la suppression de l'ancienne copie de";
+"update.alert.failed_delete_old_detail" = "%@\nVeuillez vous assurer qu'elle se trouve dans le dossier %@ !!!";
+"update.alert.cant_replace_app" = "Impossible de remplacer l'application";
+"update.alert.cant_replace_app_detail" = "\"%@\"";
+
+/* UpdateController Notifications */
+"update.notify.starting_download" = "Début du téléchargement... Mise à jour v%@...";
+"update.notify.unzipping" = "Décompression de l'archive...";
+"update.notify.mounting_dmg" = "Tentative de montage du dmg...";
+"update.notify.unmounting_dmg" = "Tentative de démontage du dmg...";
+"update.notify.checking_allowed" = "La nouvelle application v%@ est-elle autorisée...";
+"update.notify.removing_old" = "Suppression de l'ancienne application...";
+"update.notify.installing" = "Installation de la nouvelle version...";
+"update.notify.complete" = "Mise à jour terminée...Lancement de la nouvelle version...";

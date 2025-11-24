@@ -208,3 +208,63 @@
 /* Display Errors */
 "log.display.no_data" = "No hay datos de pantalla disponibles desde HardwareCollector";
 "log.display.section_not_found" = "Sección de pantallas no encontrada en los datos en caché (se buscó 'Displays:')";
+
+/* UpdateController */
+"log.update.checking" = "%@ : Comprobando actualizaciones...";
+"log.update.versions" = "%@ : Versión local (%@) y versión remota (%@) en .pbxproj desde la etiqueta (%@)";
+"log.update.newer_version" = "%@ : Nueva versión (%@) disponible";
+"log.update.done" = "%@ : Hecho";
+"log.update.starting_download" = "%@ : Iniciando descarga de la actualización v%@...";
+"log.update.unzipping" = "%@ : Descomprimiendo archivo...";
+"log.update.extracted" = "%@ : Del archivo se extrajo : %@";
+"log.update.mounting_dmg" = "%@ : Intentando montar dmg %@";
+"log.update.dmg_mounted" = "%@ : %@ montado en /Volumes/%@!\n%@ : Intentando copiar aplicación /Volumes/\"%@/%@.app\" a %@";
+"log.update.app_copied" = "%@ : /Volumes/\"%@/%@.app\" copiado a %@!";
+"log.update.unmounting_dmg" = "%@ : Intentando desmontar volumen \"/Volumes/%@\"";
+"log.update.dmg_ejected" = "%@ : /Volumes/\"%@\" expulsado!";
+"log.update.checking_os_compatibility" = "%@ : ¿Se permite la nueva aplicación v%@ en el SO actual %@?";
+"log.update.os_versions" = "%@ : Versión actual del SO %@ y versión mínima del SO %@";
+"log.update.os_version_index" = "%@ : Índice (%d) : Versión actual del SO %@ y versión mínima del SO %@";
+"log.update.update_allowed" = "%@ : Actualización (con %@ como versión mínima del SO) permitida en la versión actual del SO %@";
+"log.update.removing_old_app" = "%@ : Eliminando aplicación antigua...";
+"log.update.directory_deleted" = "%@ : Directorio %@ eliminado correctamente";
+"log.update.error_deleting_directory" = "%@ : Error al eliminar el directorio %@ con error : (%@)";
+"log.update.copying_new_version" = "%@ : Copiando nueva versión \"/%@.app\" ¡Casi terminado!";
+"log.update.complete_launching" = "%@ : ¡Actualización completa!...Iniciando nueva versión \"%@.app\"...";
+"log.update.element_from_archive" = "%@ : Elemento del archivo : %@";
+"log.update.element_returned" = "%@ : Elemento devuelto %@";
+
+/* UpdateController Alerts */
+"update.alert.update_found" = "¡Actualización encontrada!";
+"update.alert.latest_version" = "La última versión es %@.\nActualmente estás ejecutando %@.";
+"update.alert.button.update" = "Actualizar";
+"update.alert.button.skip" = "Omitir";
+"update.alert.button.return" = "Volver";
+"update.alert.cant_get_version" = "No se puede obtener la versión de la última etiqueta del repositorio remoto";
+"update.alert.cant_download" = "No se puede descargar la actualización";
+"update.alert.cant_unzip" = "No se puede descomprimir el archivo";
+"update.alert.cant_unzip_detail" = "%@ en %@";
+"update.alert.cant_find_extension" = "No se puede encontrar la extensión .app o .dmg en los nombres de archivos extraídos del archivo";
+"update.alert.cant_mount_dmg" = "No se puede montar el dmg";
+"update.alert.cant_copy_app" = "No se puede copiar la aplicación";
+"update.alert.cant_copy_app_detail" = "/Volumes/\"%@/%@.app\" a %@";
+"update.alert.cant_unmount_dmg" = "No se puede desmontar el %@dmg";
+"update.alert.cant_unmount_dmg_detail" = "/Volumes/\"%@\"";
+"update.alert.cant_get_min_os" = "No se puede obtener la versión mínima del SO";
+"update.alert.cant_get_min_os_detail" = "LSMinimumSystemVersion no encontrado en\n\"%@\"";
+"update.alert.update_cant_be_achieved" = "No se puede realizar la actualización";
+"update.alert.update_cant_be_achieved_detail" = "La versión mínima del SO %@ es mayor que la versión actual del SO %@";
+"update.alert.failed_delete_old" = "Error al eliminar la copia antigua de";
+"update.alert.failed_delete_old_detail" = "%@\n¡Por favor asegúrate de que esté en la carpeta %@!";
+"update.alert.cant_replace_app" = "No se puede reemplazar la aplicación";
+"update.alert.cant_replace_app_detail" = "\"%@\"";
+
+/* UpdateController Notifications */
+"update.notify.starting_download" = "Iniciando descarga... Actualización v%@...";
+"update.notify.unzipping" = "Descomprimiendo archivo...";
+"update.notify.mounting_dmg" = "Intentando montar dmg...";
+"update.notify.unmounting_dmg" = "Intentando desmontar dmg...";
+"update.notify.checking_allowed" = "¿Se permite la nueva aplicación v%@...";
+"update.notify.removing_old" = "Eliminando aplicación antigua...";
+"update.notify.installing" = "Instalando nueva versión...";
+"update.notify.complete" = "Actualización completa...Iniciando nueva versión...";
