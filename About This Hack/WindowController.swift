@@ -74,17 +74,24 @@ class WindowController: NSWindowController {
                                             name: NSWindow.didResizeNotification,
                                             object: window)
 
-        // Wait for data to be ready before showing window
-        waitForDataAndShowWindow()
+        // Add observer for data files created notification
+        NotificationCenter.default.addObserver(self,
+                                            selector: #selector(dataFilesCreated),
+                                            name: CreateDataFiles.dataFilesCreatedNotification,
+                                            object: nil)
+
+        // If data files are already created (e.g., app restarted), load immediately
+        if CreateDataFiles.dataFilesCreated {
+            loadDataAndShowWindow()
+        }
     }
 
-    private func waitForDataAndShowWindow() {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            // Wait for data files to be created
-            while !CreateDataFiles.dataFilesCreated {
-                Thread.sleep(forTimeInterval: 0.05)
-            }
+    @objc private func dataFilesCreated() {
+        loadDataAndShowWindow()
+    }
 
+    private func loadDataAndShowWindow() {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             // Collect all hardware data
             HardwareCollector.shared.getAllData()
 

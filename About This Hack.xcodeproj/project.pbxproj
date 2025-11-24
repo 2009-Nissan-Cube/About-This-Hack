@@ -116,6 +116,7 @@
 		115D921026D6F65500F5DF35 /* About This Hack */ = {
 			isa = PBXGroup;
 			children = (
+				C147F9E62DD9FFD300D8C1CF /* Utilities */,
 				D90473D62D6FD62900B738E3 /* About This Hack-Bridging-Header.h */,
 				115D921B26D6F65600F5DF35 /* About_This_Hack.entitlements */,
 				115D921126D6F65500F5DF35 /* AppDelegate.swift */,
@@ -127,17 +128,16 @@
 				C1EDE5602AC9E70C00878889 /* InitGlobalVariables.swift */,
 				115D922326D6F6AE00F5DF35 /* InsertExtension.swift */,
 				58134C0128668FF70008B00D /* Keycodes.swift */,
-				LOCVAR00000000000000001 /* Localizable.strings */,
 				D91B9F7529B27FA800AB58B7 /* Main.storyboard */,
 				MAINVAR000000000000001 /* Main.strings */,
-				D90473D92D6FD70800B738E3 /* ObjCSIP.h */,
-				D90473D72D6FD62900B738E3 /* ObjCSIP.m */,
+				LOCVAR00000000000000001 /* Localizable.strings */,
 				72E686C22862453700B8316D /* Reachability.swift */,
 				114545F52710E3AE0017655D /* Shell.swift */,
+				D90473D92D6FD70800B738E3 /* ObjCSIP.h */,
+				D90473D72D6FD62900B738E3 /* ObjCSIP.m */,
 				9664A9122BECC81D00B5E306 /* SystemFunctions.swift */,
 				C1D8307C2AAE57E500ABD4A4 /* Tooltips.swift */,
 				C1F22EAE2AA4EDE000236BB6 /* UpdateController.swift */,
-				C147F9E62DD9FFD300D8C1CF /* Utilities */,
 				115D921326D6F65500F5DF35 /* ViewController.swift */,
 				58B988D326D7ABFE0092EC5B /* ViewControllerDisplays.swift */,
 				58B988D526D7ACD70092EC5B /* ViewControllerService.swift */,
@@ -463,7 +463,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1558;
+				CURRENT_PROJECT_VERSION = 1565;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = ER43ZD2S4U;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -500,7 +500,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1558;
+				CURRENT_PROJECT_VERSION = 1565;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = ER43ZD2S4U;
 				ENABLE_HARDENED_RUNTIME = YES;
