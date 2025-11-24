@@ -75,9 +75,13 @@ class CreateDataFiles {
         }
         
         // Wait for all commands to complete (this is called from a background thread in getInitDataFilesAsync)
-        // Note: In rare cases, if a command hangs, this could block. However, these are standard macOS
-        // system commands that are unlikely to hang. Future improvement: consider adding timeout.
-        group.wait()
+        // Timeout after 12 seconds to prevent indefinite blocking if a command hangs
+        let timeout = DispatchTime.now() + .seconds(12)
+        let result = group.wait(timeout: timeout)
+        
+        if case .timedOut = result {
+            ATHLogger.warning(NSLocalizedString("log.data.timeout", comment: "Data files creation timed out after 12 seconds"), category: .system)
+        }
 // */
 
 /*  Testing phase - Uncomment and modify path for testing phase

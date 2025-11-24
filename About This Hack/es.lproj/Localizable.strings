@@ -180,6 +180,7 @@
 
 /* Data Files */
 "log.data.files_created" = "Archivos de datos creados";
+"log.data.timeout" = "Se agotó el tiempo de creación de archivos de datos después de 12 segundos";
 
 /* CPU Hardware Collector Errors */
 "log.cpu.failed_packages" = "No se pudo obtener el recuento de CPU físicas a través de hw.packages. Error: %@";

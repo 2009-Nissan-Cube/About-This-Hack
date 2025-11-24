@@ -180,6 +180,7 @@
 
 /* Data Files */
 "log.data.files_created" = "Data files created successfully";
+"log.data.timeout" = "Data files creation timed out after 12 seconds";
 
 /* CPU Hardware Collector Errors */
 "log.cpu.failed_packages" = "Failed to get physical CPU count via hw.packages. Error: %@";
