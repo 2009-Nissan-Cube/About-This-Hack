@@ -81,6 +81,8 @@ class CreateDataFiles {
         
         if case .timedOut = result {
             ATHLogger.warning(NSLocalizedString("log.data.timeout", comment: "Data files creation timed out after 12 seconds"), category: .system)
+        } else {
+            ATHLogger.info(NSLocalizedString("log.data.files_created", comment: "Data files created successfully"), category: .system)
         }
 // */
 
@@ -90,8 +92,6 @@ class CreateDataFiles {
         createFileIfNeeded(atPath: InitGlobVar.hwFilePath, withCommand: "ln -s \(testDataRep)/hw.txt  \"\(InitGlobVar.hwFilePath)\"")
         // ... Add similar lines for other files
 */
-
-        ATHLogger.info(NSLocalizedString("log.data.files_created", comment: "Data files created successfully"), category: .system)
 
         lock.lock()
         _dataFilesCreated = true

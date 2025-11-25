@@ -269,3 +269,8 @@
 "update.notify.removing_old" = "Removing Old App...";
 "update.notify.installing" = "New Version Install...";
 "update.notify.complete" = "Update Complete...Launching New Version...";
+
+/* Loading Indicator */
+"loading.data.message" = "Loading data...";
+"log.loading.shown" = "Loading indicator shown";
+"log.loading.hidden" = "Loading indicator hidden";
