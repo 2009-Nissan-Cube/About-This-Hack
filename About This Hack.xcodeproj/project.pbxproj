@@ -130,6 +130,7 @@
 				D91B9F7529B27FA800AB58B7 /* Main.storyboard */,
 				MAINVAR000000000000001 /* Main.strings */,
 				C055B7F92ED5D88D00246967 /* Models */,
+				D901B91A2ED63355006BA8A5 /* Unused */,
 				C147F9E62DD9FFD300D8C1CF /* Utilities */,
 				C055B7FA2ED5D89700246967 /* Views */,
 			);
@@ -188,6 +189,13 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D901B91A2ED63355006BA8A5 /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Unused;
 			sourceTree = "<group>";
 		};
 		DC6870442A63332C00CAD908 /* HardwareCollectors */ = {
