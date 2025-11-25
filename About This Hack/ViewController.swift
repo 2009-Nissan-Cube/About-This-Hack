@@ -68,6 +68,8 @@ class ViewController: NSViewController {
         if HardwareCollector.shared.dataHasBeenSet {
             setToolTips()
         }
+        resizeButtonsToFit()
+        resizeLabelFieldsToFit()
     }
     
     // MARK: - Private Methods
