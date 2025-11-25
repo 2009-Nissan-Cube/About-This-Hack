@@ -35,8 +35,9 @@ class WindowController: NSWindowController {
         ATHLogger.info(NSLocalizedString("log.window.loaded", comment: "Window controller loaded"), category: .ui)
         self.tabViewController = self.window?.contentViewController as? NSTabViewController
 
-        // Localize segmented control - defer to ensure outlets are connected
-        // This fixes a race condition in Tahoe where the outlet might not be ready yet
+        // Localize segmented control immediately if outlet is ready
+        // Also defer to handle Tahoe race condition where outlet might not be ready yet
+        localizeSegmentedControl()
         DispatchQueue.main.async { [weak self] in
             self?.localizeSegmentedControl()
         }
@@ -80,6 +81,9 @@ class WindowController: NSWindowController {
                                             name: CreateDataFiles.dataFilesCreatedNotification,
                                             object: nil)
 
+        // Show loading indicator centered on main window while waiting for data
+        LoadingIndicatorController.shared.show(centeredOn: window)
+
         // If data files are already created (e.g., app restarted), load immediately
         if CreateDataFiles.dataFilesCreated {
             loadDataAndShowWindow()
@@ -97,6 +101,9 @@ class WindowController: NSWindowController {
 
             // Show window on main thread
             DispatchQueue.main.async {
+                // Hide loading indicator before showing main window
+                LoadingIndicatorController.shared.hide()
+                
                 // Ensure segmented control is properly localized before showing window
                 // This is a safety measure for Tahoe where outlets might not be ready earlier
                 self?.localizeSegmentedControl()

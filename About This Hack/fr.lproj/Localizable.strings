@@ -36,7 +36,7 @@
 "log.browser.opened.mac_basics" = "Navigateur ouvert : Notions de base sur Mac";
 "log.browser.opened.mac_user_guide" = "Navigateur ouvert : Guide de l'utilisateur Mac";
 "log.browser.failed" = "Échec de l'ouverture de l'URL : %@";
-"log.support_view.init" = "Initialisation de la vue d'assistance...";
+"log.support_view.init" = "Initialisation de Support View...";
 "log.storage.init" = "Initialisation de la vue de stockage...";
 "log.storage.image_setting" = "Configuration de l'image de stockage : %@ %@";
 "log.storage.image_not_found" = "Image spécifique introuvable, utilisation de l'image générique %@";
@@ -180,6 +180,7 @@
 
 /* Data Files */
 "log.data.files_created" = "Fichiers de données créés avec succès";
+"log.data.timeout" = "La création des fichiers de données a expiré après 12 secondes";
 
 /* CPU Hardware Collector Errors */
 "log.cpu.failed_packages" = "Échec de l'obtention du nombre de CPU physiques via hw.packages. Erreur : %@";
@@ -268,3 +269,8 @@
 "update.notify.removing_old" = "Suppression de l'ancienne application...";
 "update.notify.installing" = "Installation de la nouvelle version...";
 "update.notify.complete" = "Mise à jour terminée...Lancement de la nouvelle version...";
+
+/* Loading Indicator */
+"loading.data.message" = "Chargement des données...";
+"log.loading.shown" = "Chargement des données… est montré";
+"log.loading.hidden" = "Chargement des données… est masqué";
