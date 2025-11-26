@@ -157,10 +157,10 @@
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="texturedRounded" trackingMode="selectOne" id="Kat-cT-SH6">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment label="Overview" toolTip="General presentation of system specifications" selected="YES"/>
-                                                <segment label="Displays" toolTip="Screens and resolutions" tag="1"/>
-                                                <segment label="Storage" toolTip="Boot disk, connection type and available space"/>
-                                                <segment label="Support" toolTip="Presentation of support links for help with your hackintosh or mac"/>
+                                                <segment label="|" toolTip="General presentation of system specifications" selected="YES"/>
+                                                <segment label="|" toolTip="Screens and resolutions" tag="1"/>
+                                                <segment label="|" toolTip="Boot disk, connection type and available space"/>
+                                                <segment label="|" toolTip="Presentation of support links for help with your hackintosh or mac"/>
                                             </segments>
                                         </segmentedCell>
                                         <connections>

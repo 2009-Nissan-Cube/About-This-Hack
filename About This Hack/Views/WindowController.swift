@@ -35,9 +35,9 @@ class WindowController: NSWindowController {
         ATHLogger.info(NSLocalizedString("log.window.loaded", comment: "Window controller loaded"), category: .ui)
         self.tabViewController = self.window?.contentViewController as? NSTabViewController
 
-        // Localize segmented control immediately if outlet is ready
-        // Also defer to handle Tahoe race condition where outlet might not be ready yet
-        localizeSegmentedControl()
+        // Localize segmented control immediately if outlet is ready -> issue with tabs
+        // Defer to handle Tahoe race condition where outlet might not be ready yet -> working fine
+//        localizeSegmentedControl()
         DispatchQueue.main.async { [weak self] in
             self?.localizeSegmentedControl()
         }
