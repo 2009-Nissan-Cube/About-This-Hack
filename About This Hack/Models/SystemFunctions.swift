@@ -124,11 +124,11 @@ func getNVRAM(variable nVRAMPath: String, variable nVRAMKey: String) -> String? 
 	var masterPort = IOMainorMasterPortDefault
 
 	 guard IOMasterPort(bootstrap_port, &masterPort) == KERN_SUCCESS else {
-		 print("\(thisComponent) : NO successful Acces with mastreport \(masterPort)")
+		 print("\(thisComponent) : NO successful Acces with masterport \(masterPort)")
 		 return nil
 	 }
 	 guard  !(IORegistryEntryFromPath(masterPort, nVRAMPath) == 0) else {
-		 print("\(thisComponent) : NO successful Access with mastreport \(masterPort) to path \(nVRAMPath)")
+		 print("\(thisComponent) : NO successful Access with masterport \(masterPort) to path \(nVRAMPath)")
 		 return nil
 	 }
   
@@ -158,11 +158,11 @@ func ioRegFullPathContent(path ioRegPath: String, key ioRegKey: String, encode i
     var masterPort = IOMainorMasterPortDefault
 
     guard IOMasterPort(bootstrap_port, &masterPort) == KERN_SUCCESS else {
-        print("\(thisComponent) : NO successful Acces with mastreport \(masterPort)")
+        print("\(thisComponent) : NO successful Acces with masterport \(masterPort)")
         return ""
     }
     guard  !(IORegistryEntryFromPath(masterPort, ioRegPath) == 0) else {
-        print("\(thisComponent) : NO successful Access with mastreport \(masterPort) to path \(ioRegPath)")
+        print("\(thisComponent) : NO successful Access with masterport \(masterPort) to path \(ioRegPath)")
         return ""
     }
 
@@ -195,11 +195,11 @@ func getCleanedIORegValueAsString(path ioRegPath: String, key ioRegKey: String, 
 	var masterPort = IOMainorMasterPortDefault
 
 	guard IOMasterPort(bootstrap_port, &masterPort) == KERN_SUCCESS else {
-		print("\(thisComponent) : NO successful Acces with mastreport \(masterPort)")
+		print("\(thisComponent) : NO successful Acces with masterport \(masterPort)")
 		return ""
 	}
 	guard  !(IORegistryEntryFromPath(masterPort, ioRegPath) == 0) else {
-		print("\(thisComponent) : NO successful Access with mastreport \(masterPort) to path \(ioRegPath)")
+		print("\(thisComponent) : NO successful Access with masterport \(masterPort) to path \(ioRegPath)")
 		return ""
 	}
 
@@ -234,11 +234,11 @@ func getNOTCleanedIORegValueAsString(path ioRegPath: String, key ioRegKey: Strin
     var masterPort = IOMainorMasterPortDefault
 
     guard IOMasterPort(bootstrap_port, &masterPort) == KERN_SUCCESS else {
-        print("\(thisComponent) : NO successful Acces with mastreport \(masterPort)")
+        print("\(thisComponent) : NO successful Acces with masterport \(masterPort)")
         return ""
     }
     guard  !(IORegistryEntryFromPath(masterPort, ioRegPath) == 0) else {
-        print("\(thisComponent) : NO successful Access with mastreport \(masterPort) to path \(ioRegPath)")
+        print("\(thisComponent) : NO successful Access with masterport \(masterPort) to path \(ioRegPath)")
         return ""
     }
 
