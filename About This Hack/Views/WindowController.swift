@@ -37,7 +37,7 @@ class WindowController: NSWindowController {
 
         // Localize segmented control immediately if outlet is ready -> issue with tabs
         // Defer to handle Tahoe race condition where outlet might not be ready yet -> working fine
-//        localizeSegmentedControl()
+        localizeSegmentedControl()
         DispatchQueue.main.async { [weak self] in
             self?.localizeSegmentedControl()
         }
