@@ -76,6 +76,8 @@ class ViewController: NSViewController {
     private func updateUI() {
 		// Ensure buttons reflect current titles after UI update
 		resizeButtonsToFit()
+        // Ensure labels and text fields dynamically resize after UI update
+        resizeLabelFieldsToFit()
         // Ensure we're on the main thread
         guard Thread.isMainThread else {
             DispatchQueue.main.async { [weak self] in
