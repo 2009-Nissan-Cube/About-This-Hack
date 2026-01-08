@@ -113,8 +113,7 @@ class SettingsWindowController: NSWindowController {
     
     // MARK: - Actions
     @IBAction func resetToDefault(_ sender: Any) {
-        guard let logoImageView = logoImageView,
-              let statusLabel = statusLabel else {
+            guard let statusLabel = statusLabel else {
             ATHLogger.error("Settings window UI elements not found in resetToDefault", category: .ui)
             return
         }
