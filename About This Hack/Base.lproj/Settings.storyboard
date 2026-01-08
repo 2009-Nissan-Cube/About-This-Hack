@@ -63,7 +63,7 @@
                                     <constraint firstAttribute="width" constant="200" id="logo-width"/>
                                     <constraint firstAttribute="height" constant="200" id="logo-height"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="logo-image-cell"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="center" imageScaling="proportionallyDown" id="logo-image-cell"/>
                             </imageView>
                             
                             <!-- Status Label -->
