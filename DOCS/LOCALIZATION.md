@@ -18,8 +18,8 @@ Language support has been added in a simple and easy way to maintain or add new 
 
 Created en.lproj, es.lproj and fr.lproj directories with:
 
-- Localizable.strings (43 keys) - application UI strings
-- Main.strings (69 keys) - storyboard interface elements
+- Localizable.strings - application UI strings
+- Main.strings - storyboard interface elements
 - Project configuration: Updated project.pbxproj to register English, Spanish and French as supported languages
 - Added storage.available localization key to
 	- en.lproj/Localizable.strings ("Available")
@@ -27,7 +27,7 @@ Created en.lproj, es.lproj and fr.lproj directories with:
 	- fr.lproj/Localizable.strings ("Disponible")
 - Replaced hardcoded "Available" with `NSLocalizedString("storage.available", comment: "Available storage label")` in the HardwareCollector.swift file.
 
-**Localize tabs titles and tooltips:**
+### Localize tabs titles and tooltips
 
 Tab segment titles and tooltips remained hardcoded in English regardless of macOS language setting. NSSegmentedControl doesn't auto-localize labels set in Interface Builder.
 

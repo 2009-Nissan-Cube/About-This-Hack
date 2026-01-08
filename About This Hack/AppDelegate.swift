@@ -3,6 +3,9 @@ import Foundation
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
+    
+    // Keep a reference to the settings window controller
+    private var settingsWindowController: SettingsWindowController?
 
     override init() {
         super.init()
@@ -59,5 +62,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func showHelp(_ sender: Any) {
         showView(atIndex: 3)
+    }
+    
+    @IBAction func showSettings(_ sender: Any) {
+        // Create settings window if it doesn't exist or was closed
+        if settingsWindowController == nil {
+            let storyboard = NSStoryboard(name: "Settings", bundle: nil)
+            settingsWindowController = storyboard.instantiateInitialController() as? SettingsWindowController
+        }
+        
+        // Show and bring to front
+        settingsWindowController?.showWindow(nil)
+        settingsWindowController?.window?.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
     }
 }

@@ -274,3 +274,15 @@
 "loading.data.message" = "Chargement des données...";
 "log.loading.shown" = "Chargement des données… est montré";
 "log.loading.hidden" = "Chargement des données… est masqué";
+
+/* Settings Window */
+"settings.logo.info" = "Glissez-déposez une image PNG (1024x1024 pixels) pour personnaliser le logo macOS dans l'onglet Aperçu.";
+"settings.logo.reset" = "Réinitialiser par défaut";
+"settings.logo.custom_active" = "Logo personnalisé actif";
+"settings.logo.default_active" = "Logo par défaut actif";
+"settings.logo.reset_success" = "Logo réinitialisé par défaut";
+"settings.logo.error.invalid" = "Fichier image invalide";
+"settings.logo.error.not_png" = "L'image doit être au format PNG";
+"settings.logo.error.no_rep" = "Impossible de lire les dimensions de l'image";
+"settings.logo.error.wrong_size" = "L'image doit être de 1024x1024 pixels. Taille actuelle : %dx%d";
+"settings.logo.success" = "Logo personnalisé appliqué avec succès";

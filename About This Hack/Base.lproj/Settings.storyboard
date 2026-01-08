@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="SettingsWindowController">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24128"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Settings Window Controller-->
+        <scene sceneID="settings-scene">
+            <objects>
+                <windowController storyboardIdentifier="SettingsWindowController" id="SettingsWindowController" customClass="SettingsWindowController" customModule="About_This_Hack" sceneMemberID="viewController">
+                    <window key="window" title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="settings-window" userLabel="Settings Window">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="500" height="400"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
+                    </window>
+                    <connections>
+                        <outlet property="window" destination="settings-window" id="settings-window-outlet"/>
+                        <segue destination="settings-view-controller" kind="relationship" relationship="window.shadowedContentViewController" id="settings-segue"/>
+                    </connections>
+                </windowController>
+                <customObject id="settings-first-responder" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="250"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="settings-view-scene">
+            <objects>
+                <viewController id="settings-view-controller" sceneMemberID="viewController">
+                    <view key="view" wantsLayer="YES" id="settings-view">
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="400"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <!-- Title Label -->
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="title-label">
+                                <rect key="frame" x="18" y="360" width="464" height="24"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Custom Logo Settings" id="title-label-cell">
+                                    <font key="font" metaFont="systemBold" size="20"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            
+                            <!-- Info Label -->
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="info-label" identifier="info-label">
+                                <rect key="frame" x="18" y="310" width="464" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="info-label-height"/>
+                                </constraints>
+                                <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Drag and drop a PNG image (1024x1024 pixels) to customize the macOS logo in the Overview tab." id="info-label-cell">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            
+                            <!-- Logo Image View -->
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="logo-image-view" identifier="logo-image-view">
+                                <rect key="frame" x="150" y="110" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="logo-width"/>
+                                    <constraint firstAttribute="height" constant="200" id="logo-height"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="logo-image-cell"/>
+                            </imageView>
+                            
+                            <!-- Status Label -->
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="status-label" identifier="status-label">
+                                <rect key="frame" x="18" y="80" width="464" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="" id="status-label-cell">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            
+                            <!-- Reset Button -->
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="reset-button" identifier="reset-button">
+                                <rect key="frame" x="185" y="30" width="130" height="32"/>
+                                <buttonCell key="cell" type="push" title="Reset to Default" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="reset-button-cell">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <!-- Title constraints -->
+                            <constraint firstItem="title-label" firstAttribute="top" secondItem="settings-view" secondAttribute="top" constant="16" id="title-top"/>
+                            <constraint firstItem="title-label" firstAttribute="leading" secondItem="settings-view" secondAttribute="leading" constant="20" id="title-leading"/>
+                            <constraint firstAttribute="trailing" secondItem="title-label" secondAttribute="trailing" constant="20" id="title-trailing"/>
+                            
+                            <!-- Info label constraints -->
+                            <constraint firstItem="info-label" firstAttribute="top" secondItem="title-label" secondAttribute="bottom" constant="16" id="info-top"/>
+                            <constraint firstItem="info-label" firstAttribute="leading" secondItem="settings-view" secondAttribute="leading" constant="20" id="info-leading"/>
+                            <constraint firstAttribute="trailing" secondItem="info-label" secondAttribute="trailing" constant="20" id="info-trailing"/>
+                            
+                            <!-- Logo image view constraints -->
+                            <constraint firstItem="logo-image-view" firstAttribute="centerX" secondItem="settings-view" secondAttribute="centerX" id="logo-centerx"/>
+                            <constraint firstItem="logo-image-view" firstAttribute="top" secondItem="info-label" secondAttribute="bottom" constant="0" id="logo-top"/>
+                            
+                            <!-- Status label constraints -->
+                            <constraint firstItem="status-label" firstAttribute="top" secondItem="logo-image-view" secondAttribute="bottom" constant="13" id="status-top"/>
+                            <constraint firstItem="status-label" firstAttribute="leading" secondItem="settings-view" secondAttribute="leading" constant="20" id="status-leading"/>
+                            <constraint firstAttribute="trailing" secondItem="status-label" secondAttribute="trailing" constant="20" id="status-trailing"/>
+                            
+                            <!-- Reset button constraints -->
+                            <constraint firstItem="reset-button" firstAttribute="top" secondItem="status-label" secondAttribute="bottom" constant="18" id="reset-top"/>
+                            <constraint firstItem="reset-button" firstAttribute="centerX" secondItem="settings-view" secondAttribute="centerX" id="reset-centerx"/>
+                            <constraint firstAttribute="bottom" secondItem="reset-button" secondAttribute="bottom" constant="30" id="reset-bottom"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="settings-view-first-responder" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="655"/>
+        </scene>
+    </scenes>
+</document>
