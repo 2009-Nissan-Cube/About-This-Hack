@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="SettingsWindowController">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="SettingsWindowController">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24128"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Settings Window Controller-->
+        <!--Window Controller-->
         <scene sceneID="settings-scene">
             <objects>
                 <windowController storyboardIdentifier="SettingsWindowController" id="SettingsWindowController" customClass="SettingsWindowController" customModule="About_This_Hack" sceneMemberID="viewController">
@@ -23,29 +23,26 @@
                 </windowController>
                 <customObject id="settings-first-responder" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="93" y="194"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="settings-view-scene">
             <objects>
                 <viewController id="settings-view-controller" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="settings-view">
-                        <rect key="frame" x="0.0" y="0.0" width="500" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="633" height="391"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <!-- Title Label -->
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="title-label">
-                                <rect key="frame" x="18" y="360" width="464" height="24"/>
+                                <rect key="frame" x="18" y="351" width="597" height="24"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Custom Logo Settings" id="title-label-cell">
                                     <font key="font" metaFont="systemBold" size="20"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            
-                            <!-- Info Label -->
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="info-label" identifier="info-label">
-                                <rect key="frame" x="18" y="310" width="464" height="34"/>
+                            <textField identifier="info-label" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="info-label">
+                                <rect key="frame" x="18" y="301" width="597" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="info-label-height"/>
                                 </constraints>
@@ -55,30 +52,24 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            
-                            <!-- Logo Image View -->
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="logo-image-view" identifier="logo-image-view">
-                                <rect key="frame" x="150" y="110" width="200" height="200"/>
+                            <imageView identifier="logo-image-view" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="logo-image-view">
+                                <rect key="frame" x="214" y="98" width="206" height="206"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="logo-width"/>
                                     <constraint firstAttribute="height" constant="200" id="logo-height"/>
+                                    <constraint firstAttribute="width" constant="200" id="logo-width"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="center" imageScaling="proportionallyDown" id="logo-image-cell"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="center" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="logo-image-cell"/>
                             </imageView>
-                            
-                            <!-- Status Label -->
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="status-label" identifier="status-label">
-                                <rect key="frame" x="18" y="80" width="464" height="17"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="" id="status-label-cell">
+                            <textField identifier="status-label" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="status-label">
+                                <rect key="frame" x="18" y="72" width="597" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" id="status-label-cell">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            
-                            <!-- Reset Button -->
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="reset-button" identifier="reset-button">
-                                <rect key="frame" x="185" y="30" width="130" height="32"/>
+                            <button identifier="reset-button" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="reset-button">
+                                <rect key="frame" x="256" y="30" width="121" height="24"/>
                                 <buttonCell key="cell" type="push" title="Reset to Default" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="reset-button-cell">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -86,35 +77,26 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <!-- Title constraints -->
-                            <constraint firstItem="title-label" firstAttribute="top" secondItem="settings-view" secondAttribute="top" constant="16" id="title-top"/>
-                            <constraint firstItem="title-label" firstAttribute="leading" secondItem="settings-view" secondAttribute="leading" constant="20" id="title-leading"/>
-                            <constraint firstAttribute="trailing" secondItem="title-label" secondAttribute="trailing" constant="20" id="title-trailing"/>
-                            
-                            <!-- Info label constraints -->
-                            <constraint firstItem="info-label" firstAttribute="top" secondItem="title-label" secondAttribute="bottom" constant="16" id="info-top"/>
                             <constraint firstItem="info-label" firstAttribute="leading" secondItem="settings-view" secondAttribute="leading" constant="20" id="info-leading"/>
+                            <constraint firstItem="info-label" firstAttribute="top" secondItem="title-label" secondAttribute="bottom" constant="16" id="info-top"/>
                             <constraint firstAttribute="trailing" secondItem="info-label" secondAttribute="trailing" constant="20" id="info-trailing"/>
-                            
-                            <!-- Logo image view constraints -->
                             <constraint firstItem="logo-image-view" firstAttribute="centerX" secondItem="settings-view" secondAttribute="centerX" id="logo-centerx"/>
-                            <constraint firstItem="logo-image-view" firstAttribute="top" secondItem="info-label" secondAttribute="bottom" constant="0" id="logo-top"/>
-                            
-                            <!-- Status label constraints -->
-                            <constraint firstItem="status-label" firstAttribute="top" secondItem="logo-image-view" secondAttribute="bottom" constant="13" id="status-top"/>
-                            <constraint firstItem="status-label" firstAttribute="leading" secondItem="settings-view" secondAttribute="leading" constant="20" id="status-leading"/>
-                            <constraint firstAttribute="trailing" secondItem="status-label" secondAttribute="trailing" constant="20" id="status-trailing"/>
-                            
-                            <!-- Reset button constraints -->
-                            <constraint firstItem="reset-button" firstAttribute="top" secondItem="status-label" secondAttribute="bottom" constant="18" id="reset-top"/>
-                            <constraint firstItem="reset-button" firstAttribute="centerX" secondItem="settings-view" secondAttribute="centerX" id="reset-centerx"/>
+                            <constraint firstItem="logo-image-view" firstAttribute="top" secondItem="info-label" secondAttribute="bottom" id="logo-top"/>
                             <constraint firstAttribute="bottom" secondItem="reset-button" secondAttribute="bottom" constant="30" id="reset-bottom"/>
+                            <constraint firstItem="reset-button" firstAttribute="centerX" secondItem="settings-view" secondAttribute="centerX" id="reset-centerx"/>
+                            <constraint firstItem="reset-button" firstAttribute="top" secondItem="status-label" secondAttribute="bottom" constant="18" id="reset-top"/>
+                            <constraint firstItem="status-label" firstAttribute="leading" secondItem="settings-view" secondAttribute="leading" constant="20" id="status-leading"/>
+                            <constraint firstItem="status-label" firstAttribute="top" secondItem="logo-image-view" secondAttribute="bottom" constant="13" id="status-top"/>
+                            <constraint firstAttribute="trailing" secondItem="status-label" secondAttribute="trailing" constant="20" id="status-trailing"/>
+                            <constraint firstItem="title-label" firstAttribute="leading" secondItem="settings-view" secondAttribute="leading" constant="20" id="title-leading"/>
+                            <constraint firstItem="title-label" firstAttribute="top" secondItem="settings-view" secondAttribute="top" constant="16" id="title-top"/>
+                            <constraint firstAttribute="trailing" secondItem="title-label" secondAttribute="trailing" constant="20" id="title-trailing"/>
                         </constraints>
                     </view>
                 </viewController>
                 <customObject id="settings-view-first-responder" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="94" y="796"/>
         </scene>
     </scenes>
 </document>
