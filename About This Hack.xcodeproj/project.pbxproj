@@ -31,6 +31,7 @@
 		D99B37072F1010E300B71FAE /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D99B37052F1010E300B71FAE /* Settings.storyboard */; };
 		D99B37092F1010F400B71FAE /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99B37082F1010F400B71FAE /* SettingsWindowController.swift */; };
 		D99B370B2F10110C00B71FAE /* CustomLogoConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99B370A2F10110C00B71FAE /* CustomLogoConstants.swift */; };
+		D9E195DA2F1184F5009E9F91 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E195D92F1184F5009E9F91 /* SettingsView.swift */; };
 		DC6870462A63334400CAD908 /* HCVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870452A63334400CAD908 /* HCVersion.swift */; };
 		DC6870482A63336E00CAD908 /* HardwareCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870472A63336E00CAD908 /* HardwareCollector.swift */; };
 		DC68704A2A633DDD00CAD908 /* HCMacModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870492A633DDD00CAD908 /* HCMacModel.swift */; };
@@ -75,6 +76,7 @@
 		D99B37062F1010E300B71FAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		D99B37082F1010F400B71FAE /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		D99B370A2F10110C00B71FAE /* CustomLogoConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLogoConstants.swift; sourceTree = "<group>"; };
+		D9E195D92F1184F5009E9F91 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		DC6870452A63334400CAD908 /* HCVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCVersion.swift; sourceTree = "<group>"; };
 		DC6870472A63336E00CAD908 /* HardwareCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardwareCollector.swift; sourceTree = "<group>"; };
 		DC6870492A633DDD00CAD908 /* HCMacModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMacModel.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 		C055B7FA2ED5D89700246967 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D9E195D92F1184F5009E9F91 /* SettingsView.swift */,
 				D99B37082F1010F400B71FAE /* SettingsWindowController.swift */,
 				115D921326D6F65500F5DF35 /* ViewController.swift */,
 				58B988D326D7ABFE0092EC5B /* ViewControllerDisplays.swift */,
@@ -316,6 +319,7 @@
 				58B988D926D7ACD80092EC5B /* ViewControllerStorage.swift in Sources */,
 				58B988DA26D7ACD80092EC5B /* ViewControllerSupport.swift in Sources */,
 				58B988D426D7ABFE0092EC5B /* ViewControllerDisplays.swift in Sources */,
+				D9E195DA2F1184F5009E9F91 /* SettingsView.swift in Sources */,
 				DC6870562A6473AE00CAD908 /* HCGPU.swift in Sources */,
 				DC6870462A63334400CAD908 /* HCVersion.swift in Sources */,
 				C1BAD6FF26D70091008460FB /* WindowController.swift in Sources */,
@@ -534,7 +538,7 @@
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/swift",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 2.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.0xCUBE.About-This-Hack";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -571,7 +575,7 @@
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/swift",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 2.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.0xCUBE.About-This-Hack";
 				PRODUCT_NAME = "$(TARGET_NAME)";

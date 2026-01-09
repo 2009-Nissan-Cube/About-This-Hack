@@ -276,6 +276,7 @@
 "log.loading.hidden" = "Loading indicator hidden";
 
 /* Settings Window */
+"settings.title" = "Custom logo settings";
 "settings.logo.info" = "Drag and drop a PNG image (1024x1024 pixels) to customize the macOS logo in the Overview tab.";
 "settings.logo.reset" = "Reset to Default";
 "settings.logo.custom_active" = "Custom logo active";
