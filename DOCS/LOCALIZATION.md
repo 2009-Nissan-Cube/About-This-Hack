@@ -54,8 +54,8 @@ private func localizeSegmentedControl() {
 
 ### Screenshots
 
-![English](English.png)
+![English](Images/English.png)
 
-![Spanish](Spanish.png)
+![Spanish](Images/Spanish.png)
 
-![French](French.png)
+![French](Images/French.png)
