@@ -14,19 +14,19 @@ struct SettingsView: View {
         VStack(spacing: 0) {
             // Title
             Text(NSLocalizedString("settings.title", comment: "Custom logo settings"))
-                .font(.system(size: 20, weight: .bold))
-                .padding(.top, 16)
+                .font(.system(size: 16, weight: .bold))
+                .padding(.top, 12)
                 .padding(.horizontal, 20)
             
             // Info label
             Text(NSLocalizedString("settings.logo.info", comment: "Drag and drop a PNG image (1024x1024 pixels) to customize the macOS logo in the Overview tab."))
-                .font(.system(size: 13))
+                .font(.system(size: 12))
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .frame(height: 42)
                 .padding(.top, 6)
                 .padding(.horizontal, 20)
-                .padding(.bottom, 10)
+                .padding(.bottom, 6)
             
             // Logo image with drag and drop
             ZStack {
@@ -51,16 +51,21 @@ struct SettingsView: View {
             Text(viewModel.statusMessage)
                 .font(.system(size: 13))
                 .foregroundColor(viewModel.statusColor)
+                .multilineTextAlignment(.center)
                 .frame(height: 16)
-                .padding(.top, 13)
+                .padding(.top, 10)
                 .padding(.horizontal, 20)
             
             // Reset button
-            Button(NSLocalizedString("settings.logo.reset", comment: "Reset to Default")) {
+            Button() {
                 viewModel.resetToDefault()
             }
-            .padding(.top, 18)
-            .padding(.bottom, 30)
+                label: {
+                Text(NSLocalizedString("settings.logo.reset", comment: "Reset to Default"))
+                    .font(.system(size: 12))
+            }
+            .padding(.top, 10)
+            .padding(.bottom, 10)
         }
         .frame(width: 422, height: 400)
         .onAppear {

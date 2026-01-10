@@ -277,7 +277,7 @@
 
 /* Settings Window */
 "settings.title" = "Custom logo settings";
-"settings.logo.info" = "Drag and drop a PNG image (1024x1024 pixels) to customize the macOS logo in the Overview tab.";
+"settings.logo.info" = "Drag and drop a PNG image (1024x1024 pixels) to\ncustomize the macOS logo in the Overview tab";
 "settings.logo.reset" = "Reset to Default";
 "settings.logo.custom_active" = "Custom logo active";
 "settings.logo.default_active" = "Default logo active";
@@ -285,5 +285,5 @@
 "settings.logo.error.invalid" = "Invalid image file";
 "settings.logo.error.not_png" = "Image must be in PNG format";
 "settings.logo.error.no_rep" = "Cannot read image dimensions";
-"settings.logo.error.wrong_size" = "Image must be 1024x1024 pixels. Current size: %dx%d";
+"settings.logo.error.wrong_size" = "Image must be 1024x1024 px (dropped %dx%d)";
 "settings.logo.success" = "Custom logo applied successfully";

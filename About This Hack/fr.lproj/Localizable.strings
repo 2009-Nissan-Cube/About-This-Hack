@@ -276,8 +276,8 @@
 "log.loading.hidden" = "Chargement des données… est masqué";
 
 /* Settings Window */
-"settings.title" = "Personnaliser le logo";
-"settings.logo.info" = "Glissez-déposez une image PNG (1024x1024 pixels) pour personnaliser le logo macOS dans l'onglet Aperçu.";
+"settings.title" = "Personnaliser logo";
+"settings.logo.info" = "Glissez-déposez une image PNG (1024x1024 pixels) pour\npersonnaliser le logo macOS dans l'onglet Aperçu";
 "settings.logo.reset" = "Réinitialiser par défaut";
 "settings.logo.custom_active" = "Logo personnalisé actif";
 "settings.logo.default_active" = "Logo par défaut actif";
@@ -285,5 +285,5 @@
 "settings.logo.error.invalid" = "Fichier image invalide";
 "settings.logo.error.not_png" = "L'image doit être au format PNG";
 "settings.logo.error.no_rep" = "Impossible de lire les dimensions de l'image";
-"settings.logo.error.wrong_size" = "L'image doit être de 1024x1024 pixels. Taille actuelle : %dx%d";
+"settings.logo.error.wrong_size" = "L'image doit être de 1024x1024 px (actuelle : %dx%d)";
 "settings.logo.success" = "Logo personnalisé appliqué avec succès";
