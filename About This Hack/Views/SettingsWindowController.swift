@@ -5,7 +5,21 @@ class SettingsWindowController: NSWindowController {
     
     // MARK: - Constants
     private static let windowWidth: CGFloat = 422
-    private static let windowHeight: CGFloat = 400
+    private static let defaultWindowHeight: CGFloat = 350
+    
+    // Computed property to get the appropriate window height based on macOS version
+    private var windowHeight: CGFloat {
+        // In macOS Tahoe, the toolbar takes up more vertical space
+        // We need to compensate by making the window slightly taller
+        let isTahoe = isMacOSTahoe()
+        return isTahoe ? 370 : Self.defaultWindowHeight
+    }
+    
+    // Detect if running on macOS Tahoe (26.x)
+    private func isMacOSTahoe() -> Bool {
+        let osVersion = ProcessInfo.processInfo.operatingSystemVersion
+        return osVersion.majorVersion == 26
+    }
     
     // MARK: - Lifecycle
     override func windowDidLoad() {
@@ -39,7 +53,7 @@ class SettingsWindowController: NSWindowController {
     
     // MARK: - Window Management
     private func setWindowSize() {
-        let windowSize = NSSize(width: Self.windowWidth, height: Self.windowHeight)
+        let windowSize = NSSize(width: Self.windowWidth, height: windowHeight)
         window?.setContentSize(windowSize)
         window?.minSize = windowSize
         window?.maxSize = windowSize

@@ -285,5 +285,5 @@
 "settings.logo.error.invalid" = "Fichier image invalide";
 "settings.logo.error.not_png" = "L'image doit être au format PNG";
 "settings.logo.error.no_rep" = "Impossible de lire les dimensions de l'image";
-"settings.logo.error.wrong_size" = "L'image doit être de 1024x1024 px (actuelle : %dx%d)";
+"settings.logo.error.wrong_size" = "L'image doit être de 1024x1024 px (actuelle %dx%d)";
 "settings.logo.success" = "Logo personnalisé appliqué avec succès";

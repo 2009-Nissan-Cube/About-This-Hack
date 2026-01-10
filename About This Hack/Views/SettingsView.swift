@@ -2,8 +2,6 @@
 //  SettingsView.swift
 //  About This Hack
 //
-//  Created by GitHub Copilot on 1/9/26.
-//
 
 import SwiftUI
 
@@ -15,7 +13,7 @@ struct SettingsView: View {
             // Title
             Text(NSLocalizedString("settings.title", comment: "Custom logo settings"))
                 .font(.system(size: 16, weight: .bold))
-                .padding(.top, 12)
+                .padding(.top, 10)
                 .padding(.horizontal, 20)
             
             // Info label
@@ -23,17 +21,17 @@ struct SettingsView: View {
                 .font(.system(size: 12))
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
-                .frame(height: 42)
-                .padding(.top, 6)
+                .frame(height: 40)
+                .padding(.top, 4)
                 .padding(.horizontal, 20)
-                .padding(.bottom, 6)
+                .padding(.bottom, 4)
             
             // Logo image with drag and drop
             ZStack {
                 Image(nsImage: viewModel.logoImage)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 200, height: 200)
+                    .frame(width: 180, height: 180)
                     .background(Color(NSColor.textBackgroundColor))
                     .cornerRadius(8)
                     .overlay(
@@ -51,9 +49,8 @@ struct SettingsView: View {
             Text(viewModel.statusMessage)
                 .font(.system(size: 13))
                 .foregroundColor(viewModel.statusColor)
-                .multilineTextAlignment(.center)
                 .frame(height: 16)
-                .padding(.top, 10)
+                .padding(.top, 8)
                 .padding(.horizontal, 20)
             
             // Reset button
@@ -64,10 +61,10 @@ struct SettingsView: View {
                 Text(NSLocalizedString("settings.logo.reset", comment: "Reset to Default"))
                     .font(.system(size: 12))
             }
-            .padding(.top, 10)
-            .padding(.bottom, 10)
+            .padding(.top, 8)
+            .padding(.bottom, 16)
         }
-        .frame(width: 422, height: 400)
+        .frame(width: 422, height: 330)
         .onAppear {
             viewModel.loadCustomLogo()
         }
