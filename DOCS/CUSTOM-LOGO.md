@@ -46,4 +46,7 @@ Custom logo path persists in UserDefaults. Overview tab updates via notification
 
 ![Default logo](Images/Wrong-size.png)
 
-![Default logo](Images/Wrong-format.png)
+![Default logo](Images/No-png.png)
+
+![Default logo](Images/No-image.png)
+
