@@ -35,12 +35,15 @@ class WindowController: NSWindowController {
         ATHLogger.info(NSLocalizedString("log.window.loaded", comment: "Window controller loaded"), category: .ui)
         self.tabViewController = self.window?.contentViewController as? NSTabViewController
 
-        // Localize segmented control immediately if outlet is ready
-        // Also defer to handle Tahoe race condition where outlet might not be ready yet
-        localizeSegmentedControl()
-        DispatchQueue.main.async { [weak self] in
-            self?.localizeSegmentedControl()
-        }
+			// Localize segmented control immediately if outlet is ready on pre-Tahoe macOS
+			// Skip immediate call on Tahoe to avoid race condition where outlet might not be ready
+			// On Tahoe, rely on deferred async call and the call during loadDataAndShowWindow()
+		if !isMacOSTahoe() {
+			localizeSegmentedControl()
+		}
+		DispatchQueue.main.async { [weak self] in
+			self?.localizeSegmentedControl()
+		}
 
         // Hide window initially - will show once data is loaded
         window?.setIsVisible(false)

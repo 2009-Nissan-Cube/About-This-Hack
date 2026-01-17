@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="SettingsWindowController">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24506"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="settings-scene">
+            <objects>
+                <windowController storyboardIdentifier="SettingsWindowController" id="SettingsWindowController" customClass="SettingsWindowController" customModule="About_This_Hack" sceneMemberID="viewController">
+                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="settings-window" userLabel="Settings Window">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+                        <rect key="contentRect" x="716" y="346" width="422" height="400"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <value key="minSize" type="size" width="422" height="400"/>
+                        <value key="maxSize" type="size" width="422" height="400"/>
+                    </window>
+                    <connections>
+                        <outlet property="window" destination="settings-window" id="settings-window-outlet"/>
+                    </connections>
+                </windowController>
+                <customObject id="settings-first-responder" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="93" y="194"/>
+        </scene>
+    </scenes>
+</document>

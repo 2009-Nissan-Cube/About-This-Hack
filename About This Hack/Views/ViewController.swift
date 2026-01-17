@@ -33,6 +33,7 @@ class ViewController: NSViewController {
     // MARK: - Properties
     private lazy var osNumber = ProcessInfo.processInfo.operatingSystemVersionString
     private let modelID = "Mac", ocLevel = "Unknown", ocVersionID = "Version"
+    private let defaults = UserDefaults.standard
     
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
@@ -43,6 +44,12 @@ class ViewController: NSViewController {
         // It will be shown/hidden appropriately in updateUI() based on OS version
         creditText.isHidden = true
         creditText.alphaValue = 0
+        
+        // Listen for custom logo changes
+        NotificationCenter.default.addObserver(self,
+                                             selector: #selector(customLogoDidChange),
+                                             name: .customLogoDidChange,
+                                             object: nil)
     }
     
     override func viewWillAppear() {
@@ -95,6 +102,12 @@ class ViewController: NSViewController {
         CATransaction.setDisableActions(true)
         
         picture.image = NSImage(named: getOSImageName())
+        
+        // Check for custom logo
+        if let customLogoPath = defaults.string(forKey: CustomLogoConstants.customLogoPathKey),
+           let customImage = NSImage(contentsOfFile: customLogoPath) {
+            picture.image = customImage
+        }
         osVersion.stringValue = HCVersion.shared.osName
         systemVersion.stringValue = "\(HCVersion.shared.osNumber) (\(HCVersion.shared.osBuildNumber))"
         
@@ -252,5 +265,25 @@ class ViewController: NSViewController {
     @IBAction func showSoftwareUpdate(_ sender: NSButton) {
         let softwareUpdatePath = "/System/Library/PreferencePanes/SoftwareUpdate.prefPane"
         NSWorkspace.shared.open(URL(fileURLWithPath: FileManager.default.fileExists(atPath: softwareUpdatePath) ? softwareUpdatePath : "\(InitGlobVar.allAppliLocation)/App Store.app"))
+    }
+    
+    // MARK: - Custom Logo
+    @objc private func customLogoDidChange() {
+        // Reload the logo image
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        
+        if let customLogoPath = defaults.string(forKey: CustomLogoConstants.customLogoPathKey),
+           let customImage = NSImage(contentsOfFile: customLogoPath) {
+            picture.image = customImage
+        } else {
+            picture.image = NSImage(named: getOSImageName())
+        }
+        
+        CATransaction.commit()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }

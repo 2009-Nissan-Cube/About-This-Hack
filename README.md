@@ -1,6 +1,6 @@
 # About This Hack: Your Mac's Story, Beautifully Told
 
-![Platform](https://img.shields.io/badge/macOS-10.13+-green.svg)
+![Platform](https://img.shields.io/badge/macOS-11.5+-green.svg)
 ![Platform](https://img.shields.io/badge/Xcode-15-lavender.svg)
 ![Downloads](https://img.shields.io/github/downloads/2009-Nissan-Cube/About-This-Hack/total?label=Downloads&color=9494ff)
 
@@ -46,6 +46,19 @@ Some values show more details when hovered over. See if you can find them all! ð
 
 There is also a native auto-updater that reminds you when a new version releases!
 
+## Customization
+
+### Custom Logo
+
+Want to personalize your About This Hack? You can now replace the macOS logo in the Overview tab with your own custom image!
+
+1. Go to **About This Hack > Preferences...** (or press âŒ˜,)
+2. Drag and drop your custom PNG image (must be 1024x1024 pixels)
+3. Your custom logo will instantly appear in the Overview tab
+4. Click "Reset to Default" anytime to restore the original macOS logo
+
+**Note:** The image must be in PNG format and exactly 1024x1024 pixels in size.
+
 ---
 
 ## Getting Started
@@ -89,4 +102,4 @@ About This Hack is a labor of love, bringing back the classic Mac experience wit
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=0xCUB3/About-This-Hack&type=Date)](https://star-history.com/#0xCUB3/About-This-Hack&Date)
-1. 
+
