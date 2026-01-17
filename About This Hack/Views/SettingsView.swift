@@ -54,17 +54,16 @@ struct SettingsView: View {
                 .padding(.horizontal, 20)
             
             // Reset button
-            Button() {
+            Button {
                 viewModel.resetToDefault()
-            }
-                label: {
+            } label: {
                 Text(NSLocalizedString("settings.logo.reset", comment: "Reset to Default"))
                     .font(.system(size: 12))
             }
             .padding(.top, 8)
-            .padding(.bottom, 16)
+            .padding(.bottom, 10)
         }
-        .frame(width: 422, height: 330)
+        .frame(width: 422, height: 334)
         .onAppear {
             viewModel.loadCustomLogo()
         }
@@ -79,6 +78,15 @@ class SettingsViewModel: ObservableObject {
     @Published var isDragging: Bool = false
     
     private let defaults = UserDefaults.standard
+    
+    init() {
+        // Ensure OS version data is loaded on initialization
+        // This is safe to call synchronously because:
+        // 1. HCVersion.getVersion() has a guard that returns immediately if already loaded
+        // 2. In normal app flow, this will already be loaded by HardwareCollector
+        // 3. Even if not loaded, reading OS version is a fast system call
+        HCVersion.shared.getVersion()
+    }
     
     func loadCustomLogo() {
         if let logoPath = defaults.string(forKey: CustomLogoConstants.customLogoPathKey),

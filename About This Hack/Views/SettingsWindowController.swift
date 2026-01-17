@@ -5,34 +5,55 @@ class SettingsWindowController: NSWindowController {
     
     // MARK: - Constants
     private static let windowWidth: CGFloat = 422
-    private static let defaultWindowHeight: CGFloat = 350
+    // Content height matches the SwiftUI view frame height
+    private static let contentHeight: CGFloat = 330
     
-    // Computed property to get the appropriate window height based on macOS version
-    private var windowHeight: CGFloat {
-        // In macOS Tahoe, the toolbar takes up more vertical space
-        // We need to compensate by making the window slightly taller
-        let isTahoe = isMacOSTahoe()
-        return isTahoe ? 370 : Self.defaultWindowHeight
-    }
+    // MARK: - State
+    private var isSetupComplete = false
     
-    // Detect if running on macOS Tahoe (26.x)
-    private func isMacOSTahoe() -> Bool {
-        let osVersion = ProcessInfo.processInfo.operatingSystemVersion
-        return osVersion.majorVersion == 26
+    // MARK: - Initialization
+    convenience init() {
+        // Create the window programmatically
+        // Use the content height to match the SwiftUI view's frame
+        let contentRect = NSRect(x: 0, y: 0, width: Self.windowWidth, height: Self.contentHeight)
+        let styleMask: NSWindow.StyleMask = [.titled, .closable, .miniaturizable]
+        let window = NSWindow(contentRect: contentRect, styleMask: styleMask, backing: .buffered, defer: false)
+        
+        // Configure window properties
+        window.title = NSLocalizedString("settings.title", comment: "Custom logo settings")
+        window.isReleasedWhenClosed = false
+        
+        self.init(window: window)
+        
+        // For programmatically created windows, windowDidLoad() is not called automatically
+        // We need to set up the content here
+        performSetupIfNeeded()
     }
     
     // MARK: - Lifecycle
     override func windowDidLoad() {
         super.windowDidLoad()
         
+        // Ensure setup is performed (either here or from init)
+        performSetupIfNeeded()
+    }
+    
+    // MARK: - Setup Methods
+    private func performSetupIfNeeded() {
+        // Note: This is always called on the main thread (AppKit lifecycle guarantee)
+        guard !isSetupComplete else { return }
+        
+        setupWindowProperties()
+        setupSwiftUIContent()
+        isSetupComplete = true
+    }
+    
+    private func setupWindowProperties() {
         // Set window properties
         window?.styleMask.remove(.resizable)
         
         // Explicitly set the window size to ensure it's applied correctly
         setWindowSize()
-        
-        // Setup SwiftUI content
-        setupSwiftUIContent()
     }
     
     override func windowWillLoad() {
@@ -53,7 +74,7 @@ class SettingsWindowController: NSWindowController {
     
     // MARK: - Window Management
     private func setWindowSize() {
-        let windowSize = NSSize(width: Self.windowWidth, height: windowHeight)
+        let windowSize = NSSize(width: Self.windowWidth, height: Self.contentHeight)
         window?.setContentSize(windowSize)
         window?.minSize = windowSize
         window?.maxSize = windowSize

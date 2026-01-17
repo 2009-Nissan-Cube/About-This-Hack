@@ -67,8 +67,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func showSettings(_ sender: Any) {
         // Create settings window if it doesn't exist or was closed
         if settingsWindowController == nil {
-            let storyboard = NSStoryboard(name: "Settings", bundle: nil)
-            settingsWindowController = storyboard.instantiateInitialController() as? SettingsWindowController
+            settingsWindowController = SettingsWindowController()
         }
         
         // Show and bring to front
