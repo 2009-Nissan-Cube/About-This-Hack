@@ -50,8 +50,6 @@ private func localizeSegmentedControl() {
 }
 ```
 
-- Localizable.strings (en/es/fr): Added 8 localization keys per language: `segment.title.*` and `segment.tooltip.*`.
-
 ### Screenshots
 
 ![English](Images/English.png)
