@@ -215,6 +215,7 @@
 "log.update.versions" = "%@ : Local version (%@) and Remote version (%@) in .pbxproj from tag (%@)";
 "log.update.newer_version" = "%@ : Newer version (%@) available";
 "log.update.done" = "%@ : Done";
+"log.update.timeout" = "%@ : Update check timed out after waiting for network response";
 "log.update.starting_download" = "%@ : Starting Download v%@ Update...";
 "log.update.unzipping" = "%@ : Unzipping Archive...";
 "log.update.extracted" = "%@ : From archive was extracted : %@";
@@ -241,7 +242,9 @@
 "update.alert.button.update" = "Update";
 "update.alert.button.skip" = "Skip";
 "update.alert.button.return" = "Return";
-"update.alert.cant_get_version" = "Can't get version from last remote repo tag";
+"update.alert.timeout" = "Update check timed out";
+"update.alert.timeout_detail" = "The connection to GitHub timed out after %d seconds. The app will continue without checking for updates.";
+"update.alert.cant_get_version" = "Can't get last version from remote repo tag";
 "update.alert.cant_download" = "Can't Download Update";
 "update.alert.cant_unzip" = "Can't unzip Archive";
 "update.alert.cant_unzip_detail" = "%@ into %@";

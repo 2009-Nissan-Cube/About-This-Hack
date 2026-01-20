@@ -23,13 +23,84 @@ class UpdateController {
     static var alertdetail       :Any    = ""
     static var notificationID    :Int    = 0
     static var unzippedFile      :Bool   = false
+    
+    // Timeout duration for update check (in seconds)
+    static let updateCheckTimeout: TimeInterval = 10.0
+    
+    // Lock for thread-safe access to cancellation flag
+    private static let cancellationLock = NSLock()
+    private static var _updateCheckCancelled = false
+    private static var updateCheckCancelled: Bool {
+        get {
+            cancellationLock.lock()
+            defer { cancellationLock.unlock() }
+            return _updateCheckCancelled
+        }
+        set {
+            cancellationLock.lock()
+            defer { cancellationLock.unlock() }
+            _updateCheckCancelled = newValue
+        }
+    }
+    
+    /// Asynchronously checks for updates with timeout
+    /// - Parameter completion: Completion handler called with result (true if update should be performed)
+    static func checkForUpdatesAsync(completion: @escaping (Bool) -> Void) {
+        DispatchQueue.global(qos: .utility).async {
+            ATHLogger.info(String(format: NSLocalizedString("log.update.checking", comment: "Checking for updates"), thisComponent), category: .system)
+            
+            updateCheckCancelled = false
+            let semaphore = DispatchSemaphore(value: 0)
+            var result = false
+            
+            // Create a separate thread for the actual check to allow timeout
+            DispatchQueue.global(qos: .utility).async {
+                result = checkForUpdates()
+                // Only signal if not cancelled to avoid race condition
+                if !updateCheckCancelled {
+                    semaphore.signal()
+                }
+            }
+            
+            // Wait with timeout
+            let waitResult = semaphore.wait(timeout: .now() + updateCheckTimeout)
+            
+            if waitResult == .timedOut {
+                updateCheckCancelled = true
+                ATHLogger.warning(String(format: NSLocalizedString("log.update.timeout", comment: "Update check timed out"), thisComponent), category: .system)
+                
+                // Call completion handler first to allow data loading to proceed
+                DispatchQueue.main.async {
+                    completion(false)
+                }
+                
+                // Show timeout alert without blocking data loading
+                // Silenced for now, to enable it uncomment lines 79, 80, 81
+//                alertheader = NSLocalizedString("update.alert.timeout", comment: "Update check timed out")
+//                alertdetail = String(format: NSLocalizedString("update.alert.timeout_detail", comment: "The connection to GitHub timed out after %d seconds"), Int(updateCheckTimeout))
+//                showInformationalAlert(message: alertheader, text: "\(alertdetail)")
+            } else {
+                // Call completion handler consistently on main thread
+                DispatchQueue.main.async {
+                    completion(updateCheckCancelled ? false : result)
+                }
+            }
+        }
+    }
 
     static func checkForUpdates() -> Bool {
-        ATHLogger.info(String(format: NSLocalizedString("log.update.checking", comment: "Checking for updates"), thisComponent), category: .system)
+        // Check if cancelled early to avoid unnecessary work
+        guard !updateCheckCancelled else { return false }
+        
         lastTagVersion = run("GIT_TERMINAL_PROMPT=0 git ls-remote --tags --refs \(InitGlobVar.athrepositoryURL) | grep \"/tags/[0-9]\" | awk -F'/' '{print  $NF}' | sort -u | tail -n1 | tr -d '\n'")
+        
+        guard !updateCheckCancelled else { return false }
+        
         if lastTagVersion != "" && !lastTagVersion.starts(with: "fatal") {
             let pbxProjLocat = InitGlobVar.athlasttagpbxproj.replacingOccurrences(of: "[LASTTAG]", with: lastTagVersion)
             marketVersion = run("\(InitGlobVar.curlLocation) -s \(InitGlobVar.athrepositoryURL)\(pbxProjLocat) | sed -e 's?,?\\n?g' -e 's?;?\\n?g' | grep \"MARKETING_VERSION = \" | awk '{print $NF}' | sort -u | tail -n1 | tr -d '\n' 2>/dev/null")
+            
+            guard !updateCheckCancelled else { return false }
 // Postulat : there is one and only one target in pbxproj
             if marketVersion == "" {
                 marketVersion = thisApplicationVersion  // fake marketVersion (ie. = localVersion) so no Update and no app. crash
@@ -38,15 +109,25 @@ class UpdateController {
             if thisApplicationVersion < marketVersion {
                 //MARK: newer app found
                 ATHLogger.info(String(format: NSLocalizedString("log.update.newer_version", comment: "Newer version available"), thisComponent, marketVersion), category: .system)
-                let prompt = updateAlert(message: NSLocalizedString("update.alert.update_found", comment: "Update found!"), text: String(format: NSLocalizedString("update.alert.latest_version", comment: "Latest version info"), marketVersion, thisApplicationVersion), buttonArray: [NSLocalizedString("update.alert.button.update", comment: "Update"), NSLocalizedString("update.alert.button.skip", comment: "Skip")])
+                
+                guard !updateCheckCancelled else { return false }
+                
+                var prompt = false
+                // Show alert on main thread and wait for user response
+                DispatchQueue.main.sync {
+                    prompt = updateAlert(message: NSLocalizedString("update.alert.update_found", comment: "Update found!"), text: String(format: NSLocalizedString("update.alert.latest_version", comment: "Latest version info"), marketVersion, thisApplicationVersion), buttonArray: [NSLocalizedString("update.alert.button.update", comment: "Update"), NSLocalizedString("update.alert.button.skip", comment: "Skip")])
+                }
                 ATHLogger.info(String(format: NSLocalizedString("log.update.done", comment: "Update check done"), thisComponent), category: .system)
                 return prompt
             }
         } else {
+            guard !updateCheckCancelled else { return false }
+            
             alertheader = NSLocalizedString("update.alert.cant_get_version", comment: "Can't get version from remote repo")
             alertdetail = "\(InitGlobVar.athrepositoryURL)"
             ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
-            _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: [NSLocalizedString("update.alert.button.return", comment: "Return")])
+            // Show alert without blocking the main thread
+            showInformationalAlert(message: "\(alertheader)", text: "\(alertdetail)")
         }
         return false
     }
@@ -272,6 +353,38 @@ class UpdateController {
             alert.addButton(withTitle: buttonAlerte)
         }
         return alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn
+    }
+    
+    /// Shows an informational alert without blocking using a non-modal approach
+    /// The alert is displayed but doesn't prevent other UI operations from proceeding
+    static func showInformationalAlert(message: String, text: String) {
+        DispatchQueue.main.async {
+            // Create alert window manually to avoid runModal() blocking
+            let alert = NSAlert()
+            alert.messageText = message
+            alert.informativeText = text
+            alert.alertStyle = .warning
+            alert.addButton(withTitle: NSLocalizedString("update.alert.button.return", comment: "Return"))
+            
+            // Get the alert's window and show it non-modally
+            let window = alert.window
+            window.level = .floating
+            window.center()
+            
+            // Use beginSheetModal if we have a main window, otherwise show as floating
+            if let mainWindow = NSApplication.shared.mainWindow {
+                alert.beginSheetModal(for: mainWindow) { response in
+                    // Sheet dismissed, no action needed
+                }
+            } else {
+                // No main window yet, show as non-blocking floating alert
+                // We'll make the OK button close the window
+                let button = alert.buttons.first
+                button?.target = window
+                button?.action = #selector(NSWindow.close)
+                window.makeKeyAndOrderFront(nil)
+            }
+        }
     }
 
     static func notify(title: String, informativeText: String) -> Void {

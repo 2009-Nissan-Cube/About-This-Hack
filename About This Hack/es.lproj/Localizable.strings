@@ -215,6 +215,7 @@
 "log.update.versions" = "%@ : Versión local (%@) y versión remota (%@) en .pbxproj desde la etiqueta (%@)";
 "log.update.newer_version" = "%@ : Nueva versión (%@) disponible";
 "log.update.done" = "%@ : Hecho";
+"log.update.timeout" = "%@ : La verificación de actualización excedió el tiempo de espera esperando respuesta de la red";
 "log.update.starting_download" = "%@ : Iniciando descarga de la actualización v%@...";
 "log.update.unzipping" = "%@ : Descomprimiendo archivo...";
 "log.update.extracted" = "%@ : Del archivo se extrajo : %@";
@@ -241,7 +242,9 @@
 "update.alert.button.update" = "Actualizar";
 "update.alert.button.skip" = "Omitir";
 "update.alert.button.return" = "Volver";
-"update.alert.cant_get_version" = "No se puede obtener la versión de la última etiqueta del repositorio remoto";
+"update.alert.timeout" = "La verificación de actualización ha excedido el tiempo de espera";
+"update.alert.timeout_detail" = "La conexión a GitHub excedió el tiempo de espera después de %d segundos. La aplicación continuará sin verificar actualizaciones.";
+"update.alert.cant_get_version" = "No se puede obtener la última versión desde la etiqueta del repositorio remoto";
 "update.alert.cant_download" = "No se puede descargar la actualización";
 "update.alert.cant_unzip" = "No se puede descomprimir el archivo";
 "update.alert.cant_unzip_detail" = "%@ en %@";

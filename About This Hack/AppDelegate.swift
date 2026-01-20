@@ -17,12 +17,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        // Check for updates asynchronously to avoid blocking app startup
         ATHLogger.info(NSLocalizedString("log.checking_updates", comment: "Checking for updates"), category: .system)
-        if UpdateController.checkForUpdates() {
-            ATHLogger.info(NSLocalizedString("log.update_available", comment: "Update available"), category: .system)
-            UpdateController.updateATH()
-        } else {
-            ATHLogger.info(NSLocalizedString("log.no_updates", comment: "No updates available"), category: .system)
+        UpdateController.checkForUpdatesAsync { shouldUpdate in
+            if shouldUpdate {
+                ATHLogger.info(NSLocalizedString("log.update_available", comment: "Update available"), category: .system)
+                UpdateController.updateATH()
+            } else {
+                ATHLogger.info(NSLocalizedString("log.no_updates", comment: "No updates available"), category: .system)
+            }
         }
     }
 
