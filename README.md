@@ -2,7 +2,7 @@
 
 ![Platform](https://img.shields.io/badge/macOS-11.5+-green.svg)
 ![Platform](https://img.shields.io/badge/Xcode-15-lavender.svg)
-![Downloads](https://img.shields.io/github/downloads/perez987/About-This-Hack/total?label=Downloads&color=9494ff)
+![Downloads](https://img.shields.io/github/downloads/2009-Nissan-Cube/About-This-Hack/total?label=Downloads&color=9494ff)
 
 ![image](https://github.com/user-attachments/assets/abf73d22-1228-424a-ad50-705150adbef8)
 
