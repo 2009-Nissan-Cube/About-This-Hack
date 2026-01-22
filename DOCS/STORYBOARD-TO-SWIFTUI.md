@@ -9,7 +9,7 @@
 
 ### Updated `SettingsWindowController.swift`
 
-- Completely removed dependency on Settings.storyboard
+- Removed dependency on Settings.storyboard
 - Added convenience initializer to create window programmatically:
 
 ```swift

@@ -73,7 +73,7 @@ Want to personalize your About This Hack? You can now replace the macOS logo in 
 
 ## Compatibility
 
-- Supports macOS 10.13 High Sierra and newer
+- Supports macOS 11.5 Big Sur and newer
 - Not compatible with Linux or Windows.
 
 ## Credits
