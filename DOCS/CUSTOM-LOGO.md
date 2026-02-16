@@ -17,7 +17,6 @@ Want to personalize your About This Hack? You can now replace the macOS logo in 
 **New Components**
 
 - `SettingsWindowController.swift` - Manages settings UI with drag-and-drop validation
-- `Settings.storyboard` - Settings window layout with logo preview and reset functionality
 - `CustomLogoConstants.swift` - Shared constants for logo path key and notification name
 
 **Modified Components**
@@ -42,7 +41,7 @@ Custom logo path persists in UserDefaults. Overview tab updates via notification
 
 ![Default logo](Images/Default.png)
 
-## Errors screenshots
+## Error screenshots
 
 ![Default logo](Images/Wrong-size.png)
 
