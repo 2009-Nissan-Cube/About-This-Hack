@@ -54,6 +54,7 @@ class WindowController: NSWindowController {
         window?.minSize = size
         window?.maxSize = size
         window?.styleMask.remove(.resizable)
+        window?.styleMask.insert(.fullSizeContentView)
 
         // Restore window position or center if no saved position
         if let savedFrame = defaults.string(forKey: windowFrameKey) {
