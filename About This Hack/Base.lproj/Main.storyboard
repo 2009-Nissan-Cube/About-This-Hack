@@ -142,10 +142,10 @@
                 <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" customClass="WindowController" customModule="About_This_Hack" sceneMemberID="viewController">
                     <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" releasedWhenClosed="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <rect key="contentRect" x="890" y="620" width="580" height="280"/>
+                        <rect key="contentRect" x="890" y="620" width="580" height="350"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <value key="minSize" type="size" width="580" height="280"/>
-                        <value key="maxSize" type="size" width="580" height="280"/>
+                        <value key="minSize" type="size" width="580" height="350"/>
+                        <value key="maxSize" type="size" width="580" height="350"/>
                         <toolbar key="toolbar" implicitIdentifier="507F4FF9-8B58-4513-B8A2-0D484D04E6BB" centeredItem="5iE-AH-Dbz" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="AUk-9O-EXi">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="F6F-um-AUh"/>
@@ -198,7 +198,7 @@
                         <tabViewItem label="Support" id="jDc-xR-PKa"/>
                     </tabViewItems>
                     <tabView key="tabView" type="noTabsNoBorder" id="SGh-uI-E1i">
-                        <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
+                        <rect key="frame" x="0.0" y="0.0" width="580" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="message"/>
                         <connections>
@@ -222,7 +222,7 @@
             <objects>
                 <viewController id="f5d-9Y-QYV" customClass="ViewController" customModule="About_This_Hack" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="LbC-pU-3D0">
-                        <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
+                        <rect key="frame" x="0.0" y="0.0" width="580" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <visualEffectView fixedFrame="YES" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="OYy-cZ-3Gd">
@@ -306,7 +306,7 @@
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Frv-p2-mrc">
                                 <rect key="frame" x="82" y="-16" width="400" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="™ and © 2021-2025 Alexander Skula et al. All Rights Reserved." id="9m4-Aj-Z9s">
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="™ and © 2021-2026 Alexander Skula et al. All Rights Reserved." id="9m4-Aj-Z9s">
                                     <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -485,7 +485,7 @@
             <objects>
                 <viewController id="4Ic-HP-FIG" customClass="ViewControllerDisplays" customModule="About_This_Hack" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="kpy-1x-g1k">
-                        <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
+                        <rect key="frame" x="0.0" y="0.0" width="580" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <visualEffectView fixedFrame="YES" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="EGc-6g-wEc">
@@ -658,7 +658,7 @@
             <objects>
                 <viewController id="ZgD-vw-Fms" customClass="ViewControllerStorage" customModule="About_This_Hack" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Kmi-uE-oI6">
-                        <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
+                        <rect key="frame" x="0.0" y="0.0" width="580" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <visualEffectView fixedFrame="YES" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="cZg-9c-paQ">
@@ -715,7 +715,7 @@
             <objects>
                 <viewController id="X4p-pe-eWz" customClass="ViewControllerSupport" customModule="About_This_Hack" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="2en-24-V6N">
-                        <rect key="frame" x="0.0" y="0.0" width="580" height="280"/>
+                        <rect key="frame" x="0.0" y="0.0" width="580" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <visualEffectView fixedFrame="YES" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="9HK-GK-DBm">
