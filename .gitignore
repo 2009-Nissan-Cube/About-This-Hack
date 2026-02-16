@@ -1,8 +1,11 @@
-About This Hack.xcodeproj/project.xcworkspace/xcuserdata/mdn.xcuserdatad/UserInterfaceState.xcuserstate
+# Xcode
+#
+
 About This Hack/Application.xib
-.DS_Store
-About This Hack.xcodeproj/xcuserdata/
-About This Hack/.DS_Store
-About This Hack/Base.lproj/.DS_Store
-ImagesTMP/com.apple.macbookpro-16-space-gray/.DS_Store
 .aider*
+
+## User settings
+xcuserdata/
+
+## General macOS
+.DS_Store
