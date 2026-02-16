@@ -158,6 +158,15 @@ class HCVersion {
 //        return config
 //    }
 
+    func getOSImageName() -> String {
+        let osImageNames: [MacOSVersion: String] = [
+            .tahoe: "Tahoe", .sequoia: "Sequoia", .sonoma: "Sonoma", .ventura: "Ventura",
+            .monterey: "Monterey", .bigSur: "Big Sur", .catalina: "Catalina",
+            .mojave: "Mojave", .highSierra: "High Sierra", .sierra: "Sierra"
+        ]
+        return osImageNames[osVersion] ?? "Unknown"
+    }
+
     private func getOCLPInfo() -> String {
         guard let xmlString = HardwareCollector.shared.getCachedFileContent(InitGlobVar.oclpXmlFilePath) else {
             return ""

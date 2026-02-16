@@ -69,13 +69,4 @@ class InitGlobVar {
     static var MacUserGuideURL         = "https://support.apple.com/manuals"
         
     static var nvramOpencoreVersion    = "4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version"
-
-    // Support URLs -  Note: These seem identical to the above URLs.
-    // You might want to consolidate or clarify their usage.
-    static var macOSUserGuidePress     = "https://support.apple.com/guide/mac-help/welcome/mac"
-    static var whatsNewInMacOSPress    = "https://www.apple.com/macos/ventura/"
-    static var AppleSupportPress       = "https://support.apple.com"
-    static var HackintoshPress         = "https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html#table-of-contents"
-    static var MacBasicsPress          = "https://help.apple.com/macos/big-sur/mac-basics/"
-    static var MacUserGuidePress       = "https://support.apple.com/manuals"
 }

@@ -12,7 +12,6 @@ class ViewControllerStorage: NSViewController {
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        self.view.window?.styleMask.remove(.resizable)
         start()
         setToolTips()
     }

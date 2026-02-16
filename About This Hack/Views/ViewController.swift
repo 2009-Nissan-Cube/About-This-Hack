@@ -54,7 +54,6 @@ class ViewController: NSViewController {
     
     override func viewWillAppear() {
         super.viewWillAppear()
-        view.window?.styleMask.remove(.resizable)
 
         // Only update UI if data is already loaded
         if HardwareCollector.shared.dataHasBeenSet {
@@ -101,7 +100,7 @@ class ViewController: NSViewController {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         
-        picture.image = NSImage(named: getOSImageName())
+        picture.image = NSImage(named: HCVersion.shared.getOSImageName())
         
         // Check for custom logo
         if let customLogoPath = defaults.string(forKey: CustomLogoConstants.customLogoPathKey),
@@ -218,13 +217,6 @@ class ViewController: NSViewController {
 		}
 	}
 
-    private func getOSImageName() -> String {
-        let osImageNames: [MacOSVersion: String] = [.tahoe: "Tahoe", .sequoia: "Sequoia", .sonoma: "Sonoma", .ventura: "Ventura",
-                                                    .monterey: "Monterey", .bigSur: "Big Sur", .catalina: "Catalina",
-                                                    .mojave: "Mojave", .highSierra: "High Sierra", .sierra: "Sierra"]
-        return osImageNames[HCVersion.shared.osVersion] ?? "Unknown"
-    }
-    
     private func setToolTips() {
         let t = Tooltips.shared
         let tooltips: [(NSView, String?)] = [
@@ -277,7 +269,7 @@ class ViewController: NSViewController {
            let customImage = NSImage(contentsOfFile: customLogoPath) {
             picture.image = customImage
         } else {
-            picture.image = NSImage(named: getOSImageName())
+            picture.image = NSImage(named: HCVersion.shared.getOSImageName())
         }
         
         CATransaction.commit()

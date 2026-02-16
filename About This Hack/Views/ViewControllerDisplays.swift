@@ -36,7 +36,6 @@ class ViewControllerDisplays: NSViewController {
     }
     
     override func viewDidAppear() {
-        self.view.window?.styleMask.remove(.resizable)
         start()
     }
     

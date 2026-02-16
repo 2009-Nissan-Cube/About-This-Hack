@@ -203,14 +203,14 @@ class UpdateController {
                 return
             }
             if isUpdateAvailable {
-                while (!InitGlobVar.defaultfileManager.fileExists(atPath: "/Volumes/\(thisApplicationName)")) {
+                while (!InitGlobVar.defaultfileManager.fileExists(atPath: "/Volumes/\(InitGlobVar.thisApplicationName)")) {
                     Thread.sleep(forTimeInterval: 2)
                 }
                 //MARK: .dmg is mounted containing a .app so we copy it to temp Dir
-                ATHLogger.info(String(format: NSLocalizedString("log.update.dmg_mounted", comment: "DMG mounted and copying"), thisComponent, exeToSearch, thisApplicationName, thisComponent, thisApplicationName, thisApplicationName, InitGlobVar.athDirectory), category: .system)
-                guard run("/bin/cp -prf /Volumes/\"\(thisApplicationName)/\(thisApplicationName).app\" \(InitGlobVar.athDirectory)/\"\(thisApplicationName).app\"") == "" else {
+                ATHLogger.info(String(format: NSLocalizedString("log.update.dmg_mounted", comment: "DMG mounted and copying"), thisComponent, exeToSearch, InitGlobVar.thisApplicationName, thisComponent, InitGlobVar.thisApplicationName, InitGlobVar.thisApplicationName, InitGlobVar.athDirectory), category: .system)
+                guard run("/bin/cp -prf /Volumes/\"\(InitGlobVar.thisApplicationName)/\(InitGlobVar.thisApplicationName).app\" \(InitGlobVar.athDirectory)/\"\(InitGlobVar.thisApplicationName).app\"") == "" else {
                     alertheader = NSLocalizedString("update.alert.cant_copy_app", comment: "Can't copy application")
-                    alertdetail = String(format: NSLocalizedString("update.alert.cant_copy_app_detail", comment: "Can't copy app detail"), thisApplicationName, thisApplicationName, InitGlobVar.athDirectory)
+                    alertdetail = String(format: NSLocalizedString("update.alert.cant_copy_app_detail", comment: "Can't copy app detail"), InitGlobVar.thisApplicationName, InitGlobVar.thisApplicationName, InitGlobVar.athDirectory)
                     ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
                     _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: [NSLocalizedString("update.alert.button.return", comment: "Return")])
                     isUpdateAvailable = false
@@ -218,33 +218,33 @@ class UpdateController {
                 }
             }
             if isUpdateAvailable {
-                while (!InitGlobVar.defaultfileManager.fileExists(atPath: "\(InitGlobVar.athDirectory)/\(thisApplicationName).app")) {
+                while (!InitGlobVar.defaultfileManager.fileExists(atPath: "\(InitGlobVar.athDirectory)/\(InitGlobVar.thisApplicationName).app")) {
                     Thread.sleep(forTimeInterval: 0.2)
                 }
                 //MARK: .app from .dmg copied to temp Dir .dmg is detached
-                ATHLogger.info(String(format: NSLocalizedString("log.update.app_copied", comment: "App copied to directory"), thisComponent, thisApplicationName, thisApplicationName, InitGlobVar.athDirectory), category: .system)
-                ATHLogger.info(String(format: NSLocalizedString("log.update.unmounting_dmg", comment: "Try to unmount dmg"), thisComponent, thisApplicationName), category: .system)
+                ATHLogger.info(String(format: NSLocalizedString("log.update.app_copied", comment: "App copied to directory"), thisComponent, InitGlobVar.thisApplicationName, InitGlobVar.thisApplicationName, InitGlobVar.athDirectory), category: .system)
+                ATHLogger.info(String(format: NSLocalizedString("log.update.unmounting_dmg", comment: "Try to unmount dmg"), thisComponent, InitGlobVar.thisApplicationName), category: .system)
                 notify(title: NSLocalizedString("update.notify.unmounting_dmg", comment: "Try to unmount dmg"), informativeText: "")
-                guard run("/usr/bin/hdiutil detach  /Volumes/\"\(thisApplicationName)\" -force -quiet") == "" else {
-                    alertheader = String(format: NSLocalizedString("update.alert.cant_unmount_dmg", comment: "Can't unmount dmg"), thisApplicationName)
-                    alertdetail = String(format: NSLocalizedString("update.alert.cant_unmount_dmg_detail", comment: "Can't unmount dmg detail"), thisApplicationName)
+                guard run("/usr/bin/hdiutil detach  /Volumes/\"\(InitGlobVar.thisApplicationName)\" -force -quiet") == "" else {
+                    alertheader = String(format: NSLocalizedString("update.alert.cant_unmount_dmg", comment: "Can't unmount dmg"), InitGlobVar.thisApplicationName)
+                    alertdetail = String(format: NSLocalizedString("update.alert.cant_unmount_dmg_detail", comment: "Can't unmount dmg detail"), InitGlobVar.thisApplicationName)
                     ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
                     _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: [NSLocalizedString("update.alert.button.return", comment: "Return")])
                     isUpdateAvailable = false
                     return
                 }
-                ATHLogger.info(String(format: NSLocalizedString("log.update.dmg_ejected", comment: "DMG ejected"), thisComponent, thisApplicationName), category: .system)
+                ATHLogger.info(String(format: NSLocalizedString("log.update.dmg_ejected", comment: "DMG ejected"), thisComponent, InitGlobVar.thisApplicationName), category: .system)
             }
         }
         
         //MARK: does this new .app alowed on this OS version
         if isUpdateAvailable {
-            while (!InitGlobVar.defaultfileManager.fileExists(atPath: "\(InitGlobVar.athDirectory)/\(thisApplicationName).app")) {
+            while (!InitGlobVar.defaultfileManager.fileExists(atPath: "\(InitGlobVar.athDirectory)/\(InitGlobVar.thisApplicationName).app")) {
                 Thread.sleep(forTimeInterval: 0.2)
             }
             ATHLogger.info(String(format: NSLocalizedString("log.update.checking_os_compatibility", comment: "Checking OS compatibility"), thisComponent, marketVersion, HCVersion.shared.osNumber), category: .system)
             notify(title: String(format: NSLocalizedString("update.notify.checking_allowed", comment: "Checking if new app is allowed"), marketVersion), informativeText: "")
-            let plistNewVersion = "\(InitGlobVar.athDirectory)/\(thisApplicationName).app/Contents/Info.plist"
+            let plistNewVersion = "\(InitGlobVar.athDirectory)/\(InitGlobVar.thisApplicationName).app/Contents/Info.plist"
             if InitGlobVar.defaultfileManager.fileExists(atPath: "\(plistNewVersion)") {
                 if let resourceFileDictionaryContent = NSDictionary(contentsOfFile: "\(plistNewVersion)") {
                     // Get "LSMinimumSystemVersion" value by key
@@ -318,11 +318,11 @@ class UpdateController {
 
         //MARK: current app removed new one replaces it
         if isUpdateAvailable {
-            ATHLogger.info(String(format: NSLocalizedString("log.update.copying_new_version", comment: "Copying new version"), thisComponent, thisApplicationName), category: .system)
+            ATHLogger.info(String(format: NSLocalizedString("log.update.copying_new_version", comment: "Copying new version"), thisComponent, InitGlobVar.thisApplicationName), category: .system)
             notify(title: NSLocalizedString("update.notify.installing", comment: "New Version Install"), informativeText: "")
-            guard run("/bin/mv -f \(InitGlobVar.athDirectory)\"/\(thisApplicationName).app\" \(InitGlobVar.allAppliLocation)") == "" else {
+            guard run("/bin/mv -f \(InitGlobVar.athDirectory)\"/\(InitGlobVar.thisApplicationName).app\" \(InitGlobVar.allAppliLocation)") == "" else {
                 alertheader = NSLocalizedString("update.alert.cant_replace_app", comment: "Can't replace application")
-                alertdetail = String(format: NSLocalizedString("update.alert.cant_replace_app_detail", comment: "Can't replace app detail"), thisApplicationName)
+                alertdetail = String(format: NSLocalizedString("update.alert.cant_replace_app_detail", comment: "Can't replace app detail"), InitGlobVar.thisApplicationName)
                 ATHLogger.error("\(thisComponent) : \(alertheader) \(alertdetail)", category: .system)
                 _ = updateAlert(message: "\(alertheader)", text: "\(alertdetail)", buttonArray: [NSLocalizedString("update.alert.button.return", comment: "Return")])
                 isUpdateAvailable = false
@@ -336,7 +336,7 @@ class UpdateController {
                 Thread.sleep(forTimeInterval: 0.2)
             }
             if isUpdateAvailable {
-                ATHLogger.info(String(format: NSLocalizedString("log.update.complete_launching", comment: "Update complete, launching new version"), thisComponent, thisApplicationName), category: .system)
+                ATHLogger.info(String(format: NSLocalizedString("log.update.complete_launching", comment: "Update complete, launching new version"), thisComponent, InitGlobVar.thisApplicationName), category: .system)
                 notify(title: NSLocalizedString("update.notify.complete", comment: "Update Complete, Launching New Version"), informativeText: "")
                 _ = run("/usr/bin/open \"\(InitGlobVar.thisAppliLocation)\"")
                 exit(0)
@@ -418,7 +418,7 @@ class UpdateController {
             for file in enumerator {
                 let pathElement = NSURL(fileURLWithPath: file as! String, relativeTo: pathURL as URL).path
                 ATHLogger.debug(String(format: NSLocalizedString("log.update.element_from_archive", comment: "Element from archive"), thisComponent, String(describing: pathElement)), category: .system)
-                if pathElement?.replacingOccurrences(of: "%20", with: " ").contains("\(InitGlobVar.athDirectory)/\(thisApplicationName)") ?? false {
+                if pathElement?.replacingOccurrences(of: "%20", with: " ").contains("\(InitGlobVar.athDirectory)/\(InitGlobVar.thisApplicationName)") ?? false {
                     fileExtensionInArray.forEach { extention in
                         if pathElement?.hasSuffix(extention) ?? false {
                             fileNameToReturn = pathElement?.replacingOccurrences(of: "%20", with: " ") ?? ""

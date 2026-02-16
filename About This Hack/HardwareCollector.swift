@@ -74,41 +74,36 @@ class HardwareCollector {
         // Clear cache to ensure we read fresh data files
         clearCache()
 
-        // Use a serial queue to ensure everything loads in order
-        let serialQueue = DispatchQueue(label: "com.aboutthishack.datacollection", qos: .userInitiated)
+        // Prefetch commonly used files first
+        let commonFiles = [
+            InitGlobVar.hwFilePath,
+            InitGlobVar.scrFilePath,
+            InitGlobVar.bootvolnameFilePath,
+            InitGlobVar.storagedataFilePath,
+            InitGlobVar.sysmemFilePath,
+            InitGlobVar.bootvollistFilePath,
+            InitGlobVar.oclpXmlFilePath
+        ]
 
-        serialQueue.sync {
-            // Prefetch commonly used files first
-            let commonFiles = [
-                InitGlobVar.hwFilePath,
-                InitGlobVar.scrFilePath,
-                InitGlobVar.bootvolnameFilePath,
-                InitGlobVar.storagedataFilePath,
-                InitGlobVar.sysmemFilePath,
-                InitGlobVar.bootvollistFilePath,
-                InitGlobVar.oclpXmlFilePath
-            ]
-
-            for path in commonFiles {
-                _ = getCachedFileContent(path)
-            }
-            
-            // Initialize all hardware collectors in a specific order to avoid race conditions
-            HCVersion.shared.getVersion()
-            HCMacModel.shared.getMacModel()
-            _ = HCCPU.shared.getCPU()
-            _ = HCRAM.shared.getRam()
-            _ = HCStartupDisk.shared.getStartupDisk()
-            _ = HCDisplay.shared.getDisp()
-            _ = HCGPU.shared.getGPU()
-            
-            // Initialize display and storage info
-            hasBuiltInDisplay = checkForBuiltInDisplay()
-            displayRes = getDisplayRes()
-            displayNames = getDisplayNames()
-            (storageType, storageData, storagePercent) = getStorageInfo()
+        for path in commonFiles {
+            _ = getCachedFileContent(path)
         }
-        
+
+        // Initialize all hardware collectors in a specific order
+        HCVersion.shared.getVersion()
+        HCMacModel.shared.getMacModel()
+        _ = HCCPU.shared.getCPU()
+        _ = HCRAM.shared.getRam()
+        _ = HCStartupDisk.shared.getStartupDisk()
+        _ = HCDisplay.shared.getDisp()
+        _ = HCGPU.shared.getGPU()
+
+        // Initialize display and storage info
+        hasBuiltInDisplay = checkForBuiltInDisplay()
+        displayRes = getDisplayRes()
+        displayNames = getDisplayNames()
+        (storageType, storageData, storagePercent) = getStorageInfo()
+
         dataHasBeenSet = true
     }
     
@@ -146,7 +141,8 @@ class HardwareCollector {
     
     private func checkForBuiltInDisplay() -> Bool {
         guard let content = getCachedFileContent(InitGlobVar.scrFilePath) else { return false }
-        return content.lowercased().contains("connection type: internal") || content.lowercased().contains("display type: built-in")
+        let lower = content.lowercased()
+        return lower.contains("connection type: internal") || lower.contains("display type: built-in")
     }
 
     private func getStorageInfo() -> (Bool, String, Double) {

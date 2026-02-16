@@ -96,20 +96,10 @@ class SettingsViewModel: ObservableObject {
             statusColor = .green
         } else {
             // Show default OS logo
-            logoImage = NSImage(named: getOSImageName()) ?? NSImage()
+            logoImage = NSImage(named: HCVersion.shared.getOSImageName()) ?? NSImage()
             statusMessage = NSLocalizedString("settings.logo.default_active", comment: "Default logo active")
             statusColor = .gray
         }
-    }
-    
-    private func getOSImageName() -> String {
-        // Use the same logic as ViewController
-        let osImageNames: [MacOSVersion: String] = [
-            .tahoe: "Tahoe", .sequoia: "Sequoia", .sonoma: "Sonoma", .ventura: "Ventura",
-            .monterey: "Monterey", .bigSur: "Big Sur", .catalina: "Catalina",
-            .mojave: "Mojave", .highSierra: "High Sierra", .sierra: "Sierra"
-        ]
-        return osImageNames[HCVersion.shared.osVersion] ?? "Unknown"
     }
     
     func handleDrop(providers: [NSItemProvider]) {

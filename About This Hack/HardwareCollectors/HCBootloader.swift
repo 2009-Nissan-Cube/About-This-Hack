@@ -6,7 +6,7 @@ class HCBootloader {
     
     private lazy var bootloaderInfo: String = {
         // Prioritize Apple Silicon check
-        if run("sysctl -n machdep.cpu.brand_string").contains("Apple") {
+        if (getSysctlValueByKey(inputKey: "machdep.cpu.brand_string") ?? "").contains("Apple") {
             return "Apple iBoot"
         }
 

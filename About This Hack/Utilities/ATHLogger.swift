@@ -7,11 +7,19 @@ final class ATHLogger {
     // MARK: - Log Levels
     
     /// Defines the severity levels for logging
-    enum Level: String, CaseIterable {
-        case debug = "DEBUG"
-        case info = "INFO"
-        case warning = "WARNING"
-        case error = "ERROR"
+    enum Level: Int, CaseIterable, Comparable {
+        case debug = 0, info = 1, warning = 2, error = 3
+
+        static func < (lhs: Level, rhs: Level) -> Bool { lhs.rawValue < rhs.rawValue }
+
+        var label: String {
+            switch self {
+            case .debug: return "DEBUG"
+            case .info: return "INFO"
+            case .warning: return "WARNING"
+            case .error: return "ERROR"
+            }
+        }
         
         /// Log level icon for visual distinction in console
         var icon: String {
@@ -64,6 +72,12 @@ final class ATHLogger {
     
     /// Whether to show timestamps in logs
     static var showTimestamps = true
+
+    private static let timestampFormatter: ISO8601DateFormatter = {
+        let f = ISO8601DateFormatter()
+        f.formatOptions = [.withInternetDateTime]
+        return f
+    }()
     
     // MARK: - Logging Methods
     
@@ -77,7 +91,7 @@ final class ATHLogger {
         line: Int = #line
     ) {
         // Skip logging if below minimum level
-        guard level.rawValue.compare(minimumLogLevel.rawValue) != .orderedAscending else {
+        guard level >= minimumLogLevel else {
             return
         }
         
@@ -111,13 +125,11 @@ final class ATHLogger {
         
         // Add timestamp if enabled
         if showTimestamps {
-            let formatter = ISO8601DateFormatter()
-            formatter.formatOptions = [.withInternetDateTime]
-            components.append("[\(formatter.string(from: Date()))]")
+            components.append("[\(timestampFormatter.string(from: Date()))]")
         }
         
         // Add level and category
-        components.append("[\(level.rawValue)][\(category.rawValue)]")
+        components.append("[\(level.label)][\(category.rawValue)]")
         
         // Add source information if enabled
         if showSourceInfo {
