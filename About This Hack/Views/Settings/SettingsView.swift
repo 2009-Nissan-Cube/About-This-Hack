@@ -105,17 +105,26 @@ class SettingsViewModel: ObservableObject {
     func handleDrop(providers: [NSItemProvider]) {
         guard let provider = providers.first else { return }
         
-        provider.loadItem(forTypeIdentifier: "public.file-url", options: nil) { [weak self] (urlData, error) in
-            guard let self = self,
-                  let urlData = urlData as? Data,
-                  let url = URL(dataRepresentation: urlData, relativeTo: nil) else {
+        provider.loadItem(forTypeIdentifier: "public.file-url", options: nil) { [weak self] item, _ in
+            let url: URL?
+            if let fileURL = item as? URL {
+                url = fileURL
+            } else if let data = item as? Data {
+                url = URL(dataRepresentation: data, relativeTo: nil)
+            } else if let path = item as? String {
+                url = URL(string: path) ?? URL(fileURLWithPath: path)
+            } else {
+                url = nil
+            }
+
+            guard let url else {
                 DispatchQueue.main.async {
                     self?.isDragging = false
                 }
                 return
             }
             
-            self.handleDroppedImage(at: url.path)
+            self?.handleDroppedImage(at: url.path)
         }
     }
     

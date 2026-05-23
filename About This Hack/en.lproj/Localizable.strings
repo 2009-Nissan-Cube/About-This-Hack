@@ -22,7 +22,7 @@
 "segment.tooltip.storage" = "Boot disk, connection type and available space";
 "segment.tooltip.support" = "Presentation of support links for help with your hackintosh or mac";
 
-/* ViewControllerSupport */
+/* Support View */
 "browser.success" = "Browser Successfully opened";
 
 /* Storage */
@@ -290,3 +290,50 @@
 "settings.logo.error.no_rep" = "Cannot read image dimensions";
 "settings.logo.error.wrong_size" = "Image must be 1024x1024 px (current %dx%d)";
 "settings.logo.success" = "Custom logo applied successfully";
+
+/* SwiftUI Main Window */
+"overview.label.version" = "Version";
+"overview.label.processor" = "Processor";
+"overview.label.memory" = "Memory";
+"overview.label.graphics" = "Graphics";
+"overview.label.display" = "Display";
+"overview.label.startup_disk" = "Startup Disk";
+"overview.label.serial_number" = "Serial Number";
+"overview.label.bootloader" = "Bootloader";
+"overview.button.system_report" = "System Report...";
+"overview.button.software_update" = "Software Update...";
+"overview.credit" = "™ and © 2021-2026 Alexander Skula et al. All Rights Reserved.";
+"displays.none" = "No displays found";
+"displays.display" = "Display";
+"displays.resolution" = "Resolution";
+"displays.button.preferences" = "Display Preferences...";
+"storage.label.startup_disk" = "Startup Disk";
+"storage.label.storage" = "Storage";
+"storage.percent_used" = "%.0f%% used";
+"support.section.hardware" = "Hardware Help";
+"support.section.macos" = "macOS Help";
+"support.macos_user_guide" = "macOS User Guide";
+"support.whats_new" = "What's New in macOS";
+"support.apple_support" = "Apple Support";
+"support.hackintosh_guide" = "Hackintosh Guide";
+"support.mac_basics" = "Mac Basics";
+"support.mac_user_guide" = "Mac User Guide";
+"support.credit" = "Made with ❤️ by Alexander Skula, MDNich, and matxpa";
+"menu.about" = "About %@";
+"menu.preferences" = "Preferences…";
+"menu.hide" = "Hide %@";
+"menu.hide_others" = "Hide Others";
+"menu.show_all" = "Show All";
+"menu.quit" = "Quit %@";
+"menu.view" = "View";
+"menu.window" = "Window";
+"menu.help" = "Help";
+"menu.minimize" = "Minimize";
+"menu.close" = "Close";
+"menu.bring_all_to_front" = "Bring All to Front";
+"overview.version_format" = "Version %@ (%@)";
+"storage.label.kind" = "Type";
+"storage.label.connection" = "Connection";
+"storage.label.capacity" = "Capacity";
+"storage.label.available" = "Available";
+"storage.label.used" = "Used";

@@ -22,7 +22,7 @@
 "segment.tooltip.storage" = "Disco de arranque, tipo de conexión y espacio disponible";
 "segment.tooltip.support" = "Presentación de enlaces de soporte para ayuda con tu hackintosh o mac";
 
-/* ViewControllerSupport */
+/* Support View */
 "browser.success" = "Navegador abierto correctamente";
 
 /* Storage */
@@ -290,3 +290,50 @@
 "settings.logo.error.no_rep" = "No se pueden leer las dimensiones de la imagen";
 "settings.logo.error.wrong_size" = "La imagen debe tener 1024x1024 px (actual %dx%d)";
 "settings.logo.success" = "Logo personalizado aplicado correctamente";
+
+/* SwiftUI Main Window */
+"overview.label.version" = "Versión";
+"overview.label.processor" = "CPU";
+"overview.label.memory" = "Memoria";
+"overview.label.graphics" = "Gráficos";
+"overview.label.display" = "Pantalla";
+"overview.label.startup_disk" = "D. arranque";
+"overview.label.serial_number" = "Nº de serie";
+"overview.label.bootloader" = "Cargador";
+"overview.button.system_report" = "Informe del sistema...";
+"overview.button.software_update" = "Actualización de software...";
+"overview.credit" = "™ y © 2021-2026 Alexander Skula et al. Todos los derechos reservados.";
+"displays.none" = "No se encontraron pantallas";
+"displays.display" = "Pantalla";
+"displays.resolution" = "Resolución";
+"displays.button.preferences" = "Preferencias de pantalla...";
+"storage.label.startup_disk" = "Disco de arranque";
+"storage.label.storage" = "Almacenamiento";
+"storage.percent_used" = "%.0f%% usado";
+"support.section.hardware" = "Ayuda de hardware";
+"support.section.macos" = "Ayuda de macOS";
+"support.macos_user_guide" = "Guía de macOS";
+"support.whats_new" = "Novedades de macOS";
+"support.apple_support" = "Soporte de Apple";
+"support.hackintosh_guide" = "Guía Hackintosh";
+"support.mac_basics" = "Lo básico del Mac";
+"support.mac_user_guide" = "Guía del Mac";
+"support.credit" = "Hecho con ❤️ por Alexander Skula, MDNich y matxpa";
+"menu.about" = "Acerca de %@";
+"menu.preferences" = "Preferencias…";
+"menu.hide" = "Ocultar %@";
+"menu.hide_others" = "Ocultar otros";
+"menu.show_all" = "Mostrar todo";
+"menu.quit" = "Salir de %@";
+"menu.view" = "Vista";
+"menu.window" = "Ventana";
+"menu.help" = "Ayuda";
+"menu.minimize" = "Minimizar";
+"menu.close" = "Cerrar";
+"menu.bring_all_to_front" = "Traer todo al frente";
+"overview.version_format" = "Versión %@ (%@)";
+"storage.label.kind" = "Tipo";
+"storage.label.connection" = "Conexión";
+"storage.label.capacity" = "Capacidad";
+"storage.label.available" = "Disponible";
+"storage.label.used" = "Usado";

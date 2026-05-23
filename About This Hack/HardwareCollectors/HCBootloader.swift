@@ -1,47 +1,82 @@
 import Foundation
+import IOKit
 
 class HCBootloader {
     static let shared = HCBootloader()
     private init() {}
     
-    private lazy var bootloaderInfo: String = {
-        // Prioritize Apple Silicon check
+    private let cacheLock = NSLock()
+    private var bootloaderInfoCache: String?
+    private var bootargsInfoCache: String?
+
+    func reset() {
+        cacheLock.lock()
+        bootloaderInfoCache = nil
+        bootargsInfoCache = nil
+        cacheLock.unlock()
+    }
+    
+    func getBootloader() -> String {
+        cachedBootloaderInfo()
+            .components(separatedBy: .whitespaces)
+            .filter { !$0.isEmpty }
+            .joined(separator: " ")
+    }
+    
+    func getBootargs() -> String {
+        cachedBootargsInfo()
+    }
+
+    private func cachedBootloaderInfo() -> String {
+        cacheLock.lock()
+        if let bootloaderInfoCache {
+            cacheLock.unlock()
+            return bootloaderInfoCache
+        }
+        cacheLock.unlock()
+
+        let detected = detectBootloaderInfo()
+
+        cacheLock.lock()
+        bootloaderInfoCache = detected
+        cacheLock.unlock()
+
+        return detected
+    }
+
+    private func cachedBootargsInfo() -> String {
+        cacheLock.lock()
+        if let bootargsInfoCache {
+            cacheLock.unlock()
+            return bootargsInfoCache
+        }
+        cacheLock.unlock()
+
+        let detected = detectBootargsInfo()
+
+        cacheLock.lock()
+        bootargsInfoCache = detected
+        cacheLock.unlock()
+
+        return detected
+    }
+
+    private func detectBootloaderInfo() -> String {
         if (getSysctlValueByKey(inputKey: "machdep.cpu.brand_string") ?? "").contains("Apple") {
             return "Apple iBoot"
         }
 
-        // Cache nvram result to avoid multiple calls
-        let nvramOutput = run("nvram \(InitGlobVar.nvramOpencoreVersion) 2>/dev/null")
-
-        if !nvramOutput.isEmpty {
-            let parts = nvramOutput.components(separatedBy: "\t")
-            guard parts.count >= 2 else { return "Apple UEFI" }
-
-            let versionPart = parts[1].trimmingCharacters(in: .whitespacesAndNewlines)
-            let components = versionPart.split(separator: "-", maxSplits: 1)
-
-            if components.count >= 2 {
-                let buildType = String(components[0])
-                let version = String(components[1])
-
-                // Clean up version string
-                let cleanVersion = version
-                    .replacingOccurrences(of: " ", with: ".")
-                    .trimmingCharacters(in: CharacterSet(charactersIn: "."))
-
-                // Format build type
-                let formattedBuildType: String
-                switch buildType {
-                case "REL": formattedBuildType = "(Release)"
-                case "DEB": formattedBuildType = "(Debug)"
-                default: formattedBuildType = buildType.isEmpty ? "" : "(\(buildType))"
-                }
-
-                return "OpenCore \(cleanVersion) \(formattedBuildType)".trimmingCharacters(in: .whitespaces)
-            }
+        if let nvramVersion = readNVRAMValue(named: InitGlobVar.nvramOpencoreVersion),
+           let parsedVersion = parseOpenCoreVersion(nvramVersion) {
+            return parsedVersion
         }
 
-        // Check for Clover using cached file content
+        if let fallbackVersion = parseCLIValue(
+            executeProcess(executableURL: URL(fileURLWithPath: "/usr/sbin/nvram"), arguments: [InitGlobVar.nvramOpencoreVersion]).stdout
+        ), let parsedVersion = parseOpenCoreVersion(fallbackVersion) {
+            return parsedVersion
+        }
+
         if let hwContent = HardwareCollector.shared.getCachedFileContent(InitGlobVar.hwFilePath) {
             let cloverLine = hwContent.components(separatedBy: .newlines)
                 .first { $0.contains("Clover") }
@@ -56,27 +91,105 @@ class HCBootloader {
             }
         }
 
-        // Fallback
         return "Apple UEFI"
-    }()
-    
-    private lazy var bootargsInfo: String = {
-        var bootargs = run("nvram -x boot-args 2>/dev/null | grep -A1 \"<key>boot-args</key>\" | tail -1 | awk -F \"<string>\" '{print $NF}' | awk -F \"<\\/string>\" '{print $1}'  | tr -d '\n'")
-        
-        if bootargs.isEmpty {
-            bootargs = run("\(InitGlobVar.bdmesgExecID) 2>/dev/null | grep ' boot-args=' | tail -1 | awk -F ' boot-args=' '{print $NF}' | tr -d '\n'")
-        }
-        
-        return bootargs.isEmpty ? "Empty/Unknown" : bootargs
-    }()
-    
-    func getBootloader() -> String {
-        return bootloaderInfo.components(separatedBy: .whitespaces)
-            .filter { !$0.isEmpty }
-            .joined(separator: " ")
     }
-    
-    func getBootargs() -> String {
-        return bootargsInfo
+
+    private func detectBootargsInfo() -> String {
+        if let bootArgs = readNVRAMValue(named: "boot-args"), !bootArgs.isEmpty {
+            return bootArgs
+        }
+
+        if let bootArgs = parseCLIValue(
+            executeProcess(executableURL: URL(fileURLWithPath: "/usr/sbin/nvram"), arguments: ["boot-args"]).stdout
+        ), !bootArgs.isEmpty {
+            return bootArgs
+        }
+
+        let bdmesgOutput = executeProcess(executableURL: URL(fileURLWithPath: InitGlobVar.bdmesgExecID), arguments: []).stdout
+        let fallbackBootArgs = bdmesgOutput
+            .components(separatedBy: .newlines)
+            .last { $0.contains(" boot-args=") }?
+            .components(separatedBy: " boot-args=")
+            .last?
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        return fallbackBootArgs?.isEmpty == false ? fallbackBootArgs! : "Empty/Unknown"
+    }
+
+    private func readNVRAMValue(named propertyName: String) -> String? {
+        let options = IORegistryEntryFromPath(initPortDefault(), "IODeviceTree:/options")
+        guard options != MACH_PORT_NULL else {
+            return nil
+        }
+        defer { IOObjectRelease(options) }
+
+        guard let value = IORegistryEntryCreateCFProperty(options, propertyName as CFString, kCFAllocatorDefault, 0)?.takeRetainedValue() else {
+            return nil
+        }
+
+        return normalizeNVRAMValue(value)
+    }
+
+    private func normalizeNVRAMValue(_ value: CFTypeRef) -> String? {
+        if let stringValue = value as? String {
+            return sanitizeNVRAMString(stringValue)
+        }
+
+        if let dataValue = value as? Data,
+           let stringValue = String(data: dataValue, encoding: .utf8) {
+            return sanitizeNVRAMString(stringValue)
+        }
+
+        if let numberValue = value as? NSNumber {
+            return numberValue.stringValue
+        }
+
+        return nil
+    }
+
+    private func sanitizeNVRAMString(_ value: String) -> String {
+        value
+            .replacingOccurrences(of: "\0", with: "")
+            .trimmingCharacters(in: CharacterSet.controlCharacters.union(.whitespacesAndNewlines))
+    }
+
+    private func parseCLIValue(_ output: String) -> String? {
+        let cleanedOutput = output.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !cleanedOutput.isEmpty else {
+            return nil
+        }
+
+        let parts = cleanedOutput.components(separatedBy: "\t")
+        if parts.count >= 2 {
+            return parts.dropFirst().joined(separator: "\t").trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+
+        return cleanedOutput
+    }
+
+    private func parseOpenCoreVersion(_ rawValue: String) -> String? {
+        let cleanedValue = rawValue.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !cleanedValue.isEmpty else {
+            return nil
+        }
+
+        let components = cleanedValue.split(separator: "-", maxSplits: 1)
+        guard components.count >= 2 else {
+            return nil
+        }
+
+        let buildType = String(components[0])
+        let version = String(components[1])
+            .replacingOccurrences(of: " ", with: ".")
+            .trimmingCharacters(in: CharacterSet(charactersIn: "."))
+
+        let formattedBuildType: String
+        switch buildType {
+        case "REL": formattedBuildType = "(Release)"
+        case "DEB": formattedBuildType = "(Debug)"
+        default: formattedBuildType = buildType.isEmpty ? "" : "(\(buildType))"
+        }
+
+        return "OpenCore \(version) \(formattedBuildType)".trimmingCharacters(in: .whitespaces)
     }
 }

@@ -22,7 +22,7 @@
 "segment.tooltip.storage" = "Disque de démarrage, type de connexion et espace disponible";
 "segment.tooltip.support" = "Présentation des liens d'assistance pour votre hackintosh ou Mac";
 
-/* ViewControllerSupport */
+/* Support View */
 "browser.success" = "Navigateur ouvert avec succès";
 
 /* Storage */
@@ -290,3 +290,50 @@
 "settings.logo.error.no_rep" = "Impossible de lire les dimensions de l'image";
 "settings.logo.error.wrong_size" = "L'image doit être de 1024x1024 px (actuelle %dx%d)";
 "settings.logo.success" = "Logo personnalisé appliqué avec succès";
+
+/* SwiftUI Main Window */
+"overview.label.version" = "Version";
+"overview.label.processor" = "CPU";
+"overview.label.memory" = "Mémoire";
+"overview.label.graphics" = "Graphiques";
+"overview.label.display" = "Écran";
+"overview.label.startup_disk" = "Disque de d.";
+"overview.label.serial_number" = "N. de série";
+"overview.label.bootloader" = "Chargeur";
+"overview.button.system_report" = "Rapport système...";
+"overview.button.software_update" = "Mise à jour logicielle...";
+"overview.credit" = "™ et © 2021-2026 Alexander Skula et al. Tous droits réservés.";
+"displays.none" = "Aucun écran trouvé";
+"displays.display" = "Écran";
+"displays.resolution" = "Résolution";
+"displays.button.preferences" = "Préférences Écrans...";
+"storage.label.startup_disk" = "Disque de démarrage";
+"storage.label.storage" = "Stockage";
+"storage.percent_used" = "%.0f%% utilisé";
+"support.section.hardware" = "Aide matérielle";
+"support.section.macos" = "Aide macOS";
+"support.macos_user_guide" = "Guide de l'utilisateur macOS";
+"support.whats_new" = "Nouveautés de macOS";
+"support.apple_support" = "Assistance Apple";
+"support.hackintosh_guide" = "Guide Hackintosh";
+"support.mac_basics" = "Notions de base sur Mac";
+"support.mac_user_guide" = "Guide de l'utilisateur Mac";
+"support.credit" = "Fait avec ❤️ par Alexander Skula, MDNich et matxpa";
+"menu.about" = "À propos de %@";
+"menu.preferences" = "Préférences…";
+"menu.hide" = "Masquer %@";
+"menu.hide_others" = "Masquer les autres";
+"menu.show_all" = "Tout afficher";
+"menu.quit" = "Quitter %@";
+"menu.view" = "Présentation";
+"menu.window" = "Fenêtre";
+"menu.help" = "Aide";
+"menu.minimize" = "Réduire";
+"menu.close" = "Fermer";
+"menu.bring_all_to_front" = "Tout ramener au premier plan";
+"overview.version_format" = "Version %@ (%@)";
+"storage.label.kind" = "Type";
+"storage.label.connection" = "Connexion";
+"storage.label.capacity" = "Capacité";
+"storage.label.available" = "Disponible";
+"storage.label.used" = "Utilisé";

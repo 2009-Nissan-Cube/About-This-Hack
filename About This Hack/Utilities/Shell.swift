@@ -6,21 +6,71 @@
 
 import Foundation
 
-// Allows native runnning of Terminal commands
-func run(_ command: String) -> String {
+struct ProcessResult {
+    let executableURL: URL
+    let arguments: [String]
+    let stdout: String
+    let stderr: String
+    let terminationStatus: Int32
+
+    var succeeded: Bool {
+        terminationStatus == 0
+    }
+
+    var combinedOutput: String {
+        [stdout, stderr]
+            .filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+            .joined(separator: "\n")
+    }
+}
+
+@discardableResult
+func executeProcess(executableURL: URL, arguments: [String]) -> ProcessResult {
     let task = Process()
-    let pipe = Pipe()
+    let stdoutPipe = Pipe()
+    let stderrPipe = Pipe()
+    let readGroup = DispatchGroup()
+    let readQueue = DispatchQueue(label: "AboutThisHack.ProcessRead", qos: .utility, attributes: .concurrent)
 
-    task.standardOutput = pipe
-    task.arguments = ["-c", command]
-    task.launchPath = "/bin/zsh"
-    task.launch()
+    task.executableURL = executableURL
+    task.arguments = arguments
+    task.standardOutput = stdoutPipe
+    task.standardError = stderrPipe
 
-    let data = pipe.fileHandleForReading.readDataToEndOfFile()
-    let output = String(data: data, encoding: .utf8)!
+    var stdoutData = Data()
+    var stderrData = Data()
 
-    task.waitUntilExit()
+    readGroup.enter()
+    readQueue.async {
+        stdoutData = stdoutPipe.fileHandleForReading.readDataToEndOfFile()
+        readGroup.leave()
+    }
 
-    return output
+    readGroup.enter()
+    readQueue.async {
+        stderrData = stderrPipe.fileHandleForReading.readDataToEndOfFile()
+        readGroup.leave()
+    }
 
+    do {
+        try task.run()
+        task.waitUntilExit()
+        readGroup.wait()
+    } catch {
+        return ProcessResult(
+            executableURL: executableURL,
+            arguments: arguments,
+            stdout: "",
+            stderr: error.localizedDescription,
+            terminationStatus: -1
+        )
+    }
+
+    return ProcessResult(
+        executableURL: executableURL,
+        arguments: arguments,
+        stdout: String(data: stdoutData, encoding: .utf8) ?? "",
+        stderr: String(data: stderrData, encoding: .utf8) ?? "",
+        terminationStatus: task.terminationStatus
+    )
 }

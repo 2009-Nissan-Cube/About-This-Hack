@@ -1,11 +1,12 @@
 import Foundation
 
 class CreateDataFiles {
-
-    static private var _dataFilesCreated: Bool = false
+    static private var _dataFilesCreated = false
+    static private var _loadInProgress = false
+    static private var pendingCompletions: [() -> Void] = []
     static private let lock = NSLock()
-    
-    // Notification name for when data files are created
+
+    // Notification name for when startup data is ready
     static let dataFilesCreatedNotification = Notification.Name("DataFilesCreated")
 
     static var dataFilesCreated: Bool {
@@ -14,9 +15,11 @@ class CreateDataFiles {
         return _dataFilesCreated
     }
 
-    /// Asynchronously creates initial data files
-    /// - Parameter completion: Called on completion (main thread)
+    /// Asynchronously prepares initial hardware data.
+    /// Concurrent callers share one in-progress load.
     static func getInitDataFilesAsync(completion: @escaping () -> Void) {
+        var shouldStartLoad = false
+
         lock.lock()
         if _dataFilesCreated {
             lock.unlock()
@@ -25,76 +28,50 @@ class CreateDataFiles {
             }
             return
         }
+
+        pendingCompletions.append(completion)
+        if !_loadInProgress {
+            _loadInProgress = true
+            shouldStartLoad = true
+        }
         lock.unlock()
 
-        DispatchQueue.global(qos: .userInitiated).async {
-            getInitDataFiles()
-            DispatchQueue.main.async {
-                completion()
-                // Post notification that data files are ready
-                NotificationCenter.default.post(name: dataFilesCreatedNotification, object: nil)
-            }
+        guard shouldStartLoad else {
+            return
+        }
+
+        HardwareCollector.shared.prepareInitialDataAsync {
+            finishInitialLoad()
         }
     }
 
     static func getInitDataFiles() {
-        lock.lock()
-        if _dataFilesCreated {
-            lock.unlock()
-            return
+        let semaphore = DispatchSemaphore(value: 0)
+        getInitDataFilesAsync {
+            semaphore.signal()
         }
+        semaphore.wait()
+    }
+
+    static func reset() {
+        lock.lock()
+        _dataFilesCreated = false
+        _loadInProgress = false
+        pendingCompletions.removeAll()
         lock.unlock()
 
-        _ = run("rm -rf " + InitGlobVar.athDirectory + " 2>/dev/null")
-        _ = run("mkdir " + InitGlobVar.athDirectory + " 2>/dev/null")
-        ATHLogger.debug(NSLocalizedString("log.data.directory_created", comment: "Data directory created"), category: .system)
+        HardwareCollector.shared.resetData()
+    }
 
-// /* Product phase  - Uncomment for product phase
-        // Use DispatchGroup to run all commands in parallel
-        let group = DispatchGroup()
-        let queue = DispatchQueue.global(qos: .userInitiated)
-        
-        // Define all file creation commands
-        // Note: scrXmlFilePath and syssoftdataFilePath removed - they were never used in the codebase
-        let commands = [
-            "system_profiler SPHardwareDataType > \"\(InitGlobVar.hwFilePath)\"",
-            "system_profiler SPMemoryDataType | grep -v \"^Memory:$\" > \"\(InitGlobVar.sysmemFilePath)\"",
-            "diskutil info / > \"\(InitGlobVar.bootvolnameFilePath)\"",
-            "diskutil list / > \"\(InitGlobVar.bootvollistFilePath)\"",
-            "system_profiler SPDisplaysDataType > \"\(InitGlobVar.scrFilePath)\"",
-            "system_profiler SPStorageDataType > \"\(InitGlobVar.storagedataFilePath)\""
-        ]
-        
-        // Execute all commands concurrently
-        for command in commands {
-            group.enter()
-            queue.async {
-                _ = run(command)
-                group.leave()
-            }
-        }
-        
-        // Wait for all commands to complete (this is called from a background thread in getInitDataFilesAsync)
-        // Timeout after 12 seconds to prevent indefinite blocking if a command hangs
-        let timeout = DispatchTime.now() + .seconds(12)
-        let result = group.wait(timeout: timeout)
-        
-        if case .timedOut = result {
-            ATHLogger.warning(NSLocalizedString("log.data.timeout", comment: "Data files creation timed out after 12 seconds"), category: .system)
-        } else {
-            ATHLogger.info(NSLocalizedString("log.data.files_created", comment: "Data files created successfully"), category: .system)
-        }
-// */
-
-/*  Testing phase - Uncomment and modify path for testing phase
-        let testDataRep = "~/Downloads/0-ath-issue-N78" // Replace with your test data directory
-
-        createFileIfNeeded(atPath: InitGlobVar.hwFilePath, withCommand: "ln -s \(testDataRep)/hw.txt  \"\(InitGlobVar.hwFilePath)\"")
-        // ... Add similar lines for other files
-*/
-
+    private static func finishInitialLoad() {
         lock.lock()
         _dataFilesCreated = true
+        _loadInProgress = false
+        let completions = pendingCompletions
+        pendingCompletions.removeAll()
         lock.unlock()
+
+        completions.forEach { $0() }
+        NotificationCenter.default.post(name: dataFilesCreatedNotification, object: nil)
     }
 }

@@ -16,6 +16,12 @@ class HCMacModel {
         dataHasBeenSet = true
     }
     
+    func reset() {
+        macName = "Hackintosh Extreme Plus"
+        builtInDisplaySize = 0
+        dataHasBeenSet = false
+    }
+    
     func getModelIdentifier() -> String {
         ATHLogger.debug(NSLocalizedString("log.macmodel.getting_identifier", comment: "Getting Model Identifier"), category: .hardware)
         if let fullIdentifier = getSysctlValueByKey(inputKey: "hw.model") {
@@ -31,30 +37,12 @@ class HCMacModel {
     
     private func getMacName() -> String {
         ATHLogger.debug(NSLocalizedString("log.macmodel.getting_name", comment: "Getting Mac Name"), category: .hardware)
-        let infoString = getModelIdentifier()
-        let (displaySize, name) = macModels[infoString] ?? (0, "Mac")
+        let modelIdentifier = getModelIdentifier()
+        let (displaySize, mappedName) = macModels[modelIdentifier] ?? (0, modelIdentifier)
         builtInDisplaySize = displaySize
-        ATHLogger.debug(String(format: NSLocalizedString("log.macmodel.looked_up_name", comment: "Looked up Mac Name"), infoString, "\(displaySize)", name), category: .hardware)
-        
-        // if not in macModels, use plist just in case
-        if (name == "Mac" && infoString != "MacPro7,1") {
-            let baseCommand = "defaults read"
-            let plistPath = "~/Library/Preferences/com.apple.SystemProfiler.plist"
-            let key = "\"CPU Names\""
-            let cutCommand = "| cut -sd '\"' -f 4"
-            let uniqCommand = "| uniq"
-
-            // Combine all parts into a single command string
-            let fullCommand = "\(baseCommand) \(plistPath) \(key) \(cutCommand) \(uniqCommand)"
-    
-            return run(fullCommand).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
-        }
-        
-        // MacPro7,1 OK
-        let command = "cat \(InitGlobVar.hwFilePath) | grep \"Model Identifier\" | cut -d \":\" -f4"
-        let macNameFromHwFile = run(command).trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? name
-        ATHLogger.debug(String(format: NSLocalizedString("log.macmodel.name_from_file", comment: "Mac Name from hwFilePath"), macNameFromHwFile), category: .hardware)
-        return macNameFromHwFile
+        let resolvedName = mappedName.nilIfEmpty ?? modelIdentifier
+        ATHLogger.debug(String(format: NSLocalizedString("log.macmodel.looked_up_name", comment: "Looked up Mac Name"), modelIdentifier, "\(displaySize)", resolvedName), category: .hardware)
+        return resolvedName
     }
     
     private lazy var macModels: [String: (Float, String)] = [

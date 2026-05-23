@@ -14,11 +14,9 @@ class Tooltips {
         osVersiontoolTip
     }
 
-    private lazy var _macModeltoolTip: String = {
-        let pciData = run("system_profiler SPPCIDataType | grep \":$\" | sed 's/://g'")
-        return HCMacModel.shared.macName + " - " + HCMacModel.shared.getModelIdentifier() + "\n" + pciData
-    }()
-    var macModeltoolTip: String { _macModeltoolTip }
+    var macModeltoolTip: String {
+        HCMacModel.shared.macName + " - " + HCMacModel.shared.getModelIdentifier() + "\n" + HCGPU.shared.getGPUInfo()
+    }
 
     var cputoolTip: String {
         HCCPU.shared.getCPU() + "\n" + HCCPU.shared.getCPUInfo()
@@ -45,7 +43,7 @@ class Tooltips {
     }
 
     var startupDiskImagetoolTip: String {
-        HardwareCollector.shared.getCachedFileContent(InitGlobVar.bootvollistFilePath) ?? ""
+        HCStartupDisk.shared.getStartupDiskInfo()
     }
 
     var storageValuetoolTip: String {
@@ -64,4 +62,3 @@ class Tooltips {
         NSLocalizedString("tooltip.softupd", comment: "Software Update button tooltip")
     }
 }
-

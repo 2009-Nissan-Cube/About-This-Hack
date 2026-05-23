@@ -2,32 +2,32 @@
 //  HardwareCollector.swift
 //  HardwareCollector
 //
+//
 
 import Foundation
 import AppKit
 
+private struct HardwareSnapshot {
+    let hardwareData: String
+    let memoryData: String
+    let oclpData: String?
+}
+
 class HardwareCollector {
     static let shared = HardwareCollector()
     private init() {}
-    
-    // File content cache
-    private var fileContentCache: [String: String] = [:]
-    private let cacheLock = NSLock()
 
-    // Thread-safe flag for getAllData()
+    private let stateLock = NSLock()
+    private var snapshot: HardwareSnapshot?
     private var _dataHasBeenSet = false
-    private let dataInitLock = NSLock()
+    private var _isLoading = false
+    private var pendingCompletions: [() -> Void] = []
+    private let loadQueue = DispatchQueue(label: "AboutThisHack.HardwareCollector.Load", qos: .userInitiated)
+
     var dataHasBeenSet: Bool {
-        get {
-            dataInitLock.lock()
-            defer { dataInitLock.unlock() }
-            return _dataHasBeenSet
-        }
-        set {
-            dataInitLock.lock()
-            defer { dataInitLock.unlock() }
-            _dataHasBeenSet = newValue
-        }
+        stateLock.lock()
+        defer { stateLock.unlock() }
+        return _dataHasBeenSet
     }
 
     var numberOfDisplays = NSScreen.screens.count
@@ -40,56 +40,136 @@ class HardwareCollector {
     var deviceProtocol = ""
     var hasBuiltInDisplay = false
     var macType: MacType = .laptop
-    
-    func getCachedFileContent(_ path: String) -> String? {
-        cacheLock.lock()
-        defer { cacheLock.unlock() }
 
-        if let cached = fileContentCache[path] {
-            return cached
+    func prepareInitialDataAsync(completion: @escaping () -> Void) {
+        var shouldStartLoad = false
+
+        stateLock.lock()
+        if _dataHasBeenSet {
+            stateLock.unlock()
+            DispatchQueue.main.async {
+                completion()
+            }
+            return
         }
 
-        guard let content = try? String(contentsOfFile: path, encoding: .utf8), !content.isEmpty else {
-            return nil
+        pendingCompletions.append(completion)
+        if !_isLoading {
+            _isLoading = true
+            shouldStartLoad = true
+        }
+        stateLock.unlock()
+
+        guard shouldStartLoad else {
+            return
         }
 
-        fileContentCache[path] = content
-        return content
-    }
-
-    func clearCache() {
-        cacheLock.lock()
-        defer { cacheLock.unlock() }
-        fileContentCache.removeAll()
-        ATHLogger.debug(NSLocalizedString("log.hardware.cache_cleared", comment: "File cache cleared"), category: .hardware)
-
-        // Reset lazy properties in hardware collectors
-        HCGPU.shared.reset()
-        HCDisplay.shared.reset()
+        loadQueue.async { [weak self] in
+            self?.loadInitialData()
+        }
     }
 
     func getAllData() {
         guard !dataHasBeenSet else { return }
 
-        // Clear cache to ensure we read fresh data files
-        clearCache()
+        let semaphore = DispatchSemaphore(value: 0)
+        prepareInitialDataAsync {
+            semaphore.signal()
+        }
+        semaphore.wait()
+    }
 
-        // Prefetch commonly used files first
-        let commonFiles = [
-            InitGlobVar.hwFilePath,
-            InitGlobVar.scrFilePath,
-            InitGlobVar.bootvolnameFilePath,
-            InitGlobVar.storagedataFilePath,
-            InitGlobVar.sysmemFilePath,
-            InitGlobVar.bootvollistFilePath,
-            InitGlobVar.oclpXmlFilePath
-        ]
+    func resetData() {
+        stateLock.lock()
+        snapshot = nil
+        _dataHasBeenSet = false
+        _isLoading = false
+        pendingCompletions.removeAll()
+        stateLock.unlock()
 
-        for path in commonFiles {
-            _ = getCachedFileContent(path)
+        resetDerivedState()
+        resetCollectorCaches()
+    }
+
+    func getCachedFileContent(_ path: String) -> String? {
+        if let snapshot = currentSnapshot(), let content = mappedSnapshotContent(for: path, snapshot: snapshot), !content.isEmpty {
+            return content
         }
 
-        // Initialize all hardware collectors in a specific order
+        guard let content = try? String(contentsOfFile: path, encoding: .utf8), !content.isEmpty else {
+            return nil
+        }
+        return content
+    }
+
+    private func loadInitialData() {
+        let collectedSnapshot = collectSnapshot()
+
+        stateLock.lock()
+        snapshot = collectedSnapshot
+        stateLock.unlock()
+
+        resetDerivedState()
+        resetCollectorCaches()
+        initializeDerivedData()
+
+        stateLock.lock()
+        _dataHasBeenSet = true
+        _isLoading = false
+        let completions = pendingCompletions
+        pendingCompletions.removeAll()
+        stateLock.unlock()
+
+        ATHLogger.info(NSLocalizedString("log.data.files_created", comment: "Data files created successfully"), category: .system)
+
+        DispatchQueue.main.async {
+            completions.forEach { $0() }
+        }
+    }
+
+    private func currentSnapshot() -> HardwareSnapshot? {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+        return snapshot
+    }
+
+    private func mappedSnapshotContent(for path: String, snapshot: HardwareSnapshot) -> String? {
+        switch path {
+        case InitGlobVar.hwFilePath:
+            return snapshot.hardwareData
+        case InitGlobVar.sysmemFilePath:
+            return snapshot.memoryData
+        case InitGlobVar.oclpXmlFilePath:
+            return snapshot.oclpData
+        default:
+            return nil
+        }
+    }
+
+    private func resetDerivedState() {
+        numberOfDisplays = NSScreen.screens.count
+        displayRes = []
+        displayNames = []
+        storageType = false
+        storageData = ""
+        storagePercent = 0.0
+        deviceLocation = ""
+        deviceProtocol = ""
+        hasBuiltInDisplay = false
+        macType = .laptop
+    }
+
+    private func resetCollectorCaches() {
+        ATHLogger.debug(NSLocalizedString("log.hardware.cache_cleared", comment: "File cache cleared"), category: .hardware)
+        HCVersion.shared.reset()
+        HCMacModel.shared.reset()
+        HCStartupDisk.shared.reset()
+        HCDisplay.shared.reset()
+        HCGPU.shared.reset()
+        HCBootloader.shared.reset()
+    }
+
+    private func initializeDerivedData() {
         HCVersion.shared.getVersion()
         HCMacModel.shared.getMacModel()
         _ = HCCPU.shared.getCPU()
@@ -98,99 +178,79 @@ class HardwareCollector {
         _ = HCDisplay.shared.getDisp()
         _ = HCGPU.shared.getGPU()
 
-        // Initialize display and storage info
-        hasBuiltInDisplay = checkForBuiltInDisplay()
-        displayRes = getDisplayRes()
-        displayNames = getDisplayNames()
-        (storageType, storageData, storagePercent) = getStorageInfo()
+        displayNames = HCDisplay.shared.getDisplayNames()
+        displayRes = HCDisplay.shared.getDisplayResolutions()
+        numberOfDisplays = displayNames.count
+        hasBuiltInDisplay = HCDisplay.shared.hasBuiltInDisplay()
 
-        dataHasBeenSet = true
-    }
-    
-    private func getDisplayRes() -> [String] {
-        guard let content = getCachedFileContent(InitGlobVar.scrFilePath) else { return [] }
-        return content.components(separatedBy: .newlines)
-            .filter { $0.contains("Resolution") }
-            .map { String($0.dropFirst(22)).trimmingCharacters(in: .whitespaces) }
+        let storageSummary = HCStartupDisk.shared.getStorageSummary()
+        storageType = storageSummary.isSolidState
+        storageData = storageSummary.description
+        storagePercent = storageSummary.percentUsed
+        deviceLocation = storageSummary.deviceLocation
+        deviceProtocol = storageSummary.deviceProtocol
     }
 
-    private func getDisplayNames() -> [String] {
-        guard let content = getCachedFileContent(InitGlobVar.scrFilePath) else { return [] }
-        
-        var displayNames: [String] = []
-        var inDisplaysSection = false
-        
-        let lines = content.components(separatedBy: .newlines)
-        for line in lines {
-            let trimmed = line.trimmingCharacters(in: .whitespaces)
-            
-            if trimmed == "Displays:" {
-                inDisplaysSection = true
-                continue
+    private func collectSnapshot() -> HardwareSnapshot {
+        let collectionQueue = DispatchQueue(label: "AboutThisHack.HardwareCollector.Collection", qos: .userInitiated, attributes: .concurrent)
+        let group = DispatchGroup()
+
+        var hardwareData = ""
+        var memoryData = ""
+
+        group.enter()
+        collectionQueue.async {
+            hardwareData = self.collectCommandOutput(
+                executablePath: "/usr/sbin/system_profiler",
+                arguments: ["SPHardwareDataType"],
+                label: "SPHardwareDataType"
+            )
+            group.leave()
+        }
+
+        group.enter()
+        collectionQueue.async {
+            memoryData = self.collectCommandOutput(
+                executablePath: "/usr/sbin/system_profiler",
+                arguments: ["SPMemoryDataType"],
+                label: "SPMemoryDataType"
+            ) { output in
+                output
+                    .components(separatedBy: .newlines)
+                    .filter { $0.trimmingCharacters(in: .whitespaces) != "Memory:" }
+                    .joined(separator: "\n")
             }
-            
-            if inDisplaysSection && trimmed.hasSuffix(":") {
-                // This is a display name (e.g., "G27Q:")
-                let name = String(trimmed.dropLast())
-                displayNames.append(name)
-            }
+            group.leave()
         }
-        
-        return displayNames
-    }
-    
-    private func checkForBuiltInDisplay() -> Bool {
-        guard let content = getCachedFileContent(InitGlobVar.scrFilePath) else { return false }
-        let lower = content.lowercased()
-        return lower.contains("connection type: internal") || lower.contains("display type: built-in")
+
+        group.wait()
+
+        let oclpData = try? String(contentsOfFile: InitGlobVar.oclpXmlFilePath, encoding: .utf8)
+
+        return HardwareSnapshot(
+            hardwareData: hardwareData,
+            memoryData: memoryData,
+            oclpData: oclpData
+        )
     }
 
-    private func getStorageInfo() -> (Bool, String, Double) {
-        guard let content = getCachedFileContent(InitGlobVar.bootvolnameFilePath) else {
-            return (false, "Error reading file", 0)
+    private func collectCommandOutput(
+        executablePath: String,
+        arguments: [String],
+        label: String,
+        postProcess: (String) -> String = { $0 }
+    ) -> String {
+        let result = executeProcess(executableURL: URL(fileURLWithPath: executablePath), arguments: arguments)
+
+        guard result.succeeded else {
+            ATHLogger.warning("\(label) failed with status \(result.terminationStatus): \(result.combinedOutput)", category: .hardware)
+            return ""
         }
-        
-        let lines = content.components(separatedBy: .newlines)
-        deviceProtocol = lines.first { $0.contains("Protocol:") }?.components(separatedBy: ":").last?.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: " fabric$", with: "", options: [.regularExpression, .caseInsensitive]) ?? "Unknown"
-        deviceLocation = lines.first { $0.contains("Device Location:") }?.components(separatedBy: ":").last?.trimmingCharacters(in: .whitespaces) ?? "Unknown"
-        
-        let isSSd = content.contains("Solid State: Yes")
-        let (sizeGB, availableGB) = parseStorageSize(lines)
-        let percent = availableGB / sizeGB
-        let percentFree = String(format: "%.2f", percent * 100)
-        
-        let storageInfo = """
-        \(HCStartupDisk.shared.getStartupDisk()) (\(deviceLocation) \(deviceProtocol))
-        \(String(format: "%.2f", sizeGB)) GB (\(String(format: "%.2f", availableGB)) GB \(NSLocalizedString("storage.available", comment: "Available storage label")) - \(percentFree)%)
-        """
-        
-        return (isSSd, storageInfo, 1 - percent)
-    }
-    
-    private func parseStorageSize(_ lines: [String]) -> (Double, Double) {
-        let sizeLine = lines.first { $0.contains("Total Space:") }?.components(separatedBy: ":").last?.trimmingCharacters(in: .whitespaces) ?? "0 B"
-        let availableLine = lines.first { $0.contains("Free Space:") }?.components(separatedBy: ":").last?.trimmingCharacters(in: .whitespaces) ?? "0 B"
-        
-        let (size, sizeUnit) = parseSize(sizeLine)
-        let (available, availableUnit) = parseSize(availableLine)
-        
-        return (convertToGB(size, unit: sizeUnit), convertToGB(available, unit: availableUnit))
-    }
-    
-    private func parseSize(_ sizeString: String) -> (Double, String) {
-        let components = sizeString.components(separatedBy: .whitespaces)
-        guard components.count >= 2, let size = Double(components[0]) else { return (0, "B") }
-        return (size, components[1])
-    }
-    
-    private func convertToGB(_ size: Double, unit: String) -> Double {
-        switch unit.uppercased() {
-        case "B": return size / 1_000_000_000
-        case "KB": return size / 1_000_000
-        case "MB": return size / 1_000
-        case "GB": return size
-        case "TB": return size * 1_000
-        default: return size
+
+        let output = postProcess(result.stdout)
+        if output.isEmpty {
+            ATHLogger.warning("\(label) returned no output", category: .hardware)
         }
+        return output
     }
 }

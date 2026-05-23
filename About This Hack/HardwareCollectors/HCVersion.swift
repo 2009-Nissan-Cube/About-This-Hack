@@ -12,6 +12,15 @@ class HCVersion {
     var osPrefix: String = "macOS"
     var dataHasBeenSet: Bool = false
     
+    func reset() {
+        osNumber = "10.10.0"
+        osVersion = .macOS
+        osName = ""
+        osBuildNumber = "19G101"
+        osPrefix = "macOS"
+        dataHasBeenSet = false
+    }
+    
     func getVersion() {
         guard !dataHasBeenSet else { return }
         ATHLogger.info(NSLocalizedString("log.version.init", comment: "Initializing OS Version Info"), category: .system)
@@ -33,8 +42,8 @@ class HCVersion {
     private func getOSNumber() -> String {
         ATHLogger.debug(NSLocalizedString("log.version.getting_number", comment: "Getting OS Number"), category: .system)
         let osVersion = ProcessInfo.processInfo.operatingSystemVersion
-        var versionString = ""
-        if (osVersion.patchVersion == 0) {
+        let versionString: String
+        if osVersion.patchVersion == 0 {
             versionString = "\(osVersion.majorVersion).\(osVersion.minorVersion)"
         } else {
             versionString = "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
@@ -45,9 +54,18 @@ class HCVersion {
   
     private func getOSBuild() -> String {
         ATHLogger.debug(NSLocalizedString("log.version.getting_build", comment: "Getting OS Build Number"), category: .system)
-        let buildString = run("sw_vers -buildVersion").trimmingCharacters(in: .whitespacesAndNewlines)
+
+        let buildString: String
+        if let systemVersion = NSDictionary(contentsOfFile: "/System/Library/CoreServices/SystemVersion.plist") as? [String: Any],
+           let productBuildVersion = systemVersion["ProductBuildVersion"] as? String,
+           !productBuildVersion.isEmpty {
+            buildString = productBuildVersion
+        } else {
+            buildString = getSysctlValueByKey(inputKey: "kern.osversion")?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "Unknown"
+        }
+
         ATHLogger.debug(String(format: NSLocalizedString("log.version.determined_build", comment: "Determined OS Build Number"), buildString), category: .system)
-        return buildString        
+        return buildString
     }
     
     private func setOSVersion(osNumber: String) {
@@ -114,12 +132,10 @@ class HCVersion {
         return String(cString: kernel)
     }
     
-     private func getSIPInfo() -> String {
+    private func getSIPInfo() -> String {
         let csrConfig = csrActiveConfig()
         let sipStatus = (csrConfig == 0) ? "Enabled" : "Disabled"
         
-        // If Enabled, Apple Silicon may display only "Enabled", hex value is missing
-        // If Disabled, both platforms Intel and Silicon display "sipStatus + hex value"
         var sipValue = ""
 
         if sipStatus == "Enabled" {
@@ -127,36 +143,16 @@ class HCVersion {
         }
         else {
             sipValue = "System Integrity Protection: \(sipStatus) (0x\(String(format:"%08x", csrConfig)))"
-        }        
+        }
         return sipValue
-        
-//        return "System Integrity Protection: \(sipStatus) (0x\(String(format:"%08x", csrConfig)))"
     }
     
     private func csrActiveConfig() -> UInt32 {
-        let config = ObjCSIP() // reference to Objective-C file
-        var csrConfig = UInt32(config.sipValue()) // method of the Objective-C file (long >> UInt32)
-        csrConfig = csrConfig.byteSwapped // big endian to litle endian e.g. 00000803 to 03080000
-        //print("csrConfig \(csrConfig)") // testing
+        let config = ObjCSIP()
+        var csrConfig = UInt32(config.sipValue())
+        csrConfig = csrConfig.byteSwapped
         return csrConfig
     }
-
-//    private func csrActiveConfig() -> UInt32 {
-//        var config: UInt32 = 0
-//        var size = MemoryLayout<UInt32>.size
-//        sysctlbyname("kern.bootargs", nil, &size, nil, 0)
-//        var bootArgs = [CChar](repeating: 0, count: size)
-//        sysctlbyname("kern.bootargs", &bootArgs, &size, nil, 0)
-//        let bootArgsString = String(cString: bootArgs)
-//        
-//        if let configValue = bootArgsString.captureGroup(for: "csr-active-config=(0x[0-9a-fA-F]+)") {
-//            config = UInt32(configValue.dropFirst(2), radix: 16) ?? 0
-//        } else {
-//            sysctlbyname("kern.csr_active_config", &config, &size, nil, 0)
-//        }
-//        
-//        return config
-//    }
 
     func getOSImageName() -> String {
         let osImageNames: [MacOSVersion: String] = [
