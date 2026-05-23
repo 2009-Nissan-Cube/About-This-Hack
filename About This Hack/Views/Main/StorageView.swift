@@ -39,9 +39,6 @@ struct StorageView: View {
                 .frame(width: 330, alignment: .leading)
                 .position(x: 405, y: 150)
 
-                MainFooter()
-                    .frame(width: geometry.size.width, alignment: .center)
-                    .position(x: geometry.size.width / 2, y: 303)
             }
             .frame(width: geometry.size.width, height: geometry.size.height, alignment: .topLeading)
         }

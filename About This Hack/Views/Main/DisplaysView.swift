@@ -32,9 +32,6 @@ struct DisplaysView: View {
                     .controlSize(.small)
                     .position(x: geometry.size.width / 2, y: 278)
 
-                MainFooter()
-                    .frame(width: geometry.size.width, alignment: .center)
-                    .position(x: geometry.size.width / 2, y: 303)
             }
             .frame(width: geometry.size.width, height: geometry.size.height, alignment: .topLeading)
         }
