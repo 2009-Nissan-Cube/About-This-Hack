@@ -30,10 +30,7 @@ struct OverviewView: View {
                     .frame(width: 330, height: 24, alignment: .leading)
                     .position(x: 403, y: 250)
 
-                Text(L("overview.credit", comment: "Copyright credit"))
-                    .font(.system(size: 10))
-                    .foregroundColor(Color(NSColor.disabledControlTextColor))
-                    .lineLimit(1)
+                MainFooter()
                     .frame(width: geometry.size.width, alignment: .center)
                     .position(x: geometry.size.width / 2, y: 303)
             }

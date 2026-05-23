@@ -54,3 +54,12 @@ struct SectionTitle: View {
             .foregroundColor(.secondary)
     }
 }
+
+struct MainFooter: View {
+    var body: some View {
+        Text(L("main.footer", comment: "Main window footer"))
+            .font(.system(size: 10))
+            .foregroundColor(Color(NSColor.disabledControlTextColor))
+            .lineLimit(1)
+    }
+}

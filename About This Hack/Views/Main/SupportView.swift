@@ -32,12 +32,9 @@ struct SupportView: View {
                 .frame(width: geometry.size.width, alignment: .center)
                 .position(x: geometry.size.width / 2, y: 142)
 
-                Text(L("support.credit", comment: "Support page credit"))
-                    .font(.system(size: 10))
-                    .foregroundColor(Color(NSColor.disabledControlTextColor))
-                    .lineLimit(1)
+                MainFooter()
                     .frame(width: geometry.size.width, alignment: .center)
-                    .position(x: geometry.size.width / 2, y: 293)
+                    .position(x: geometry.size.width / 2, y: 303)
             }
             .frame(width: geometry.size.width, height: geometry.size.height, alignment: .topLeading)
         }
