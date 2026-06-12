@@ -11,18 +11,6 @@ let thisApplicationVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleS
 // Define RTLD_DEFAULT for symbol lookup
 let RTLD_DEFAULT = UnsafeMutableRawPointer(bitPattern: -2)
 
-func initPortDefault() -> mach_port_t {
-    if #available(macOS 12.0, *) {
-        guard let sym = dlsym(RTLD_DEFAULT, "kIOMainPortDefault") else {
-            return kIOMasterPortDefault
-        }
-        let ptr = sym.assumingMemoryBound(to: mach_port_t.self)
-        return ptr.pointee
-    } else {
-        return kIOMasterPortDefault
-    }
-}
-
 func getSysctlValueByKey(inputKey sysctlKey: String) -> String? {
     var size = 0
     guard sysctlbyname(sysctlKey, nil, &size, nil, 0) == 0, size > 0 else {

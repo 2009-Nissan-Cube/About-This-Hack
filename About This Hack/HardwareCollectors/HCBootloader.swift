@@ -110,7 +110,7 @@ class HCBootloader {
     }
 
     private func readNVRAMValue(named propertyName: String) -> String? {
-        let options = IORegistryEntryFromPath(initPortDefault(), "IODeviceTree:/options")
+        let options = IORegistryEntryFromPath(kIOMainPortDefault, "IODeviceTree:/options")
         guard options != MACH_PORT_NULL else {
             return nil
         }
