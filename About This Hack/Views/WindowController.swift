@@ -8,7 +8,6 @@ class WindowController: NSWindowController {
     private let windowFrameKey = "MainWindowFrame"
     private let fixedWindowFrameSize = NSSize(width: 580, height: 350)
     private var isSetupComplete = false
-    private var isLoadingMainWindowData = false
 
     convenience init() {
         let window = NSWindow(
@@ -79,8 +78,8 @@ class WindowController: NSWindowController {
                                                object: window)
 
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(dataFilesCreated),
-                                               name: CreateDataFiles.dataFilesCreatedNotification,
+                                               selector: #selector(dataDidLoad),
+                                               name: HardwareCollector.dataDidLoadNotification,
                                                object: nil)
     }
 
@@ -101,31 +100,16 @@ class WindowController: NSWindowController {
         }
     }
 
-    @objc private func dataFilesCreated() {
+    @objc private func dataDidLoad() {
         startLoadingIfReady()
     }
 
     private func startLoadingIfReady() {
-        guard CreateDataFiles.dataFilesCreated else { return }
-        loadDataAndShowWindow()
-    }
+        guard HardwareCollector.shared.dataHasBeenSet, !viewModel.isLoaded else { return }
 
-    private func loadDataAndShowWindow() {
-        guard !isLoadingMainWindowData, !viewModel.isLoaded else { return }
-        isLoadingMainWindowData = true
-
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            HardwareCollector.shared.getAllData()
-
-            DispatchQueue.main.async {
-                guard let self else { return }
-
-                self.isLoadingMainWindowData = false
-                self.viewModel.markLoaded()
-                self.window?.makeKeyAndOrderFront(nil)
-                ATHLogger.info(NSLocalizedString("log.window.shown", comment: "Window shown after data loaded"), category: .ui)
-            }
-        }
+        viewModel.markLoaded()
+        window?.makeKeyAndOrderFront(nil)
+        ATHLogger.info(NSLocalizedString("log.window.shown", comment: "Window shown after data loaded"), category: .ui)
     }
 
     public func changeView(new index: Int) {

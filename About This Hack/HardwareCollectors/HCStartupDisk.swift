@@ -46,34 +46,27 @@ class HCStartupDisk {
         return computed
     }
 
-    func reset() {
-        lock.lock()
-        defer { lock.unlock() }
-        _snapshot = nil
-    }
-    
+    var isSolidState: Bool { snapshot.isSolidState }
+    var deviceLocation: String { snapshot.deviceLocation }
+    var deviceProtocol: String { snapshot.deviceProtocol }
+    var percentUsed: Double { snapshot.percentUsed }
+    var totalGB: Double { bytesToGB(snapshot.totalBytes) }
+    var availableGB: Double { bytesToGB(snapshot.availableBytes) }
+
     func getStartupDisk() -> String {
         ATHLogger.debug(NSLocalizedString("log.startup.getting_name", comment: "Getting startup disk name string"), category: .hardware)
         return snapshot.volumeName
     }
 
-    func getStorageSummary() -> (isSolidState: Bool, description: String, percentUsed: Double, deviceLocation: String, deviceProtocol: String) {
-        let info = snapshot
-        let sizeGB = bytesToGB(info.totalBytes)
-        let availableGB = bytesToGB(info.availableBytes)
-        let percentFreeText = String(format: "%.2f", info.percentFree * 100)
-
-        let storageInfo = """
-        \(info.volumeName) (\(info.deviceLocation) \(info.deviceProtocol))
-        \(String(format: "%.2f", sizeGB)) GB (\(String(format: "%.2f", availableGB)) GB \(NSLocalizedString("storage.available", comment: "Available storage label")) - \(percentFreeText)%)
-        """
-
-        return (info.isSolidState, storageInfo, info.percentUsed, info.deviceLocation, info.deviceProtocol)
-    }
-
     func getStartupDiskInfo() -> String {
         ATHLogger.debug(NSLocalizedString("log.startup.getting_detailed", comment: "Getting detailed startup disk info string"), category: .hardware)
-        return getStorageSummary().description
+        let info = snapshot
+        let percentFreeText = String(format: "%.2f", info.percentFree * 100)
+
+        return """
+        \(info.volumeName) (\(info.deviceLocation) \(info.deviceProtocol))
+        \(String(format: "%.2f", bytesToGB(info.totalBytes))) GB (\(String(format: "%.2f", bytesToGB(info.availableBytes))) GB \(NSLocalizedString("storage.available", comment: "Available storage label")) - \(percentFreeText)%)
+        """
     }
 
     private func computeSnapshot() -> StartupDiskSnapshot {
@@ -89,9 +82,10 @@ class HCStartupDisk {
 
         let volumeName = resourceValues?.volumeName ?? FileManager.default.displayName(atPath: volumeURL.path)
         let totalCapacity = resourceValues?.volumeTotalCapacity ?? 0
-        let availableCapacity = resourceValues?.volumeAvailableCapacity ?? 0
+        let importantUsageCapacity = resourceValues?.volumeAvailableCapacityForImportantUsage ?? 0
+        let fallbackCapacity = Int64(resourceValues?.volumeAvailableCapacity ?? 0)
         let totalBytes = Int64(totalCapacity)
-        let availableBytes = Int64(availableCapacity)
+        let availableBytes = importantUsageCapacity > 0 ? importantUsageCapacity : fallbackCapacity
         let deviceInfo = getDeviceInfo(for: volumeURL)
 
         ATHLogger.debug(String(format: NSLocalizedString("log.startup.parsed_name", comment: "Parsed Startup Disk Name"), volumeName), category: .hardware)

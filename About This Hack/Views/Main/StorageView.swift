@@ -2,8 +2,6 @@ import AppKit
 import SwiftUI
 
 struct StorageView: View {
-    let refreshID: UUID
-
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .topLeading) {
@@ -45,7 +43,6 @@ struct StorageView: View {
         .onAppear {
             ATHLogger.info(NSLocalizedString("log.storage.init", comment: "Storage view initializing"), category: .ui)
         }
-        .id(refreshID)
     }
 
     private var storageMeter: some View {
@@ -60,55 +57,32 @@ struct StorageView: View {
                     .frame(width: geometry.size.width * CGFloat(storagePercent), height: 8)
             }
             .frame(height: geometry.size.height, alignment: .center)
-            .help(HardwareCollector.shared.storageData)
+            .help(HCStartupDisk.shared.getStartupDiskInfo())
         }
     }
 
     private var storagePercent: Double {
-        max(0, min(HardwareCollector.shared.storagePercent, 1))
+        max(0, min(HCStartupDisk.shared.percentUsed, 1))
     }
 
     private var driveKind: String {
-        HardwareCollector.shared.storageType ? "SSD" : "HDD"
+        HCStartupDisk.shared.isSolidState ? "SSD" : "HDD"
     }
 
     private var driveConnection: String {
-        let location = HardwareCollector.shared.deviceLocation.isEmpty ? "Internal" : HardwareCollector.shared.deviceLocation
-        let proto = HardwareCollector.shared.deviceProtocol.isEmpty ? "Unknown" : HardwareCollector.shared.deviceProtocol
-        return "\(location) \(proto)"
+        "\(HCStartupDisk.shared.deviceLocation) \(HCStartupDisk.shared.deviceProtocol)"
     }
 
     private var capacityText: String {
-        guard let total = storageNumbers.total else { return "—" }
+        let total = HCStartupDisk.shared.totalGB
+        guard total > 0 else { return "—" }
 
-        if let available = storageNumbers.available {
+        let available = HCStartupDisk.shared.availableGB
+        if available > 0 {
             return "\(formatGB(total)) (\(formatGB(available)) available)"
         }
 
         return formatGB(total)
-    }
-
-    private var usedText: String {
-        guard let total = storageNumbers.total,
-              let available = storageNumbers.available else {
-            return String(format: "%.0f%%", storagePercent * 100)
-        }
-
-        let used = max(0, total - available)
-        return "\(formatGB(used)) (\(String(format: "%.0f", storagePercent * 100))%)"
-    }
-
-    private var storageNumbers: (total: Double?, available: Double?) {
-        let data = HardwareCollector.shared.storageData
-        let regex = try? NSRegularExpression(pattern: "([0-9]+(?:\\.[0-9]+)?)\\s*GB", options: [])
-        let nsRange = NSRange(data.startIndex..<data.endIndex, in: data)
-        let matches = regex?.matches(in: data, options: [], range: nsRange) ?? []
-        let values = matches.compactMap { match -> Double? in
-            guard let range = Range(match.range(at: 1), in: data) else { return nil }
-            return Double(data[range])
-        }
-
-        return (values.first, values.dropFirst().first)
     }
 
     private func formatGB(_ value: Double) -> String {
@@ -119,8 +93,8 @@ struct StorageView: View {
     }
 
     private var storageImage: NSImage {
-        let imageShortName = "\(HCVersion.shared.osName) \(HardwareCollector.shared.deviceLocation)"
-        let storageType = HardwareCollector.shared.storageType ? "SSD" : "HDD"
+        let imageShortName = "\(HCVersion.shared.osName) \(HCStartupDisk.shared.deviceLocation)"
+        let storageType = HCStartupDisk.shared.isSolidState ? "SSD" : "HDD"
         return namedImage("\(imageShortName) \(storageType)", fallback: storageType)
     }
 }

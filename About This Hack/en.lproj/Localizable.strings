@@ -6,7 +6,6 @@
 */
 
 /* Tooltips */
-"tooltip.bootloader" = "BootLoader: %@\nBoot-args: %@";
 "tooltip.sysinfo" = " Hardware, Network, Software, Etc. Detailed Data";
 "tooltip.softupd" = " Find and Install OS and Security Updates";
 
@@ -15,15 +14,6 @@
 "segment.title.displays" = "Displays";
 "segment.title.storage" = "Storage";
 "segment.title.support" = "Support";
-
-/* Segmented Control Tooltips */
-"segment.tooltip.overview" = "General presentation of system specifications";
-"segment.tooltip.displays" = "Screens and resolutions";
-"segment.tooltip.storage" = "Boot disk, connection type and available space";
-"segment.tooltip.support" = "Presentation of support links for help with your hackintosh or mac";
-
-/* Support View */
-"browser.success" = "Browser Successfully opened";
 
 /* Storage */
 "storage.available" = "Available";
@@ -38,10 +28,6 @@
 "log.browser.failed" = "Failed to open URL: %@";
 "log.support_view.init" = "Support View Initializing...";
 "log.storage.init" = "Initializing Storage View...";
-"log.storage.image_setting" = "Setting storage image: %@ %@";
-"log.storage.image_not_found" = "Specific image not found, using generic %@ image";
-"log.storage.updated" = "Updated storage info: %@, %@%%";
-"log.storage.tooltips" = "Storage tooltips configured";
 "log.window.loaded" = "Window controller loaded";
 "log.window.restored" = "Restored window position from saved frame";
 "log.window.centered" = "No saved window position, centering window";
@@ -52,21 +38,9 @@
 "log.update_available" = "Update available, initiating update process";
 "log.no_updates" = "No updates available";
 "log.app.terminating" = "Application terminating, cleaning up temporary files";
-"log.view.show_error" = "Cannot show view: main window controller not found";
 "log.display_view.init" = "Initializing Display View...";
-"log.service_view.init" = "Initializing Service View...";
-"log.display.names" = "Display names: %@";
-"log.display.resolutions" = "Display resolutions: %@";
-"log.display.name_for_index" = "Display name for index %d: \"%@\"";
-"log.display.resolution_for_index" = "Display resolution for index %d: \"%@\"";
-
-/* System & Data Files */
-"log.data.directory_created" = "Data directory created";
-"log.hardware.cache_cleared" = "File cache cleared";
 
 /* Window Controller */
-"log.window.segmented_localized" = "Segmented control localized";
-"log.window.segmented_not_ready" = "Segmented control outlet not ready";
 "log.window.deinitialized" = "Window controller deinitialized";
 "log.window.frame_saved" = "Saved window frame: %@";
 
@@ -81,40 +55,19 @@
 "log.cpu.core_count_packages" = "CPU Core count (hw.packages): %d";
 "log.cpu.core_count_physical" = "CPU Core count (hw.physicalcpu): %d";
 "log.cpu.core_count_logical" = "CPU Core count (hw.logicalcpu): %d";
-"log.cpu.fetching_details" = "Fetching CPU details from hwFilePath...";
+"log.cpu.fetching_details" = "Fetching CPU details from hardware snapshot...";
 
 /* GPU Hardware Collector */
-"log.gpu.reset" = "GPU info reset";
 "log.gpu.init" = "Initializing GPU Info...";
-"log.gpu.retrieved" = "Successfully retrieved GPU info from HardwareCollector.";
 "log.gpu.parsing_data" = "Parsing GPU data from %d lines";
-"log.gpu.line" = "Line %d: '%@'";
-"log.gpu.found_chipset" = "Found Chipset at line %d: %@";
-"log.gpu.found_vram" = "Found VRAM at line %d: %@";
-"log.gpu.found_metal" = "Found Metal at line %d: %@";
-"log.gpu.stopping_parse" = "Stopping GPU parse at Displays section (line %d)";
-"log.gpu.final_info" = "Final GPU Chipset: '%@', VRAM: '%@', Metal: '%@'";
 "log.gpu.getting_string" = "Getting GPU string...";
 "log.gpu.getting_detailed_info" = "Getting detailed GPU info string...";
-"log.gpu.retrieved_detailed" = "Successfully retrieved detailed GPU info from HardwareCollector.";
 
 /* Display Hardware Collector */
-"log.display.reset" = "Display info reset";
 "log.display.init" = "Initializing Display Info...";
-"log.display.retrieved" = "Successfully retrieved display info from HardwareCollector.";
 "log.display.parsing_data" = "Parsing display data from %d lines";
-"log.display.line" = "Line %d: '%@'";
-"log.display.found_displays" = "Found 'Displays:' at line %d";
-"log.display.main_info" = "Main Display Info: %@";
-"log.display.all_info" = "All Displays Info: %@";
 "log.display.getting_main" = "Getting main display string...";
 "log.display.getting_all" = "Getting all displays info string...";
-"log.display.parsing_main" = "Parsing main display info...";
-"log.display.found_name" = "Found display name: %@";
-"log.display.found_resolution" = "Found resolution for first display: %@";
-"log.display.parsed_main" = "Parsed Main Display Name: %@, Resolution: %@";
-"log.display.parsing_all" = "Parsing all displays info...";
-"log.display.parsed_all" = "Parsed All Displays Info: %@";
 
 /* RAM Hardware Collector */
 "log.ram.parsing_lines" = "Parsing memory file lines...";
@@ -122,8 +75,6 @@
 "log.ram.size" = "RAM Total Size (GB): %d";
 "log.ram.type_speed" = "RAM Type: %@, Speed: %@";
 "log.ram.getting_string" = "Getting RAM string...";
-"log.ram.getting_description" = "Getting RAM description string...";
-"log.ram.getting_description_array" = "Getting RAM description array string...";
 "log.ram.parsing_details" = "Parsing memory details from shared lines...";
 
 /* Version/OS Hardware Collector */
@@ -138,8 +89,6 @@
 "log.version.determined_build" = "Determined OS Build Number: %@";
 "log.version.setting_enum" = "Setting internal OS Version enum from OS Number: %@";
 "log.version.internal_set" = "Internal OS Version set to: %@";
-"log.version.converting_enum" = "Converting internal OS Version enum (%@) to string name...";
-"log.version.converted_name" = "Converted OS Name: %@";
 
 /* Serial Number Hardware Collector */
 "log.serial.init" = "Initializing Serial Number & Hardware Info...";
@@ -151,11 +100,9 @@
 
 /* Startup Disk Hardware Collector */
 "log.startup.init" = "Initializing Startup Disk Info...";
-"log.startup.read_cache" = "Successfully read %@ from cache.";
 "log.startup.parsed_name" = "Parsed Startup Disk Name: %@";
 "log.startup.getting_name" = "Getting startup disk name string...";
 "log.startup.getting_detailed" = "Getting detailed startup disk info string...";
-"log.startup.read_storage_cache" = "Successfully read %@ from cache.";
 
 /* Mac Model Hardware Collector */
 "log.macmodel.init" = "Initializing Mac Model Info...";
@@ -163,38 +110,23 @@
 "log.macmodel.getting_identifier" = "Getting Model Identifier...";
 "log.macmodel.full_identifier" = "Full Model Identifier (hw.model): %@, Parsed ID: %@";
 "log.macmodel.getting_name" = "Getting Mac Name...";
-"log.macmodel.looked_up_name" = "Looked up Mac Name for identifier '%@': (%@, %@)";
-"log.macmodel.name_from_file" = "Mac Name from hwFilePath: %@";
+"log.macmodel.looked_up_name" = "Looked up Mac Name for identifier '%@': %@";
 "log.macmodel.failed_identifier" = "Failed to get Model Identifier from hw.model.";
 
-/* Network/Reachability */
-"log.reachability.failed_create" = "Failed to create network reachability";
-"log.reachability.failed_flags" = "Failed to get reachability flags";
-"log.reachability.status" = "Internet is %@";
-"log.reachability.reachable" = "reachable";
-"log.reachability.not_reachable" = "NOT reachable";
-
 /* Window Controller */
-"log.window.view_switched" = "View switched to index: %d";
 "log.window.view_changing" = "Changing view to index: %d";
 
 /* Data Files */
 "log.data.files_created" = "Data files created successfully";
-"log.data.timeout" = "Data files creation timed out after 12 seconds";
 
 /* CPU Hardware Collector Errors */
 "log.cpu.failed_packages" = "Failed to get physical CPU count via hw.packages. Error: %@";
 "log.cpu.failed_physical" = "Failed to get physical CPU count via hw.physicalcpu. Error: %@";
 "log.cpu.failed_any_count" = "Failed to get any CPU count. Error: %@";
-"log.cpu.failed_read_details" = "Unable to read CPU details from hwFilePath: %@";
-
-/* Startup Disk Errors */
-"log.startup.failed_read_cache" = "Failed to read startup disk info from HardwareCollector cache";
-"log.startup.failed_read_detailed_cache" = "Failed to read detailed startup disk info from HardwareCollector cache";
+"log.cpu.failed_read_details" = "Unable to read CPU details from hardware snapshot";
 
 /* GPU Hardware Collector Errors */
 "log.gpu.no_data" = "No GPU data available from HardwareCollector";
-"log.gpu.no_details" = "No GPU details available from HardwareCollector";
 
 /* OS Version Hardware Collector */
 "log.version.init" = "Initializing OS Version Info...";
@@ -206,16 +138,11 @@
 /* RAM Errors */
 "log.ram.no_data" = "No RAM data available from HardwareCollector";
 
-/* Display Errors */
-"log.display.no_data" = "No display data available from HardwareCollector";
-"log.display.section_not_found" = "Displays section not found in cached data (searched for 'Displays:')";
-
 /* UpdateController */
 "log.update.checking" = "%@ : Checking for updates...";
 "log.update.versions" = "%@ : Local version (%@) and Remote version (%@) in .pbxproj from tag (%@)";
 "log.update.newer_version" = "%@ : Newer version (%@) available";
 "log.update.done" = "%@ : Done";
-"log.update.timeout" = "%@ : Update check timed out after waiting for network response";
 "log.update.starting_download" = "%@ : Starting Download v%@ Update...";
 "log.update.unzipping" = "%@ : Unzipping Archive...";
 "log.update.extracted" = "%@ : From archive was extracted : %@";
@@ -226,11 +153,7 @@
 "log.update.dmg_ejected" = "%@ : /Volumes/\"%@\" ejected!";
 "log.update.checking_os_compatibility" = "%@ : Is new app v%@ allowed on current OS %@?";
 "log.update.os_versions" = "%@ : Current OS version %@ and Minimum OS Version %@";
-"log.update.os_version_index" = "%@ : Index (%d) : Current OS version %@ and Minimum OS Version %@";
 "log.update.update_allowed" = "%@ : Update (with %@ as minimum OS version ) is allowed on current OS version %@";
-"log.update.removing_old_app" = "%@ : Removing Old App...";
-"log.update.directory_deleted" = "%@ : Directory %@ deleted successfully";
-"log.update.error_deleting_directory" = "%@ : Error deleting Directory %@ with error : (%@)";
 "log.update.copying_new_version" = "%@ : Copying New Version \"/%@.app\" Almost there!";
 "log.update.complete_launching" = "%@ : Update Complete!...Launching New \"%@.app\" Version...";
 "log.update.element_from_archive" = "%@ : Element from archive : %@";
@@ -242,8 +165,6 @@
 "update.alert.button.update" = "Update";
 "update.alert.button.skip" = "Skip";
 "update.alert.button.return" = "Return";
-"update.alert.timeout" = "Update check timed out";
-"update.alert.timeout_detail" = "The connection to GitHub timed out after %d seconds. The app will continue without checking for updates.";
 "update.alert.cant_get_version" = "Can't get last version from remote repo tag";
 "update.alert.cant_download" = "Can't Download Update";
 "update.alert.cant_unzip" = "Can't unzip Archive";
@@ -252,16 +173,11 @@
 "update.alert.cant_mount_dmg" = "Can't mount dmg";
 "update.alert.cant_copy_app" = "Can't copy application";
 "update.alert.cant_copy_app_detail" = "/Volumes/\"%@/%@.app\" to %@";
-"update.alert.cant_unmount_dmg" = "Can't unmount %@dmg";
-"update.alert.cant_unmount_dmg_detail" = "/Volumes/\"%@\"";
 "update.alert.cant_get_min_os" = "Can't get Minimum OS Version";
 "update.alert.cant_get_min_os_detail" = "LSMinimumSystemVersion not found in\n\"%@\"";
 "update.alert.update_cant_be_achieved" = "Update can't be achieved";
 "update.alert.update_cant_be_achieved_detail" = "Minimum OS Version %@ is greater than current OS version %@";
-"update.alert.failed_delete_old" = "Failed to delete the old copy of";
-"update.alert.failed_delete_old_detail" = "%@\nPlease make sure it is in %@ folder!!!";
 "update.alert.cant_replace_app" = "Can't replace application";
-"update.alert.cant_replace_app_detail" = "\"%@\"";
 
 /* UpdateController Notifications */
 "update.notify.starting_download" = "Starting Download... v%@ Update...";
@@ -269,14 +185,11 @@
 "update.notify.mounting_dmg" = "Try to mount dmg...";
 "update.notify.unmounting_dmg" = "Try to unmount dmg...";
 "update.notify.checking_allowed" = "Is new app v%@ allowed...";
-"update.notify.removing_old" = "Removing Old App...";
 "update.notify.installing" = "New Version Install...";
 "update.notify.complete" = "Update Complete...Launching New Version...";
 
 /* Loading Indicator */
 "loading.data.message" = "Loading data...";
-"log.loading.shown" = "Loading indicator shown";
-"log.loading.hidden" = "Loading indicator hidden";
 
 /* Settings Window */
 "settings.title" = "Custom logo settings";
@@ -292,7 +205,6 @@
 "settings.logo.success" = "Custom logo applied successfully";
 
 /* SwiftUI Main Window */
-"overview.label.version" = "Version";
 "overview.label.processor" = "Processor";
 "overview.label.memory" = "Memory";
 "overview.label.graphics" = "Graphics";
@@ -302,14 +214,10 @@
 "overview.label.bootloader" = "Bootloader";
 "overview.button.system_report" = "System Report...";
 "overview.button.software_update" = "Software Update...";
-"overview.credit" = "™ and © 2021-2026 Alexander Skula et al. All Rights Reserved.";
 "displays.none" = "No displays found";
-"displays.display" = "Display";
 "displays.resolution" = "Resolution";
 "displays.button.preferences" = "Display Preferences...";
 "storage.label.startup_disk" = "Startup Disk";
-"storage.label.storage" = "Storage";
-"storage.percent_used" = "%.0f%% used";
 "support.section.hardware" = "Hardware Help";
 "support.section.macos" = "macOS Help";
 "support.macos_user_guide" = "macOS User Guide";
@@ -335,6 +243,4 @@
 "storage.label.kind" = "Type";
 "storage.label.connection" = "Connection";
 "storage.label.capacity" = "Capacity";
-"storage.label.available" = "Available";
-"storage.label.used" = "Used";
 "main.footer" = "™ and © 2021-2026 Alexander Skula et al. All Rights Reserved.";

@@ -69,8 +69,8 @@ class HCCPU {
     
     private func getCPUDetails() -> String {
         ATHLogger.debug(NSLocalizedString("log.cpu.fetching_details", comment: "Fetching CPU details from hwFilePath"), category: .hardware)
-        guard let content = HardwareCollector.shared.getCachedFileContent(InitGlobVar.hwFilePath) else {
-            ATHLogger.error(String(format: NSLocalizedString("log.cpu.failed_read_details", comment: "Unable to read CPU details from hwFilePath"), InitGlobVar.hwFilePath), category: .hardware)
+        guard let content = HardwareCollector.shared.hardwareData else {
+            ATHLogger.error(NSLocalizedString("log.cpu.failed_read_details", comment: "Unable to read CPU details"), category: .hardware)
             return "Unable to read CPU details"
         }
         

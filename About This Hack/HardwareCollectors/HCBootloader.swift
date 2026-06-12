@@ -9,13 +9,6 @@ class HCBootloader {
     private var bootloaderInfoCache: String?
     private var bootargsInfoCache: String?
 
-    func reset() {
-        cacheLock.lock()
-        bootloaderInfoCache = nil
-        bootargsInfoCache = nil
-        cacheLock.unlock()
-    }
-    
     func getBootloader() -> String {
         cachedBootloaderInfo()
             .components(separatedBy: .whitespaces)
@@ -77,7 +70,7 @@ class HCBootloader {
             return parsedVersion
         }
 
-        if let hwContent = HardwareCollector.shared.getCachedFileContent(InitGlobVar.hwFilePath) {
+        if let hwContent = HardwareCollector.shared.hardwareData {
             let cloverLine = hwContent.components(separatedBy: .newlines)
                 .first { $0.contains("Clover") }
 

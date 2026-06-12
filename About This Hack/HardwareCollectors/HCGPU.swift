@@ -29,13 +29,6 @@ class HCGPU {
         return computed
     }
 
-    func reset() {
-        gpuLock.lock()
-        defer { gpuLock.unlock() }
-        _gpuInfo = nil
-        ATHLogger.debug(NSLocalizedString("log.gpu.reset", comment: "GPU info reset"), category: .hardware)
-    }
-
     private func computeGPUInfo() -> [GPUSnapshot] {
         ATHLogger.debug(NSLocalizedString("log.gpu.init", comment: "Initializing GPU Info"), category: .hardware)
 

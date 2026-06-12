@@ -5,21 +5,12 @@ class HCVersion {
     static let shared = HCVersion()
     private init() {}
     
-    var osNumber: String = "10.10.0"
-    var osVersion: MacOSVersion = .macOS
+    var osNumber: String = ""
+    var osVersion: MacOSVersion = .unknown
     var osName: String = ""
-    var osBuildNumber: String = "19G101"
+    var osBuildNumber: String = ""
     var osPrefix: String = "macOS"
     var dataHasBeenSet: Bool = false
-    
-    func reset() {
-        osNumber = "10.10.0"
-        osVersion = .macOS
-        osName = ""
-        osBuildNumber = "19G101"
-        osPrefix = "macOS"
-        dataHasBeenSet = false
-    }
     
     func getVersion() {
         guard !dataHasBeenSet else { return }
@@ -70,48 +61,30 @@ class HCVersion {
     
     private func setOSVersion(osNumber: String) {
         ATHLogger.debug(String(format: NSLocalizedString("log.version.setting_enum", comment: "Setting internal OS Version enum"), osNumber), category: .system)
-        let majorVersion = osNumber.prefix(2)
-        let minorVersion = osNumber.prefix(5)
-        
-        switch majorVersion {
+
+        switch osNumber.prefix(2) {
         case "26": osVersion = .tahoe
         case "15": osVersion = .sequoia
         case "14": osVersion = .sonoma
         case "13": osVersion = .ventura
         case "12": osVersion = .monterey
         case "11": osVersion = .bigSur
-        case "10":
-            switch minorVersion {
-            case "10.16": osVersion = .bigSur
-            case "10.15": osVersion = .catalina
-            case "10.14": osVersion = .mojave
-            case "10.13": osVersion = .highSierra
-            case "10.12": osVersion = .sierra
-            default: osVersion = .macOS
-            }
-        default: osVersion = .macOS
+        case "10": osVersion = osNumber.prefix(5) == "10.16" ? .bigSur : .unknown
+        default: osVersion = .unknown
         }
         ATHLogger.debug(String(format: NSLocalizedString("log.version.internal_set", comment: "Internal OS Version set"), "\(osVersion)"), category: .system)
     }
 
     private func macOSVersionToString() -> String {
-        ATHLogger.debug(String(format: NSLocalizedString("log.version.converting_enum", comment: "Converting internal OS Version enum"), "\(osVersion)"), category: .system)
-        var stringVersion = ""
         switch osVersion {
-        case .sierra: stringVersion = "Sierra"
-        case .highSierra: stringVersion = "High Sierra"
-        case .mojave: stringVersion = "Mojave"
-        case .catalina: stringVersion = "Catalina"
-        case .bigSur: stringVersion = "Big Sur"
-        case .monterey: stringVersion = "Monterey"
-        case .ventura: stringVersion = "Ventura"
-        case .sonoma: stringVersion = "Sonoma"
-        case .sequoia: stringVersion = "Sequoia"
-        case .tahoe: stringVersion = "Tahoe"
-        case .macOS: stringVersion = osPrefix + " X"
+        case .bigSur: return "Big Sur"
+        case .monterey: return "Monterey"
+        case .ventura: return "Ventura"
+        case .sonoma: return "Sonoma"
+        case .sequoia: return "Sequoia"
+        case .tahoe: return "Tahoe"
+        case .unknown: return ""
         }
-        ATHLogger.debug(String(format: NSLocalizedString("log.version.converted_name", comment: "Converted OS Name"), stringVersion), category: .system)
-        return stringVersion
     }
 
     func getOSBuildInfo() -> String {
@@ -125,11 +98,7 @@ class HCVersion {
     }
 
     private func getKernelVersion() -> String {
-        var size = 0
-        sysctlbyname("kern.version", nil, &size, nil, 0)
-        var kernel = [CChar](repeating: 0, count: size)
-        sysctlbyname("kern.version", &kernel, &size, nil, 0)
-        return String(cString: kernel)
+        getSysctlValueByKey(inputKey: "kern.version")?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
     }
     
     private func getSIPInfo() -> String {
@@ -148,23 +117,30 @@ class HCVersion {
     }
     
     private func csrActiveConfig() -> UInt32 {
-        let config = ObjCSIP()
-        var csrConfig = UInt32(config.sipValue())
-        csrConfig = csrConfig.byteSwapped
-        return csrConfig
+        typealias CSRGetActiveConfig = @convention(c) (UnsafeMutablePointer<UInt32>) -> Int32
+        guard let symbol = dlsym(RTLD_DEFAULT, "csr_get_active_config") else {
+            return 0
+        }
+
+        var config: UInt32 = 0
+        let status = unsafeBitCast(symbol, to: CSRGetActiveConfig.self)(&config)
+        return status == 0 ? config : 0
     }
 
     func getOSImageName() -> String {
-        let osImageNames: [MacOSVersion: String] = [
-            .tahoe: "Tahoe", .sequoia: "Sequoia", .sonoma: "Sonoma", .ventura: "Ventura",
-            .monterey: "Monterey", .bigSur: "Big Sur", .catalina: "Catalina",
-            .mojave: "Mojave", .highSierra: "High Sierra", .sierra: "Sierra"
-        ]
-        return osImageNames[osVersion] ?? "Unknown"
+        switch osVersion {
+        case .bigSur: return "Big Sur"
+        case .monterey: return "Monterey"
+        case .ventura: return "Ventura"
+        case .sonoma: return "Sonoma"
+        case .sequoia: return "Sequoia"
+        case .tahoe: return "Tahoe"
+        case .unknown: return "Unknown"
+        }
     }
 
     private func getOCLPInfo() -> String {
-        guard let xmlString = HardwareCollector.shared.getCachedFileContent(InitGlobVar.oclpXmlFilePath) else {
+        guard let xmlString = HardwareCollector.shared.oclpData else {
             return ""
         }
 
@@ -192,5 +168,5 @@ extension String {
 }
 
 enum MacOSVersion {
-    case sierra, highSierra, mojave, catalina, bigSur, monterey, ventura, sonoma, sequoia, tahoe, macOS
+    case bigSur, monterey, ventura, sonoma, sequoia, tahoe, unknown
 }

@@ -2,8 +2,6 @@ import AppKit
 import SwiftUI
 
 struct DisplaysView: View {
-    let refreshID: UUID
-
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .topLeading) {
@@ -38,20 +36,16 @@ struct DisplaysView: View {
         .onAppear {
             ATHLogger.info(NSLocalizedString("log.display_view.init", comment: "Display view initializing"), category: .ui)
         }
-        .id(refreshID)
     }
 
     private var displayItems: [DisplayItem] {
-        let count = min(HardwareCollector.shared.numberOfDisplays, 3)
-        guard count > 0 else { return [] }
+        let names = HCDisplay.shared.getDisplayNames()
+        let resolutions = HCDisplay.shared.getDisplayResolutions()
 
-        return (0..<count).map { index in
-            let name = index < HardwareCollector.shared.displayNames.count
-                ? trimDisplayName(HardwareCollector.shared.displayNames[index])
-                : L("displays.display", comment: "Fallback display name")
-
-            let resolution = index < HardwareCollector.shared.displayRes.count
-                ? removeParentheses(HardwareCollector.shared.displayRes[index])
+        return names.prefix(3).enumerated().map { index, rawName in
+            let name = trimDisplayName(rawName)
+            let resolution = index < resolutions.count
+                ? removeParentheses(resolutions[index])
                 : L("displays.resolution", comment: "Fallback resolution label")
 
             return DisplayItem(index: index,

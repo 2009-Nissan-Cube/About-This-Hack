@@ -29,13 +29,6 @@ class HCDisplay {
         return computed
     }
 
-    func reset() {
-        displayLock.lock()
-        defer { displayLock.unlock() }
-        _displays = nil
-        ATHLogger.debug(NSLocalizedString("log.display.reset", comment: "Display info reset"), category: .hardware)
-    }
-
     func getDisp() -> String {
         ATHLogger.debug(NSLocalizedString("log.display.getting_main", comment: "Getting main display string"), category: .hardware)
         guard let primaryDisplay = displays.first else {
@@ -73,10 +66,6 @@ class HCDisplay {
         displays.map(\.resolution)
     }
 
-    func hasBuiltInDisplay() -> Bool {
-        displays.contains { $0.isBuiltIn }
-    }
-
     private func computeDisplays() -> [DisplaySnapshot] {
         ATHLogger.debug(NSLocalizedString("log.display.init", comment: "Initializing Display Info"), category: .hardware)
 
@@ -88,12 +77,7 @@ class HCDisplay {
             let pixelHeight = mode?.pixelHeight ?? Int(screen.frame.height * screen.backingScaleFactor)
             let resolution = "\(pixelWidth) x \(pixelHeight)"
             let builtIn = cgDisplayID != 0 ? CGDisplayIsBuiltin(cgDisplayID) != 0 : false
-            let displayName: String
-            if #available(macOS 10.15, *) {
-                displayName = screen.localizedName
-            } else {
-                displayName = builtIn ? "Built-in Display" : "Display"
-            }
+            let displayName = screen.localizedName
 
             return DisplaySnapshot(
                 name: displayName,

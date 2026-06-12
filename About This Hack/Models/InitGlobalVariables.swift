@@ -50,10 +50,6 @@ class InitGlobVar {
     static var oclpXmlFilePath = "/System/Library/CoreServices/OpenCore-Legacy-Patcher.plist"
     static var bdmesgExecID = "/usr/local/bin/bdmesg"
         
-    // Remaining cached startup reports used by legacy CPU, RAM, serial, and OCLP parsing
-    static var hwFilePath = athDirectory + "/hw.txt"
-    static var sysmemFilePath = athDirectory + "/sysmem.txt"
-       
     // Used by the overview view
     static var systemReportSP = "/System/Library/SystemProfiler/SPPlatformReporter.spreporter"
     static var softwareUpdateSP = "/System/Library/PreferencePanes/SoftwareUpdate.prefPane"

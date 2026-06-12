@@ -5,7 +5,6 @@
 //
 
 import Foundation
-import AppKit
 
 private struct HardwareSnapshot {
     let hardwareData: String
@@ -16,6 +15,9 @@ private struct HardwareSnapshot {
 class HardwareCollector {
     static let shared = HardwareCollector()
     private init() {}
+
+    /// Posted on the main thread once the initial hardware snapshot is ready.
+    static let dataDidLoadNotification = Notification.Name("HardwareCollectorDataDidLoad")
 
     private let stateLock = NSLock()
     private var snapshot: HardwareSnapshot?
@@ -30,17 +32,23 @@ class HardwareCollector {
         return _dataHasBeenSet
     }
 
-    var numberOfDisplays = NSScreen.screens.count
-    var displayRes: [String] = []
-    var displayNames: [String] = []
-    var storageType = false
-    var storageData = ""
-    var storagePercent = 0.0
-    var deviceLocation = ""
-    var deviceProtocol = ""
-    var hasBuiltInDisplay = false
-    var macType: MacType = .laptop
+    /// Raw `system_profiler SPHardwareDataType` output.
+    var hardwareData: String? {
+        currentSnapshot()?.hardwareData.nilIfEmpty
+    }
 
+    /// Raw `system_profiler SPMemoryDataType` output.
+    var memoryData: String? {
+        currentSnapshot()?.memoryData.nilIfEmpty
+    }
+
+    /// Contents of the OpenCore Legacy Patcher plist, if present.
+    var oclpData: String? {
+        currentSnapshot()?.oclpData?.nilIfEmpty
+    }
+
+    /// Asynchronously collects the hardware snapshot and warms the collector caches.
+    /// Concurrent callers share one in-progress load; completions run on the main thread.
     func prepareInitialDataAsync(completion: @escaping () -> Void) {
         var shouldStartLoad = false
 
@@ -69,39 +77,6 @@ class HardwareCollector {
         }
     }
 
-    func getAllData() {
-        guard !dataHasBeenSet else { return }
-
-        let semaphore = DispatchSemaphore(value: 0)
-        prepareInitialDataAsync {
-            semaphore.signal()
-        }
-        semaphore.wait()
-    }
-
-    func resetData() {
-        stateLock.lock()
-        snapshot = nil
-        _dataHasBeenSet = false
-        _isLoading = false
-        pendingCompletions.removeAll()
-        stateLock.unlock()
-
-        resetDerivedState()
-        resetCollectorCaches()
-    }
-
-    func getCachedFileContent(_ path: String) -> String? {
-        if let snapshot = currentSnapshot(), let content = mappedSnapshotContent(for: path, snapshot: snapshot), !content.isEmpty {
-            return content
-        }
-
-        guard let content = try? String(contentsOfFile: path, encoding: .utf8), !content.isEmpty else {
-            return nil
-        }
-        return content
-    }
-
     private func loadInitialData() {
         let collectedSnapshot = collectSnapshot()
 
@@ -109,9 +84,7 @@ class HardwareCollector {
         snapshot = collectedSnapshot
         stateLock.unlock()
 
-        resetDerivedState()
-        resetCollectorCaches()
-        initializeDerivedData()
+        warmCollectors()
 
         stateLock.lock()
         _dataHasBeenSet = true
@@ -124,6 +97,7 @@ class HardwareCollector {
 
         DispatchQueue.main.async {
             completions.forEach { $0() }
+            NotificationCenter.default.post(name: Self.dataDidLoadNotification, object: nil)
         }
     }
 
@@ -133,43 +107,8 @@ class HardwareCollector {
         return snapshot
     }
 
-    private func mappedSnapshotContent(for path: String, snapshot: HardwareSnapshot) -> String? {
-        switch path {
-        case InitGlobVar.hwFilePath:
-            return snapshot.hardwareData
-        case InitGlobVar.sysmemFilePath:
-            return snapshot.memoryData
-        case InitGlobVar.oclpXmlFilePath:
-            return snapshot.oclpData
-        default:
-            return nil
-        }
-    }
-
-    private func resetDerivedState() {
-        numberOfDisplays = NSScreen.screens.count
-        displayRes = []
-        displayNames = []
-        storageType = false
-        storageData = ""
-        storagePercent = 0.0
-        deviceLocation = ""
-        deviceProtocol = ""
-        hasBuiltInDisplay = false
-        macType = .laptop
-    }
-
-    private func resetCollectorCaches() {
-        ATHLogger.debug(NSLocalizedString("log.hardware.cache_cleared", comment: "File cache cleared"), category: .hardware)
-        HCVersion.shared.reset()
-        HCMacModel.shared.reset()
-        HCStartupDisk.shared.reset()
-        HCDisplay.shared.reset()
-        HCGPU.shared.reset()
-        HCBootloader.shared.reset()
-    }
-
-    private func initializeDerivedData() {
+    /// Populates the collector caches off the main thread so views render without blocking.
+    private func warmCollectors() {
         HCVersion.shared.getVersion()
         HCMacModel.shared.getMacModel()
         _ = HCCPU.shared.getCPU()
@@ -177,18 +116,7 @@ class HardwareCollector {
         _ = HCStartupDisk.shared.getStartupDisk()
         _ = HCDisplay.shared.getDisp()
         _ = HCGPU.shared.getGPU()
-
-        displayNames = HCDisplay.shared.getDisplayNames()
-        displayRes = HCDisplay.shared.getDisplayResolutions()
-        numberOfDisplays = displayNames.count
-        hasBuiltInDisplay = HCDisplay.shared.hasBuiltInDisplay()
-
-        let storageSummary = HCStartupDisk.shared.getStorageSummary()
-        storageType = storageSummary.isSolidState
-        storageData = storageSummary.description
-        storagePercent = storageSummary.percentUsed
-        deviceLocation = storageSummary.deviceLocation
-        deviceProtocol = storageSummary.deviceProtocol
+        _ = HCSerialNumber.shared.getSerialNumber()
     }
 
     private func collectSnapshot() -> HardwareSnapshot {

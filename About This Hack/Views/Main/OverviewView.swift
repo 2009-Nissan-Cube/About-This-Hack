@@ -2,7 +2,6 @@ import AppKit
 import SwiftUI
 
 struct OverviewView: View {
-    let refreshID: UUID
     @State private var isSerialHidden = false
     @State private var logoRefreshID = UUID()
 
@@ -41,15 +40,11 @@ struct OverviewView: View {
         .onReceive(NotificationCenter.default.publisher(for: .customLogoDidChange)) { _ in
             logoRefreshID = UUID()
         }
-        .id(refreshID)
     }
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 0) {
-            (Text("\(HCVersion.shared.osPrefix) ")
-                .font(.system(size: 25, weight: .bold)) +
-             Text(HCVersion.shared.osName)
-                .font(.system(size: 25, weight: .regular)))
+            osTitle
                 .lineLimit(1)
                 .minimumScaleFactor(0.78)
 
@@ -57,6 +52,19 @@ struct OverviewView: View {
                 .font(.system(size: 11, weight: .semibold))
                 .help(trimmedTooltip(Tooltips.shared.osVersiontoolTip) ?? "")
         }
+    }
+
+    private var osTitle: Text {
+        let prefix = Text(HCVersion.shared.osPrefix)
+            .font(.system(size: 25, weight: .bold))
+
+        let osName = HCVersion.shared.osName
+        guard !osName.isEmpty else {
+            return prefix
+        }
+
+        return prefix + Text(" \(osName)")
+            .font(.system(size: 25, weight: .regular))
     }
 
     private var details: some View {

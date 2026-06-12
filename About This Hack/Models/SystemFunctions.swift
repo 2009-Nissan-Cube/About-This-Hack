@@ -8,9 +8,6 @@ import Darwin
 
 let thisApplicationVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0"
 
-// IOReg port default
-var IOMainorMasterPortDefault: UInt32 = 0
-
 // Define RTLD_DEFAULT for symbol lookup
 let RTLD_DEFAULT = UnsafeMutableRawPointer(bitPattern: -2)
 
@@ -27,11 +24,17 @@ func initPortDefault() -> mach_port_t {
 }
 
 func getSysctlValueByKey(inputKey sysctlKey: String) -> String? {
-    var oNbrBytes: Int = 0
-    sysctlbyname(sysctlKey, nil, &oNbrBytes, nil, 0)
-    var sysctlValue = [CChar](repeating: 0, count: Int(oNbrBytes))
-    sysctlbyname(sysctlKey, &sysctlValue, &oNbrBytes, nil, 0)
-    return String(validatingUTF8: sysctlValue) ?? "unknown"
+    var size = 0
+    guard sysctlbyname(sysctlKey, nil, &size, nil, 0) == 0, size > 0 else {
+        return nil
+    }
+
+    var value = [CChar](repeating: 0, count: size)
+    guard sysctlbyname(sysctlKey, &value, &size, nil, 0) == 0 else {
+        return nil
+    }
+
+    return String(cString: value)
 }
 
 func numericVersionComponents(from version: String) -> [Int] {

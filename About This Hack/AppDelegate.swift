@@ -9,7 +9,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         super.init()
         ATHLogger.info(NSLocalizedString("log.app.starting", comment: "Application starting"), category: .system)
 
-        CreateDataFiles.getInitDataFilesAsync {
+        HardwareCollector.shared.prepareInitialDataAsync {
             ATHLogger.info(NSLocalizedString("log.data_files.ready", comment: "Data files ready"), category: .system)
         }
     }

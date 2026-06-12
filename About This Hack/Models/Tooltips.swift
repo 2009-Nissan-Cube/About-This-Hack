@@ -10,10 +10,6 @@ class Tooltips {
         HCVersion.shared.getOSBuildInfo()
     }
 
-    var systemVersiontoolTip: String {
-        osVersiontoolTip
-    }
-
     var macModeltoolTip: String {
         HCMacModel.shared.macName + " - " + HCMacModel.shared.getModelIdentifier() + "\n" + HCGPU.shared.getGPUInfo()
     }
@@ -23,7 +19,7 @@ class Tooltips {
     }
 
     var ramtoolTip: String {
-        HardwareCollector.shared.getCachedFileContent(InitGlobVar.sysmemFilePath) ?? ""
+        HardwareCollector.shared.memoryData ?? ""
     }
 
     var startupDisktoolTip: String {
@@ -46,15 +42,6 @@ class Tooltips {
         HCStartupDisk.shared.getStartupDiskInfo()
     }
 
-    var storageValuetoolTip: String {
-        startupDisktoolTip
-    }
-
-    var blVersiontoolTip: String {
-        String(format: NSLocalizedString("tooltip.bootloader", comment: "Bootloader tooltip format"), 
-           HCBootloader.shared.getBootloader(), 
-           HCBootloader.shared.getBootargs())
-    }
     var btSysInfotoolTip: String {
         NSLocalizedString("tooltip.sysinfo", comment: "System Info button tooltip")
     }

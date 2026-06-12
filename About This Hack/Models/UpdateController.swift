@@ -21,11 +21,11 @@ class UpdateController {
         }
 
         var versionString: String {
-            let preferred = sanitizedVersionString(from: name)
+            let preferred = sanitizedVersionString(from: tagName)
             if !preferred.isEmpty {
                 return preferred
             }
-            return sanitizedVersionString(from: tagName)
+            return sanitizedVersionString(from: name)
         }
     }
 
@@ -583,7 +583,9 @@ class UpdateController {
         var relaunchError: UpdateError?
 
         DispatchQueue.main.async {
-            NSWorkspace.shared.openApplication(at: InitGlobVar.installedApplicationURL, configuration: NSWorkspace.OpenConfiguration()) { _, error in
+            let configuration = NSWorkspace.OpenConfiguration()
+            configuration.createsNewApplicationInstance = true
+            NSWorkspace.shared.openApplication(at: InitGlobVar.installedApplicationURL, configuration: configuration) { _, error in
                 if let error {
                     relaunchError = .relaunchFailed(appPath: InitGlobVar.thisAppliLocation, underlying: error)
                 }
@@ -653,25 +655,22 @@ class UpdateController {
 
     static func notify(title: String, informativeText: String) {
         notificationID += 1
-        if #available(macOS 10.14, *) {
+        let identifier = "ATH \(notificationID)"
+        let center = UNUserNotificationCenter.current()
+
+        center.requestAuthorization(options: [.alert, .sound]) { granted, _ in
+            guard granted else { return }
+
             let notification = UNMutableNotificationContent()
             notification.title = title
             notification.body = informativeText
             notification.sound = UNNotificationSound.default
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-            let request = UNNotificationRequest(identifier: "ATH \(notificationID)", content: notification, trigger: trigger)
-            UNUserNotificationCenter.current().add(request) { error in
+            let request = UNNotificationRequest(identifier: identifier, content: notification, trigger: nil)
+            center.add(request) { error in
                 if let error {
                     ATHLogger.error("\(thisComponent) : \(String(describing: error))!", category: .system)
                 }
             }
-        } else {
-            let notification = NSUserNotification()
-            notification.identifier = "ATH \(notificationID)"
-            notification.title = title
-            notification.informativeText = informativeText
-            notification.soundName = NSUserNotificationDefaultSoundName
-            NSUserNotificationCenter.default.deliver(notification)
         }
     }
 

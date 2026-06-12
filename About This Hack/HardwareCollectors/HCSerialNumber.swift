@@ -8,7 +8,7 @@ class HCSerialNumber {
         ATHLogger.debug(NSLocalizedString("log.serial.init", comment: "Initializing Serial Number & Hardware Info"), category: .hardware)
         
         // Use cached data from HardwareCollector
-        guard let content = HardwareCollector.shared.getCachedFileContent(InitGlobVar.hwFilePath) else {
+        guard let content = HardwareCollector.shared.hardwareData else {
             ATHLogger.error(NSLocalizedString("log.serial.no_hardware_info", comment: "No hardware info available from HardwareCollector for serial number"), category: .hardware)
             return ("", "")
         }

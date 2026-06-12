@@ -7,7 +7,7 @@ class HCRAM {
     // Shared parsed memory lines for efficiency
     private lazy var parsedMemoryLines: [String] = {
         ATHLogger.debug(NSLocalizedString("log.ram.parsing_lines", comment: "Parsing memory file lines"), category: .hardware)
-        guard let content = HardwareCollector.shared.getCachedFileContent(InitGlobVar.sysmemFilePath) else {
+        guard let content = HardwareCollector.shared.memoryData else {
             ATHLogger.error(NSLocalizedString("log.ram.no_data", comment: "No RAM data available from HardwareCollector"), category: .hardware)
             return []
         }
@@ -29,35 +29,6 @@ class HCRAM {
         if !memoryInfo.speed.isEmpty { result += " \(memoryInfo.speed)" }
         if memoryInfo.type.contains("D") { result += " \(memoryInfo.type)" }
         return result
-    }
-    
-    func getMemDesc() -> String {
-        ATHLogger.debug(NSLocalizedString("log.ram.getting_description", comment: "Getting RAM description string"), category: .hardware)
-
-        // Use shared parsed lines instead of re-parsing
-        return parsedMemoryLines
-            .filter { line in
-                ["ECC:", "BANK", "Size:", "Type:", "Speed:", "Manufacturer:", "Part Number:"]
-                    .contains { line.contains($0) }
-            }
-            .joined(separator: "\n")
-    }
-
-    func getMemDescArray() -> String {
-        ATHLogger.debug(NSLocalizedString("log.ram.getting_description_array", comment: "Getting RAM description array string"), category: .hardware)
-
-        // Use shared parsed lines instead of re-parsing
-        let relevantLines = parsedMemoryLines
-            .filter { line in
-                ["BANK", "Size:", "Type:", "Speed:", "Manufacturer:", "Part Number:"]
-                    .contains { line.contains($0) }
-            }
-            .map { $0.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: ":", with: ": ") }
-
-        return relevantLines
-            .split(whereSeparator: { $0.starts(with: "BANK") })
-            .map { "BANK " + $0.joined(separator: " ") }
-            .joined(separator: "\n")
     }
     
     private func parseMemoryDetails() -> (type: String, speed: String) {
