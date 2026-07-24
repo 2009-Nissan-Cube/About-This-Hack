@@ -557,9 +557,14 @@ class UpdateController {
         ATHLogger.info(String(format: NSLocalizedString("log.update.copying_new_version", comment: "Copying new version"), thisComponent, InitGlobVar.thisApplicationName), category: .system)
         notify(title: NSLocalizedString("update.notify.installing", comment: "New Version Install"), informativeText: "")
 
-        let stagedApplicationURL = InitGlobVar.applicationsDirectoryURL.appendingPathComponent("\(InitGlobVar.thisApplicationName).app.update-staging", isDirectory: true)
+        let parentDirectoryURL = InitGlobVar.installParentDirectoryURL
+        let stagedApplicationURL = parentDirectoryURL.appendingPathComponent("\(InitGlobVar.thisApplicationName).app.update-staging", isDirectory: true)
 
         do {
+            if !fileManager.fileExists(atPath: parentDirectoryURL.path) {
+                try fileManager.createDirectory(at: parentDirectoryURL, withIntermediateDirectories: true)
+            }
+
             if fileManager.fileExists(atPath: stagedApplicationURL.path) {
                 try fileManager.removeItem(at: stagedApplicationURL)
             }

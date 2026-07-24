@@ -41,9 +41,24 @@ class InitGlobVar {
     static var applicationsDirectoryURL: URL {
         URL(fileURLWithPath: allAppliLocation, isDirectory: true)
     }
-    static var thisAppliLocation: String { "\(allAppliLocation)/\(thisApplicationName).app" }
+
+    /// Path used for updates. Prefer the running .app bundle so we don't
+    /// replace /Applications when the app is launched from Downloads/DMG.
     static var installedApplicationURL: URL {
-        applicationsDirectoryURL.appendingPathComponent("\(thisApplicationName).app", isDirectory: true)
+        let bundleURL = Bundle.main.bundleURL
+        if bundleURL.pathExtension.lowercased() == "app" {
+            return bundleURL.standardizedFileURL
+        }
+        return applicationsDirectoryURL.appendingPathComponent("\(thisApplicationName).app", isDirectory: true)
+    }
+
+    static var thisAppliLocation: String {
+        installedApplicationURL.path
+    }
+
+    /// Parent directory used when staging a replacement app bundle.
+    static var installParentDirectoryURL: URL {
+        installedApplicationURL.deletingLastPathComponent()
     }
 
     // OCLP Dict File (if exists) where Patch Version Commit and DateTime will be extracted
