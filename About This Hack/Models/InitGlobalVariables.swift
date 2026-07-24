@@ -74,7 +74,7 @@ class InitGlobVar {
 
     // Used by the support view
     static var macOSUserGuideURL = "https://support.apple.com/guide/mac-help/welcome/mac"
-    static var whatsNewInMacOSURL = "https://www.apple.com/macos/ventura/"
+    static var whatsNewInMacOSURL = "https://www.apple.com/macos/"
     static var AppleSupportURL = "https://support.apple.com"
     static var HackintoshInstallURL = "https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html#table-of-contents"
     static var MacBasicsURL = "https://help.apple.com/macos/big-sur/mac-basics/"
