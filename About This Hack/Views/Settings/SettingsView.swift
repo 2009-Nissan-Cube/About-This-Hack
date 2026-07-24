@@ -158,27 +158,50 @@ class SettingsViewModel: ObservableObject {
                     comment: "Image must be 1024x1024 pixels. Current size: %dx%d"), width, height))
                 return
             }
-            
-            // Save the path
-            self.defaults.set(path, forKey: CustomLogoConstants.customLogoPathKey)
-            
-            // Update display
-            self.logoImage = image
+
+            // Copy into Application Support so the logo survives source moves/deletes.
+            let storedURL = CustomLogoConstants.storedLogoURL
+            do {
+                try FileManager.default.createDirectory(
+                    at: CustomLogoConstants.supportDirectoryURL,
+                    withIntermediateDirectories: true
+                )
+                if FileManager.default.fileExists(atPath: storedURL.path) {
+                    try FileManager.default.removeItem(at: storedURL)
+                }
+                try FileManager.default.copyItem(atPath: path, toPath: storedURL.path)
+            } catch {
+                self.showError(NSLocalizedString("settings.logo.error.invalid", comment: "Invalid image file"))
+                return
+            }
+
+            self.defaults.set(storedURL.path, forKey: CustomLogoConstants.customLogoPathKey)
+
+            // Prefer the stored copy for display so we validate the copy worked.
+            self.logoImage = NSImage(contentsOf: storedURL) ?? image
             self.statusMessage = NSLocalizedString("settings.logo.success", comment: "Custom logo applied successfully")
             self.statusColor = .green
-            
+
             // Post notification to update the Overview tab
             NotificationCenter.default.post(name: .customLogoDidChange, object: nil)
         }
     }
     
     func resetToDefault() {
+        if let logoPath = defaults.string(forKey: CustomLogoConstants.customLogoPathKey),
+           logoPath == CustomLogoConstants.storedLogoURL.path ||
+            logoPath.hasPrefix(CustomLogoConstants.supportDirectoryURL.path) {
+            try? FileManager.default.removeItem(atPath: logoPath)
+        } else {
+            try? FileManager.default.removeItem(at: CustomLogoConstants.storedLogoURL)
+        }
+
         defaults.removeObject(forKey: CustomLogoConstants.customLogoPathKey)
         loadCustomLogo()
-        
+
         // Post notification to update the Overview tab
         NotificationCenter.default.post(name: .customLogoDidChange, object: nil)
-        
+
         statusMessage = NSLocalizedString("settings.logo.reset_success", comment: "Logo reset to default")
         statusColor = .green
     }
