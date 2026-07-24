@@ -1,7 +1,7 @@
 # About This Hack: Your Mac's Story, Beautifully Told
 
 ![Platform](https://img.shields.io/badge/macOS-12+-green.svg)
-![Platform](https://img.shields.io/badge/Xcode-15-lavender.svg)
+![Platform](https://img.shields.io/badge/Xcode-27-lavender.svg)
 ![Downloads](https://img.shields.io/github/downloads/2009-Nissan-Cube/About-This-Hack/total?label=Downloads&color=9494ff)
 
 ![image](https://github.com/user-attachments/assets/abf73d22-1228-424a-ad50-705150adbef8)
@@ -14,7 +14,7 @@ Discover the heart of your macOS device with About This Hack: a sleek, intuitive
 
 A throwback to the (better) About This Mac view from pre-Ventura. Get instant access to essential system specs, including your computer model, OS version, and processor details. Hackintosh users will appreciate the Clover or OpenCore bootloader version display.
 
-<img width="692" alt="OpenCore Hackintosh" text="OpenCore Hackintosh" src="https://github.com/0xCUB3/About-This-Hack/assets/94565160/18d29cff-1db1-4060-8e02-64307dafa20c">
+<img width="692" alt="OpenCore Hackintosh" text="OpenCore Hackintosh" src="https://github.com/2009-Nissan-Cube/About-This-Hack/assets/94565160/18d29cff-1db1-4060-8e02-64307dafa20c">
 
 > 💡 Pro Tip: Click your serial number to hide it for screenshots!
 
@@ -22,27 +22,27 @@ A throwback to the (better) About This Mac view from pre-Ventura. Get instant ac
 
 Visualize up to three of your connected displays with their respective resolutions.
 
-![CleanShot 2024-06-29 at 13 14 22@2x](https://github.com/0xCUB3/About-This-Hack/assets/94565160/99a06cba-a491-4db3-a0f3-b69cd6ef8cca)
+![CleanShot 2024-06-29 at 13 14 22@2x](https://github.com/2009-Nissan-Cube/About-This-Hack/assets/94565160/99a06cba-a491-4db3-a0f3-b69cd6ef8cca)
 
-![CleanShot 2024-06-29 at 13 10 16](https://github.com/0xCUB3/About-This-Hack/assets/94565160/b5b433bc-b708-4646-9301-84c8ff043315)
+![CleanShot 2024-06-29 at 13 10 16](https://github.com/2009-Nissan-Cube/About-This-Hack/assets/94565160/b5b433bc-b708-4646-9301-84c8ff043315)
 
 ## Storage
 
 Get a clear picture of your startup disk, including name, available space, and disk type, all presented with an easy-to-read usage bar.
 
-![CleanShot 2024-06-29 at 13 10 59](https://github.com/0xCUB3/About-This-Hack/assets/94565160/96ca5d35-3026-4d42-a171-6f6fcb3daeae)
+![CleanShot 2024-06-29 at 13 10 59](https://github.com/2009-Nissan-Cube/About-This-Hack/assets/94565160/96ca5d35-3026-4d42-a171-6f6fcb3daeae)
 
 ## Support
 
 Access a list of support resources for both Mac and Hackintosh users.
 
-![CleanShot 2024-06-29 at 13 11 22](https://github.com/0xCUB3/About-This-Hack/assets/94565160/49c1d426-b006-4a4c-a960-49cc4481638f)
+![CleanShot 2024-06-29 at 13 11 22](https://github.com/2009-Nissan-Cube/About-This-Hack/assets/94565160/49c1d426-b006-4a4c-a960-49cc4481638f)
 
 ---
 
 Some values show more details when hovered over. See if you can find them all! 😉
 
-![CleanShot 2024-06-29 at 13 11 56](https://github.com/0xCUB3/About-This-Hack/assets/94565160/227bae23-5157-4895-965a-86e826e947f9)
+![CleanShot 2024-06-29 at 13 11 56](https://github.com/2009-Nissan-Cube/About-This-Hack/assets/94565160/227bae23-5157-4895-965a-86e826e947f9)
 
 There is also a native auto-updater that reminds you when a new version releases!
 
@@ -63,7 +63,7 @@ Want to personalize your About This Hack? You can now replace the macOS logo in 
 
 ## Getting Started
 
-1. Download the latest release [here](https://github.com/0xCUB3/About-This-Hack/releases/latest)
+1. Download the latest release [here](https://github.com/2009-Nissan-Cube/About-This-Hack/releases/latest)
 2. Drag the app to your Applications folder
 3. Launch and explore!
 4. If you get [this error](https://user-images.githubusercontent.com/79278890/111886978-4af4cb80-89a8-11eb-90c8-522a89abb48e.png) when opening
@@ -101,5 +101,5 @@ About This Hack is a labor of love, bringing back the classic Mac experience wit
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=0xCUB3/About-This-Hack&type=Date)](https://star-history.com/#0xCUB3/About-This-Hack&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=2009-Nissan-Cube/About-This-Hack&type=Date)](https://star-history.com/#2009-Nissan-Cube/About-This-Hack&Date)
 
