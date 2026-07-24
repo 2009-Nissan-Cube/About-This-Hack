@@ -163,7 +163,21 @@ class UpdateController {
     private static let updateCheckTimeout: TimeInterval = 10.0
     private static let downloadTimeout: TimeInterval = 120.0
     private static let updateQueue = DispatchQueue(label: "AboutThisHack.UpdateController", qos: .userInitiated)
-    private static var pendingRelease: GitHubRelease?
+    private static let pendingReleaseLock = NSLock()
+    private static var _pendingRelease: GitHubRelease?
+
+    private static var pendingRelease: GitHubRelease? {
+        get {
+            pendingReleaseLock.lock()
+            defer { pendingReleaseLock.unlock() }
+            return _pendingRelease
+        }
+        set {
+            pendingReleaseLock.lock()
+            _pendingRelease = newValue
+            pendingReleaseLock.unlock()
+        }
+    }
 
     static func checkForUpdatesAsync(completion: @escaping (Bool) -> Void) {
         ATHLogger.info(String(format: NSLocalizedString("log.update.checking", comment: "Checking for updates"), thisComponent), category: .system)
