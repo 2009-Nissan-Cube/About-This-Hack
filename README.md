@@ -1,6 +1,6 @@
 # About This Hack: Your Mac's Story, Beautifully Told
 
-![Platform](https://img.shields.io/badge/macOS-11.5+-green.svg)
+![Platform](https://img.shields.io/badge/macOS-12+-green.svg)
 ![Platform](https://img.shields.io/badge/Xcode-15-lavender.svg)
 ![Downloads](https://img.shields.io/github/downloads/2009-Nissan-Cube/About-This-Hack/total?label=Downloads&color=9494ff)
 
