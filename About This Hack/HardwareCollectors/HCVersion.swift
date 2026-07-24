@@ -118,6 +118,7 @@ class HCVersion {
 
         let version: MacOSVersion
         switch osNumber.prefix(2) {
+        case "27": version = .goldenGate
         case "26": version = .tahoe
         case "15": version = .sequoia
         case "14": version = .sonoma
@@ -139,6 +140,7 @@ class HCVersion {
         case .sonoma: return "Sonoma"
         case .sequoia: return "Sequoia"
         case .tahoe: return "Tahoe"
+        case .goldenGate: return "Golden Gate"
         case .unknown: return ""
         }
     }
@@ -191,6 +193,7 @@ class HCVersion {
         case .sonoma: return "Sonoma"
         case .sequoia: return "Sequoia"
         case .tahoe: return "Tahoe"
+        case .goldenGate: return "Golden Gate"
         case .unknown: return "Unknown"
         }
     }
@@ -224,5 +227,5 @@ extension String {
 }
 
 enum MacOSVersion {
-    case bigSur, monterey, ventura, sonoma, sequoia, tahoe, unknown
+    case bigSur, monterey, ventura, sonoma, sequoia, tahoe, goldenGate, unknown
 }
