@@ -222,8 +222,8 @@ class HCMacModel {
         "Mac16,6": "MacBook Pro (14-inch, Nov 2024)", // M4 Pro/Max
         "Mac16,8": "MacBook Pro (14-inch, Nov 2024)", // M4 Pro/Max
         "Mac17,2": "MacBook Pro (14-inch, M5, 2025)",
-        "Mac17,7": "MacBook Pro (14-inch, M5 Pro/M5 Max, 2026)",
-        "Mac17,9": "MacBook Pro (14-inch, M5 Pro/M5 Max, 2026)",
+        "Mac17,7": "MacBook Pro (14-inch, M5 Max, 2026)",
+        "Mac17,9": "MacBook Pro (14-inch, M5 Pro, 2026)",
         
         // 15-inch
         "MacBookPro4,1": "MacBook Pro (15/17-inch, 2008)",
@@ -251,8 +251,8 @@ class HCMacModel {
         "Mac15,11": "MacBook Pro (16-inch, M3 Max, Late 2023)",
         "Mac16,5": "MacBook Pro (16-inch, Nov 2024)",
         "Mac16,7": "MacBook Pro (16-inch, Nov 2024)",
-        "Mac17,6": "MacBook Pro (16-inch, M5 Pro/M5 Max, 2026)",
-        "Mac17,8": "MacBook Pro (16-inch, M5 Pro/M5 Max, 2026)",
+        "Mac17,6": "MacBook Pro (16-inch, M5 Max, 2026)",
+        "Mac17,8": "MacBook Pro (16-inch, M5 Pro, 2026)",
         // 17-inch
         "MacBookPro8,3": "MacBook Pro (17-inch, Late 2011)",
         // In the rare case that the Mac model is not found
