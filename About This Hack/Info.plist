@@ -26,9 +26,5 @@
 	<string>@ 2021-2026 Alexander Skula</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>SUFeedURL</key>
-	<string>https://0xcube.netlify.app/updates.xml</string>
-	<key>SUPublicEDKey</key>
-	<string>+ugzpdsp1RQDH/YVaRuh7HYK1rgy8GZNEANeptJRjss=</string>
 </dict>
 </plist>
