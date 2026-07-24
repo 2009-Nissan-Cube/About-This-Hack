@@ -32,7 +32,7 @@ class HCGPU {
     private func computeGPUInfo() -> [GPUSnapshot] {
         ATHLogger.debug(NSLocalizedString("log.gpu.init", comment: "Initializing GPU Info"), category: .hardware)
 
-        let devices = MTLCopyAllDevices().map { device in
+        let metalDevices = MTLCopyAllDevices().map { device in
             GPUSnapshot(
                 name: normalizeGPUName(device.name),
                 memoryDescription: formatMemory(device.recommendedMaxWorkingSetSize),
@@ -42,11 +42,85 @@ class HCGPU {
             )
         }
 
-        if devices.isEmpty {
+        if !metalDevices.isEmpty {
+            ATHLogger.debug(String(format: NSLocalizedString("log.gpu.parsing_data", comment: "Parsing GPU data"), metalDevices.count), category: .hardware)
+            return metalDevices
+        }
+
+        // Some Hackintosh setups expose GPUs via system_profiler but not Metal.
+        let profilerDevices = parseSystemProfilerGPUs()
+        if profilerDevices.isEmpty {
             ATHLogger.error(NSLocalizedString("log.gpu.no_data", comment: "No GPU data available from HardwareCollector"), category: .hardware)
         } else {
-            ATHLogger.debug(String(format: NSLocalizedString("log.gpu.parsing_data", comment: "Parsing GPU data"), devices.count), category: .hardware)
+            ATHLogger.debug(String(format: NSLocalizedString("log.gpu.parsing_data", comment: "Parsing GPU data"), profilerDevices.count), category: .hardware)
         }
+        return profilerDevices
+    }
+
+    private func parseSystemProfilerGPUs() -> [GPUSnapshot] {
+        guard let content = HardwareCollector.shared.displaysData else {
+            return []
+        }
+
+        var devices: [GPUSnapshot] = []
+        var currentName = ""
+        var currentMemory = ""
+        var currentMetal = ""
+        var currentBus = ""
+
+        func flushCurrent() {
+            let trimmedName = currentName.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !trimmedName.isEmpty else {
+                currentName = ""
+                currentMemory = ""
+                currentMetal = ""
+                currentBus = ""
+                return
+            }
+
+            devices.append(
+                GPUSnapshot(
+                    name: normalizeGPUName(trimmedName),
+                    memoryDescription: currentMemory,
+                    metalDescription: currentMetal.isEmpty ? "Unknown" : currentMetal,
+                    isLowPower: false,
+                    isRemovable: currentBus.localizedCaseInsensitiveContains("PCIe") ||
+                        currentBus.localizedCaseInsensitiveContains("External")
+                )
+            )
+
+            currentName = ""
+            currentMemory = ""
+            currentMetal = ""
+            currentBus = ""
+        }
+
+        for rawLine in content.components(separatedBy: .newlines) {
+            let line = rawLine.trimmingCharacters(in: .whitespaces)
+            guard !line.isEmpty else { continue }
+
+            if line.hasPrefix("Chipset Model:") {
+                flushCurrent()
+                currentName = line.replacingOccurrences(of: "Chipset Model:", with: "").trimmingCharacters(in: .whitespaces)
+            } else if line.hasPrefix("VRAM") {
+                // e.g. "VRAM (Total): 8 GB" / "VRAM (Dynamic, Max): 1 GB"
+                if let colon = line.firstIndex(of: ":") {
+                    currentMemory = String(line[line.index(after: colon)...]).trimmingCharacters(in: .whitespaces)
+                }
+            } else if line.hasPrefix("Metal Support:") || line.hasPrefix("Metal:") {
+                if let colon = line.firstIndex(of: ":") {
+                    currentMetal = String(line[line.index(after: colon)...]).trimmingCharacters(in: .whitespaces)
+                }
+            } else if line.hasPrefix("Bus:") {
+                if let colon = line.firstIndex(of: ":") {
+                    currentBus = String(line[line.index(after: colon)...]).trimmingCharacters(in: .whitespaces)
+                }
+            } else if line.hasPrefix("Displays:") {
+                // Display section starts; keep current GPU and stop parsing nested display keys.
+                continue
+            }
+        }
+        flushCurrent()
 
         return devices
     }

@@ -9,6 +9,7 @@ import Foundation
 private struct HardwareSnapshot {
     let hardwareData: String
     let memoryData: String
+    let displaysData: String
     let oclpData: String?
 }
 
@@ -40,6 +41,11 @@ class HardwareCollector {
     /// Raw `system_profiler SPMemoryDataType` output.
     var memoryData: String? {
         currentSnapshot()?.memoryData.nilIfEmpty
+    }
+
+    /// Raw `system_profiler SPDisplaysDataType` output.
+    var displaysData: String? {
+        currentSnapshot()?.displaysData.nilIfEmpty
     }
 
     /// Contents of the OpenCore Legacy Patcher plist, if present.
@@ -135,6 +141,7 @@ class HardwareCollector {
 
         var hardwareData = ""
         var memoryData = ""
+        var displaysData = ""
 
         group.enter()
         collectionQueue.async {
@@ -161,6 +168,16 @@ class HardwareCollector {
             group.leave()
         }
 
+        group.enter()
+        collectionQueue.async {
+            displaysData = self.collectCommandOutput(
+                executablePath: "/usr/sbin/system_profiler",
+                arguments: ["SPDisplaysDataType"],
+                label: "SPDisplaysDataType"
+            )
+            group.leave()
+        }
+
         group.wait()
 
         let oclpData = try? String(contentsOfFile: InitGlobVar.oclpXmlFilePath, encoding: .utf8)
@@ -168,6 +185,7 @@ class HardwareCollector {
         return HardwareSnapshot(
             hardwareData: hardwareData,
             memoryData: memoryData,
+            displaysData: displaysData,
             oclpData: oclpData
         )
     }
