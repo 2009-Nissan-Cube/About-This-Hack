@@ -99,7 +99,3 @@ About This Hack is a labor of love, bringing back the classic Mac experience wit
   </a>
 </p>
 
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=2009-Nissan-Cube/About-This-Hack&type=Date)](https://star-history.com/#2009-Nissan-Cube/About-This-Hack&Date)
-
