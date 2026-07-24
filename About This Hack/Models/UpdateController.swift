@@ -208,12 +208,11 @@ class UpdateController {
                 }
 
             case .failure(let error):
+                // Network / API failures during the silent launch check should not
+                // interrupt the user with an alert every time the app opens.
+                let updateError = (error as? UpdateError) ?? .latestReleaseRequestFailed(error)
+                ATHLogger.error("\(thisComponent) : \(updateError.alertMessage) \(updateError.logDescription)", category: .system)
                 DispatchQueue.main.async {
-                    if let updateError = error as? UpdateError {
-                        presentInformationalUpdateError(updateError)
-                    } else {
-                        presentInformationalUpdateError(.latestReleaseRequestFailed(error))
-                    }
                     completion(false)
                 }
             }
