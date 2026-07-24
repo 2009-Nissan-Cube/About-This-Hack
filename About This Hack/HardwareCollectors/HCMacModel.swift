@@ -3,16 +3,41 @@ import Foundation
 class HCMacModel {
     static let shared = HCMacModel()
     private init() {}
-    
-    private(set) var macName: String = "Hackintosh Extreme Plus"
-    private(set) var dataHasBeenSet: Bool = false
+
+    private let stateLock = NSLock()
+    private var _macName: String = "Hackintosh Extreme Plus"
+    private var _dataHasBeenSet: Bool = false
+
+    var macName: String {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+        return _macName
+    }
+
+    var dataHasBeenSet: Bool {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+        return _dataHasBeenSet
+    }
     
     func getMacModel() {
-        guard !dataHasBeenSet else { return }
+        stateLock.lock()
+        if _dataHasBeenSet {
+            stateLock.unlock()
+            return
+        }
+        stateLock.unlock()
+
         ATHLogger.debug(NSLocalizedString("log.macmodel.init", comment: "Initializing Mac Model Info"), category: .hardware)
-        macName = getMacName()
-        ATHLogger.debug(String(format: NSLocalizedString("log.macmodel.name", comment: "Mac Name"), macName), category: .hardware)
-        dataHasBeenSet = true
+        let resolvedName = getMacName()
+        ATHLogger.debug(String(format: NSLocalizedString("log.macmodel.name", comment: "Mac Name"), resolvedName), category: .hardware)
+
+        stateLock.lock()
+        if !_dataHasBeenSet {
+            _macName = resolvedName
+            _dataHasBeenSet = true
+        }
+        stateLock.unlock()
     }
 
     func getModelIdentifier() -> String {
