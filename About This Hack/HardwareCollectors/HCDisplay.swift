@@ -18,14 +18,31 @@ class HCDisplay {
 
     private var displays: [DisplaySnapshot] {
         displayLock.lock()
-        defer { displayLock.unlock() }
-
         if let cached = _displays {
+            displayLock.unlock()
             return cached
         }
+        displayLock.unlock()
 
-        let computed = computeDisplays()
+        // NSScreen is AppKit and must be read on the main thread.
+        let computed: [DisplaySnapshot]
+        if Thread.isMainThread {
+            computed = computeDisplays()
+        } else {
+            var snapshots: [DisplaySnapshot] = []
+            DispatchQueue.main.sync {
+                snapshots = computeDisplays()
+            }
+            computed = snapshots
+        }
+
+        displayLock.lock()
+        if let cached = _displays {
+            displayLock.unlock()
+            return cached
+        }
         _displays = computed
+        displayLock.unlock()
         return computed
     }
 

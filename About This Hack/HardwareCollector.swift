@@ -108,15 +108,25 @@ class HardwareCollector {
     }
 
     /// Populates the collector caches off the main thread so views render without blocking.
+    /// Display info is warmed on the main thread because it uses AppKit (`NSScreen`).
     private func warmCollectors() {
         HCVersion.shared.getVersion()
         HCMacModel.shared.getMacModel()
         _ = HCCPU.shared.getCPU()
         _ = HCRAM.shared.getRam()
         _ = HCStartupDisk.shared.getStartupDisk()
-        _ = HCDisplay.shared.getDisp()
         _ = HCGPU.shared.getGPU()
         _ = HCSerialNumber.shared.getSerialNumber()
+
+        // NSScreen must be accessed on the main thread.
+        let displayWarmup = DispatchWorkItem {
+            _ = HCDisplay.shared.getDisp()
+        }
+        if Thread.isMainThread {
+            displayWarmup.perform()
+        } else {
+            DispatchQueue.main.sync(execute: displayWarmup)
+        }
     }
 
     private func collectSnapshot() -> HardwareSnapshot {
