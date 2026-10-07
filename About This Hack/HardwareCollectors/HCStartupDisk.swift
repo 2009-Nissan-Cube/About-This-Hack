@@ -1,188 +1,87 @@
-import Foundation
 import DiskArbitration
+import Foundation
 import IOKit
 
-private struct StartupDiskSnapshot {
-    let volumeName: String
-    let totalBytes: Int64
-    let availableBytes: Int64
-    let isSolidState: Bool
-    let deviceLocation: String
-    let deviceProtocol: String
-
-    var percentFree: Double {
-        guard totalBytes > 0 else { return 0 }
-        return Double(availableBytes) / Double(totalBytes)
-    }
-
-    var percentUsed: Double {
-        1 - percentFree
-    }
-}
-
-private struct DiskArbitrationDeviceInfo {
-    let isInternal: Bool
-    let protocolName: String
-    let isSolidState: Bool
-}
-
-class HCStartupDisk {
+/// Startup volume details. Device facts are cached; capacity is re-read after `invalidate()`.
+final class HCStartupDisk {
     static let shared = HCStartupDisk()
     private init() {}
 
-    private let lock = NSLock()
-    private var _snapshot: StartupDiskSnapshot?
+    private struct Capacity {
+        let volumeName: String
+        let totalBytes: Int64
+        let availableBytes: Int64
+    }
 
-    private var snapshot: StartupDiskSnapshot {
+    private let volumeURL = URL(fileURLWithPath: "/", isDirectory: true)
+    private let lock = NSLock()
+    private var cachedCapacity: Capacity?
+    private lazy var device: (isInternal: Bool, protocolName: String, isSolidState: Bool) = readDevice()
+
+    private var capacity: Capacity {
         lock.lock()
         defer { lock.unlock() }
+        if let cachedCapacity { return cachedCapacity }
 
-        if let cached = _snapshot {
-            return cached
-        }
-
-        let computed = computeSnapshot()
-        _snapshot = computed
+        let values = try? volumeURL.resourceValues(forKeys: [
+            .volumeNameKey, .volumeTotalCapacityKey,
+            .volumeAvailableCapacityForImportantUsageKey, .volumeAvailableCapacityKey
+        ])
+        let important = values?.volumeAvailableCapacityForImportantUsage ?? 0
+        let computed = Capacity(
+            volumeName: values?.volumeName?.nilIfEmpty ?? "/",
+            totalBytes: Int64(values?.volumeTotalCapacity ?? 0),
+            availableBytes: important > 0 ? important : Int64(values?.volumeAvailableCapacity ?? 0)
+        )
+        cachedCapacity = computed
         return computed
     }
 
-    var isSolidState: Bool { snapshot.isSolidState }
-    var deviceLocation: String { snapshot.deviceLocation }
-    var deviceProtocol: String { snapshot.deviceProtocol }
-    var percentUsed: Double { snapshot.percentUsed }
-    var totalGB: Double { bytesToGB(snapshot.totalBytes) }
-    var availableGB: Double { bytesToGB(snapshot.availableBytes) }
+    private var deviceInfo: (isInternal: Bool, protocolName: String, isSolidState: Bool) {
+        lock.lock()
+        defer { lock.unlock() }
+        return device
+    }
+
+    func invalidate() {
+        lock.lock()
+        cachedCapacity = nil
+        lock.unlock()
+    }
+
+    var isSolidState: Bool { deviceInfo.isSolidState }
+    var deviceLocation: String { deviceInfo.isInternal ? "Internal" : "External" }
+    var deviceProtocol: String { deviceInfo.protocolName }
+    var totalGB: Double { Double(capacity.totalBytes) / 1e9 }
+    var availableGB: Double { Double(capacity.availableBytes) / 1e9 }
+    var percentUsed: Double { totalGB > 0 ? 1 - availableGB / totalGB : 0 }
 
     func getStartupDisk() -> String {
-        ATHLogger.debug(NSLocalizedString("log.startup.getting_name", comment: "Getting startup disk name string"), category: .hardware)
-        return snapshot.volumeName
+        capacity.volumeName
     }
 
     func getStartupDiskInfo() -> String {
-        ATHLogger.debug(NSLocalizedString("log.startup.getting_detailed", comment: "Getting detailed startup disk info string"), category: .hardware)
-        let info = snapshot
-        let percentFreeText = String(format: "%.2f", info.percentFree * 100)
-
-        return """
-        \(info.volumeName) (\(info.deviceLocation) \(info.deviceProtocol))
-        \(String(format: "%.2f", bytesToGB(info.totalBytes))) GB (\(String(format: "%.2f", bytesToGB(info.availableBytes))) GB \(NSLocalizedString("storage.available", comment: "Available storage label")) - \(percentFreeText)%)
-        """
+        let available = String(format: "%.2f GB %@ - %.2f%%", availableGB, NSLocalizedString("storage.available", comment: "Available storage label"), (1 - percentUsed) * 100)
+        return "\(getStartupDisk()) (\(deviceLocation) \(deviceProtocol))\n\(String(format: "%.2f", totalGB)) GB (\(available))"
     }
 
-    private func computeSnapshot() -> StartupDiskSnapshot {
-        ATHLogger.debug(NSLocalizedString("log.startup.init", comment: "Initializing Startup Disk Info"), category: .hardware)
-
-        let volumeURL = URL(fileURLWithPath: "/", isDirectory: true)
-        let resourceValues = try? volumeURL.resourceValues(forKeys: [
-            .volumeNameKey,
-            .volumeTotalCapacityKey,
-            .volumeAvailableCapacityForImportantUsageKey,
-            .volumeAvailableCapacityKey
-        ])
-
-        let volumeName = resourceValues?.volumeName ?? FileManager.default.displayName(atPath: volumeURL.path)
-        let totalCapacity = resourceValues?.volumeTotalCapacity ?? 0
-        let importantUsageCapacity = resourceValues?.volumeAvailableCapacityForImportantUsage ?? 0
-        let fallbackCapacity = Int64(resourceValues?.volumeAvailableCapacity ?? 0)
-        let totalBytes = Int64(totalCapacity)
-        let availableBytes = importantUsageCapacity > 0 ? importantUsageCapacity : fallbackCapacity
-        let deviceInfo = getDeviceInfo(for: volumeURL)
-
-        ATHLogger.debug(String(format: NSLocalizedString("log.startup.parsed_name", comment: "Parsed Startup Disk Name"), volumeName), category: .hardware)
-
-        return StartupDiskSnapshot(
-            volumeName: volumeName.isEmpty ? "/" : volumeName,
-            totalBytes: totalBytes,
-            availableBytes: availableBytes,
-            isSolidState: deviceInfo?.isSolidState ?? false,
-            deviceLocation: (deviceInfo?.isInternal ?? true) ? "Internal" : "External",
-            deviceProtocol: normalizeProtocol(deviceInfo?.protocolName)
-        )
-    }
-
-    private func getDeviceInfo(for volumeURL: URL) -> DiskArbitrationDeviceInfo? {
+    private func readDevice() -> (isInternal: Bool, protocolName: String, isSolidState: Bool) {
         guard let session = DASessionCreate(kCFAllocatorDefault),
               let disk = DADiskCreateFromVolumePath(kCFAllocatorDefault, session, volumeURL as CFURL),
-              let description = DADiskCopyDescription(disk) as NSDictionary? else {
-            return nil
+              let description = DADiskCopyDescription(disk) as? [String: Any] else {
+            return (true, "Unknown", false)
         }
 
-        let isInternal = description[kDADiskDescriptionDeviceInternalKey as String] as? Bool ?? true
-        let protocolName = description[kDADiskDescriptionDeviceProtocolKey as String] as? String ?? "Unknown"
-        let ioMedia = DADiskCopyIOMedia(disk)
-        defer {
-            if ioMedia != 0 {
-                IOObjectRelease(ioMedia)
-            }
-        }
+        let media = DADiskCopyIOMedia(disk)
+        defer { if media != 0 { IOObjectRelease(media) } }
+        let options = IOOptionBits(kIORegistryIterateRecursively | kIORegistryIterateParents)
+        let characteristics = IORegistryEntrySearchCFProperty(media, kIOServicePlane, "Device Characteristics" as CFString, kCFAllocatorDefault, options) as? [String: Any]
+        let mediumType = characteristics?["Medium Type"] as? String
 
-        let isSolidState = ioMedia != 0 ? mediaIsSolidState(ioMedia) : false
-        return DiskArbitrationDeviceInfo(isInternal: isInternal, protocolName: protocolName, isSolidState: isSolidState)
-    }
-
-    private func mediaIsSolidState(_ media: io_service_t) -> Bool {
-        if let deviceCharacteristics = copyDeviceCharacteristics(from: media),
-           let mediumType = deviceCharacteristics["Medium Type"] as? String {
-            return mediumType.caseInsensitiveCompare("Solid State") == .orderedSame
-        }
-
-        if let directFlag = copyProperty(named: "Solid State", from: media) as? Bool {
-            return directFlag
-        }
-
-        return false
-    }
-
-    private func copyDeviceCharacteristics(from media: io_service_t) -> [String: Any]? {
-        if let directCharacteristics = copyProperty(named: "Device Characteristics", from: media) as? [String: Any] {
-            return directCharacteristics
-        }
-
-        var current = media
-        var shouldReleaseCurrent = false
-
-        while true {
-            var parent: io_registry_entry_t = 0
-            let status = IORegistryEntryGetParentEntry(current, kIOServicePlane, &parent)
-            guard status == KERN_SUCCESS, parent != 0 else {
-                break
-            }
-
-            if let parentCharacteristics = copyProperty(named: "Device Characteristics", from: parent) as? [String: Any] {
-                if shouldReleaseCurrent {
-                    IOObjectRelease(current)
-                }
-                IOObjectRelease(parent)
-                return parentCharacteristics
-            }
-
-            if shouldReleaseCurrent {
-                IOObjectRelease(current)
-            }
-            current = parent
-            shouldReleaseCurrent = true
-        }
-
-        if shouldReleaseCurrent {
-            IOObjectRelease(current)
-        }
-
-        return nil
-    }
-
-    private func copyProperty(named propertyName: String, from service: io_service_t) -> Any? {
-        IORegistryEntryCreateCFProperty(service, propertyName as CFString, kCFAllocatorDefault, 0)?.takeRetainedValue()
-    }
-
-    private func normalizeProtocol(_ protocolName: String?) -> String {
-        guard let protocolName, !protocolName.isEmpty else {
-            return "Unknown"
-        }
-
-        return protocolName.replacingOccurrences(of: " fabric$", with: "", options: [.regularExpression, .caseInsensitive])
-    }
-
-    private func bytesToGB(_ bytes: Int64) -> Double {
-        Double(bytes) / 1_000_000_000
+        return (
+            description[kDADiskDescriptionDeviceInternalKey as String] as? Bool ?? true,
+            (description[kDADiskDescriptionDeviceProtocolKey as String] as? String)?.nilIfEmpty ?? "Unknown",
+            mediumType?.caseInsensitiveCompare("Solid State") == .orderedSame
+        )
     }
 }

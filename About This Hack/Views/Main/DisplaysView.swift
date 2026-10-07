@@ -2,6 +2,9 @@ import AppKit
 import SwiftUI
 
 struct DisplaysView: View {
+    /// Changes when displays are connected or rearranged.
+    let revision: Int
+
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .topLeading) {

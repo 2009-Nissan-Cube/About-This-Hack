@@ -1,4 +1,3 @@
-import Foundation
 import AppKit
 import CoreGraphics
 
@@ -7,72 +6,70 @@ private struct DisplaySnapshot {
     let resolution: String
     let isBuiltIn: Bool
     let scale: Double
+    let diagonalInches: Double?
 }
 
-class HCDisplay {
+/// Connected displays. AppKit-backed, so main thread only; `invalidate()` on screen changes.
+final class HCDisplay {
     static let shared = HCDisplay()
     private init() {}
 
-    private let displayLock = NSLock()
-    private var _displays: [DisplaySnapshot]?
+    private var cachedDisplays: [DisplaySnapshot]?
 
     private var displays: [DisplaySnapshot] {
-        displayLock.lock()
-        if let cached = _displays {
-            displayLock.unlock()
-            return cached
+        dispatchPrecondition(condition: .onQueue(.main))
+        if let cachedDisplays {
+            return cachedDisplays
         }
-        displayLock.unlock()
-
-        // NSScreen is AppKit and must be read on the main thread.
-        let computed: [DisplaySnapshot]
-        if Thread.isMainThread {
-            computed = computeDisplays()
-        } else {
-            var snapshots: [DisplaySnapshot] = []
-            DispatchQueue.main.sync {
-                snapshots = computeDisplays()
-            }
-            computed = snapshots
-        }
-
-        displayLock.lock()
-        if let cached = _displays {
-            displayLock.unlock()
-            return cached
-        }
-        _displays = computed
-        displayLock.unlock()
+        let computed = NSScreen.screens.map(Self.snapshot)
+        cachedDisplays = computed
         return computed
     }
 
+    func invalidate() {
+        cachedDisplays = nil
+    }
+
+    private static func snapshot(of screen: NSScreen) -> DisplaySnapshot {
+        let displayID = (screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? NSNumber)?.uint32Value ?? 0
+        let mode = displayID != 0 ? CGDisplayCopyDisplayMode(displayID) : nil
+        let width = mode?.pixelWidth ?? Int(screen.frame.width * screen.backingScaleFactor)
+        let height = mode?.pixelHeight ?? Int(screen.frame.height * screen.backingScaleFactor)
+        let millimeters = displayID != 0 ? CGDisplayScreenSize(displayID) : .zero
+        let inches = millimeters.width > 0 ? (millimeters.width * millimeters.width + millimeters.height * millimeters.height).squareRoot() / 25.4 : nil
+
+        return DisplaySnapshot(
+            name: screen.localizedName,
+            resolution: "\(width) × \(height)",
+            isBuiltIn: displayID != 0 && CGDisplayIsBuiltin(displayID) != 0,
+            scale: Double(screen.backingScaleFactor),
+            diagonalInches: inches.map(Double.init)
+        )
+    }
+
     func getDisp() -> String {
-        ATHLogger.debug(NSLocalizedString("log.display.getting_main", comment: "Getting main display string"), category: .hardware)
-        guard let primaryDisplay = displays.first else {
+        guard let primary = displays.first else {
             return "Unknown Display"
         }
-        return "\(primaryDisplay.name) (\(primaryDisplay.resolution))"
+        return "\(primary.name) (\(primary.resolution))"
     }
 
     func getDispInfo() -> String {
-        ATHLogger.debug(NSLocalizedString("log.display.getting_all", comment: "Getting all displays info string"), category: .hardware)
         guard !displays.isEmpty else {
             return "No display information available"
         }
 
-        return displays.enumerated().map { index, display in
-            var lines = [String]()
-            lines.append(display.name)
-            lines.append("Resolution: \(display.resolution)")
+        return displays.map { display in
+            var lines = [display.name, "Resolution: \(display.resolution)"]
+            if let inches = display.diagonalInches {
+                lines.append("Size: \(String(format: "%.0f", inches))-inch")
+            }
             lines.append("Built-In: \(display.isBuiltIn ? "Yes" : "No")")
             if display.scale != 1 {
-                lines.append("Scale: \(String(format: "%.1fx", display.scale))")
-            }
-            if index != displays.count - 1 {
-                lines.append("")
+                lines.append("Scale: \(String(format: "%gx", display.scale))")
             }
             return lines.joined(separator: "\n")
-        }.joined(separator: "\n")
+        }.joined(separator: "\n\n")
     }
 
     func getDisplayNames() -> [String] {
@@ -81,30 +78,5 @@ class HCDisplay {
 
     func getDisplayResolutions() -> [String] {
         displays.map(\.resolution)
-    }
-
-    private func computeDisplays() -> [DisplaySnapshot] {
-        ATHLogger.debug(NSLocalizedString("log.display.init", comment: "Initializing Display Info"), category: .hardware)
-
-        let snapshots = NSScreen.screens.map { screen -> DisplaySnapshot in
-            let displayID = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? NSNumber
-            let cgDisplayID = CGDirectDisplayID(displayID?.uint32Value ?? 0)
-            let mode = cgDisplayID != 0 ? CGDisplayCopyDisplayMode(cgDisplayID) : nil
-            let pixelWidth = mode?.pixelWidth ?? Int(screen.frame.width * screen.backingScaleFactor)
-            let pixelHeight = mode?.pixelHeight ?? Int(screen.frame.height * screen.backingScaleFactor)
-            let resolution = "\(pixelWidth) x \(pixelHeight)"
-            let builtIn = cgDisplayID != 0 ? CGDisplayIsBuiltin(cgDisplayID) != 0 : false
-            let displayName = screen.localizedName
-
-            return DisplaySnapshot(
-                name: displayName,
-                resolution: resolution,
-                isBuiltIn: builtIn,
-                scale: Double(screen.backingScaleFactor)
-            )
-        }
-
-        ATHLogger.debug(String(format: NSLocalizedString("log.display.parsing_data", comment: "Parsing display data"), snapshots.count), category: .hardware)
-        return snapshots
     }
 }

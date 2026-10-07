@@ -9,9 +9,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         super.init()
         ATHLogger.info(NSLocalizedString("log.app.starting", comment: "Application starting"), category: .system)
 
-        HardwareCollector.shared.prepareInitialDataAsync {
-            ATHLogger.info(NSLocalizedString("log.data_files.ready", comment: "Data files ready"), category: .system)
-        }
+        HardwareCollector.shared.loadInBackground()
     }
 
     func applicationWillFinishLaunching(_ notification: Notification) {
@@ -21,20 +19,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         showMainWindow()
 
-        ATHLogger.info(NSLocalizedString("log.checking_updates", comment: "Checking for updates"), category: .system)
-        UpdateController.checkForUpdatesAsync { shouldUpdate in
-            if shouldUpdate {
-                ATHLogger.info(NSLocalizedString("log.update_available", comment: "Update available"), category: .system)
-                UpdateController.updateATH()
-            } else {
-                ATHLogger.info(NSLocalizedString("log.no_updates", comment: "No updates available"), category: .system)
-            }
-        }
+        UpdateController.checkForUpdates()
     }
 
     func applicationWillTerminate(_ notification: Notification) {
         ATHLogger.info(NSLocalizedString("log.app.terminating", comment: "Application terminating"), category: .system)
-        try? InitGlobVar.defaultfileManager.removeItem(at: InitGlobVar.athDirectoryURL)
+        try? FileManager.default.removeItem(at: InitGlobVar.athDirectoryURL)
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
@@ -52,6 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         mainWindowController?.showWindow(nil)
         NSApp.activate(ignoringOtherApps: true)
+        ATHLogger.info(NSLocalizedString("log.window.shown", comment: "Main window shown"), category: .ui)
     }
 
     private func showView(atIndex index: Int) {

@@ -28,136 +28,47 @@
 "log.browser.failed" = "Error al abrir la URL: %@";
 "log.support_view.init" = "Inicializando Support View...";
 "log.storage.init" = "Inicializando vista de almacenamiento...";
-"log.window.loaded" = "Controlador de ventana cargado";
-"log.window.restored" = "Posición de ventana restaurada desde marco guardado";
-"log.window.centered" = "No hay posición de ventana guardada, centrando ventana";
-"log.window.shown" = "Ventana mostrada después de cargar los datos";
+"log.window.shown" = "Ventana principal mostrada";
 "log.app.starting" = "Iniciando aplicación...";
-"log.data_files.ready" = "Archivos de datos listos";
-"log.checking_updates" = "Buscando actualizaciones...";
-"log.update_available" = "Actualización disponible, iniciando proceso de actualización";
-"log.no_updates" = "No hay actualizaciones disponibles";
 "log.app.terminating" = "Cerrando aplicación, limpiando archivos temporales";
 "log.display_view.init" = "Inicializando vista de pantallas...";
 
 /* Window Controller */
-"log.window.deinitialized" = "Controlador de ventana desinicializado";
-"log.window.frame_saved" = "Marco de ventana guardado: %@";
 
 /* CPU Hardware Collector */
-"log.cpu.init" = "Inicializando información de CPU...";
 "log.cpu.brand" = "Marca de CPU: %@";
-"log.cpu.details" = "Detalles de CPU: %@";
-"log.cpu.core_count" = "Número de núcleos de CPU: %d";
-"log.cpu.getting_info" = "Obteniendo información de CPU...";
-"log.cpu.getting_details" = "Obteniendo cadena de detalles de CPU...";
-"log.cpu.getting_core_count" = "Obteniendo número de núcleos de CPU...";
-"log.cpu.core_count_packages" = "Número de núcleos de CPU (hw.packages): %d";
-"log.cpu.core_count_physical" = "Número de núcleos de CPU (hw.physicalcpu): %d";
-"log.cpu.core_count_logical" = "Número de núcleos de CPU (hw.logicalcpu): %d";
-"log.cpu.fetching_details" = "Obteniendo detalles de CPU desde la instantánea de hardware...";
 
 /* GPU Hardware Collector */
-"log.gpu.init" = "Inicializando información de GPU...";
-"log.gpu.parsing_data" = "Analizando datos de GPU desde %d líneas";
-"log.gpu.getting_string" = "Obteniendo cadena de GPU...";
-"log.gpu.getting_detailed_info" = "Obteniendo cadena de información detallada de GPU...";
 
 /* Display Hardware Collector */
-"log.display.init" = "Inicializando información de pantalla...";
-"log.display.parsing_data" = "Analizando datos de pantalla desde %d líneas";
-"log.display.getting_main" = "Obteniendo cadena de pantalla principal...";
-"log.display.getting_all" = "Obteniendo cadena de todas las pantallas...";
 
 /* RAM Hardware Collector */
-"log.ram.parsing_lines" = "Analizando líneas del archivo de memoria...";
-"log.ram.init" = "Inicializando información de RAM...";
-"log.ram.size" = "Tamaño total de RAM (GB): %d";
-"log.ram.type_speed" = "Tipo de RAM: %@, Velocidad: %@";
-"log.ram.getting_string" = "Obteniendo cadena de RAM...";
-"log.ram.parsing_details" = "Analizando detalles de memoria desde líneas compartidas...";
 
 /* Version/OS Hardware Collector */
-"log.version.prefix_set" = "Prefijo de SO establecido en: %@";
-"log.version.number" = "Número de SO: %@";
-"log.version.build" = "Número de build de SO: %@";
-"log.version.enum_set" = "Enumeración de versión de SO interna establecida según osNumber";
-"log.version.name" = "Nombre de SO: %@";
-"log.version.getting_number" = "Obteniendo número de SO...";
-"log.version.determined_number" = "Número de SO determinado: %@";
-"log.version.getting_build" = "Obteniendo número de build de SO...";
-"log.version.determined_build" = "Número de build de SO determinado: %@";
-"log.version.setting_enum" = "Estableciendo enumeración de versión de SO interna desde número de SO: %@";
-"log.version.internal_set" = "Versión de SO interna establecida en: %@";
 
 /* Serial Number Hardware Collector */
-"log.serial.init" = "Inicializando número de serie e información de hardware...";
-"log.serial.retrieved" = "Información de hardware recuperada desde HardwareCollector para número de serie.";
-"log.serial.parsed" = "Número de serie analizado: %@";
-"log.serial.formatted_details" = "Detalles de hardware formateados: \n%@";
-"log.serial.getting_string" = "Obteniendo cadena de número de serie...";
-"log.serial.getting_details" = "Obteniendo cadena de detalles de información de hardware...";
 
 /* Startup Disk Hardware Collector */
-"log.startup.init" = "Inicializando información de disco de arranque...";
-"log.startup.parsed_name" = "Nombre de disco de arranque analizado: %@";
-"log.startup.getting_name" = "Obteniendo cadena de nombre de disco de arranque...";
-"log.startup.getting_detailed" = "Obteniendo cadena de información detallada de disco de arranque...";
 
 /* Mac Model Hardware Collector */
-"log.macmodel.init" = "Inicializando información de modelo de Mac...";
-"log.macmodel.name" = "Nombre de Mac: %@";
-"log.macmodel.getting_identifier" = "Obteniendo identificador de modelo...";
-"log.macmodel.full_identifier" = "Identificador de modelo completo (hw.model): %@, ID analizado: %@";
-"log.macmodel.getting_name" = "Obteniendo nombre de Mac...";
 "log.macmodel.looked_up_name" = "Nombre de Mac buscado para identificador '%@': %@";
-"log.macmodel.failed_identifier" = "No se pudo obtener el identificador de modelo desde hw.model.";
 
 /* Window Controller */
-"log.window.view_changing" = "Cambiando a la vista con índice: %d";
 
 /* Data Files */
 "log.data.files_created" = "Archivos de datos creados";
 
 /* CPU Hardware Collector Errors */
-"log.cpu.failed_packages" = "No se pudo obtener el recuento de CPU físicas a través de hw.packages. Error: %@";
-"log.cpu.failed_physical" = "No se pudo obtener el recuento de CPU físicas a través de hw.physicalcpu. Error: %@";
-"log.cpu.failed_any_count" = "No se pudo obtener ningún recuento de CPU. Error: %@";
-"log.cpu.failed_read_details" = "No se pueden leer los detalles de la CPU desde la instantánea de hardware";
 
 /* GPU Hardware Collector Errors */
-"log.gpu.no_data" = "No hay datos de GPU disponibles desde HardwareCollector";
 
 /* OS Version Hardware Collector */
-"log.version.init" = "Inicializando información de versión del SO...";
-"log.version.complete" = "Recopilación de información de versión del SO completada.";
 
 /* Serial Number Errors */
-"log.serial.no_hardware_info" = "No hay información de hardware disponible desde HardwareCollector para el número de serie.";
 
 /* RAM Errors */
-"log.ram.no_data" = "No hay datos de RAM disponibles desde HardwareCollector";
 
 /* UpdateController */
-"log.update.checking" = "%@ : Comprobando actualizaciones...";
-"log.update.versions" = "%@ : Versión local (%@) y versión remota (%@) en .pbxproj desde la etiqueta (%@)";
-"log.update.newer_version" = "%@ : Nueva versión (%@) disponible";
-"log.update.done" = "%@ : Hecho";
-"log.update.starting_download" = "%@ : Iniciando descarga de la actualización v%@...";
-"log.update.unzipping" = "%@ : Descomprimiendo archivo...";
-"log.update.extracted" = "%@ : Del archivo se extrajo : %@";
-"log.update.mounting_dmg" = "%@ : Intentando montar dmg %@";
-"log.update.dmg_mounted" = "%@ : %@ montado en /Volumes/%@!\n%@ : Intentando copiar aplicación /Volumes/\"%@/%@.app\" a %@";
-"log.update.app_copied" = "%@ : /Volumes/\"%@/%@.app\" copiado a %@!";
-"log.update.unmounting_dmg" = "%@ : Intentando desmontar volumen \"/Volumes/%@\"";
-"log.update.dmg_ejected" = "%@ : /Volumes/\"%@\" expulsado!";
-"log.update.checking_os_compatibility" = "%@ : ¿Se permite la nueva aplicación v%@ en el SO actual %@?";
-"log.update.os_versions" = "%@ : Versión actual del SO %@ y versión mínima del SO %@";
-"log.update.update_allowed" = "%@ : Actualización (con %@ como versión mínima del SO) permitida en la versión actual del SO %@";
-"log.update.copying_new_version" = "%@ : Copiando nueva versión \"/%@.app\" ¡Casi terminado!";
-"log.update.complete_launching" = "%@ : ¡Actualización completa!...Iniciando nueva versión \"%@.app\"...";
-"log.update.element_from_archive" = "%@ : Elemento del archivo : %@";
-"log.update.element_returned" = "%@ : Elemento devuelto %@";
 
 /* UpdateController Alerts */
 "update.alert.update_found" = "¡Actualización encontrada!";
@@ -189,7 +100,6 @@
 "update.notify.complete" = "Actualización completa...Iniciando nueva versión...";
 
 /* Loading Indicator */
-"loading.data.message" = "Cargando datos...";
 
 /* Settings Window */
 "settings.title" = "Personalizar logo";

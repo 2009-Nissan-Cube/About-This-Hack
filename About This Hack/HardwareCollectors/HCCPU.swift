@@ -1,76 +1,61 @@
 import Foundation
 
-class HCCPU {
+final class HCCPU {
     static let shared = HCCPU()
-    private init() {}
-    
-    private lazy var cpuInfo: (brand: String, details: String, packageCount: Int) = {
-        ATHLogger.debug(NSLocalizedString("log.cpu.init", comment: "Initializing CPU Info"), category: .hardware)
-        let brand = getSysctlValueByKey(inputKey: "machdep.cpu.brand_string")?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "Unknown CPU"
-        ATHLogger.debug(String(format: NSLocalizedString("log.cpu.brand", comment: "CPU Brand"), brand), category: .hardware)
-        let details = getCPUDetails()
-        ATHLogger.debug(String(format: NSLocalizedString("log.cpu.details", comment: "CPU Details"), details), category: .hardware)
-        let packageCount = getCPUPackageCount()
-        ATHLogger.debug(String(format: NSLocalizedString("log.cpu.core_count", comment: "CPU Core Count"), packageCount), category: .hardware)
-        return (brand, details, packageCount)
-    }()
-    
-    func getCPU() -> String {
-        ATHLogger.debug(NSLocalizedString("log.cpu.getting_info", comment: "Getting CPU info"), category: .hardware)
-        // packageCount is socket count. Only show Nx when there are multiple packages.
-        let packageCount = cpuInfo.packageCount
-        let modifiedBrand = cpuInfo.brand.replacingOccurrences(of: "(R)", with: "").replacingOccurrences(of: "(TM)", with: "")
+    static let isAppleSilicon = getSysctlIntByKey("hw.optional.arm64") == 1
 
-        if packageCount > 1 {
-            return "\(packageCount)x \(modifiedBrand)"
-        } else {
-            return modifiedBrand
-        }
-    }
-    
-    func getCPUInfo() -> String {
-        ATHLogger.debug(NSLocalizedString("log.cpu.getting_details", comment: "Getting CPU details string"), category: .hardware)
-        return cpuInfo.details
+    /// Display name, e.g. "Apple M4 Pro (14-Core)" or "3.6 GHz 8-Core Intel Core i9-9900K".
+    private let name: String
+
+    private init() {
+        let brand = getSysctlValueByKey(inputKey: "machdep.cpu.brand_string")?.collapsingWhitespace.nilIfEmpty ?? "Unknown CPU"
+        let packages = max(getSysctlIntByKey("hw.packages") ?? 1, 1)
+        let cores = (getSysctlIntByKey("hw.physicalcpu") ?? 0) / packages
+        name = Self.displayName(brand: brand, coresPerPackage: cores, packages: packages)
+        ATHLogger.debug(String(format: NSLocalizedString("log.cpu.brand", comment: "CPU Brand"), name), category: .hardware)
     }
 
-    /// Physical package/socket count used for multi-CPU display (e.g. dual-socket Mac Pro).
-    /// Returns 1 when package count cannot be determined, so callers never invent an Nx label
-    /// from core/thread counts.
-    func getCPUPackageCount() -> Int {
-        ATHLogger.debug(NSLocalizedString("log.cpu.getting_core_count", comment: "Getting CPU core count"), category: .hardware)
-        var count: UInt32 = 0
-        var size = MemoryLayout<UInt32>.size
-        let result = sysctlbyname("hw.packages", &count, &size, nil, 0)
-
-        if result == 0, count > 0 {
-            ATHLogger.debug(String(format: NSLocalizedString("log.cpu.core_count_packages", comment: "CPU Core count hw.packages"), Int(count)), category: .hardware)
-            return Int(count)
+    static func displayName(brand: String, coresPerPackage cores: Int, packages: Int) -> String {
+        var model = brand
+        for noise in ["(R)", "(TM)", "(tm)", " CPU", " Processor"] {
+            model = model.replacingOccurrences(of: noise, with: "")
         }
 
-        ATHLogger.warning(String(format: NSLocalizedString("log.cpu.failed_packages", comment: "Failed to get physical CPU count via hw.packages"), String(cString: strerror(errno))), category: .hardware)
-        // Do not fall back to physical/logical core counts: those would incorrectly produce
-        // labels like "14x Apple M4 Pro" on single-package machines.
-        return 1
-    }
-
-    /// Kept for callers that previously asked for "core count"; this is package/socket count.
-    func getCPUCoreCount() -> Int {
-        getCPUPackageCount()
-    }
-    
-    private func getCPUDetails() -> String {
-        ATHLogger.debug(NSLocalizedString("log.cpu.fetching_details", comment: "Fetching CPU details from hwFilePath"), category: .hardware)
-        guard let content = HardwareCollector.shared.hardwareData else {
-            ATHLogger.error(NSLocalizedString("log.cpu.failed_read_details", comment: "Unable to read CPU details"), category: .hardware)
-            return "Unable to read CPU details"
-        }
-        
-        // Intel reports "Processor Name:"; Apple Silicon reports "Chip:".
-        return content.components(separatedBy: .newlines)
-            .drop { line in
-                !line.contains("Processor Name:") && !line.contains("Chip:")
+        // "Intel Core i9-9900K @ 3.60GHz" -> "3.6 GHz" + "Intel Core i9-9900K"
+        var frequency = ""
+        if let at = model.range(of: "@") {
+            let raw = model[at.upperBound...].trimmingCharacters(in: .whitespaces)
+            let number = raw.prefix { $0.isNumber || $0 == "." }
+            if let value = Double(number) {
+                let unit = raw.dropFirst(number.count).trimmingCharacters(in: .whitespaces)
+                frequency = String(format: "%g %@", value, unit.isEmpty ? "GHz" : unit)
             }
+            model = String(model[..<at.lowerBound])
+        }
+        model = model.collapsingWhitespace
+
+        let hasCoreCount = model.range(of: "-Core", options: .caseInsensitive) != nil
+        let coreLabel = cores > 0 && !hasCoreCount ? "\(cores)-Core" : ""
+        let packagePrefix = packages > 1 ? "\(packages) x " : ""
+
+        if model.hasPrefix("Apple") {
+            return coreLabel.isEmpty ? packagePrefix + model : "\(packagePrefix)\(model) (\(coreLabel))"
+        }
+        return packagePrefix + [frequency, coreLabel, model].filter { !$0.isEmpty }.joined(separator: " ")
+    }
+
+    func getCPU() -> String {
+        name
+    }
+
+    /// Processor lines from `system_profiler`, empty until the report has loaded.
+    func getCPUInfo() -> String {
+        // Intel reports "Processor Name:"; Apple silicon reports "Chip:".
+        (HardwareCollector.shared.hardwareData ?? "")
+            .components(separatedBy: .newlines)
+            .drop { !$0.contains("Processor Name:") && !$0.contains("Chip:") }
             .prefix { !$0.contains("Memory:") }
+            .map { $0.trimmingCharacters(in: .whitespaces) }
             .joined(separator: "\n")
     }
 }

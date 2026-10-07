@@ -5,9 +5,10 @@ func L(_ key: String, comment: String = "") -> String {
     NSLocalizedString(key, comment: comment)
 }
 
-func trimmedTooltip(_ tooltip: String?) -> String? {
-    tooltip?.components(separatedBy: .newlines)
-        .filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+/// Tooltip text without blank lines.
+func trimmedTooltip(_ tooltip: String) -> String {
+    tooltip.components(separatedBy: .newlines)
+        .filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
         .joined(separator: "\n")
 }
 
@@ -27,21 +28,20 @@ struct InfoRow: View {
     let title: String
     let value: String
     var tooltip: String?
+    var titleWidth: CGFloat = 82
 
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 8) {
             Text(title)
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundColor(.secondary)
-                .frame(width: 92, alignment: .trailing)
+                .font(.system(size: 11, weight: .semibold))
+                .frame(width: titleWidth, alignment: .leading)
 
             Text(value.isEmpty ? "—" : value)
-                .font(.system(size: 12))
+                .font(.system(size: 11))
                 .lineLimit(1)
                 .truncationMode(.tail)
-                .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .help(trimmedTooltip(tooltip) ?? "")
+        .help(trimmedTooltip(tooltip ?? ""))
     }
 }
 

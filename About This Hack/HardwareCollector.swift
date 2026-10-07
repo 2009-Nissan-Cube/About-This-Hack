@@ -2,211 +2,82 @@
 //  HardwareCollector.swift
 //  HardwareCollector
 //
-//
 
 import Foundation
 
-private struct HardwareSnapshot {
-    let hardwareData: String
-    let memoryData: String
-    let displaysData: String
-    let oclpData: String?
-}
-
-class HardwareCollector {
+/// Loads the slow `system_profiler` reports once, in the background.
+/// Everything on first paint comes from native APIs; these reports only
+/// enrich tooltips, the memory type, and the Clover/GPU fallbacks.
+final class HardwareCollector {
     static let shared = HardwareCollector()
     private init() {}
 
-    /// Posted on the main thread once the initial hardware snapshot is ready.
+    /// Posted on the main thread once the profiler reports are loaded.
     static let dataDidLoadNotification = Notification.Name("HardwareCollectorDataDidLoad")
 
-    private let stateLock = NSLock()
-    private var snapshot: HardwareSnapshot?
-    private var _dataHasBeenSet = false
-    private var _isLoading = false
-    private var pendingCompletions: [() -> Void] = []
-    private let loadQueue = DispatchQueue(label: "AboutThisHack.HardwareCollector.Load", qos: .userInitiated)
+    private let lock = NSLock()
+    private var reports: [String: String] = [:]
+    private var started = false
 
-    var dataHasBeenSet: Bool {
-        stateLock.lock()
-        defer { stateLock.unlock() }
-        return _dataHasBeenSet
-    }
+    /// `system_profiler SPHardwareDataType` output without its section header.
+    var hardwareData: String? { report("SPHardwareDataType") }
 
-    /// Raw `system_profiler SPHardwareDataType` output.
-    var hardwareData: String? {
-        currentSnapshot()?.hardwareData.nilIfEmpty
-    }
+    /// `system_profiler SPMemoryDataType` output without its section header.
+    var memoryData: String? { report("SPMemoryDataType") }
 
-    /// Raw `system_profiler SPMemoryDataType` output.
-    var memoryData: String? {
-        currentSnapshot()?.memoryData.nilIfEmpty
-    }
-
-    /// Raw `system_profiler SPDisplaysDataType` output.
-    var displaysData: String? {
-        currentSnapshot()?.displaysData.nilIfEmpty
-    }
+    /// `system_profiler SPDisplaysDataType` output; only loaded when Metal reports no GPU.
+    var displaysData: String? { report("SPDisplaysDataType") }
 
     /// Contents of the OpenCore Legacy Patcher plist, if present.
-    var oclpData: String? {
-        currentSnapshot()?.oclpData?.nilIfEmpty
-    }
+    let oclpData: String? = try? String(contentsOfFile: InitGlobVar.oclpXmlFilePath, encoding: .utf8)
 
-    /// Asynchronously collects the hardware snapshot and warms the collector caches.
-    /// Concurrent callers share one in-progress load; completions run on the main thread.
-    func prepareInitialDataAsync(completion: @escaping () -> Void) {
-        var shouldStartLoad = false
+    func loadInBackground() {
+        lock.lock()
+        defer { lock.unlock() }
+        guard !started else { return }
+        started = true
 
-        stateLock.lock()
-        if _dataHasBeenSet {
-            stateLock.unlock()
+        // The first free-space query costs ~15 ms; keep it off the main thread.
+        DispatchQueue.global(qos: .userInitiated).async {
+            _ = HCStartupDisk.shared.getStartupDisk()
+        }
+        DispatchQueue.global(qos: .userInitiated).async { [self] in
+            var types = ["SPHardwareDataType", "SPMemoryDataType"]
+            if HCGPU.shared.needsProfilerFallback {
+                types.append("SPDisplaysDataType")
+            }
+
+            DispatchQueue.concurrentPerform(iterations: types.count) { index in
+                let output = Self.profile(types[index])
+                lock.lock()
+                reports[types[index]] = output
+                lock.unlock()
+            }
+
+            ATHLogger.info(NSLocalizedString("log.data.files_created", comment: "Data files created successfully"), category: .system)
             DispatchQueue.main.async {
-                completion()
+                NotificationCenter.default.post(name: Self.dataDidLoadNotification, object: nil)
             }
-            return
-        }
-
-        pendingCompletions.append(completion)
-        if !_isLoading {
-            _isLoading = true
-            shouldStartLoad = true
-        }
-        stateLock.unlock()
-
-        guard shouldStartLoad else {
-            return
-        }
-
-        loadQueue.async { [weak self] in
-            self?.loadInitialData()
         }
     }
 
-    private func loadInitialData() {
-        let collectedSnapshot = collectSnapshot()
-
-        stateLock.lock()
-        snapshot = collectedSnapshot
-        stateLock.unlock()
-
-        warmCollectors()
-
-        stateLock.lock()
-        _dataHasBeenSet = true
-        _isLoading = false
-        let completions = pendingCompletions
-        pendingCompletions.removeAll()
-        stateLock.unlock()
-
-        ATHLogger.info(NSLocalizedString("log.data.files_created", comment: "Data files created successfully"), category: .system)
-
-        DispatchQueue.main.async {
-            completions.forEach { $0() }
-            NotificationCenter.default.post(name: Self.dataDidLoadNotification, object: nil)
-        }
+    private func report(_ type: String) -> String? {
+        lock.lock()
+        defer { lock.unlock() }
+        return reports[type]?.nilIfEmpty
     }
 
-    private func currentSnapshot() -> HardwareSnapshot? {
-        stateLock.lock()
-        defer { stateLock.unlock() }
-        return snapshot
-    }
-
-    /// Populates the collector caches off the main thread so views render without blocking.
-    /// Display info is warmed on the main thread because it uses AppKit (`NSScreen`).
-    private func warmCollectors() {
-        HCVersion.shared.getVersion()
-        HCMacModel.shared.getMacModel()
-        _ = HCCPU.shared.getCPU()
-        _ = HCRAM.shared.getRam()
-        _ = HCStartupDisk.shared.getStartupDisk()
-        _ = HCGPU.shared.getGPU()
-        _ = HCSerialNumber.shared.getSerialNumber()
-
-        // NSScreen must be accessed on the main thread.
-        let displayWarmup = DispatchWorkItem {
-            _ = HCDisplay.shared.getDisp()
-        }
-        if Thread.isMainThread {
-            displayWarmup.perform()
-        } else {
-            DispatchQueue.main.sync(execute: displayWarmup)
-        }
-    }
-
-    private func collectSnapshot() -> HardwareSnapshot {
-        let collectionQueue = DispatchQueue(label: "AboutThisHack.HardwareCollector.Collection", qos: .userInitiated, attributes: .concurrent)
-        let group = DispatchGroup()
-
-        var hardwareData = ""
-        var memoryData = ""
-        var displaysData = ""
-
-        group.enter()
-        collectionQueue.async {
-            hardwareData = self.collectCommandOutput(
-                executablePath: "/usr/sbin/system_profiler",
-                arguments: ["SPHardwareDataType"],
-                label: "SPHardwareDataType"
-            )
-            group.leave()
-        }
-
-        group.enter()
-        collectionQueue.async {
-            memoryData = self.collectCommandOutput(
-                executablePath: "/usr/sbin/system_profiler",
-                arguments: ["SPMemoryDataType"],
-                label: "SPMemoryDataType"
-            ) { output in
-                output
-                    .components(separatedBy: .newlines)
-                    .filter { $0.trimmingCharacters(in: .whitespaces) != "Memory:" }
-                    .joined(separator: "\n")
-            }
-            group.leave()
-        }
-
-        group.enter()
-        collectionQueue.async {
-            displaysData = self.collectCommandOutput(
-                executablePath: "/usr/sbin/system_profiler",
-                arguments: ["SPDisplaysDataType"],
-                label: "SPDisplaysDataType"
-            )
-            group.leave()
-        }
-
-        group.wait()
-
-        let oclpData = try? String(contentsOfFile: InitGlobVar.oclpXmlFilePath, encoding: .utf8)
-
-        return HardwareSnapshot(
-            hardwareData: hardwareData,
-            memoryData: memoryData,
-            displaysData: displaysData,
-            oclpData: oclpData
-        )
-    }
-
-    private func collectCommandOutput(
-        executablePath: String,
-        arguments: [String],
-        label: String,
-        postProcess: (String) -> String = { $0 }
-    ) -> String {
-        let result = executeProcess(executableURL: URL(fileURLWithPath: executablePath), arguments: arguments)
-
+    private static func profile(_ type: String) -> String {
+        let result = executeProcess(executableURL: URL(fileURLWithPath: "/usr/sbin/system_profiler"), arguments: [type])
         guard result.succeeded else {
-            ATHLogger.warning("\(label) failed with status \(result.terminationStatus): \(result.combinedOutput)", category: .hardware)
+            ATHLogger.warning("\(type) failed with status \(result.terminationStatus): \(result.combinedOutput)", category: .hardware)
             return ""
         }
 
-        let output = postProcess(result.stdout)
-        if output.isEmpty {
-            ATHLogger.warning("\(label) returned no output", category: .hardware)
-        }
-        return output
+        // Drop unindented section headers such as "Hardware:" and "Memory:".
+        return result.stdout
+            .components(separatedBy: .newlines)
+            .filter { !($0.hasSuffix(":") && !$0.hasPrefix(" ")) }
+            .joined(separator: "\n")
     }
 }

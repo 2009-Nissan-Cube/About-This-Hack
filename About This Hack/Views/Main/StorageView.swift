@@ -2,6 +2,9 @@ import AppKit
 import SwiftUI
 
 struct StorageView: View {
+    /// Changes when the app is reactivated, so free space is re-read.
+    let revision: Int
+
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .topLeading) {
@@ -16,7 +19,7 @@ struct StorageView: View {
                         .interpolation(.high)
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 126, height: 126)
-                        .help(trimmedTooltip(Tooltips.shared.startupDiskImagetoolTip) ?? "")
+                        .help(HCStartupDisk.shared.getStartupDiskInfo())
 
                     storageMeter
                         .frame(width: 126, height: 12)
@@ -30,9 +33,9 @@ struct StorageView: View {
                         .lineLimit(1)
                         .truncationMode(.tail)
 
-                    StorageInfoRow(title: L("storage.label.kind", comment: "Storage kind label"), value: driveKind)
-                    StorageInfoRow(title: L("storage.label.connection", comment: "Storage connection label"), value: driveConnection)
-                    StorageInfoRow(title: L("storage.label.capacity", comment: "Storage capacity label"), value: capacityText)
+                    InfoRow(title: L("storage.label.kind", comment: "Storage kind label"), value: driveKind, titleWidth: 74)
+                    InfoRow(title: L("storage.label.connection", comment: "Storage connection label"), value: driveConnection, titleWidth: 74)
+                    InfoRow(title: L("storage.label.capacity", comment: "Storage capacity label"), value: capacityText, titleWidth: 74)
                 }
                 .frame(width: 330, alignment: .leading)
                 .position(x: 405, y: 150)
@@ -49,11 +52,11 @@ struct StorageView: View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 Capsule()
-                    .fill(Color(NSColor.separatorColor).opacity(0.30))
+                    .fill(Color.primary.opacity(0.12))
                     .frame(height: 8)
 
                 Capsule()
-                    .fill(Color.accentColor.opacity(0.82))
+                    .fill(storagePercent > 0.9 ? Color.red : Color.accentColor)
                     .frame(width: geometry.size.width * CGFloat(storagePercent), height: 8)
             }
             .frame(height: geometry.size.height, alignment: .center)
@@ -96,23 +99,5 @@ struct StorageView: View {
         let imageShortName = "\(HCVersion.shared.osName) \(HCStartupDisk.shared.deviceLocation)"
         let storageType = HCStartupDisk.shared.isSolidState ? "SSD" : "HDD"
         return namedImage("\(imageShortName) \(storageType)", fallback: storageType)
-    }
-}
-
-private struct StorageInfoRow: View {
-    let title: String
-    let value: String
-
-    var body: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 8) {
-            Text(title)
-                .font(.system(size: 11, weight: .semibold))
-                .frame(width: 74, alignment: .leading)
-
-            Text(value)
-                .font(.system(size: 11, weight: .regular))
-                .lineLimit(1)
-                .truncationMode(.tail)
-        }
     }
 }

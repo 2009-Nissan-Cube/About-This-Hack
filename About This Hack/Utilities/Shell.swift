@@ -2,13 +2,10 @@
 //  Shell.swift
 //  About This Hack
 //
-//
 
 import Foundation
 
 struct ProcessResult {
-    let executableURL: URL
-    let arguments: [String]
     let stdout: String
     let stderr: String
     let terminationStatus: Int32
@@ -29,48 +26,31 @@ func executeProcess(executableURL: URL, arguments: [String]) -> ProcessResult {
     let task = Process()
     let stdoutPipe = Pipe()
     let stderrPipe = Pipe()
-    let readGroup = DispatchGroup()
-    let readQueue = DispatchQueue(label: "AboutThisHack.ProcessRead", qos: .utility, attributes: .concurrent)
-
     task.executableURL = executableURL
     task.arguments = arguments
     task.standardOutput = stdoutPipe
     task.standardError = stderrPipe
 
-    var stdoutData = Data()
-    var stderrData = Data()
-
-    readGroup.enter()
-    readQueue.async {
-        stdoutData = stdoutPipe.fileHandleForReading.readDataToEndOfFile()
-        readGroup.leave()
-    }
-
-    readGroup.enter()
-    readQueue.async {
-        stderrData = stderrPipe.fileHandleForReading.readDataToEndOfFile()
-        readGroup.leave()
-    }
-
     do {
         try task.run()
-        task.waitUntilExit()
-        readGroup.wait()
     } catch {
-        return ProcessResult(
-            executableURL: executableURL,
-            arguments: arguments,
-            stdout: "",
-            stderr: error.localizedDescription,
-            terminationStatus: -1
-        )
+        return ProcessResult(stdout: "", stderr: error.localizedDescription, terminationStatus: -1)
     }
 
+    // Drain stderr concurrently so a full pipe can never stall the child.
+    var stderrData = Data()
+    let stderrDone = DispatchSemaphore(value: 0)
+    DispatchQueue.global(qos: .utility).async {
+        stderrData = stderrPipe.fileHandleForReading.readDataToEndOfFile()
+        stderrDone.signal()
+    }
+    let stdoutData = stdoutPipe.fileHandleForReading.readDataToEndOfFile()
+    stderrDone.wait()
+    task.waitUntilExit()
+
     return ProcessResult(
-        executableURL: executableURL,
-        arguments: arguments,
-        stdout: String(data: stdoutData, encoding: .utf8) ?? "",
-        stderr: String(data: stderrData, encoding: .utf8) ?? "",
+        stdout: String(decoding: stdoutData, as: UTF8.self),
+        stderr: String(decoding: stderrData, as: UTF8.self),
         terminationStatus: task.terminationStatus
     )
 }

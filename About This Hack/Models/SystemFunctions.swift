@@ -3,8 +3,8 @@
 //
 
 import Cocoa
-import AppKit
 import Darwin
+import IOKit
 
 let thisApplicationVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0"
 
@@ -23,6 +23,53 @@ func getSysctlValueByKey(inputKey sysctlKey: String) -> String? {
     }
 
     return String(cString: value)
+}
+
+func getSysctlIntByKey(_ sysctlKey: String) -> Int? {
+    var value: Int64 = 0
+    var size = MemoryLayout<Int64>.size
+    guard sysctlbyname(sysctlKey, &value, &size, nil, 0) == 0 else {
+        return nil
+    }
+    return size == MemoryLayout<Int32>.size ? Int(Int32(truncatingIfNeeded: value)) : Int(value)
+}
+
+/// Reads an I/O Registry property as a string, decoding NUL-terminated data and numbers.
+func registryString(_ entry: io_registry_entry_t, _ key: String) -> String? {
+    guard entry != 0,
+          let value = IORegistryEntryCreateCFProperty(entry, key as CFString, kCFAllocatorDefault, 0)?.takeRetainedValue() else {
+        return nil
+    }
+
+    let string: String?
+    switch value {
+    case let text as String: string = text
+    case let data as Data: string = String(data: data, encoding: .utf8)
+    case let number as NSNumber: string = number.stringValue
+    default: string = nil
+    }
+
+    return string?
+        .replacingOccurrences(of: "\0", with: "")
+        .trimmingCharacters(in: CharacterSet.controlCharacters.union(.whitespacesAndNewlines))
+        .nilIfEmpty
+}
+
+/// Reads a string property from a registry path such as `IODeviceTree:/product`.
+func registryString(path: String, _ key: String) -> String? {
+    let entry = IORegistryEntryFromPath(kIOMainPortDefault, path)
+    defer { if entry != 0 { IOObjectRelease(entry) } }
+    return registryString(entry, key)
+}
+
+/// Value of a `Key: value` line in `system_profiler` output.
+func profilerValues(_ key: String, in report: String?) -> [String] {
+    let prefix = key + ":"
+    return (report ?? "")
+        .components(separatedBy: .newlines)
+        .map { $0.trimmingCharacters(in: .whitespaces) }
+        .filter { $0.hasPrefix(prefix) }
+        .map { $0.dropFirst(prefix.count).trimmingCharacters(in: .whitespaces) }
 }
 
 func numericVersionComponents(from version: String) -> [Int] {

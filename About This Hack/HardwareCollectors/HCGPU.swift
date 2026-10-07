@@ -1,188 +1,164 @@
 import Foundation
+import IOKit
 import Metal
 
 private struct GPUSnapshot {
     let name: String
-    let memoryDescription: String
-    let metalDescription: String
+    let vram: String
+    let cores: Int?
+    let metal: String
     let isLowPower: Bool
     let isRemovable: Bool
+
+    /// e.g. "Apple M4 Pro (20-Core, Metal 4)" or "AMD Radeon Pro 5500M (8 GB, Metal 3)".
+    var summary: String {
+        let details = [vram, cores.map { "\($0)-Core" } ?? "", metal].filter { !$0.isEmpty }
+        return details.isEmpty ? name : "\(name) (\(details.joined(separator: ", ")))"
+    }
 }
 
-class HCGPU {
+final class HCGPU {
     static let shared = HCGPU()
     private init() {}
 
-    private var _gpuInfo: [GPUSnapshot]?
-    private let gpuLock = NSLock()
+    private let lock = NSLock()
+    private var cachedMetalGPUs: [GPUSnapshot]?
 
-    private var gpuInfo: [GPUSnapshot] {
-        gpuLock.lock()
-        defer { gpuLock.unlock() }
-
-        if let cached = _gpuInfo {
-            return cached
-        }
-
-        let computed = computeGPUInfo()
-        _gpuInfo = computed
-        return computed
+    /// True when Metal sees no GPU and `system_profiler` is the only source.
+    var needsProfilerFallback: Bool {
+        metalGPUs.isEmpty
     }
 
-    private func computeGPUInfo() -> [GPUSnapshot] {
-        ATHLogger.debug(NSLocalizedString("log.gpu.init", comment: "Initializing GPU Info"), category: .hardware)
+    private var gpus: [GPUSnapshot] {
+        let metal = metalGPUs
+        return metal.isEmpty ? profilerGPUs() : metal
+    }
 
-        let metalDevices = MTLCopyAllDevices().map { device in
+    private var metalGPUs: [GPUSnapshot] {
+        lock.lock()
+        defer { lock.unlock() }
+        if let cachedMetalGPUs {
+            return cachedMetalGPUs
+        }
+
+        // High-performance internal GPUs first, then eGPUs, then integrated ones.
+        // MTLCopyAllDevices does not force a GPU switch on dual-GPU MacBook Pros.
+        let devices = MTLCopyAllDevices().sorted { rank($0) < rank($1) }
+        let snapshots = devices.map { device in
             GPUSnapshot(
-                name: normalizeGPUName(device.name),
-                memoryDescription: formatMemory(device.recommendedMaxWorkingSetSize),
-                metalDescription: "Metal Supported",
+                name: device.name,
+                vram: device.hasUnifiedMemory ? "" : dedicatedMemory(of: device),
+                cores: registryInt("gpu-core-count", registryID: device.registryID),
+                metal: metalVersion(of: device),
                 isLowPower: device.isLowPower,
                 isRemovable: device.isRemovable
             )
         }
-
-        if !metalDevices.isEmpty {
-            ATHLogger.debug(String(format: NSLocalizedString("log.gpu.parsing_data", comment: "Parsing GPU data"), metalDevices.count), category: .hardware)
-            return metalDevices
-        }
-
-        // Some Hackintosh setups expose GPUs via system_profiler but not Metal.
-        let profilerDevices = parseSystemProfilerGPUs()
-        if profilerDevices.isEmpty {
-            ATHLogger.error(NSLocalizedString("log.gpu.no_data", comment: "No GPU data available from HardwareCollector"), category: .hardware)
-        } else {
-            ATHLogger.debug(String(format: NSLocalizedString("log.gpu.parsing_data", comment: "Parsing GPU data"), profilerDevices.count), category: .hardware)
-        }
-        return profilerDevices
+        cachedMetalGPUs = snapshots
+        return snapshots
     }
 
-    private func parseSystemProfilerGPUs() -> [GPUSnapshot] {
-        guard let content = HardwareCollector.shared.displaysData else {
-            return []
-        }
+    private func rank(_ device: MTLDevice) -> Int {
+        device.isLowPower ? 2 : (device.isRemovable ? 1 : 0)
+    }
 
+    private func metalVersion(of device: MTLDevice) -> String {
+        if #available(macOS 26.0, *), device.supportsFamily(.metal4) {
+            return "Metal 4"
+        }
+        if #available(macOS 13.0, *), device.supportsFamily(.metal3) {
+            return "Metal 3"
+        }
+        return device.supportsFamily(.mac2) ? "Metal 2" : "Metal"
+    }
+
+    /// Exact VRAM from the GPU's registry entry, falling back to Metal's working-set estimate.
+    private func dedicatedMemory(of device: MTLDevice) -> String {
+        if let megabytes = registryInt("VRAM,totalMB", registryID: device.registryID), megabytes > 0 {
+            return formatMegabytes(megabytes)
+        }
+        let bytes = device.recommendedMaxWorkingSetSize
+        return bytes > 0 ? formatMegabytes(Int(bytes / 1_048_576)) : ""
+    }
+
+    private func registryInt(_ key: String, registryID: UInt64) -> Int? {
+        guard let matching = IORegistryEntryIDMatching(registryID) else { return nil }
+        let service = IOServiceGetMatchingService(kIOMainPortDefault, matching)
+        guard service != 0 else { return nil }
+        defer { IOObjectRelease(service) }
+
+        let options = IOOptionBits(kIORegistryIterateRecursively | kIORegistryIterateParents)
+        let value = IORegistryEntrySearchCFProperty(service, kIOServicePlane, key as CFString, kCFAllocatorDefault, options)
+        if let number = value as? NSNumber {
+            return number.intValue
+        }
+        if let data = value as? Data, data.count <= 8 {
+            return data.reversed().reduce(0) { $0 << 8 | Int($1) }
+        }
+        return nil
+    }
+
+    private func formatMegabytes(_ megabytes: Int) -> String {
+        megabytes >= 1024
+            ? String(format: "%g GB", (Double(megabytes) / 1024 * 10).rounded() / 10)
+            : "\(megabytes) MB"
+    }
+
+    /// Some Hackintosh setups expose GPUs via `system_profiler` but not Metal.
+    private func profilerGPUs() -> [GPUSnapshot] {
         var devices: [GPUSnapshot] = []
-        var currentName = ""
-        var currentMemory = ""
-        var currentMetal = ""
-        var currentBus = ""
+        var fields: [String: String] = [:]
 
-        func flushCurrent() {
-            let trimmedName = currentName.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !trimmedName.isEmpty else {
-                currentName = ""
-                currentMemory = ""
-                currentMetal = ""
-                currentBus = ""
-                return
-            }
-
-            devices.append(
-                GPUSnapshot(
-                    name: normalizeGPUName(trimmedName),
-                    memoryDescription: currentMemory,
-                    metalDescription: currentMetal.isEmpty ? "Unknown" : currentMetal,
+        func flush() {
+            if let name = fields["Chipset Model"]?.nilIfEmpty {
+                let bus = fields["Bus"] ?? ""
+                devices.append(GPUSnapshot(
+                    name: name,
+                    vram: fields["VRAM"] ?? "",
+                    cores: fields["Total Number of Cores"].flatMap { Int($0) },
+                    metal: fields["Metal"] ?? "",
                     isLowPower: false,
-                    isRemovable: currentBus.localizedCaseInsensitiveContains("PCIe") ||
-                        currentBus.localizedCaseInsensitiveContains("External")
-                )
-            )
-
-            currentName = ""
-            currentMemory = ""
-            currentMetal = ""
-            currentBus = ""
+                    isRemovable: bus.localizedCaseInsensitiveContains("PCIe") || bus.localizedCaseInsensitiveContains("External")
+                ))
+            }
+            fields = [:]
         }
 
-        for rawLine in content.components(separatedBy: .newlines) {
+        for rawLine in (HardwareCollector.shared.displaysData ?? "").components(separatedBy: .newlines) {
             let line = rawLine.trimmingCharacters(in: .whitespaces)
-            guard !line.isEmpty else { continue }
+            guard let colon = line.firstIndex(of: ":") else { continue }
+            var key = String(line[..<colon])
+            let value = line[line.index(after: colon)...].trimmingCharacters(in: .whitespaces)
 
-            if line.hasPrefix("Chipset Model:") {
-                flushCurrent()
-                currentName = line.replacingOccurrences(of: "Chipset Model:", with: "").trimmingCharacters(in: .whitespaces)
-            } else if line.hasPrefix("VRAM") {
-                // e.g. "VRAM (Total): 8 GB" / "VRAM (Dynamic, Max): 1 GB"
-                if let colon = line.firstIndex(of: ":") {
-                    currentMemory = String(line[line.index(after: colon)...]).trimmingCharacters(in: .whitespaces)
-                }
-            } else if line.hasPrefix("Metal Support:") || line.hasPrefix("Metal:") {
-                if let colon = line.firstIndex(of: ":") {
-                    currentMetal = String(line[line.index(after: colon)...]).trimmingCharacters(in: .whitespaces)
-                }
-            } else if line.hasPrefix("Bus:") {
-                if let colon = line.firstIndex(of: ":") {
-                    currentBus = String(line[line.index(after: colon)...]).trimmingCharacters(in: .whitespaces)
-                }
-            } else if line.hasPrefix("Displays:") {
-                // Display section starts; keep current GPU and stop parsing nested display keys.
-                continue
+            if key == "Chipset Model" {
+                flush()
+            } else if key.hasPrefix("VRAM") {
+                key = "VRAM" // "VRAM (Total)" / "VRAM (Dynamic, Max)"
+            } else if key.hasPrefix("Metal") {
+                key = "Metal" // "Metal Support" / "Metal Family" / "Metal"
+            }
+            if fields[key] == nil {
+                fields[key] = value
             }
         }
-        flushCurrent()
-
+        flush()
         return devices
     }
 
     func getGPU() -> String {
-        ATHLogger.debug(NSLocalizedString("log.gpu.getting_string", comment: "Getting GPU string"), category: .hardware)
-        guard let primaryGPU = gpuInfo.first else {
-            return "Unknown GPU"
-        }
-
-        var result = primaryGPU.name
-        if !primaryGPU.memoryDescription.isEmpty {
-            result += " \(primaryGPU.memoryDescription)"
-        }
-        if !primaryGPU.metalDescription.isEmpty {
-            result += " (\(primaryGPU.metalDescription))"
-        }
-        return result.trimmingCharacters(in: .whitespaces)
+        gpus.first?.summary ?? "Unknown GPU"
     }
 
     func getGPUInfo() -> String {
-        ATHLogger.debug(NSLocalizedString("log.gpu.getting_detailed_info", comment: "Getting detailed GPU info string"), category: .hardware)
-        guard !gpuInfo.isEmpty else {
-            return "Graphics\n"
+        let blocks = gpus.map { device -> String in
+            var lines = [device.name]
+            if !device.vram.isEmpty { lines.append("VRAM: \(device.vram)") }
+            if let cores = device.cores { lines.append("Cores: \(cores)") }
+            if !device.metal.isEmpty { lines.append("Metal: \(device.metal)") }
+            if device.isLowPower { lines.append("Low Power: Yes") }
+            if device.isRemovable { lines.append("Removable: Yes") }
+            return lines.joined(separator: "\n")
         }
-
-        var lines = ["Graphics"]
-        for device in gpuInfo {
-            lines.append(device.name)
-            if !device.memoryDescription.isEmpty {
-                lines.append("Memory: \(device.memoryDescription)")
-            }
-            lines.append("Metal: \(device.metalDescription)")
-            lines.append("Low Power: \(device.isLowPower ? "Yes" : "No")")
-            if device.isRemovable {
-                lines.append("Removable: Yes")
-            }
-            lines.append("")
-        }
-
-        return lines.dropLast().joined(separator: "\n")
-    }
-
-    private func normalizeGPUName(_ name: String) -> String {
-        name
-            .replacingOccurrences(of: "Intel ", with: "")
-            .replacingOccurrences(of: "NVIDIA ", with: "")
-            .replacingOccurrences(of: "AMD ", with: "")
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-
-    private func formatMemory(_ bytes: UInt64) -> String {
-        guard bytes > 0 else {
-            return ""
-        }
-
-        let gigabytes = Double(bytes) / 1_000_000_000
-        if gigabytes >= 1 {
-            return String(format: "%.1f GB", gigabytes)
-        }
-
-        let megabytes = Double(bytes) / 1_000_000
-        return String(format: "%.0f MB", megabytes)
+        return (["Graphics"] + blocks).joined(separator: "\n")
     }
 }

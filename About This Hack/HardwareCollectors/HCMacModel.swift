@@ -1,67 +1,25 @@
 import Foundation
 
-class HCMacModel {
+final class HCMacModel {
     static let shared = HCMacModel()
-    private init() {}
 
-    private let stateLock = NSLock()
-    private var _macName: String = "Hackintosh Extreme Plus"
-    private var _dataHasBeenSet: Bool = false
+    let modelIdentifier: String
+    let macName: String
 
-    var macName: String {
-        stateLock.lock()
-        defer { stateLock.unlock() }
-        return _macName
+    private init() {
+        let identifier = getSysctlValueByKey(inputKey: "hw.model")?
+            .components(separatedBy: ":").last?
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .nilIfEmpty ?? "Unknown"
+        modelIdentifier = identifier
+        // Apple silicon publishes its exact marketing name; Intel Macs and Hackintoshes use the catalog.
+        macName = registryString(path: "IODeviceTree:/product", "product-name")
+            ?? Self.macModels[identifier]
+            ?? identifier
+        ATHLogger.debug(String(format: NSLocalizedString("log.macmodel.looked_up_name", comment: "Looked up Mac Name"), identifier, macName), category: .hardware)
     }
 
-    var dataHasBeenSet: Bool {
-        stateLock.lock()
-        defer { stateLock.unlock() }
-        return _dataHasBeenSet
-    }
-    
-    func getMacModel() {
-        stateLock.lock()
-        if _dataHasBeenSet {
-            stateLock.unlock()
-            return
-        }
-        stateLock.unlock()
-
-        ATHLogger.debug(NSLocalizedString("log.macmodel.init", comment: "Initializing Mac Model Info"), category: .hardware)
-        let resolvedName = getMacName()
-        ATHLogger.debug(String(format: NSLocalizedString("log.macmodel.name", comment: "Mac Name"), resolvedName), category: .hardware)
-
-        stateLock.lock()
-        if !_dataHasBeenSet {
-            _macName = resolvedName
-            _dataHasBeenSet = true
-        }
-        stateLock.unlock()
-    }
-
-    func getModelIdentifier() -> String {
-        ATHLogger.debug(NSLocalizedString("log.macmodel.getting_identifier", comment: "Getting Model Identifier"), category: .hardware)
-        if let fullIdentifier = getSysctlValueByKey(inputKey: "hw.model") {
-            let parts = fullIdentifier.components(separatedBy: ":")
-            let modelId = parts.last?.trimmingCharacters(in: .whitespacesAndNewlines)
-            let finalModelId = modelId?.nilIfEmpty ?? "Unknown"
-            ATHLogger.debug(String(format: NSLocalizedString("log.macmodel.full_identifier", comment: "Full Model Identifier"), fullIdentifier, finalModelId), category: .hardware)
-            return finalModelId
-        }
-        ATHLogger.warning(NSLocalizedString("log.macmodel.failed_identifier", comment: "Failed to get Model Identifier from hw.model"), category: .hardware)
-        return "Unknown"
-    }
-    
-    private func getMacName() -> String {
-        ATHLogger.debug(NSLocalizedString("log.macmodel.getting_name", comment: "Getting Mac Name"), category: .hardware)
-        let modelIdentifier = getModelIdentifier()
-        let resolvedName = macModels[modelIdentifier]?.nilIfEmpty ?? modelIdentifier
-        ATHLogger.debug(String(format: NSLocalizedString("log.macmodel.looked_up_name", comment: "Looked up Mac Name"), modelIdentifier, resolvedName), category: .hardware)
-        return resolvedName
-    }
-    
-    private lazy var macModels: [String: String] = [
+    private static let macModels: [String: String] = [
         // iMacs
         "iMac4,1": "iMac 17-Inch \"Core Duo\" 1.83",
         "iMac4,2": "iMac 17-Inch \"Core Duo\" 1.83",
@@ -259,10 +217,4 @@ class HCMacModel {
         "Unknown": "Mac (UNKNOWN)",
         "Mac": "Mac",
     ]
-}
-
-extension String {
-    var nilIfEmpty: String? {
-        self.isEmpty ? nil : self
-    }
 }

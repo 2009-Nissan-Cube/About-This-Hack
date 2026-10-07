@@ -30,24 +30,9 @@ struct MainView: View {
     }
 
     private var mainContent: some View {
-        ZStack(alignment: .topLeading) {
-            Color(NSColor.windowBackgroundColor)
-
-            if viewModel.isLoaded {
-                selectedContent
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            } else {
-                VStack(spacing: 12) {
-                    ProgressView()
-                    Text(L("loading.data.message", comment: "Loading data message"))
-                        .font(.system(size: 13))
-                        .foregroundColor(.secondary)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(NSColor.windowBackgroundColor))
+        selectedContent
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .background(Color(NSColor.windowBackgroundColor))
     }
 
     private var tabPicker: some View {
@@ -65,13 +50,13 @@ struct MainView: View {
     private var selectedContent: some View {
         switch viewModel.selectedTab {
         case 1:
-            DisplaysView()
+            DisplaysView(revision: viewModel.revision)
         case 2:
-            StorageView()
+            StorageView(revision: viewModel.revision)
         case 3:
             SupportView()
         default:
-            OverviewView()
+            OverviewView(revision: viewModel.revision, logo: viewModel.logo)
         }
     }
 }

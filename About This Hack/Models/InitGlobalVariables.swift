@@ -3,82 +3,49 @@
 //
 
 import Foundation
-import AppKit
 
-class InitGlobVar {
-    
-    // Computed property for thisApplicationName
+enum InitGlobVar {
     static var thisApplicationName: String {
         (Bundle.main.applicationName ?? "").replacingOccurrences(of: ".app", with: "")
     }
-    
-    static var athfilesDirectory = "/.ath"
-    static var tempDirectory = "/private/tmp"
-    
-    // Calculated property for athDirectory
-    static var athDirectory: String {
-        tempDirectory + athfilesDirectory
-    }
-    
-    static var athDirectoryURL: URL {
-        URL(fileURLWithPath: athDirectory, isDirectory: true)
-    }
-    
-    static var updateDirectory: String {
-        athDirectory + "/update"
-    }
-    
-    static var updateDirectoryURL: URL {
-        URL(fileURLWithPath: updateDirectory, isDirectory: true)
-    }
-    
-    static let defaultfileManager = FileManager.default
+
+    static let athDirectoryURL = URL(fileURLWithPath: "/private/tmp/.ath", isDirectory: true)
+    static let updateDirectoryURL = athDirectoryURL.appendingPathComponent("update", isDirectory: true)
 
     // Used by UpdateController
-    static var athrepositoryURL = "https://github.com/2009-Nissan-Cube/About-This-Hack"
-    static var latestReleaseAPIURL = "https://api.github.com/repos/2009-Nissan-Cube/About-This-Hack/releases/latest"
-    static var allAppliLocation = "/Applications"
-    static var applicationsDirectoryURL: URL {
-        URL(fileURLWithPath: allAppliLocation, isDirectory: true)
-    }
+    static let athrepositoryURL = "https://github.com/2009-Nissan-Cube/About-This-Hack"
+    static let latestReleaseAPIURL = "https://api.github.com/repos/2009-Nissan-Cube/About-This-Hack/releases/latest"
+    static let allAppliLocation = "/Applications"
 
-    /// Path used for updates. Prefer the running .app bundle so we don't
-    /// replace /Applications when the app is launched from Downloads/DMG.
+    /// Bundle replaced by updates. Prefer the running .app so launching from
+    /// Downloads or a DMG doesn't replace the copy in /Applications.
     static var installedApplicationURL: URL {
         let bundleURL = Bundle.main.bundleURL
         if bundleURL.pathExtension.lowercased() == "app" {
             return bundleURL.standardizedFileURL
         }
-        return applicationsDirectoryURL.appendingPathComponent("\(thisApplicationName).app", isDirectory: true)
+        return URL(fileURLWithPath: allAppliLocation, isDirectory: true).appendingPathComponent("\(thisApplicationName).app", isDirectory: true)
     }
 
     static var thisAppliLocation: String {
         installedApplicationURL.path
     }
 
-    /// Parent directory used when staging a replacement app bundle.
-    static var installParentDirectoryURL: URL {
-        installedApplicationURL.deletingLastPathComponent()
-    }
+    // OCLP plist with the patch version, commit, and date
+    static let oclpXmlFilePath = "/System/Library/CoreServices/OpenCore-Legacy-Patcher.plist"
 
-    // OCLP Dict File (if exists) where Patch Version Commit and DateTime will be extracted
-    static var oclpXmlFilePath = "/System/Library/CoreServices/OpenCore-Legacy-Patcher.plist"
-    static var bdmesgExecID = "/usr/local/bin/bdmesg"
-        
-    // Used by the overview view
-    static var systemReportSP = "/System/Library/SystemProfiler/SPPlatformReporter.spreporter"
-    static var softwareUpdateSP = "/System/Library/PreferencePanes/SoftwareUpdate.prefPane"
-        
-    // Used by the displays view
-    static var displayPrefPane = "/System/Library/PreferencePanes/Displays.prefPane"
+    // Used by the overview and displays views
+    static let systemReportSP = "/System/Library/SystemProfiler/SPPlatformReporter.spreporter"
+    static let softwareUpdateSP = "/System/Library/PreferencePanes/SoftwareUpdate.prefPane"
+    static let displayPrefPane = "/System/Library/PreferencePanes/Displays.prefPane"
 
     // Used by the support view
-    static var macOSUserGuideURL = "https://support.apple.com/guide/mac-help/welcome/mac"
-    static var whatsNewInMacOSURL = "https://www.apple.com/macos/"
-    static var AppleSupportURL = "https://support.apple.com"
-    static var HackintoshInstallURL = "https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html#table-of-contents"
-    static var MacBasicsURL = "https://help.apple.com/macos/big-sur/mac-basics/"
-    static var MacUserGuideURL = "https://support.apple.com/manuals"
-        
-    static var nvramOpencoreVersion = "4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version"
+    static let macOSUserGuideURL = "https://support.apple.com/guide/mac-help/welcome/mac"
+    static let whatsNewInMacOSURL = "https://www.apple.com/macos/"
+    static let AppleSupportURL = "https://support.apple.com"
+    static let HackintoshInstallURL = "https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html#table-of-contents"
+    static let MacBasicsURL = "https://help.apple.com/macos/big-sur/mac-basics/"
+    static let MacUserGuideURL = "https://support.apple.com/manuals"
+
+    static let nvramOpencoreVersion = "4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version"
 }
