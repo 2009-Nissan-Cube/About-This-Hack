@@ -4,7 +4,7 @@
 ![Platform](https://img.shields.io/badge/Xcode-27-lavender.svg)
 ![Downloads](https://img.shields.io/github/downloads/2009-Nissan-Cube/About-This-Hack/total?label=Downloads&color=9494ff)
 
-![image](https://github.com/user-attachments/assets/abf73d22-1228-424a-ad50-705150adbef8)
+<p align="center"><img width="620" alt="About This Hack Overview" src="DOCS/Images/Screenshots/Overview.png"></p>
 
 Discover the heart of your macOS device with About This Hack: a sleek, intuitive hardware info app that brings back the beloved classic 'About This Mac' interface while offering a treasure trove of additional features. Whether you're on a Hackintosh or a real Mac, experience the best of all worlds with About This Hack!<br>
 
@@ -12,39 +12,35 @@ Discover the heart of your macOS device with About This Hack: a sleek, intuitive
 
 ## Overview (Remember this?)
 
-A throwback to the (better) About This Mac view from pre-Ventura. Get instant access to essential system specs, including your computer model, OS version, and processor details. Hackintosh users will appreciate the Clover or OpenCore bootloader version display.
+A throwback to the (better) About This Mac view from before Ventura. You get your Mac model, macOS version, processor, memory, startup disk, display, graphics, serial number, and bootloader at a glance. Hackintosh users see their Clover or OpenCore version, like `OpenCore 1.0.0 (Release)`.
 
-<img width="692" alt="OpenCore Hackintosh" text="OpenCore Hackintosh" src="https://github.com/2009-Nissan-Cube/About-This-Hack/assets/94565160/18d29cff-1db1-4060-8e02-64307dafa20c">
+The window opens with data right away. Slower details like memory type load in the background and fill in a moment later.
 
 > 💡 Pro Tip: Click your serial number to hide it for screenshots!
 
 ## Displays
 
-Visualize up to three of your connected displays with their respective resolutions.
+See up to three connected displays with their resolutions. The tab updates when you plug in or remove a monitor.
 
-![CleanShot 2024-06-29 at 13 14 22@2x](https://github.com/2009-Nissan-Cube/About-This-Hack/assets/94565160/99a06cba-a491-4db3-a0f3-b69cd6ef8cca)
-
-![CleanShot 2024-06-29 at 13 10 16](https://github.com/2009-Nissan-Cube/About-This-Hack/assets/94565160/b5b433bc-b708-4646-9301-84c8ff043315)
+<img width="620" alt="Displays" src="DOCS/Images/Screenshots/Displays.png">
 
 ## Storage
 
-Get a clear picture of your startup disk, including name, available space, and disk type, all presented with an easy-to-read usage bar.
+See your startup disk's name, type, connection, and free space, with a usage bar that turns red when the disk is over 90% full.
 
-![CleanShot 2024-06-29 at 13 10 59](https://github.com/2009-Nissan-Cube/About-This-Hack/assets/94565160/96ca5d35-3026-4d42-a171-6f6fcb3daeae)
+<img width="620" alt="Storage" src="DOCS/Images/Screenshots/Storage.png">
 
 ## Support
 
 Access a list of support resources for both Mac and Hackintosh users.
 
-![CleanShot 2024-06-29 at 13 11 22](https://github.com/2009-Nissan-Cube/About-This-Hack/assets/94565160/49c1d426-b006-4a4c-a960-49cc4481638f)
+<img width="620" alt="Support" src="DOCS/Images/Screenshots/Support.png">
 
 ---
 
-Some values show more details when hovered over. See if you can find them all! 😉
+Some values show more details when you hover over them. See if you can find them all! 😉
 
-![CleanShot 2024-06-29 at 13 11 56](https://github.com/2009-Nissan-Cube/About-This-Hack/assets/94565160/227bae23-5157-4895-965a-86e826e947f9)
-
-There is also a native auto-updater that reminds you when a new version releases!
+There is also a native auto-updater that tells you when a new version is out.
 
 ## Customization
 
@@ -59,6 +55,8 @@ Want to personalize your About This Hack? You can now replace the macOS logo in 
 
 **Note:** The image must be in PNG format and exactly 1024x1024 pixels in size.
 
+<img width="420" alt="Custom logo settings" src="DOCS/Images/Screenshots/Settings.png">
+
 ---
 
 ## Getting Started
@@ -70,6 +68,16 @@ Want to personalize your About This Hack? You can now replace the macOS logo in 
 - Open `System Preferences` and go to `Security & Privacy`
 - You'll see a notice saying About This Hack app is blocked
 - Click "Open Anyway".
+
+## Building from Source
+
+Open `About This Hack.xcodeproj` in Xcode and run the **About This Hack** scheme. To run the tests from the command line:
+
+```bash
+xcodebuild test -project "About This Hack.xcodeproj" -scheme "About This Hack" -destination platform=macOS
+```
+
+The tests cover processor and bootloader formatting, version comparison, matching localization keys across languages, and a quick check that each hardware collector returns a value on the current Mac.
 
 ## Compatibility
 
