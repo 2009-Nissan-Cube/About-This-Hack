@@ -3,21 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D9MAINBF000000000000001 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9MAINFR000000000000001 /* main.swift */; };
 		114545F62710E3AE0017655D /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114545F52710E3AE0017655D /* Shell.swift */; };
-		E1F000000000000000000001 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = E1F000000000000000000003 /* ZIPFoundation */; };
 		115D921226D6F65500F5DF35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115D921126D6F65500F5DF35 /* AppDelegate.swift */; };
-		D9SWUIBF000000000000001 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9SWUIFR000000000000001 /* MainViewModel.swift */; };
-		D9SWUIBF000000000000002 /* SharedSwiftUIViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9SWUIFR000000000000002 /* SharedSwiftUIViews.swift */; };
-		D9SWUIBF000000000000003 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9SWUIFR000000000000003 /* MainView.swift */; };
-		D9SWUIBF000000000000004 /* OverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9SWUIFR000000000000004 /* OverviewView.swift */; };
-		D9SWUIBF000000000000005 /* DisplaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9SWUIFR000000000000005 /* DisplaysView.swift */; };
-		D9SWUIBF000000000000006 /* StorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9SWUIFR000000000000006 /* StorageView.swift */; };
-		D9SWUIBF000000000000007 /* SupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9SWUIFR000000000000007 /* SupportView.swift */; };
 		115D921626D6F65600F5DF35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 115D921526D6F65600F5DF35 /* Assets.xcassets */; };
 		9664A9132BECC81D00B5E306 /* SystemFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9664A9122BECC81D00B5E306 /* SystemFunctions.swift */; };
 		C147F9E72DD9FFD300D8C1CF /* ATHLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C147F9E52DD9FFD300D8C1CF /* ATHLogger.swift */; };
@@ -27,6 +18,14 @@
 		D99B37092F1010F400B71FAE /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99B37082F1010F400B71FAE /* SettingsWindowController.swift */; };
 		D99B370B2F10110C00B71FAE /* CustomLogoConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99B370A2F10110C00B71FAE /* CustomLogoConstants.swift */; };
 		D9E195DA2F1184F5009E9F91 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E195D92F1184F5009E9F91 /* SettingsView.swift */; };
+		D9MAINBF000000000000001 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9MAINFR000000000000001 /* main.swift */; };
+		D9SWUIBF000000000000001 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9SWUIFR000000000000001 /* MainViewModel.swift */; };
+		D9SWUIBF000000000000002 /* SharedSwiftUIViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9SWUIFR000000000000002 /* SharedSwiftUIViews.swift */; };
+		D9SWUIBF000000000000003 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9SWUIFR000000000000003 /* MainView.swift */; };
+		D9SWUIBF000000000000004 /* OverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9SWUIFR000000000000004 /* OverviewView.swift */; };
+		D9SWUIBF000000000000005 /* DisplaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9SWUIFR000000000000005 /* DisplaysView.swift */; };
+		D9SWUIBF000000000000006 /* StorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9SWUIFR000000000000006 /* StorageView.swift */; };
+		D9SWUIBF000000000000007 /* SupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9SWUIFR000000000000007 /* SupportView.swift */; };
 		DC6870462A63334400CAD908 /* HCVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870452A63334400CAD908 /* HCVersion.swift */; };
 		DC6870482A63336E00CAD908 /* HardwareCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870472A63336E00CAD908 /* HardwareCollector.swift */; };
 		DC68704A2A633DDD00CAD908 /* HCMacModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870492A633DDD00CAD908 /* HCMacModel.swift */; };
@@ -37,24 +36,28 @@
 		DC6870582A6473E400CAD908 /* HCSerialNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870572A6473E400CAD908 /* HCSerialNumber.swift */; };
 		DC68705A2A6473F000CAD908 /* HCBootloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6870592A6473F000CAD908 /* HCBootloader.swift */; };
 		DC68705C2A6474B600CAD908 /* HCDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68705B2A6474B600CAD908 /* HCDisplay.swift */; };
+		E1F000000000000000000001 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = E1F000000000000000000003 /* ZIPFoundation */; };
 		LOCBUILD000000000000001 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = LOCVAR00000000000000001 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8661D2703076618200A139E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 115D920626D6F65500F5DF35 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 115D920D26D6F65500F5DF35;
+			remoteInfo = "About This Hack";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		D9MAINFR000000000000001 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		114545F52710E3AE0017655D /* Shell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		115D920E26D6F65500F5DF35 /* About This Hack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "About This Hack.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		115D921126D6F65500F5DF35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D9SWUIFR000000000000001 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		D9SWUIFR000000000000002 /* SharedSwiftUIViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedSwiftUIViews.swift; sourceTree = "<group>"; };
-		D9SWUIFR000000000000003 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		D9SWUIFR000000000000004 /* OverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewView.swift; sourceTree = "<group>"; };
-		D9SWUIFR000000000000005 /* DisplaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaysView.swift; sourceTree = "<group>"; };
-		D9SWUIFR000000000000006 /* StorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageView.swift; sourceTree = "<group>"; };
-		D9SWUIFR000000000000007 /* SupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportView.swift; sourceTree = "<group>"; };
 		115D921526D6F65600F5DF35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		115D921A26D6F65600F5DF35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		115D921B26D6F65600F5DF35 /* About_This_Hack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = About_This_Hack.entitlements; sourceTree = "<group>"; };
+		8661D25F3076618200A139E1 /* AboutThisHackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AboutThisHackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9664A9122BECC81D00B5E306 /* SystemFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemFunctions.swift; sourceTree = "<group>"; };
 		C147F9E52DD9FFD300D8C1CF /* ATHLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATHLogger.swift; sourceTree = "<group>"; };
 		C1BAD6FE26D70091008460FB /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
@@ -63,6 +66,14 @@
 		D99B37082F1010F400B71FAE /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		D99B370A2F10110C00B71FAE /* CustomLogoConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLogoConstants.swift; sourceTree = "<group>"; };
 		D9E195D92F1184F5009E9F91 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D9MAINFR000000000000001 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		D9SWUIFR000000000000001 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		D9SWUIFR000000000000002 /* SharedSwiftUIViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedSwiftUIViews.swift; sourceTree = "<group>"; };
+		D9SWUIFR000000000000003 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		D9SWUIFR000000000000004 /* OverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewView.swift; sourceTree = "<group>"; };
+		D9SWUIFR000000000000005 /* DisplaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaysView.swift; sourceTree = "<group>"; };
+		D9SWUIFR000000000000006 /* StorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageView.swift; sourceTree = "<group>"; };
+		D9SWUIFR000000000000007 /* SupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportView.swift; sourceTree = "<group>"; };
 		DC6870452A63334400CAD908 /* HCVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCVersion.swift; sourceTree = "<group>"; };
 		DC6870472A63336E00CAD908 /* HardwareCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardwareCollector.swift; sourceTree = "<group>"; };
 		DC6870492A633DDD00CAD908 /* HCMacModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMacModel.swift; sourceTree = "<group>"; };
@@ -78,12 +89,23 @@
 		LOCFR00000000000000000001 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		8661D2603076618200A139E1 /* AboutThisHackTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AboutThisHackTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		115D920B26D6F65500F5DF35 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				E1F000000000000000000001 /* ZIPFoundation in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8661D25C3076618200A139E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				115D921026D6F65500F5DF35 /* About This Hack */,
+				8661D2603076618200A139E1 /* AboutThisHackTests */,
 				115D920F26D6F65500F5DF35 /* Products */,
 				C1DEC6512AA52812001F37A2 /* Frameworks */,
 			);
@@ -103,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				115D920E26D6F65500F5DF35 /* About This Hack.app */,
+				8661D25F3076618200A139E1 /* AboutThisHackTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,20 +186,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		DC6870442A63332C00CAD908 /* HardwareCollectors */ = {
+		D9SETGR000000000000001 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				DC6870592A6473F000CAD908 /* HCBootloader.swift */,
-				DC68704B2A6341E700CAD908 /* HCCPU.swift */,
-				DC68705B2A6474B600CAD908 /* HCDisplay.swift */,
-				DC6870552A6473AE00CAD908 /* HCGPU.swift */,
-				DC6870492A633DDD00CAD908 /* HCMacModel.swift */,
-				DC68704D2A63453900CAD908 /* HCRAM.swift */,
-				DC6870572A6473E400CAD908 /* HCSerialNumber.swift */,
-				DC68704F2A640A9F00CAD908 /* HCStartupDisk.swift */,
-				DC6870452A63334400CAD908 /* HCVersion.swift */,
+				D9E195D92F1184F5009E9F91 /* SettingsView.swift */,
+				D99B37082F1010F400B71FAE /* SettingsWindowController.swift */,
 			);
-			path = HardwareCollectors;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		D9SWUIGR000000000000001 /* Main */ = {
@@ -192,13 +209,20 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		D9SETGR000000000000001 /* Settings */ = {
+		DC6870442A63332C00CAD908 /* HardwareCollectors */ = {
 			isa = PBXGroup;
 			children = (
-				D9E195D92F1184F5009E9F91 /* SettingsView.swift */,
-				D99B37082F1010F400B71FAE /* SettingsWindowController.swift */,
+				DC6870592A6473F000CAD908 /* HCBootloader.swift */,
+				DC68704B2A6341E700CAD908 /* HCCPU.swift */,
+				DC68705B2A6474B600CAD908 /* HCDisplay.swift */,
+				DC6870552A6473AE00CAD908 /* HCGPU.swift */,
+				DC6870492A633DDD00CAD908 /* HCMacModel.swift */,
+				DC68704D2A63453900CAD908 /* HCRAM.swift */,
+				DC6870572A6473E400CAD908 /* HCSerialNumber.swift */,
+				DC68704F2A640A9F00CAD908 /* HCStartupDisk.swift */,
+				DC6870452A63334400CAD908 /* HCVersion.swift */,
 			);
-			path = Settings;
+			path = HardwareCollectors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,6 +248,29 @@
 			productReference = 115D920E26D6F65500F5DF35 /* About This Hack.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8661D25E3076618200A139E1 /* AboutThisHackTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8661D2653076618200A139E1 /* Build configuration list for PBXNativeTarget "AboutThisHackTests" */;
+			buildPhases = (
+				8661D25B3076618200A139E1 /* Sources */,
+				8661D25C3076618200A139E1 /* Frameworks */,
+				8661D25D3076618200A139E1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8661D2713076618200A139E1 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				8661D2603076618200A139E1 /* AboutThisHackTests */,
+			);
+			name = AboutThisHackTests;
+			packageProductDependencies = (
+			);
+			productName = AboutThisHackTests;
+			productReference = 8661D25F3076618200A139E1 /* AboutThisHackTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -231,12 +278,16 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 2720;
 				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					115D920D26D6F65500F5DF35 = {
 						CreatedOnToolsVersion = 12.5;
 						LastSwiftMigration = 1520;
+					};
+					8661D25E3076618200A139E1 = {
+						CreatedOnToolsVersion = 27.2;
+						TestTargetID = 115D920D26D6F65500F5DF35;
 					};
 				};
 			};
@@ -259,6 +310,7 @@
 			projectRoot = "";
 			targets = (
 				115D920D26D6F65500F5DF35 /* About This Hack */,
+				8661D25E3076618200A139E1 /* AboutThisHackTests */,
 			);
 		};
 /* End PBXProject section */
@@ -270,6 +322,13 @@
 			files = (
 				115D921626D6F65600F5DF35 /* Assets.xcassets in Resources */,
 				LOCBUILD000000000000001 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8661D25D3076618200A139E1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,7 +370,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8661D25B3076618200A139E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8661D2713076618200A139E1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 115D920D26D6F65500F5DF35 /* About This Hack */;
+			targetProxy = 8661D2703076618200A139E1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		LOCVAR00000000000000001 /* Localizable.strings */ = {
@@ -325,25 +399,6 @@
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		E1F000000000000000000002 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
-			requirement = {
-				kind = exactVersion;
-				version = 0.9.20;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		E1F000000000000000000003 /* ZIPFoundation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E1F000000000000000000002 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
-			productName = ZIPFoundation;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCBuildConfiguration section */
 		115D921C26D6F65600F5DF35 /* Debug */ = {
@@ -546,6 +601,43 @@
 			};
 			name = Release;
 		};
+		8661D2633076618200A139E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.0xCUBE.AboutThisHackTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/About This Hack.app/Contents/MacOS/About This Hack";
+			};
+			name = Debug;
+		};
+		8661D2643076618200A139E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.0xCUBE.AboutThisHackTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/About This Hack.app/Contents/MacOS/About This Hack";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -567,7 +659,35 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		8661D2653076618200A139E1 /* Build configuration list for PBXNativeTarget "AboutThisHackTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8661D2633076618200A139E1 /* Debug */,
+				8661D2643076618200A139E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E1F000000000000000000002 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.9.20;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E1F000000000000000000003 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E1F000000000000000000002 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 115D920626D6F65500F5DF35 /* Project object */;
 }

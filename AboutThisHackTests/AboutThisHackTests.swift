@@ -1,37 +1,74 @@
-//
-//  AboutThisHackTests.swift
-//  AboutThisHackTests
-//
-//  Created by Alexander Skula on 10/7/26.
-//
-
 import XCTest
+@testable import About_This_Hack
 
-final class AboutThisHackTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+final class FormattingTests: XCTestCase {
+    func testProcessorNames() {
+        XCTAssertEqual(HCCPU.displayName(brand: "Apple M4 Pro", coresPerPackage: 14, packages: 1), "Apple M4 Pro (14-Core)")
+        XCTAssertEqual(HCCPU.displayName(brand: "Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz", coresPerPackage: 8, packages: 1),
+                       "3.6 GHz 8-Core Intel Core i9-9900K")
+        XCTAssertEqual(HCCPU.displayName(brand: "Intel(R) Xeon(R) CPU           X5690  @ 3.47GHz", coresPerPackage: 6, packages: 2),
+                       "2 x 3.47 GHz 6-Core Intel Xeon X5690")
+        XCTAssertEqual(HCCPU.displayName(brand: "AMD Ryzen 9 5950X 16-Core Processor", coresPerPackage: 16, packages: 1),
+                       "AMD Ryzen 9 5950X 16-Core")
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testOpenCoreVersion() {
+        XCTAssertEqual(HCBootloader.parseOpenCoreVersion("REL-100-2024-04-01"), "OpenCore 1.0.0 (Release)")
+        XCTAssertEqual(HCBootloader.parseOpenCoreVersion("DEB-097-2023-12-04"), "OpenCore 0.9.7 (Debug)")
+        XCTAssertNil(HCBootloader.parseOpenCoreVersion("garbage"))
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-        // XCTest Documentation
-        // https://developer.apple.com/documentation/xctest
+    func testProfilerValuesSkipEmptySlots() {
+        let report = """
+              BANK 0/ChannelA-DIMM0:
+                  Size: Empty
+                  Type: Empty
+              BANK 1/ChannelA-DIMM1:
+                  Size: 16 GB
+                  Type: DDR4
+                  Speed: 2667 MHz
+        """
+        XCTAssertEqual(profilerValues("Type", in: report), ["Empty", "DDR4"])
+        XCTAssertEqual(profilerValues("Speed", in: report), ["2667 MHz"])
+        XCTAssertEqual(profilerValues("Type", in: nil), [])
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
+    func testVersionComparison() {
+        XCTAssertTrue(isVersion("3.1.0", atLeast: "3.0.0"))
+        XCTAssertTrue(isVersion("v3.0", atLeast: "3.0.0"))
+        XCTAssertFalse(isVersion("2.10.0", atLeast: "3.0"))
+        XCTAssertEqual(compareVersionStrings("2.10", "2.9"), .orderedDescending)
+    }
+
+    func testTooltipTrimming() {
+        XCTAssertEqual(trimmedTooltip("a\n\n  \nb\n"), "a\nb")
+    }
+}
+
+final class LocalizationTests: XCTestCase {
+    private func keys(_ language: String) throws -> Set<String> {
+        let path = try XCTUnwrap(Bundle.main.path(forResource: "Localizable", ofType: "strings", inDirectory: nil, forLocalization: language))
+        let table = try XCTUnwrap(NSDictionary(contentsOfFile: path) as? [String: String])
+        return Set(table.keys)
+    }
+
+    func testLanguagesShareKeys() throws {
+        let english = try keys("en")
+        XCTAssertFalse(english.isEmpty)
+        for language in ["es", "fr"] {
+            let other = try keys(language)
+            XCTAssertEqual(english.subtracting(other), [], "missing in \(language)")
+            XCTAssertEqual(other.subtracting(english), [], "extra in \(language)")
         }
     }
+}
 
+final class LiveHardwareTests: XCTestCase {
+    func testCollectorsReturnValues() {
+        XCTAssertFalse(HCCPU.shared.getCPU().isEmpty)
+        XCTAssertFalse(HCGPU.shared.getGPU().isEmpty)
+        XCTAssertFalse(HCMacModel.shared.macName.isEmpty)
+        XCTAssertFalse(HCStartupDisk.shared.getStartupDisk().isEmpty)
+        XCTAssertTrue(HCRAM.shared.getRam().hasSuffix("GB") || HCRAM.shared.getRam().contains("GB "))
+    }
 }
